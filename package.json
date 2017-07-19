@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron ."
   },
+  "repository": "https://github.com/hungle88/electron-react-starter-kit",
   "keywords": [
     "Electron",
     "React",
