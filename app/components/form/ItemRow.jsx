@@ -79,12 +79,14 @@ class ItemsRow extends Component {
           </span>
         </div>
         <div className="itemActions">
-          <a
-            href="#"
-            className="itemRemoveBtn"
-            onClick={() => this.props.removeRow(this.state.id)}>
-            <i className="ion-close-circled" />
-          </a>
+          { this.props.actions &&
+            <a
+              href="#"
+              className="itemRemoveBtn"
+              onClick={() => this.props.removeRow(this.state.id)}>
+              <i className="ion-close-circled" />
+            </a>
+          }
         </div>
       </div>
     );

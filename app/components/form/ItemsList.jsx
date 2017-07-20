@@ -12,13 +12,23 @@ import ItemRow from './ItemRow.jsx';
 
 // Component
 class ItemsList extends Component {
+
+  componentWillMount = () => {
+    const {rows} = this.props.items;
+    if (rows.length === 0) {
+      this.addRow('muted');
+    }
+  };
+
   // Add A Row
-  addRow = () => {
+  addRow = muted => {
     const {dispatch} = this.props;
     const addRow = bindActionCreators(ActionCreators.addItem, dispatch);
     addRow();
     // Play a sound
-    sounds.play('ADD');
+    if (muted !== 'muted') {
+      sounds.play('ADD');
+    }
   };
 
   // Remove A Row
@@ -37,11 +47,6 @@ class ItemsList extends Component {
     updateRow(childComponentState);
   };
 
-  // Save Data
-  submitForm = () => {
-    console.log('Data Saved');
-  };
-
   render = () => {
     const {rows} = this.props.items;
     const rowsComponent = rows.map((item, index) => {
@@ -49,6 +54,7 @@ class ItemsList extends Component {
         <ItemRow
           key={item.id}
           item={item}
+          actions={index === 0 ? false : true}
           updateRow={this.updateRow}
           removeRow={this.removeRow}
         />
@@ -69,22 +75,14 @@ class ItemsList extends Component {
           <div className="itemLabelSubtotal">
             <label className="itemLabel ">Subtotal</label>
           </div>
-          <div className="itemLabelActions" />
         </div>
 
         {rowsComponent}
 
-        <div className="formActions">
-          <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
-            Add A Row
-          </a>
-          <a
-            href="#"
-            className="btn btn-success"
-            onClick={() => this.submitForm()}>
-            Submit
-          </a>
-        </div>
+        <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
+          Add A Row
+        </a>
+
       </div>
     );
   };

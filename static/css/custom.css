@@ -1,26 +1,10 @@
-body {
-  height: 100vh;
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
-  animation: fadein 0.5s;
+.formHeader {
+  padding: 0 40px;
+  margin-bottom: 40px;
 }
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.draggable     { -webkit-app-region: drag }
-.non-draggable { -webkit-app-region: no-drag }
-
 /* Items List */
 .itemsListDiv {
-  padding: 20px;
-  margin: 20px;
+  padding: 0 40px 60px 40px;
 }
 
 .itemsListHeader {
@@ -32,7 +16,8 @@ body {
 .itemsListHeader > div {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  /* padding: 0 10px; */
+  margin-right: 20px;
 }
 
 .itemLabel {
@@ -56,12 +41,10 @@ body {
 .itemLabelSubtotal {
   flex: 1;
 }
-.itemLabelActions {
-  flex: 0.5;
-}
 
 /* Single Item */
 .itemDiv {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -69,9 +52,25 @@ body {
 
 .itemDiv > div {
   display: flex;
-  flex-direction: column;
-  padding: 0 10px;
+  flex-direction: row;
+  margin-right: 20px;
   margin-bottom: 10px;
+}
+
+.itemActions {
+  position: absolute;
+  right: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  top: 5px;
+}
+
+.itemActions i {
+  color: #ec476e;
 }
 
 .itemDiv input {
@@ -81,7 +80,9 @@ body {
   font-size: 16px;
   display: block;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, .2);
+  border: 1px solid #f2f3f4;
+  color: #3a3e42;
+  font-size: 14px;
 }
 
 .itemDescription {
@@ -98,34 +99,43 @@ body {
 
 .itemSubtotal {
   flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  font-size: 16px;
-  color: #d4d4d5;
-}
-.itemActions {
-  flex: 0.5;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
+  font-size: 14px;
+  color: #B4B7BA;
 }
 
 /* Buttons */
+.bottomBarWrapper {
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #f2f3f4;
+  width: 100%;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+background: #fff;
+}
+
 .btn {
-  font-size: 14px;
-  text-transform: uppercase;
+  font-size: 12px;
   color: white;
-  background: #282828;
-  border-radius: 50px;
-  padding: 10px 20px;
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: none;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start
 }
 
 .btn-success {
-  background: green;
+  background: #6bbb69;
 }
 
 .btn-primary {
-  background: navy;
+  background: #469fe5;
 }
 
 .formActions {
