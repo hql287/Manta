@@ -1,3 +1,22 @@
+body {
+  height: 100vh;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  animation: fadein 0.5s;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.draggable     { -webkit-app-region: drag }
+.non-draggable { -webkit-app-region: no-drag }
+
 /* Items List */
 .itemsListDiv {
   padding: 20px;

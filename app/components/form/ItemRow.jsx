@@ -1,11 +1,6 @@
 // Libs
 import React, {Component} from 'react';
 
-// Semantic UI Components
-import {Button, Icon, Form} from 'semantic-ui-react';
-
-// Custom Components
-
 // Component
 class ItemsRow extends Component {
   state = {
@@ -90,7 +85,7 @@ class ItemsRow extends Component {
               href="#"
               className="itemRemoveBtn"
               onClick={() => this.props.removeRow(this.props.id)}>
-              <Icon size="large" name="trash outline" />
+              <i className="ion-close-circled"></i>
             </a>
           }
         </div>

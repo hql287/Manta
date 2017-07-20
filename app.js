@@ -1,62 +1,105 @@
-const electron = require('electron');
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
+// Node Libs
+const path = require('path');
+const url  = require('url');
+const glob = require('glob');
+
+// Electron Libs
+const electron      = require('electron');
+const app           = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-const path = require('path');
-const url = require('url');
+// 3rd Party Libs
+const appConfig = require('electron-settings');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
+let mainWindow      = null;
+let mainWindowState = {};
 
-function createWindow() {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+// Create Main Window
+function createMainWindow() {
+  const mainWindowOptions = {
+    x: mainWindowState.bounds && mainWindowState.bounds.x || undefined,
+    y: mainWindowState.bounds && mainWindowState.bounds.y || undefined,
+    width: mainWindowState.bounds && mainWindowState.bounds.width || 1000,
+    height: mainWindowState.bounds && mainWindowState.bounds.height || 800,
+    minWidth: 800,
+    minHeight: 600,
+    titleBarStyle: 'hiddenInset',
+    backgroundColor: '#2e2c29',
+    show: false,
+    title: 'Main Window',
+    webPreferences: {
+      nodeIntegrationInWorker: true
+    },
+  };
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, './app/index.html'),
-      protocol: 'file:',
-      slashes: true,
-    }),
-  );
+  mainWindow = new BrowserWindow(mainWindowOptions);
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, './app/index.html'),
+    protocol: 'file:',
+    slashes: true
+  }));
 
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function() {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
+  mainWindow.on('ready-to-show', () => {
+    mainWindow.show();
+    mainWindow.focus();
+  });
+
+  mainWindow.on('closed', () => {
     mainWindow = null;
+  });
+
+  ['resize', 'move', 'close'].forEach( event => {
+    mainWindow.on(event, storeMainWindowState);
+  });
+
+  // Once finished load
+  mainWindow.webContents.on('did-finish-load', () => {
+    // Open Dev Tools
+    mainWindow.webContents.openDevTools();
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+// Initialize
+function initialize() {
+  // Load all main process files
+  loadMainProcessFiles();
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function() {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit();
+  app.on('ready', () => {
+    if (appConfig.has('windowState.main')) {
+      mainWindowState = appConfig.get('windowState.main');
+    }
+    // Create The Main Window
+    createMainWindow();
+  });
+
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  });
+
+  app.on('activate', () => {
+    if (mainWindow === null) {
+      createMainWindow();
+    }
+  });
+}
+
+// Imports Main Process Files
+function loadMainProcessFiles() {
+  const files = glob.sync(path.join(__dirname, 'main/*.js'));
+  files.forEach(file => require(file));
+}
+
+// Save Main Window State
+function storeMainWindowState() {
+  // only update bounds if the window isn't currently maximized
+  if (!mainWindowState.isMaximized) {
+    mainWindowState.bounds = mainWindow.getBounds();
   }
-});
+  mainWindowState.isMaximized = mainWindow.isMaximized();
+  appConfig.set('windowState.main', mainWindowState);
+}
 
-app.on('activate', function() {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+initialize();

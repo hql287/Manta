@@ -19,14 +19,14 @@ import combineReducers from './reducers/index';
 import App from './App';
 
 // Sounds
-import sounds from './libs/sounds.js';
+import sounds from '../libs/sounds.js';
 sounds.preload();
 
 // Create Store
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const AppStore = createStore(
   combineReducers,
-  // composeEnhancers(applyMiddleware(ReduxThunk, Logger))
+  composeEnhancers(applyMiddleware(ReduxThunk, Logger))
 );
 
 // Render App
@@ -34,5 +34,5 @@ ReactDOM.render(
   <Provider store={AppStore}>
     <App />
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

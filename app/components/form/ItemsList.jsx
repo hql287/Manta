@@ -2,13 +2,13 @@
 import React, {Component} from 'react';
 import uuidv4 from 'uuid/v4';
 import _ from 'lodash';
-import sounds from '../libs/sounds.js';
+import sounds from '../../../libs/sounds.js';
 
 // Semantic UI Components
 import {Button, List, Form} from 'semantic-ui-react';
 
 // Custom Component
-import ItemRow from '../components/ItemRow.jsx';
+import ItemRow from './ItemRow.jsx';
 
 // Component
 class ItemsList extends Component {
