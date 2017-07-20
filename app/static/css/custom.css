@@ -1,0 +1,119 @@
+/* Items List */
+.itemsListDiv {
+  padding: 20px;
+  margin: 20px;
+}
+
+.itemsListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemsListHeader > div {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+}
+
+.itemLabel {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #444444;
+}
+
+.itemLabelDescription {
+  flex: 2;
+}
+.itemLabelPrice {
+  flex: 1;
+}
+.itemLabelQuantity {
+  flex: 1;
+}
+.itemLabelSubtotal {
+  flex: 1;
+}
+.itemLabelActions {
+  flex: 0.5;
+}
+
+/* Single Item */
+.itemDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemDiv > div {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+.itemDiv input {
+  min-height: 36px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.itemDescription {
+  flex: 2;
+}
+
+.itemPrice {
+  flex: 1;
+}
+
+.itemQuantity {
+  flex: 1;
+}
+
+.itemSubtotal {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 16px;
+  color: #d4d4d5;
+}
+.itemActions {
+  flex: 0.5;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Buttons */
+.btn {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: white;
+  background: #282828;
+  border-radius: 50px;
+  padding: 10px 20px;
+}
+
+.btn-success {
+  background: green;
+}
+
+.btn-primary {
+  background: navy;
+}
+
+.formActions {
+  display: block;
+  padding: 10px;
+  margin-top: 20px;
+}
+.formActions .btn {
+  margin-right: 10px;
+}
