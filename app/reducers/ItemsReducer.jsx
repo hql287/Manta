@@ -1,26 +1,45 @@
-const initialState = [
-  {
-    description: 'Mobile App Development',
-    quantity: 2,
-    price: 5000
-  },
-  {
-    description: 'Landing Page',
-    quantity: 3,
-    price: 1000
-  },
-  {
-    description: 'Email Marketing Campagin',
-    quantity: 1,
-    price: 1000
-  }
-]
+// Node Libs
+import uuidv4 from 'uuid/v4';
 
-const SettingsReducer = (state = initialState, action) => {
-  switch(action.type) {
-  default:
-    return state;
-  }
-}
+// Actions
+import * as ACTION_TYPES from '../constants/actions.jsx';
 
-export default SettingsReducer;
+const initialState = {
+  rows: [],
+};
+
+const ItemsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    // Add Item
+    case ACTION_TYPES.ADD_ITEM: {
+      return Object.assign({}, state, {
+        rows: [...state.rows, {id: uuidv4()}],
+      });
+    }
+
+    // Remove Item
+    case ACTION_TYPES.REMOVE_ITEM: {
+      return Object.assign({}, state, {
+        rows: state.rows.filter(item => item.id !== action.id),
+      });
+    }
+
+    // Update Item
+    case ACTION_TYPES.UPDATE_ITEM: {
+      return Object.assign({}, state, {
+        rows: state.rows.map(item => {
+          if (item.id !== action.data.id) {
+            return item;
+          }
+          return action.data;
+        }),
+      });
+    }
+
+    default: {
+      return state;
+    }
+  }
+};
+
+export default ItemsReducer;

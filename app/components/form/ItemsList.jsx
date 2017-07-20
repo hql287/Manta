@@ -1,97 +1,59 @@
 // Libs
 import React, {Component} from 'react';
-import uuidv4 from 'uuid/v4';
-import _ from 'lodash';
 import sounds from '../../../libs/sounds.js';
 
-// Semantic UI Components
-import {Button, List, Form} from 'semantic-ui-react';
+// Redux
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as ActionCreators from '../../actions/items.jsx';
 
 // Custom Component
 import ItemRow from './ItemRow.jsx';
 
 // Component
 class ItemsList extends Component {
-  state = {
-    rows: [],
-    data: [],
-  };
-
-  componentWillMount = () => {
-    this.addRow();
-  };
-
   // Add A Row
   addRow = () => {
-    // Create a unique id for each row
-    let uuid = uuidv4();
-
-    // Push new row to rows
-    let currentRows = this.state.rows;
-    currentRows.push(
-      <ItemRow
-        key={uuid}
-        id={uuid}
-        actions={currentRows.length ? true : false}
-        updateRow={this.updateRow}
-        removeRow={this.removeRow}
-      />,
-    );
-
-    // Push data holder to data
-    let currentData = this.state.data;
-    currentData.push({id: uuid});
-
-    // Update state
-    this.setState({
-      rows: currentRows,
-      data: currentData,
-    });
-
+    const {dispatch} = this.props;
+    const addRow = bindActionCreators(ActionCreators.addItem, dispatch);
+    addRow();
     // Play a sound
     sounds.play('ADD');
   };
 
   // Remove A Row
-  removeRow = uuid => {
-    // Remove Row from Rows
-    let currentRows = this.state.rows;
-    let rowIndex = _.findIndex(currentRows, {key: uuid});
-    currentRows.splice(rowIndex, 1);
-
-    // Remove Row Data from Data
-    let currentData = this.state.data;
-    let dataIndex = _.findIndex(currentData, {key: uuid});
-    currentData.splice(dataIndex, 1);
-
-    // Update State
-    this.setState({
-      rows: currentRows,
-      data: currentData,
-    });
-
+  removeRow = rowId => {
+    const {dispatch} = this.props;
+    const removeRow = bindActionCreators(ActionCreators.removeItem, dispatch);
+    removeRow(rowId);
     // Play a sound
     sounds.play('REMOVE');
   };
 
   // Update Row Data
   updateRow = childComponentState => {
-    let currentData = this.state.data;
-    let rowIndex = _.findIndex(currentData, {id: childComponentState.id});
-    // Update data
-    currentData[rowIndex] = childComponentState;
-    // Update State
-    this.setState({
-      data: currentData,
-    });
+    const {dispatch} = this.props;
+    const updateRow = bindActionCreators(ActionCreators.updateItem, dispatch);
+    updateRow(childComponentState);
   };
 
   // Save Data
   submitForm = () => {
-    console.log('Data', this.state.data);
+    console.log('Data Saved');
   };
 
   render = () => {
+    const {rows} = this.props.items;
+    const rowsComponent = rows.map((item, index) => {
+      return (
+        <ItemRow
+          key={item.id}
+          item={item}
+          updateRow={this.updateRow}
+          removeRow={this.removeRow}
+        />
+      );
+    });
     return (
       <div className="itemsListDiv">
         <div className="itemsListHeader">
@@ -110,7 +72,8 @@ class ItemsList extends Component {
           <div className="itemLabelActions" />
         </div>
 
-        {this.state.rows}
+        {rowsComponent}
+
         <div className="formActions">
           <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
             Add A Row
@@ -127,4 +90,6 @@ class ItemsList extends Component {
   };
 }
 
-export default ItemsList;
+export default connect(state => ({
+  items: state.ItemsReducer,
+}))(ItemsList);

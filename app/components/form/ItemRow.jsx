@@ -3,11 +3,15 @@ import React, {Component} from 'react';
 
 // Component
 class ItemsRow extends Component {
-  state = {
-    description: '',
-    quantity: 0,
-    price: 0,
-    subtotal: 0,
+  componentWillMount = () => {
+    const {id, description, quantity, price, subtotal} = this.props.item;
+    this.setState({
+      id,
+      description: description ? description : '',
+      quantity: quantity ? quantity : 0,
+      price: price ? price : 0,
+      subtotal: subtotal ? subtotal : 0,
+    });
   };
 
   updateDescription = event => {
@@ -38,13 +42,8 @@ class ItemsRow extends Component {
   };
 
   uploadRowState = () => {
-    const {id, updateRow} = this.props;
-    const currentState = this.state;
-    updateRow(
-      Object.assign({}, currentState, {
-        id: id,
-      }),
-    );
+    const {updateRow} = this.props;
+    updateRow(this.state);
   };
 
   render = () => {
@@ -80,14 +79,12 @@ class ItemsRow extends Component {
           </span>
         </div>
         <div className="itemActions">
-          { this.props.actions &&
-            <a
-              href="#"
-              className="itemRemoveBtn"
-              onClick={() => this.props.removeRow(this.props.id)}>
-              <i className="ion-close-circled"></i>
-            </a>
-          }
+          <a
+            href="#"
+            className="itemRemoveBtn"
+            onClick={() => this.props.removeRow(this.state.id)}>
+            <i className="ion-close-circled" />
+          </a>
         </div>
       </div>
     );
