@@ -29,14 +29,14 @@ body,
   flex-direction: row;
 }
 
-
 /* Sidebar Wrapper */
 /* =================================================================== */
 .sideBarWrapper {
   background: #f9fafa;
-min-width: 190px;
-    max-width: 190px;
-    width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+  width: 190px;
+  border-right: 1px solid #f2f3f4;
 }
 ul.sideBar {
   list-style: none;
@@ -85,7 +85,7 @@ i#icon-archive {
 /* Main Content */
 /* =================================================================== */
 .mainContentWrapper {
-  padding-top: 40px;
+  /* padding-top: 40px; */
   width: 100%;
   overflow: scroll;
 }

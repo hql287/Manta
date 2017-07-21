@@ -1,16 +1,19 @@
-.formHeader {
+.itemsListWrapper {
+  display: flex;
+  flex-direction: column;
   padding: 0 40px;
-  margin-bottom: 40px;
-}
-/* Items List */
-.itemsListDiv {
-  padding: 0 40px 60px 40px;
 }
 
 .itemsListHeader {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.itemsListDiv {
+  /* padding: 0 40px 20px 40px; */
+  /* flex: 1; */
+  /* overflow: scroll; */
 }
 
 .itemsListHeader > div {
@@ -50,6 +53,19 @@
   justify-content: space-between;
 }
 
+.itemDiv input {
+  min-height: 36px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  border: 1px solid #f2f3f4;
+  color: #3a3e42;
+  font-size: 14px;
+}
+
+
 .itemDiv > div {
   display: flex;
   flex-direction: row;
@@ -61,28 +77,16 @@
   position: absolute;
   right: 0;
   display: flex !important;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
   margin: 0 !important;
   margin-right: 0 !important;
   margin-bottom: 0 !important;
   top: 5px;
 }
 
-.itemActions i {
+.itemActions a.itemRemoveBtn i {
   color: #ec476e;
-}
-
-.itemDiv input {
-  min-height: 36px;
-  border-radius: 4px;
-  padding: 0 10px;
-  font-size: 16px;
-  display: block;
-  width: 100%;
-  border: 1px solid #f2f3f4;
-  color: #3a3e42;
-  font-size: 14px;
 }
 
 .itemDescription {
@@ -102,47 +106,23 @@
   justify-content: flex-start;
   align-items: center;
   font-size: 14px;
-  color: #B4B7BA;
+  color: #b4b7ba;
+}
+.itemsListActions {
+  flex: 1;
 }
 
 /* Buttons */
-.bottomBarWrapper {
-  position: fixed;
-  bottom: 0;
-  border-top: 1px solid #f2f3f4;
-  width: 100%;
-  padding: 10px 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-background: #fff;
-}
-
-.btn {
-  font-size: 12px;
-  color: white;
+.bottomBarWrapper a {
+  border: 1px solid #ffffff;
   border-radius: 4px;
-  padding: 5px 10px;
-  border: none;
-    display: inline-flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: flex-start
+  padding: 0 40px;
+}
+.bottomBarWrapper a:focus {
+  background: #f2f3f4;
+}
+.bottomBarWrapper a:hover {
+  border: 1px solid #f2f3f4;
 }
 
-.btn-success {
-  background: #6bbb69;
-}
 
-.btn-primary {
-  background: #469fe5;
-}
-
-.formActions {
-  display: block;
-  padding: 10px;
-  margin-top: 20px;
-}
-.formActions .btn {
-  margin-right: 10px;
-}

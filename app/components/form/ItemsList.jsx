@@ -5,16 +5,16 @@ import sounds from '../../../libs/sounds.js';
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/items.jsx';
+import * as ActionCreators from '../../actions/form.jsx';
 
 // Custom Component
 import ItemRow from './ItemRow.jsx';
 
 // Component
 class ItemsList extends Component {
-
+  // Before mounting
   componentWillMount = () => {
-    const {rows} = this.props.items;
+    const {rows} = this.props.currentReceipt;
     if (rows.length === 0) {
       this.addRow('muted');
     }
@@ -47,8 +47,26 @@ class ItemsList extends Component {
     updateRow(childComponentState);
   };
 
+  // Clear everything
+  clearCurrentItems = () => {
+    const {dispatch} = this.props;
+    const clearCurrentItems = bindActionCreators(
+      ActionCreators.clearItems,
+      dispatch,
+    );
+    clearCurrentItems();
+    this.addRow();
+  };
+
+  // Save Receipt
+  saveReceipt = () => {
+    const saveData = this.props.saveData;
+    const currentReceiptData = this.props.currentReceipt;
+    saveData(currentReceiptData);
+  };
+
   render = () => {
-    const {rows} = this.props.items;
+    const {rows} = this.props.currentReceipt;
     const rowsComponent = rows.map((item, index) => {
       return (
         <ItemRow
@@ -61,7 +79,7 @@ class ItemsList extends Component {
       );
     });
     return (
-      <div className="itemsListDiv">
+      <div className="itemsListWrapper">
         <div className="itemsListHeader">
           <div className="itemLabelDescription">
             <label className="itemLabel">Description *</label>
@@ -76,18 +94,19 @@ class ItemsList extends Component {
             <label className="itemLabel ">Subtotal</label>
           </div>
         </div>
-
-        {rowsComponent}
-
-        <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
-          Add A Row
-        </a>
-
+        <div className="itemsListDiv">
+          {rowsComponent}
+        </div>
+        <div className="itemsListActions">
+          <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
+            Add A Row
+          </a>
+        </div>
       </div>
     );
   };
 }
 
 export default connect(state => ({
-  items: state.ItemsReducer,
+  currentReceipt: state.FormReducer,
 }))(ItemsList);
