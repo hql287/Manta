@@ -8,28 +8,25 @@ const initialState = {
 
 const ReceiptsReducer = (state = initialState, action) => {
   switch (action.type) {
-    // Add Item
+    // Get All Receipts
     case ACTION_TYPES.GET_RECEIPTS: {
       return Object.assign({}, state, {
         loaded: true,
-        data: action.receipts,
+        data: action.data,
       });
     }
-
-    // Remove Item
+    // Save Receipt
     case ACTION_TYPES.SAVE_RECEIPT: {
       return Object.assign({}, state, {
-        data: action.allReceipts,
+        data: action.data,
       });
     }
-
-    // Update Item
+    // Delete A Receipt
     case ACTION_TYPES.DELETE_RECEIPT: {
       return Object.assign({}, state, {
-        data: action.remainingReceipts,
+        data: action.data,
       });
     }
-
     default: {
       return state;
     }
