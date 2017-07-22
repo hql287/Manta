@@ -36,3 +36,41 @@ label {
 .btn-primary {
   background: #469fe5;
 }
+
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding-top: 40px;
+}
+
+/* Header */
+/* ====================================================== */
+.pageHeader {
+  padding: 0 40px;
+  max-height: 60px;
+  flex: 1;
+}
+
+/* Content */
+/* ====================================================== */
+.pageContent {
+  flex: 1;
+  overflow: scroll;
+  padding: 0 40px 20px 40px;
+}
+.pageItem {
+    margin-bottom: 20px;
+}
+
+/* Footer */
+/* ====================================================== */
+.pageFooter {
+  border-top: 1px solid #f2f3f4;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  max-height: 40px;
+}

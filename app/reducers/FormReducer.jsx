@@ -5,7 +5,7 @@ import uuidv4 from 'uuid/v4';
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const initialState = {
-  rows: [],
+  rows: [{id: uuidv4()}],
   discount: {},
   note: '',
 };

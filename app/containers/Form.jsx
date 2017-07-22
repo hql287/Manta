@@ -32,20 +32,20 @@ class Form extends Component {
       dispatch,
     );
     clearForm();
-  }
+  };
 
   render = () => {
     return (
-      <div className="formWrapper">
-        <div className="formHeader">
+      <div className="pageWrapper">
+        <div className="pageHeader">
           <h4>New Receipt</h4>
         </div>
-        <div className="formContent">
+        <div className="pageContent">
           <ItemsList saveData={this.saveData} />
           <Discount />
           <Note />
         </div>
-        <div className="formActionsWrapper">
+        <div className="pageFooter">
           <a href="#" onClick={() => this.saveReceipt()}>
             <i className="ion-android-checkmark-circle" />
           </a>

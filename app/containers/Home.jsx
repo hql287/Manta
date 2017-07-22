@@ -24,24 +24,31 @@ class Home extends Component {
       dispatch,
     );
     deleteReceipt(id);
-  }
+  };
 
   render = () => {
-    const { receipts }  = this.props
+    const {receipts} = this.props;
     const receiptsComponent = receipts.data.map(receipt => {
       return (
         <div key={receipt._id}>
           <p>
             {receipt._id}
           </p>
-          <a href="#" onClick={() => this.deleteReceipt(receipt._id)}>Remove</a>
+          <a href="#" onClick={() => this.deleteReceipt(receipt._id)}>
+            Remove
+          </a>
         </div>
       );
-    })
+    });
     return (
-      <div>
-        <h1>Home</h1>
-        { receiptsComponent }
+      <div className="pageWrapper">
+        <div className="pageHeader">
+          <h4>All Receipts</h4>
+        </div>
+        <div className="pageContent">
+          {receiptsComponent}
+        </div>
+        <div className="pageFooter" />
       </div>
     );
   };

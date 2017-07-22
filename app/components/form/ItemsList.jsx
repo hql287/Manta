@@ -13,22 +13,20 @@ import ItemRow from './ItemRow.jsx';
 // Component
 class ItemsList extends Component {
   // Before mounting
-  componentWillMount = () => {
-    const {rows} = this.props.currentReceipt;
-    if (rows.length === 0) {
-      this.addRow('muted');
-    }
-  };
+  // componentWillMount = () => {
+  //   const {rows} = this.props.currentReceipt;
+  //   if (rows.length === 0) {
+  //     this.addRow('muted');
+  //   }
+  // };
 
   // Add A Row
-  addRow = muted => {
+  addRow = () => {
     const {dispatch} = this.props;
     const addRow = bindActionCreators(ActionCreators.addItem, dispatch);
     addRow();
     // Play a sound
-    if (muted !== 'muted') {
-      sounds.play('ADD');
-    }
+    sounds.play('ADD');
   };
 
   // Remove A Row
@@ -45,24 +43,6 @@ class ItemsList extends Component {
     const {dispatch} = this.props;
     const updateRow = bindActionCreators(ActionCreators.updateItem, dispatch);
     updateRow(childComponentState);
-  };
-
-  // Clear everything
-  clearCurrentItems = () => {
-    const {dispatch} = this.props;
-    const clearCurrentItems = bindActionCreators(
-      ActionCreators.clearItems,
-      dispatch,
-    );
-    clearCurrentItems();
-    this.addRow();
-  };
-
-  // Save Receipt
-  saveReceipt = () => {
-    const saveData = this.props.saveData;
-    const currentReceiptData = this.props.currentReceipt;
-    saveData(currentReceiptData);
   };
 
   render = () => {

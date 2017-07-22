@@ -1,3 +1,0 @@
-{"rows":[{"id":"b17cdf05-cc9d-4849-a3ea-a8a378f19591","description":"Web Design","quantity":"10","price":"2000","subtotal":20000},{"id":"45f0cbeb-72e8-40df-8763-620ebbd8f447","description":"Mobile App","quantity":"2","price":"2000","subtotal":4000}],"discount":{"type":"flat","amount":10},"note":"First Time Customer","_id":"rlKe0CvkZR25sQgE"}
-{"$$deleted":true,"_id":"rlKe0CvkZR25sQgE"}
-{"rows":[{"id":"ae6bbeee-ca10-4ba2-ba4e-7bdd193bfb24","description":"Web Design","quantity":"1","price":"1000","subtotal":1000},{"id":"5106ac64-9650-442f-a2d7-af8d741238cf","description":"Mobile App","quantity":"2","price":"2000","subtotal":4000}],"discount":{"amount":10,"type":"percentage"},"note":"First Time Customer","_id":"zVGPhzCosq69Ruyl"}
