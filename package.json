@@ -1,5 +1,5 @@
 {
-  "name": "electron-react-starter-kit",
+  "name": "paperless",
   "version": "1.0.0",
   "description": "Minimum boilerplate code for using ReactJS in Electron",
   "main": "app.js",
@@ -27,6 +27,7 @@
     "eslint-plugin-react": "^7.1.0"
   },
   "dependencies": {
+    "date-fns": "^1.28.5",
     "electron-settings": "^3.1.1",
     "lodash": "^4.17.4",
     "pouchdb-browser": "^6.3.4",

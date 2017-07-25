@@ -39,8 +39,12 @@ export const getReceipts = () => {
 // Save A Receipts
 export const saveReceipt = data => {
   return dispatch => {
+    const doc = Object.assign({}, data, {
+      _id: uuidv4(),
+      created_at: Date.now(),
+    });
     db
-      .put(Object.assign({}, data, {_id: uuidv4()}))
+      .put(doc)
       .then(getAllDocs)
       .then(newDocs => {
         dispatch({

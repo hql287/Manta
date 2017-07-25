@@ -47,3 +47,11 @@ export const updateNote = data => {
   };
 };
 
+export const updateCurrency = data => {
+  return {
+    type: ACTION_TYPES.UPDATE_CURRENCY,
+    data
+  };
+};
+
+

@@ -6,7 +6,10 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const initialState = {
   rows: [{id: uuidv4()}],
-  discount: {},
+  discount: {
+    amount: 0,
+    type: 'percentage',
+  },
   note: '',
 };
 
@@ -57,6 +60,12 @@ const FormReducer = (state = initialState, action) => {
     }
 
     // Update Note
+    case ACTION_TYPES.UPDATE_CURRENCY: {
+      return Object.assign({}, state, {
+        currency: action.data,
+      });
+    }
+
     case ACTION_TYPES.UPDATE_NOTE: {
       return Object.assign({}, state, {
         note: action.data,
@@ -67,7 +76,10 @@ const FormReducer = (state = initialState, action) => {
     case ACTION_TYPES.CLEAR_FORM: {
       return {
         rows: [{id: uuidv4()}],
-        discount: {},
+        discount: {
+          amount: 0,
+          type: 'percentage',
+        },
         note: '',
       };
     }

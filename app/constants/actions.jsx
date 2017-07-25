@@ -13,6 +13,10 @@ export const UPDATE_DISCOUNT_TYPE = 'UPDATE_DISCOUNT_TYPE';
 // Note
 export const UPDATE_NOTE = 'UPDATE_NOTE';
 
+// Currency
+export const UPDATE_CURRENCY = 'UPDATE_CURRENCY';
+
+
 // Receipt
 export const GET_RECEIPTS = 'GET_RECEIPTS';
 export const SAVE_RECEIPT = 'SAVE_RECEIPT';
@@ -23,3 +27,4 @@ export const DELETE_RECEIPT = 'DELETE_RECEIPT';
 // Settings Info
 export const SAVE_SETTINGS = 'SAVE_SETTINGS';
 export const UPDATE_SETTINGS_INFO = 'UPDATE_SETTINGS_INFO';
+export const UPDATE_APP_SETTINGS = 'UPDATE_APP_SETTINGS';

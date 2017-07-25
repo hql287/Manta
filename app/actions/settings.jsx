@@ -7,6 +7,13 @@ export const updateInfo = data => {
   };
 };
 
+export const updateAppSettings = data => {
+  return {
+    type: ACTION_TYPES.UPDATE_APP_SETTINGS,
+    data,
+  };
+};
+
 export const saveSettings = data => {
   return {
     type: ACTION_TYPES.SAVE_SETTINGS,

@@ -64,7 +64,6 @@
   font-size: 14px;
 }
 
-
 .itemDiv > div {
   display: flex;
   flex-direction: row;
@@ -111,6 +110,24 @@
   flex: 1;
 }
 
+.itemsListActions a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+
+.itemsListActions a:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.itemsListActions a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+
 /* Buttons */
 .bottomBarWrapper a {
   border: 1px solid #ffffff;
@@ -123,5 +140,3 @@
 .bottomBarWrapper a:hover {
   border: 1px solid #f2f3f4;
 }
-
-

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>CSN Bot</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="../static/css/ionicons.min.css" >
+    <link rel="stylesheet" href="../static/css/general.css" >
+    <link rel="stylesheet" href="../static/css/modal.css" >
+  </head>
+  <body>
+    <div id="modal">
+      <div id="modalType"></div>
+      <div id="modalContent">
+        <h4 id="modalTitle"></h4>
+        <p id="modalMessage"></p>
+      </div>
+      <div id="modalButtons"></div>
+    </div>
+
+    <!-- Javascript -->
+    <script>
+      if (typeof module === 'object') {
+        window.module = module; module = undefined;
+      }
+    </script>
+
+    <!-- Renderer -->
+    <script src="./modal.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
+  </body>
+</html>

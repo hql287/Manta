@@ -3,25 +3,26 @@
 .discountWrapper {
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
 }
+
 .discountContent {
   display: flex;
   flex-direction: column;
 }
+
 .discountAmount {
   flex: 1;
   width: 50%;
 }
+
 .discountType {
   flex: 1;
   margin-top: 10px;
 }
 
 /* Receipt Note */
-.noteWrapper {
-  margin-top: 40px;
-}
+.noteWrapper {}
+
 textarea.noteContent {
   min-height: 36px;
   border-radius: 4px;

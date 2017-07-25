@@ -17,24 +17,13 @@ class Info extends Component {
     }
   };
 
-  updateFullname = event => {
-    this.setState({fullname: event.target.value}, () => this.updateInfoState());
-  };
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  updateCompany = event => {
-    this.setState({company: event.target.value}, () => this.updateInfoState());
-  };
-
-  updateAddress = event => {
-    this.setState({address: event.target.value}, () => this.updateInfoState());
-  };
-
-  updatePhone = event => {
-    this.setState({phone: event.target.value}, () => this.updateInfoState());
-  };
-
-  updateWebsite = event => {
-    this.setState({website: event.target.value}, () => this.updateInfoState());
+    this.setState({ [name]: value }, () => {
+      this.updateInfoState();
+    });
   };
 
   updateInfoState = () => {
@@ -49,18 +38,20 @@ class Info extends Component {
           <div className="pageItem col-md-6">
             <label className="itemLabel">Full Name</label>
             <input
+              name="fullname"
               type="text"
               value={this.state.fullname}
-              onChange={this.updateFullname.bind(this)}
+              onChange={e => this.handleInputChange(e)}
             />
           </div>
 
           <div className="pageItem col-md-6">
             <label className="itemLabel">Company</label>
             <input
+              name="company"
               type="text"
               value={this.state.company}
-              onChange={this.updateCompany.bind(this)}
+              onChange={e => this.handleInputChange(e)}
             />
           </div>
         </div>
@@ -68,9 +59,10 @@ class Info extends Component {
         <div className="pageItem">
           <label className="itemLabel">Address</label>
           <input
+            name="address"
             type="text"
             value={this.state.address}
-            onChange={this.updateAddress.bind(this)}
+            onChange={e => this.handleInputChange(e)}
           />
         </div>
 
@@ -78,18 +70,20 @@ class Info extends Component {
           <div className="pageItem col-md-6">
             <label className="itemLabel">Phone Number</label>
             <input
+              name="phone"
               type="text"
               value={this.state.phone}
-              onChange={this.updatePhone.bind(this)}
+              onChange={e => this.handleInputChange(e)}
             />
           </div>
 
           <div className="pageItem col-md-6">
             <label className="itemLabel">Website</label>
             <input
+              name="website"
               type="text"
               value={this.state.website}
-              onChange={this.updateWebsite.bind(this)}
+              onChange={e => this.handleInputChange(e)}
             />
           </div>
         </div>

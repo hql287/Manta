@@ -1,11 +1,13 @@
 // Libs
 import React, {Component} from 'react';
-import sounds from '../../../libs/sounds.js';
 
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as ActionCreators from '../../actions/form.jsx';
+
+// Custom Libs
+import sounds from '../../../libs/sounds.js';
 
 // Custom Component
 import ItemRow from './ItemRow.jsx';

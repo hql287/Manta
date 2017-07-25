@@ -1,27 +1,3 @@
-body,
-#root,
-.appWrapper {
-  height: 100vh;
-  -webkit-user-select: none;
-  -webkit-app-region: drag;
-  animation: fadein 0.5s;
-}
-
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.draggable {
-  -webkit-app-region: drag;
-}
-.non-draggable {
-  -webkit-app-region: no-drag;
-}
 /* App Wrapper */
 /* =================================================================== */
 .appWrapper {
@@ -50,6 +26,7 @@ ul.sideBar li {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  padding: 0 10px;
 }
 
 ul.sideBar li a {
@@ -58,10 +35,14 @@ ul.sideBar li a {
   line-height: 21px;
   text-decoration: none;
   display: flex;
-  padding: 0 20px;
+  padding: 2px 20px;
   width: 100%;
   align-items: center;
   margin-bottom: 5px;
+  border-radius: 4px;
+}
+ul.sideBar a.active {
+  background: #eceeef;
 }
 
 i#icon-archive {

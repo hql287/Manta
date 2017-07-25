@@ -43,6 +43,7 @@ function createMainWindow() {
   mainWindow.on('ready-to-show', () => {
     mainWindow.show();
     mainWindow.focus();
+    appConfig.set('mainWindowID', mainWindow.id);
   });
 
   mainWindow.on('closed', () => {
@@ -71,6 +72,10 @@ function initialize() {
     }
     // Create The Main Window
     createMainWindow();
+
+    // Set Initial Values
+    // appConfig.set('currentDownloads', 0);
+    // appConfig.set('downloadingList', false);
   });
 
   app.on('window-all-closed', () => {
