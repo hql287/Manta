@@ -34,11 +34,12 @@ class Form extends Component {
     );
     const currentReceipt = this.props.currentReceipt;
     saveReceipt(currentReceipt);
-    sounds.play('ADD');
     // Clear The Form
     this.clearForm('muted');
     // Show hint
     this.showHint('Receipt Saved!');
+    // Play a Sound
+    sounds.play('ADD');
   };
 
   // Clear The Form

@@ -10,11 +10,13 @@ const initialState = {
     amount: 0,
     type: 'percentage',
   },
+  currency: 'USD',
   note: '',
 };
 
 const FormReducer = (state = initialState, action) => {
   switch (action.type) {
+
     // Add Item
     case ACTION_TYPES.ADD_ITEM: {
       return Object.assign({}, state, {
@@ -59,13 +61,14 @@ const FormReducer = (state = initialState, action) => {
       });
     }
 
-    // Update Note
+    // Update Currency
     case ACTION_TYPES.UPDATE_CURRENCY: {
       return Object.assign({}, state, {
         currency: action.data,
       });
     }
 
+    // Update Note
     case ACTION_TYPES.UPDATE_NOTE: {
       return Object.assign({}, state, {
         note: action.data,
@@ -80,6 +83,7 @@ const FormReducer = (state = initialState, action) => {
           amount: 0,
           type: 'percentage',
         },
+        currency: 'USD',
         note: '',
       };
     }

@@ -41,9 +41,7 @@ class Receipt extends Component {
   }
 
   // Preview Receipt
-  previewReceipt = () => {
-    console.log('Previewing');
-  };
+  previewReceipt = () => ipc.send('preview-receipt', this.props.data);
 
   // Render
   render = () => {

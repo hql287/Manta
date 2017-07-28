@@ -20,3 +20,10 @@ export const saveSettings = data => {
     data,
   };
 };
+
+export const updatePrintOptions = data => {
+  return {
+    type: ACTION_TYPES.UPDATE_PRINT_OPTIONS,
+    data,
+  };
+}

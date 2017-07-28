@@ -32,6 +32,15 @@ const SettingsReducer = (state = initialState, action) => {
       });
     }
 
+    // Update Print Options
+    case ACTION_TYPES.UPDATE_PRINT_OPTIONS: {
+      return Object.assign({}, state, {
+        current: Object.assign({}, state.current, {
+          printOptions: action.data,
+        })
+      });
+    }
+
     // Save All Settings
     case ACTION_TYPES.SAVE_SETTINGS: {
       appConfig.set('settings', action.data);

@@ -11,6 +11,7 @@ class Info extends Component {
         fullname: '',
         company: '',
         address: '',
+        email:'',
         phone: '',
         website: '',
       });
@@ -56,14 +57,26 @@ class Info extends Component {
           </div>
         </div>
 
-        <div className="pageItem">
-          <label className="itemLabel">Address</label>
-          <input
-            name="address"
-            type="text"
-            value={this.state.address}
-            onChange={e => this.handleInputChange(e)}
-          />
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">Address</label>
+            <input
+              name="address"
+              type="text"
+              value={this.state.address}
+              onChange={e => this.handleInputChange(e)}
+            />
+          </div>
+
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">Email</label>
+            <input
+              name="email"
+              type="text"
+              value={this.state.email}
+              onChange={e => this.handleInputChange(e)}
+            />
+          </div>
         </div>
 
         <div className="row">

@@ -38,10 +38,28 @@ export const getReceipts = () => {
 
 // Save A Receipts
 export const saveReceipt = data => {
+  // Set all subtotal
+  let subtotal = 0;
+  data.rows.forEach((row, index) => {
+    subtotal += row.subtotal;
+  });
+
+  // set Grand Total
+  let grandTotal;
+  const discountAmount = data.discount.amount;
+  if (data.discount.type === 'percentage') {
+    grandTotal = subtotal * (100 - discountAmount) / 100;
+  } else {
+    grandTotal = subtotal - discountAmount;
+  }
+
+  // Save To Database
   return dispatch => {
     const doc = Object.assign({}, data, {
       _id: uuidv4(),
       created_at: Date.now(),
+      subtotal,
+      grandTotal,
     });
     db
       .put(doc)

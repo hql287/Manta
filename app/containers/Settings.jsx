@@ -12,6 +12,7 @@ const _ = require('lodash');
 // Components
 import Info from '../components/settings/Info.jsx';
 import AppSettings from '../components/settings/AppSettings.jsx';
+import PrintOptions from '../components/settings/PrintOptions.jsx';
 
 // Component
 class Settings extends Component {
@@ -69,12 +70,22 @@ class Settings extends Component {
     updateAppSettings(data);
   };
 
+  // Update Print Options
+  updatePrintOptions = data => {
+    const {dispatch} = this.props;
+    const updatePrintOptions = bindActionCreators(
+      ActionCreators.updatePrintOptions,
+      dispatch,
+    );
+    updatePrintOptions(data);
+  }
+
   changeTab = tabNum => {
     this.setState({visibleTab: tabNum});
   };
 
   render = () => {
-    const {info, appSettings} = this.props.settings.current;
+    const {info, appSettings, printOptions} = this.props.settings.current;
     return (
       <div className="pageWrapper">
         <div className="pageHeader">
@@ -91,6 +102,12 @@ class Settings extends Component {
             href="#"
             className={this.state.visibleTab === 2 ? 'active' : ''}
             onClick={() => this.changeTab(2)}>
+            Print Options
+          </a>
+          <a
+            href="#"
+            className={this.state.visibleTab === 3 ? 'active' : ''}
+            onClick={() => this.changeTab(3)}>
             App Settings
           </a>
         </div>
@@ -98,6 +115,10 @@ class Settings extends Component {
           {this.state.visibleTab === 1 &&
             <Info info={info} updateInfo={this.updateInfo} />}
           {this.state.visibleTab === 2 &&
+            <PrintOptions
+              printOptions={printOptions}
+              updatePrintOptions={this.updatePrintOptions} />}
+          {this.state.visibleTab === 3 &&
             <AppSettings
               appSettings={appSettings}
               updateAppSettings={this.updateAppSettings}

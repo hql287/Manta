@@ -1,0 +1,35 @@
+body {
+  padding-top: 80px;
+}
+
+div#actionsBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: black;
+  color: white;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  -webkit-app-region: drag;
+}
+
+div#actionsBar a {
+  display: flex;
+  color: white;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-right: 20px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}

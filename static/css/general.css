@@ -68,6 +68,67 @@ input:disabled {
   background: #f2f3f4 !important;
 }
 
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #49e845;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #49e845;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 label {
   display: flex;
   align-items: center;
@@ -217,4 +278,11 @@ label {
 .pageFooter a:hover {
   background: #f2f3f4;
   outline: none;
+}
+
+select#themeSwitcher {
+  max-width: 150px;
+  max-height: 24px;
+  font-size: 14px;
+  margin-right: 20px;
 }
