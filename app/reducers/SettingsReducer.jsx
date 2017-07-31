@@ -2,14 +2,15 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 const appConfig = require('electron').remote.require('electron-settings');
 
 let initialState;
-
-if (!appConfig.has('settings')) {
-  appConfig.set('settings', {});
+const savedSettings = {
+  info: appConfig.get('info'),
+  appSettings: appConfig.get('appSettings'),
+  printOptions: appConfig.get('printOptions'),
 }
 
 initialState = {
-  current: appConfig.get('settings'),
-  saved: appConfig.get('settings'),
+  current: savedSettings,
+  saved: savedSettings,
 };
 
 const SettingsReducer = (state = initialState, action) => {
@@ -43,7 +44,9 @@ const SettingsReducer = (state = initialState, action) => {
 
     // Save All Settings
     case ACTION_TYPES.SAVE_SETTINGS: {
-      appConfig.set('settings', action.data);
+      appConfig.set('info', action.data.info);
+      appConfig.set('appSettings', action.data.appSettings);
+      appConfig.set('printOptions', action.data.printOptions);
       return Object.assign({}, state, {
         saved: action.data,
       });

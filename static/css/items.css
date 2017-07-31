@@ -140,3 +140,23 @@
 .bottomBarWrapper a:hover {
   border: 1px solid #f2f3f4;
 }
+
+/* Item Animation */
+.itemList-enter {
+  opacity: 0.01;
+}
+
+.itemList-enter.itemList-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.itemList-leave {
+  opacity: 1;
+}
+
+.itemList-leave.itemList-leave-active {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+}
+

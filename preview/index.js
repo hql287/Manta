@@ -17,18 +17,17 @@ import combineReducers from './reducers';
 
 // Create Store
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const AppStore = createStore(
+const PreviewStore = createStore(
   combineReducers,
   composeEnhancers(applyMiddleware(ReduxThunk, Logger))
 );
 
-// Main App
-import App from './App';
+// Custom Components
+import Receipt from './containers/Receipt.jsx';
 
-// Render App
 ReactDOM.render(
-  <Provider store={AppStore}>
-    <App />
+  <Provider store={PreviewStore}>
+    <Receipt/>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('receiptWrapper')
 );

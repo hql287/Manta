@@ -11,19 +11,7 @@ const openDialog = require('../../renderers/dialog.js');
 // Component
 class PrintOptions extends Component {
   componentWillMount = () => {
-    if (this.props.printOptions !== undefined) {
-      this.setState(this.props.printOptions);
-    } else {
-      this.setState({
-        marginsType: 2,
-        pageSize: 'A4',
-        printBackground: true,
-        printSelectionOnly: false,
-        landscape: false,
-        template: 'default',
-        exportDir: '',
-      });
-    }
+    this.setState(this.props.printOptions);
   };
 
   componentDidMount = () => {

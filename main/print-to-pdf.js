@@ -13,13 +13,13 @@ const shell = electron.shell;
 const appConfig = require('electron-settings');
 
 ipc.on('print-to-pdf', (event, docId) => {
-  const exportDir = appConfig.get('settings.printOptions.exportDir');
+  const exportDir = appConfig.get('printOptions.exportDir');
   const pdfPath = path.join(exportDir, `${docId}.pdf`);
   const win = BrowserWindow.fromWebContents(event.sender);
 
   let printOptions;
-  if (appConfig.has('settings.printOptions')) {
-    printOptions = appConfig.get('settings.printOptions');
+  if (appConfig.has('printOptions')) {
+    printOptions = appConfig.get('printOptions');
   } else {
     printOptions = {};
   }

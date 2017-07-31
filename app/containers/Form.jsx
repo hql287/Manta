@@ -20,8 +20,6 @@ import Note from '../components/form/Note.jsx';
 // Component
 class Form extends Component {
 
-  state = { hint: '' }
-
   // Save Data
   saveReceipt = () => {
     // Validate Form
@@ -36,8 +34,6 @@ class Form extends Component {
     saveReceipt(currentReceipt);
     // Clear The Form
     this.clearForm('muted');
-    // Show hint
-    this.showHint('Receipt Saved!');
     // Play a Sound
     sounds.play('ADD');
   };
@@ -53,8 +49,6 @@ class Form extends Component {
     clearForm();
     // Play A Sound
     if (!vol) sounds.play('RELOAD');
-    // Show hint
-    this.showHint('Form reloaded!');
   };
 
   // Validate Form
@@ -98,19 +92,6 @@ class Form extends Component {
     return validated;
   }
 
-  // Show Page Hint
-  showHint = content => {
-    this.setState({ hint: content }, () => {
-      document.getElementById('pageFooterHint').classList.add('active');
-    })
-  }
-
-  // Hide Page hint
-  hideHint = () => {
-    document.getElementById('pageFooterHint').classList.remove('active');
-    this.setState({ hint: '' });
-  }
-
   // Render The form
   render = () => {
     return (
@@ -125,20 +106,12 @@ class Form extends Component {
           <Note />
         </div>
         <div className="pageFooter">
-          <div className="pageFooterContent">
-            <a href="#" onClick={() => this.saveReceipt()}>
-              <i className="ion-android-checkmark-circle" />
-            </a>
-            <a href="#" onClick={() => this.clearForm()}>
-              <i className="ion-ios-loop-strong" />
-            </a>
-          </div>
-          <div id="pageFooterHint" className="pageFooterHint">
-            <span> { this.state.hint }</span>
-            <a href="#" onClick={() => this.hideHint()}>
-              <i className="ion-close"></i>
-            </a>
-          </div>
+          <a href="#" onClick={() => this.saveReceipt()}>
+            <i className="ion-android-checkmark-circle" />
+          </a>
+          <a href="#" onClick={() => this.clearForm()}>
+            <i className="ion-ios-loop-strong" />
+          </a>
         </div>
       </div>
     );
@@ -147,7 +120,7 @@ class Form extends Component {
 }
 
 export default connect(state => ({
-  receipts: state.ReceiptsReducer,
   currentReceipt: state.FormReducer,
+  receipts: state.ReceiptsReducer,
   settings: state.SettingsReducer,
 }))(Form);

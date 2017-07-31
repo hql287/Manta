@@ -16,23 +16,7 @@ import PrintOptions from '../components/settings/PrintOptions.jsx';
 
 // Component
 class Settings extends Component {
-  state = {
-    hint: '',
-    visibleTab: 1,
-  };
-
-  // Show Page Hint
-  showHint = content => {
-    this.setState({hint: content}, () => {
-      document.getElementById('pageFooterHint').classList.add('active');
-    });
-  };
-
-  // Hide Page hint
-  hideHint = () => {
-    document.getElementById('pageFooterHint').classList.remove('active');
-    this.setState({hint: ''});
-  };
+  state = { visibleTab: 1 };
 
   // Check if settings have been saved
   settingsSaved = () => {
@@ -49,8 +33,6 @@ class Settings extends Component {
       dispatch,
     );
     saveSettings(this.props.settings.current);
-    // Show hint
-    this.showHint('All Settings Saved!');
   };
 
   // Update Info Settings
@@ -80,6 +62,7 @@ class Settings extends Component {
     updatePrintOptions(data);
   }
 
+  // Switch Tab
   changeTab = tabNum => {
     this.setState({visibleTab: tabNum});
   };
@@ -90,6 +73,14 @@ class Settings extends Component {
       <div className="pageWrapper">
         <div className="pageHeader">
           <h4>Settings</h4>
+          { !this.settingsSaved() &&
+            <div className="pageHint">
+              <span>{this.state.hint}</span>
+              <a href="#" onClick={() => this.hideHint()}>
+                <i className="ion-close" />
+              </a>
+            </div>
+          }
         </div>
         <div className="pageTabs">
           <a
@@ -124,23 +115,13 @@ class Settings extends Component {
               updateAppSettings={this.updateAppSettings}
             />}
         </div>
-        <div className="pageFooter">
-          {!this.settingsSaved() &&
-            <div className="pageFooterContent">
-              <small className="text-muted">You Have unsaved changes!</small>
-              <a href="#" onClick={() => this.saveSettingsState()}>
-                <i className="ion-android-checkmark-circle" />
-              </a>
-            </div>}
-          <div id="pageFooterHint" className="pageFooterHint">
-            <span>
-              {' '}{this.state.hint}
-            </span>
-            <a href="#" onClick={() => this.hideHint()}>
-              <i className="ion-close" />
+        {!this.settingsSaved() &&
+          <div className="pageFooter">
+            <small className="text-muted">You Have unsaved changes!</small>
+            <a href="#" onClick={() => this.saveSettingsState()}>
+              <i className="ion-android-checkmark-circle" />
             </a>
-          </div>
-        </div>
+          </div>}
       </div>
     );
   };

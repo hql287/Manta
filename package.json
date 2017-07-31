@@ -7,13 +7,6 @@
     "start": "electron ."
   },
   "repository": "https://github.com/hungle88/electron-react-starter-kit",
-  "keywords": [
-    "Electron",
-    "React",
-    "starter",
-    "tutorial",
-    "demo"
-  ],
   "author": "Hung Q. Le",
   "license": "CC0-1.0",
   "devDependencies": {
@@ -28,13 +21,11 @@
   },
   "dependencies": {
     "date-fns": "^1.28.5",
-    "electron-pug": "^1.5.1",
     "electron-settings": "^3.1.1",
-    "html-pdf": "^2.1.0",
     "lodash": "^4.17.4",
     "pouchdb-browser": "^6.3.4",
-    "pug": "^2.0.0-rc.2",
     "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-redux": "^5.0.5",
@@ -42,8 +33,6 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "semantic-ui-css": "^2.2.11",
-    "semantic-ui-react": "^0.71.1",
     "uuid": "^3.1.0"
   }
 }

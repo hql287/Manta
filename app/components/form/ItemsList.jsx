@@ -1,5 +1,6 @@
 // Libs
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Redux
 import {connect} from 'react-redux';
@@ -77,7 +78,12 @@ class ItemsList extends Component {
           </div>
         </div>
         <div className="itemsListDiv">
-          {rowsComponent}
+          <ReactCSSTransitionGroup
+            transitionName="itemList"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {rowsComponent}
+          </ReactCSSTransitionGroup>
         </div>
         <div className="itemsListActions">
           <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>

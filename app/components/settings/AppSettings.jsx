@@ -11,15 +11,7 @@ const openDialog = require('../../renderers/dialog.js');
 // Component
 class AppSettings extends Component {
   componentWillMount = () => {
-    if (this.props.appSettings !== undefined) {
-      this.setState(this.props.appSettings);
-    } else {
-      this.setState({
-        currency: 'USD',
-        sound: 'default',
-        muted: false,
-      });
-    }
+    this.setState(this.props.appSettings);
   };
 
   handleInputChange = event => {

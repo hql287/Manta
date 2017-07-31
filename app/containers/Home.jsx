@@ -3,6 +3,7 @@ const ipc = require('electron').ipcRenderer;
 
 // React Libraries
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Redux
 import {connect} from 'react-redux';
@@ -15,8 +16,10 @@ import EmptyMessage from '../components/receipts/EmptyMessage.jsx';
 
 // Component
 class Home extends Component {
-
-  state = { hint: '' }
+  state = {
+    hint: '',
+    openPrevWinHint: false,
+  };
 
   // Will Mount
   componentWillMount = () => {
@@ -30,10 +33,25 @@ class Home extends Component {
     }
   };
 
+  // Once Mounted, add event listeners
+  // on opening and open preview window events
+  componentDidMount = () => {
+    // Opening Event
+    ipc.on('show-opening-preview-window-hint', event => {
+      this.setState({openPrevWinHint: true});
+    });
+    // Opened Event
+    ipc.on('hide-opening-preview-window-hint', event => {
+      this.setState({openPrevWinHint: false});
+    });
+  };
+
   // Remove all IPC listeners once all reciepts are removed
   // Or the container is unmounted
   componentWillUnmount() {
     ipc.removeAllListeners('confirmed-delete-receipt');
+    ipc.removeAllListeners('show-opening-preview-window-hint');
+    ipc.removeAllListeners('hide-opening-preview-window-hint');
   }
 
   // Delete a receipt
@@ -57,16 +75,16 @@ class Home extends Component {
 
   // Show Page Hint
   showHint = content => {
-    this.setState({ hint: content }, () => {
+    this.setState({hint: content}, () => {
       document.getElementById('pageFooterHint').classList.add('active');
-    })
-  }
+    });
+  };
 
   // Hide Page hint
   hideHint = () => {
     document.getElementById('pageFooterHint').classList.remove('active');
-    this.setState({ hint: '' });
-  }
+    this.setState({hint: ''});
+  };
 
   // Render
   render = () => {
@@ -76,6 +94,7 @@ class Home extends Component {
         <Receipt
           key={receipt._id}
           deleteReceipt={this.deleteReceipt}
+          showOpeningPreviewWindowHint={this.showOpeningPreviewWindowHint}
           index={index}
           data={receipt}
         />
@@ -85,6 +104,15 @@ class Home extends Component {
       <div className="pageWrapper">
         <div className="pageHeader">
           <h4>All Receipts</h4>
+          <ReactCSSTransitionGroup
+            transitionName="itemList"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {this.state.openPrevWinHint &&
+              <span className="pageHint rotating">
+                <i className="ion-ios-loop-strong" />
+              </span>}
+          </ReactCSSTransitionGroup>
         </div>
         {this.showEmptyMessage()
           ? <EmptyMessage />
@@ -101,16 +129,8 @@ class Home extends Component {
                 </div>
                 <div className="itemLabelActions" />
               </div>
-              { receiptsComponent }
+              {receiptsComponent}
             </div>}
-        <div className="pageFooter">
-          <div id="pageFooterHint" className="pageFooterHint">
-            <span> { this.state.hint }</span>
-            <a href="#" onClick={() => this.hideHint()}>
-              <i className="ion-close"></i>
-            </a>
-          </div>
-        </div>
       </div>
     );
   };

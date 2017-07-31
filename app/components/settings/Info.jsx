@@ -4,24 +4,12 @@ import React, {Component} from 'react';
 // Component
 class Info extends Component {
   componentWillMount = () => {
-    if (this.props.info !== undefined) {
-      this.setState(this.props.info);
-    } else {
-      this.setState({
-        fullname: '',
-        company: '',
-        address: '',
-        email:'',
-        phone: '',
-        website: '',
-      });
-    }
+    this.setState(this.props.info);
   };
 
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-
     this.setState({ [name]: value }, () => {
       this.updateInfoState();
     });
