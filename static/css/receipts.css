@@ -1,0 +1,36 @@
+.receipt {
+  position: relative;
+  margin-bottom: 20px;
+  justify-content: space-around;
+  display: flex;
+  font-size: 14px;
+}
+
+.receiptNumber {
+  flex: 1;
+  max-width: 20px;
+}
+.receiptId {
+  flex: 2;
+}
+.receiptCreatedAt {
+  flex: 4;
+  display: flex;
+  justify-content: flex-start;
+}
+.receiptCreatedAt > * {
+  margin-right: 10px;
+}
+.receiptActions {
+  position: absolute;
+  right: 0;
+  min-width: 60px;
+  display: flex;
+  justify-content: space-around;
+}
+a.previewReceipt i {
+    color: #469FE5;
+}
+a.removeReceipt i {
+    color: #EC476E;
+}

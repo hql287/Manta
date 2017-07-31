@@ -14,20 +14,11 @@ class ItemsRow extends Component {
     });
   };
 
-  updateDescription = event => {
-    this.setState({description: event.target.value}, () => {
-      this.uploadRowState();
-    });
-  };
+  handleInputChange = event => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  updateQuantity = event => {
-    this.setState({quantity: event.target.value}, () => {
-      this.updateSubtotal();
-    });
-  };
-
-  updatePrice = event => {
-    this.setState({price: event.target.value}, () => {
+    this.setState({ [name]: value }, () => {
       this.updateSubtotal();
     });
   };
@@ -51,40 +42,43 @@ class ItemsRow extends Component {
       <div className="itemDiv">
         <div className="itemDescription">
           <input
+            name="description"
             type="text"
             value={this.state.description}
-            onChange={this.updateDescription.bind(this)}
+            onChange={e => this.handleInputChange(e)}
             placeholder="Description"
           />
         </div>
         <div className="itemPrice">
           <input
+            name="price"
             type="number"
             value={this.state.price}
-            onChange={this.updatePrice.bind(this)}
+            onChange={e => this.handleInputChange(e)}
             placeholder="Price"
           />
         </div>
         <div className="itemQuantity">
           <input
+            name="quantity"
             type="number"
             value={this.state.quantity}
-            onChange={this.updateQuantity.bind(this)}
+            onChange={e => this.handleInputChange(e)}
             placeholder="Quantity"
           />
         </div>
         <div className="itemSubtotal">
-          <span>
-            {this.state.subtotal}
-          </span>
+          <span>{this.state.subtotal}</span>
         </div>
         <div className="itemActions">
-          <a
-            href="#"
-            className="itemRemoveBtn"
-            onClick={() => this.props.removeRow(this.state.id)}>
-            <i className="ion-close-circled" />
-          </a>
+          { this.props.actions &&
+            <a
+              href="#"
+              className="itemRemoveBtn"
+              onClick={() => this.props.removeRow(this.state.id)}>
+              <i className="ion-close-circled" />
+            </a>
+          }
         </div>
       </div>
     );

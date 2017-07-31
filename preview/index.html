@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Paperless Previewer</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="../static/css/ionicons.min.css" >
+    <link rel="stylesheet" href="../static/css/general.css" >
+    <link rel="stylesheet" href="./preview.css" >
+  </head>
+  <body id="body">
+
+    <div id="actionsBar" class="no-print">
+      <select id="themeSwitcher">
+        <option value="default">Default</option>
+        <option value="hosting">Hosting</option>
+        <option value="elegant">Elegant</option>
+        <option value="classic">Classic</option>
+      </select>
+      <a href="#" id="printToPDF">Save</a>
+    </div>
+
+    <div id="receiptWrapper"></div>
+
+    <!-- Javascript -->
+    <script>
+      if (typeof module === 'object') {
+        window.module = module; module = undefined;
+      }
+    </script>
+
+    <!-- Renderer -->
+    <script src="./index.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
+  </body>
+</html>

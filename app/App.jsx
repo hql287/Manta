@@ -15,11 +15,15 @@ import Settings from './containers/Settings.jsx';
 class App extends Component {
   render = () =>
     <Router history={browserHistory}>
-      <div className="container">
-        <AppNav />
-        <Route exact path="/" component={Home} />
-        <Route path="/form" component={Form} />
-        <Route path="/settings" component={Settings} />
+      <div className="appWrapper">
+        <div className="sideBarWrapper">
+          <AppNav />
+        </div>
+        <div className="mainContentWrapper">
+          <Route exact path="/" component={Home} />
+          <Route path="/form" component={Form} />
+          <Route path="/settings" component={Settings} />
+        </div>
       </div>
     </Router>;
 }

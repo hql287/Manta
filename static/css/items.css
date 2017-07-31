@@ -1,0 +1,162 @@
+.itemsListWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemsListHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemsListDiv {
+  /* padding: 0 40px 20px 40px; */
+  /* flex: 1; */
+  /* overflow: scroll; */
+}
+
+.itemsListHeader > div {
+  display: flex;
+  flex-direction: column;
+  /* padding: 0 10px; */
+  margin-right: 20px;
+}
+
+.itemLabel {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #444444;
+}
+
+.itemLabelDescription {
+  flex: 2;
+}
+.itemLabelPrice {
+  flex: 1;
+}
+.itemLabelQuantity {
+  flex: 1;
+}
+.itemLabelSubtotal {
+  flex: 1;
+}
+
+/* Single Item */
+.itemDiv {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.itemDiv input {
+  min-height: 36px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  border: 1px solid #f2f3f4;
+  color: #3a3e42;
+  font-size: 14px;
+}
+
+.itemDiv > div {
+  display: flex;
+  flex-direction: row;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.itemActions {
+  position: absolute;
+  right: 0;
+  display: flex !important;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+  top: 5px;
+}
+
+.itemActions a.itemRemoveBtn i {
+  color: #ec476e;
+}
+
+.itemDescription {
+  flex: 2;
+}
+
+.itemPrice {
+  flex: 1;
+}
+
+.itemQuantity {
+  flex: 1;
+}
+
+.itemSubtotal {
+  flex: 1;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 14px;
+  color: #b4b7ba;
+}
+.itemsListActions {
+  flex: 1;
+}
+
+.itemsListActions a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+
+.itemsListActions a:active {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.itemsListActions a:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+
+/* Buttons */
+.bottomBarWrapper a {
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  padding: 0 40px;
+}
+.bottomBarWrapper a:focus {
+  background: #f2f3f4;
+}
+.bottomBarWrapper a:hover {
+  border: 1px solid #f2f3f4;
+}
+
+/* Item Animation */
+.itemList-enter {
+  opacity: 0.01;
+}
+
+.itemList-enter.itemList-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.itemList-leave {
+  opacity: 1;
+}
+
+.itemList-leave.itemList-leave-active {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+}
+

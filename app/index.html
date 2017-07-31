@@ -5,12 +5,26 @@
     <title>Hello World!</title>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="../static/css/ionicons.min.css"></link>
-    <link rel="stylesheet" href="../static/css/custom.css"></link>
+    <link rel="stylesheet" href="../static/css/general.css"></link>
+    <link rel="stylesheet" href="../static/css/layout.css"></link>
+    <link rel="stylesheet" href="../static/css/form.css"></link>
+    <link rel="stylesheet" href="../static/css/receipts.css"></link>
+    <link rel="stylesheet" href="../static/css/items.css"></link>
   </head>
   <body>
     <div id="root"></div>
   </body>
+
+  <!-- Javascript -->
   <script>
-    require('./renderer.js')
+    if (typeof module === 'object') {
+      window.module = module; module = undefined;
+    }
   </script>
+
+  <!-- Renderer -->
+  <script src="./renderer.js"></script>
+  <script src="./index.js"></script>
+
+  <script>if (window.module) module = window.module;</script>
 </html>

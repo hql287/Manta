@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import SettingsReducer from './SettingsReducer';
-import ItemsReducer from './ItemsReducer';
+import FormReducer from './FormReducer';
+import ReceiptsReducer from './ReceiptsReducer';
 
 export default combineReducers({
-  ItemsReducer,
+  FormReducer,
+  ReceiptsReducer,
   SettingsReducer
 });

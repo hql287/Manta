@@ -1,38 +1,21 @@
-// Libraries
-import React from 'react';
-import ReactDOM from 'react-dom';
+// Node Libs
+const path = require('path');
+const glob = require('glob');
 
-// Redux Stuff
-import {createStore, applyMiddleware, compose} from 'redux';
-import {Provider} from 'react-redux';
+// Custom Libs
+const sounds = require(path.join(__dirname, '../libs/sounds.js'));
 
-// Middleware allows action creator to return a function instead of plain object
-import ReduxThunk from 'redux-thunk';
+// Imports Main Renderere Files
+function loadMaiRendererFiles() {
+  const files = glob.sync(path.join(__dirname, './renderers/*.js'));
+  files.forEach(file => require(file));
+  sounds.preload();
+}
 
-// Log Redux action inside console
-import Logger from 'redux-logger';
+function initialize() {
+  loadMaiRendererFiles();
+  sounds.play('STARTUP');
+  console.timeEnd('init');
+}
 
-// Root Reducer
-import combineReducers from './reducers/index';
-
-// Main App
-import App from './App';
-
-// Sounds
-import sounds from '../libs/sounds.js';
-sounds.preload();
-
-// Create Store
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const AppStore = createStore(
-  combineReducers,
-  composeEnhancers(applyMiddleware(ReduxThunk, Logger))
-);
-
-// Render App
-ReactDOM.render(
-  <Provider store={AppStore}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+initialize();

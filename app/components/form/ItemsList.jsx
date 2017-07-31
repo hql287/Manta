@@ -1,17 +1,28 @@
 // Libs
 import React, {Component} from 'react';
-import sounds from '../../../libs/sounds.js';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/items.jsx';
+import * as ActionCreators from '../../actions/form.jsx';
+
+// Custom Libs
+import sounds from '../../../libs/sounds.js';
 
 // Custom Component
 import ItemRow from './ItemRow.jsx';
 
 // Component
 class ItemsList extends Component {
+  // Before mounting
+  // componentWillMount = () => {
+  //   const {rows} = this.props.currentReceipt;
+  //   if (rows.length === 0) {
+  //     this.addRow('muted');
+  //   }
+  // };
+
   // Add A Row
   addRow = () => {
     const {dispatch} = this.props;
@@ -37,25 +48,21 @@ class ItemsList extends Component {
     updateRow(childComponentState);
   };
 
-  // Save Data
-  submitForm = () => {
-    console.log('Data Saved');
-  };
-
   render = () => {
-    const {rows} = this.props.items;
+    const {rows} = this.props.currentReceipt;
     const rowsComponent = rows.map((item, index) => {
       return (
         <ItemRow
           key={item.id}
           item={item}
+          actions={index === 0 ? false : true}
           updateRow={this.updateRow}
           removeRow={this.removeRow}
         />
       );
     });
     return (
-      <div className="itemsListDiv">
+      <div className="itemsListWrapper">
         <div className="itemsListHeader">
           <div className="itemLabelDescription">
             <label className="itemLabel">Description *</label>
@@ -69,20 +76,18 @@ class ItemsList extends Component {
           <div className="itemLabelSubtotal">
             <label className="itemLabel ">Subtotal</label>
           </div>
-          <div className="itemLabelActions" />
         </div>
-
-        {rowsComponent}
-
-        <div className="formActions">
+        <div className="itemsListDiv">
+          <ReactCSSTransitionGroup
+            transitionName="itemList"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            {rowsComponent}
+          </ReactCSSTransitionGroup>
+        </div>
+        <div className="itemsListActions">
           <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
             Add A Row
-          </a>
-          <a
-            href="#"
-            className="btn btn-success"
-            onClick={() => this.submitForm()}>
-            Submit
           </a>
         </div>
       </div>
@@ -91,5 +96,5 @@ class ItemsList extends Component {
 }
 
 export default connect(state => ({
-  items: state.ItemsReducer,
+  currentReceipt: state.FormReducer,
 }))(ItemsList);

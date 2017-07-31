@@ -1,0 +1,47 @@
+
+/* Receipt Discount */
+.discountWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.discountContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.discountAmount {
+  flex: 1;
+  width: 50%;
+}
+
+.discountType {
+  flex: 1;
+  margin-top: 10px;
+}
+
+/* Receipt Note */
+.noteWrapper {}
+
+textarea.noteContent {
+  min-height: 36px;
+  border-radius: 4px;
+  padding: 10px;
+  display: block;
+  width: 100%;
+  border: 1px solid #f2f3f4;
+  color: #3a3e42;
+  font-size: 14px;
+}
+
+/* Actions */
+/* ====================================================== */
+
+.formActions {
+  display: block;
+  padding: 10px;
+  margin-top: 20px;
+}
+.formActions .btn {
+  margin-right: 10px;
+}
