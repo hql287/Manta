@@ -3,11 +3,12 @@ import uuidv4 from 'uuid/v4';
 
 // PouchDB
 const PouchDB = require('pouchdb-browser');
-const db = new PouchDB('receipts');
+const db = new PouchDB('contacts');
 
+// Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-// Helper
+// Get All Docs Helper
 const getAllDocs = () =>
   new Promise((resolve, reject) => {
     db
@@ -24,57 +25,55 @@ const getAllDocs = () =>
       });
   });
 
-// Get All Receipts
-export const getReceipts = () => {
+// Get A Single Doc Helper
+const getSingleDoc = _id => {
+  new Promise((resolve, reject) => {
+    db
+      .get(_id)
+      .then(doc => {
+        resolve(doc);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
+
+// Get All Contacts
+export const getAllContacts = () => {
   return dispatch => {
     getAllDocs().then(allDocs => {
       dispatch({
-        type: ACTION_TYPES.GET_RECEIPTS,
+        type: ACTION_TYPES.GET_ALL_CONTACTS,
         data: allDocs,
       });
     });
   };
 };
 
-// Calculate Subtotal
-const getSubtotal = data => {
-  // Set all subtotal
-  let subtotal = 0;
-  data.rows.forEach((row, index) => {
-    subtotal += row.subtotal;
-  });
-  return subtotal;
+// Get One Contact
+export const getOneContact = _id => {
+  return dispatch => {
+    getSingleDoc(_id).then(doc => {
+      dispatch({
+        type: ACTION_TYPES.GET_ONE_CONTACT,
+        data: doc,
+      });
+    });
+  };
 };
 
-// Calculate Grand Total
-const getGrandTotal = data => {
-  const subtotal = getSubtotal(data);
-  let grandTotal;
-  const discountAmount = data.discount.amount;
-  if (data.discount.type === 'percentage') {
-    grandTotal = subtotal * (100 - discountAmount) / 100;
-  } else {
-    grandTotal = subtotal - discountAmount;
-  }
-  return grandTotal;
-};
-
-// Save A Receipts
-export const saveReceipt = data => {
-  const subtotal = getSubtotal(data);
-  const grandTotal = getGrandTotal(data);
-
+// Save A Contact
+export const saveContact = data => {
   // Save To Database
   return dispatch => {
     const doc = Object.assign({}, data, {
       _id: uuidv4(),
       created_at: Date.now(),
-      subtotal,
-      grandTotal,
     });
     db.put(doc).then(getAllDocs).then(newDocs => {
       dispatch({
-        type: ACTION_TYPES.SAVE_RECEIPT,
+        type: ACTION_TYPES.SAVE_CONTACT,
         data: newDocs,
       });
     });
@@ -82,15 +81,15 @@ export const saveReceipt = data => {
 };
 
 // Delete a Receipts
-export const deleteReceipt = receiptId => {
+export const deleteContact = contactId => {
   return dispatch => {
     db
-      .get(receiptId)
+      .get(contactId)
       .then(doc => db.remove(doc))
       .then(getAllDocs)
       .then(remainingDocs => {
         dispatch({
-          type: ACTION_TYPES.DELETE_RECEIPT,
+          type: ACTION_TYPES.DELETE_CONTACT,
           data: remainingDocs,
         });
       });

@@ -295,7 +295,7 @@ select#themeSwitcher {
   transition: opacity 250ms ease-in;
 }
 
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+@-webkit-keyframes rotating {
   from {
     -webkit-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -329,4 +329,100 @@ select#themeSwitcher {
   -ms-animation: rotating 2s linear infinite;
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
+}
+
+.recipientForm {
+  padding: 20px;
+  background: #f2f3f4;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.recipientsList {
+  margin-bottom: 20px;
+}
+
+/* Logo */
+.logoDropzone {
+  position: relative;
+  padding: 20px;
+  border: 1px solid #f2f3f4;
+  border-radius: 4px;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.logoDropzoneInner {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  border: 2px dashed #b4b7ba;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  background: #f9fafa;
+  padding: 20px;
+  position: relative;
+}
+.logoDropzoneInner::before {
+  content: "DRAG & DROP";
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  text-align: center;
+  color: #b4b7ba;
+}
+
+.logoImgWrapper {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.logoImgWrapper:hover .logoRemoveBtn {
+  opacity: 1;
+  visibility: visible;
+  color: #ec476e;
+}
+
+.logoImg {
+  display: flex;
+  max-width: 100px;
+  align-self: center;
+}
+
+.logoChangeBtn {
+  background: #469fe5;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+
+.logoRemoveBtn {
+  display: flex;
+  position: absolute;
+  font-size: 50px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f9fafa;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: .2s;
+  transition: .2s;
 }

@@ -1,8 +1,17 @@
 // Libs
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Component
 class ItemsRow extends Component {
+
+  static propTypes = {
+    item: PropTypes.object.isRequired,
+    actions: PropTypes.bool.isRequired,
+    updateRow: PropTypes.func.isRequired,
+    removeRow: PropTypes.func.isRequired,
+  };
+
   componentWillMount = () => {
     const {id, description, quantity, price, subtotal} = this.props.item;
     this.setState({

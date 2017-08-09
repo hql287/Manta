@@ -119,6 +119,7 @@ function setInitialValues() {
   // Default Info
   if (!appConfig.has('info')) {
     appConfig.set('info', {
+      logo: '',
       fullname: '',
       company: '',
       address: '',
@@ -176,6 +177,7 @@ function initialize() {
       createMainWindow();
     }
   });
+  // console.log(appConfig.getAll());
 }
 
 // Imports Main Process Files

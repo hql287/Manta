@@ -5,6 +5,11 @@ import uuidv4 from 'uuid/v4';
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const initialState = {
+  recipient: {
+    type: '',
+    select: {},
+    new: {},
+  },
   rows: [{id: uuidv4()}],
   discount: {
     amount: 0,
@@ -16,6 +21,25 @@ const initialState = {
 
 const FormReducer = (state = initialState, action) => {
   switch (action.type) {
+
+    // Update recipient
+    case ACTION_TYPES.UPDATE_RECIPIENT: {
+      if (action.data.type === 'select') {
+        return Object.assign({}, state, {
+          recipient: Object.assign({}, state.recipient, {
+            type: 'select',
+            select: action.data.data
+          })
+        });
+      } else {
+        return Object.assign({}, state, {
+          recipient: Object.assign({}, state.recipient, {
+            type: 'new',
+            new: action.data.data
+          })
+        });
+      }
+    }
 
     // Add Item
     case ACTION_TYPES.ADD_ITEM: {
@@ -78,6 +102,11 @@ const FormReducer = (state = initialState, action) => {
     // Clear Form Data
     case ACTION_TYPES.CLEAR_FORM: {
       return {
+        recipient: {
+          type: '',
+          select: {},
+          new: {},
+        },
         rows: [{id: uuidv4()}],
         discount: {
           amount: 0,
@@ -88,6 +117,7 @@ const FormReducer = (state = initialState, action) => {
       };
     }
 
+    // Default
     default: {
       return state;
     }

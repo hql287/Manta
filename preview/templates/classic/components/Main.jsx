@@ -1,8 +1,12 @@
 // React Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Component
 class Main extends Component {
+  static propTypes = {
+    receipt: PropTypes.object.isRequired,
+  };
 
   getSubtotal = () =>
     <tr>

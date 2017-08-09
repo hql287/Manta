@@ -3,14 +3,11 @@ const ipc = require('electron').ipcRenderer;
 
 // React Libraries
 import React, {Component} from 'react';
-
-// Redux
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/receipts.jsx';
+import PropTypes from 'prop-types';
 
 // 3rd Party Libs
-const _ = require('lodash');
 const format = require('date-fns/format')
+const _ = require('lodash');
 
 // Custom Libs
 const openDialog = require('../../renderers/dialog.js');
@@ -18,6 +15,12 @@ import sounds from '../../../libs/sounds.js';
 
 // Component
 class Receipt extends Component {
+
+  static propTypes = {
+    data: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    deleteReceipt: PropTypes.func.isRequired,
+  };
 
   componentDidMount() {
     const deleteReceipt = this.props.deleteReceipt;

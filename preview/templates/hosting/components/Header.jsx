@@ -1,30 +1,36 @@
-// Node Libs
-const path = require('path');
-
 // React Libraries
 import React from 'react';
+import PropTypes from 'prop-types';
+
+Header.propTypes = {
+  company: PropTypes.object.isRequired,
+};
 
 // Component
-const Header = props =>
-  <header className="clearfix">
-    <div id="logo">
-      <img
-        src={path.join(__dirname, '../assets/logo.png')}
-      />
-    </div>
-    <div id="company">
-      <h2 className="name">
-        {props.company.company}
-      </h2>
-      <div>
-        {props.company.address}
+function Header ({company}) {
+  return (
+    <header className="clearfix">
+      <div id="logo">
+        <img
+          src={company.logo}
+        />
       </div>
-      <div>
-        {props.company.phone}
+      <div id="company">
+        <h2 className="name">
+          {company.company}
+        </h2>
+        <div>
+          {company.address}
+        </div>
+        <div>
+          {company.phone}
+        </div>
+        <div>
+          {company.website}
+        </div>
       </div>
-      <div>
-        {props.company.website}
-      </div>
-    </div>
-  </header>;
+    </header>
+  );
+}
+
 export default Header;

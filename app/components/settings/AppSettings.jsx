@@ -1,5 +1,6 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Node Libs
 import _ from 'lodash';
@@ -10,6 +11,12 @@ const openDialog = require('../../renderers/dialog.js');
 
 // Component
 class AppSettings extends Component {
+
+  static propTypes = {
+    appSettings: PropTypes.object.isRequired,
+    updateAppSettings: PropTypes.func.isRequired,
+  };
+
   componentWillMount = () => {
     this.setState(this.props.appSettings);
   };

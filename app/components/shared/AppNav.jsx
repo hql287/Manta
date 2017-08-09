@@ -8,19 +8,25 @@ class AppNav extends Component {
       <ul className="sideBar">
         <li>
           <NavLink exact to="/">
-            <i id="icon-archive" className="ion-ios-box"></i>
-            All
+            <i id="icon-archive" className="ion-ios-box" />
+            Receipts
           </NavLink>
         </li>
         <li>
           <NavLink exact to="/form">
-            <i id="icon-form" className="ion-android-list"></i>
-            New
+            <i id="icon-form" className="ion-android-list" />
+            New Receipt
+          </NavLink>
+        </li>
+        <li>
+          <NavLink exact to="/contacts">
+            <i id="icon-contacts" className="ion-person" />
+            Contacts
           </NavLink>
         </li>
         <li>
           <NavLink exact to="/settings">
-            <i id="icon-settings" className="ion-ios-gear"></i>
+            <i id="icon-settings" className="ion-ios-gear" />
             Settings
           </NavLink>
         </li>

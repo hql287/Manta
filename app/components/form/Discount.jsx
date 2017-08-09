@@ -8,6 +8,7 @@ import * as ActionCreators from '../../actions/form.jsx';
 
 // Component
 class Discount extends Component {
+
   // Update Discount Amount
   updateAmount = event => {
     const amount = parseInt(event.target.value, 10);

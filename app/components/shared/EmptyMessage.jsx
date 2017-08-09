@@ -2,9 +2,11 @@
 import React from 'react';
 
 // Component
-const EmptyMessage = () =>
+const EmptyMessage = props =>
   <div className="pageContent">
-    <span className="sectionHeader">You don't have any receipts yet!</span>
+    <span className="sectionHeader">
+      {props.text}
+    </span>
   </div>;
 
 export default EmptyMessage;

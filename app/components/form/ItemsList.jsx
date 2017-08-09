@@ -15,6 +15,7 @@ import ItemRow from './ItemRow.jsx';
 
 // Component
 class ItemsList extends Component {
+
   // Before mounting
   // componentWillMount = () => {
   //   const {rows} = this.props.currentReceipt;
