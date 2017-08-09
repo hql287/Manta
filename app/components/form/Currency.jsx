@@ -1,5 +1,6 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
@@ -11,6 +12,11 @@ import currencies from '../../../libs/currencies.json';
 
 // Component
 class Currency extends Component {
+  // Proptypes
+  static propTypes = {
+    defaultCurrency: PropTypes.string.isRequired,
+  };
+
   // Update Discount Amount
   updateCurrency = event => {
     const {dispatch} = this.props;
@@ -34,7 +40,7 @@ class Currency extends Component {
       );
     });
 
-    const { defaultCurrency } = this.props;
+    const {defaultCurrency} = this.props;
     const {currency} = this.props.currentReceipt;
 
     return (

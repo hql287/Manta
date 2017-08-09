@@ -1,5 +1,6 @@
 // React Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // 3rd Party Libs
 const format = require('date-fns/format');
@@ -7,6 +8,10 @@ const _ = require('lodash');
 
 // Component
 class Main extends Component {
+  static propTypes = {
+    receipt: PropTypes.object.isRequired,
+  };
+
   getDiscount = () => {
     const {discount} = this.props.receipt;
     let discountTxt = '';

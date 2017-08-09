@@ -3,6 +3,7 @@ const ipc = require('electron').ipcRenderer;
 
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
@@ -10,6 +11,11 @@ const openDialog = require('../../renderers/dialog.js');
 
 // Component
 class PrintOptions extends Component {
+  static propTypes = {
+    printOptions: PropTypes.object.isRequired,
+    updatePrintOptions: PropTypes.func.isRequired,
+  };
+
   componentWillMount = () => {
     this.setState(this.props.printOptions);
   };

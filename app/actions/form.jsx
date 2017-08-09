@@ -1,5 +1,12 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
+export const updateRecipient = data => {
+  return {
+    type: ACTION_TYPES.UPDATE_RECIPIENT,
+    data
+  };
+};
+
 export const addItem = () => {
   return {
     type: ACTION_TYPES.ADD_ITEM,

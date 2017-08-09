@@ -12,14 +12,11 @@ import * as ActionCreators from '../actions/receipts.jsx';
 
 // Custom Components
 import Receipt from '../components/receipts/Receipt.jsx';
-import EmptyMessage from '../components/receipts/EmptyMessage.jsx';
+import EmptyMessage from '../components/shared/EmptyMessage.jsx';
 
 // Component
-class Home extends Component {
-  state = {
-    hint: '',
-    openPrevWinHint: false,
-  };
+class Receipts extends Component {
+  state = { openPrevWinHint: false };
 
   // Will Mount
   componentWillMount = () => {
@@ -63,27 +60,6 @@ class Home extends Component {
       dispatch,
     );
     deleteReceipt(id);
-    // Show hint
-    this.showHint('Receipt Deleted!');
-  };
-
-  // Show Empty Message
-  showEmptyMessage = () => {
-    const {receipts} = this.props;
-    return receipts.data.length === 0;
-  };
-
-  // Show Page Hint
-  showHint = content => {
-    this.setState({hint: content}, () => {
-      document.getElementById('pageFooterHint').classList.add('active');
-    });
-  };
-
-  // Hide Page hint
-  hideHint = () => {
-    document.getElementById('pageFooterHint').classList.remove('active');
-    this.setState({hint: ''});
   };
 
   // Render
@@ -94,7 +70,6 @@ class Home extends Component {
         <Receipt
           key={receipt._id}
           deleteReceipt={this.deleteReceipt}
-          showOpeningPreviewWindowHint={this.showOpeningPreviewWindowHint}
           index={index}
           data={receipt}
         />
@@ -114,8 +89,8 @@ class Home extends Component {
               </span>}
           </ReactCSSTransitionGroup>
         </div>
-        {this.showEmptyMessage()
-          ? <EmptyMessage />
+        {receipts.data.length === 0
+          ? <EmptyMessage text="You don't have any receipt yet"/>
           : <div className="pageContent">
               <div className="pageLabels">
                 <div className="itemLabelNumner">
@@ -138,4 +113,4 @@ class Home extends Component {
 
 export default connect(state => ({
   receipts: state.ReceiptsReducer,
-}))(Home);
+}))(Receipts);

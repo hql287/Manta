@@ -8,7 +8,6 @@ import * as ActionCreators from '../../actions/form.jsx';
 
 // Component
 class Note extends Component {
-
   updateNoteState = event => {
     const {dispatch} = this.props;
     const updateNote = bindActionCreators(ActionCreators.updateNote, dispatch);

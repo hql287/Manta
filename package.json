@@ -20,12 +20,17 @@
     "eslint-plugin-react": "^7.1.0"
   },
   "dependencies": {
+    "babel-eslint": "^7.2.3",
     "date-fns": "^1.28.5",
     "electron-settings": "^3.1.1",
+    "jimp": "^0.2.28",
     "lodash": "^4.17.4",
     "pouchdb-browser": "^6.3.4",
+    "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
+    "react-dnd": "^2.4.0",
+    "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-redux": "^5.0.5",
