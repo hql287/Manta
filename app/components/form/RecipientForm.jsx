@@ -4,29 +4,40 @@ import PropTypes from 'prop-types';
 
 // Component
 class RecipientForm extends Component {
-  static propTypes = {
-    currentRecipientData: PropTypes.object.isRequired,
-    updateRecipient: PropTypes.func.isRequired,
-  };
+
+  componentWillMount = () => {
+    this.setState(this.props.currentRecipientData);
+  }
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.clearState) {
+      this.setState({
+        fullname: '',
+        company: '',
+        phone: '',
+        email: '',
+      });
+    }
+  }
 
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({[name]: value}, () => {
-      this.updateRecipient();
+    this.setState({ [name]: value }, () => {
+      this.updateRecipientFormData();
     });
   };
 
-  updateRecipient = () => {
-    const {updateRecipient} = this.props;
-    updateRecipient({
+  updateRecipientFormData = () => {
+    const {updateRecipientState} = this.props;
+    updateRecipientState({
       type: 'new',
-      data: this.state,
+      new: this.state,
     });
   };
 
   render = () => {
-    const {fullname, company, phone, email} = this.props.currentRecipientData;
+    const {fullname, company, phone, email} = this.state;
     return (
       <div className="recipientForm">
         <div className="row">
@@ -73,5 +84,14 @@ class RecipientForm extends Component {
     );
   };
 }
+
+RecipientForm.propTypes = {
+  currentRecipientData: PropTypes.object,
+  updateRecipientState: PropTypes.func.isRequired,
+};
+
+RecipientForm.defaultProps = {
+  currentRecipientData: {},
+};
 
 export default RecipientForm;

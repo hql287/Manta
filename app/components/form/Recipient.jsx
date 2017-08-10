@@ -14,41 +14,81 @@ import RecipientsList from './RecipientsList.jsx';
 
 // Component
 class Recipient extends Component {
-  static propTypes = {
-    recipients: PropTypes.array.isRequired,
-  };
-
+  // Extract data from redux set as state before mount
   componentWillMount = () => {
-    if (this.props.recipients.length > 0) {
-      this.setState({type: 'select'});
-    } else {
-      this.setState({type: 'new'});
+    const {recipient} = this.props.currentReceipt;
+    switch (recipient.type) {
+      case 'new': {
+        this.setState({
+          type: 'new',
+          new: recipient.new,
+          select: recipient.select,
+        });
+        break;
+      }
+      case 'select': {
+        this.setState({
+          type: 'select',
+          new: recipient.new,
+          select: recipient.select,
+        });
+        break;
+      }
+
+      // If there is no existing data
+      default: {
+        if (this.props.recipients.length > 0) {
+          this.setState({
+            type: 'select',
+            new: {},
+            select: {},
+          });
+        } else {
+          this.setState({
+            type: 'new',
+            new: {},
+            select: {},
+          });
+        }
+      }
     }
   };
 
+  // Toggle Recipient Form
   toggleForm = event => {
-    this.setState({
-      type: event.target.value,
+    this.setState({ type: event.target.value }, () => {
+      this.dispatchRecipientData(this.state);
     });
   };
 
-  updateRecipient = data => {
+  // Update Local Recipient State Data
+  updateRecipientState = data => {
+    this.setState(data, () => {
+      this.dispatchRecipientData(this.state);
+    });
+  };
+
+  // Send Recipient State Data to Store
+  dispatchRecipientData = data => {
     const {dispatch} = this.props;
-    const updateRecipient = bindActionCreators(
+    const dispatchRecipientData = bindActionCreators(
       FormActionCreators.updateRecipient,
       dispatch,
     );
-    updateRecipient(data);
+    dispatchRecipientData(data);
   };
 
+  // Output Form or List
   outputComponent = () => {
-    const {currentReceipt, recipients} = this.props;
     // If No contact existed, show the contact form
+    const {recipients} = this.props;
+    const { type } = this.props.currentReceipt.recipient;
     if (recipients.length === 0) {
       return (
         <RecipientForm
-          currentRecipientData={currentReceipt.recipient.new}
-          updateRecipient={this.updateRecipient}
+          currentRecipientData={this.state.new}
+          updateRecipientState={this.updateRecipientState}
+          clearState={type === null ? true : false}
         />
       );
     }
@@ -57,21 +97,24 @@ class Recipient extends Component {
     if (this.state.type === 'new') {
       return (
         <RecipientForm
-          currentRecipientData={currentReceipt.recipient.new}
-          updateRecipient={this.updateRecipient}
+          currentRecipientData={this.state.new}
+          updateRecipientState={this.updateRecipientState}
+          clearState={type === null ? true : false}
         />
       );
     } else {
       return (
         <RecipientsList
-          currentSelectedRecipient={currentReceipt.recipient.select}
           recipients={recipients}
-          updateRecipient={this.updateRecipient}
+          currentSelectedRecipient={this.state.select}
+          updateRecipientState={this.updateRecipientState}
+          clearState={type === null ? true : false}
         />
       );
     }
   };
 
+  // Render
   render = () => {
     const {type} = this.state;
     const {recipients} = this.props;
@@ -86,10 +129,10 @@ class Recipient extends Component {
                 <input
                   type="radio"
                   onChange={e => this.toggleForm(e)}
-                  checked={type === 'select'}
-                  value="select"
+                  checked={type === 'new'}
+                  value="new"
                 />
-                Select
+                Add New
               </label>
             </div>
             <div className="radio">
@@ -97,10 +140,10 @@ class Recipient extends Component {
                 <input
                   type="radio"
                   onChange={e => this.toggleForm(e)}
-                  checked={type === 'new'}
-                  value="new"
+                  checked={type === 'select'}
+                  value="select"
                 />
-                Add New
+                Select
               </label>
             </div>
           </div>}
@@ -108,6 +151,10 @@ class Recipient extends Component {
     );
   };
 }
+
+Recipient.propTypes = {
+  recipients: PropTypes.array.isRequired,
+};
 
 export default connect(state => ({
   currentReceipt: state.FormReducer,

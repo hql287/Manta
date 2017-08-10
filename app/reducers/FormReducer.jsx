@@ -6,7 +6,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const initialState = {
   recipient: {
-    type: '',
+    type: null,
     select: {},
     new: {},
   },
@@ -24,21 +24,9 @@ const FormReducer = (state = initialState, action) => {
 
     // Update recipient
     case ACTION_TYPES.UPDATE_RECIPIENT: {
-      if (action.data.type === 'select') {
-        return Object.assign({}, state, {
-          recipient: Object.assign({}, state.recipient, {
-            type: 'select',
-            select: action.data.data
-          })
-        });
-      } else {
-        return Object.assign({}, state, {
-          recipient: Object.assign({}, state.recipient, {
-            type: 'new',
-            new: action.data.data
-          })
-        });
-      }
+      return Object.assign({}, state, {
+        recipient: action.data
+      });
     }
 
     // Add Item
@@ -103,7 +91,7 @@ const FormReducer = (state = initialState, action) => {
     case ACTION_TYPES.CLEAR_FORM: {
       return {
         recipient: {
-          type: '',
+          type: null,
           select: {},
           new: {},
         },
