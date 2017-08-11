@@ -1,5 +1,6 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
+const appConfig = require('electron').remote.require('electron-settings');
 
 // Actions
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -15,7 +16,7 @@ const initialState = {
     amount: 0,
     type: 'percentage',
   },
-  currency: 'USD',
+  currency: appConfig.get('appSettings').currency,
   note: '',
 };
 
@@ -100,7 +101,7 @@ const FormReducer = (state = initialState, action) => {
           amount: 0,
           type: 'percentage',
         },
-        currency: 'USD',
+        currency: appConfig.get('appSettings').currency,
         note: '',
       };
     }

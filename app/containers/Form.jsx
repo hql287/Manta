@@ -21,20 +21,10 @@ import Note from '../components/form/Note.jsx';
 
 // Component
 class Form extends Component {
-  componentWillMount = () => {
-    if (!this.props.recipients.loaded) {
-      const {dispatch} = this.props;
-      const getAllContacts = bindActionCreators(
-        ContactsActionCreators.getAllContacts,
-        dispatch,
-      );
-      getAllContacts();
-    }
-  };
 
   // Save Data
-  saveData = () => {
-    const { currentReceipt } = this.props;
+  saveData() {
+    const {currentReceipt} = this.props;
     // Validate Form
     if (!this.validateForm()) return;
     // Save To DB if it's a new contact
@@ -48,14 +38,14 @@ class Form extends Component {
     this.clearForm('muted');
     // Play a Sound
     sounds.play('ADD');
-  };
+  }
 
-  getReceiptData = () => {
+  getReceiptData() {
     let receiptData;
-    const { currentReceipt } = this.props;
+    const {currentReceipt} = this.props;
     if (currentReceipt.recipient.type === 'new') {
       receiptData = Object.assign({}, currentReceipt, {
-        recipient: currentReceipt.recipient.new
+        recipient: currentReceipt.recipient.new,
       });
     } else {
       const selectedRecipient = currentReceipt.recipient.select;
@@ -64,57 +54,57 @@ class Form extends Component {
         company: selectedRecipient.company,
         email: selectedRecipient.email,
         phone: selectedRecipient.phone,
-      }
+      };
       receiptData = Object.assign({}, currentReceipt, {
-        recipient: selectedRecipientData
+        recipient: selectedRecipientData,
       });
     }
     return receiptData;
   }
 
   // Save Receipt To DB
-  saveReceiptToDB = data => {
+  saveReceiptToDB(data) {
     // Dispatch Action
     const {dispatch} = this.props;
     const saveReceipt = bindActionCreators(
       ReceiptsActionCreators.saveReceipt,
-      dispatch,
+      dispatch
     );
     // Save The Receipt
     saveReceipt(data);
   }
 
   // Save Recipient To DB
-  saveRecipienAsNewContact = data => {
+  saveRecipienAsNewContact(data) {
     // Dispatch Action
     const {dispatch} = this.props;
     const saveContact = bindActionCreators(
       ContactsActionCreators.saveContact,
-      dispatch,
+      dispatch
     );
     // Save New Contact
     saveContact(data);
   }
 
   // Clear The Form
-  clearForm = vol => {
+  clearForm(vol) {
     // Dispatch Clear Form Action
     const {dispatch} = this.props;
     const clearForm = bindActionCreators(
       FormActionCreators.clearForm,
-      dispatch,
+      dispatch
     );
     clearForm();
     // Play A Sound
     if (!vol) sounds.play('RELOAD');
-  };
+  }
 
   // Validate Form
-  validateForm = () => {
+  validateForm() {
     let validated = true;
     // Validate Each Row Content
-    const { rows } = this.props.currentReceipt;
-    for ( let i = 0; i < rows.length; i++ ) {
+    const {rows} = this.props.currentReceipt;
+    for (let i = 0; i < rows.length; i++) {
       let row = rows[i];
       // Does it contain description?
       if (!row.description) {
@@ -122,7 +112,7 @@ class Form extends Component {
           type: 'warning',
           title: 'Required Field',
           message: 'Description can not be blank',
-        })
+        });
         validated = false;
         break;
       }
@@ -132,7 +122,7 @@ class Form extends Component {
           type: 'warning',
           title: 'Required Field',
           message: 'Price must be greater than 0',
-        })
+        });
         validated = false;
         break;
       }
@@ -142,7 +132,7 @@ class Form extends Component {
           type: 'warning',
           title: 'Required Field',
           message: 'Quantity must be greater than 0',
-        })
+        });
         validated = false;
         break;
       }
@@ -151,17 +141,17 @@ class Form extends Component {
   }
 
   // Render The form
-  render = () => {
+  render() {
     return (
       <div className="pageWrapper">
         <div className="pageHeader">
           <h4>New Receipt</h4>
         </div>
         <div className="pageContent">
-          <Recipient recipients={this.props.recipients.data}/>
-          <Currency defaultCurrency={this.props.settings.current.appSettings.currency}/>
-          <ItemsList/>
-          <Discount/>
+          <Recipient/>
+          <Currency />
+          <ItemsList />
+          <Discount />
           <Note />
         </div>
         <div className="pageFooter">
@@ -174,13 +164,11 @@ class Form extends Component {
         </div>
       </div>
     );
-  };
-
+  }
 }
 
 export default connect(state => ({
-  currentReceipt: state.FormReducer,
   receipts: state.ReceiptsReducer,
   recipients: state.ContactsReducer,
-  settings: state.SettingsReducer,
+  currentReceipt: state.FormReducer,
 }))(Form);

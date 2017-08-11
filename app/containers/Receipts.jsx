@@ -15,7 +15,7 @@ import Receipt from '../components/receipts/Receipt.jsx';
 import EmptyMessage from '../components/shared/EmptyMessage.jsx';
 
 // Component
-class List extends Component {
+class Receipts extends Component {
   state = { openPrevWinHint: false };
 
   // Will Mount
@@ -113,4 +113,4 @@ class List extends Component {
 
 export default connect(state => ({
   receipts: state.ReceiptsReducer,
-}))(List);
+}))(Receipts);
