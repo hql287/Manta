@@ -1,6 +1,5 @@
 // Node Libs
 const fs = require('fs');
-const os = require('os');
 
 // Electron Libs
 const path = require('path');

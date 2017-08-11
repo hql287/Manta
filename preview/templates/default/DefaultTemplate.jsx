@@ -12,12 +12,12 @@ class DefaultTemplate extends Component {
     data: PropTypes.object.isRequired,
   };
   render = () => {
-    const {company, receipt} = this.props.data;
+    const {company, invoice} = this.props.data;
     return (
       <div className="invoice-box">
-        <Top company={company} receipt={receipt}/>
-        <Information recipient={receipt.recipient} company={company} />
-        <MainContent receipt={receipt} />
+        <Top company={company} invoice={invoice}/>
+        <Information recipient={invoice.recipient} company={company} />
+        <MainContent invoice={invoice} />
       </div>
     );
   };

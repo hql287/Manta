@@ -14,74 +14,74 @@ const openDialog = require('../../renderers/dialog.js');
 import sounds from '../../../libs/sounds.js';
 
 // Component
-class Receipt extends Component {
+class Invoice extends Component {
 
   static propTypes = {
     data: PropTypes.object.isRequired,
     index: PropTypes.number.isRequired,
-    deleteReceipt: PropTypes.func.isRequired,
+    deleteInvoice: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    const deleteReceipt = this.props.deleteReceipt;
-    ipc.on('confirmed-delete-receipt', (event, index, receiptId) => {
-      if (receiptId === this.props.data._id) {
+    const deleteInvoice = this.props.deleteInvoice;
+    ipc.on('confirmed-delete-invoice', (event, index, invoiceId) => {
+      if (invoiceId === this.props.data._id) {
         if (index === 0) {
-          deleteReceipt(receiptId);
+          deleteInvoice(invoiceId);
           sounds.play('REMOVE');
         }
       }
     });
   }
 
-  openDeleteDialog = receiptId => {
+  openDeleteDialog = invoiceId => {
     openDialog({
       type: 'warning',
-      title: 'Delete This Receipt',
+      title: 'Delete This Invoice',
       message: 'Are You Sure?',
       buttons: ['Yes', 'No']
-    }, 'confirmed-delete-receipt', receiptId);
+    }, 'confirmed-delete-invoice', invoiceId);
   }
 
-  // Preview Receipt
-  previewReceipt = () => ipc.send('preview-receipt', this.props.data);
+  // Preview Invoice
+  previewInvoice = () => ipc.send('preview-invoice', this.props.data);
 
   // Render
   render = () => {
-    const receipt = this.props.data;
+    const invoice = this.props.data;
     return (
-      <div className="receipt">
-        <span className="receiptNumber">
+      <div className="invoice">
+        <span className="invoiceNumber">
           {this.props.index + 1}
         </span>
 
-        <a href="#" className="receiptId" onClick={() => this.previewReceipt()}>
-          {_.truncate(receipt._id, {
+        <a href="#" className="invoiceId" onClick={() => this.previewInvoice()}>
+          {_.truncate(invoice._id, {
             length: 8,
             omission: '',
           })}
         </a>
 
-        <span className="receiptCreatedAt">
+        <span className="invoiceCreatedAt">
           <span>
-            {format(receipt.created_at, 'DD-MM-YYYY')}
+            {format(invoice.created_at, 'DD-MM-YYYY')}
           </span>
           <span className="text-muted">
-            {format(receipt.created_at, 'HH:mm')}
+            {format(invoice.created_at, 'HH:mm')}
           </span>
         </span>
 
-        <div className="receiptActions">
+        <div className="invoiceActions">
           <a
             href="#"
-            className="previewReceipt"
-            onClick={() => this.previewReceipt()}>
+            className="previewInvoice"
+            onClick={() => this.previewInvoice()}>
             <i className="ion-search" />
           </a>
           <a
             href="#"
-            className="removeReceipt"
-            onClick={() => this.openDeleteDialog(receipt._id)}>
+            className="removeInvoice"
+            onClick={() => this.openDeleteDialog(invoice._id)}>
             <i className="ion-android-cancel" />
           </a>
         </div>
@@ -90,4 +90,4 @@ class Receipt extends Component {
   };
 }
 
-export default Receipt;
+export default Invoice;

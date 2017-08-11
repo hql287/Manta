@@ -5,38 +5,38 @@ import PropTypes from 'prop-types';
 // Component
 class MainContent extends Component {
   static propTypes = {
-    receipt: PropTypes.object.isRequired,
+    invoice: PropTypes.object.isRequired,
   };
 
   getDiscount = () => {
     let discountTxt;
-    const {discount} = this.props.receipt;
+    const {discount} = this.props.invoice;
     if (discount.type === 'percentage') {
       discountTxt = `${discount.amount}%`;
     } else {
-      discountTxt = `${this.props.receipt.currency} ${discount.amount}`;
+      discountTxt = `${this.props.invoice.currency} ${discount.amount}`;
     }
     return discountTxt;
   }
 
   getGrandTotal = () => {
-    const {receipt} = this.props;
+    const {invoice} = this.props;
     let grandTotal = 0;
-    receipt.rows.forEach((row, index) => {
+    invoice.rows.forEach((row, index) => {
       grandTotal += row.subtotal;
     });
 
-    const discountAmount = receipt.discount.amount;
-    if (receipt.discount.type === 'percentage') {
+    const discountAmount = invoice.discount.amount;
+    if (invoice.discount.type === 'percentage') {
       grandTotal = grandTotal * (100 - discountAmount) / 100;
     } else {
       grandTotal -= discountAmount;
     }
-    return `${this.props.receipt.currency} ${grandTotal}`;
+    return `${this.props.invoice.currency} ${grandTotal}`;
   };
 
   render = () => {
-    const {rows} = this.props.receipt;
+    const {rows} = this.props.invoice;
     const rowsComponent = rows.map((row, index) => {
       return (
         <tr

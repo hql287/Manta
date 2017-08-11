@@ -1,1 +1,1 @@
-export const SET_RECEIPT = 'SET_RECEIPT';
+export const SET_INVOICE = 'SET_INVOICE';

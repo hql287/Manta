@@ -9,16 +9,16 @@ const _ = require('lodash');
 // Component
 class Main extends Component {
   static propTypes = {
-    receipt: PropTypes.object.isRequired,
+    invoice: PropTypes.object.isRequired,
   };
 
   getDiscount = () => {
-    const {discount} = this.props.receipt;
+    const {discount} = this.props.invoice;
     let discountTxt = '';
     if (discount.type === 'percentage') {
       discountTxt = `${discount.amount}%`;
     } else {
-      discountTxt = `${this.props.receipt.currency} ${discount.amount}`;
+      discountTxt = `${this.props.invoice.currency} ${discount.amount}`;
     }
     return (
       <tr>
@@ -34,7 +34,7 @@ class Main extends Component {
     <tr>
       <td colSpan="3">SUBTOTAL</td>
       <td className="total">
-        {this.props.receipt.currency} {this.props.receipt.subtotal}
+        {this.props.invoice.currency} {this.props.invoice.subtotal}
       </td>
     </tr>;
 
@@ -44,13 +44,13 @@ class Main extends Component {
         GRAND TOTAL
       </td>
       <td className="grand total">
-        {this.props.receipt.currency} {this.props.receipt.grandTotal}
+        {this.props.invoice.currency} {this.props.invoice.grandTotal}
       </td>
     </tr>;
 
   render = () => {
-    const {receipt} = this.props;
-    const rowsComponents = receipt.rows.map((row, index) => {
+    const {invoice} = this.props;
+    const rowsComponents = invoice.rows.map((row, index) => {
       return (
         <tr key={index}>
           <td className="desc">
@@ -86,11 +86,11 @@ class Main extends Component {
             {this.getGrandTotal()}
           </tbody>
         </table>
-        {this.props.receipt.note &&
+        {this.props.invoice.note &&
           <div id="notices">
             <div>NOTICE:</div>
             <div className="notice">
-              {this.props.receipt.note}
+              {this.props.invoice.note}
             </div>
           </div>}
       </main>

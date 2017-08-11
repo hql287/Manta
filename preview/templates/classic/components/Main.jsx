@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Component
 class Main extends Component {
   static propTypes = {
-    receipt: PropTypes.object.isRequired,
+    invoice: PropTypes.object.isRequired,
   };
 
   getSubtotal = () =>
@@ -14,17 +14,17 @@ class Main extends Component {
         SUBTOTAL
       </td>
       <td className="sub total">
-        {this.props.receipt.currency} {this.props.receipt.subtotal}
+        {this.props.invoice.currency} {this.props.invoice.subtotal}
       </td>
     </tr>;
 
   getDiscount = () => {
-    const { discount } = this.props.receipt;
+    const { discount } = this.props.invoice;
     let discountTxt = '';
     if (discount.type === 'percentage') {
       discountTxt = `${discount.amount}%`;
     } else {
-      discountTxt = `${this.props.receipt.currency} ${discount.amount}`;
+      discountTxt = `${this.props.invoice.currency} ${discount.amount}`;
     }
     return (
       <tr>
@@ -40,13 +40,13 @@ class Main extends Component {
         GRAND TOTAL
       </td>
       <td className="grand total">
-        {this.props.receipt.currency} {this.props.receipt.grandTotal}
+        {this.props.invoice.currency} {this.props.invoice.grandTotal}
       </td>
     </tr>;
 
   render = () => {
-    const {receipt} = this.props;
-    const rowsComponent = receipt.rows.map((row, index) => {
+    const {invoice} = this.props;
+    const rowsComponent = invoice.rows.map((row, index) => {
       return (
         <tr key={index}>
           <td className="desc">

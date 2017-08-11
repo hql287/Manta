@@ -6,23 +6,23 @@ const initialState = {
   data: [],
 };
 
-const ReceiptsReducer = (state = initialState, action) => {
+const InvoicesReducer = (state = initialState, action) => {
   switch (action.type) {
-    // Get All Receipts
-    case ACTION_TYPES.GET_RECEIPTS: {
+    // Get All Invoices
+    case ACTION_TYPES.GET_INVOICES: {
       return Object.assign({}, state, {
         loaded: true,
         data: action.data,
       });
     }
-    // Save Receipt
-    case ACTION_TYPES.SAVE_RECEIPT: {
+    // Save Invoice
+    case ACTION_TYPES.SAVE_INVOICE: {
       return Object.assign({}, state, {
         data: action.data,
       });
     }
-    // Delete A Receipt
-    case ACTION_TYPES.DELETE_RECEIPT: {
+    // Delete A Invoice
+    case ACTION_TYPES.DELETE_INVOICE: {
       return Object.assign({}, state, {
         data: action.data,
       });
@@ -33,4 +33,4 @@ const ReceiptsReducer = (state = initialState, action) => {
   }
 };
 
-export default ReceiptsReducer;
+export default InvoicesReducer;

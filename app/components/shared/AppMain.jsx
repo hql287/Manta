@@ -6,7 +6,7 @@ import {Redirect, Switch, Route} from 'react-router-dom';
 
 // Custom Components
 import Form from '../../containers/Form.jsx';
-import Receipts from '../../containers/Receipts.jsx';
+import Invoices from '../../containers/Invoices.jsx';
 import Settings from '../../containers/Settings.jsx';
 import Contacts from '../../containers/Contacts.jsx';
 
@@ -16,7 +16,7 @@ class AppMain extends Component {
       <Redirect to='/form'/>
       <Switch>
         <Route path='/form' component={Form} />
-        <Route path='/receipts' component={Receipts} />
+        <Route path='/invoices' component={Invoices} />
         <Route path='/contacts' component={Contacts} />
         <Route path='/settings' component={Settings} />
       </Switch>

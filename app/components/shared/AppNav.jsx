@@ -13,9 +13,9 @@ class AppNav extends Component {
           </NavLink>
         </li>
         <li>
-          <NavLink to='/receipts'>
+          <NavLink to='/invoices'>
             <i id='icon-archive' className='ion-ios-box' />
-            Receipts
+            Invoices
           </NavLink>
         </li>
         <li>

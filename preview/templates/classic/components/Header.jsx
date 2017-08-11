@@ -8,7 +8,7 @@ const _ = require('lodash');
 
 // Proptypes
 Header.propTypes = {
-  receipt: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired,
 };
 
 // Component
@@ -17,10 +17,10 @@ function Header(props) {
     <h1 className="clearfix">
       <small>
         <span>DATE</span>
-        <br /> {format(props.receipt.created_at, 'DD-MM-YYYY')}
+        <br /> {format(props.invoice.created_at, 'DD-MM-YYYY')}
       </small>{' '}
       INVOICE #
-      {_.truncate(props.receipt._id, {
+      {_.truncate(props.invoice._id, {
         length: 8,
         omission: '',
       })}

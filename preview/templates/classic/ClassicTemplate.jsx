@@ -14,17 +14,17 @@ class ClassicTemplate extends Component {
 
   // Render
   render = () => {
-    const {company, receipt, template} = this.props.data;
+    const {company, invoice, template} = this.props.data;
     return (
       <main>
-        <Header receipt={receipt} />
-        <Main receipt={receipt} />
+        <Header invoice={invoice} />
+        <Main invoice={invoice} />
         <Footer />
-        {receipt.note &&
+        {invoice.note &&
           <div id="notices">
             <div>NOTICE:</div>
             <div className="notice">
-              {receipt.note}
+              {invoice.note}
             </div>
           </div>}
       </main>
