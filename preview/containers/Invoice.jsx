@@ -11,7 +11,7 @@ import React, {Component} from 'react';
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/receipt.jsx';
+import * as ActionCreators from '../actions/invoice.jsx';
 
 // 3rd Party Libs
 const appConfig = require('electron').remote.require('electron-settings');
@@ -23,7 +23,7 @@ import ElegantTemplate from '../templates/elegant/ElegantTemplate.jsx';
 import ClassicTemplate from '../templates/classic/ClassicTemplate.jsx';
 
 // Component
-class Receipt extends Component {
+class Invoice extends Component {
   // Before Mount
   componentWillMount = () => {
     this.setState(
@@ -46,14 +46,14 @@ class Receipt extends Component {
   // Once mounted
   componentDidMount = () => {
     // Add Event Listener
-    ipc.on('update-preview', (event, receiptData) => {
+    ipc.on('update-preview', (event, invoiceData) => {
       const {dispatch} = this.props;
-      const setReceipt = bindActionCreators(
-        ActionCreators.setReceipt,
+      const setInvoice = bindActionCreators(
+        ActionCreators.setInvoice,
         dispatch,
       );
       // Dispatch Action
-      setReceipt(receiptData);
+      setInvoice(invoiceData);
       // Update State
       this.setState({waiting: false});
     });
@@ -82,10 +82,10 @@ class Receipt extends Component {
   };
 
   addPrintFn = () => {
-    const {receipt} = this.props;
+    const {invoice} = this.props;
     const printPDFBtn = document.getElementById('printToPDF');
     printPDFBtn.addEventListener('click', event => {
-      ipc.send('print-to-pdf', receipt._id);
+      ipc.send('print-to-pdf', invoice._id);
     });
   };
 
@@ -105,11 +105,11 @@ class Receipt extends Component {
 
   // Render
   render = () => {
-    const {receipt} = this.props;
+    const {invoice} = this.props;
     const data = {
       company: this.state.company,
       template: this.state.template,
-      receipt,
+      invoice,
     };
     if (this.state.waiting) {
       return <div>Waiting For Data...</div>;
@@ -133,5 +133,5 @@ class Receipt extends Component {
 }
 
 export default connect(state => ({
-  receipt: state.ReceiptReducer,
-}))(Receipt);
+  invoice: state.InvoiceReducer,
+}))(Invoice);

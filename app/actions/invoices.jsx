@@ -3,7 +3,7 @@ import uuidv4 from 'uuid/v4';
 
 // PouchDB
 const PouchDB = require('pouchdb-browser');
-const db = new PouchDB('receipts');
+const db = new PouchDB('invoices');
 
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
@@ -24,12 +24,12 @@ const getAllDocs = () =>
       });
   });
 
-// Get All Receipts
-export const getReceipts = () => {
+// Get All Invoices
+export const getInvoices = () => {
   return dispatch => {
     getAllDocs().then(allDocs => {
       dispatch({
-        type: ACTION_TYPES.GET_RECEIPTS,
+        type: ACTION_TYPES.GET_INVOICES,
         data: allDocs,
       });
     });
@@ -59,8 +59,8 @@ const getGrandTotal = data => {
   return grandTotal;
 };
 
-// Save A Receipts
-export const saveReceipt = data => {
+// Save an Invoice
+export const saveInvoice = data => {
   const subtotal = getSubtotal(data);
   const grandTotal = getGrandTotal(data);
 
@@ -74,23 +74,23 @@ export const saveReceipt = data => {
     });
     db.put(doc).then(getAllDocs).then(newDocs => {
       dispatch({
-        type: ACTION_TYPES.SAVE_RECEIPT,
+        type: ACTION_TYPES.SAVE_INVOICE,
         data: newDocs,
       });
     });
   };
 };
 
-// Delete a Receipts
-export const deleteReceipt = receiptId => {
+// Delete an invoice
+export const deleteInvoice = invoiceId => {
   return dispatch => {
     db
-      .get(receiptId)
+      .get(invoiceId)
       .then(doc => db.remove(doc))
       .then(getAllDocs)
       .then(remainingDocs => {
         dispatch({
-          type: ACTION_TYPES.DELETE_RECEIPT,
+          type: ACTION_TYPES.DELETE_INVOICE,
           data: remainingDocs,
         });
       });

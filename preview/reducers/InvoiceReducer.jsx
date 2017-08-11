@@ -3,10 +3,10 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const initialState = {};
 
-const ReceiptsReducer = (state = initialState, action) => {
+const InvoicesReducer = (state = initialState, action) => {
   switch (action.type) {
-    // Get All Receipts
-    case ACTION_TYPES.SET_RECEIPT: {
+    // Get All Invoices
+    case ACTION_TYPES.SET_INVOICE: {
       return Object.assign({}, state, action.data);
     }
 
@@ -16,4 +16,4 @@ const ReceiptsReducer = (state = initialState, action) => {
   }
 };
 
-export default ReceiptsReducer;
+export default InvoicesReducer;

@@ -23,11 +23,11 @@ const PreviewStore = createStore(
 );
 
 // Custom Components
-import Receipt from './containers/Receipt.jsx';
+import Invoice from './containers/Invoice.jsx';
 
 ReactDOM.render(
   <Provider store={PreviewStore}>
-    <Receipt/>
+    <Invoice/>
   </Provider>,
-  document.getElementById('receiptWrapper')
+  document.getElementById('invoiceWrapper')
 );

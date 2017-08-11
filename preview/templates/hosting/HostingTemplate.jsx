@@ -13,11 +13,11 @@ class HostingTemplate extends Component {
   };
   // Render
   render = () => {
-    const {company, receipt} = this.props.data;
+    const {company, invoice} = this.props.data;
     return (
       <div>
         <Header company={company}/>
-        <Main receipt={receipt}/>
+        <Main invoice={invoice}/>
       </div>
     );
   };

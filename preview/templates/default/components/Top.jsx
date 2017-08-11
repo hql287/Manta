@@ -11,7 +11,7 @@ const format = require('date-fns/format');
 
 Top.propTypes = {
   company: PropTypes.object.isRequired,
-  receipt: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired,
 };
 
 // Component
@@ -29,13 +29,13 @@ function Top (props) {
                   </td>
                   <td>
                     Invoice #:
-                    {_.truncate(props.receipt._id, {
+                    {_.truncate(props.invoice._id, {
                       length: 8,
                       omission: '',
                     })}
                     <br />
                     Created:
-                    {format(props.receipt.created_at, 'DD-MM-YYYY')}
+                    {format(props.invoice.created_at, 'DD-MM-YYYY')}
                     <br />
                   </td>
                 </tr>

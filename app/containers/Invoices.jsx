@@ -8,25 +8,25 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/receipts.jsx';
+import * as ActionCreators from '../actions/invoices.jsx';
 
 // Custom Components
-import Receipt from '../components/receipts/Receipt.jsx';
+import Invoice from '../components/invoices/Invoice.jsx';
 import EmptyMessage from '../components/shared/EmptyMessage.jsx';
 
 // Component
-class Receipts extends Component {
+class Invoices extends Component {
   state = { openPrevWinHint: false };
 
   // Will Mount
   componentWillMount = () => {
-    if (!this.props.receipts.loaded) {
+    if (!this.props.invoices.loaded) {
       const {dispatch} = this.props;
-      const getReceipts = bindActionCreators(
-        ActionCreators.getReceipts,
+      const getInvoices = bindActionCreators(
+        ActionCreators.getInvoices,
         dispatch,
       );
-      getReceipts();
+      getInvoices();
     }
   };
 
@@ -46,39 +46,39 @@ class Receipts extends Component {
   // Remove all IPC listeners once all reciepts are removed
   // Or the container is unmounted
   componentWillUnmount() {
-    ipc.removeAllListeners('confirmed-delete-receipt');
+    ipc.removeAllListeners('confirmed-delete-invoice');
     ipc.removeAllListeners('show-opening-preview-window-hint');
     ipc.removeAllListeners('hide-opening-preview-window-hint');
   }
 
-  // Delete a receipt
-  deleteReceipt = id => {
+  // Delete a invoice
+  deleteInvoice = id => {
     // Dispatch Action
     const {dispatch} = this.props;
-    const deleteReceipt = bindActionCreators(
-      ActionCreators.deleteReceipt,
+    const deleteInvoice = bindActionCreators(
+      ActionCreators.deleteInvoice,
       dispatch,
     );
-    deleteReceipt(id);
+    deleteInvoice(id);
   };
 
   // Render
   render = () => {
-    const {receipts} = this.props;
-    const receiptsComponent = receipts.data.map((receipt, index) => {
+    const {invoices} = this.props;
+    const invoicesComponent = invoices.data.map((invoice, index) => {
       return (
-        <Receipt
-          key={receipt._id}
-          deleteReceipt={this.deleteReceipt}
+        <Invoice
+          key={invoice._id}
+          deleteInvoice={this.deleteInvoice}
           index={index}
-          data={receipt}
+          data={invoice}
         />
       );
     });
     return (
       <div className="pageWrapper">
         <div className="pageHeader">
-          <h4>All Receipts</h4>
+          <h4>All invoices</h4>
           <ReactCSSTransitionGroup
             transitionName="itemList"
             transitionEnterTimeout={500}
@@ -89,8 +89,8 @@ class Receipts extends Component {
               </span>}
           </ReactCSSTransitionGroup>
         </div>
-        {receipts.data.length === 0
-          ? <EmptyMessage text="You don't have any receipt yet"/>
+        {invoices.data.length === 0
+          ? <EmptyMessage text="You don't have any invoice yet"/>
           : <div className="pageContent">
               <div className="pageLabels">
                 <div className="itemLabelNumner">
@@ -104,7 +104,7 @@ class Receipts extends Component {
                 </div>
                 <div className="itemLabelActions" />
               </div>
-              {receiptsComponent}
+              {invoicesComponent}
             </div>}
       </div>
     );
@@ -112,5 +112,5 @@ class Receipts extends Component {
 }
 
 export default connect(state => ({
-  receipts: state.ReceiptsReducer,
-}))(Receipts);
+  invoices: state.InvoicesReducer,
+}))(Invoices);

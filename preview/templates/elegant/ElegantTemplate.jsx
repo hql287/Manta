@@ -13,11 +13,11 @@ class ElegantTemplate extends Component {
   };
   // Render
   render = () => {
-    const {company, receipt } = this.props.data;
+    const {company, invoice } = this.props.data;
     return (
       <div>
-        <Header receipt={receipt} company={company}/>
-        <Main receipt={receipt}/>
+        <Header invoice={invoice} company={company}/>
+        <Main invoice={invoice}/>
       </div>
     );
   };

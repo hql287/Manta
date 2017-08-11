@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as FormActionCreators from '../actions/form.jsx';
-import * as ReceiptsActionCreators from '../actions/receipts.jsx';
+import * as InvoicesActionCreators from '../actions/invoices.jsx';
 import * as ContactsActionCreators from '../actions/contacts.jsx';
 
 // Custom Libs
@@ -24,54 +24,54 @@ class Form extends Component {
 
   // Save Data
   saveData() {
-    const {currentReceipt} = this.props;
+    const {currentInvoice} = this.props;
     // Validate Form
     if (!this.validateForm()) return;
     // Save To DB if it's a new contact
-    if (currentReceipt.recipient.type === 'new') {
-      const newContactData = currentReceipt.recipient.new;
+    if (currentInvoice.recipient.type === 'new') {
+      const newContactData = currentInvoice.recipient.new;
       this.saveRecipienAsNewContact(newContactData);
     }
-    // Save Receipt To DB
-    this.saveReceiptToDB(this.getReceiptData());
+    // Save Invoice To DB
+    this.saveInvoiceToDB(this.getInvoiceData());
     // Clear The Form
     this.clearForm('muted');
     // Play a Sound
     sounds.play('ADD');
   }
 
-  getReceiptData() {
-    let receiptData;
-    const {currentReceipt} = this.props;
-    if (currentReceipt.recipient.type === 'new') {
-      receiptData = Object.assign({}, currentReceipt, {
-        recipient: currentReceipt.recipient.new,
+  getInvoiceData() {
+    let invoiceData;
+    const {currentInvoice} = this.props;
+    if (currentInvoice.recipient.type === 'new') {
+      invoiceData = Object.assign({}, currentInvoice, {
+        recipient: currentInvoice.recipient.new,
       });
     } else {
-      const selectedRecipient = currentReceipt.recipient.select;
+      const selectedRecipient = currentInvoice.recipient.select;
       const selectedRecipientData = {
         fullname: selectedRecipient.fullname,
         company: selectedRecipient.company,
         email: selectedRecipient.email,
         phone: selectedRecipient.phone,
       };
-      receiptData = Object.assign({}, currentReceipt, {
+      invoiceData = Object.assign({}, currentInvoice, {
         recipient: selectedRecipientData,
       });
     }
-    return receiptData;
+    return invoiceData;
   }
 
-  // Save Receipt To DB
-  saveReceiptToDB(data) {
+  // Save Invoice To DB
+  saveInvoiceToDB(data) {
     // Dispatch Action
     const {dispatch} = this.props;
-    const saveReceipt = bindActionCreators(
-      ReceiptsActionCreators.saveReceipt,
+    const saveInvoice = bindActionCreators(
+      InvoicesActionCreators.saveInvoice,
       dispatch
     );
-    // Save The Receipt
-    saveReceipt(data);
+    // Save The Invoice
+    saveInvoice(data);
   }
 
   // Save Recipient To DB
@@ -103,7 +103,7 @@ class Form extends Component {
   validateForm() {
     let validated = true;
     // Validate Each Row Content
-    const {rows} = this.props.currentReceipt;
+    const {rows} = this.props.currentInvoice;
     for (let i = 0; i < rows.length; i++) {
       let row = rows[i];
       // Does it contain description?
@@ -145,7 +145,7 @@ class Form extends Component {
     return (
       <div className="pageWrapper">
         <div className="pageHeader">
-          <h4>New Receipt</h4>
+          <h4>New Invoice</h4>
         </div>
         <div className="pageContent">
           <Recipient/>
@@ -168,7 +168,7 @@ class Form extends Component {
 }
 
 export default connect(state => ({
-  receipts: state.ReceiptsReducer,
+  invoices: state.InvoicesReducer,
   recipients: state.ContactsReducer,
-  currentReceipt: state.FormReducer,
+  currentInvoice: state.FormReducer,
 }))(Form);

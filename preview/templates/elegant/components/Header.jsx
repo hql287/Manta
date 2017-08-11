@@ -7,7 +7,7 @@ const format = require('date-fns/format');
 const _ = require('lodash');
 
 Header.propTypes = {
-  receipt: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired,
   company: PropTypes.object.isRequired,
 };
 
@@ -20,7 +20,7 @@ function Header (props) {
       </div>
       <h1>
         INVOICE:
-        {_.truncate(props.receipt._id, {
+        {_.truncate(props.invoice._id, {
           length: 8,
           omission: '',
         })}
@@ -48,7 +48,7 @@ function Header (props) {
         </div>
         <div>
           <span>DATE: </span>
-          {format(props.receipt.created_at, 'DD-MM-YYYY')}
+          {format(props.invoice.created_at, 'DD-MM-YYYY')}
         </div>
       </div>
     </header>

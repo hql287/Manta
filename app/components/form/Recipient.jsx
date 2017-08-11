@@ -26,7 +26,7 @@ class Recipient extends Component {
       getAllContacts();
     }
     // Set state
-    const {recipient} = this.props.currentReceipt;
+    const {recipient} = this.props.currentInvoice;
     this.setState({
       type: recipient.type ? recipient.type : 'new',
       new: recipient.type ? recipient.new : {},
@@ -62,7 +62,7 @@ class Recipient extends Component {
   outputComponent = () => {
     // If No contact existed, show the contact form
     const {recipients} = this.props;
-    const { type } = this.props.currentReceipt.recipient;
+    const { type } = this.props.currentInvoice.recipient;
     if (recipients.data.length === 0) {
       return (
         <RecipientForm
@@ -133,6 +133,6 @@ class Recipient extends Component {
 }
 
 export default connect(state => ({
-  currentReceipt: state.FormReducer,
+  currentInvoice: state.FormReducer,
   recipients: state.ContactsReducer,
 }))(Recipient);
