@@ -333,9 +333,10 @@ select#themeSwitcher {
 
 .recipientForm {
   padding: 20px;
-  background: #f2f3f4;
+  background: #f9fafa;
   border-radius: 4px;
   margin-bottom: 20px;
+  border: 1px solid #f2f3f4;
 }
 
 .recipientsList {
