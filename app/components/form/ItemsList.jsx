@@ -16,14 +16,6 @@ import ItemRow from './ItemRow.jsx';
 // Component
 class ItemsList extends Component {
 
-  // Before mounting
-  // componentWillMount = () => {
-  //   const {rows} = this.props.currentReceipt;
-  //   if (rows.length === 0) {
-  //     this.addRow('muted');
-  //   }
-  // };
-
   // Add A Row
   addRow = () => {
     const {dispatch} = this.props;
