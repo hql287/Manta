@@ -7,35 +7,35 @@ import _ from 'lodash';
 
 // Component
 class RecipientsList extends Component {
+  // Set & Update Selected Recipient on Mount
   componentWillMount = () => {
-    const {recipients, currentSelectedRecipient} = this.props;
-    if (currentSelectedRecipient.fullname) {
-      this.setState({recipient: currentSelectedRecipient._id});
-    } else {
-      this.setState({recipient: recipients[0]._id}, () => {
-        this.updateSelectedRecipient();
-      });
+    const {
+      recipients,
+      currentSelectedRecipient,
+      handleRecipientSelectChange,
+    } = this.props;
+    if (!currentSelectedRecipient._id) {
+      this.updateSelectedRecipient(recipients[0]._id);
     }
   };
 
+  // Handle Selection Change
   handleInputChange = event => {
-    this.setState({recipient: event.target.value}, () => {
-      this.updateSelectedRecipient();
-    });
+    this.updateSelectedRecipient(event.target.value);
   };
 
-  updateSelectedRecipient = () => {
-    const {recipients, updateRecipientState} = this.props;
-    const recipientIndex = _.findIndex(recipients, {_id: this.state.recipient});
+  // Update Selected Recipient State
+  updateSelectedRecipient = selectedRecipientId => {
+    const {recipients, handleRecipientSelectChange} = this.props;
+    const recipientIndex = _.findIndex(recipients, {_id: selectedRecipientId});
     const recipient = recipients[recipientIndex];
-    updateRecipientState({
-      type: 'select',
-      select: recipient,
-    });
+    handleRecipientSelectChange(recipient);
   };
 
+
+  // Render Component
   render = () => {
-    const {recipients} = this.props;
+    const {recipients, currentSelectedRecipient} = this.props;
     const recipientOptions = recipients.map((recipient, index) => {
       return (
         <option value={recipient._id} key={recipient._id}>
@@ -47,7 +47,11 @@ class RecipientsList extends Component {
     return (
       <div className="recipientsList">
         <select
-          value={this.state.recipient}
+          value={
+            currentSelectedRecipient._id
+              ? currentSelectedRecipient._id
+              : recipients[0]._id
+          }
           onChange={e => this.handleInputChange(e)}>
           {recipientOptions}
         </select>
@@ -56,10 +60,11 @@ class RecipientsList extends Component {
   };
 }
 
+// PropTypes Validation
 RecipientsList.propTypes = {
-  recipients: PropTypes.array,
-  updateRecipient: PropTypes.func,
+  recipients: PropTypes.array.isRequired,
   currentSelectedRecipient: PropTypes.object,
+  handleRecipientSelectChange: PropTypes.func.isRequired,
 };
 
 RecipientsList.defaultProps = {

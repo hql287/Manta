@@ -4,40 +4,8 @@ import PropTypes from 'prop-types';
 
 // Component
 class RecipientForm extends Component {
-
-  componentWillMount = () => {
-    this.setState(this.props.currentRecipientData);
-  }
-
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.clearState) {
-      this.setState({
-        fullname: '',
-        company: '',
-        phone: '',
-        email: '',
-      });
-    }
-  }
-
-  handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
-    this.setState({ [name]: value }, () => {
-      this.updateRecipientFormData();
-    });
-  };
-
-  updateRecipientFormData = () => {
-    const {updateRecipientState} = this.props;
-    updateRecipientState({
-      type: 'new',
-      new: this.state,
-    });
-  };
-
   render = () => {
-    const {fullname, company, phone, email} = this.state;
+    const {fullname, company, phone, email} = this.props.currentRecipientData;
     return (
       <div className="recipientForm">
         <div className="row">
@@ -47,7 +15,7 @@ class RecipientForm extends Component {
               name="fullname"
               type="text"
               value={fullname ? fullname : ''}
-              onChange={e => this.handleInputChange(e)}
+              onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
           </div>
           <div className="pageItem col-md-6">
@@ -56,7 +24,7 @@ class RecipientForm extends Component {
               name="company"
               type="text"
               value={company ? company : ''}
-              onChange={e => this.handleInputChange(e)}
+              onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
           </div>
         </div>
@@ -67,7 +35,7 @@ class RecipientForm extends Component {
               name="email"
               type="text"
               value={email ? email : ''}
-              onChange={e => this.handleInputChange(e)}
+              onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
           </div>
           <div className="pageItem col-md-6">
@@ -76,7 +44,7 @@ class RecipientForm extends Component {
               name="phone"
               type="text"
               value={phone ? phone : ''}
-              onChange={e => this.handleInputChange(e)}
+              onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
           </div>
         </div>
@@ -85,9 +53,10 @@ class RecipientForm extends Component {
   };
 }
 
+// PropTypes Validation
 RecipientForm.propTypes = {
   currentRecipientData: PropTypes.object,
-  updateRecipientState: PropTypes.func.isRequired,
+  handleRecipientFormInputChange: PropTypes.func.isRequired,
 };
 
 RecipientForm.defaultProps = {
