@@ -10,7 +10,7 @@ class RecipientForm extends Component {
       <div className="recipientForm">
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Full Name</label>
+            <label className="itemLabel">Full Name *</label>
             <input
               name="fullname"
               type="text"
@@ -30,7 +30,7 @@ class RecipientForm extends Component {
         </div>
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Email</label>
+            <label className="itemLabel">Email *</label>
             <input
               name="email"
               type="text"

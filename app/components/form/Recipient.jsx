@@ -17,7 +17,6 @@ import RecipientsList from './RecipientsList.jsx';
 
 // Component
 class Recipient extends Component {
-
   // Extract data from redux set as state before mount
   componentWillMount = () => {
     // Retrieve all contacts
@@ -32,17 +31,18 @@ class Recipient extends Component {
     // Set state
     const {recipient} = this.props.currentInvoice;
     this.setState({
-      type: recipient.type ? recipient.type : 'new',
-      new: recipient.type ? recipient.new : {},
-      select: recipient.type ? recipient.select : {},
+      newRecipient: recipient.newRecipient ? true : false,
+      new: _.isEmpty(recipient.new) ? {} : recipient.new,
+      select: _.isEmpty(recipient.select) ? {} : recipient.select,
     });
   };
 
   // Clear Form When Props are Empty Objects
   componentWillReceiveProps = nextProps => {
     const { recipient } = nextProps.currentInvoice;
-    if (recipient.type === null) {
+    if (_.isEmpty(recipient.new) && _.isEmpty(recipient.select)) {
       this.setState({
+        newRecipient: true,
         new: {},
         select: {},
       });
@@ -51,7 +51,7 @@ class Recipient extends Component {
 
   // Toggle Recipient Form
   toggleForm = event => {
-    this.setState({ type: event.target.value }, () => {
+    this.setState({ newRecipient: event.target.value === 'new' ? true : false }, () => {
       this.dispatchRecipientData(this.state);
     });
   };
@@ -102,7 +102,7 @@ class Recipient extends Component {
     }
     // If there are contacts
     // Show New or Select Form depends on state
-    if (this.state.type === 'new') {
+    if (this.state.newRecipient) {
       return (
         <RecipientForm
           currentRecipientData={this.state.new}
@@ -123,7 +123,7 @@ class Recipient extends Component {
   // Render
   render = () => {
     const {recipients} = this.props;
-    const {type} = this.state;
+    const {newRecipient} = this.state;
     return (
       <div className="recipientWrapper">
         <label className="itemLabel">Recipient</label>
@@ -135,7 +135,7 @@ class Recipient extends Component {
                 <input
                   type="radio"
                   onChange={e => this.toggleForm(e)}
-                  checked={type === 'new'}
+                  checked={newRecipient === true}
                   value="new"
                 />
                 Add New
@@ -146,7 +146,7 @@ class Recipient extends Component {
                 <input
                   type="radio"
                   onChange={e => this.toggleForm(e)}
-                  checked={type === 'select'}
+                  checked={newRecipient === false}
                   value="select"
                 />
                 Select
@@ -157,6 +157,12 @@ class Recipient extends Component {
     );
   };
 }
+
+// PropTypes Validation
+Recipient.propTypes = {
+  currentInvoice: PropTypes.object.isRequired,
+  recipients: PropTypes.object.isRequired,
+};
 
 export default connect(state => ({
   currentInvoice: state.FormReducer,

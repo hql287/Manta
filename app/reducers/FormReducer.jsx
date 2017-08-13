@@ -7,7 +7,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const initialState = {
   recipient: {
-    type: null,
+    newRecipient: true,
     select: {},
     new: {},
   },
@@ -92,7 +92,7 @@ const FormReducer = (state = initialState, action) => {
     case ACTION_TYPES.CLEAR_FORM: {
       return {
         recipient: {
-          type: null,
+          newRecipient: true,
           select: {},
           new: {},
         },
