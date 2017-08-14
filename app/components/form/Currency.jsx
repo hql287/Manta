@@ -38,7 +38,7 @@ class Currency extends Component {
     const {currency} = this.props.currentReceipt;
 
     return (
-      <div className="currencyWrapper">
+      <div className="currencyWrapper formSection">
         <label className="itemLabel">Currency</label>
         <select
           value={currency}

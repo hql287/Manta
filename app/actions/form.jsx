@@ -54,6 +54,14 @@ export const updateNote = data => {
   };
 };
 
+export const changeDueDate = data => {
+  return {
+    type: ACTION_TYPES.CHANGE_DUE_DATE,
+    data
+  };
+};
+
+
 export const updateCurrency = data => {
   return {
     type: ACTION_TYPES.UPDATE_CURRENCY,

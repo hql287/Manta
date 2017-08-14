@@ -21,6 +21,7 @@ import Recipient from '../components/form/Recipient.jsx';
 import ItemsList from '../components/form/ItemsList.jsx';
 import Currency from '../components/form/Currency.jsx';
 import Discount from '../components/form/Discount.jsx';
+import DueDate from '../components/form/DueDate.jsx';
 import Note from '../components/form/Note.jsx';
 
 // Component
@@ -198,6 +199,7 @@ class Form extends Component {
         <div className="pageContent">
           <Recipient />
           <Currency />
+          <DueDate/>
           <ItemsList />
           <Discount />
           <Note />

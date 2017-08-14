@@ -76,9 +76,6 @@ class ItemsRow extends Component {
             placeholder="Quantity"
           />
         </div>
-        <div className="itemSubtotal">
-          <span>{this.state.subtotal}</span>
-        </div>
         <div className="itemActions">
           { this.props.actions &&
             <a

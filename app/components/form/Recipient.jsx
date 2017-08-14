@@ -125,7 +125,7 @@ class Recipient extends Component {
     const {recipients} = this.props;
     const {newRecipient} = this.state;
     return (
-      <div className="recipientWrapper">
+      <div className="recipientWrapper formSection">
         <label className="itemLabel">Recipient</label>
         {this.outputComponent()}
         {recipients.data.length > 0 &&

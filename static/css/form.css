@@ -45,3 +45,7 @@ textarea.noteContent {
 .formActions .btn {
   margin-right: 10px;
 }
+
+.formSection {
+    margin-bottom: 30px;
+}

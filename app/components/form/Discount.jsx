@@ -31,11 +31,11 @@ class Discount extends Component {
   };
 
   render = () => {
-    const {discount} = this.props.currentReceipt;
+    const {discount} = this.props.currentInvoice;
     const amount = discount.amount ? discount.amount : 0;
     const type = discount.type ? discount.type : 'percentage';
     return (
-      <div className="discountWrapper">
+      <div className="discountWrapper formSection">
         <label className="itemLabel ">Discount</label>
 
         <div className="discountContent">
@@ -77,5 +77,5 @@ class Discount extends Component {
 }
 
 export default connect(state => ({
-  currentReceipt: state.FormReducer,
+  currentInvoice: state.FormReducer,
 }))(Discount);
