@@ -8,9 +8,6 @@ import MainContent from './components/MainContent.jsx';
 
 // Component
 class DefaultTemplate extends Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-  };
   render = () => {
     const {company, invoice} = this.props.data;
     return (
@@ -22,5 +19,9 @@ class DefaultTemplate extends Component {
     );
   };
 }
+
+DefaultTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default DefaultTemplate;

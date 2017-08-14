@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 // 3rd Party Libs
 const _ = require('lodash');
 const format = require('date-fns/format');
+const moment = require('moment');
 
 Top.propTypes = {
   company: PropTypes.object.isRequired,
@@ -15,7 +16,7 @@ Top.propTypes = {
 };
 
 // Component
-function Top (props) {
+function Top ({ company, invoice }) {
   return (
     <table>
       <tbody>
@@ -25,17 +26,18 @@ function Top (props) {
               <tbody>
                 <tr>
                   <td className="title">
-                    <img src={props.company.logo} />
+                    <img src={company.logo} />
                   </td>
                   <td>
-                    Invoice #:
-                    {_.truncate(props.invoice._id, {
+                    Invoice: #
+                    {_.truncate(invoice._id, {
                       length: 8,
                       omission: '',
                     })}
                     <br />
-                    Created:
-                    {format(props.invoice.created_at, 'DD-MM-YYYY')}
+                    Created: {format(invoice.created_at, 'DD/MM/YYYY')}
+                    <br />
+                    Due: { moment(invoice.dueDate).format('DD/MM/YYYY') }
                     <br />
                   </td>
                 </tr>

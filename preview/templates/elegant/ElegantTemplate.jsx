@@ -8,9 +8,6 @@ import Main from './components/Main.jsx';
 
 // Component
 class ElegantTemplate extends Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-  };
   // Render
   render = () => {
     const {company, invoice } = this.props.data;
@@ -22,6 +19,10 @@ class ElegantTemplate extends Component {
     );
   };
 }
+
+ElegantTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default ElegantTemplate;
 

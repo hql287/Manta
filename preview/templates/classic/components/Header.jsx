@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // 3rd Party Libs
-const format = require('date-fns/format');
 const _ = require('lodash');
+const format = require('date-fns/format');
+const moment = require('moment');
 
 // Proptypes
 Header.propTypes = {
@@ -12,18 +13,22 @@ Header.propTypes = {
 };
 
 // Component
-function Header(props) {
+function Header({ invoice }) {
   return (
     <h1 className="clearfix">
       <small>
-        <span>DATE</span>
-        <br /> {format(props.invoice.created_at, 'DD-MM-YYYY')}
+        <span>CREATED DATE</span>
+        <br /> {format(invoice.created_at, 'DD-MM-YYYY')}
       </small>{' '}
       INVOICE #
-      {_.truncate(props.invoice._id, {
+      {_.truncate(invoice._id, {
         length: 8,
         omission: '',
       })}
+      <small>
+        <span>DUE DATE</span>
+        <br /> {moment(invoice.dueDate).format('DD-MM-YYYY')}
+      </small>{' '}
     </h1>
   );
 }

@@ -2,16 +2,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// 3rd Party Libs
-const format = require('date-fns/format');
-const _ = require('lodash');
-
 // Component
 class Main extends Component {
-  static propTypes = {
-    invoice: PropTypes.object.isRequired,
-  };
-
   getDiscount = () => {
     const {discount} = this.props.invoice;
     let discountTxt = '';
@@ -86,15 +78,20 @@ class Main extends Component {
             {this.getGrandTotal()}
           </tbody>
         </table>
-        {this.props.invoice.note &&
+        {invoice.note &&
           <div id="notices">
             <div>NOTICE:</div>
             <div className="notice">
-              {this.props.invoice.note}
+              {invoice.note}
             </div>
           </div>}
       </main>
     );
   };
 }
+
+Main.propTypes = {
+  invoice: PropTypes.object.isRequired,
+};
+
 export default Main;

@@ -8,18 +8,14 @@ import Footer from './components/Footer.jsx';
 
 // Component
 class ClassicTemplate extends Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-  };
-
   // Render
   render = () => {
-    const {company, invoice, template} = this.props.data;
+    const {company, invoice} = this.props.data;
     return (
       <main>
         <Header invoice={invoice} />
         <Main invoice={invoice} />
-        <Footer />
+        <Footer company={company} invoice={invoice} />
         {invoice.note &&
           <div id="notices">
             <div>NOTICE:</div>
@@ -31,5 +27,9 @@ class ClassicTemplate extends Component {
     );
   };
 }
+
+ClassicTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default ClassicTemplate;
