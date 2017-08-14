@@ -8,9 +8,6 @@ import Main from './components/Main.jsx';
 
 // Component
 class HostingTemplate extends Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-  };
   // Render
   render = () => {
     const {company, invoice} = this.props.data;
@@ -22,5 +19,9 @@ class HostingTemplate extends Component {
     );
   };
 }
+
+HostingTemplate.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default HostingTemplate;

@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // 3rd Party Libs
-const format = require('date-fns/format');
 const _ = require('lodash');
+const format = require('date-fns/format');
+const moment = require('moment');
 
 Header.propTypes = {
   invoice: PropTypes.object.isRequired,
@@ -12,43 +13,48 @@ Header.propTypes = {
 };
 
 // Component
-function Header (props) {
+function Header ({ company, invoice }) {
+  const { recipient } = invoice;
   return (
     <header className="clearfix">
       <div id="logo">
-        <img src={props.company.logo} />
+        <img src={company.logo} />
       </div>
       <h1>
-        INVOICE:
-        {_.truncate(props.invoice._id, {
+        INVOICE: #
+        {_.truncate(invoice._id, {
           length: 8,
           omission: '',
         })}
       </h1>
       <div id="company" className="clearfix">
         <div>
-          {props.company.company}
+          {company.company}
         </div>
         <div>
-          {props.company.address}
+          {company.address}
         </div>
         <div>
-          {props.company.phone}
+          {company.phone}
         </div>
         <div>
-          {props.company.website}
+          {company.website}
         </div>
       </div>
       <div id="project">
         <div>
-          <span>CLIENT</span> John Doe
+          <span>CLIENT</span> { recipient.fullname }
         </div>
         <div>
-          <span>ADDRESS</span> 796 Silver Harbour, TX 79273, US
+          <span>EMAIL</span> { recipient.email }
         </div>
         <div>
-          <span>DATE: </span>
-          {format(props.invoice.created_at, 'DD-MM-YYYY')}
+          <span>CREATED: </span>
+          {format(invoice.created_at, 'DD/MM/YYYY')}
+        </div>
+        <div>
+          <span>DUE DATE: </span>
+          {moment(invoice.dueDate).format('DD/MM/YYYY')}
         </div>
       </div>
     </header>

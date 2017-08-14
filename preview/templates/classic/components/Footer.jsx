@@ -1,53 +1,63 @@
 // React Libraries
 import React from 'react';
+import PropTypes from 'prop-types';
+
+Footer.propTypes = {
+  company: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired,
+};
 
 // Component
-function Footer(props) {
+function Footer({company, invoice}) {
+  const { recipient} = invoice;
   return (
     <div className="clearfix" id="details">
       <div id="project">
         <div className="arrow">
           <div className="inner-arrow">
-            <span>PROJECT</span> Website development
+            <span>CLIENT</span> { recipient.fullname }
           </div>
         </div>
-        <div className="arrow">
-          <div className="inner-arrow">
-            <span>CLIENT</span> John Doe
+        { recipient.company &&
+          <div className="arrow">
+            <div className="inner-arrow">
+              <span>COMPANY</span> { recipient.company }
+            </div>
           </div>
-        </div>
-        <div className="arrow">
-          <div className="inner-arrow">
-            <span>ADDRESS</span> 796 Silver Harbour, TX 79273, US
-          </div>
-        </div>
+        }
         <div className="arrow">
           <div className="inner-arrow">
             <span>EMAIL</span>{' '}
-            <a href="mailto:john@example.com">john@example.com</a>
+            { recipient.email }
           </div>
         </div>
+        { recipient.phone &&
+          <div className="arrow">
+            <div className="inner-arrow">
+              <span>PHONE</span> { recipient.phone }
+            </div>
+          </div>
+        }
       </div>
       <div id="company">
         <div className="arrow back">
           <div className="inner-arrow">
-            Company Name <span>COMPANY</span>
+            { company.company } <span>COMPANY</span>
           </div>
         </div>
         <div className="arrow back">
           <div className="inner-arrow">
-            455 Foggy Heights, AZ 85004, US <span>ADDRESS</span>
+            { company.address } <span>ADDRESS</span>
           </div>
         </div>
         <div className="arrow back">
           <div className="inner-arrow">
-            (602) 519-0450 <span>PHONE</span>
+            { company.phone } <span>PHONE</span>
           </div>
         </div>
         <div className="arrow back">
           <div className="inner-arrow">
-            <a href="mailto:company@example.com">company@example.com</a>{' '}
-            <span>EMAIL</span>
+            { company.email }  <span>EMAIL</span>
           </div>
         </div>
       </div>
