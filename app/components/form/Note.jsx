@@ -17,7 +17,7 @@ class Note extends Component {
   render = () => {
     const {note} = this.props.currentReceipt;
     return (
-      <div className="noteWrapper">
+      <div className="noteWrapper formSection">
         <label className="itemLabel ">Note</label>
         <textarea
           className="noteContent"

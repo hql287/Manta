@@ -16,13 +16,13 @@ const initialState = {
     amount: 0,
     type: 'percentage',
   },
+  dueDate: null,
   currency: appConfig.get('appSettings').currency,
   note: '',
 };
 
 const FormReducer = (state = initialState, action) => {
   switch (action.type) {
-
     // Update recipient
     case ACTION_TYPES.UPDATE_RECIPIENT: {
       return Object.assign({}, state, {
@@ -81,6 +81,13 @@ const FormReducer = (state = initialState, action) => {
       });
     }
 
+    // Update Due Date
+    case ACTION_TYPES.CHANGE_DUE_DATE: {
+      return Object.assign({}, state, {
+        dueDate: action.data,
+      });
+    }
+
     // Update Note
     case ACTION_TYPES.UPDATE_NOTE: {
       return Object.assign({}, state, {
@@ -101,6 +108,7 @@ const FormReducer = (state = initialState, action) => {
           amount: 0,
           type: 'percentage',
         },
+        dueDate: null,
         currency: appConfig.get('appSettings').currency,
         note: '',
       };

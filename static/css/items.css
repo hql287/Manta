@@ -10,9 +10,6 @@
 }
 
 .itemsListDiv {
-  /* padding: 0 40px 20px 40px; */
-  /* flex: 1; */
-  /* overflow: scroll; */
 }
 
 .itemsListHeader > div {
@@ -67,20 +64,17 @@
 .itemDiv > div {
   display: flex;
   flex-direction: row;
-  margin-right: 20px;
+  margin-right: 10px;
   margin-bottom: 10px;
 }
 
 .itemActions {
-  position: absolute;
-  right: 0;
   display: flex !important;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
   margin: 0 !important;
-  margin-right: 0 !important;
-  margin-bottom: 0 !important;
-  top: 5px;
+  margin-left: 10px;
 }
 
 .itemActions a.itemRemoveBtn i {
@@ -159,4 +153,3 @@
   opacity: 0.01;
   transition: opacity 250ms ease-in;
 }
-

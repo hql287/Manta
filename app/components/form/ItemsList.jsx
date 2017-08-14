@@ -55,7 +55,7 @@ class ItemsList extends Component {
       );
     });
     return (
-      <div className="itemsListWrapper">
+      <div className="itemsListWrapper formSection">
         <div className="itemsListHeader">
           <div className="itemLabelDescription">
             <label className="itemLabel">Description *</label>
@@ -65,9 +65,6 @@ class ItemsList extends Component {
           </div>
           <div className="itemLabelQuantity">
             <label className="itemLabel ">Quantity *</label>
-          </div>
-          <div className="itemLabelSubtotal">
-            <label className="itemLabel ">Subtotal</label>
           </div>
         </div>
         <div className="itemsListDiv">
