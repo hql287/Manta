@@ -22,19 +22,13 @@ const AppStore = createStore(
   composeEnhancers(applyMiddleware(ReduxThunk, Logger))
 );
 
-// React Router
-import {browserHistory} from 'history';
-import {BrowserRouter as Router} from 'react-router-dom';
-
 // Main App
 import App from './App';
 
 // Render App
 ReactDOM.render(
   <Provider store={AppStore}>
-    <Router history={browserHistory}>
-      <App />
-    </Router>
+    <App />
   </Provider>,
   document.getElementById('root')
 );

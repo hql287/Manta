@@ -7,11 +7,26 @@ import AppMain from './components/shared/AppMain.jsx';
 
 // Components
 class App extends Component {
-  render = () =>
-    <div className="appWrapper">
-      <AppNav />
-      <AppMain/>
-    </div>;
+  componentWillMount = () => {
+    this.setState({
+      activeTab: 'form',
+    });
+  };
+
+  changeTab = tabName => {
+    this.setState({
+      activeTab: tabName,
+    });
+  };
+
+  render = () => {
+    return (
+      <div className="appWrapper">
+        <AppNav changeTab={this.changeTab} />
+        <AppMain activeTab={this.state.activeTab} />
+      </div>
+    );
+  };
 }
 
 export default App;
