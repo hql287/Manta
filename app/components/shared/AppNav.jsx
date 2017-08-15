@@ -1,37 +1,45 @@
 // Libraries
 import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class AppNav extends Component {
-  render = () =>
-    <div className='sideBarWrapper'>
-      <ul className='sideBar'>
-        <li>
-          <NavLink to='/form'>
-            <i id='icon-form' className='ion-android-list' />
-            Create
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/invoices'>
-            <i id='icon-archive' className='ion-ios-box' />
-            Invoices
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/contacts'>
-            <i id='icon-contacts' className='ion-person' />
-            Contacts
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/settings'>
-            <i id='icon-settings' className='ion-ios-gear' />
-            Settings
-          </NavLink>
-        </li>
-      </ul>
-    </div>;
+  render = () => {
+    const {changeTab} = this.props;
+    return (
+      <div className="sideBarWrapper">
+        <ul className="sideBar">
+          <li>
+            <a href="#" onClick={() => changeTab('form')}>
+              <i id="icon-form" className="ion-android-list" />
+              Create
+            </a>
+          </li>
+          <li>
+            <a href="#" onClick={() => changeTab('invoices')}>
+              <i id="icon-archive" className="ion-ios-box" />
+              Invoices
+            </a>
+          </li>
+          <li>
+            <a href="#" onClick={() => changeTab('contacts')}>
+              <i id="icon-contacts" className="ion-person" />
+              Contacts
+            </a>
+          </li>
+          <li>
+            <a href="#" onClick={() => changeTab('settings')}>
+              <i id="icon-settings" className="ion-ios-gear" />
+              Settings
+            </a>
+          </li>
+        </ul>
+      </div>
+    );
+  };
 }
+
+AppNav.propTypes = {
+  changeTab: PropTypes.func.isRequired,
+};
 
 export default AppNav;
