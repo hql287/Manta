@@ -62,22 +62,9 @@ class Contacts extends Component {
         {contacts.data.length === 0
           ? <EmptyMessage text="You dont't have any contacts yet!" />
           : <div className="pageContent">
-              <div className="pageLabels row">
-                <div className="col-md-1">
-                  <label className="itemLabel">#</label>
-                </div>
-                <div className="col-md-3">
-                  <label className="itemLabel">Fullname</label>
-                </div>
-                <div className="col-md-4">
-                  <label className="itemLabel">Email</label>
-                </div>
-                <div className="col-md-3">
-                  <label className="itemLabel">Phone</label>
-                </div>
-                <div className="col-md-1" />
+              <div className="row">
+                {contactsComponent}
               </div>
-              {contactsComponent}
             </div>}
       </div>
     );
