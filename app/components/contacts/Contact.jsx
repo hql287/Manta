@@ -15,12 +15,6 @@ import sounds from '../../../libs/sounds.js';
 
 // Component
 class Contact extends Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-    index: PropTypes.number.isRequired,
-    deleteContact: PropTypes.func.isRequired,
-  };
-
   componentDidMount() {
     const deleteContact = this.props.deleteContact;
     ipc.on('confirmed-delete-contact', (event, index, contactId) => {
@@ -48,48 +42,38 @@ class Contact extends Component {
   render = () => {
     const contact = this.props.data;
     return (
-      <div className="contact row">
-        <div className="col-md-1">
-          <span className="contactNumber">
-            {this.props.index + 1}
-          </span>
-        </div>
-        <div className="col-md-3">
-          <span>
-            {contact.fullname}
-          </span>
-        </div>
-        <div className="col-md-4">
-          <span>
-            {contact.email}
-          </span>
-        </div>
-        <div className="col-md-3">
-          <span>
-            {contact.phone}
-          </span>
-        </div>
+      <div className="col-md-6">
+        <div className="contact card">
+          <div className="card-body">
+            <h4 className="card-title">{contact.fullname}</h4>
+            <h6 className="card-subtitle mb-2 text-muted">{contact.company}</h6>
+            <p className="card-text">
+              {contact.email}
+              <br/>
+              {contact.phone}
+            </p>
 
-        <div className="contactActions col-md-1">
-          <a
-            href="#"
-            className="deleteContact"
-            onClick={() => this.openDeleteDialog(contact._id)}>
-            <i className="ion-android-cancel" />
-          </a>
+            <a
+              href="#"
+              className="card-link">
+              Edit
+            </a>
+            <a
+              href="#"
+              className="card-link text-danger"
+              onClick={() => this.openDeleteDialog(contact._id)}>
+              Delete
+            </a>
+          </div>
         </div>
       </div>
     );
   };
 }
 
-export default Contact;
+Contact.propTypes = {
+  data: PropTypes.object.isRequired,
+  deleteContact: PropTypes.func.isRequired,
+};
 
-// <div className="col-md-2">
-//   <a href="#" className="contactId" onClick={() => this.previewReceipt()}>
-//     {_.truncate(contact._id, {
-//       length: 8,
-//       omission: '',
-//     })}
-//   </a>
-// </div>
+export default Contact;

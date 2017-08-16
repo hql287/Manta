@@ -92,19 +92,9 @@ class Invoices extends Component {
         {invoices.data.length === 0
           ? <EmptyMessage text="You don't have any invoice yet"/>
           : <div className="pageContent">
-              <div className="pageLabels">
-                <div className="itemLabelNumner">
-                  <label className="itemLabel">#</label>
-                </div>
-                <div className="itemLabelId">
-                  <label className="itemLabel">Id</label>
-                </div>
-                <div className="itemLabelDate">
-                  <label className="itemLabel ">Created Date</label>
-                </div>
-                <div className="itemLabelActions" />
+              <div className="row">
+                {invoicesComponent}
               </div>
-              {invoicesComponent}
             </div>}
       </div>
     );

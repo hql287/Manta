@@ -21,16 +21,70 @@
 .invoiceCreatedAt > * {
   margin-right: 10px;
 }
-.invoiceActions {
-  position: absolute;
-  right: 0;
-  min-width: 60px;
-  display: flex;
-  justify-content: space-around;
-}
 a.previewInvoice i {
-    color: #469FE5;
+  color: #469fe5;
 }
 a.removeInvoice i {
-    color: #EC476E;
+  color: #ec476e;
+}
+
+/* Single Invoice */
+.invoice {
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  font-size: 14px;
+  flex-direction: column;
+  border-radius: 4px;
+  border: 1px solid #f2f3f4;
+  padding: 20px;
+}
+
+.invoiceHeader {
+  border-bottom: 1px solid #f2f3f4;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  display: flex;
+}
+
+.invoiceLabel {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b4b7ba;
+  display: block;
+  margin-top: 10px;
+}
+
+.invoice p {
+  margin: 0;
+  font-size: 16px;
+  color: #4f555c;
+}
+
+/* Client */
+.invoiceClient h3 {
+  font-size: 32px;
+}
+
+.invoiceDates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoiceActions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.invoiceActions a {
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #f2f3f4;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 45%;
 }
