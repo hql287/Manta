@@ -16,11 +16,7 @@ const dragNDrop = require('../../renderers/dragNdrop.js');
 // Component
 class Info extends Component {
 
-  static propTypes = {
-    info: PropTypes.object.isRequired,
-    updateInfo: PropTypes.func.isRequired,
-  };
-
+    // Life Cycle Events
   componentWillMount = () => {
     this.setState(this.props.info);
   };
@@ -53,6 +49,7 @@ class Info extends Component {
     ipc.removeAllListeners('file-selected');
   };
 
+    // Helper Functions
   resizeImage = filePath => {
     return new Promise((resolve, reject) => {
       Jimp.read(filePath, (err, file) => {
@@ -100,6 +97,7 @@ class Info extends Component {
     files.forEach(file => fs.unlinkSync(file));
   }
 
+    // Handle Drag & Drop Upload
   handleLogoUpload = filepath => {
     this.resizeImage(filepath)
       .then(this.convertResizedImageToBase64)
@@ -111,6 +109,7 @@ class Info extends Component {
       });
   };
 
+    // Handle Input Change
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -119,16 +118,19 @@ class Info extends Component {
     });
   };
 
+    // Select Logo from File
   selectLogo = () => {
     ipc.send('open-file-dialog');
   };
 
+    // Remove Current Logo
   removeLogo = () => {
     this.setState({logo: null}, () => {
       this.updateInfoState();
     });
   };
 
+    // Save Info Data
   updateInfoState = () => {
     const {updateInfo} = this.props;
     updateInfo(this.state);
@@ -228,5 +230,10 @@ class Info extends Component {
     );
   };
 }
+
+Info.propTypes = {
+  info: PropTypes.object.isRequired,
+  updateInfo: PropTypes.func.isRequired,
+};
 
 export default Info;

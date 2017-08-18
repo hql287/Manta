@@ -56,6 +56,18 @@ const FormReducer = (state = initialState, action) => {
       });
     }
 
+    // Move Row Item
+    case ACTION_TYPES.MOVE_ROW: {
+      const { dragIndex, hoverIndex } = action;
+      const dragRow = state.rows[dragIndex];
+      let newRows = state.rows;
+      newRows.splice(dragIndex, 1);
+      newRows.splice(hoverIndex, 0, dragRow);
+      return Object.assign({}, state, {
+        rows: newRows,
+      });
+    }
+
     // Update Discount
     case ACTION_TYPES.UPDATE_DISCOUNT_AMOUNT: {
       return Object.assign({}, state, {
