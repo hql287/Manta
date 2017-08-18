@@ -11,12 +11,6 @@ const openDialog = require('../../renderers/dialog.js');
 
 // Component
 class AppSettings extends Component {
-
-  static propTypes = {
-    appSettings: PropTypes.object.isRequired,
-    updateAppSettings: PropTypes.func.isRequired,
-  };
-
   componentWillMount = () => {
     this.setState(this.props.appSettings);
   };
@@ -93,5 +87,10 @@ class AppSettings extends Component {
     );
   };
 }
+
+AppSettings.propTypes = {
+  appSettings: PropTypes.object.isRequired,
+  updateAppSettings: PropTypes.func.isRequired,
+};
 
 export default AppSettings;

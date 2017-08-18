@@ -7,6 +7,10 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as ActionCreators from '../../actions/form.jsx';
 
+// DragnDrop
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 // Custom Libs
 import sounds from '../../../libs/sounds.js';
 
@@ -41,21 +45,31 @@ class ItemsList extends Component {
     updateRow(childComponentState);
   };
 
+  moveRow = (dragIndex, hoverIndex) => {
+    const {dispatch} = this.props;
+    const moveRow = bindActionCreators(ActionCreators.moveRow, dispatch);
+    moveRow(dragIndex, hoverIndex);
+  };
+
+
   render = () => {
-    const {rows} = this.props.currentReceipt;
+    const {rows} = this.props.currentInvoice;
     const rowsComponent = rows.map((item, index) => {
       return (
         <ItemRow
           key={item.id}
           item={item}
+          index={index}
+          activeHandler={rows.length > 1 ? true : false}
           actions={index === 0 ? false : true}
           updateRow={this.updateRow}
           removeRow={this.removeRow}
+          moveRow={this.moveRow}
         />
       );
     });
     return (
-      <div className="itemsListWrapper formSection">
+      <div className="itemsListWrapper formSection non-draggable" onDragOver={this.dragOver}>
         <div className="itemsListHeader">
           <div className="itemLabelDescription">
             <label className="itemLabel">Description *</label>
@@ -86,5 +100,6 @@ class ItemsList extends Component {
 }
 
 export default connect(state => ({
-  currentReceipt: state.FormReducer,
-}))(ItemsList);
+  currentInvoice: state.FormReducer,
+}))(DragDropContext(HTML5Backend)(ItemsList));
+

@@ -11,11 +11,6 @@ const openDialog = require('../../renderers/dialog.js');
 
 // Component
 class PrintOptions extends Component {
-  static propTypes = {
-    printOptions: PropTypes.object.isRequired,
-    updatePrintOptions: PropTypes.func.isRequired,
-  };
-
   componentWillMount = () => {
     this.setState(this.props.printOptions);
   };
@@ -168,5 +163,10 @@ class PrintOptions extends Component {
     );
   };
 }
+
+PrintOptions.propTypes = {
+  printOptions: PropTypes.object.isRequired,
+  updatePrintOptions: PropTypes.func.isRequired,
+};
 
 export default PrintOptions;

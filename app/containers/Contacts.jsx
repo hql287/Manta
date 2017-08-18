@@ -3,6 +3,7 @@ const ipc = require('electron').ipcRenderer;
 
 // React Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
@@ -70,6 +71,11 @@ class Contacts extends Component {
     );
   };
 }
+
+// PropTypes Validation
+Contacts.propTypes = {
+  contacts: PropTypes.object.isRequired,
+};
 
 export default connect(state => ({
   contacts: state.ContactsReducer,

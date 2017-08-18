@@ -27,6 +27,15 @@ export const updateItem = data => {
   };
 };
 
+export const moveRow = (dragIndex, hoverIndex) => {
+  return {
+    type: ACTION_TYPES.MOVE_ROW,
+    dragIndex,
+    hoverIndex,
+  };
+};
+
+
 export const clearForm = () => {
   return {
     type: ACTION_TYPES.CLEAR_FORM,

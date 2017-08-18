@@ -22,7 +22,7 @@ class App extends Component {
   render = () => {
     return (
       <div className="appWrapper">
-        <AppNav changeTab={this.changeTab} />
+        <AppNav activeTab={this.state.activeTab} changeTab={this.changeTab} />
         <AppMain activeTab={this.state.activeTab} />
       </div>
     );

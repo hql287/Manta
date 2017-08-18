@@ -3,6 +3,7 @@ const ipc = require('electron').ipcRenderer;
 
 // React Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Redux
@@ -100,6 +101,11 @@ class Invoices extends Component {
     );
   };
 }
+
+// PropTypes Validation
+Invoices.propTypes = {
+  invoices: PropTypes.object.isRequired,
+};
 
 export default connect(state => ({
   invoices: state.InvoicesReducer,

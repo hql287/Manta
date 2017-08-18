@@ -1,5 +1,6 @@
 // React
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
@@ -16,7 +17,9 @@ import PrintOptions from '../components/settings/PrintOptions.jsx';
 
 // Component
 class Settings extends Component {
-  state = { visibleTab: 1 };
+  componentWillMount = () => {
+    this.setState({  visibleTab: 1  });
+  }
 
   // Check if settings have been saved
   settingsSaved = () => {
@@ -73,14 +76,6 @@ class Settings extends Component {
       <div className="pageWrapper">
         <div className="pageHeader">
           <h4>Settings</h4>
-          { !this.settingsSaved() &&
-            <div className="pageHint">
-              <span>{this.state.hint}</span>
-              <a href="#" onClick={() => this.hideHint()}>
-                <i className="ion-close" />
-              </a>
-            </div>
-          }
         </div>
         <div className="pageTabs">
           <a
@@ -126,6 +121,11 @@ class Settings extends Component {
     );
   };
 }
+
+// PropTypes Validation
+Settings.propTypes = {
+  settings: PropTypes.object.isRequired,
+};
 
 export default connect(state => ({
   settings: state.SettingsReducer,
