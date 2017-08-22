@@ -7,6 +7,9 @@ import PropTypes from 'prop-types';
 import {ItemTypes} from '../../constants/ItemTypes';
 import {DragSource, DropTarget} from 'react-dnd';
 
+// Animation
+import {Motion, spring} from 'react-motion';
+
 const rowSource = {
   beginDrag(props) {
     return {
@@ -76,8 +79,10 @@ const collectTarget = (connect, monitor) => {
   };
 };
 
+
 // Component
 class ItemsRow extends Component {
+
   componentWillMount = () => {
     const {id, description, quantity, price, subtotal} = this.props.item;
     this.setState({
@@ -92,7 +97,6 @@ class ItemsRow extends Component {
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-
     this.setState({[name]: value}, () => {
       this.updateSubtotal();
     });
@@ -118,64 +122,78 @@ class ItemsRow extends Component {
       connectDragPreview,
       connectDropTarget,
       isDragging,
-      activeHandler,
+      hasHandler,
     } = this.props;
-    const opacity = isDragging ? 0 : 1;
     return connectDragPreview(
       connectDropTarget(
-        <div className="itemDiv" style={{opacity}}>
-          <div className="itemDescription">
-            <input
-              name="description"
-              type="text"
-              value={this.state.description}
-              onChange={e => this.handleInputChange(e)}
-              placeholder="Description"
-            />
-          </div>
-          <div className="itemPrice">
-            <input
-              name="price"
-              type="number"
-              value={this.state.price}
-              onChange={e => this.handleInputChange(e)}
-              placeholder="Price"
-            />
-          </div>
-          <div className="itemQuantity">
-            <input
-              name="quantity"
-              type="number"
-              value={this.state.quantity}
-              onChange={e => this.handleInputChange(e)}
-              placeholder="Quantity"
-            />
-          </div>
-          <div className="itemActions">
-            {connectDragSource(
-              <div className={activeHandler ? 'dragHandler active' : 'dragHandler'}>
-                <i className="ion-grid" />
+        <div style={{opacity: isDragging ? 0 : 1}}>
+          <Motion
+            defaultStyle={{opacity: 0}}
+            style={{opacity: spring(1)}}>
+            {interpolatingStyle => (
+              <div className="itemDiv" style={interpolatingStyle} >
+
+              <div className="itemDescription">
+                <input
+                  name="description"
+                  type="text"
+                  value={this.state.description}
+                  onChange={e => this.handleInputChange(e)}
+                  placeholder="Description"
+                />
+              </div>
+
+              <div className="itemPrice">
+                <input
+                  name="price"
+                  type="number"
+                  value={this.state.price}
+                  onChange={e => this.handleInputChange(e)}
+                  placeholder="Price"
+                />
+              </div>
+
+              <div className="itemQuantity">
+                <input
+                  name="quantity"
+                  type="number"
+                  value={this.state.quantity}
+                  onChange={e => this.handleInputChange(e)}
+                  placeholder="Quantity"
+                />
+              </div>
+
+              <div className="itemActions">
+                {hasHandler && connectDragSource(
+                  <div className="dragHandler">
+                    <i className="ion-grid" />
+                  </div>
+                )}
+                {this.props.actions &&
+                  <a
+                    href="#"
+                    className="itemRemoveBtn"
+                    onClick={() => this.props.removeRow(this.state.id)}>
+                    <i className="ion-close-circled" />
+                  </a>}
+              </div>
               </div>
             )}
-            {this.props.actions &&
-              <a
-                href="#"
-                className="itemRemoveBtn"
-                onClick={() => this.props.removeRow(this.state.id)}>
-                <i className="ion-close-circled" />
-              </a>}
-          </div>
-        </div>,
+          </Motion>
+        </div>
       ),
     );
   };
 }
 
 ItemsRow.propTypes = {
-  item: PropTypes.object.isRequired,
-  actions: PropTypes.bool.isRequired,
-  updateRow: PropTypes.func.isRequired,
-  removeRow: PropTypes.func.isRequired,
+  item:       PropTypes.object.isRequired,
+  index:      PropTypes.number.isRequired,
+  hasHandler: PropTypes.bool.isRequired,
+  actions:    PropTypes.bool.isRequired,
+  updateRow:  PropTypes.func.isRequired,
+  removeRow:  PropTypes.func.isRequired,
+  moveRow:    PropTypes.func.isRequired,
 };
 
 export default DragSource(ItemTypes.ROW, rowSource, collectSource)(
