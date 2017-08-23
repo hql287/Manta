@@ -16,8 +16,11 @@ import {Motion, spring} from 'react-motion';
 // Custom Libs
 import sounds from '../../../libs/sounds.js';
 
-// Custom Component
+// Custom Component & HOCs
 import ItemRow from './ItemRow.jsx';
+import _withAnimation from './hoc/_withAnimation.jsx';
+import _withDragNDrop from './hoc/_withDragNDrop.jsx';
+const ItemRowWithAnimationAndDragNDrop = _withAnimation(_withDragNDrop(ItemRow));
 
 // Component
 class ItemsList extends Component {
@@ -58,26 +61,16 @@ class ItemsList extends Component {
     const {rows} = this.props.currentInvoice;
     const rowsComponent = rows.map((item, index) => {
       return (
-        <Motion
+        <ItemRowWithAnimationAndDragNDrop
           key={item.id}
-          style={{top: spring(index*50)}}>
-          {({top}) =>
-            <div
-              style={{
-                position: 'absolute',
-                top: `${top}px`
-              }}>
-              <ItemRow
-                item={item}
-                index={index}
-                hasHandler={rows.length > 1 ? true : false}
-                actions={index === 0 ? false : true}
-                updateRow={this.updateRow}
-                removeRow={this.removeRow}
-                moveRow={this.moveRow}
-              />
-            </div>}
-        </Motion>
+          item={item}
+          index={index}
+          hasHandler={rows.length > 1 ? true : false}
+          actions={index === 0 ? false : true}
+          updateRow={this.updateRow}
+          removeRow={this.removeRow}
+          moveRow={this.moveRow}
+        />
       );
     });
     return (
@@ -94,7 +87,7 @@ class ItemsList extends Component {
           </div>
         </div>
         <Motion style={{ height: spring(rows.length*50) }}>
-          { ({height}) =>
+          {({height}) =>
             <div
               className="itemsListDiv"
               style={{ height: `${height}px` }}>
