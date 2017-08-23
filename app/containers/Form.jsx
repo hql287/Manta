@@ -198,9 +198,9 @@ class Form extends Component {
         </div>
         <div className="pageContent">
           <Recipient />
-          <Currency />
-          <DueDate/>
           <ItemsList />
+          <DueDate/>
+          <Currency />
           <Discount />
           <Note />
         </div>
