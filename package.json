@@ -17,7 +17,8 @@
     "electron-prebuilt-compile": "^1.6.11",
     "electron-react-devtools": "^0.4.0",
     "eslint": "^4.2.0",
-    "eslint-plugin-react": "^7.1.0"
+    "eslint-plugin-react": "^7.1.0",
+    "spectron": "^3.7.2"
   },
   "dependencies": {
     "babel-eslint": "^7.2.3",
@@ -37,6 +38,7 @@
     "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
+    "react-motion": "^0.5.0",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",

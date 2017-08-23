@@ -1,6 +1,5 @@
 // Libs
 import React, {Component} from 'react';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Redux
 import {connect} from 'react-redux';
@@ -10,6 +9,9 @@ import * as ActionCreators from '../../actions/form.jsx';
 // DragnDrop
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+
+// Animation
+import {Motion, spring} from 'react-motion';
 
 // Custom Libs
 import sounds from '../../../libs/sounds.js';
@@ -45,31 +47,41 @@ class ItemsList extends Component {
     updateRow(childComponentState);
   };
 
+  // Drag Row
   moveRow = (dragIndex, hoverIndex) => {
     const {dispatch} = this.props;
     const moveRow = bindActionCreators(ActionCreators.moveRow, dispatch);
     moveRow(dragIndex, hoverIndex);
   };
 
-
   render = () => {
     const {rows} = this.props.currentInvoice;
     const rowsComponent = rows.map((item, index) => {
       return (
-        <ItemRow
+        <Motion
           key={item.id}
-          item={item}
-          index={index}
-          activeHandler={rows.length > 1 ? true : false}
-          actions={index === 0 ? false : true}
-          updateRow={this.updateRow}
-          removeRow={this.removeRow}
-          moveRow={this.moveRow}
-        />
+          style={{top: spring(index*50)}}>
+          {({top}) =>
+            <div
+              style={{
+                position: 'absolute',
+                top: `${top}px`
+              }}>
+              <ItemRow
+                item={item}
+                index={index}
+                hasHandler={rows.length > 1 ? true : false}
+                actions={index === 0 ? false : true}
+                updateRow={this.updateRow}
+                removeRow={this.removeRow}
+                moveRow={this.moveRow}
+              />
+            </div>}
+        </Motion>
       );
     });
     return (
-      <div className="itemsListWrapper formSection non-draggable" onDragOver={this.dragOver}>
+      <div className="itemsListWrapper formSection non-draggable">
         <div className="itemsListHeader">
           <div className="itemLabelDescription">
             <label className="itemLabel">Description *</label>
@@ -81,14 +93,14 @@ class ItemsList extends Component {
             <label className="itemLabel ">Quantity *</label>
           </div>
         </div>
-        <div className="itemsListDiv">
-          <ReactCSSTransitionGroup
-            transitionName="itemList"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
-            {rowsComponent}
-          </ReactCSSTransitionGroup>
-        </div>
+        <Motion style={{ height: spring(rows.length*50) }}>
+          { ({height}) =>
+            <div
+              className="itemsListDiv"
+              style={{ height: `${height}px` }}>
+              {rowsComponent}
+            </div>}
+        </Motion>
         <div className="itemsListActions">
           <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
             Add A Row
