@@ -12,13 +12,10 @@ const initialState = {
     new: {},
   },
   rows: [{id: uuidv4()}],
-  discount: {
-    amount: 0,
-    type: 'percentage',
-  },
-  dueDate: null,
-  currency: appConfig.get('appSettings').currency,
-  note: '',
+  dueDate:  { required: false },
+  currency: { required: false },
+  discount: { required: false },
+  note:     { required: false },
 };
 
 const FormReducer = (state = initialState, action) => {
@@ -69,41 +66,39 @@ const FormReducer = (state = initialState, action) => {
     }
 
     // Update Discount
-    case ACTION_TYPES.UPDATE_DISCOUNT_AMOUNT: {
+    case ACTION_TYPES.UPDATE_DISCOUNT: {
       return Object.assign({}, state, {
         discount: Object.assign({}, state.discount, {
-          amount: action.data,
-        }),
-      });
-    }
-
-    // Update Discount
-    case ACTION_TYPES.UPDATE_DISCOUNT_TYPE: {
-      return Object.assign({}, state, {
-        discount: Object.assign({}, state.discount, {
-          type: action.data,
-        }),
+          amount: action.data.amount,
+          type: action.data.type,
+        })
       });
     }
 
     // Update Currency
     case ACTION_TYPES.UPDATE_CURRENCY: {
       return Object.assign({}, state, {
-        currency: action.data,
+        currency: Object.assign({}, state.currency, {
+          selectedCurrency: action.data,
+        })
       });
     }
 
     // Update Due Date
     case ACTION_TYPES.CHANGE_DUE_DATE: {
       return Object.assign({}, state, {
-        dueDate: action.data,
+        dueDate: Object.assign({}, state.dueDate, {
+          selectedDate: action.data,
+        })
       });
     }
 
     // Update Note
     case ACTION_TYPES.UPDATE_NOTE: {
       return Object.assign({}, state, {
-        note: action.data,
+        note: Object.assign({}, state.note, {
+          content: action.data,
+        })
       });
     }
 
@@ -116,14 +111,20 @@ const FormReducer = (state = initialState, action) => {
           new: {},
         },
         rows: [{id: uuidv4()}],
-        discount: {
-          amount: 0,
-          type: 'percentage',
-        },
-        dueDate: null,
-        currency: appConfig.get('appSettings').currency,
-        note: '',
-      };
+        dueDate:  { required: false },
+        currency: { required: false },
+        discount: { required: false },
+        note:     { required: false },
+      }
+    }
+
+    // Toggle Field
+    case ACTION_TYPES.TOGGLE_FIELD: {
+      return Object.assign({}, state, {
+        [action.field]: Object.assign({}, state[action.field], {
+          required: !state[action.field].required,
+        })
+      });
     }
 
     // Default

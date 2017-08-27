@@ -146,12 +146,13 @@ class Invoice extends Component {
               {format(invoice.created_at, 'DD/MM/YYYY')}
             </p>
           </div>
-          <div className="dueDate">
-            <InvoiceLabel>Due Date</InvoiceLabel>
-            <p>
-              {moment(invoice.DueDate).format('DD/MM/YYYY')}
-            </p>
-          </div>
+          { invoice.DueDate &&
+            <div className="dueDate">
+              <InvoiceLabel>Due Date</InvoiceLabel>
+              <p>
+                {moment(invoice.DueDate).format('DD/MM/YYYY')}
+              </p>
+            </div>}
         </InvoiceDates>
 
         <InvoiceSum>
@@ -160,7 +161,6 @@ class Invoice extends Component {
             {invoice.currency} {invoice.grandTotal}
           </p>
         </InvoiceSum>
-
 
         <InvoiceActions>
           <InvoiceActionsBtn
@@ -186,3 +186,6 @@ Invoice.propTypes = {
 };
 
 export default Invoice;
+
+        //
+        //

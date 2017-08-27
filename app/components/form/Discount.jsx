@@ -21,7 +21,6 @@ const DiscountContent = styled.div`
 
 const DiscountAmount = styled.div`
   flex: 1;
-  width: 50%;
 `;
 
 const DiscountType = styled.div`
@@ -31,66 +30,88 @@ const DiscountType = styled.div`
 
 // Component
 class Discount extends Component {
-  // Update Discount Amount
-  updateAmount = event => {
-    const amount = parseInt(event.target.value, 10);
-    const {dispatch} = this.props;
-    const updateDiscountAmount = bindActionCreators(
-      ActionCreators.updateDiscountAmount,
-      dispatch,
-    );
-    updateDiscountAmount(amount);
-  };
 
-  // Update Discount Type
-  updateType = event => {
+  componentWillMount = () => {
+    const { discount } = this.props.currentInvoice;
+    this.setState({
+      amount: discount.amount ? discount.amount : '',
+      type: discount.type ? discount.type : 'percentage',
+    });
+  }
+
+  handleInputChange = event => {
+    const name = event.target.name;
+    const eValue = event.target.value;
+    let value;
+    if (name !== 'amount') {
+      value = eValue;
+    } else {
+      value = eValue === '' ? '' : parseInt(eValue, 10);
+    }
+    this.setState({[name]: value}, () => {
+      this.updateDiscountState();
+    });
+  }
+
+  updateDiscountState = () => {
     const {dispatch} = this.props;
-    const updateDiscountType = bindActionCreators(
-      ActionCreators.updateDiscountType,
+    const updateDiscount = bindActionCreators(
+      ActionCreators.updateDiscount,
       dispatch,
     );
-    updateDiscountType(event.target.value);
+    updateDiscount(this.state);
   };
 
   render = () => {
     const {discount} = this.props.currentInvoice;
-    const amount = discount.amount ? discount.amount : 0;
-    const type = discount.type ? discount.type : 'percentage';
     return (
       <DiscountWrapper>
         <label className="itemLabel">Discount</label>
-        <DiscountContent>
-          <DiscountAmount>
-            <input
-              type="number"
-              value={amount}
-              onChange={this.updateAmount.bind(this)}
-              placeholder="Amount"
-            />
-          </DiscountAmount>
-          <DiscountType>
-            <div className="radio">
-              <label>
-                <input
-                  type="radio"
-                  onChange={this.updateType.bind(this)}
-                  checked={type === 'percentage'}
-                  value="percentage"
-                />Percentage
-              </label>
-            </div>
-            <div className="radio">
-              <label>
-                <input
-                  type="radio"
-                  onChange={this.updateType.bind(this)}
-                  checked={type === 'flat'}
-                  value="flat"
-                />Flat Rate
-              </label>
-            </div>
-          </DiscountType>
-        </DiscountContent>
+        <label className="switch">
+          <input
+            name="required"
+            type="checkbox"
+            checked={discount.required}
+            onChange={() => this.props.toggleField('discount')}
+          />
+          <span className="slider round"></span>
+        </label>
+        { discount.required &&
+          <DiscountContent>
+            <DiscountAmount>
+              <input
+                name="amount"
+                type="number"
+                value={this.state.amount}
+                onChange={e => this.handleInputChange(e)}
+                placeholder="Amount"
+              />
+            </DiscountAmount>
+            <DiscountType>
+              <div className="radio">
+                <label>
+                  <input
+                    name="type"
+                    type="radio"
+                    onChange={e => this.handleInputChange(e)}
+                    checked={this.state.type === 'percentage'}
+                    value="percentage"
+                  />Percentage
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input
+                    name="type"
+                    type="radio"
+                    onChange={e => this.handleInputChange(e)}
+                    checked={this.state.type === 'flat'}
+                    value="flat"
+                  />Flat Rate
+                </label>
+              </div>
+            </DiscountType>
+          </DiscountContent>}
       </DiscountWrapper>
     );
   };

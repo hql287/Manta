@@ -30,7 +30,12 @@ class Invoices extends Component {
   state = { openPrevWinHint: false };
 
   // Will Mount
-  componentWillMount = () => {
+  // componentWillMount = () => {
+  // };
+
+  // Once Mounted, add event listeners
+  // on opening and open preview window events
+  componentDidMount = () => {
     if (!this.props.invoices.loaded) {
       const {dispatch} = this.props;
       const getInvoices = bindActionCreators(
@@ -39,11 +44,6 @@ class Invoices extends Component {
       );
       getInvoices();
     }
-  };
-
-  // Once Mounted, add event listeners
-  // on opening and open preview window events
-  componentDidMount = () => {
     // Opening Event
     ipc.on('show-opening-preview-window-hint', event => {
       this.setState({openPrevWinHint: true});

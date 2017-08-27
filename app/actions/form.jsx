@@ -1,5 +1,6 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
+// Recipient
 export const updateRecipient = data => {
   return {
     type: ACTION_TYPES.UPDATE_RECIPIENT,
@@ -7,6 +8,7 @@ export const updateRecipient = data => {
   };
 };
 
+// ItemsRow
 export const addItem = () => {
   return {
     type: ACTION_TYPES.ADD_ITEM,
@@ -35,27 +37,15 @@ export const moveRow = (dragIndex, hoverIndex) => {
   };
 };
 
-
-export const clearForm = () => {
+// Discount
+export const updateDiscount = data => {
   return {
-    type: ACTION_TYPES.CLEAR_FORM,
-  };
-};
-
-export const updateDiscountAmount = data => {
-  return {
-    type: ACTION_TYPES.UPDATE_DISCOUNT_AMOUNT,
+    type: ACTION_TYPES.UPDATE_DISCOUNT,
     data
   };
-};
+}
 
-export const updateDiscountType = data => {
-  return {
-    type: ACTION_TYPES.UPDATE_DISCOUNT_TYPE,
-    data
-  };
-};
-
+// Note
 export const updateNote = data => {
   return {
     type: ACTION_TYPES.UPDATE_NOTE,
@@ -63,6 +53,7 @@ export const updateNote = data => {
   };
 };
 
+// DueDate
 export const changeDueDate = data => {
   return {
     type: ACTION_TYPES.CHANGE_DUE_DATE,
@@ -70,7 +61,7 @@ export const changeDueDate = data => {
   };
 };
 
-
+// Currency
 export const updateCurrency = data => {
   return {
     type: ACTION_TYPES.UPDATE_CURRENCY,
@@ -78,4 +69,17 @@ export const updateCurrency = data => {
   };
 };
 
+// Form Actions
+export const clearForm = () => {
+  return {
+    type: ACTION_TYPES.CLEAR_FORM,
+  };
+};
+
+export const toggleField = field => {
+  return {
+    type: ACTION_TYPES.TOGGLE_FIELD,
+    field,
+  };
+};
 
