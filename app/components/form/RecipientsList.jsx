@@ -5,6 +5,12 @@ import PropTypes from 'prop-types';
 // 3rd Party Libs
 import _ from 'lodash';
 
+// Styles
+import styled from 'styled-components';
+const List = styled.div`
+  margin-bottom: 20px;
+`;
+
 // Component
 class RecipientsList extends Component {
   // Set & Update Selected Recipient on Mount
@@ -45,7 +51,7 @@ class RecipientsList extends Component {
       );
     });
     return (
-      <div className="recipientsList">
+      <List>
         <select
           value={
             currentSelectedRecipient._id
@@ -55,7 +61,7 @@ class RecipientsList extends Component {
           onChange={e => this.handleInputChange(e)}>
           {recipientOptions}
         </select>
-      </div>
+      </List>
     );
   };
 }

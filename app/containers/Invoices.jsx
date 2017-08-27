@@ -15,6 +15,16 @@ import * as ActionCreators from '../actions/invoices.jsx';
 import Invoice from '../components/invoices/Invoice.jsx';
 import EmptyMessage from '../components/shared/EmptyMessage.jsx';
 
+// Styles
+import styled from 'styled-components';
+
+const InvoicesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+`;
+
 // Component
 class Invoices extends Component {
   state = { openPrevWinHint: false };
@@ -93,9 +103,9 @@ class Invoices extends Component {
         {invoices.data.length === 0
           ? <EmptyMessage text="You don't have any invoice yet"/>
           : <div className="pageContent">
-              <div className="row">
+              <InvoicesContainer>
                 {invoicesComponent}
-              </div>
+              </InvoicesContainer>
             </div>}
       </div>
     );

@@ -13,10 +13,99 @@ import PropTypes from 'prop-types';
 const openDialog = require('../../renderers/dialog.js');
 const dragNDrop = require('../../renderers/dragNdrop.js');
 
+// Custom Component
+import Button from '../shared/Button.jsx';
+
+// Styles
+import styled from 'styled-components';
+
+const LogoDropzone = styled.div`
+  position: relative;
+  padding: 20px;
+  border: 1px solid #f2f3f4;
+  border-radius: 4px;
+  display: inline-flex;
+  flex-direction: column;
+`;
+
+const LogoDropzoneInner = styled.div`
+  display: flex;
+  height: 100px;
+  width: 100px;
+  border: 2px dashed #b4b7ba;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  background: #f9fafa;
+  padding: 20px;
+  position: relative;
+  &::before {
+    content: "DRAG & DROP";
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    text-align: center;
+    color: #b4b7ba;
+  }
+`;
+
+const LogoImgWrapper = styled.div`
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 4px;
+  overflow: hidden;
+  &:hover a {
+    opacity: 1;
+    visibility: visible;
+    color: #ec476e;
+  }
+`;
+
+const LogoImg = styled.img`
+  display: flex;
+  max-width: 100px;
+  align-self: center;
+`;
+
+const LogoRemoveBtn = styled.a`
+  display: flex;
+  position: absolute;
+  font-size: 50px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f9fafa;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: .2s;
+  transition: .2s;
+`;
+
+const LogoChangeBtn = styled(Button)`
+  background: #469fe5;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+`;
+
 // Component
 class Info extends Component {
 
-    // Life Cycle Events
+  // Life Cycle Events
   componentWillMount = () => {
     this.setState(this.props.info);
   };
@@ -49,7 +138,7 @@ class Info extends Component {
     ipc.removeAllListeners('file-selected');
   };
 
-    // Helper Functions
+  // Helper Functions
   resizeImage = filePath => {
     return new Promise((resolve, reject) => {
       Jimp.read(filePath, (err, file) => {
@@ -97,7 +186,7 @@ class Info extends Component {
     files.forEach(file => fs.unlinkSync(file));
   }
 
-    // Handle Drag & Drop Upload
+  // Handle Drag & Drop Upload
   handleLogoUpload = filepath => {
     this.resizeImage(filepath)
       .then(this.convertResizedImageToBase64)
@@ -109,7 +198,7 @@ class Info extends Component {
       });
   };
 
-    // Handle Input Change
+  // Handle Input Change
   handleInputChange = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -118,19 +207,19 @@ class Info extends Component {
     });
   };
 
-    // Select Logo from File
+  // Select Logo from File
   selectLogo = () => {
     ipc.send('open-file-dialog');
   };
 
-    // Remove Current Logo
+  // Remove Current Logo
   removeLogo = () => {
     this.setState({logo: null}, () => {
       this.updateInfoState();
     });
   };
 
-    // Save Info Data
+  // Save Info Data
   updateInfoState = () => {
     const {updateInfo} = this.props;
     updateInfo(this.state);
@@ -141,25 +230,19 @@ class Info extends Component {
       <div>
         <div className="pageItem">
           <label className="itemLabel">Logo</label>
-          <div id="logoDropzone" className="logoDropzone">
+          <LogoDropzone id="logoDropzone" >
             {this.state.logo
-              ? <div className="logoImgWrapper">
-                  <img className="logoImg" src={this.state.logo} alt="Logo" />
-                  <a
-                    href="#"
-                    className="logoRemoveBtn"
-                    onClick={() => this.removeLogo()}>
+              ? <LogoImgWrapper>
+                  <LogoImg src={this.state.logo} alt="Logo" />
+                  <LogoRemoveBtn onClick={() => this.removeLogo()}>
                     <i className="ion-android-cancel" />
-                  </a>
-                </div>
-              : <div className="logoDropzoneInner" />}
-            <a
-              href="#"
-              className="btn btn-primary"
-              onClick={() => this.selectLogo()}>
+                  </LogoRemoveBtn>
+                </LogoImgWrapper>
+              : <LogoDropzoneInner/>}
+            <LogoChangeBtn primary onClick={() => this.selectLogo()}>
               Select Photo
-            </a>
-          </div>
+            </LogoChangeBtn>
+          </LogoDropzone>
         </div>
         <div className="row">
           <div className="pageItem col-md-6">

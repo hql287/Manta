@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as ActionCreators from '../../actions/form.jsx';
 
+// 3rd Party Libs
 import _ from 'lodash';
 import currencies from '../../../libs/currencies.json';
 
@@ -38,7 +39,7 @@ class Currency extends Component {
     const {currency} = this.props.currentReceipt;
 
     return (
-      <div className="currencyWrapper formSection">
+      <div className="formSection">
         <label className="itemLabel">Currency</label>
         <select
           value={currency}

@@ -10,10 +10,11 @@ import * as ActionCreators from '../../actions/form.jsx';
 import {SingleDatePicker} from 'react-dates';
 import moment from 'moment';
 
-const clearDateBtn = () =>
-<div>
-  <a href="#">Clear</a>
-</div>;
+// Styles
+import styled from 'styled-components';
+const DueDateContent = styled.div`
+  display: flex;
+`;
 
 // Component
 class DueDate extends Component {
@@ -44,9 +45,9 @@ class DueDate extends Component {
     const {dueDate} = this.props.currentInvoice;
     const date = dueDate ? moment(dueDate) : null;
     return (
-      <div className="dueDateWrapper formSection">
+      <div className="formSection">
         <label className="itemLabel">Due Date</label>
-        <div className="dueDateContent">
+        <DueDateContent>
           <SingleDatePicker
             id="invoice-duedate"
             placeholder="Select A Date"
@@ -63,7 +64,7 @@ class DueDate extends Component {
             onClick={() => this.onDateChange(null)}>
             <i className="ion-close-circled"></i>
           </a>
-        </div>
+        </DueDateContent>
       </div>
     );
   };
