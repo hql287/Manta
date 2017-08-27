@@ -14,6 +14,75 @@ const _ = require('lodash');
 const openDialog = require('../../renderers/dialog.js');
 import sounds from '../../../libs/sounds.js';
 
+// Styles
+import styled from 'styled-components';
+
+const InvoiceContainer = styled.div`
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  font-size: 14px;
+  flex-direction: column;
+  border-radius: 4px;
+  border: 1px solid #f2f3f4;
+  padding: 20px;
+  flex: 1;
+  margin: 0 15px;
+  p {
+    margin: 0;
+    font-size: 16px;
+    color: #4f555c;
+  }
+`;
+
+const InvoiceHeader = styled.div`
+  border-bottom: 1px solid #f2f3f4;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  display: flex;
+`;
+
+const InvoiceLabel = styled.label`
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  color: #b4b7ba;
+  display: block;
+  margin-top: 10px;
+`;
+
+const InvoiceClient = styled.div`
+  h3 {
+    font-size: 32px;
+  }
+`;
+
+const InvoiceDates = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const InvoiceSum = styled.div``;
+
+const InvoiceActions = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+`;
+
+const InvoiceActionsBtn = styled.a`
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #f2f3f4;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 45%;
+  ${props => props.primary && `i { color: #469fe5; }`}
+  ${props => props.danger && `i { color: #ec476e; }`}
+`;
+
 // Component
 class Invoice extends Component {
   componentDidMount() {
@@ -49,66 +118,63 @@ class Invoice extends Component {
     const invoice = this.props.data;
     const {recipient} = invoice;
     return (
-      <div className="col-md-6">
-        <div className="invoice">
-          <div className="invoiceHeader">
-            <div className="invoiceId">
-              <label className="invoiceLabel">Invoice ID:</label>
-              <p className="invoiceId">
-                {_.truncate(invoice._id, {
-                  length: 8,
-                  omission: '',
-                })}
-              </p>
-            </div>
-            <div className="invoiceStatus" />
-          </div>
-
-          <div className="invoiceClient">
-            <label className="invoiceLabel">Billed To:</label>
-            <p>
-              {recipient.fullname}
+      <InvoiceContainer>
+        <InvoiceHeader>
+          <div className="invoiceId">
+            <InvoiceLabel>Invoice ID: </InvoiceLabel>
+            <p className="invoiceId">
+              {_.truncate(invoice._id, {
+                length: 8,
+                omission: '',
+              })}
             </p>
           </div>
+          <div className="invoiceStatus" />
+        </InvoiceHeader>
 
-          <div className="invoiceDates">
-            <div className="createdDate">
-              <label className="invoiceLabel">Invoiced Date</label>
-              <p>
-                {format(invoice.created_at, 'DD/MM/YYYY')}
-              </p>
-            </div>
-            <div className="dueDate">
-              <label className="invoiceLabel">Due Date</label>
-              <p>
-                {moment(invoice.DueDate).format('DD/MM/YYYY')}
-              </p>
-            </div>
-          </div>
+        <InvoiceClient>
+          <InvoiceLabel>Billed To:</InvoiceLabel>
+          <p>
+            {recipient.fullname}
+          </p>
+        </InvoiceClient>
 
-          <div className="invoiceSum">
-            <label className="invoiceLabel">Total</label>
+        <InvoiceDates>
+          <div className="createdDate">
+            <InvoiceLabel>Invoiced Date</InvoiceLabel>
             <p>
-              {invoice.currency} {invoice.grandTotal}
+              {format(invoice.created_at, 'DD/MM/YYYY')}
             </p>
           </div>
-
-          <div className="invoiceActions">
-            <a
-              href="#"
-              className="previewInvoice"
-              onClick={() => this.previewInvoice()}>
-              <i className="ion-search" />
-            </a>
-            <a
-              href="#"
-              className="removeInvoice"
-              onClick={() => this.openDeleteDialog(invoice._id)}>
-              <i className="ion-android-cancel" />
-            </a>
+          <div className="dueDate">
+            <InvoiceLabel>Due Date</InvoiceLabel>
+            <p>
+              {moment(invoice.DueDate).format('DD/MM/YYYY')}
+            </p>
           </div>
-        </div>
-      </div>
+        </InvoiceDates>
+
+        <InvoiceSum>
+          <InvoiceLabel>Total</InvoiceLabel>
+          <p>
+            {invoice.currency} {invoice.grandTotal}
+          </p>
+        </InvoiceSum>
+
+
+        <InvoiceActions>
+          <InvoiceActionsBtn
+            primary
+            onClick={() => this.previewInvoice()}>
+            <i className="ion-search" />
+          </InvoiceActionsBtn>
+          <InvoiceActionsBtn
+            danger
+            onClick={() => this.openDeleteDialog(invoice._id)}>
+            <i className="ion-android-cancel" />
+          </InvoiceActionsBtn>
+        </InvoiceActions>
+      </InvoiceContainer>
     );
   };
 }

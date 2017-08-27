@@ -17,14 +17,53 @@ import {Motion, spring} from 'react-motion';
 import sounds from '../../../libs/sounds.js';
 
 // Custom Component & HOCs
+import Button from '../../components/shared/Button.jsx';
 import ItemRow from './ItemRow.jsx';
 import _withAnimation from './hoc/_withAnimation.jsx';
 import _withDragNDrop from './hoc/_withDragNDrop.jsx';
 const ItemRowWithAnimationAndDragNDrop = _withAnimation(_withDragNDrop(ItemRow));
 
+// Styles
+import styled from 'styled-components';
+const ItemsListWrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  -webkit-app-region: no-drag;
+  margin-bottom: 30px;
+`;
+
+const ItemsListHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  & > div {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+`;
+
+const ItemsListActionsBtn = styled(Button)`
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    color: white;
+  }
+  &:active {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+`;
+
+const ItemsListDiv = styled.div`
+  position: relative;
+  margin-bottom: 10px;
+`;
+
 // Component
 class ItemsList extends Component {
-
   // Add A Row
   addRow = () => {
     const {dispatch} = this.props;
@@ -74,32 +113,30 @@ class ItemsList extends Component {
       );
     });
     return (
-      <div className="itemsListWrapper formSection non-draggable">
-        <div className="itemsListHeader">
-          <div className="itemLabelDescription">
+      <ItemsListWrapper>
+        <ItemsListHeader>
+          <div className="flex2">
             <label className="itemLabel">Description *</label>
           </div>
-          <div className="itemLabelPrice">
+          <div className="flex1">
             <label className="itemLabel">Price *</label>
           </div>
-          <div className="itemLabelQuantity">
+          <div className="flex1">
             <label className="itemLabel ">Quantity *</label>
           </div>
-        </div>
-        <Motion style={{ height: spring(rows.length*50) }}>
+        </ItemsListHeader>
+        <Motion style={{height: spring(rows.length * 50)}}>
           {({height}) =>
-            <div
-              className="itemsListDiv"
-              style={{ height: `${height}px` }}>
+            <ItemsListDiv style={{height: `${height}px`}}>
               {rowsComponent}
-            </div>}
+            </ItemsListDiv>}
         </Motion>
         <div className="itemsListActions">
-          <a href="#" className="btn btn-primary" onClick={() => this.addRow()}>
+          <ItemsListActionsBtn onClick={() => this.addRow()} primary>
             Add A Row
-          </a>
+          </ItemsListActionsBtn>
         </div>
-      </div>
+      </ItemsListWrapper>
     );
   };
 }
@@ -107,4 +144,3 @@ class ItemsList extends Component {
 export default connect(state => ({
   currentInvoice: state.FormReducer,
 }))(DragDropContext(HTML5Backend)(ItemsList));
-

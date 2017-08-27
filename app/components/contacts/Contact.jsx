@@ -13,8 +13,21 @@ const _ = require('lodash');
 const openDialog = require('../../renderers/dialog.js');
 import sounds from '../../../libs/sounds.js';
 
+// Custom Components
+import Button from '../shared/Button';
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  CardText,
+  CardButton,
+} from '../shared/Card.jsx';
+
+
 // Component
 class Contact extends Component {
+
   componentDidMount() {
     const deleteContact = this.props.deleteContact;
     ipc.on('confirmed-delete-contact', (event, index, contactId) => {
@@ -42,31 +55,21 @@ class Contact extends Component {
   render = () => {
     const contact = this.props.data;
     return (
-      <div className="col-md-6">
-        <div className="contact card">
-          <div className="card-body">
-            <h4 className="card-title">{contact.fullname}</h4>
-            <h6 className="card-subtitle mb-2 text-muted">{contact.company}</h6>
-            <p className="card-text">
-              {contact.email}
-              <br/>
-              {contact.phone}
-            </p>
-
-            <a
-              href="#"
-              className="card-link">
-              Edit
-            </a>
-            <a
-              href="#"
-              className="card-link text-danger"
-              onClick={() => this.openDeleteDialog(contact._id)}>
-              Delete
-            </a>
-          </div>
-        </div>
-      </div>
+      <Card>
+        <CardBody>
+          <CardTitle>{contact.fullname}</CardTitle>
+          <CardSubtitle>{contact.company}</CardSubtitle>
+          <CardText>
+            {contact.email}
+            <br/>
+            {contact.phone}
+          </CardText>
+          <Button primary>Edit</Button>
+          <Button danger onClick={() => this.openDeleteDialog(contact._id)}>
+            Delete
+          </Button>
+        </CardBody>
+      </Card>
     );
   };
 }

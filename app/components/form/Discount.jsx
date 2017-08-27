@@ -6,9 +6,31 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as ActionCreators from '../../actions/form.jsx';
 
+// Styles
+import styled from 'styled-components';
+const DiscountWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+`;
+
+const DiscountContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const DiscountAmount = styled.div`
+  flex: 1;
+  width: 50%;
+`;
+
+const DiscountType = styled.div`
+  flex: 1;
+  margin-top: 10px;
+`;
+
 // Component
 class Discount extends Component {
-
   // Update Discount Amount
   updateAmount = event => {
     const amount = parseInt(event.target.value, 10);
@@ -35,20 +57,18 @@ class Discount extends Component {
     const amount = discount.amount ? discount.amount : 0;
     const type = discount.type ? discount.type : 'percentage';
     return (
-      <div className="discountWrapper formSection">
-        <label className="itemLabel ">Discount</label>
-
-        <div className="discountContent">
-          <div className="discountAmount">
+      <DiscountWrapper>
+        <label className="itemLabel">Discount</label>
+        <DiscountContent>
+          <DiscountAmount>
             <input
               type="number"
               value={amount}
               onChange={this.updateAmount.bind(this)}
               placeholder="Amount"
             />
-          </div>
-
-          <div className="discountType">
+          </DiscountAmount>
+          <DiscountType>
             <div className="radio">
               <label>
                 <input
@@ -69,9 +89,9 @@ class Discount extends Component {
                 />Flat Rate
               </label>
             </div>
-          </div>
-        </div>
-      </div>
+          </DiscountType>
+        </DiscountContent>
+      </DiscountWrapper>
     );
   };
 }

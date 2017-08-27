@@ -2,14 +2,34 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// Styles
+import styled from 'styled-components';
+const Form = styled.div`
+  padding: 20px;
+  background: #f9fafa;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #f2f3f4;
+`;
+
+const Row = styled.div`
+  display: flex;
+  margin: 0 -15px;
+`;
+
+const Field = styled.div`
+  flex: 1;
+  margin: 0 15px 20px 15px;
+`;
+
 // Component
 class RecipientForm extends Component {
   render = () => {
     const {fullname, company, phone, email} = this.props.currentRecipientData;
     return (
-      <div className="recipientForm">
-        <div className="row">
-          <div className="pageItem col-md-6">
+      <Form>
+        <Row>
+          <Field>
             <label className="itemLabel">Full Name *</label>
             <input
               name="fullname"
@@ -17,8 +37,8 @@ class RecipientForm extends Component {
               value={fullname ? fullname : ''}
               onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
-          </div>
-          <div className="pageItem col-md-6">
+          </Field>
+          <Field>
             <label className="itemLabel">Company</label>
             <input
               name="company"
@@ -26,10 +46,10 @@ class RecipientForm extends Component {
               value={company ? company : ''}
               onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
-          </div>
-        </div>
-        <div className="row">
-          <div className="pageItem col-md-6">
+          </Field>
+        </Row>
+        <Row>
+          <Field>
             <label className="itemLabel">Email *</label>
             <input
               name="email"
@@ -37,8 +57,8 @@ class RecipientForm extends Component {
               value={email ? email : ''}
               onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
-          </div>
-          <div className="pageItem col-md-6">
+          </Field>
+          <Field>
             <label className="itemLabel">Phone Number</label>
             <input
               name="phone"
@@ -46,9 +66,9 @@ class RecipientForm extends Component {
               value={phone ? phone : ''}
               onChange={e => this.props.handleRecipientFormInputChange(e)}
             />
-          </div>
-        </div>
-      </div>
+          </Field>
+        </Row>
+      </Form>
     );
   };
 }

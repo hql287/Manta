@@ -2,9 +2,55 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// Styles
+import styled from 'styled-components';
+const ItemDiv = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  flex: 1;
+
+  & > div {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+    &:last-child {
+      margin-right: 0px;
+    }
+  }
+`;
+
+const ItemDivInput = styled.input`
+  min-height: 36px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  border: 1px solid #f2f3f4;
+  color: #3a3e42;
+  font-size: 14px;
+`;
+
+const ItemActions = styled.div`
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  margin: 0 !important;
+  margin-left: 10px;
+`;
+
+const ItemRemoveBtn = styled.a`
+  > i {
+    color: #ec476e;
+  }
+`;
+
 // Component
 class ItemsRow extends Component {
-
   componentWillMount = () => {
     const {id, description, quantity, price, subtotal} = this.props.item;
     this.setState({
@@ -39,11 +85,11 @@ class ItemsRow extends Component {
   };
 
   render = () => {
-    const { actions, hasHandler } = this.props;
+    const {actions, hasHandler} = this.props;
     return (
-      <div className="itemDiv">
-        <div className="itemDescription">
-          <input
+      <ItemDiv>
+        <div className="flex2">
+          <ItemDivInput
             name="description"
             type="text"
             value={this.state.description}
@@ -52,8 +98,8 @@ class ItemsRow extends Component {
           />
         </div>
 
-        <div className="itemPrice">
-          <input
+        <div className="flex1">
+          <ItemDivInput
             name="price"
             type="number"
             value={this.state.price}
@@ -62,8 +108,8 @@ class ItemsRow extends Component {
           />
         </div>
 
-        <div className="itemQuantity">
-          <input
+        <div className="flex1">
+          <ItemDivInput
             name="quantity"
             type="number"
             value={this.state.quantity}
@@ -72,29 +118,28 @@ class ItemsRow extends Component {
           />
         </div>
 
-        { (actions||hasHandler) &&
-          <div className="itemActions">
-            { actions &&
-              <a
+        {(actions || hasHandler) &&
+          <ItemActions>
+            {actions &&
+              <ItemRemoveBtn
                 href="#"
-                className="itemRemoveBtn"
                 onClick={() => this.props.removeRow(this.state.id)}>
                 <i className="ion-close-circled" />
-              </a>}
-          </div>}
-      </div>
+              </ItemRemoveBtn>}
+          </ItemActions>}
+      </ItemDiv>
     );
   };
 }
 
 ItemsRow.propTypes = {
-  item:       PropTypes.object.isRequired,
-  index:      PropTypes.number.isRequired,
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired,
   hasHandler: PropTypes.bool.isRequired,
-  actions:    PropTypes.bool.isRequired,
-  updateRow:  PropTypes.func.isRequired,
-  removeRow:  PropTypes.func.isRequired,
-  moveRow:    PropTypes.func.isRequired,
+  actions: PropTypes.bool.isRequired,
+  updateRow: PropTypes.func.isRequired,
+  removeRow: PropTypes.func.isRequired,
+  moveRow: PropTypes.func.isRequired,
 };
 
 export default ItemsRow;
