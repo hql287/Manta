@@ -6,21 +6,29 @@ export const MOVE_ROW = 'MOVE_ROW';
 export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const UPDATE_ITEM = 'UPDATE_ITEM';
 export const CLEAR_FORM = 'CLEAR_FORM';
+
 // DISCOUNT
-export const UPDATE_DISCOUNT_AMOUNT = 'UPDATE_DISCOUNT_AMOUNT';
-export const UPDATE_DISCOUNT_TYPE = 'UPDATE_DISCOUNT_TYPE';
+export const UPDATE_DISCOUNT = 'UPDATE_DISCOUNT';
+
 // NOTE
 export const UPDATE_NOTE = 'UPDATE_NOTE';
+
 // CURRENCY
 export const UPDATE_CURRENCY = 'UPDATE_CURRENCY';
+
 // DUE DATE
 export const CHANGE_DUE_DATE = 'CHANGE_DUE_DATE';
+
 // INVOICE
 export const GET_INVOICES = 'GET_INVOICES';
 export const SAVE_INVOICE = 'SAVE_INVOICE';
 export const DELETE_INVOICE = 'DELETE_INVOICE';
+
 // RECIPIENT
 export const UPDATE_RECIPIENT = 'UPDATE_RECIPIENT';
+
+// FIELDS
+export const TOGGLE_FIELD = 'TOGGLE_FIELD';
 
 // CONTACTS
 // ===========================================================

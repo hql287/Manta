@@ -16,12 +16,9 @@ import {Motion, spring} from 'react-motion';
 // Custom Libs
 import sounds from '../../../libs/sounds.js';
 
-// Custom Component & HOCs
+// Custom Component
 import Button from '../../components/shared/Button.jsx';
 import ItemRow from './ItemRow.jsx';
-import _withAnimation from './hoc/_withAnimation.jsx';
-import _withDragNDrop from './hoc/_withDragNDrop.jsx';
-const ItemRowWithAnimationAndDragNDrop = _withAnimation(_withDragNDrop(ItemRow));
 
 // Styles
 import styled from 'styled-components';
@@ -100,7 +97,7 @@ class ItemsList extends Component {
     const {rows} = this.props.currentInvoice;
     const rowsComponent = rows.map((item, index) => {
       return (
-        <ItemRowWithAnimationAndDragNDrop
+        <ItemRow
           key={item.id}
           item={item}
           index={index}

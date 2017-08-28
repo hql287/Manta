@@ -80,7 +80,7 @@ export const saveContact = data => {
   };
 };
 
-// Delete a Invoices
+// Delete A Contact
 export const deleteContact = contactId => {
   return dispatch => {
     db

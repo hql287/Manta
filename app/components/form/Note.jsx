@@ -21,29 +21,52 @@ const NoteContent = styled.textarea`
 
 // Component
 class Note extends Component {
+  componentWillMount = () => {
+    const {note} = this.props.currentInvoice;
+    this.setState({
+      content: note.content ? note.content : '',
+    });
+  };
+
+  handleInputChange = event => {
+    this.setState({content: event.target.value}, () => {
+      this.updateNoteState();
+    });
+  };
+
   updateNoteState = event => {
     const {dispatch} = this.props;
     const updateNote = bindActionCreators(ActionCreators.updateNote, dispatch);
-    updateNote(event.target.value);
+    updateNote(this.state.content);
   };
 
   render = () => {
-    const {note} = this.props.currentReceipt;
+    const {note} = this.props.currentInvoice;
     return (
       <div className="formSection">
         <label className="itemLabel">Note</label>
-        <NoteContent
-          rows="4"
-          value={note ? note : ''}
-          cols="50"
-          onChange={this.updateNoteState.bind(this)}
-          placeholder="Note"
-        />
+        <label className="switch">
+          <input
+            name="required"
+            type="checkbox"
+            checked={note.required}
+            onChange={() => this.props.toggleField('note')}
+          />
+          <span className="slider round" />
+        </label>
+        {note.required &&
+          <NoteContent
+            rows="4"
+            value={this.state.content}
+            cols="50"
+            onChange={e => this.handleInputChange(e)}
+            placeholder="Note"
+          />}
       </div>
     );
   };
 }
 
 export default connect(state => ({
-  currentReceipt: state.FormReducer,
+  currentInvoice: state.FormReducer,
 }))(Note);

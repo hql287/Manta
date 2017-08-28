@@ -13,7 +13,7 @@ import currencies from '../../../libs/currencies.json';
 
 // Component
 class Currency extends Component {
-  // Update Discount Amount
+
   updateCurrency = event => {
     const {dispatch} = this.props;
     const updateCurrency = bindActionCreators(
@@ -36,21 +36,32 @@ class Currency extends Component {
       );
     });
 
-    const {currency} = this.props.currentReceipt;
+    const {currency} = this.props.currentInvoice;
 
     return (
       <div className="formSection">
         <label className="itemLabel">Currency</label>
-        <select
-          value={currency}
-          onChange={e => this.updateCurrency(e)}>
-          {currenciesOptions}
-        </select>
+        <label className="switch">
+          <input
+            name="required"
+            type="checkbox"
+            checked={currency.required}
+            onChange={() => this.props.toggleField('currency')}
+          />
+          <span className="slider round"></span>
+        </label>
+        { currency.required &&
+          <select
+            value={currency.selectedCurrency}
+            onChange={e => this.updateCurrency(e)}>
+            <option value={null}>Select A Currency</option>
+            {currenciesOptions}
+          </select>}
       </div>
     );
   };
 }
 
 export default connect(state => ({
-  currentReceipt: state.FormReducer,
+  currentInvoice: state.FormReducer,
 }))(Currency);

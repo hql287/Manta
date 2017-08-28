@@ -2,8 +2,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// HOCs
+import _withAnimation from './hoc/_withAnimation.jsx';
+import _withDragNDrop from './hoc/_withDragNDrop.jsx';
+
 // Styles
 import styled from 'styled-components';
+
 const ItemDiv = styled.div`
   position: relative;
   display: flex;
@@ -56,24 +61,32 @@ class ItemsRow extends Component {
     this.setState({
       id,
       description: description ? description : '',
-      quantity: quantity ? quantity : 0,
-      price: price ? price : 0,
-      subtotal: subtotal ? subtotal : 0,
+      price: price ? price : '',
+      quantity: quantity ? quantity : '',
+      subtotal: subtotal ? subtotal : '',
     });
   };
 
   handleInputChange = event => {
     const name = event.target.name;
-    const value = event.target.value;
+    const eValue = event.target.value;
+    let value;
+    if (name === 'description') {
+      value = eValue;
+    } else {
+      value = eValue === '' ? '' : parseInt(eValue, 10);
+    }
     this.setState({[name]: value}, () => {
       this.updateSubtotal();
     });
   };
 
   updateSubtotal = () => {
-    let currentPrice = this.state.price;
-    let currentQuantity = this.state.quantity;
-    let currentSubtotal = currentPrice * currentQuantity;
+    const currentPrice =
+      this.state.price === '' ? 0 : parseInt(this.state.price);
+    const currentQuantity =
+      this.state.quantity === '' ? 0 : parseInt(this.state.quantity);
+    const currentSubtotal = currentPrice * currentQuantity;
     this.setState({subtotal: currentSubtotal}, () => {
       this.uploadRowState();
     });
@@ -133,13 +146,16 @@ class ItemsRow extends Component {
 }
 
 ItemsRow.propTypes = {
-  item: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
+  item:       PropTypes.object.isRequired,
+  index:      PropTypes.number.isRequired,
   hasHandler: PropTypes.bool.isRequired,
-  actions: PropTypes.bool.isRequired,
-  updateRow: PropTypes.func.isRequired,
-  removeRow: PropTypes.func.isRequired,
-  moveRow: PropTypes.func.isRequired,
+  actions:    PropTypes.bool.isRequired,
+  updateRow:  PropTypes.func.isRequired,
+  removeRow:  PropTypes.func.isRequired,
+  moveRow:    PropTypes.func.isRequired,
 };
+
+ItemsRow = _withDragNDrop(ItemsRow);
+ItemsRow = _withAnimation(ItemsRow);
 
 export default ItemsRow;
