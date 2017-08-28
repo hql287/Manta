@@ -28,7 +28,6 @@ import Button from '../components/shared/Button.jsx';
 
 // Component
 class Form extends Component {
-
   // Validate Form Data
   validateFormData = () => {
     const { rows, recipient, discount, note, dueDate, currency } = this.props.currentInvoice;
@@ -45,14 +44,14 @@ class Form extends Component {
   saveFormData = () => {
     // Validate Form Data
     if (!this.validateFormData()) return;
-    // Save To DB if it's a new contact
     const {currentInvoice} = this.props;
+    // Save To DB if it's a new contact
     if (currentInvoice.recipient.newRecipient) {
       const newContactData = currentInvoice.recipient.new;
       this.saveRecipienAsNewContact(newContactData);
     }
     // Save Invoice To DB
-    this.saveInvoiceToDB(this.getInvoiceData());
+    this.saveInvoiceToDB(getInvoiceData(currentInvoice));
     // Clear The Form
     this.clearFormData('muted');
     // Play a Sound
@@ -73,42 +72,15 @@ class Form extends Component {
   };
 
   // ToggleField
-  toggleField = field => {
+  toggleField = (field, cb=null) => {
     const {dispatch} = this.props;
     const toggleField = bindActionCreators(
       FormActionCreators.toggleField,
       dispatch,
     );
     toggleField(field);
-  };
-
-  // HELPER FUNCTIONS
-  // Get Invoice Data From Store and adjust before saving
-  getInvoiceData = () => {
-    const { recipient, rows, discount, note, dueDate, currency } = this.props.currentInvoice;
-    // Set Initial Value
-    let invoiceData = { rows };
-    // Set Invoice DueDate
-    if (dueDate.required) invoiceData.dueDate = dueDate.selectedDate;
-    // Set Invoice Currency
-    if (currency.required) invoiceData.currency = currency.selectedCurrency;
-    // Set Invoice Note
-    if (note.required) invoiceData.note = note.content;
-    // Set Recipient
-    if (recipient.newRecipient) {
-      invoiceData.recipient = recipient.new;
-    } else {
-      const { fullname, company, email, phone } = recipient.select;
-      invoiceData.recipient = { fullname, company, email, phone };
-    }
-    // Set Invoice Discount
-    if (discount.required) {
-      invoiceData.discount = {
-        amount: discount.amount,
-        type: discount.type,
-      };
-    }
-    return invoiceData;
+    // Execute Call Back
+    cb && cb();
   };
 
   // Save Recipient To DB
@@ -168,6 +140,34 @@ Form.propTypes = {
   invoices: PropTypes.object.isRequired,
   recipients: PropTypes.object.isRequired,
   currentInvoice: PropTypes.object.isRequired,
+};
+
+// HELPERS
+function getInvoiceData (currentInvoice) {
+  const { recipient, rows, discount, note, dueDate, currency } = currentInvoice;
+  // Set Initial Value
+  let invoiceData = { rows };
+  // Set Invoice DueDate
+  if (dueDate.required) invoiceData.dueDate = dueDate.selectedDate;
+  // Set Invoice Currency
+  if (currency.required) invoiceData.currency = currency.selectedCurrency;
+  // Set Invoice Note
+  if (note.required) invoiceData.note = note.content;
+  // Set Recipient
+  if (recipient.newRecipient) {
+    invoiceData.recipient = recipient.new;
+  } else {
+    const { fullname, company, email, phone } = recipient.select;
+    invoiceData.recipient = { fullname, company, email, phone };
+  }
+  // Set Invoice Discount
+  if (discount.required) {
+    invoiceData.discount = {
+      amount: discount.amount,
+      type: discount.type,
+    };
+  }
+  return invoiceData;
 };
 
 // VALIDATION RULES
