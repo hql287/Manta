@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/form.jsx';
+import * as ActionCreators from '../../actions/form';
 
 // React Dates
 import {SingleDatePicker} from 'react-dates';
@@ -44,15 +44,15 @@ class DueDate extends Component {
       <div className="formSection">
         <label className="itemLabel">
           Due Date
-          <label className="switch">
-            <input
-              name="required"
-              type="checkbox"
-              checked={dueDate.required}
-              onChange={() => this.props.toggleField('dueDate')}
-            />
-            <span className="slider round"></span>
-          </label>
+        </label>
+        <label className="switch">
+          <input
+            name="required"
+            type="checkbox"
+            checked={dueDate.required}
+            onChange={() => this.props.toggleField('dueDate')}
+          />
+          <span className="slider round"></span>
         </label>
         { dueDate.required &&
           <DueDateContent>

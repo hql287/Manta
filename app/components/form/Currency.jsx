@@ -13,7 +13,7 @@ import currencies from '../../../libs/currencies.json';
 
 // Component
 class Currency extends Component {
-  // Update Discount Amount
+
   updateCurrency = event => {
     const {dispatch} = this.props;
     const updateCurrency = bindActionCreators(
