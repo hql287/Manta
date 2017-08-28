@@ -2,6 +2,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// HOCs
+import _withAnimation from './hoc/_withAnimation.jsx';
+import _withDragNDrop from './hoc/_withDragNDrop.jsx';
+
 // Styles
 import styled from 'styled-components';
 
@@ -142,13 +146,16 @@ class ItemsRow extends Component {
 }
 
 ItemsRow.propTypes = {
-  item: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
+  item:       PropTypes.object.isRequired,
+  index:      PropTypes.number.isRequired,
   hasHandler: PropTypes.bool.isRequired,
-  actions: PropTypes.bool.isRequired,
-  updateRow: PropTypes.func.isRequired,
-  removeRow: PropTypes.func.isRequired,
-  moveRow: PropTypes.func.isRequired,
+  actions:    PropTypes.bool.isRequired,
+  updateRow:  PropTypes.func.isRequired,
+  removeRow:  PropTypes.func.isRequired,
+  moveRow:    PropTypes.func.isRequired,
 };
+
+ItemsRow = _withDragNDrop(ItemsRow);
+ItemsRow = _withAnimation(ItemsRow);
 
 export default ItemsRow;
