@@ -13,7 +13,7 @@ Header.propTypes = {
 };
 
 // Component
-function Header({ invoice }) {
+function Header({invoice}) {
   return (
     <h1 className="clearfix">
       <small>
@@ -25,10 +25,11 @@ function Header({ invoice }) {
         length: 8,
         omission: '',
       })}
-      <small>
-        <span>DUE DATE</span>
-        <br /> {moment(invoice.dueDate).format('DD-MM-YYYY')}
-      </small>{' '}
+      {invoice.dueDate &&
+        <small>
+          <span>DUE DATE</span>
+          <br /> {moment(invoice.dueDate).format('DD-MM-YYYY')}
+        </small>}
     </h1>
   );
 }

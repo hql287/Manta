@@ -12,7 +12,7 @@ class DefaultTemplate extends Component {
     const {company, invoice} = this.props.data;
     return (
       <div className="invoice-box">
-        <Top company={company} invoice={invoice}/>
+        <Top company={company} invoice={invoice} />
         <Information recipient={invoice.recipient} company={company} />
         <MainContent invoice={invoice} />
       </div>

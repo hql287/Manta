@@ -28,24 +28,6 @@ class Main extends Component {
     );
   };
 
-  getSubtotal = () =>
-    <tr>
-      <td colSpan="2" />
-      <td colSpan="2">SUBTOTAL</td>
-      <td>
-        {this.props.invoice.currency} {this.props.invoice.subtotal}
-      </td>
-    </tr>;
-
-  getGrandTotal = () =>
-    <tr>
-      <td colSpan="2" />
-      <td colSpan="2">GRAND TOTAL</td>
-      <td>
-        {this.props.invoice.currency} {this.props.invoice.grandTotal}
-      </td>
-    </tr>;
-
   render = () => {
     const {invoice} = this.props;
     const {recipient} = invoice;
@@ -101,9 +83,10 @@ class Main extends Component {
             <div className="date">
               Date of Invoice: {format(invoice.created_at, 'DD/MM/YYYY')}
             </div>
-            <div className="date">
-              Due Date: {moment(invoice.dueDate).format('DD/MM/YYYY')}
-            </div>
+            {invoice.dueDate &&
+              <div className="date">
+                Due Date: {moment(invoice.dueDate).format('DD/MM/YYYY')}
+              </div>}
           </div>
         </div>
         <table cellSpacing="0" cellPadding="0">
@@ -120,9 +103,21 @@ class Main extends Component {
             {rowsComponents}
           </tbody>
           <tfoot>
-            {this.getSubtotal()}
-            {this.getDiscount()}
-            {this.getGrandTotal()}
+            <tr>
+              <td colSpan="2" />
+              <td colSpan="2">SUBTOTAL</td>
+              <td>
+                {invoice.currency} {invoice.subtotal}
+              </td>
+            </tr>
+            {invoice.discount && this.getDiscount()}
+            <tr>
+              <td colSpan="2" />
+              <td colSpan="2">GRAND TOTAL</td>
+              <td>
+                {invoice.currency} {invoice.grandTotal}
+              </td>
+            </tr>
           </tfoot>
         </table>
         <div id="thanks">Thank you!</div>

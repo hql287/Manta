@@ -16,7 +16,7 @@ Top.propTypes = {
 };
 
 // Component
-function Top ({ company, invoice }) {
+function Top({company, invoice}) {
   return (
     <table>
       <tbody>
@@ -29,16 +29,23 @@ function Top ({ company, invoice }) {
                     <img src={company.logo} />
                   </td>
                   <td>
-                    Invoice: #
-                    {_.truncate(invoice._id, {
-                      length: 8,
-                      omission: '',
-                    })}
-                    <br />
-                    Created: {format(invoice.created_at, 'DD/MM/YYYY')}
-                    <br />
-                    Due: { moment(invoice.dueDate).format('DD/MM/YYYY') }
-                    <br />
+                    <span>
+                      Invoice: #
+                      {_.truncate(invoice._id, {
+                        length: 8,
+                        omission: '',
+                      })}
+                      <br />
+                    </span>
+                    <span>
+                      Created: {format(invoice.created_at, 'DD/MM/YYYY')}
+                      <br />
+                    </span>
+                    {invoice.dueDate &&
+                      <span>
+                        Due Date: {moment(invoice.dueDate).format('DD/MM/YYYY')}
+                        <br />
+                      </span>}
                   </td>
                 </tr>
               </tbody>

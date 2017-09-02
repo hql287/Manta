@@ -52,10 +52,11 @@ function Header ({ company, invoice }) {
           <span>CREATED: </span>
           {format(invoice.created_at, 'DD/MM/YYYY')}
         </div>
-        <div>
-          <span>DUE DATE: </span>
-          {moment(invoice.dueDate).format('DD/MM/YYYY')}
-        </div>
+        { invoice.dueDate &&
+          <div>
+            <span>DUE DATE: </span>
+            {moment(invoice.dueDate).format('DD/MM/YYYY')}
+          </div>}
       </div>
     </header>
   );

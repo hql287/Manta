@@ -8,12 +8,12 @@ Information.propTypes = {
 };
 
 // Component
-function Information ({company, recipient}) {
+function Information({company, recipient}) {
   return (
     <table>
       <tbody>
-        <tr className='information'>
-          <td colSpan='2'>
+        <tr className="information">
+          <td colSpan="2">
             <table>
               <tbody>
                 <tr>
@@ -37,6 +37,6 @@ function Information ({company, recipient}) {
       </tbody>
     </table>
   );
-};
+}
 
 export default Information;
