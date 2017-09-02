@@ -4,10 +4,6 @@ import PropTypes from 'prop-types';
 
 // Component
 class MainContent extends Component {
-  static propTypes = {
-    invoice: PropTypes.object.isRequired,
-  };
-
   getDiscount = () => {
     let discountTxt;
     const {discount} = this.props.invoice;
@@ -17,31 +13,15 @@ class MainContent extends Component {
       discountTxt = `${this.props.invoice.currency} ${discount.amount}`;
     }
     return discountTxt;
-  }
-
-  getGrandTotal = () => {
-    const {invoice} = this.props;
-    let grandTotal = 0;
-    invoice.rows.forEach((row, index) => {
-      grandTotal += row.subtotal;
-    });
-
-    const discountAmount = invoice.discount.amount;
-    if (invoice.discount.type === 'percentage') {
-      grandTotal = grandTotal * (100 - discountAmount) / 100;
-    } else {
-      grandTotal -= discountAmount;
-    }
-    return `${this.props.invoice.currency} ${grandTotal}`;
   };
 
   render = () => {
-    const {rows} = this.props.invoice;
-    const rowsComponent = rows.map((row, index) => {
+    const {invoice} = this.props;
+    const rowsComponent = invoice.rows.map((row, index) => {
       return (
         <tr
           key={index}
-          className={index + 1 == rows.length ? 'item last' : 'item'}>
+          className={index + 1 == invoice.rows.length ? 'item last' : 'item'}>
           <td>
             {row.description}
           </td>
@@ -59,19 +39,18 @@ class MainContent extends Component {
             <td>Item</td>
             <td>Subtotal</td>
           </tr>
-
           {rowsComponent}
-
+          {invoice.discount &&
+            <tr className="total">
+              <td />
+              <td>
+                Discount: {this.getDiscount()}{' '}
+              </td>
+            </tr>}
           <tr className="total">
             <td />
             <td>
-              Discount: {this.getDiscount()}
-            </td>
-          </tr>
-          <tr className="total">
-            <td />
-            <td>
-              Total: {this.getGrandTotal()}
+              Total: {invoice.grandTotal}
             </td>
           </tr>
         </tbody>
@@ -79,5 +58,9 @@ class MainContent extends Component {
     );
   };
 }
+
+MainContent.propTypes = {
+  invoice: PropTypes.object.isRequired,
+};
 
 export default MainContent;

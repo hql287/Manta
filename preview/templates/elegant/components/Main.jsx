@@ -22,24 +22,6 @@ class Main extends Component {
     );
   };
 
-  getSubtotal = () =>
-    <tr>
-      <td colSpan="3">SUBTOTAL</td>
-      <td className="total">
-        {this.props.invoice.currency} {this.props.invoice.subtotal}
-      </td>
-    </tr>;
-
-  getGrandTotal = () =>
-    <tr>
-      <td colSpan="3" className="grand total">
-        GRAND TOTAL
-      </td>
-      <td className="grand total">
-        {this.props.invoice.currency} {this.props.invoice.grandTotal}
-      </td>
-    </tr>;
-
   render = () => {
     const {invoice} = this.props;
     const rowsComponents = invoice.rows.map((row, index) => {
@@ -73,9 +55,21 @@ class Main extends Component {
           </thead>
           <tbody>
             {rowsComponents}
-            {this.getSubtotal()}
-            {this.getDiscount()}
-            {this.getGrandTotal()}
+            <tr>
+              <td colSpan="3">SUBTOTAL</td>
+              <td className="total">
+                {invoice.currency} {invoice.subtotal}
+              </td>
+            </tr>
+            { invoice.discount && this.getDiscount()}
+            <tr>
+              <td colSpan="3" className="grand total">
+                GRAND TOTAL
+              </td>
+              <td className="grand total">
+                {invoice.currency} {invoice.grandTotal}
+              </td>
+            </tr>
           </tbody>
         </table>
         {invoice.note &&
