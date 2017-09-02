@@ -5,26 +5,38 @@ import PropTypes from 'prop-types';
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as FormActionCreators from '../actions/form.jsx';
-import * as InvoicesActionCreators from '../actions/invoices.jsx';
-import * as ContactsActionCreators from '../actions/contacts.jsx';
+import * as FormActionCreators from '../actions/form';
+import * as InvoicesActionCreators from '../actions/invoices';
+import * as ContactsActionCreators from '../actions/contacts';
 
 // 3rd Party Libs
 import _ from 'lodash';
 
 // Custom Libs
-import sounds from '../../libs/sounds.js';
-const openDialog = require('../renderers/dialog.js');
+import sounds from '../../libs/sounds';
+const openDialog = require('../renderers/dialog');
+
+// Layout
+import {
+  PageWrapper,
+  PageHeader,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageContent,
+  PageFooter,
+  } from '../components/shared/Layout';
+
+// Animation
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Components
-import Recipient from '../components/form/Recipient.jsx';
-import ItemsList from '../components/form/ItemsList.jsx';
-import Currency from '../components/form/Currency.jsx';
-import Discount from '../components/form/Discount.jsx';
-import DueDate from '../components/form/DueDate.jsx';
-import Note from '../components/form/Note.jsx';
-
-import Button from '../components/shared/Button.jsx';
+import Recipient from '../components/form/Recipient';
+import ItemsList from '../components/form/ItemsList';
+import Currency from '../components/form/Currency';
+import Discount from '../components/form/Discount';
+import DueDate from '../components/form/DueDate';
+import Note from '../components/form/Note';
+import Button from '../components/shared/Button';
 
 // Component
 class Form extends Component {
@@ -110,27 +122,27 @@ class Form extends Component {
   // Render The form
   render = () => {
     return (
-      <div className="pageWrapper">
-        <div className="pageHeader">
-          <h4>New Invoice</h4>
-        </div>
-        <div className="pageContent">
+      <PageWrapper>
+        <PageHeader>
+          <PageHeaderTitle>Create A New Invoice</PageHeaderTitle>
+          <PageHeaderActions>
+            <Button primary onClick={() => this.saveFormData()}>
+              Save
+            </Button>
+            <Button danger onClick={() => this.clearFormData()}>
+              Clear
+            </Button>
+          </PageHeaderActions>
+        </PageHeader>
+        <PageContent>
           <Recipient />
           <ItemsList />
           <DueDate  toggleField={this.toggleField} />
           <Currency toggleField={this.toggleField} />
           <Discount toggleField={this.toggleField} />
           <Note     toggleField={this.toggleField} />
-        </div>
-        <div className="pageFooter">
-          <Button primary onClick={() => this.saveFormData()}>
-            Save
-          </Button>
-          <Button danger onClick={() => this.clearFormData()}>
-            Clear
-          </Button>
-        </div>
-      </div>
+        </PageContent>
+      </PageWrapper>
     );
   };
 }
@@ -317,8 +329,15 @@ function validateNote(note) {
   return true;
 }
 
-export default connect(state => ({
+// Map State to Props
+Form = connect(state => ({
   invoices: state.InvoicesReducer,
   recipients: state.ContactsReducer,
   currentInvoice: state.FormReducer,
 }))(Form);
+
+// Add Faded In Animation
+Form = _withFadeInAnimation(Form);
+
+// Export
+export default Form;

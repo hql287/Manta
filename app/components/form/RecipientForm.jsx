@@ -2,6 +2,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// Animation
+import _withFadeInAnimation from '../../components/shared/hoc/_withFadeInAnimation';
+
 // Styles
 import styled from 'styled-components';
 const Form = styled.div`
@@ -82,5 +85,7 @@ RecipientForm.propTypes = {
 RecipientForm.defaultProps = {
   currentRecipientData: {},
 };
+
+RecipientForm = _withFadeInAnimation(RecipientForm);
 
 export default RecipientForm;

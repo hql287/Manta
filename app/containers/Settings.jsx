@@ -5,15 +5,35 @@ import PropTypes from 'prop-types';
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/settings.jsx';
+import * as ActionCreators from '../actions/settings';
 
 // 3rd Party Libs
 const _ = require('lodash');
 
+// Layout
+import {
+  PageWrapper,
+  PageHeader,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageContent,
+  PageFooter,
+  } from '../components/shared/Layout';
+
+// Animation
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
+
 // Components
-import Info from '../components/settings/Info.jsx';
-import AppSettings from '../components/settings/AppSettings.jsx';
-import PrintOptions from '../components/settings/PrintOptions.jsx';
+import Info from '../components/settings/Info';
+import AppSettings from '../components/settings/AppSettings';
+import PrintOptions from '../components/settings/PrintOptions';
+import Message from '../components/shared/Message';
+import Button from '../components/shared/Button';
+import {
+  TabsWrapper,
+  TabContent,
+  Tab,
+  } from '../components/shared/Tabs';
 
 // Component
 class Settings extends Component {
@@ -73,51 +93,52 @@ class Settings extends Component {
   render = () => {
     const {info, appSettings, printOptions} = this.props.settings.current;
     return (
-      <div className="pageWrapper">
-        <div className="pageHeader">
-          <h4>Settings</h4>
-        </div>
-        <div className="pageTabs">
-          <a
-            href="#"
-            className={this.state.visibleTab === 1 ? 'active' : ''}
-            onClick={() => this.changeTab(1)}>
-            Profile
-          </a>
-          <a
-            href="#"
-            className={this.state.visibleTab === 2 ? 'active' : ''}
-            onClick={() => this.changeTab(2)}>
-            Print Options
-          </a>
-          <a
-            href="#"
-            className={this.state.visibleTab === 3 ? 'active' : ''}
-            onClick={() => this.changeTab(3)}>
-            App Settings
-          </a>
-        </div>
-        <div className="pageContent">
-          {this.state.visibleTab === 1 &&
-            <Info info={info} updateInfo={this.updateInfo} />}
-          {this.state.visibleTab === 2 &&
-            <PrintOptions
-              printOptions={printOptions}
-              updatePrintOptions={this.updatePrintOptions} />}
-          {this.state.visibleTab === 3 &&
-            <AppSettings
-              appSettings={appSettings}
-              updateAppSettings={this.updateAppSettings}
-            />}
-        </div>
-        {!this.settingsSaved() &&
-          <div className="pageFooter">
-            <small className="text-muted">You Have unsaved changes!</small>
-            <a href="#" onClick={() => this.saveSettingsState()}>
-              <i className="ion-android-checkmark-circle" />
-            </a>
-          </div>}
-      </div>
+      <PageWrapper>
+        <PageHeader>
+          <PageHeaderTitle>Settings</PageHeaderTitle>
+          {!this.settingsSaved() &&
+            <PageHeaderActions>
+              <Button primary onClick={() => this.saveSettingsState()}>
+                Save
+              </Button>
+          </PageHeaderActions>}
+        </PageHeader>
+        <PageContent>
+          <TabsWrapper>
+            <Tab
+              href="#"
+              className={this.state.visibleTab === 1 ? 'active' : ''}
+              onClick={() => this.changeTab(1)}>
+              Profile
+            </Tab>
+            <Tab
+              href="#"
+              className={this.state.visibleTab === 2 ? 'active' : ''}
+              onClick={() => this.changeTab(2)}>
+              Print Options
+            </Tab>
+            <Tab
+              href="#"
+              className={this.state.visibleTab === 3 ? 'active' : ''}
+              onClick={() => this.changeTab(3)}>
+              App Settings
+            </Tab>
+          </TabsWrapper>
+          <TabContent>
+            {this.state.visibleTab === 1 &&
+              <Info info={info} updateInfo={this.updateInfo} />}
+            {this.state.visibleTab === 2 &&
+                <PrintOptions
+                  printOptions={printOptions}
+                  updatePrintOptions={this.updatePrintOptions} />}
+            {this.state.visibleTab === 3 &&
+              <AppSettings
+                appSettings={appSettings}
+                updateAppSettings={this.updateAppSettings}
+              />}
+          </TabContent>
+        </PageContent>
+      </PageWrapper>
     );
   };
 }
@@ -127,6 +148,9 @@ Settings.propTypes = {
   settings: PropTypes.object.isRequired,
 };
 
-export default connect(state => ({
-  settings: state.SettingsReducer,
-}))(Settings);
+// Map state to props & Added Faded In Animation
+Settings = connect(state => ({ settings: state.SettingsReducer }))(Settings);
+Settings = _withFadeInAnimation(Settings);
+
+// Export
+export default Settings;

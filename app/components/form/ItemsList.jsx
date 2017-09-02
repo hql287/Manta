@@ -138,6 +138,9 @@ class ItemsList extends Component {
   };
 }
 
-export default connect(state => ({
-  currentInvoice: state.FormReducer,
-}))(DragDropContext(HTML5Backend)(ItemsList));
+// Map state to props & Add DragNDrop Context
+ItemsList = connect(state => ({ currentInvoice: state.FormReducer }))(ItemsList);
+ItemsList = DragDropContext(HTML5Backend)(ItemsList);
+
+// Export
+export default ItemsList;

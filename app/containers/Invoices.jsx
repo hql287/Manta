@@ -4,16 +4,28 @@ const ipc = require('electron').ipcRenderer;
 // React Libraries
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 // Redux
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as ActionCreators from '../actions/invoices.jsx';
 
+// Layout
+import {
+  PageWrapper,
+  PageHeader,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageContent,
+  PageFooter,
+  } from '../components/shared/Layout';
+
+// Animation
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
+
 // Custom Components
 import Invoice from '../components/invoices/Invoice.jsx';
-import EmptyMessage from '../components/shared/EmptyMessage.jsx';
+import Message from '../components/shared/Message.jsx';
 
 // Styles
 import styled from 'styled-components';
@@ -27,12 +39,6 @@ const InvoicesContainer = styled.div`
 
 // Component
 class Invoices extends Component {
-  state = { openPrevWinHint: false };
-
-  // Will Mount
-  // componentWillMount = () => {
-  // };
-
   // Once Mounted, add event listeners
   // on opening and open preview window events
   componentDidMount = () => {
@@ -44,22 +50,12 @@ class Invoices extends Component {
       );
       getInvoices();
     }
-    // Opening Event
-    ipc.on('show-opening-preview-window-hint', event => {
-      this.setState({openPrevWinHint: true});
-    });
-    // Opened Event
-    ipc.on('hide-opening-preview-window-hint', event => {
-      this.setState({openPrevWinHint: false});
-    });
   };
 
-  // Remove all IPC listeners once all reciepts are removed
-  // Or the container is unmounted
+  // Remove all IPC listeners once all reciepts
+  // are removed or the compornent is unmounted
   componentWillUnmount() {
     ipc.removeAllListeners('confirmed-delete-invoice');
-    ipc.removeAllListeners('show-opening-preview-window-hint');
-    ipc.removeAllListeners('hide-opening-preview-window-hint');
   }
 
   // Delete a invoice
@@ -87,27 +83,18 @@ class Invoices extends Component {
       );
     });
     return (
-      <div className="pageWrapper">
-        <div className="pageHeader">
-          <h4>All invoices</h4>
-          <ReactCSSTransitionGroup
-            transitionName="itemList"
-            transitionEnterTimeout={500}
-            transitionLeaveTimeout={300}>
-            {this.state.openPrevWinHint &&
-              <span className="pageHint rotating">
-                <i className="ion-ios-loop-strong" />
-              </span>}
-          </ReactCSSTransitionGroup>
-        </div>
-        {invoices.data.length === 0
-          ? <EmptyMessage text="You don't have any invoice yet"/>
-          : <div className="pageContent">
-              <InvoicesContainer>
+      <PageWrapper>
+        <PageHeader>
+          <PageHeaderTitle>All Invoices</PageHeaderTitle>
+        </PageHeader>
+        <PageContent>
+          {invoices.data.length === 0
+            ? <Message info text="You don't have any invoice yet"/>
+            : <InvoicesContainer>
                 {invoicesComponent}
-              </InvoicesContainer>
-            </div>}
-      </div>
+              </InvoicesContainer>}
+        </PageContent>
+      </PageWrapper>
     );
   };
 }
@@ -117,6 +104,9 @@ Invoices.propTypes = {
   invoices: PropTypes.object.isRequired,
 };
 
-export default connect(state => ({
-  invoices: state.InvoicesReducer,
-}))(Invoices);
+// Map state to props & Add Faded In Animation
+Invoices = connect(state => ({ invoices: state.InvoicesReducer }))(Invoices);
+Invoices = _withFadeInAnimation(Invoices);
+
+// Export
+export default  Invoices;

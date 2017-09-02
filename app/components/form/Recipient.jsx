@@ -164,7 +164,11 @@ Recipient.propTypes = {
   recipients: PropTypes.object.isRequired,
 };
 
-export default connect(state => ({
+// Map state to props
+Recipient = connect(state => ({
   currentInvoice: state.FormReducer,
   recipients: state.ContactsReducer,
 }))(Recipient);
+
+// Export
+export default Recipient;

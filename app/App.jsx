@@ -2,8 +2,11 @@
 import React, {Component} from 'react';
 
 // Custom Components
-import AppNav from './components/shared/AppNav.jsx';
-import AppMain from './components/shared/AppMain.jsx';
+import AppNav from './components/layout/AppNav.jsx';
+import AppMain from './components/layout/AppMain.jsx';
+
+// Layout
+import { AppWrapper } from './components/shared/Layout';
 
 // Components
 class App extends Component {
@@ -21,10 +24,10 @@ class App extends Component {
 
   render = () => {
     return (
-      <div className="appWrapper">
+      <AppWrapper>
         <AppNav activeTab={this.state.activeTab} changeTab={this.changeTab} />
         <AppMain activeTab={this.state.activeTab} />
-      </div>
+      </AppWrapper>
     );
   };
 }

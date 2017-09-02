@@ -117,6 +117,4 @@ class Discount extends Component {
   };
 }
 
-export default connect(state => ({
-  currentInvoice: state.FormReducer,
-}))(Discount);
+export default connect(state => ({ currentInvoice: state.FormReducer }))(Discount);

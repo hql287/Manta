@@ -16,6 +16,9 @@ const dragNDrop = require('../../renderers/dragNdrop.js');
 // Custom Component
 import Button from '../shared/Button.jsx';
 
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+
 // Styles
 import styled from 'styled-components';
 
@@ -318,5 +321,7 @@ Info.propTypes = {
   info: PropTypes.object.isRequired,
   updateInfo: PropTypes.func.isRequired,
 };
+
+Info = _withFadeInAnimation(Info);
 
 export default Info;
