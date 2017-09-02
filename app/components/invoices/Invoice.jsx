@@ -186,6 +186,3 @@ Invoice.propTypes = {
 };
 
 export default Invoice;
-
-        //
-        //

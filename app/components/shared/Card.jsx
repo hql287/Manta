@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Styles
 import styled from 'styled-components';
 
-const CardWithStyle = styled.div`
+const CardStyle = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -18,45 +18,45 @@ const CardWithStyle = styled.div`
   margin-bottom: 30px;
 `;
 
-const CardBodyWithStyle = styled.div`
+const CardBodyStyle = styled.div`
   flex: 1 1 auto;
   padding: 1.25rem;
 `;
 
-const CardTitleWithStyle = styled.h4`
+const CardTitleStyle = styled.h4`
   margin-bottom: .75rem;
 `;
 
-const CardSubtitleWithStyle = styled.h6`
+const CardSubtitleStyle = styled.h6`
   color: #868e96;
   margin-top: -.375rem;
   margin-bottom: .5rem;
 `;
 
-const CardTextWithStyle = styled.p``;
+const CardTextStyle = styled.p``;
 
 // Components
 export const Card = props =>
-  <CardWithStyle>
+  <CardStyle>
     { props.children }
-  </CardWithStyle>;
+  </CardStyle>;
 
 export const CardBody = props =>
-  <CardBodyWithStyle>
+  <CardBodyStyle>
     { props.children }
-  </CardBodyWithStyle>;
+  </CardBodyStyle>;
 
 export const CardTitle = props =>
-  <CardTitleWithStyle>
+  <CardTitleStyle>
     { props.children }
-  </CardTitleWithStyle>;
+  </CardTitleStyle>;
 
 export const CardSubtitle = props =>
-  <CardSubtitleWithStyle>
+  <CardSubtitleStyle>
     { props.children }
-  </CardSubtitleWithStyle>;
+  </CardSubtitleStyle>;
 
 export const CardText = props =>
-  <CardTextWithStyle>
+  <CardTextStyle>
     { props.children }
-  </CardTextWithStyle>;
+  </CardTextStyle>;

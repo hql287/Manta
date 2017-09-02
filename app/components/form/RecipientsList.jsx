@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 // 3rd Party Libs
 import _ from 'lodash';
 
+// Animation
+import _withFadeInAnimation from '../../components/shared/hoc/_withFadeInAnimation';
+
 // Styles
 import styled from 'styled-components';
 const List = styled.div`
@@ -76,5 +79,7 @@ RecipientsList.propTypes = {
 RecipientsList.defaultProps = {
   currentSelectedRecipient: {},
 };
+
+RecipientsList = _withFadeInAnimation(RecipientsList);
 
 export default RecipientsList;

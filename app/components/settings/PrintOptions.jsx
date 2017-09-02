@@ -9,6 +9,9 @@ import PropTypes from 'prop-types';
 import currencies from '../../../libs/currencies.json';
 const openDialog = require('../../renderers/dialog.js');
 
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+
 // Component
 class PrintOptions extends Component {
   componentWillMount = () => {
@@ -168,5 +171,7 @@ PrintOptions.propTypes = {
   printOptions: PropTypes.object.isRequired,
   updatePrintOptions: PropTypes.func.isRequired,
 };
+
+PrintOptions = _withFadeInAnimation(PrintOptions);
 
 export default PrintOptions;

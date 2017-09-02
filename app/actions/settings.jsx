@@ -14,16 +14,16 @@ export const updateAppSettings = data => {
   };
 };
 
+export const updatePrintOptions = data => {
+  return {
+    type: ACTION_TYPES.UPDATE_PRINT_OPTIONS,
+    data,
+  };
+};
+
 export const saveSettings = data => {
   return {
     type: ACTION_TYPES.SAVE_SETTINGS,
     data,
   };
 };
-
-export const updatePrintOptions = data => {
-  return {
-    type: ACTION_TYPES.UPDATE_PRINT_OPTIONS,
-    data,
-  };
-}

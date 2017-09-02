@@ -9,6 +9,9 @@ import _ from 'lodash';
 import currencies from '../../../libs/currencies.json';
 const openDialog = require('../../renderers/dialog.js');
 
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+
 // Component
 class AppSettings extends Component {
   componentWillMount = () => {
@@ -92,5 +95,7 @@ AppSettings.propTypes = {
   appSettings: PropTypes.object.isRequired,
   updateAppSettings: PropTypes.func.isRequired,
 };
+
+AppSettings =  _withFadeInAnimation(AppSettings);
 
 export default AppSettings;

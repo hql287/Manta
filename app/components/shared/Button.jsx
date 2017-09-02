@@ -4,49 +4,48 @@ import PropTypes from 'prop-types';
 
 // Styles
 import styled from 'styled-components';
-const Button = styled.a`
-  font-size: 12px;
-  color: white;
-  border-radius: 4px;
-  padding: 5px 10px;
-  border: none;
+
+const ButtonStyle = styled.a`
   display: inline-flex;
-  align-items: center;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 15px;
+  font-size: 12px;
+  text-decoration: none;
+  color: white;
   background: #292B2C;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   ${props => props.primary && `background: #469fe5;`}
   ${props => props.success && `background: #6bbb69;`}
   ${props => props.danger && `background: #EC476E;`}
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
 `;
 
-export const ButtonWrapper = props => {
-  const { href, onClick, children, primary, success, danger } = props;
-  return (
-    <Button
-      href={href}
-      primary={ primary ? true : false }
-      success={ success ? true : false }
-      danger={ danger ? true : false }
-      onClick={onClick}>
-      { children }
-    </Button>
-  );
-}
+export const Button = props =>
+  <ButtonStyle { ...props }>
+    { props.children }
+  </ButtonStyle>;
 
-ButtonWrapper.propTypes = {
+Button.propTypes = {
+  danger: PropTypes.bool,
   href: PropTypes.string,
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   success: PropTypes.bool,
-  danger: PropTypes.bool,
 };
 
-ButtonWrapper.defaultProps = {
+Button.defaultProps = {
   href: '#',
   primary: false,
   success: false,
   danger: false,
-}
+};
 
-export default ButtonWrapper;
+export default Button;

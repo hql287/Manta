@@ -60,6 +60,7 @@ class DueDate extends Component {
               id="invoice-duedate"
               placeholder="Select A Date"
               firstDayOfWeek={1}
+              withFullScreenPortal={true}
               displayFormat="DD/MM/YYYY"
               hideKeyboardShortcutsPanel={true}
               date={selectedDate}
@@ -78,6 +79,4 @@ class DueDate extends Component {
   };
 }
 
-export default connect(state => ({
-  currentInvoice: state.FormReducer,
-}))(DueDate);
+export default connect(state => ({ currentInvoice: state.FormReducer }))(DueDate);

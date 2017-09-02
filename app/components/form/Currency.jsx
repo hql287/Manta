@@ -62,6 +62,5 @@ class Currency extends Component {
   };
 }
 
-export default connect(state => ({
-  currentInvoice: state.FormReducer,
-}))(Currency);
+// Map State to Props & Export
+export default connect(state => ({ currentInvoice: state.FormReducer }))(Currency);

@@ -12,7 +12,20 @@ import * as ActionCreators from '../actions/contacts.jsx';
 
 // Custom Components
 import Contact from '../components/contacts/Contact.jsx';
-import EmptyMessage from '../components/shared/EmptyMessage.jsx';
+import Message from '../components/shared/Message.jsx';
+
+// Layout
+import {
+  PageWrapper,
+  PageHeader,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageContent,
+  PageFooter,
+  } from '../components/shared/Layout';
+
+// Animation
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Component
 class Contacts extends Component {
@@ -42,7 +55,6 @@ class Contacts extends Component {
     ipc.removeAllListeners('confirmed-delete-contact');
   }
 
-  // Render
   render = () => {
     const {contacts} = this.props;
     const contactsComponent = contacts.data.map((contact, index) => {
@@ -56,27 +68,30 @@ class Contacts extends Component {
       );
     });
     return (
-      <div className="pageWrapper">
-        <div className="pageHeader">
-          <h4>All Contacts</h4>
-        </div>
-        {contacts.data.length === 0
-          ? <EmptyMessage text="You dont't have any contacts yet!" />
-          : <div className="pageContent">
-              <div className="row">
+      <PageWrapper>
+        <PageHeader>
+          <PageHeaderTitle>All Contacts</PageHeaderTitle>
+        </PageHeader>
+        <PageContent>
+          {contacts.data.length === 0
+            ? <Message info text="You don't have any contacts yet!" />
+            : <div className="row">
                 {contactsComponent}
-              </div>
-            </div>}
-      </div>
+              </div>}
+        </PageContent>
+      </PageWrapper>
     );
   };
 }
 
-// PropTypes Validation
+// PropTypes
 Contacts.propTypes = {
   contacts: PropTypes.object.isRequired,
 };
 
-export default connect(state => ({
-  contacts: state.ContactsReducer,
-}))(Contacts);
+// Map state to props & Add Faded In Animation
+Contacts = connect(state => ({ contacts: state.ContactsReducer }))(Contacts);
+Contacts = _withFadeInAnimation(Contacts);
+
+// Export
+export default Contacts;
