@@ -1,10 +1,12 @@
 // Libraries
 import React, {Component} from 'react';
 
-// Redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/form.jsx';
+// Custom Components
+import Switch from '../shared/Switch';
+import {Section} from '../shared/Section';
+
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Styles
 import styled from 'styled-components';
@@ -22,49 +24,31 @@ const NoteContent = styled.textarea`
 // Component
 class Note extends Component {
   componentWillMount = () => {
-    const {note} = this.props.currentInvoice;
-    this.setState({
-      content: note.content ? note.content : '',
-    });
+    this.setState({content: this.props.content});
   };
 
   handleInputChange = event => {
     this.setState({content: event.target.value}, () => {
-      this.updateNoteState();
+      this.props.updateFieldData('note', this.state);
     });
   };
 
-  updateNoteState = event => {
-    const {dispatch} = this.props;
-    const updateNote = bindActionCreators(ActionCreators.updateNote, dispatch);
-    updateNote(this.state.content);
-  };
-
   render = () => {
-    const {note} = this.props.currentInvoice;
+    const {note, toggleField} = this.props;
     return (
-      <div className="formSection">
+      <Section>
         <label className="itemLabel">Note</label>
-        <label className="switch">
-          <input
-            name="required"
-            type="checkbox"
-            checked={note.required}
-            onChange={() => this.props.toggleField('note')}
-          />
-          <span className="slider round" />
-        </label>
-        {note.required &&
-          <NoteContent
-            rows="4"
-            value={this.state.content}
-            cols="50"
-            onChange={e => this.handleInputChange(e)}
-            placeholder="Note"
-          />}
-      </div>
+        <NoteContent
+          rows="4"
+          value={this.state.content}
+          cols="50"
+          onChange={e => this.handleInputChange(e)}
+          placeholder="Note"
+        />
+      </Section>
     );
   };
 }
 
-export default connect(state => ({ currentInvoice: state.FormReducer }))(Note);
+// Export
+export default _withFadeInAnimation(Note);

@@ -15,6 +15,7 @@ const initialState = {
   dueDate:  { required: false },
   currency: { required: false },
   discount: { required: false },
+  vat:      { required: false },
   note:     { required: false },
 };
 
@@ -65,41 +66,56 @@ const FormReducer = (state = initialState, action) => {
       });
     }
 
-    // Update Discount
-    case ACTION_TYPES.UPDATE_DISCOUNT: {
-      return Object.assign({}, state, {
-        discount: Object.assign({}, state.discount, {
-          amount: action.data.amount,
-          type: action.data.type,
-        })
-      });
-    }
+    // Update Field Data
+    case ACTION_TYPES.UPDATE_FIELD_DATA: {
+      switch(action.field) {
 
-    // Update Currency
-    case ACTION_TYPES.UPDATE_CURRENCY: {
-      return Object.assign({}, state, {
-        currency: Object.assign({}, state.currency, {
-          selectedCurrency: action.data,
-        })
-      });
-    }
+        case 'dueDate': {
+          return Object.assign({}, state, {
+            dueDate: Object.assign({}, state.dueDate, {
+              selectedDate: action.data,
+            })
+          });
+        }
 
-    // Update Due Date
-    case ACTION_TYPES.CHANGE_DUE_DATE: {
-      return Object.assign({}, state, {
-        dueDate: Object.assign({}, state.dueDate, {
-          selectedDate: action.data,
-        })
-      });
-    }
+        case 'currency': {
+          return Object.assign({}, state, {
+            currency: Object.assign({}, state.currency, {
+              selectedCurrency: action.data,
+            })
+          });
+        }
 
-    // Update Note
-    case ACTION_TYPES.UPDATE_NOTE: {
-      return Object.assign({}, state, {
-        note: Object.assign({}, state.note, {
-          content: action.data,
-        })
-      });
+        case 'discount': {
+          return Object.assign({}, state, {
+            discount: Object.assign({}, state.discount, {
+              amount: action.data.amount,
+              type: action.data.type,
+            })
+          });
+        }
+
+        case 'vat': {
+          return Object.assign({}, state, {
+            vat: Object.assign({}, state.vat, {
+              amount: action.data.amount,
+            })
+          });
+        }
+
+        case 'note': {
+          return Object.assign({}, state, {
+            note: Object.assign({}, state.note, {
+              content: action.data.content,
+            })
+          });
+        }
+
+        default: {
+          return state;
+        }
+
+      }
     }
 
     // Clear Form Data
@@ -114,6 +130,7 @@ const FormReducer = (state = initialState, action) => {
         dueDate:  { required: false },
         currency: { required: false },
         discount: { required: false },
+        vat:      { required: false },
         note:     { required: false },
       }
     }

@@ -12,12 +12,20 @@ const springConfig = {
 
 const setMarginValue = activeTab => {
   switch (activeTab) {
-    case 'invoices': { return 25 }
-    case 'contacts': { return 50 }
-    case 'settings': { return 75 }
-    default: { return 0 }
+    case 'invoices': {
+      return 25;
+    }
+    case 'contacts': {
+      return 50;
+    }
+    case 'settings': {
+      return 75;
+    }
+    default: {
+      return 0;
+    }
   }
-}
+};
 
 // Styles
 import styled from 'styled-components';
@@ -34,7 +42,7 @@ const TopBar = styled.div`
   padding-top: 40px;
   padding-left: 40px;
   padding-right: 40px;
-  background: #2C323A;
+  background: #2c323a;
 `;
 
 const Tab = styled.a`
@@ -56,13 +64,14 @@ const Tab = styled.a`
 const Icon = styled.i`
   margin-right: 8px;
   font-size: 18px;
-  ${props => props.id === 'form' && `color: #6bbb69;`}
-  ${props => props.id === 'contacts' && `color: #469fe5;`}
-  ${props => props.id === 'settings' && `color: #C4C8CC;`}
-  ${props => props.id === 'archive' && `
+  ${props => props.id === 'form' && `color: #6bbb69;`} ${props =>
+      props.id === 'contacts' && `color: #469fe5;`} ${props =>
+      props.id === 'settings' && `color: #C4C8CC;`} ${props =>
+      props.id === 'archive' &&
+      `
     color: #cbc189;
     font-size: 24px;
-  `}
+  `};
 `;
 
 const ActiveIndicator = styled.div`
@@ -73,7 +82,7 @@ const ActiveIndicator = styled.div`
   left: 0;
   padding: 0 40px;
   > div {
-    background: #469FE5;
+    background: #469fe5;
     width: 25%;
     height: 100%;
   }
@@ -85,34 +94,26 @@ class AppNav extends Component {
     const marginLeftValue = setMarginValue(activeTab);
     return (
       <TopBar>
-        <Tab
-          href="#"
-          onClick={() => changeTab('form')}>
-          <Icon id="form" className="ion-android-list"/>
+        <Tab href="#" onClick={() => changeTab('form')}>
+          <Icon id="form" className="ion-android-list" />
           Create
         </Tab>
-        <Tab
-          href="#"
-          onClick={() => changeTab('invoices')}>
-          <Icon id="archive" className="ion-ios-filing"/>
+        <Tab href="#" onClick={() => changeTab('invoices')}>
+          <Icon id="archive" className="ion-ios-filing" />
           Archive
         </Tab>
-        <Tab
-          href="#"
-          onClick={() => changeTab('contacts')}>
-          <Icon id="contacts" className="ion-person-stalker"/>
+        <Tab href="#" onClick={() => changeTab('contacts')}>
+          <Icon id="contacts" className="ion-person-stalker" />
           Contacts
         </Tab>
-        <Tab
-          href="#"
-          onClick={() => changeTab('settings')}>
-          <Icon id="settings" className="ion-ios-gear"/>
+        <Tab href="#" onClick={() => changeTab('settings')}>
+          <Icon id="settings" className="ion-ios-gear" />
           Settings
         </Tab>
-        <Motion style={{ marginLeft: spring(marginLeftValue, springConfig) }}>
+        <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
           {({marginLeft}) =>
             <ActiveIndicator>
-              <div style={{ marginLeft: `${marginLeft}%` }}/>
+              <div style={{marginLeft: `${marginLeft}%`}} />
             </ActiveIndicator>}
         </Motion>
       </TopBar>

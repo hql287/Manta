@@ -17,7 +17,8 @@ import {Motion, spring} from 'react-motion';
 import sounds from '../../../libs/sounds.js';
 
 // Custom Component
-import Button from '../../components/shared/Button.jsx';
+import Button from '../shared/Button.jsx';
+import { Section } from '../shared/Section';
 import ItemRow from './ItemRow.jsx';
 
 // Styles
@@ -27,7 +28,6 @@ const ItemsListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   -webkit-app-region: no-drag;
-  margin-bottom: 30px;
 `;
 
 const ItemsListHeader = styled.div`
@@ -110,30 +110,24 @@ class ItemsList extends Component {
       );
     });
     return (
-      <ItemsListWrapper>
-        <ItemsListHeader>
-          <div className="flex2">
-            <label className="itemLabel">Description *</label>
+      <Section>
+        <ItemsListWrapper>
+          <ItemsListHeader>
+            <label className="itemLabel">Product/Service *</label>
+          </ItemsListHeader>
+          <Motion style={{height: spring(rows.length * 50)}}>
+            {({height}) =>
+              <ItemsListDiv style={{height: `${height}px`}}>
+                {rowsComponent}
+              </ItemsListDiv>}
+          </Motion>
+          <div className="itemsListActions">
+            <ItemsListActionsBtn onClick={() => this.addRow()} primary>
+              Add An Item
+            </ItemsListActionsBtn>
           </div>
-          <div className="flex1">
-            <label className="itemLabel">Price *</label>
-          </div>
-          <div className="flex1">
-            <label className="itemLabel ">Quantity *</label>
-          </div>
-        </ItemsListHeader>
-        <Motion style={{height: spring(rows.length * 50)}}>
-          {({height}) =>
-            <ItemsListDiv style={{height: `${height}px`}}>
-              {rowsComponent}
-            </ItemsListDiv>}
-        </Motion>
-        <div className="itemsListActions">
-          <ItemsListActionsBtn onClick={() => this.addRow()} primary>
-            Add A Row
-          </ItemsListActionsBtn>
-        </div>
-      </ItemsListWrapper>
+        </ItemsListWrapper>
+      </Section>
     );
   };
 }

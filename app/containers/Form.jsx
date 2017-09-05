@@ -27,6 +27,7 @@ import {
   } from '../components/shared/Layout';
 
 // Animation
+import {Motion, spring} from 'react-motion';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Components
@@ -35,28 +36,25 @@ import ItemsList from '../components/form/ItemsList';
 import Currency from '../components/form/Currency';
 import Discount from '../components/form/Discount';
 import DueDate from '../components/form/DueDate';
+import Vat from '../components/form/Vat'
 import Note from '../components/form/Note';
+import Settings from '../components/form/Settings';
 import Button from '../components/shared/Button';
 
 // Component
 class Form extends Component {
-  // Validate Form Data
-  validateFormData = () => {
-    const { rows, recipient, discount, note, dueDate, currency } = this.props.currentInvoice;
-    if (!validateRows(rows)) return false;
-    if (!validateRecipient(recipient)) return false;
-    if (!validateDueDate(dueDate)) return false;
-    if (!validateCurrency(currency)) return false;
-    if (!validateDiscount(discount)) return false;
-    if (!validateNote(note)) return false;
-    return true;
-  }
 
-  // Save Form Data
+   state = { isSettingsOpened: false }
+
+   toggleFormSettings = () => {
+    this.setState({ isSettingsOpened: !this.state.isSettingsOpened });
+   }
+
+  // Process Form Data
   saveFormData = () => {
-    // Validate Form Data
-    if (!this.validateFormData()) return;
     const {currentInvoice} = this.props;
+    // Validate Form Data
+    if (!validateFormData(currentInvoice)) return;
     // Save To DB if it's a new contact
     if (currentInvoice.recipient.newRecipient) {
       const newContactData = currentInvoice.recipient.new;
@@ -78,9 +76,11 @@ class Form extends Component {
       FormActionCreators.clearForm,
       dispatch,
     );
-    clearForm();
-    // Play A Sound
-    if (!vol) sounds.play('RELOAD');
+    this.setState({ isSettingsOpened: false }, () => {
+      clearForm();
+      // Play A Sound
+      if (!vol) sounds.play('RELOAD');
+    })
   };
 
   // ToggleField
@@ -94,6 +94,16 @@ class Form extends Component {
     // Execute Call Back
     cb && cb();
   };
+
+  // Update Field Data
+  updateFieldData = (field, data) => {
+    const {dispatch} = this.props;
+    const updateFieldData = bindActionCreators(
+      FormActionCreators.updateFieldData,
+      dispatch,
+    );
+    updateFieldData(field, data);
+  }
 
   // Save Recipient To DB
   saveRecipienAsNewContact = data => {
@@ -121,6 +131,13 @@ class Form extends Component {
 
   // Render The form
   render = () => {
+    const {
+      dueDate,
+      currency,
+      discount,
+      vat,
+      note
+    } = this.props.currentInvoice;
     return (
       <PageWrapper>
         <PageHeader>
@@ -135,12 +152,34 @@ class Form extends Component {
           </PageHeaderActions>
         </PageHeader>
         <PageContent>
+          <Settings
+            isSettingsOpened={this.state.isSettingsOpened}
+            toggleFormSettings={this.toggleFormSettings}
+            toggleField={this.toggleField}
+            currentInvoice={this.props.currentInvoice}
+          />
           <Recipient />
           <ItemsList />
-          <DueDate  toggleField={this.toggleField} />
-          <Currency toggleField={this.toggleField} />
-          <Discount toggleField={this.toggleField} />
-          <Note     toggleField={this.toggleField} />
+          { dueDate.required &&
+            <DueDate
+              dueDate={dueDate}
+              updateFieldData={this.updateFieldData} />}
+          { currency.required &&
+            <Currency
+              currency={currency}
+              updateFieldData={this.updateFieldData} />}
+          { discount.required &&
+            <Discount
+              discount={discount}
+              updateFieldData={this.updateFieldData} />}
+          { vat.required &&
+            <Vat
+              vat={vat}
+              updateFieldData={this.updateFieldData} />}
+          { note.required &&
+            <Note
+              note={note}
+              updateFieldData={this.updateFieldData}/>}
         </PageContent>
       </PageWrapper>
     );
@@ -155,8 +194,36 @@ Form.propTypes = {
 };
 
 // HELPERS
+function validateFormData (currentInvoice) {
+  const {
+    recipient,
+    rows,
+    dueDate,
+    currency,
+    discount,
+    vat,
+    note
+  } = currentInvoice;
+  if (!validateRows(rows)) return false;
+  if (!validateRecipient(recipient)) return false;
+  if (!validateDueDate(dueDate)) return false;
+  if (!validateCurrency(currency)) return false;
+  if (!validateDiscount(discount)) return false;
+  if (!validateVat(vat)) return false;
+  if (!validateNote(note)) return false;
+  return true;
+}
+
 function getInvoiceData (currentInvoice) {
-  const { recipient, rows, discount, note, dueDate, currency } = currentInvoice;
+  const {
+    recipient,
+    rows,
+    dueDate,
+    currency,
+    discount,
+    vat,
+    note
+  } = currentInvoice;
   // Set Initial Value
   let invoiceData = { rows };
   // Set Invoice DueDate
@@ -165,6 +232,8 @@ function getInvoiceData (currentInvoice) {
   if (currency.required) invoiceData.currency = currency.selectedCurrency;
   // Set Invoice Note
   if (note.required) invoiceData.note = note.content;
+  // Set Invoice Tax
+  if (vat.required) invoiceData.vat = vat.amount;
   // Set Recipient
   if (recipient.newRecipient) {
     invoiceData.recipient = recipient.new;
@@ -303,6 +372,23 @@ function validateDiscount(discount) {
         type: 'warning',
         title: 'Required Field',
         message: 'Discount Amount Must Be Greater Than 0',
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+  return true;
+}
+
+function validateVat(vat) {
+  const { required, amount } = vat;
+  if (required) {
+    if (!amount || amount === '' || amount === 0 ) {
+      openDialog({
+        type: 'warning',
+        title: 'Required Field',
+        message: 'Tax Amount Must Be Greater Than 0',
       });
       return false;
     } else {

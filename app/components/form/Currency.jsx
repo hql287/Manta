@@ -2,25 +2,24 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// Redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/form.jsx';
-
 // 3rd Party Libs
 import _ from 'lodash';
 import currencies from '../../../libs/currencies.json';
 
+// Custom Components
+import Switch from '../shared/Switch';
+import {Section} from '../shared/Section';
+
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+
 // Component
 class Currency extends Component {
-
   updateCurrency = event => {
-    const {dispatch} = this.props;
-    const updateCurrency = bindActionCreators(
-      ActionCreators.updateCurrency,
-      dispatch,
-    );
-    updateCurrency(event.target.value);
+    const {updateFieldData} = this.props;
+    const value = event.target.value;
+    const selectedCurrency = value === '' ? null : value;
+    updateFieldData('currency', selectedCurrency);
   };
 
   render = () => {
@@ -36,31 +35,21 @@ class Currency extends Component {
       );
     });
 
-    const {currency} = this.props.currentInvoice;
+    const {currency, toggleField} = this.props;
 
     return (
-      <div className="formSection">
+      <Section>
         <label className="itemLabel">Currency</label>
-        <label className="switch">
-          <input
-            name="required"
-            type="checkbox"
-            checked={currency.required}
-            onChange={() => this.props.toggleField('currency')}
-          />
-          <span className="slider round"></span>
-        </label>
-        { currency.required &&
-          <select
-            value={currency.selectedCurrency}
-            onChange={e => this.updateCurrency(e)}>
-            <option value={null}>Select A Currency</option>
-            {currenciesOptions}
-          </select>}
-      </div>
+        <select
+          value={currency.selectedCurrency}
+          onChange={e => this.updateCurrency(e)}>
+          <option value="">Select A Currency</option>
+          {currenciesOptions}
+        </select>
+      </Section>
     );
   };
 }
 
-// Map State to Props & Export
-export default connect(state => ({ currentInvoice: state.FormReducer }))(Currency);
+// Export
+export default _withFadeInAnimation(Currency);

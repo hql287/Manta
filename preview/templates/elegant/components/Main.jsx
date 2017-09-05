@@ -62,6 +62,14 @@ class Main extends Component {
               </td>
             </tr>
             { invoice.discount && this.getDiscount()}
+            { invoice.vat &&
+              <tr>
+                <td colSpan="3">VAT</td>
+                <td className="total">
+                  {invoice.vat}%
+                </td>
+              </tr>
+            }
             <tr>
               <td colSpan="3" className="grand total">
                 GRAND TOTAL
