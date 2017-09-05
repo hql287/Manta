@@ -14,9 +14,11 @@ const AppMainContentStyle = styled.div`
   overflow: scroll;
   width: 100%;
   height: 100%;
+  background: #F9FAFA;
 `;
 
 const PageWrapperStyle = styled.div`
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -30,7 +32,7 @@ const PageHeaderStyle = styled.div`
   justify-content: space-between;
   height: 50px;
   padding: 10px 40px;
-  background: #F2F3F4;
+  background: #FFF;
   border-bottom: 1px solid rgba(0,0,0,.1);
   z-index: 1;
 `;
@@ -48,22 +50,18 @@ const PageHeaderActionsStyle = styled.div`
 
 const PageContentStyle = styled.div`
   flex: 1;
-  overflow: scroll;
-  padding: 20px 40px 0 40px;
-  margin-top: 50px;
+  margin: 90px 40px 40px 40px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 4px;
+  background: #FFF;
 `;
 
 const PageFooterStyle = styled.div`
-  position: relative;
-  flex: 1;
-  max-height: 40px;
-  text-transform: uppercase;
-  font-size: 14px;
-  padding: 0 40px;
-  border-top: 1px solid #f2f3f4;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #F9FAFA;
+  border-top: 1px solid rgba(0,0,0,.1);
 `;
 
 // Components

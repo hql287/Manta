@@ -67,26 +67,32 @@ class ItemsRow extends Component {
     });
   };
 
-  handleInputChange = event => {
+  handleTextInputChange = event => {
     const name = event.target.name;
+    const value = event.target.value;
+    this.setState({[name]: value}, () => {
+      this.uploadRowState();
+    });
+  };
+
+  handleNumberInputChange = event => {
+    const name   = event.target.name;
     const eValue = event.target.value;
-    let value;
-    if (name === 'description') {
-      value = eValue;
-    } else {
-      value = eValue === '' ? '' : parseInt(eValue, 10);
-    }
+    const value  = eValue === '' ? '' : parseInt(eValue, 10);
     this.setState({[name]: value}, () => {
       this.updateSubtotal();
     });
   };
 
   updateSubtotal = () => {
-    const currentPrice =
-      this.state.price === '' ? 0 : parseInt(this.state.price);
-    const currentQuantity =
-      this.state.quantity === '' ? 0 : parseInt(this.state.quantity);
-    const currentSubtotal = currentPrice * currentQuantity;
+    const currentPrice = this.state.price === '' ? 0 : parseInt(this.state.price, 10);
+    const currentQuantity = this.state.quantity === '' ? 0 : parseInt(this.state.quantity, 10);
+    let currentSubtotal;
+    if (this.state.price === '' || this.state.quantity === '') {
+      currentSubtotal = '';
+    } else {
+      currentSubtotal = currentPrice * currentQuantity;
+    }
     this.setState({subtotal: currentSubtotal}, () => {
       this.uploadRowState();
     });
@@ -101,12 +107,12 @@ class ItemsRow extends Component {
     const {actions, hasHandler} = this.props;
     return (
       <ItemDiv>
-        <div className="flex2">
+        <div className="flex3">
           <ItemDivInput
             name="description"
             type="text"
             value={this.state.description}
-            onChange={e => this.handleInputChange(e)}
+            onChange={e => this.handleTextInputChange(e)}
             placeholder="Description"
           />
         </div>
@@ -116,7 +122,7 @@ class ItemsRow extends Component {
             name="price"
             type="number"
             value={this.state.price}
-            onChange={e => this.handleInputChange(e)}
+            onChange={e => this.handleNumberInputChange(e)}
             placeholder="Price"
           />
         </div>
@@ -126,7 +132,7 @@ class ItemsRow extends Component {
             name="quantity"
             type="number"
             value={this.state.quantity}
-            onChange={e => this.handleInputChange(e)}
+            onChange={e => this.handleNumberInputChange(e)}
             placeholder="Quantity"
           />
         </div>

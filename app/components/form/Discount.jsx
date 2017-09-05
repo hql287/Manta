@@ -1,17 +1,18 @@
 // Libraries
 import React, {Component} from 'react';
 
-// Redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/form.jsx';
+// Custom Components
+import Switch from '../shared/Switch';
+import {Section} from '../shared/Section';
+
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Styles
 import styled from 'styled-components';
 const DiscountWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
 `;
 
 const DiscountContent = styled.div`
@@ -19,9 +20,7 @@ const DiscountContent = styled.div`
   flex-direction: column;
 `;
 
-const DiscountAmount = styled.div`
-  flex: 1;
-`;
+const DiscountAmount = styled.div`flex: 1;`;
 
 const DiscountType = styled.div`
   flex: 1;
@@ -30,14 +29,13 @@ const DiscountType = styled.div`
 
 // Component
 class Discount extends Component {
-
   componentWillMount = () => {
-    const { discount } = this.props.currentInvoice;
+    const {discount} = this.props;
     this.setState({
       amount: discount.amount ? discount.amount : '',
       type: discount.type ? discount.type : 'percentage',
     });
-  }
+  };
 
   handleInputChange = event => {
     const name = event.target.name;
@@ -51,32 +49,19 @@ class Discount extends Component {
     this.setState({[name]: value}, () => {
       this.updateDiscountState();
     });
-  }
+  };
 
   updateDiscountState = () => {
-    const {dispatch} = this.props;
-    const updateDiscount = bindActionCreators(
-      ActionCreators.updateDiscount,
-      dispatch,
-    );
-    updateDiscount(this.state);
+    const {updateFieldData} = this.props;
+    updateFieldData('discount', this.state);
   };
 
   render = () => {
-    const {discount} = this.props.currentInvoice;
+    const {discount, toggleField} = this.props;
     return (
-      <DiscountWrapper>
-        <label className="itemLabel">Discount</label>
-        <label className="switch">
-          <input
-            name="required"
-            type="checkbox"
-            checked={discount.required}
-            onChange={() => this.props.toggleField('discount')}
-          />
-          <span className="slider round"></span>
-        </label>
-        { discount.required &&
+      <Section>
+        <DiscountWrapper>
+          <label className="itemLabel">Discount</label>
           <DiscountContent>
             <DiscountAmount>
               <input
@@ -111,10 +96,12 @@ class Discount extends Component {
                 </label>
               </div>
             </DiscountType>
-          </DiscountContent>}
-      </DiscountWrapper>
+          </DiscountContent>
+        </DiscountWrapper>
+      </Section>
     );
   };
 }
 
-export default connect(state => ({ currentInvoice: state.FormReducer }))(Discount);
+// Exports
+export default _withFadeInAnimation(Discount);

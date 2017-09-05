@@ -47,6 +47,13 @@ class MainContent extends Component {
                 Discount: {this.getDiscount()}{' '}
               </td>
             </tr>}
+          {invoice.vat &&
+            <tr className="total">
+              <td />
+              <td>
+                VAT: {invoice.vat}%
+              </td>
+            </tr>}
           <tr className="total">
             <td />
             <td>

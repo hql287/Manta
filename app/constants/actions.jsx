@@ -1,46 +1,40 @@
 // FORM
 // ===========================================================
-// ITEM
-export const ADD_ITEM = 'ADD_ITEM';
-export const MOVE_ROW = 'MOVE_ROW';
-export const REMOVE_ITEM = 'REMOVE_ITEM';
-export const UPDATE_ITEM = 'UPDATE_ITEM';
-export const CLEAR_FORM = 'CLEAR_FORM';
-
-// DISCOUNT
-export const UPDATE_DISCOUNT = 'UPDATE_DISCOUNT';
-
-// NOTE
-export const UPDATE_NOTE = 'UPDATE_NOTE';
-
-// CURRENCY
-export const UPDATE_CURRENCY = 'UPDATE_CURRENCY';
-
-// DUE DATE
-export const CHANGE_DUE_DATE = 'CHANGE_DUE_DATE';
-
-// INVOICE
-export const GET_INVOICES = 'GET_INVOICES';
-export const SAVE_INVOICE = 'SAVE_INVOICE';
-export const DELETE_INVOICE = 'DELETE_INVOICE';
-
-// RECIPIENT
+// ===========================================================
+// Recipient
 export const UPDATE_RECIPIENT = 'UPDATE_RECIPIENT';
 
-// FIELDS
-export const TOGGLE_FIELD = 'TOGGLE_FIELD';
+// Row items
+export const ADD_ITEM    = 'ADD_ITEM';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const UPDATE_ITEM = 'UPDATE_ITEM';
+export const MOVE_ROW    = 'MOVE_ROW';
+
+// Fields
+export const TOGGLE_FIELD      = 'TOGGLE_FIELD';
+export const UPDATE_FIELD_DATA = 'UPDATE_FIELD_DATA';
+export const CLEAR_FORM        = 'CLEAR_FORM';
+
+// INVOICE
+// ===========================================================
+// ===========================================================
+export const GET_INVOICES   = 'GET_INVOICES';
+export const SAVE_INVOICE   = 'SAVE_INVOICE';
+export const DELETE_INVOICE = 'DELETE_INVOICE';
+
 
 // CONTACTS
 // ===========================================================
+// ===========================================================
 export const GET_ALL_CONTACTS = 'GET_ALL_CONTACTS';
-export const GET_ONE_CONTACT = 'GET_ONE_CONTACT';
-export const SAVE_CONTACT = 'SAVE_CONTACT';
-export const DELETE_CONTACT = 'DELETE_CONTACT';
+export const GET_ONE_CONTACT  = 'GET_ONE_CONTACT';
+export const SAVE_CONTACT     = 'SAVE_CONTACT';
+export const DELETE_CONTACT   = 'DELETE_CONTACT';
 
 // SETTINGS
 // ===========================================================
-// Settings Info
-export const SAVE_SETTINGS = 'SAVE_SETTINGS';
+// ===========================================================
+export const SAVE_SETTINGS        = 'SAVE_SETTINGS';
 export const UPDATE_SETTINGS_INFO = 'UPDATE_SETTINGS_INFO';
-export const UPDATE_APP_SETTINGS = 'UPDATE_APP_SETTINGS';
+export const UPDATE_APP_SETTINGS  = 'UPDATE_APP_SETTINGS';
 export const UPDATE_PRINT_OPTIONS = 'UPDATE_PRINT_OPTIONS';

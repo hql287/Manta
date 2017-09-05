@@ -37,17 +37,19 @@ const getSubtotal = data => {
 
 // Calculate Grand Total
 const getGrandTotal = data => {
-  const subtotal = getSubtotal(data);
-  let grandTotal;
+  let grandTotal = getSubtotal(data);
+  // Apply Discount
   if ( data.discount ) {
-    const discountAmount = data.discount.amount;
     if (data.discount.type === 'percentage') {
-      grandTotal = subtotal * (100 - discountAmount) / 100;
+      grandTotal = grandTotal * (100 - data.discount.amount) / 100;;
     } else {
-      grandTotal = subtotal - discountAmount;
+      grandTotal = grandTotal - data.discount.amount;
     }
-  } else {
-    grandTotal = subtotal;
+  }
+  // Apply VAT
+  if (data.vat) {
+    const vatValue = grandTotal * data.vat / 100;
+    grandTotal     = grandTotal + vatValue;
   }
   return grandTotal;
 };

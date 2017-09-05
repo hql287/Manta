@@ -14,6 +14,7 @@ import _ from 'lodash';
 // Custom Components
 import RecipientForm from './RecipientForm.jsx';
 import RecipientsList from './RecipientsList.jsx';
+import { Section } from '../shared/Section'
 
 // Component
 class Recipient extends Component {
@@ -125,8 +126,8 @@ class Recipient extends Component {
     const {recipients} = this.props;
     const {newRecipient} = this.state;
     return (
-      <div className="formSection">
-        <label className="itemLabel">Recipient</label>
+      <Section>
+        <label className="itemLabel">Client *</label>
         {this.outputComponent()}
         {recipients.data.length > 0 &&
           <div>
@@ -153,7 +154,7 @@ class Recipient extends Component {
               </label>
             </div>
           </div>}
-      </div>
+      </Section>
     );
   };
 }

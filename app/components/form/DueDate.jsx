@@ -1,10 +1,9 @@
 // Libraries
 import React, {Component} from 'react';
 
-// Redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/form';
+// Custom Components
+import Switch from '../shared/Switch';
+import {Section} from '../shared/Section';
 
 // React Dates
 import {SingleDatePicker} from 'react-dates';
@@ -12,15 +11,15 @@ import moment from 'moment';
 
 // Styles
 import styled from 'styled-components';
-const DueDateContent = styled.div`
-  display: flex;
-`;
+const DueDateContent = styled.div`display: flex;`;
+
+// Animation
+import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
 class DueDate extends Component {
-
   componentWillMount = () => {
-    this.setState({ focused: false });
+    this.setState({focused: false});
   };
 
   onFocusChange = () => {
@@ -29,54 +28,43 @@ class DueDate extends Component {
 
   onDateChange = date => {
     const selectedDate = date === null ? null : moment(date).toObject();
-    const {dispatch} = this.props;
-    const changeDueDate = bindActionCreators(
-      ActionCreators.changeDueDate,
-      dispatch,
-    );
-    changeDueDate(selectedDate);
+    this.props.updateFieldData('dueDate', selectedDate);
   };
 
   render = () => {
-    const {dueDate} = this.props.currentInvoice;
-    const selectedDate = dueDate.selectedDate ? moment(dueDate.selectedDate) : null;
+    const {dueDate, toggleField} = this.props;
+    const selectedDate = dueDate.selectedDate
+      ? moment(dueDate.selectedDate)
+      : null;
     return (
-      <div className="formSection">
-        <label className="itemLabel">
-          Due Date
-        </label>
-        <label className="switch">
-          <input
-            name="required"
-            type="checkbox"
-            checked={dueDate.required}
-            onChange={() => this.props.toggleField('dueDate')}
+      <Section>
+        <label className="itemLabel">Due Date</label>
+        <DueDateContent>
+          <SingleDatePicker
+            id="invoice-duedate"
+            placeholder="Select A Date"
+            firstDayOfWeek={1}
+            withFullScreenPortal={true}
+            displayFormat="DD/MM/YYYY"
+            hideKeyboardShortcutsPanel={true}
+            date={selectedDate}
+            focused={this.state.focused}
+            onFocusChange={() => this.onFocusChange()}
+            onDateChange={newDate => this.onDateChange(newDate)}
           />
-          <span className="slider round"></span>
-        </label>
-        { dueDate.required &&
-          <DueDateContent>
-            <SingleDatePicker
-              id="invoice-duedate"
-              placeholder="Select A Date"
-              firstDayOfWeek={1}
-              withFullScreenPortal={true}
-              displayFormat="DD/MM/YYYY"
-              hideKeyboardShortcutsPanel={true}
-              date={selectedDate}
-              focused={this.state.focused}
-              onFocusChange={() => this.onFocusChange()}
-              onDateChange={newDate => this.onDateChange(newDate)}
-            />
-            <a href="#"
-              className={ selectedDate === null ? "clearDateBtn" : "clearDateBtn active" }
-              onClick={() => this.onDateChange(null)}>
-              <i className="ion-close-circled"></i>
-            </a>
-          </DueDateContent>}
-      </div>
+          <a
+            href="#"
+            className={
+              selectedDate === null ? 'clearDateBtn' : 'clearDateBtn active'
+            }
+            onClick={() => this.onDateChange(null)}>
+            <i className="ion-close-circled" />
+          </a>
+        </DueDateContent>
+      </Section>
     );
   };
 }
 
-export default connect(state => ({ currentInvoice: state.FormReducer }))(DueDate);
+// Export
+export default _withFadeInAnimation(DueDate);
