@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
-    "test": "jest --watch -o"
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
   },
   "repository": "https://github.com/hungle88/electron-react-starter-kit",
   "author": "Hung Q. Le",

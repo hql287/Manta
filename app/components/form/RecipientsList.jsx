@@ -80,6 +80,4 @@ RecipientsList.defaultProps = {
   currentSelectedRecipient: {},
 };
 
-RecipientsList = _withFadeInAnimation(RecipientsList);
-
-export default RecipientsList;
+export default _withFadeInAnimation(RecipientsList);

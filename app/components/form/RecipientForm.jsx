@@ -86,6 +86,4 @@ RecipientForm.defaultProps = {
   currentRecipientData: {},
 };
 
-RecipientForm = _withFadeInAnimation(RecipientForm);
-
-export default RecipientForm;
+export default _withFadeInAnimation(RecipientForm);

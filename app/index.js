@@ -18,8 +18,10 @@ import Logger from 'redux-logger';
 // Root Reducer
 import combineReducers from './reducers';
 
-// Create Store
+// Integrate Redux Devtool
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// Create Store
 const AppStore = createStore(
   combineReducers,
   composeEnhancers(
