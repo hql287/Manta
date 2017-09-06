@@ -1,6 +1,7 @@
 // Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 
 // HOCs
 import _withAnimation from './hoc/_withAnimation.jsx';
@@ -161,7 +162,7 @@ ItemsRow.propTypes = {
   moveRow:    PropTypes.func.isRequired,
 };
 
-ItemsRow = _withDragNDrop(ItemsRow);
-ItemsRow = _withAnimation(ItemsRow);
-
-export default ItemsRow;
+export default compose (
+  _withAnimation,
+  _withDragNDrop,
+)(ItemsRow);
