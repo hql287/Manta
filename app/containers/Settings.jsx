@@ -37,8 +37,18 @@ import {
 
 // Component
 class Settings extends Component {
-  componentWillMount = () => {
-    this.setState({  visibleTab: 1  });
+
+  state = { visibleTab: 1 };
+
+  componentDidMount = () => {
+    if (!this.props.settings.loaded) {
+      const {dispatch} = this.props;
+      const getInitalSettings = bindActionCreators(
+        ActionCreators.getInitalSettings,
+        dispatch,
+      );
+      getInitalSettings();
+    }
   }
 
   // Check if settings have been saved
@@ -58,39 +68,20 @@ class Settings extends Component {
     saveSettings(this.props.settings.current);
   };
 
-  // Update Info Settings
-  updateInfo = data => {
+  // Update Setting
+  updateSettings = (setting, data) => {
     const {dispatch} = this.props;
-    const updateInfo = bindActionCreators(ActionCreators.updateInfo, dispatch);
-    updateInfo(data);
+    const updateSettings = bindActionCreators(ActionCreators.updateSettings, dispatch);
+    updateSettings(setting, data);
   };
-
-  // Update App Settings
-  updateAppSettings = data => {
-    const {dispatch} = this.props;
-    const updateAppSettings = bindActionCreators(
-      ActionCreators.updateAppSettings,
-      dispatch,
-    );
-    updateAppSettings(data);
-  };
-
-  // Update Print Options
-  updatePrintOptions = data => {
-    const {dispatch} = this.props;
-    const updatePrintOptions = bindActionCreators(
-      ActionCreators.updatePrintOptions,
-      dispatch,
-    );
-    updatePrintOptions(data);
-  }
 
   // Switch Tab
   changeTab = tabNum => {
     this.setState({visibleTab: tabNum});
   };
 
-  render = () => {
+  // Render Main Content
+  renderSettingsContent = () => {
     const {info, appSettings, printOptions} = this.props.settings.current;
     return (
       <PageWrapper>
@@ -126,21 +117,30 @@ class Settings extends Component {
           </TabsWrapper>
           <TabContent>
             {this.state.visibleTab === 1 &&
-              <Info info={info} updateInfo={this.updateInfo} />}
+              <Info
+                info={info}
+                updateSettings={this.updateSettings} />}
             {this.state.visibleTab === 2 &&
-                <PrintOptions
-                  printOptions={printOptions}
-                  updatePrintOptions={this.updatePrintOptions} />}
+              <PrintOptions
+                printOptions={printOptions}
+                updateSettings={this.updateSettings} />}
             {this.state.visibleTab === 3 &&
               <AppSettings
                 appSettings={appSettings}
-                updateAppSettings={this.updateAppSettings}
-              />}
+                updateSettings={this.updateSettings} />}
           </TabContent>
         </PageContent>
       </PageWrapper>
     );
-  };
+  }
+
+  render = () => {
+    return (
+      this.props.settings.loaded
+      ? this.renderSettingsContent()
+      : null
+    );
+  }
 }
 
 // PropTypes Validation

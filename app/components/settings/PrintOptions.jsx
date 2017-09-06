@@ -49,13 +49,8 @@ class PrintOptions extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({[name]: value}, () => {
-      this.updatePrintOptionsState();
+      this.props.updateSettings('printOptions', this.state);
     });
-  };
-
-  updatePrintOptionsState = () => {
-    const {updatePrintOptions} = this.props;
-    updatePrintOptions(this.state);
   };
 
   render = () => {
@@ -169,7 +164,7 @@ class PrintOptions extends Component {
 
 PrintOptions.propTypes = {
   printOptions: PropTypes.object.isRequired,
-  updatePrintOptions: PropTypes.func.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 };
 
 PrintOptions = _withFadeInAnimation(PrintOptions);

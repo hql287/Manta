@@ -206,7 +206,7 @@ class Info extends Component {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({[name]: value}, () => {
-      this.updateInfoState();
+      this.props.updateSettings('info', this.state);
     });
   };
 
@@ -220,12 +220,6 @@ class Info extends Component {
     this.setState({logo: null}, () => {
       this.updateInfoState();
     });
-  };
-
-  // Save Info Data
-  updateInfoState = () => {
-    const {updateInfo} = this.props;
-    updateInfo(this.state);
   };
 
   render = () => {
@@ -319,7 +313,7 @@ class Info extends Component {
 
 Info.propTypes = {
   info: PropTypes.object.isRequired,
-  updateInfo: PropTypes.func.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 };
 
 Info = _withFadeInAnimation(Info);

@@ -23,13 +23,8 @@ class AppSettings extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({[name]: value}, () => {
-      this.updateAppSettingsState();
+      this.props.updateSettings('appSettings', this.state);
     });
-  };
-
-  updateAppSettingsState = () => {
-    const {updateAppSettings} = this.props;
-    updateAppSettings(this.state);
   };
 
   render = () => {
@@ -93,7 +88,7 @@ class AppSettings extends Component {
 
 AppSettings.propTypes = {
   appSettings: PropTypes.object.isRequired,
-  updateAppSettings: PropTypes.func.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 };
 
 AppSettings =  _withFadeInAnimation(AppSettings);
