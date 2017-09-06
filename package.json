@@ -4,12 +4,14 @@
   "description": "Minimum boilerplate code for using ReactJS in Electron",
   "main": "app.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "jest --watch -o"
   },
   "repository": "https://github.com/hungle88/electron-react-starter-kit",
   "author": "Hung Q. Le",
   "license": "CC0-1.0",
   "devDependencies": {
+    "babel-jest": "^21.0.0",
     "babel-plugin-styled-components": "^1.1.7",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -17,8 +19,13 @@
     "electron-builder": "^19.16.0",
     "electron-prebuilt-compile": "^1.6.11",
     "electron-react-devtools": "^0.4.0",
+    "enzyme": "^2.9.1",
     "eslint": "^4.2.0",
     "eslint-plugin-react": "^7.1.0",
+    "jest": "^21.0.1",
+    "jest-styled-components": "^4.4.1",
+    "react-test-renderer": "^15.6.1",
+    "sinon": "^3.2.1",
     "spectron": "^3.7.2"
   },
   "dependencies": {
