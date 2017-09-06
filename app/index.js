@@ -8,6 +8,9 @@ import {Provider} from 'react-redux';
 
 // Middleware allows action creator to return a function instead of plain object
 import ReduxThunk from 'redux-thunk';
+import ContactsMW from './middlewares/ContactsMW';
+import InvoicesMW from './middlewares/InvoicesMW';
+import SettingsMW from './middlewares/SettingsMW';
 
 // Log Redux action inside console
 import Logger from 'redux-logger';
@@ -19,7 +22,15 @@ import combineReducers from './reducers';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const AppStore = createStore(
   combineReducers,
-  composeEnhancers(applyMiddleware(ReduxThunk, Logger))
+  composeEnhancers(
+    applyMiddleware(
+      ContactsMW,
+      InvoicesMW,
+      SettingsMW,
+      ReduxThunk,
+      Logger
+    )
+  )
 );
 
 // Main App
