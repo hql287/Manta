@@ -1,6 +1,5 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
-const appConfig = require('electron').remote.require('electron-settings');
 
 // Actions
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -45,12 +44,11 @@ const FormReducer = (state = initialState, action) => {
     // Update Item
     case ACTION_TYPES.UPDATE_ITEM: {
       return Object.assign({}, state, {
-        rows: state.rows.map(item => {
-          if (item.id !== action.data.id) {
-            return item;
-          }
-          return action.data;
-        }),
+        rows: state.rows.map(item =>
+          (item.id !== action.data.id)
+            ? item
+            : action.data
+        ),
       });
     }
 

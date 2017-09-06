@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Animation
 import {Motion, spring} from 'react-motion';
+
 const springConfig = {
   stiffness: 350,
   damping: 18,

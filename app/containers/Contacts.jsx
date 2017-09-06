@@ -30,7 +30,7 @@ import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation'
 // Component
 class Contacts extends Component {
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     if (!this.props.contacts.loaded) {
       const {dispatch} = this.props;
       const getAllContacts = bindActionCreators(

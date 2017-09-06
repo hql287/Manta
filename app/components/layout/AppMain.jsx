@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
-import Form from '../../containers/Form.jsx';
-import Invoices from '../../containers/Invoices.jsx';
-import Contacts from '../../containers/Contacts.jsx';
-import Settings from '../../containers/Settings.jsx';
+import Form from '../../containers/Form';
+import Invoices from '../../containers/Invoices';
+import Contacts from '../../containers/Contacts';
+import Settings from '../../containers/Settings';
 
 // Layout
 import { AppMainContent } from '../shared/Layout';
