@@ -26,6 +26,18 @@ const Message = props => {
 
 Message.propTypes = {
   text: PropTypes.string.isRequired,
+  info: PropTypes.bool,
+  success: PropTypes.bool,
+  danger: PropTypes.bool,
+  warning: PropTypes.bool,
 };
+
+Message.defaultProps = {
+  info: true,
+  success: false,
+  danger: false,
+  warning: false,
+};
+
 
 export default Message;

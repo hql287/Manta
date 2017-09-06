@@ -67,4 +67,8 @@ const TabsWrapper = props =>
     {props.children}
   </TabsWrapperStyle>;
 
-export {Tab, TabContent, TabsWrapper};
+export {
+  Tab,
+  TabContent,
+  TabsWrapper
+};
