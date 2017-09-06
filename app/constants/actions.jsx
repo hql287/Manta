@@ -35,6 +35,5 @@ export const DELETE_CONTACT   = 'DELETE_CONTACT';
 // ===========================================================
 // ===========================================================
 export const SAVE_SETTINGS        = 'SAVE_SETTINGS';
-export const UPDATE_SETTINGS_INFO = 'UPDATE_SETTINGS_INFO';
-export const UPDATE_APP_SETTINGS  = 'UPDATE_APP_SETTINGS';
-export const UPDATE_PRINT_OPTIONS = 'UPDATE_PRINT_OPTIONS';
+export const UPDATE_SETTINGS      = 'UPDATE_SETTINGS';
+export const GET_INITIAL_SETTINGS = 'GET_INITIAL_SETTINGS';
