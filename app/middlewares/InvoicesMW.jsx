@@ -55,12 +55,12 @@ const getGrandTotal = data => {
   return grandTotal;
 };
 
-const InvoicesMW = store => next => action => {
+const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.GET_INVOICES: {
       getAllDocs()
         .then(allDocs => {
-          next(Object.assign({}, action, {
+          dispatch(Object.assign({}, action, {
             data: allDocs,
           }));
         });
@@ -83,7 +83,7 @@ const InvoicesMW = store => next => action => {
         .put(doc)
         .then(getAllDocs)
         .then(newDocs => {
-          next({
+          dispatch({
             type: ACTION_TYPES.SAVE_INVOICE,
             data: newDocs,
           });
@@ -97,7 +97,7 @@ const InvoicesMW = store => next => action => {
         .then(doc => db.remove(doc))
         .then(getAllDocs)
         .then(remainingDocs => {
-          next({
+          dispatch({
             type: ACTION_TYPES.DELETE_INVOICE,
             data: remainingDocs,
           });

@@ -4,7 +4,7 @@ const appConfig = require('electron').remote.require('electron-settings');
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-const InvoicesMW = store => next => action => {
+const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.GET_INITIAL_SETTINGS: {
       const savedSettings = {
@@ -12,7 +12,7 @@ const InvoicesMW = store => next => action => {
         appSettings: appConfig.get('appSettings'),
         printOptions: appConfig.get('printOptions'),
       };
-      next(
+      dispatch(
         Object.assign({}, action, {
           data: {
             current: savedSettings,
@@ -29,7 +29,7 @@ const InvoicesMW = store => next => action => {
       appConfig.set('appSettings', action.data.appSettings);
       appConfig.set('printOptions', action.data.printOptions);
       // Continue
-      next(action);
+      dispatch(action);
       break;
     }
 
