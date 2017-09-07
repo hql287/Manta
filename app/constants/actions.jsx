@@ -37,3 +37,8 @@ export const DELETE_CONTACT   = 'DELETE_CONTACT';
 export const SAVE_SETTINGS        = 'SAVE_SETTINGS';
 export const UPDATE_SETTINGS      = 'UPDATE_SETTINGS';
 export const GET_INITIAL_SETTINGS = 'GET_INITIAL_SETTINGS';
+
+// UI
+// ===========================================================
+// ===========================================================
+export const UI_CHANGE_TAB = 'UI_CHANGE_TAB';
