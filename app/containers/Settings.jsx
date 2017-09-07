@@ -29,9 +29,9 @@ import PrintOptions from '../components/settings/PrintOptions';
 import Message from '../components/shared/Message';
 import Button from '../components/shared/Button';
 import {
-  TabsWrapper,
-  TabContent,
   Tab,
+  Tabs,
+  TabContent,
 } from '../components/shared/Tabs';
 
 // Component
@@ -84,7 +84,7 @@ class Settings extends Component {
           </PageHeaderActions>}
         </PageHeader>
         <PageContent>
-          <TabsWrapper>
+          <Tabs>
             <Tab
               href="#"
               className={this.state.visibleTab === 1 ? 'active' : ''}
@@ -103,7 +103,7 @@ class Settings extends Component {
               onClick={() => this.changeTab(3)}>
               App Settings
             </Tab>
-          </TabsWrapper>
+          </Tabs>
           <TabContent>
             {this.state.visibleTab === 1 &&
               <Info
