@@ -39,11 +39,11 @@ const getSingleDoc = _id => {
   });
 };
 
-const ContactsMW = ({ dispatch }) => next => action => {
+const ContactsMW = () => next => action => {
   switch (action.type) {
     case ACTION_TYPES.GET_ALL_CONTACTS: {
       getAllDocs().then(allDocs => {
-        dispatch(Object.assign({}, action, {
+        next(Object.assign({}, action, {
           data: allDocs,
         }));
       });
@@ -52,7 +52,7 @@ const ContactsMW = ({ dispatch }) => next => action => {
 
     case ACTION_TYPES.GET_ONE_CONTACT: {
       getSingleDoc(action._id).then(doc => {
-        dispatch({
+        next({
           type: ACTION_TYPES.GET_ONE_CONTACT,
           data: doc,
         });
@@ -69,7 +69,7 @@ const ContactsMW = ({ dispatch }) => next => action => {
         .put(doc)
         .then(getAllDocs)
         .then(newDocs => {
-          dispatch({
+          next({
             type: ACTION_TYPES.SAVE_CONTACT,
             data: newDocs,
           });
@@ -83,7 +83,7 @@ const ContactsMW = ({ dispatch }) => next => action => {
         .then(doc => db.remove(doc))
         .then(getAllDocs)
         .then(remainingDocs => {
-          dispatch({
+          next({
             type: ACTION_TYPES.DELETE_CONTACT,
             data: remainingDocs,
           });
