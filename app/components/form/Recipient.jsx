@@ -4,16 +4,15 @@ import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as FormActionCreators from '../../actions/form.jsx';
-import * as ContactsActionCreators from '../../actions/contacts.jsx';
+import * as FormActions from '../../actions/form';
+import * as ContactsActions from '../../actions/contacts';
 
 // 3rd Party Libs
 import _ from 'lodash';
 
 // Custom Components
-import RecipientForm from './RecipientForm.jsx';
-import RecipientsList from './RecipientsList.jsx';
+import RecipientForm from './RecipientForm';
+import RecipientsList from './RecipientsList';
 import { Section } from '../shared/Section'
 
 // Component
@@ -23,11 +22,7 @@ class Recipient extends Component {
     // Retrieve all contacts
     if (!this.props.recipients.loaded) {
       const {dispatch} = this.props;
-      const getAllContacts = bindActionCreators(
-        ContactsActionCreators.getAllContacts,
-        dispatch
-      );
-      getAllContacts();
+      dispatch(ContactsActions.getAllContacts());
     }
     // Set state
     const {recipient} = this.props.currentInvoice;
@@ -82,11 +77,7 @@ class Recipient extends Component {
   // Send Recipient State Data to Store
   dispatchRecipientData = data => {
     const {dispatch} = this.props;
-    const dispatchRecipientData = bindActionCreators(
-      FormActionCreators.updateRecipient,
-      dispatch,
-    );
-    dispatchRecipientData(data);
+    dispatch(FormActions.updateRecipient(data));
   };
 
   // Output Form or List

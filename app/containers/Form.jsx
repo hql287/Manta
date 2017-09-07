@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as FormActionCreators from '../actions/form';
-import * as InvoicesActionCreators from '../actions/invoices';
-import * as ContactsActionCreators from '../actions/contacts';
+import * as InvoicesActions from '../actions/invoices';
+import * as ContactsActions from '../actions/contacts';
+import * as FormActions from '../actions/form';
 
 // 3rd Party Libs
 import _ from 'lodash';
@@ -70,27 +69,18 @@ class Form extends Component {
 
   // Clear Form Data
   clearFormData = vol => {
-    // Dispatch Clear Form Action
-    const {dispatch} = this.props;
-    const clearForm = bindActionCreators(
-      FormActionCreators.clearForm,
-      dispatch,
-    );
     this.setState({ isSettingsOpened: false }, () => {
-      clearForm();
+      const {dispatch} = this.props;
+      dispatch(FormActions.clearForm());
       // Play A Sound
       if (!vol) sounds.play('RELOAD');
-    })
+    });
   };
 
   // ToggleField
   toggleField = (field, cb=null) => {
     const {dispatch} = this.props;
-    const toggleField = bindActionCreators(
-      FormActionCreators.toggleField,
-      dispatch,
-    );
-    toggleField(field);
+    dispatch(FormActions.toggleField(field));
     // Execute Call Back
     cb && cb();
   };
@@ -98,35 +88,19 @@ class Form extends Component {
   // Update Field Data
   updateFieldData = (field, data) => {
     const {dispatch} = this.props;
-    const updateFieldData = bindActionCreators(
-      FormActionCreators.updateFieldData,
-      dispatch,
-    );
-    updateFieldData(field, data);
+    dispatch(FormActions.updateFieldData(field, data));
   }
 
   // Save Recipient To DB
   saveRecipienAsNewContact = data => {
-    // Dispatch Action
     const {dispatch} = this.props;
-    const saveContact = bindActionCreators(
-      ContactsActionCreators.saveContact,
-      dispatch,
-    );
-    // Save New Contact
-    saveContact(data);
+    dispatch(ContactsActions.saveContact(data));
   };
 
   // Save Invoice To DB
   saveInvoiceToDB = data => {
-    // Dispatch Action
     const {dispatch} = this.props;
-    const saveInvoice = bindActionCreators(
-      InvoicesActionCreators.saveInvoice,
-      dispatch,
-    );
-    // Save The Invoice
-    saveInvoice(data);
+    dispatch(InvoicesActions.saveInvoice(data));
   };
 
   // Render The form

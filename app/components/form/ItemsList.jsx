@@ -3,8 +3,7 @@ import React, {Component} from 'react';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../../actions/form.jsx';
+import * as Actions from '../../actions/form.jsx';
 
 // DragnDrop
 import {DragDropContext} from 'react-dnd';
@@ -64,8 +63,7 @@ class ItemsList extends Component {
   // Add A Row
   addRow = () => {
     const {dispatch} = this.props;
-    const addRow = bindActionCreators(ActionCreators.addItem, dispatch);
-    addRow();
+    dispatch(Actions.addItem());
     // Play a sound
     sounds.play('ADD');
   };
@@ -73,8 +71,7 @@ class ItemsList extends Component {
   // Remove A Row
   removeRow = rowId => {
     const {dispatch} = this.props;
-    const removeRow = bindActionCreators(ActionCreators.removeItem, dispatch);
-    removeRow(rowId);
+    dispatch(Actions.removeItem(rowId));
     // Play a sound
     sounds.play('REMOVE');
   };
@@ -82,15 +79,13 @@ class ItemsList extends Component {
   // Update Row Data
   updateRow = childComponentState => {
     const {dispatch} = this.props;
-    const updateRow = bindActionCreators(ActionCreators.updateItem, dispatch);
-    updateRow(childComponentState);
+    dispatch(Actions.updateItem(childComponentState));
   };
 
   // Drag Row
   moveRow = (dragIndex, hoverIndex) => {
     const {dispatch} = this.props;
-    const moveRow = bindActionCreators(ActionCreators.moveRow, dispatch);
-    moveRow(dragIndex, hoverIndex);
+    dispatch(Actions.moveRow(dragIndex, hoverIndex));
   };
 
   render = () => {

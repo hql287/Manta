@@ -7,12 +7,11 @@ import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/contacts.jsx';
+import * as Actions from '../actions/contacts';
 
 // Custom Components
-import Contact from '../components/contacts/Contact.jsx';
-import Message from '../components/shared/Message.jsx';
+import Contact from '../components/contacts/Contact';
+import Message from '../components/shared/Message';
 
 // Layout
 import {
@@ -33,22 +32,13 @@ class Contacts extends Component {
   componentDidMount = () => {
     if (!this.props.contacts.loaded) {
       const {dispatch} = this.props;
-      const getAllContacts = bindActionCreators(
-        ActionCreators.getAllContacts,
-        dispatch,
-      );
-      getAllContacts();
+      dispatch(Actions.getAllContacts());
     }
   };
 
   deleteContact = _id => {
-    // Dispatch Action
     const {dispatch} = this.props;
-    const deleteContact = bindActionCreators(
-      ActionCreators.deleteContact,
-      dispatch,
-    );
-    deleteContact(_id);
+    dispatch(Actions.deleteContact(_id));
   };
 
   componentWillUnmount() {

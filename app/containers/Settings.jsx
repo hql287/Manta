@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/settings';
+import * as Actions from '../actions/settings';
 
 // 3rd Party Libs
 const _ = require('lodash');
@@ -33,7 +32,7 @@ import {
   TabsWrapper,
   TabContent,
   Tab,
-  } from '../components/shared/Tabs';
+} from '../components/shared/Tabs';
 
 // Component
 class Settings extends Component {
@@ -43,11 +42,7 @@ class Settings extends Component {
   componentDidMount = () => {
     if (!this.props.settings.loaded) {
       const {dispatch} = this.props;
-      const getInitalSettings = bindActionCreators(
-        ActionCreators.getInitalSettings,
-        dispatch,
-      );
-      getInitalSettings();
+      dispatch(Actions.getInitalSettings());
     }
   }
 
@@ -59,20 +54,14 @@ class Settings extends Component {
 
   // Save Settings to App Config
   saveSettingsState = () => {
-    // Dispatch Action
-    const {dispatch} = this.props;
-    const saveSettings = bindActionCreators(
-      ActionCreators.saveSettings,
-      dispatch,
-    );
-    saveSettings(this.props.settings.current);
+    const {dispatch, settings} = this.props;
+    dispatch(Actions.saveSettings(settings.current));
   };
 
   // Update Setting
   updateSettings = (setting, data) => {
     const {dispatch} = this.props;
-    const updateSettings = bindActionCreators(ActionCreators.updateSettings, dispatch);
-    updateSettings(setting, data);
+    dispatch(Actions.updateSettings(setting, data));
   };
 
   // Switch Tab
