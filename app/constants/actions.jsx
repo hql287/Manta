@@ -42,3 +42,6 @@ export const GET_INITIAL_SETTINGS = 'GET_INITIAL_SETTINGS';
 // ===========================================================
 // ===========================================================
 export const UI_CHANGE_TAB = 'UI_CHANGE_TAB';
+export const UI_NEW_NOTIFICATION = 'UI_NEW_NOTIFICATION';
+export const UI_REMOVE_NOTIFICATION = 'UI_REMOVE_NOTIFICATION';
+

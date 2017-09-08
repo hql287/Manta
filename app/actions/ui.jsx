@@ -8,3 +8,20 @@ export const changeActiveTab = tabName => {
     payload: tabName,
   };
 };
+
+export const newNoti = (messageType, messageContent) => {
+  return {
+    type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+    payload: {
+      type: messageType,
+      message: messageContent,
+    },
+  };
+};
+
+export const removeNoti = id => {
+  return {
+    type: ACTION_TYPES.UI_REMOVE_NOTIFICATION,
+    payload: id,
+  };
+};

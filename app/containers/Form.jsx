@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import * as InvoicesActions from '../actions/invoices';
 import * as ContactsActions from '../actions/contacts';
 import * as FormActions from '../actions/form';
+import * as UIActions from '../actions/ui';
 
 // 3rd Party Libs
 import _ from 'lodash';
@@ -61,6 +62,8 @@ class Form extends Component {
     }
     // Save Invoice To DB
     this.saveInvoiceToDB(getInvoiceData(currentInvoice));
+    // Show Success Notification
+    this.newNotification('success', 'Invoice Created Successfully!');
     // Clear The Form
     this.clearFormData('muted');
     // Play a Sound
@@ -76,6 +79,12 @@ class Form extends Component {
       if (!vol) sounds.play('RELOAD');
     });
   };
+
+  // Show Notification
+  newNotification = (type, message) => {
+    const { dispatch } = this.props;
+    dispatch(UIActions.newNoti(type, message));
+  }
 
   // ToggleField
   toggleField = (field, cb=null) => {
@@ -391,8 +400,9 @@ function validateNote(note) {
 
 // Map State to Props
 Form = connect(state => ({
-  invoices: state.InvoicesReducer,
-  recipients: state.ContactsReducer,
+  UI:             state.UIReducer,
+  invoices:       state.InvoicesReducer,
+  recipients:     state.ContactsReducer,
   currentInvoice: state.FormReducer,
 }))(Form);
 
