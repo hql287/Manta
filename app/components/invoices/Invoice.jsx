@@ -10,10 +10,6 @@ const format = require('date-fns/format');
 const moment = require('moment');
 const _ = require('lodash');
 
-// Custom Libs
-const openDialog = require('../../renderers/dialog.js');
-import sounds from '../../../libs/sounds.js';
-
 // Styles
 import styled from 'styled-components';
 
@@ -87,37 +83,17 @@ const InvoiceActionsBtn = styled.a`
 class Invoice extends Component {
   constructor(props) {
     super(props);
-    this.openDeleteDialog = this.openDeleteDialog.bind(this);
+    this.deleteInvoice = this.deleteInvoice.bind(this);
     this.previewInvoice = this.previewInvoice.bind(this);
-  }
-
-  componentDidMount() {
-    const deleteInvoice = this.props.deleteInvoice;
-    ipc.on('confirmed-delete-invoice', (event, index, invoiceId) => {
-      if (invoiceId === this.props.data._id) {
-        if (index === 0) {
-          deleteInvoice(invoiceId);
-          sounds.play('REMOVE');
-        }
-      }
-    });
   }
 
   shouldComponentUpdate(nextProps) {
     return this.props.data._id !== nextProps.data._id;
   }
 
-  openDeleteDialog() {
-    openDialog(
-      {
-        type: 'warning',
-        title: 'Delete This Invoice',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
-      },
-      'confirmed-delete-invoice',
-      this.props.data._id
-    );
+  deleteInvoice() {
+    const { data, deleteInvoice } = this.props;
+    deleteInvoice(data._id);
   }
 
   previewInvoice() {
@@ -181,7 +157,7 @@ class Invoice extends Component {
           </InvoiceActionsBtn>
           <InvoiceActionsBtn
             danger
-            onClick={this.openDeleteDialog}>
+            onClick={this.deleteInvoice}>
             <i className="ion-android-cancel" />
           </InvoiceActionsBtn>
         </InvoiceActions>
