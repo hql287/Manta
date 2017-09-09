@@ -1,8 +1,8 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Custom Components
-import Switch from '../shared/Switch';
 import {Section} from '../shared/Section';
 
 // Animation
@@ -14,14 +14,11 @@ const DiscountWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const DiscountContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const DiscountAmount = styled.div`flex: 1;`;
-
 const DiscountType = styled.div`
   flex: 1;
   margin-top: 10px;
@@ -29,15 +26,25 @@ const DiscountType = styled.div`
 
 // Component
 class Discount extends Component {
-  componentWillMount = () => {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.updateDiscountState = this.updateDiscountState.bind(this);
+  }
+
+  componentWillMount() {
     const {discount} = this.props;
     this.setState({
       amount: discount.amount ? discount.amount : '',
       type: discount.type ? discount.type : 'percentage',
     });
-  };
+  }
 
-  handleInputChange = event => {
+  shouldComponentUpdate(nextProps) {
+    return this.props.discount !== nextProps.discount;
+  }
+
+  handleInputChange(event) {
     const name = event.target.name;
     const eValue = event.target.value;
     let value;
@@ -49,15 +56,14 @@ class Discount extends Component {
     this.setState({[name]: value}, () => {
       this.updateDiscountState();
     });
-  };
+  }
 
-  updateDiscountState = () => {
+  updateDiscountState() {
     const {updateFieldData} = this.props;
     updateFieldData('discount', this.state);
-  };
+  }
 
-  render = () => {
-    const {discount, toggleField} = this.props;
+  render() {
     return (
       <Section>
         <DiscountWrapper>
@@ -68,7 +74,7 @@ class Discount extends Component {
                 name="amount"
                 type="number"
                 value={this.state.amount}
-                onChange={e => this.handleInputChange(e)}
+                onChange={this.handleInputChange}
                 placeholder="Amount"
               />
             </DiscountAmount>
@@ -78,7 +84,7 @@ class Discount extends Component {
                   <input
                     name="type"
                     type="radio"
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={this.handleInputChange}
                     checked={this.state.type === 'percentage'}
                     value="percentage"
                   />Percentage
@@ -89,7 +95,7 @@ class Discount extends Component {
                   <input
                     name="type"
                     type="radio"
-                    onChange={e => this.handleInputChange(e)}
+                    onChange={this.handleInputChange}
                     checked={this.state.type === 'flat'}
                     value="flat"
                   />Flat Rate
@@ -100,8 +106,13 @@ class Discount extends Component {
         </DiscountWrapper>
       </Section>
     );
-  };
+  }
 }
+
+Discount.propTypes = {
+  discount: PropTypes.object.isRequired,
+  updateFieldData: PropTypes.func.isRequired,
+};
 
 // Exports
 export default _withFadeInAnimation(Discount);

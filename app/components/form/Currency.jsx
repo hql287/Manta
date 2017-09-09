@@ -7,7 +7,6 @@ import _ from 'lodash';
 import currencies from '../../../libs/currencies.json';
 
 // Custom Components
-import Switch from '../shared/Switch';
 import {Section} from '../shared/Section';
 
 // Animation
@@ -15,14 +14,26 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
 class Currency extends Component {
-  updateCurrency = event => {
-    const {updateFieldData} = this.props;
+  constructor(props) {
+    super(props);
+    this.updateCurrency = this.updateCurrency.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.updateFieldData('currency', 'USD');
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.currency !== nextProps.currency;
+  }
+
+  updateCurrency(event) {
     const value = event.target.value;
     const selectedCurrency = value === '' ? null : value;
-    updateFieldData('currency', selectedCurrency);
-  };
+    this.props.updateFieldData('currency', selectedCurrency);
+  }
 
-  render = () => {
+  render() {
     const currenciesKeys = _.keys(currencies);
     const currenciesOptions = currenciesKeys.map(key => {
       let optionKey = currencies[key]['code'];
@@ -34,22 +45,24 @@ class Currency extends Component {
         </option>
       );
     });
-
-    const {currency, toggleField} = this.props;
-
+    const {currency} = this.props;
     return (
       <Section>
         <label className="itemLabel">Currency</label>
         <select
           value={currency.selectedCurrency}
-          onChange={e => this.updateCurrency(e)}>
-          <option value="">Select A Currency</option>
+          onChange={this.updateCurrency}>
           {currenciesOptions}
         </select>
       </Section>
     );
-  };
+  }
 }
+
+Currency.propTypes = {
+  currency: PropTypes.object.isRequired,
+  updateFieldData: PropTypes.func.isRequired,
+};
 
 // Export
 export default _withFadeInAnimation(Currency);

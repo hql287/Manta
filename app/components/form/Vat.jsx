@@ -1,8 +1,8 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Custom Components
-import Switch from '../shared/Switch';
 import {Section} from '../shared/Section';
 
 // Animation
@@ -14,43 +14,45 @@ const VatWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const VatContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 const VatAmount = styled.div`flex: 1;`;
-
-const VatType = styled.div`
-  flex: 1;
-  margin-top: 10px;
-`;
 
 // Component
 class Vat extends Component {
-  componentWillMount = () => {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  componentWillMount() {
     const {vat} = this.props;
     this.setState({
       amount: vat.amount ? vat.amount : '',
     });
-  };
+  }
 
-  handleInputChange = event => {
+  shouldComponentUpdate(nextProps) {
+    return this.props.vat !== nextProps.vat;
+  }
+
+  handleInputChange(event) {
     const name = event.target.name;
     const value =
       event.target.value === '' ? '' : parseInt(event.target.value, 10);
     this.setState({[name]: value}, () => {
       this.updateVatState();
     });
-  };
+  }
 
-  updateVatState = () => {
+  updateVatState() {
     const {updateFieldData} = this.props;
     updateFieldData('vat', this.state);
-  };
+  }
 
-  render = () => {
+  render() {
     return (
       <Section>
         <VatWrapper>
@@ -61,7 +63,7 @@ class Vat extends Component {
                 name="amount"
                 type="number"
                 value={this.state.amount}
-                onChange={e => this.handleInputChange(e)}
+                onChange={this.handleInputChange}
                 placeholder="Amount"
               />
             </VatAmount>
@@ -69,8 +71,13 @@ class Vat extends Component {
         </VatWrapper>
       </Section>
     );
-  };
+  }
 }
+
+Vat.propTypes = {
+  updateFieldData: PropTypes.func.isRequired,
+  vat: PropTypes.object.isRequired,
+};
 
 // Exports
 export default _withFadeInAnimation(Vat);

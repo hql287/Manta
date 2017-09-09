@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/invoices.jsx';
+import * as Actions from '../actions/invoices';
 
 // Layout
 import {
@@ -24,8 +23,8 @@ import {
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Custom Components
-import Invoice from '../components/invoices/Invoice.jsx';
-import Message from '../components/shared/Message.jsx';
+import Invoice from '../components/invoices/Invoice';
+import Message from '../components/shared/Message';
 
 // Styles
 import styled from 'styled-components';
@@ -44,11 +43,7 @@ class Invoices extends Component {
   componentDidMount = () => {
     if (!this.props.invoices.loaded) {
       const {dispatch} = this.props;
-      const getInvoices = bindActionCreators(
-        ActionCreators.getInvoices,
-        dispatch,
-      );
-      getInvoices();
+      dispatch(Actions.getInvoices());
     }
   };
 
@@ -60,13 +55,8 @@ class Invoices extends Component {
 
   // Delete a invoice
   deleteInvoice = id => {
-    // Dispatch Action
     const {dispatch} = this.props;
-    const deleteInvoice = bindActionCreators(
-      ActionCreators.deleteInvoice,
-      dispatch,
-    );
-    deleteInvoice(id);
+    dispatch(Actions.deleteInvoice(id));
   };
 
   // Render

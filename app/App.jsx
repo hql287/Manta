@@ -1,35 +1,64 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+// Redux
+import {connect} from 'react-redux';
+import * as Actions from './actions/ui';
 
 // Custom Components
-import AppNav from './components/layout/AppNav.jsx';
-import AppMain from './components/layout/AppMain.jsx';
+import AppNav from './components/layout/AppNav';
+import AppMain from './components/layout/AppMain';
+import AppNoti from './components/layout/AppNoti';
 
 // Layout
-import { AppWrapper } from './components/shared/Layout';
+import {AppWrapper} from './components/shared/Layout';
 
 // Components
 class App extends Component {
-  componentWillMount = () => {
-    this.setState({
-      activeTab: 'form',
-    });
-  };
+  constructor(props) {
+    super(props);
+    this.changeTab = this.changeTab.bind(this);
+    this.removeNoti = this.removeNoti.bind(this);
+  }
 
-  changeTab = tabName => {
-    this.setState({
-      activeTab: tabName,
-    });
-  };
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.UI.activeTab !== nextProps.UI.activeTab ||
+      this.props.UI.notifications.length !== nextProps.UI.notifications.length
+    );
+  }
 
-  render = () => {
+  changeTab(tabName) {
+    const {dispatch} = this.props;
+    dispatch(Actions.changeActiveTab(tabName));
+  }
+
+  removeNoti(id) {
+    const {dispatch} = this.props;
+    dispatch(Actions.removeNoti(id));
+  }
+
+  render() {
+    const {activeTab, notifications} = this.props.UI;
     return (
       <AppWrapper>
-        <AppNav activeTab={this.state.activeTab} changeTab={this.changeTab} />
-        <AppMain activeTab={this.state.activeTab} />
+        <AppNav activeTab={activeTab} changeTab={this.changeTab} />
+        <AppMain activeTab={activeTab} />
+        {notifications.length > 0
+          ? <AppNoti
+              notifications={notifications}
+              removeNoti={this.removeNoti}
+            />
+          : null}
       </AppWrapper>
     );
-  };
+  }
 }
 
-export default App;
+App.propTypes = {
+  UI: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
+
+export default connect(state => ({UI: state.UIReducer}))(App);

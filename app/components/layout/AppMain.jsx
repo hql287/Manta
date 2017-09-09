@@ -3,17 +3,21 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
-import Form from '../../containers/Form.jsx';
-import Invoices from '../../containers/Invoices.jsx';
-import Contacts from '../../containers/Contacts.jsx';
-import Settings from '../../containers/Settings.jsx';
+import Form from '../../containers/Form';
+import Invoices from '../../containers/Invoices';
+import Contacts from '../../containers/Contacts';
+import Settings from '../../containers/Settings';
 
 // Layout
 import { AppMainContent } from '../shared/Layout';
 
 
 class AppMain extends Component {
-  render = () => {
+  shouldComponentUpdate(nextProps) {
+    return this.props.activeTab !== nextProps.activeTab;
+  }
+
+  render() {
     const {activeTab} = this.props;
     return (
       <AppMainContent>
@@ -23,7 +27,7 @@ class AppMain extends Component {
         {activeTab === 'settings' && <Settings />}
       </AppMainContent>
     );
-  };
+  }
 }
 
 AppMain.propTypes = {

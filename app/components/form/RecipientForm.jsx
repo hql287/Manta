@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Animation
@@ -26,54 +26,52 @@ const Field = styled.div`
 `;
 
 // Component
-class RecipientForm extends Component {
-  render = () => {
-    const {fullname, company, phone, email} = this.props.currentRecipientData;
-    return (
-      <Form>
-        <Row>
-          <Field>
-            <label className="itemLabel">Full Name *</label>
-            <input
-              name="fullname"
-              type="text"
-              value={fullname ? fullname : ''}
-              onChange={e => this.props.handleRecipientFormInputChange(e)}
-            />
-          </Field>
-          <Field>
-            <label className="itemLabel">Company</label>
-            <input
-              name="company"
-              type="text"
-              value={company ? company : ''}
-              onChange={e => this.props.handleRecipientFormInputChange(e)}
-            />
-          </Field>
-        </Row>
-        <Row>
-          <Field>
-            <label className="itemLabel">Email *</label>
-            <input
-              name="email"
-              type="text"
-              value={email ? email : ''}
-              onChange={e => this.props.handleRecipientFormInputChange(e)}
-            />
-          </Field>
-          <Field>
-            <label className="itemLabel">Phone Number</label>
-            <input
-              name="phone"
-              type="text"
-              value={phone ? phone : ''}
-              onChange={e => this.props.handleRecipientFormInputChange(e)}
-            />
-          </Field>
-        </Row>
-      </Form>
-    );
-  };
+function RecipientForm(props) {
+  const {fullname, company, phone, email} = props.currentRecipientData;
+  return (
+    <Form>
+      <Row>
+        <Field>
+          <label className="itemLabel">Full Name *</label>
+          <input
+            name="fullname"
+            type="text"
+            value={fullname ? fullname : ''}
+            onChange={props.handleRecipientFormInputChange}
+          />
+        </Field>
+        <Field>
+          <label className="itemLabel">Company</label>
+          <input
+            name="company"
+            type="text"
+            value={company ? company : ''}
+            onChange={props.handleRecipientFormInputChange}
+          />
+        </Field>
+      </Row>
+      <Row>
+        <Field>
+          <label className="itemLabel">Email *</label>
+          <input
+            name="email"
+            type="text"
+            value={email ? email : ''}
+            onChange={props.handleRecipientFormInputChange}
+          />
+        </Field>
+        <Field>
+          <label className="itemLabel">Phone Number</label>
+          <input
+            name="phone"
+            type="text"
+            value={phone ? phone : ''}
+            onChange={props.handleRecipientFormInputChange}
+          />
+        </Field>
+      </Row>
+    </Form>
+  );
 }
 
 // PropTypes Validation
@@ -86,6 +84,4 @@ RecipientForm.defaultProps = {
   currentRecipientData: {},
 };
 
-RecipientForm = _withFadeInAnimation(RecipientForm);
-
-export default RecipientForm;
+export default _withFadeInAnimation(RecipientForm);

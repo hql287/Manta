@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 // Redux
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import * as ActionCreators from '../actions/settings';
+import {compose} from 'redux';
+import * as Actions from '../actions/settings';
 
 // 3rd Party Libs
 const _ = require('lodash');
@@ -17,8 +17,7 @@ import {
   PageHeaderTitle,
   PageHeaderActions,
   PageContent,
-  PageFooter,
-  } from '../components/shared/Layout';
+} from '../components/shared/Layout';
 
 // Animation
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
@@ -27,70 +26,54 @@ import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation'
 import Info from '../components/settings/Info';
 import AppSettings from '../components/settings/AppSettings';
 import PrintOptions from '../components/settings/PrintOptions';
-import Message from '../components/shared/Message';
 import Button from '../components/shared/Button';
 import {
-  TabsWrapper,
-  TabContent,
   Tab,
-  } from '../components/shared/Tabs';
+  Tabs,
+  TabContent,
+} from '../components/shared/Tabs';
 
 // Component
 class Settings extends Component {
-  componentWillMount = () => {
-    this.setState({  visibleTab: 1  });
+  constructor(props) {
+    super(props);
+    this.state = { visibleTab: 1 };
+    this.saveSettingsState = this.saveSettingsState.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
+  }
+
+  componentDidMount() {
+    if (!this.props.settings.loaded) {
+      const {dispatch} = this.props;
+      dispatch(Actions.getInitalSettings());
+    }
   }
 
   // Check if settings have been saved
-  settingsSaved = () => {
+  settingsSaved() {
     const {current, saved} = this.props.settings;
     return _.isEqual(current, saved);
   };
 
   // Save Settings to App Config
-  saveSettingsState = () => {
-    // Dispatch Action
-    const {dispatch} = this.props;
-    const saveSettings = bindActionCreators(
-      ActionCreators.saveSettings,
-      dispatch,
-    );
-    saveSettings(this.props.settings.current);
+  saveSettingsState() {
+    const {dispatch, settings} = this.props;
+    dispatch(Actions.saveSettings(settings.current));
   };
 
-  // Update Info Settings
-  updateInfo = data => {
+  // Update Setting
+  updateSettings(setting, data) {
     const {dispatch} = this.props;
-    const updateInfo = bindActionCreators(ActionCreators.updateInfo, dispatch);
-    updateInfo(data);
+    dispatch(Actions.updateSettings(setting, data));
   };
-
-  // Update App Settings
-  updateAppSettings = data => {
-    const {dispatch} = this.props;
-    const updateAppSettings = bindActionCreators(
-      ActionCreators.updateAppSettings,
-      dispatch,
-    );
-    updateAppSettings(data);
-  };
-
-  // Update Print Options
-  updatePrintOptions = data => {
-    const {dispatch} = this.props;
-    const updatePrintOptions = bindActionCreators(
-      ActionCreators.updatePrintOptions,
-      dispatch,
-    );
-    updatePrintOptions(data);
-  }
 
   // Switch Tab
-  changeTab = tabNum => {
+  changeTab(tabNum) {
     this.setState({visibleTab: tabNum});
   };
 
-  render = () => {
+  // Render Main Content
+  renderSettingsContent() {
     const {info, appSettings, printOptions} = this.props.settings.current;
     return (
       <PageWrapper>
@@ -98,13 +81,13 @@ class Settings extends Component {
           <PageHeaderTitle>Settings</PageHeaderTitle>
           {!this.settingsSaved() &&
             <PageHeaderActions>
-              <Button primary onClick={() => this.saveSettingsState()}>
+              <Button primary onClick={this.saveSettingsState}>
                 Save
               </Button>
           </PageHeaderActions>}
         </PageHeader>
         <PageContent>
-          <TabsWrapper>
+          <Tabs>
             <Tab
               href="#"
               className={this.state.visibleTab === 1 ? 'active' : ''}
@@ -123,24 +106,33 @@ class Settings extends Component {
               onClick={() => this.changeTab(3)}>
               App Settings
             </Tab>
-          </TabsWrapper>
+          </Tabs>
           <TabContent>
             {this.state.visibleTab === 1 &&
-              <Info info={info} updateInfo={this.updateInfo} />}
+              <Info
+                info={info}
+                updateSettings={this.updateSettings} />}
             {this.state.visibleTab === 2 &&
-                <PrintOptions
-                  printOptions={printOptions}
-                  updatePrintOptions={this.updatePrintOptions} />}
+              <PrintOptions
+                printOptions={printOptions}
+                updateSettings={this.updateSettings} />}
             {this.state.visibleTab === 3 &&
               <AppSettings
                 appSettings={appSettings}
-                updateAppSettings={this.updateAppSettings}
-              />}
+                updateSettings={this.updateSettings} />}
           </TabContent>
         </PageContent>
       </PageWrapper>
     );
-  };
+  }
+
+  render() {
+    return (
+      this.props.settings.loaded
+      ? this.renderSettingsContent()
+      : null
+    );
+  }
 }
 
 // PropTypes Validation
@@ -148,9 +140,8 @@ Settings.propTypes = {
   settings: PropTypes.object.isRequired,
 };
 
-// Map state to props & Added Faded In Animation
-Settings = connect(state => ({ settings: state.SettingsReducer }))(Settings);
-Settings = _withFadeInAnimation(Settings);
-
 // Export
-export default Settings;
+export default compose(
+  connect(state => ({ settings: state.SettingsReducer })),
+  _withFadeInAnimation
+)(Settings);

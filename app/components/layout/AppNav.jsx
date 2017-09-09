@@ -1,9 +1,10 @@
 // Libraries
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Animation
 import {Motion, spring} from 'react-motion';
+
 const springConfig = {
   stiffness: 350,
   damping: 18,
@@ -88,42 +89,39 @@ const ActiveIndicator = styled.div`
   }
 `;
 
-class AppNav extends Component {
-  render = () => {
-    const {activeTab, changeTab} = this.props;
-    const marginLeftValue = setMarginValue(activeTab);
-    return (
-      <TopBar>
-        <Tab href="#" onClick={() => changeTab('form')}>
-          <Icon id="form" className="ion-android-list" />
-          Create
-        </Tab>
-        <Tab href="#" onClick={() => changeTab('invoices')}>
-          <Icon id="archive" className="ion-ios-filing" />
-          Archive
-        </Tab>
-        <Tab href="#" onClick={() => changeTab('contacts')}>
-          <Icon id="contacts" className="ion-person-stalker" />
-          Contacts
-        </Tab>
-        <Tab href="#" onClick={() => changeTab('settings')}>
-          <Icon id="settings" className="ion-ios-gear" />
-          Settings
-        </Tab>
-        <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
-          {({marginLeft}) =>
-            <ActiveIndicator>
-              <div style={{marginLeft: `${marginLeft}%`}} />
-            </ActiveIndicator>}
-        </Motion>
-      </TopBar>
-    );
-  };
+function AppNav({activeTab, changeTab}) {
+  const marginLeftValue = setMarginValue(activeTab);
+  return (
+    <TopBar>
+      <Tab href="#" onClick={() => changeTab('form')}>
+        <Icon id="form" className="ion-android-list" />
+        Create
+      </Tab>
+      <Tab href="#" onClick={() => changeTab('invoices')}>
+        <Icon id="archive" className="ion-ios-filing" />
+        Archive
+      </Tab>
+      <Tab href="#" onClick={() => changeTab('contacts')}>
+        <Icon id="contacts" className="ion-person-stalker" />
+        Contacts
+      </Tab>
+      <Tab href="#" onClick={() => changeTab('settings')}>
+        <Icon id="settings" className="ion-ios-gear" />
+        Settings
+      </Tab>
+      <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
+        {({marginLeft}) =>
+          <ActiveIndicator>
+            <div style={{marginLeft: `${marginLeft}%`}} />
+          </ActiveIndicator>}
+      </Motion>
+    </TopBar>
+  );
 }
 
 AppNav.propTypes = {
-  changeTab: PropTypes.func.isRequired,
   activeTab: PropTypes.string.isRequired,
+  changeTab: PropTypes.func.isRequired,
 };
 
 export default AppNav;

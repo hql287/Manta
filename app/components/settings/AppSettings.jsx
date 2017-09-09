@@ -7,32 +7,31 @@ import _ from 'lodash';
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
-const openDialog = require('../../renderers/dialog.js');
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
 class AppSettings extends Component {
-  componentWillMount = () => {
-    this.setState(this.props.appSettings);
-  };
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-  handleInputChange = event => {
+  componentWillMount() {
+    this.setState(this.props.appSettings);
+  }
+
+  handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({[name]: value}, () => {
-      this.updateAppSettingsState();
+      this.props.updateSettings('appSettings', this.state);
     });
-  };
+  }
 
-  updateAppSettingsState = () => {
-    const {updateAppSettings} = this.props;
-    updateAppSettings(this.state);
-  };
-
-  render = () => {
+  render() {
     const currenciesKeys = _.keys(currencies);
     const currenciesOptions = currenciesKeys.map(key => {
       let optionKey = currencies[key]['code'];
@@ -54,7 +53,7 @@ class AppSettings extends Component {
               <select
                 name="currency"
                 value={this.state.currency}
-                onChange={e => this.handleInputChange(e)}>
+                onChange={this.handleInputChange}>
                 {currenciesOptions}
               </select>
             </div>
@@ -65,7 +64,7 @@ class AppSettings extends Component {
               <select
                 name="sound"
                 value={this.state.sound}
-                onChange={e => this.handleInputChange(e)}>
+                onChange={this.handleInputChange}>
                 <option value="default">Default</option>
                 <option value="modern">Modern</option>
                 <option value="cs">Counter Strike</option>
@@ -81,21 +80,19 @@ class AppSettings extends Component {
               name="muted"
               type="checkbox"
               checked={this.state.muted}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
             <span className="slider round"></span>
           </label>
         </div>
       </div>
     );
-  };
+  }
 }
 
 AppSettings.propTypes = {
   appSettings: PropTypes.object.isRequired,
-  updateAppSettings: PropTypes.func.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 };
 
-AppSettings =  _withFadeInAnimation(AppSettings);
-
-export default AppSettings;
+export default _withFadeInAnimation(AppSettings);;

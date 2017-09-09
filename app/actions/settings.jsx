@@ -1,22 +1,15 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-export const updateInfo = data => {
+export const getInitalSettings = () => {
   return {
-    type: ACTION_TYPES.UPDATE_SETTINGS_INFO,
-    data,
+    type: ACTION_TYPES.GET_INITIAL_SETTINGS,
   };
 };
 
-export const updateAppSettings = data => {
+export const updateSettings = (setting, data) => {
   return {
-    type: ACTION_TYPES.UPDATE_APP_SETTINGS,
-    data,
-  };
-};
-
-export const updatePrintOptions = data => {
-  return {
-    type: ACTION_TYPES.UPDATE_PRINT_OPTIONS,
+    type: ACTION_TYPES.UPDATE_SETTINGS,
+    setting,
     data,
   };
 };

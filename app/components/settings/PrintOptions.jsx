@@ -6,7 +6,6 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Libs
-import currencies from '../../../libs/currencies.json';
 const openDialog = require('../../renderers/dialog.js');
 
 // Animation
@@ -14,11 +13,17 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
 class PrintOptions extends Component {
-  componentWillMount = () => {
-    this.setState(this.props.printOptions);
-  };
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.selectExportDir = this.selectExportDir.bind(this);
+  }
 
-  componentDidMount = () => {
+  componentWillMount() {
+    this.setState(this.props.printOptions);
+  }
+
+  componentDidMount() {
     ipc.on('no-access-directory', (event, message) => {
       openDialog({
         type: 'warning',
@@ -28,37 +33,31 @@ class PrintOptions extends Component {
     });
 
     ipc.on('confirmed-export-directory', (event, path) => {
-      console.log(path);
       this.setState({exportDir: path}, () => {
         this.updatePrintOptionsState();
       });
     });
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     ipc.removeAllListeners('no-access-directory');
     ipc.removeAllListeners('confirmed-export-directory');
-  };
+  }
 
-  selectExportDir = () => {
+  selectExportDir() {
     ipc.send('select-export-directory');
-  };
+  }
 
-  handleInputChange = event => {
+  handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.setState({[name]: value}, () => {
-      this.updatePrintOptionsState();
+      this.props.updateSettings('printOptions', this.state);
     });
-  };
+  }
 
-  updatePrintOptionsState = () => {
-    const {updatePrintOptions} = this.props;
-    updatePrintOptions(this.state);
-  };
-
-  render = () => {
+  render() {
     return (
       <div>
         <div className="row">
@@ -75,7 +74,7 @@ class PrintOptions extends Component {
               <a
                 href="#"
                 className="input-group-customized "
-                onClick={() => this.selectExportDir()}>
+                onClick={this.selectExportDir}>
                 <i className="ion-folder" />
               </a>
             </div>
@@ -86,7 +85,7 @@ class PrintOptions extends Component {
             <select
               name="template"
               value={this.state.template}
-              onChange={e => this.handleInputChange(e)}>
+              onChange={this.handleInputChange}>
               <option value="default">Default</option>
               <option value="hosting">Hosting</option>
               <option value="elegant">Elegant</option>
@@ -101,7 +100,7 @@ class PrintOptions extends Component {
             <select
               name="marginsType"
               value={this.state.marginsType}
-              onChange={e => this.handleInputChange(e)}>
+              onChange={this.handleInputChange}>
               <option value="0">Default Margin</option>
               <option value="1">No Margin</option>
               <option value="2">Minimum Margin</option>
@@ -113,7 +112,7 @@ class PrintOptions extends Component {
             <select
               name="pageSize"
               value={this.state.pageSize}
-              onChange={e => this.handleInputChange(e)}>
+              onChange={this.handleInputChange}>
               <option value="A3">A3</option>
               <option value="A4">A4</option>
               <option value="A5">A5</option>
@@ -131,7 +130,7 @@ class PrintOptions extends Component {
               name="printBackground"
               type="checkbox"
               checked={this.state.printBackground}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
             <span className="slider round"></span>
           </label>
@@ -144,7 +143,7 @@ class PrintOptions extends Component {
               name="printSelectionOnly"
               type="checkbox"
               checked={this.state.printSelectionOnly}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
             <span className="slider round"></span>
           </label>
@@ -157,21 +156,19 @@ class PrintOptions extends Component {
               name="landscape"
               type="checkbox"
               checked={this.state.landscape}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
             <span className="slider round"></span>
           </label>
         </div>
       </div>
     );
-  };
+  }
 }
 
 PrintOptions.propTypes = {
   printOptions: PropTypes.object.isRequired,
-  updatePrintOptions: PropTypes.func.isRequired,
+  updateSettings: PropTypes.func.isRequired,
 };
 
-PrintOptions = _withFadeInAnimation(PrintOptions);
-
-export default PrintOptions;
+export default _withFadeInAnimation(PrintOptions);
