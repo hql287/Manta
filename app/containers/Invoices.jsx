@@ -6,18 +6,21 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from '../actions/invoices';
+
+// Custom Libs
+const openDialog = require('../renderers/dialog.js');
+import sounds from '../../libs/sounds.js';
 
 // Layout
 import {
   PageWrapper,
   PageHeader,
   PageHeaderTitle,
-  PageHeaderActions,
   PageContent,
-  PageFooter,
-  } from '../components/shared/Layout';
+} from '../components/shared/Layout';
 
 // Animation
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
@@ -38,29 +41,60 @@ const InvoicesContainer = styled.div`
 
 // Component
 class Invoices extends Component {
-  // Once Mounted, add event listeners
-  // on opening and open preview window events
-  componentDidMount = () => {
+  constructor(props) {
+    super(props);
+    this.deleteInvoice = this.deleteInvoice.bind(this);
+  }
+
+  // Load Invoices & add event listeners
+  componentDidMount() {
+    // Get All Invoices
     if (!this.props.invoices.loaded) {
       const {dispatch} = this.props;
       dispatch(Actions.getInvoices());
     }
-  };
 
-  // Remove all IPC listeners once all reciepts
-  // are removed or the compornent is unmounted
+    // Add Event Listener
+    ipc.on('confirmed-delete-invoice', (event, index, invoiceId) => {
+      if (index === 0) {
+        this.confirmedDeleteInvoice(invoiceId);
+        sounds.play('REMOVE');
+      }
+    });
+  }
+
+  // Optimization
+  shouldComponentUpdate(nextProps) {
+    return this.props.invoices !== nextProps.invoices;
+  }
+
+  // Remove all IPC listeners when unmounted
   componentWillUnmount() {
     ipc.removeAllListeners('confirmed-delete-invoice');
   }
 
-  // Delete a invoice
-  deleteInvoice = id => {
+  // Open Confirm Dialog
+  deleteInvoice(invoiceId) {
+    openDialog(
+      {
+        type: 'warning',
+        title: 'Delete This Invoice',
+        message: 'Are You Sure?',
+        buttons: ['Yes', 'No'],
+      },
+      'confirmed-delete-invoice',
+      invoiceId
+    );
+  }
+
+  // Confirm Delete an invoice
+  confirmedDeleteInvoice(invoiceId) {
     const {dispatch} = this.props;
-    dispatch(Actions.deleteInvoice(id));
-  };
+    dispatch(Actions.deleteInvoice(invoiceId));
+  }
 
   // Render
-  render = () => {
+  render() {
     const {invoices} = this.props;
     const invoicesComponent = invoices.data.map((invoice, index) => {
       return (
@@ -86,7 +120,7 @@ class Invoices extends Component {
         </PageContent>
       </PageWrapper>
     );
-  };
+  }
 }
 
 // PropTypes Validation
@@ -94,9 +128,8 @@ Invoices.propTypes = {
   invoices: PropTypes.object.isRequired,
 };
 
-// Map state to props & Add Faded In Animation
-Invoices = connect(state => ({ invoices: state.InvoicesReducer }))(Invoices);
-Invoices = _withFadeInAnimation(Invoices);
-
 // Export
-export default  Invoices;
+export default compose(
+  connect(state => ({ invoices: state.InvoicesReducer })),
+  _withFadeInAnimation
+)(Invoices);
