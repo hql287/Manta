@@ -1,8 +1,8 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Custom Components
-import Switch from '../shared/Switch';
 import {Section} from '../shared/Section';
 
 // React Dates
@@ -18,21 +18,36 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
 class DueDate extends Component {
-  componentWillMount = () => {
-    this.setState({focused: false});
-  };
+  constructor(props) {
+    super(props);
+    this.state = {focused: false};
+    this.onFocusChange = this.onFocusChange.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
+    this.clearDate = this.clearDate.bind(this);
+  }
 
-  onFocusChange = () => {
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state !== nextState ||
+      this.props.dueDate !== nextProps.dueDate
+    );
+  }
+
+  onFocusChange() {
     this.setState({focused: !this.state.focused});
-  };
+  }
 
-  onDateChange = date => {
+  onDateChange(date) {
     const selectedDate = date === null ? null : moment(date).toObject();
     this.props.updateFieldData('dueDate', selectedDate);
-  };
+  }
 
-  render = () => {
-    const {dueDate, toggleField} = this.props;
+  clearDate() {
+    this.onDateChange(null);
+  }
+
+  render() {
+    const {dueDate} = this.props;
     const selectedDate = dueDate.selectedDate
       ? moment(dueDate.selectedDate)
       : null;
@@ -49,22 +64,27 @@ class DueDate extends Component {
             hideKeyboardShortcutsPanel={true}
             date={selectedDate}
             focused={this.state.focused}
-            onFocusChange={() => this.onFocusChange()}
+            onFocusChange={this.onFocusChange}
             onDateChange={newDate => this.onDateChange(newDate)}
           />
           <a
-            href="#"
             className={
               selectedDate === null ? 'clearDateBtn' : 'clearDateBtn active'
             }
-            onClick={() => this.onDateChange(null)}>
+            href="#"
+            onClick={this.clearDate}>
             <i className="ion-close-circled" />
           </a>
         </DueDateContent>
       </Section>
     );
-  };
+  }
 }
+
+DueDate.propTypes = {
+  dueDate: PropTypes.object.isRequired,
+  updateFieldData: PropTypes.func.isRequired,
+};
 
 // Export
 export default _withFadeInAnimation(DueDate);

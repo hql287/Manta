@@ -5,10 +5,6 @@ const ipc = require('electron').ipcRenderer;
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// 3rd Party Libs
-const format = require('date-fns/format');
-const _ = require('lodash');
-
 // Custom Libs
 const openDialog = require('../../renderers/dialog.js');
 import sounds from '../../../libs/sounds.js';
@@ -21,12 +17,14 @@ import {
   CardTitle,
   CardSubtitle,
   CardText,
-  CardButton,
 } from '../shared/Card.jsx';
-
 
 // Component
 class Contact extends Component {
+  constructor(props) {
+    super(props);
+    this.openDeleteDialog = this.openDeleteDialog.bind(this);
+  }
 
   componentDidMount() {
     const deleteContact = this.props.deleteContact;
@@ -38,7 +36,11 @@ class Contact extends Component {
     });
   }
 
-  openDeleteDialog = contactId => {
+  shouldComponentUpdate(nextProps) {
+    return this.props.data._id !== nextProps.data._id;
+  }
+
+  openDeleteDialog() {
     openDialog(
       {
         type: 'warning',
@@ -47,12 +49,11 @@ class Contact extends Component {
         buttons: ['Yes', 'No'],
       },
       'confirmed-delete-contact',
-      contactId,
+      this.props.data._id
     );
-  };
+  }
 
-  // Render
-  render = () => {
+  render() {
     const contact = this.props.data;
     return (
       <Card>
@@ -65,13 +66,13 @@ class Contact extends Component {
             {contact.phone}
           </CardText>
           <Button primary>Edit</Button>
-          <Button danger onClick={() => this.openDeleteDialog(contact._id)}>
+          <Button danger onClick={this.openDeleteDialog}>
             Delete
           </Button>
         </CardBody>
       </Card>
     );
-  };
+  }
 }
 
 Contact.propTypes = {

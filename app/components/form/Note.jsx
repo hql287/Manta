@@ -1,8 +1,8 @@
 // Libraries
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 // Custom Components
-import Switch from '../shared/Switch';
 import {Section} from '../shared/Section';
 
 // Animation
@@ -23,32 +23,45 @@ const NoteContent = styled.textarea`
 
 // Component
 class Note extends Component {
-  componentWillMount = () => {
-    this.setState({content: this.props.content});
-  };
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-  handleInputChange = event => {
+  componentWillMount() {
+    this.setState({content: this.props.content});
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.note !== nextProps.note;
+  }
+
+  handleInputChange(event) {
     this.setState({content: event.target.value}, () => {
       this.props.updateFieldData('note', this.state);
     });
-  };
+  }
 
-  render = () => {
-    const {note, toggleField} = this.props;
+  render() {
     return (
       <Section>
         <label className="itemLabel">Note</label>
         <NoteContent
-          rows="4"
-          value={this.state.content}
           cols="50"
-          onChange={e => this.handleInputChange(e)}
+          rows="4"
+          onChange={this.handleInputChange}
           placeholder="Note"
+          value={this.state.content}
         />
       </Section>
     );
-  };
+  }
 }
+
+Note.propTypes = {
+  note: PropTypes.object.isRequired,
+  updateFieldData: PropTypes.func.isRequired,
+};
 
 // Export
 export default _withFadeInAnimation(Note);

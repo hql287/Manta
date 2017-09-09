@@ -23,7 +23,10 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.UI !== nextProps.UI;
+    return (
+      this.props.UI.activeTab !== nextProps.UI.activeTab ||
+      this.props.UI.notifications.length !== nextProps.UI.notifications.length
+    );
   }
 
   changeTab(tabName) {

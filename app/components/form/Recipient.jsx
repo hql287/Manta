@@ -13,12 +13,18 @@ import _ from 'lodash';
 // Custom Components
 import RecipientForm from './RecipientForm';
 import RecipientsList from './RecipientsList';
-import { Section } from '../shared/Section'
+import { Section } from '../shared/Section';
 
 // Component
 class Recipient extends Component {
+  constructor(props) {
+    super(props);
+    this.toggleForm = this.toggleForm.bind(this);
+    this.handleRecipientFormInputChange = this.handleRecipientFormInputChange.bind(this);
+    this.handleRecipientSelectChange = this.handleRecipientSelectChange.bind(this);
+  }
   // Extract data from redux set as state before mount
-  componentWillMount = () => {
+  componentWillMount() {
     // Retrieve all contacts
     if (!this.props.recipients.loaded) {
       const {dispatch} = this.props;
@@ -31,10 +37,10 @@ class Recipient extends Component {
       new: _.isEmpty(recipient.new) ? {} : recipient.new,
       select: _.isEmpty(recipient.select) ? {} : recipient.select,
     });
-  };
+  }
 
   // Clear Form When Props are Empty Objects
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps(nextProps) {
     const { recipient } = nextProps.currentInvoice;
     if (_.isEmpty(recipient.new) && _.isEmpty(recipient.select)) {
       this.setState({
@@ -45,15 +51,20 @@ class Recipient extends Component {
     }
   }
 
+  // Optimization
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state !== nextState;
+  }
+
   // Toggle Recipient Form
-  toggleForm = event => {
+  toggleForm(event) {
     this.setState({ newRecipient: event.target.value === 'new' ? true : false }, () => {
       this.dispatchRecipientData(this.state);
     });
-  };
+  }
 
   //  Handle Recipient Form Input Change
-  handleRecipientFormInputChange = event => {
+  handleRecipientFormInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
@@ -66,7 +77,7 @@ class Recipient extends Component {
   }
 
   // Handle Recipient Selection Change
-  handleRecipientSelectChange = selectedRecipient => {
+  handleRecipientSelectChange(selectedRecipient) {
     this.setState({
       select: selectedRecipient,
     }, () => {
@@ -75,13 +86,13 @@ class Recipient extends Component {
   }
 
   // Send Recipient State Data to Store
-  dispatchRecipientData = data => {
+  dispatchRecipientData(data) {
     const {dispatch} = this.props;
     dispatch(FormActions.updateRecipient(data));
-  };
+  }
 
   // Output Form or List
-  outputComponent = () => {
+  outputComponent() {
     // If No contact existed, show the contact form
     const { recipients } = this.props;
     if (recipients.data.length === 0) {
@@ -113,7 +124,8 @@ class Recipient extends Component {
   };
 
   // Render
-  render = () => {
+  render() {
+    console.log('Render Recipient');
     const {recipients} = this.props;
     const {newRecipient} = this.state;
     return (
@@ -126,7 +138,7 @@ class Recipient extends Component {
               <label>
                 <input
                   type="radio"
-                  onChange={e => this.toggleForm(e)}
+                  onChange={this.toggleForm}
                   checked={newRecipient === true}
                   value="new"
                 />
@@ -137,7 +149,7 @@ class Recipient extends Component {
               <label>
                 <input
                   type="radio"
-                  onChange={e => this.toggleForm(e)}
+                  onChange={this.toggleForm}
                   checked={newRecipient === false}
                   value="select"
                 />
@@ -153,14 +165,12 @@ class Recipient extends Component {
 // PropTypes Validation
 Recipient.propTypes = {
   currentInvoice: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
   recipients: PropTypes.object.isRequired,
 };
 
-// Map state to props
-Recipient = connect(state => ({
+// Map state to props & Export
+export default connect(state => ({
   currentInvoice: state.FormReducer,
   recipients: state.ContactsReducer,
 }))(Recipient);
-
-// Export
-export default Recipient;

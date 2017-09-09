@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {findDOMNode} from 'react-dom';
 import PropTypes from 'prop-types';
+import {compose} from 'redux';
 
 // Drag & Drop
 import {ItemTypes} from '../../../constants/ItemTypes';
@@ -76,35 +77,57 @@ const collectTarget = (connect, monitor) => {
   };
 };
 
-class _withDragNDropHOC extends Component {
-  render = () => {
+class _withDragNDrop extends Component {
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.index !== nextProps.index ||
+      this.props.isDragging !== nextProps.isDragging ||
+      this.props.hasHandler !== nextProps.hasHandler
+    );
+  }
+
+  render() {
     const {
       connectDragSource,
-      connectDragPreview,
       connectDropTarget,
       isDragging,
       hasHandler,
     } = this.props;
     return connectDropTarget(
       connectDragSource(
-        <div style={{ display: 'flex', opacity: isDragging ? 0 : 1 }}>
-          {hasHandler && connectDragSource(
-            <div className="dragHandler">
-              <i className="ion-grid" />
-            </div>
-          )}
-          { this.props.children }
+        <div style={{display: 'flex', opacity: isDragging ? 0 : 1}}>
+          {hasHandler &&
+            connectDragSource(
+              <div className="dragHandler">
+                <i className="ion-grid" />
+              </div>
+            )}
+          {this.props.children}
         </div>
-    ));
+      )
+    );
   }
+}
+
+// PropTypes Validation
+_withDragNDrop.propTypes = {
+  connectDragSource: PropTypes.func.isRequired,
+  connectDropTarget: PropTypes.func.isRequired,
+  hasHandler: PropTypes.bool.isRequired,
+  index: PropTypes.number.isRequired,
+  isDragging: PropTypes.bool.isRequired,
 };
 
-_withDragNDropHOC = DragSource(ItemTypes.ROW, rowSource, collectSource)(_withDragNDropHOC);
-_withDragNDropHOC = DropTarget(ItemTypes.ROW, rowTarget, collectTarget)(_withDragNDropHOC);
+// Make the Component as Drag Target & Drop Target
+const _withDragNDropWrapper = compose(
+  DragSource(ItemTypes.ROW, rowSource, collectSource),
+  DropTarget(ItemTypes.ROW, rowTarget, collectTarget)
+)(_withDragNDrop);
 
-const _withDragNDrop = ComposedComponent => props =>
-  <_withDragNDropHOC {...props}>
-    <ComposedComponent { ...props }/>
-  </_withDragNDropHOC>
+// Export the HOC
+const _withDragNDropHOC = ComposedComponent => props =>
+  <_withDragNDropWrapper {...props}>
+    <ComposedComponent {...props} />
+  </_withDragNDropWrapper>;
 
-export default _withDragNDrop;
+export default _withDragNDropHOC;

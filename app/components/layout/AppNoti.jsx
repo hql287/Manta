@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
@@ -16,21 +16,18 @@ const AllNotis = styled.div`
 // Component
 import Notification from '../../components/shared/Notification';
 
-class AppNoti extends Component {
-  render = () => {
-    const {notifications, removeNoti} = this.props;
-    const notificationsComponent = notifications.map(noti =>
-      <Notification
-        key={noti.id}
-        noti={noti}
-        removeNoti={removeNoti} />
-    );
-    return (
-      <AllNotis>
-        {notificationsComponent}
-      </AllNotis>
-    );
-  };
+function AppNoti({notifications, removeNoti}) {
+  const notificationsComponent = notifications.map(noti =>
+    <Notification
+      key={noti.id}
+      noti={noti}
+      removeNoti={removeNoti} />
+  );
+  return (
+    <AllNotis>
+      {notificationsComponent}
+    </AllNotis>
+  );
 }
 
 AppNoti.propTypes = {

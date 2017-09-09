@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 
 // HOCs
-import _withAnimation from './hoc/_withAnimation.jsx';
-import _withDragNDrop from './hoc/_withDragNDrop.jsx';
+import _withAnimation from './hoc/_withAnimation';
+import _withDragNDrop from './hoc/_withDragNDrop';
 
 // Styles
 import styled from 'styled-components';
@@ -57,7 +57,15 @@ const ItemRemoveBtn = styled.a`
 
 // Component
 class ItemsRow extends Component {
-  componentWillMount = () => {
+  constructor(props) {
+    super(props);
+    this.updateSubtotal = this.updateSubtotal.bind(this);
+    this.uploadRowState = this.uploadRowState.bind(this);
+    this.handleTextInputChange = this.handleTextInputChange.bind(this);
+    this.handleNumberInputChange = this.handleNumberInputChange.bind(this);
+  }
+
+  componentWillMount() {
     const {id, description, quantity, price, subtotal} = this.props.item;
     this.setState({
       id,
@@ -66,9 +74,9 @@ class ItemsRow extends Component {
       quantity: quantity ? quantity : '',
       subtotal: subtotal ? subtotal : '',
     });
-  };
+  }
 
-  handleTextInputChange = event => {
+  handleTextInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({[name]: value}, () => {
@@ -76,7 +84,7 @@ class ItemsRow extends Component {
     });
   };
 
-  handleNumberInputChange = event => {
+  handleNumberInputChange(event) {
     const name   = event.target.name;
     const eValue = event.target.value;
     const value  = eValue === '' ? '' : parseInt(eValue, 10);
@@ -85,7 +93,7 @@ class ItemsRow extends Component {
     });
   };
 
-  updateSubtotal = () => {
+  updateSubtotal() {
     const currentPrice = this.state.price === '' ? 0 : parseInt(this.state.price, 10);
     const currentQuantity = this.state.quantity === '' ? 0 : parseInt(this.state.quantity, 10);
     let currentSubtotal;
@@ -99,12 +107,12 @@ class ItemsRow extends Component {
     });
   };
 
-  uploadRowState = () => {
+  uploadRowState() {
     const {updateRow} = this.props;
     updateRow(this.state);
   };
 
-  render = () => {
+  render() {
     const {actions, hasHandler} = this.props;
     return (
       <ItemDiv>
@@ -149,20 +157,18 @@ class ItemsRow extends Component {
           </ItemActions>}
       </ItemDiv>
     );
-  };
+  }
 }
 
 ItemsRow.propTypes = {
-  item:       PropTypes.object.isRequired,
-  index:      PropTypes.number.isRequired,
-  hasHandler: PropTypes.bool.isRequired,
   actions:    PropTypes.bool.isRequired,
-  updateRow:  PropTypes.func.isRequired,
+  hasHandler: PropTypes.bool.isRequired,
+  item:       PropTypes.object.isRequired,
   removeRow:  PropTypes.func.isRequired,
-  moveRow:    PropTypes.func.isRequired,
+  updateRow:  PropTypes.func.isRequired,
 };
 
 export default compose (
   _withAnimation,
-  _withDragNDrop,
+  _withDragNDrop
 )(ItemsRow);

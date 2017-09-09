@@ -85,6 +85,12 @@ const InvoiceActionsBtn = styled.a`
 
 // Component
 class Invoice extends Component {
+  constructor(props) {
+    super(props);
+    this.openDeleteDialog = this.openDeleteDialog.bind(this);
+    this.previewInvoice = this.previewInvoice.bind(this);
+  }
+
   componentDidMount() {
     const deleteInvoice = this.props.deleteInvoice;
     ipc.on('confirmed-delete-invoice', (event, index, invoiceId) => {
@@ -97,7 +103,11 @@ class Invoice extends Component {
     });
   }
 
-  openDeleteDialog = invoiceId => {
+  shouldComponentUpdate(nextProps) {
+    return this.props.data._id !== nextProps.data._id;
+  }
+
+  openDeleteDialog() {
     openDialog(
       {
         type: 'warning',
@@ -106,15 +116,16 @@ class Invoice extends Component {
         buttons: ['Yes', 'No'],
       },
       'confirmed-delete-invoice',
-      invoiceId,
+      this.props.data._id
     );
-  };
+  }
 
-  // Preview Invoice
-  previewInvoice = () => ipc.send('preview-invoice', this.props.data);
+  previewInvoice() {
+    ipc.send('preview-invoice', this.props.data);
+  }
 
   // Render
-  render = () => {
+  render() {
     const invoice = this.props.data;
     const {recipient} = invoice;
     return (
@@ -165,23 +176,22 @@ class Invoice extends Component {
         <InvoiceActions>
           <InvoiceActionsBtn
             primary
-            onClick={() => this.previewInvoice()}>
+            onClick={this.previewInvoice}>
             <i className="ion-search" />
           </InvoiceActionsBtn>
           <InvoiceActionsBtn
             danger
-            onClick={() => this.openDeleteDialog(invoice._id)}>
+            onClick={this.openDeleteDialog}>
             <i className="ion-android-cancel" />
           </InvoiceActionsBtn>
         </InvoiceActions>
       </InvoiceContainer>
     );
-  };
+  }
 }
 
 Invoice.propTypes = {
   data: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
   deleteInvoice: PropTypes.func.isRequired,
 };
 

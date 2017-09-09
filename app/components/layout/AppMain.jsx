@@ -13,7 +13,11 @@ import { AppMainContent } from '../shared/Layout';
 
 
 class AppMain extends Component {
-  render = () => {
+  shouldComponentUpdate(nextProps) {
+    return this.props.activeTab !== nextProps.activeTab;
+  }
+
+  render() {
     const {activeTab} = this.props;
     return (
       <AppMainContent>
@@ -23,7 +27,7 @@ class AppMain extends Component {
         {activeTab === 'settings' && <Settings />}
       </AppMainContent>
     );
-  };
+  }
 }
 
 AppMain.propTypes = {

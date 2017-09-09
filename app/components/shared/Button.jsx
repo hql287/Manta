@@ -28,10 +28,13 @@ const ButtonStyle = styled.a`
   }
 `;
 
-export const Button = props =>
-  <ButtonStyle { ...props }>
-    { props.children }
-  </ButtonStyle>;
+function Button(props) {
+  return (
+    <ButtonStyle {...props}>
+      { props.children }
+    </ButtonStyle>
+  );
+}
 
 Button.propTypes = {
   danger: PropTypes.bool,

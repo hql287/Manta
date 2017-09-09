@@ -23,11 +23,9 @@ import {
   PageHeaderTitle,
   PageHeaderActions,
   PageContent,
-  PageFooter,
-  } from '../components/shared/Layout';
+} from '../components/shared/Layout';
 
 // Animation
-import {Motion, spring} from 'react-motion';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Components
@@ -36,22 +34,29 @@ import ItemsList from '../components/form/ItemsList';
 import Currency from '../components/form/Currency';
 import Discount from '../components/form/Discount';
 import DueDate from '../components/form/DueDate';
-import Vat from '../components/form/Vat'
+import Vat from '../components/form/Vat';
 import Note from '../components/form/Note';
 import Settings from '../components/form/Settings';
 import Button from '../components/shared/Button';
 
 // Component
 class Form extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isSettingsOpened: false };
+    this.saveFormData       = this.saveFormData.bind(this);
+    this.clearFormData      = this.clearFormData.bind(this);
+    this.toggleField        = this.toggleField.bind(this);
+    this.updateFieldData    = this.updateFieldData.bind(this);
+    this.toggleFormSettings = this.toggleFormSettings.bind(this);
+  }
 
-   state = { isSettingsOpened: false }
-
-   toggleFormSettings = () => {
+  toggleFormSettings() {
     this.setState({ isSettingsOpened: !this.state.isSettingsOpened });
-   }
+  }
 
   // Process Form Data
-  saveFormData = () => {
+  saveFormData() {
     const {currentInvoice} = this.props;
     // Validate Form Data
     if (!validateFormData(currentInvoice)) return;
@@ -71,49 +76,49 @@ class Form extends Component {
   };
 
   // Clear Form Data
-  clearFormData = vol => {
+  clearFormData(vol) {
     this.setState({ isSettingsOpened: false }, () => {
       const {dispatch} = this.props;
       dispatch(FormActions.clearForm());
       // Play A Sound
       if (!vol) sounds.play('RELOAD');
     });
-  };
+  }
 
   // Show Notification
-  newNotification = (type, message) => {
+  newNotification(type, message) {
     const { dispatch } = this.props;
     dispatch(UIActions.newNoti(type, message));
   }
 
   // ToggleField
-  toggleField = (field, cb=null) => {
+  toggleField(field, cb=null) {
     const {dispatch} = this.props;
     dispatch(FormActions.toggleField(field));
     // Execute Call Back
     cb && cb();
-  };
+  }
 
   // Update Field Data
-  updateFieldData = (field, data) => {
+  updateFieldData(field, data) {
     const {dispatch} = this.props;
     dispatch(FormActions.updateFieldData(field, data));
   }
 
   // Save Recipient To DB
-  saveRecipienAsNewContact = data => {
+  saveRecipienAsNewContact(data) {
     const {dispatch} = this.props;
     dispatch(ContactsActions.saveContact(data));
-  };
+  }
 
   // Save Invoice To DB
-  saveInvoiceToDB = data => {
+  saveInvoiceToDB(data) {
     const {dispatch} = this.props;
     dispatch(InvoicesActions.saveInvoice(data));
-  };
+  }
 
   // Render The form
-  render = () => {
+  render() {
     const {
       dueDate,
       currency,
@@ -126,10 +131,10 @@ class Form extends Component {
         <PageHeader>
           <PageHeaderTitle>Create A New Invoice</PageHeaderTitle>
           <PageHeaderActions>
-            <Button primary onClick={() => this.saveFormData()}>
+            <Button primary onClick={this.saveFormData}>
               Save
             </Button>
-            <Button danger onClick={() => this.clearFormData()}>
+            <Button danger onClick={this.clearFormData}>
               Clear
             </Button>
           </PageHeaderActions>
@@ -166,7 +171,7 @@ class Form extends Component {
         </PageContent>
       </PageWrapper>
     );
-  };
+  }
 }
 
 // PropTypes Validation

@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 // Animation
@@ -57,90 +57,93 @@ const Label = styled.label`
 import Switch from '../shared/Switch';
 
 // Component
-class Settings extends Component {
+function Settings(props) {
+  const {
+    isSettingsOpened,
+    toggleFormSettings,
+    toggleField,
+    currentInvoice,
+  } = props;
 
-  render = () => {
-    const {
-      isSettingsOpened,
-      toggleFormSettings,
-      toggleField,
-      currentInvoice,
-    } = this.props;
+  const {
+    dueDate,
+    currency,
+    discount,
+    vat,
+    note,
+  } = currentInvoice;
 
-    const {
-      dueDate,
-      currency,
-      discount,
-      vat,
-      note,
-    } = currentInvoice;
+  return (
+    <Motion
+      style={{
+        height: spring(isSettingsOpened ? 155 : 45),
+        rotate: spring(isSettingsOpened ? 180 : 0),
+      }}>
+      {({height, rotate}) =>
+        <Wrapper style={{ height: `${height}px`}}>
+          <SettingsHeader
+            href="#"
+            onClick={toggleFormSettings}>
+            <Label>Form Settings</Label>
+            <div style={{
+                transform: `rotate(${rotate}deg)`
+              }}>
+              <i className="ion-arrow-down-b"/>
+            </div>
+          </SettingsHeader>
 
-    return (
-      <Motion
-        style={{
-          height: spring(isSettingsOpened ? 155 : 45),
-          rotate: spring(isSettingsOpened ? 180 : 0),
-        }}>
-        {({height, rotate}) =>
-          <Wrapper style={{ height: `${height}px`}}>
-            <SettingsHeader
-              href="#"
-              onClick={() => toggleFormSettings()}>
-              <Label>Form Settings</Label>
-              <div style={{
-                  transform: `rotate(${rotate}deg)`
-                }}>
-                <i className="ion-arrow-down-b"/>
-              </div>
-            </SettingsHeader>
+          <AllSettings>
+            <Setting>
+              <Label>Due Date</Label>
+              <Switch
+                checked={dueDate.required}
+                onChange={() => toggleField('dueDate')}
+              />
+            </Setting>
 
-            <AllSettings>
-              <Setting>
-                <Label>Due Date</Label>
-                <Switch
-                  checked={dueDate.required}
-                  onChange={() => toggleField('dueDate')}
-                />
-              </Setting>
+            <Setting>
+              <Label>Currency</Label>
+              <Switch
+                checked={currency.required}
+                onChange={() => toggleField('currency')}
+              />
+            </Setting>
 
+            <Setting>
+              <Label>Discount</Label>
+              <Switch
+                checked={discount.required}
+                onChange={() => toggleField('discount')}
+              />
+            </Setting>
 
-              <Setting>
-                <Label>Currency</Label>
-                <Switch
-                  checked={currency.required}
-                  onChange={() => toggleField('currency')}
-                />
-              </Setting>
+            <Setting>
+              <Label>Vat</Label>
+              <Switch
+                checked={vat.required}
+                onChange={() => toggleField('vat')}
+              />
+            </Setting>
 
-              <Setting>
-                <Label>Discount</Label>
-                <Switch
-                  checked={discount.required}
-                  onChange={() => toggleField('discount')}
-                />
-              </Setting>
-
-              <Setting>
-                <Label>Vat</Label>
-                <Switch
-                  checked={vat.required}
-                  onChange={() => toggleField('vat')}
-                />
-              </Setting>
-
-              <Setting>
-                <Label>Note</Label>
-                <Switch
-                  checked={note.required}
-                  onChange={() => toggleField('note')}
-                />
-              </Setting>
-            </AllSettings>
-          </Wrapper>}
-      </Motion>
-    );
-  };
+            <Setting>
+              <Label>Note</Label>
+              <Switch
+                checked={note.required}
+                onChange={() => toggleField('note')}
+              />
+            </Setting>
+          </AllSettings>
+        </Wrapper>}
+    </Motion>
+  );
 }
+
+Settings.propTypes = {
+  isSettingsOpened: PropTypes.bool.isRequired,
+  currentInvoice: PropTypes.object.isRequired,
+  toggleField: PropTypes.func.isRequired,
+  toggleFormSettings: PropTypes.func.isRequired,
+};
 
 // Export
 export default Settings;

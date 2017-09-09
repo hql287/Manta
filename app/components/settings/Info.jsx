@@ -107,13 +107,18 @@ const LogoChangeBtn = styled(Button)`
 
 // Component
 class Info extends Component {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.selectLogo = this.selectLogo.bind(this);
+    this.removeLogo = this.removeLogo.bind(this);
+  }
 
-  // Life Cycle Events
-  componentWillMount = () => {
+  componentWillMount() {
     this.setState(this.props.info);
-  };
+  }
 
-  componentDidMount = () => {
+  componentDidMount() {
     // Handle Selected File
     ipc.on('file-selected', (event, filePath) => {
       this.handleLogoUpload(filePath);
@@ -135,14 +140,14 @@ class Info extends Component {
       const imageUrl = e.dataTransfer.files[0].path;
       this.handleLogoUpload(imageUrl);
     });
-  };
+  }
 
-  componentWillUnmount = () => {
+  componentWillUnmount() {
     ipc.removeAllListeners('file-selected');
   };
 
   // Helper Functions
-  resizeImage = filePath => {
+  resizeImage(filePath) {
     return new Promise((resolve, reject) => {
       Jimp.read(filePath, (err, file) => {
         if (err) {
@@ -155,16 +160,16 @@ class Info extends Component {
             .write(`./static/imgs/tmp/resizedlogo.${fileExtention}`, () => {
               const resizeImgPath = path.join(
                 __dirname,
-                `../../../static/imgs/tmp/resizedlogo.${fileExtention}`,
+                `../../../static/imgs/tmp/resizedlogo.${fileExtention}`
               );
               resolve(resizeImgPath);
             });
         }
       });
     });
-  };
+  }
 
-  convertResizedImageToBase64 = filePath => {
+  convertResizedImageToBase64(filePath) {
     return new Promise((resolve, reject) => {
       fs.readFile(filePath, (err, data) => {
         // Error handler
@@ -182,15 +187,15 @@ class Info extends Component {
         resolve(imgSrcString);
       });
     });
-  };
+  }
 
-  cleanUpFiles = () => {
+  cleanUpFiles() {
     const files = glob.sync(path.join(__dirname, '../../../static/imgs/tmp/*'));
     files.forEach(file => fs.unlinkSync(file));
   }
 
   // Handle Drag & Drop Upload
-  handleLogoUpload = filepath => {
+  handleLogoUpload(filepath) {
     this.resizeImage(filepath)
       .then(this.convertResizedImageToBase64)
       .then(imgSrcString => {
@@ -199,30 +204,35 @@ class Info extends Component {
           this.updateInfoState();
         });
       });
-  };
+  }
 
   // Handle Input Change
-  handleInputChange = event => {
+  handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({[name]: value}, () => {
       this.props.updateSettings('info', this.state);
     });
-  };
+  }
+
+  // Update Info State
+  updateInfoState() {
+    this.props.updateSettings('info', this.state);
+  }
 
   // Select Logo from File
-  selectLogo = () => {
+  selectLogo() {
     ipc.send('open-file-dialog');
-  };
+  }
 
   // Remove Current Logo
-  removeLogo = () => {
+  removeLogo() {
     this.setState({logo: null}, () => {
       this.updateInfoState();
     });
-  };
+  }
 
-  render = () => {
+  render() {
     return (
       <div>
         <div className="pageItem">
@@ -231,12 +241,12 @@ class Info extends Component {
             {this.state.logo
               ? <LogoImgWrapper>
                   <LogoImg src={this.state.logo} alt="Logo" />
-                  <LogoRemoveBtn onClick={() => this.removeLogo()}>
+                  <LogoRemoveBtn onClick={this.removeLogo}>
                     <i className="ion-android-cancel" />
                   </LogoRemoveBtn>
                 </LogoImgWrapper>
               : <LogoDropzoneInner/>}
-            <LogoChangeBtn primary onClick={() => this.selectLogo()}>
+            <LogoChangeBtn primary onClick={this.selectLogo}>
               Select Photo
             </LogoChangeBtn>
           </LogoDropzone>
@@ -248,7 +258,7 @@ class Info extends Component {
               name="fullname"
               type="text"
               value={this.state.fullname}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
           </div>
 
@@ -258,7 +268,7 @@ class Info extends Component {
               name="company"
               type="text"
               value={this.state.company}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
           </div>
         </div>
@@ -270,7 +280,7 @@ class Info extends Component {
               name="address"
               type="text"
               value={this.state.address}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
           </div>
 
@@ -280,7 +290,7 @@ class Info extends Component {
               name="email"
               type="text"
               value={this.state.email}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
           </div>
         </div>
@@ -292,7 +302,7 @@ class Info extends Component {
               name="phone"
               type="text"
               value={this.state.phone}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
           </div>
 
@@ -302,13 +312,13 @@ class Info extends Component {
               name="website"
               type="text"
               value={this.state.website}
-              onChange={e => this.handleInputChange(e)}
+              onChange={this.handleInputChange}
             />
           </div>
         </div>
       </div>
     );
-  };
+  }
 }
 
 Info.propTypes = {
@@ -316,6 +326,4 @@ Info.propTypes = {
   updateSettings: PropTypes.func.isRequired,
 };
 
-Info = _withFadeInAnimation(Info);
-
-export default Info;
+export default _withFadeInAnimation(Info);
