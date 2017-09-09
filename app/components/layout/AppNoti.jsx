@@ -6,11 +6,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 const AllNotis = styled.div`
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50%;
   height: auto;
-  max-width: 300px;
+  bottom: 0;
+  width: 100%;
 `;
 
 // Component
