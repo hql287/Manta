@@ -135,23 +135,6 @@ label {
   font-size: 14px;
 }
 
-/* .pageWrapper { */
-/*   display: flex; */
-/*   flex-direction: column; */
-/*   height: 100%; */
-/*   padding-top: 40px; */
-/* } */
-
-/* Header */
-/* ====================================================== */
-/* .pageHeader { */
-/*   padding: 0 40px; */
-/*   max-height: 60px; */
-/*   flex: 1; */
-/*   display: flex; */
-/*   justify-content: space-between; */
-/* } */
-
 .pageLabels {
   display: flex;
   margin-bottom: 0 !important;
@@ -194,30 +177,11 @@ label {
 
 /* Content */
 /* ====================================================== */
-/* .pageContent { */
-/*   flex: 1; */
-/*   overflow: scroll; */
-/*   padding: 0 40px; */
-/* } */
 
 .pageItem {
   margin-bottom: 20px;
 }
 
-/* Footer */
-/* ====================================================== */
-/* .pageFooter { */
-/*   position: relative; */
-/*   flex: 1; */
-/*   max-height: 40px; */
-/*   text-transform: uppercase; */
-/*   font-size: 14px; */
-/*   padding: 0 40px; */
-/*   border-top: 1px solid #f2f3f4; */
-/*   justify-content: space-between; */
-/*   align-items: center; */
-/*   display: flex; */
-/* } */
 
 #pageFooterHint a {
   background: none;
@@ -229,15 +193,6 @@ label {
   padding: 0;
 }
 
-/* .pageFooter a { */
-/*   padding: 0 30px; */
-/*   border: 1px solid #f2f3f4; */
-/*   border-radius: 4px; */
-/* } */
-/* .pageFooter a:hover { */
-/*   background: #f2f3f4; */
-/*   outline: none; */
-/* } */
 
 select#themeSwitcher {
   max-width: 150px;

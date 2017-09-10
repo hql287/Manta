@@ -2,13 +2,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
+// 3rd Party Libs
+import _ from 'lodash';
+
 // Redux
 import {connect} from 'react-redux';
 import * as FormActions from '../../actions/form';
 import * as ContactsActions from '../../actions/contacts';
-
-// 3rd Party Libs
-import _ from 'lodash';
 
 // Custom Components
 import RecipientForm from './RecipientForm';
@@ -19,35 +19,31 @@ import { Section } from '../shared/Section';
 class Recipient extends Component {
   constructor(props) {
     super(props);
+    this.state = this.props.currentInvoice.recipient;
     this.toggleForm = this.toggleForm.bind(this);
-    this.handleRecipientFormInputChange = this.handleRecipientFormInputChange.bind(this);
-    this.handleRecipientSelectChange = this.handleRecipientSelectChange.bind(this);
+    this.updateRecipientForm = this.updateRecipientForm.bind(this);
+    this.updateRecipientList = this.updateRecipientList.bind(this);
   }
-  // Extract data from redux set as state before mount
-  componentWillMount() {
-    // Retrieve all contacts
-    if (!this.props.recipients.loaded) {
+
+  // Retrieve all contacts once the component is mounted
+  componentDidMount() {
+    if (!this.props.contacts.loaded) {
       const {dispatch} = this.props;
       dispatch(ContactsActions.getAllContacts());
     }
-    // Set state
-    const {recipient} = this.props.currentInvoice;
-    this.setState({
-      newRecipient: recipient.newRecipient ? true : false,
-      new: _.isEmpty(recipient.new) ? {} : recipient.new,
-      select: _.isEmpty(recipient.select) ? {} : recipient.select,
-    });
   }
 
-  // Clear Form When Props are Empty Objects
+  // Handle Reset Form
   componentWillReceiveProps(nextProps) {
     const { recipient } = nextProps.currentInvoice;
     if (_.isEmpty(recipient.new) && _.isEmpty(recipient.select)) {
-      this.setState({
-        newRecipient: true,
-        new: {},
-        select: {},
-      });
+      this.setState(
+        Object.assign({}, this.state, {
+          newRecipient: true,
+          new: {},
+          select: {},
+        })
+      );
     }
   }
 
@@ -56,107 +52,100 @@ class Recipient extends Component {
     return this.state !== nextState;
   }
 
-  // Toggle Recipient Form
-  toggleForm(event) {
-    this.setState({ newRecipient: event.target.value === 'new' ? true : false }, () => {
-      this.dispatchRecipientData(this.state);
+  // Switch between New Recipient Form or Selection Form
+  toggleForm() {
+    this.setState({ newRecipient: !this.state.newRecipient }, () => {
+      this.updateRecipientData(this.state);
     });
   }
 
-  //  Handle Recipient Form Input Change
-  handleRecipientFormInputChange(event) {
+  // Hanlde Update Recipient Form Data
+  updateRecipientForm(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({
-      new: Object.assign({}, this.state.new, {
-        [name]: value
-      })
+      new: Object.assign({}, this.state.new, {[name]: value})
     }, () => {
-      this.dispatchRecipientData(this.state);
+      this.updateRecipientData(this.state);
     });
   }
 
-  // Handle Recipient Selection Change
-  handleRecipientSelectChange(selectedRecipient) {
-    this.setState({
-      select: selectedRecipient,
-    }, () => {
-      this.dispatchRecipientData(this.state);
+  // Handle Update Recipient Selection Form
+  updateRecipientList(selectedContact) {
+    this.setState({ select: selectedContact }, () => {
+      this.updateRecipientData(this.state);
     });
   }
 
-  // Send Recipient State Data to Store
-  dispatchRecipientData(data) {
+  // Update Recipient Date to Current Invoice
+  updateRecipientData(data) {
     const {dispatch} = this.props;
     dispatch(FormActions.updateRecipient(data));
   }
 
-  // Output Form or List
-  outputComponent() {
-    // If No contact existed, show the contact form
-    const { recipients } = this.props;
-    if (recipients.data.length === 0) {
+  // Render Form or Select Input
+  renderComponent() {
+    const { currentInvoice, contacts } = this.props;
+    if (contacts.data.length === 0 ) {
       return (
         <RecipientForm
-          currentRecipientData={this.state.new}
-          handleRecipientFormInputChange={this.handleRecipientFormInputChange}
+          formData={this.state.new}
+          updateRecipientForm={this.updateRecipientForm}
         />
       );
     }
-    // If there are contacts
-    // Show New or Select Form depends on state
+
     if (this.state.newRecipient) {
-      return (
+      return(
         <RecipientForm
-          currentRecipientData={this.state.new}
-          handleRecipientFormInputChange={this.handleRecipientFormInputChange}
+          formData={this.state.new}
+          updateRecipientForm={this.updateRecipientForm}
         />
       );
     } else {
-      return (
+      return(
         <RecipientsList
-          recipients={recipients.data}
-          currentSelectedRecipient={this.state.select}
-          handleRecipientSelectChange={this.handleRecipientSelectChange}
+          contacts={this.props.contacts.data}
+          selectedContact={this.state.select}
+          updateRecipientList={this.updateRecipientList}
         />
       );
     }
-  };
+  }
 
   // Render
   render() {
-    console.log('Render Recipient');
-    const {recipients} = this.props;
-    const {newRecipient} = this.state;
+    const { contacts } = this.props;
     return (
       <Section>
         <label className="itemLabel">Client *</label>
-        {this.outputComponent()}
-        {recipients.data.length > 0 &&
-          <div>
-            <div className="radio">
-              <label>
-                <input
-                  type="radio"
-                  onChange={this.toggleForm}
-                  checked={newRecipient === true}
-                  value="new"
-                />
-                Add New
-              </label>
+        { this.renderComponent() }
+        { contacts.data.length > 0
+          ? <div>
+              <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    onChange={this.toggleForm}
+                    checked={this.state.newRecipient === true}
+                    value="new"
+                  />
+                  Add New
+                </label>
+              </div>
+              <div className="radio">
+                <label>
+                  <input
+                    type="radio"
+                    onChange={this.toggleForm}
+                    checked={this.state.newRecipient === false}
+                    value="select"
+                  />
+                  Select
+                </label>
+              </div>
             </div>
-            <div className="radio">
-              <label>
-                <input
-                  type="radio"
-                  onChange={this.toggleForm}
-                  checked={newRecipient === false}
-                  value="select"
-                />
-                Select
-              </label>
-            </div>
-          </div>}
+          : null}
       </Section>
     );
   };
@@ -165,12 +154,12 @@ class Recipient extends Component {
 // PropTypes Validation
 Recipient.propTypes = {
   currentInvoice: PropTypes.object.isRequired,
+  contacts: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  recipients: PropTypes.object.isRequired,
 };
 
 // Map state to props & Export
 export default connect(state => ({
   currentInvoice: state.FormReducer,
-  recipients: state.ContactsReducer,
+  contacts: state.ContactsReducer,
 }))(Recipient);

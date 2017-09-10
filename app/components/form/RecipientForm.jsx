@@ -25,9 +25,8 @@ const Field = styled.div`
   margin: 0 15px 20px 15px;
 `;
 
-// Component
-function RecipientForm(props) {
-  const {fullname, company, phone, email} = props.currentRecipientData;
+function RecipientForm({ formData, updateRecipientForm }) {
+  const { fullname, company, email, phone } = formData;
   return (
     <Form>
       <Row>
@@ -37,7 +36,7 @@ function RecipientForm(props) {
             name="fullname"
             type="text"
             value={fullname ? fullname : ''}
-            onChange={props.handleRecipientFormInputChange}
+            onChange={updateRecipientForm}
           />
         </Field>
         <Field>
@@ -46,7 +45,7 @@ function RecipientForm(props) {
             name="company"
             type="text"
             value={company ? company : ''}
-            onChange={props.handleRecipientFormInputChange}
+            onChange={updateRecipientForm}
           />
         </Field>
       </Row>
@@ -57,7 +56,7 @@ function RecipientForm(props) {
             name="email"
             type="text"
             value={email ? email : ''}
-            onChange={props.handleRecipientFormInputChange}
+            onChange={updateRecipientForm}
           />
         </Field>
         <Field>
@@ -66,7 +65,7 @@ function RecipientForm(props) {
             name="phone"
             type="text"
             value={phone ? phone : ''}
-            onChange={props.handleRecipientFormInputChange}
+            onChange={updateRecipientForm}
           />
         </Field>
       </Row>
@@ -76,12 +75,12 @@ function RecipientForm(props) {
 
 // PropTypes Validation
 RecipientForm.propTypes = {
-  currentRecipientData: PropTypes.object,
-  handleRecipientFormInputChange: PropTypes.func.isRequired,
+  formData: PropTypes.object,
+  updateRecipientForm: PropTypes.func.isRequired,
 };
 
 RecipientForm.defaultProps = {
-  currentRecipientData: {},
+  formData: {},
 };
 
 export default _withFadeInAnimation(RecipientForm);
