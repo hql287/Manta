@@ -7,14 +7,14 @@ const initialState = {
 const SettingsReducer = (state = initialState, action) => {
   switch (action.type) {
     // Get Initial Settings
-    case ACTION_TYPES.GET_INITIAL_SETTINGS: {
+    case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       return Object.assign({}, action.data, {
         loaded: true,
       });
     }
 
     // Update Settings
-    case ACTION_TYPES.UPDATE_SETTINGS: {
+    case ACTION_TYPES.SETTINGS_UPDATE: {
       return Object.assign({}, state, {
         current: Object.assign({}, state.current, {
           [action.setting]: action.data,
@@ -23,7 +23,7 @@ const SettingsReducer = (state = initialState, action) => {
     }
 
     // Save All Settings
-    case ACTION_TYPES.SAVE_SETTINGS: {
+    case ACTION_TYPES.SETTINGS_SAVE: {
       return Object.assign({}, state, {
         saved: action.data,
       });

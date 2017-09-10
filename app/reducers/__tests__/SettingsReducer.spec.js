@@ -41,7 +41,7 @@ describe('Settings Reducer', () => {
       saved: sampleSettings,
     };
     const newState = SettingsReducer(initialState, {
-      type: ACTION_TYPES.GET_INITIAL_SETTINGS,
+      type: ACTION_TYPES.SETTINGS_GET_INITIAL,
       data: payload,
     });
     expect(newState.loaded).toBeTruthy;
@@ -52,7 +52,7 @@ describe('Settings Reducer', () => {
   it('update save settings', () => {
     const payload = sampleSettings;
     const newState = SettingsReducer(initialState, {
-      type: ACTION_TYPES.SAVE_SETTINGS,
+      type: ACTION_TYPES.SETTINGS_SAVE,
       data: payload,
     });
     expect(newState.saved).toEqual(payload);
@@ -77,7 +77,7 @@ describe('Settings Reducer should handle update', () => {
       lang: 'vi',
     };
     const newState = SettingsReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_SETTINGS,
+      type: ACTION_TYPES.SETTINGS_UPDATE,
       setting: 'appSettings',
       data: payload,
     });
@@ -96,7 +96,7 @@ describe('Settings Reducer should handle update', () => {
       website: 'https://iknownothing.com',
     };
     const newState = SettingsReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_SETTINGS,
+      type: ACTION_TYPES.SETTINGS_UPDATE,
       setting: 'info',
       data: payload,
     });
@@ -116,7 +116,7 @@ describe('Settings Reducer should handle update', () => {
       landscape: true,
     };
     const newState = SettingsReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_SETTINGS,
+      type: ACTION_TYPES.SETTINGS_UPDATE,
       setting: 'printOptions',
       data: payload,
     });

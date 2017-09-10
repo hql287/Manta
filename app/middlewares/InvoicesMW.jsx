@@ -57,7 +57,7 @@ const getGrandTotal = data => {
 
 const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
-    case ACTION_TYPES.GET_INVOICES: {
+    case ACTION_TYPES.INVOICE_GET_ALL: {
       getAllDocs()
         .then(allDocs => {
           next(Object.assign({}, action, {
@@ -76,7 +76,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       break;
     }
 
-    case ACTION_TYPES.SAVE_INVOICE: {
+    case ACTION_TYPES.INVOICE_SAVE: {
       // Set new document
       const doc = Object.assign({}, action.data, {
         _id: uuidv4(),
@@ -109,7 +109,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       break;
     }
 
-    case ACTION_TYPES.DELETE_INVOICE: {
+    case ACTION_TYPES.INVOICE_DELETE: {
       db
         .get(action._id)
         .then(doc => db.remove(doc))

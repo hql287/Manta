@@ -3,7 +3,7 @@ import * as actions from '../settings';
 
 it('getInitalSettings should create GET_INITIAL_SETTINGS action', () => {
   expect(actions.getInitalSettings()).toEqual({
-    type: ACTION_TYPES.GET_INITIAL_SETTINGS,
+    type: ACTION_TYPES.SETTINGS_GET_INITIAL,
   });
 });
 
@@ -15,7 +15,7 @@ it('updateSettings should create SAVE_SETTINGS action', () => {
   };
   const settingType = 'info';
   expect(actions.updateSettings(settingType, settingsData)).toEqual({
-    type: ACTION_TYPES.UPDATE_SETTINGS,
+    type: ACTION_TYPES.SETTINGS_UPDATE,
     setting: settingType,
     data: settingsData,
   });
@@ -24,7 +24,7 @@ it('updateSettings should create SAVE_SETTINGS action', () => {
 it('saveSettings should create SAVE_SETTINGS action', () => {
   const settingsData = {  };
   expect(actions.saveSettings(settingsData)).toEqual({
-    type: ACTION_TYPES.SAVE_SETTINGS,
+    type: ACTION_TYPES.SETTINGS_SAVE,
     data: settingsData,
   });
 });

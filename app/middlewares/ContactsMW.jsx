@@ -27,7 +27,7 @@ const getAllDocs = () =>
 
 const ContactsMW = ({dispatch}) => next => action => {
   switch (action.type) {
-    case ACTION_TYPES.GET_ALL_CONTACTS: {
+    case ACTION_TYPES.CONTACT_GET_ALL: {
       getAllDocs()
         .then(allDocs => {
           next(
@@ -48,7 +48,7 @@ const ContactsMW = ({dispatch}) => next => action => {
       break;
     }
 
-    case ACTION_TYPES.SAVE_CONTACT: {
+    case ACTION_TYPES.CONTACT_SAVE: {
       const doc = Object.assign({}, action.data, {
         _id: uuidv4(),
         created_at: Date.now(),
@@ -74,7 +74,7 @@ const ContactsMW = ({dispatch}) => next => action => {
       break;
     }
 
-    case ACTION_TYPES.DELETE_CONTACT: {
+    case ACTION_TYPES.CONTACT_DELETE: {
       db
         .get(action._id)
         .then(doc => db.remove(doc))

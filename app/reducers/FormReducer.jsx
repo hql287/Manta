@@ -21,28 +21,28 @@ const initialState = {
 const FormReducer = (state = initialState, action) => {
   switch (action.type) {
     // Update recipient
-    case ACTION_TYPES.UPDATE_RECIPIENT: {
+    case ACTION_TYPES.FORM_RECIPIENT_UPDATE: {
       return Object.assign({}, state, {
         recipient: action.data
       });
     }
 
     // Add Item
-    case ACTION_TYPES.ADD_ITEM: {
+    case ACTION_TYPES.FORM_ITEM_ADD: {
       return Object.assign({}, state, {
         rows: [...state.rows, {id: uuidv4()}],
       });
     }
 
     // Remove Item
-    case ACTION_TYPES.REMOVE_ITEM: {
+    case ACTION_TYPES.FORM_ITEM_REMOVE: {
       return Object.assign({}, state, {
         rows: state.rows.filter(item => item.id !== action.id),
       });
     }
 
     // Update Item
-    case ACTION_TYPES.UPDATE_ITEM: {
+    case ACTION_TYPES.FORM_ITEM_UPDATE: {
       return Object.assign({}, state, {
         rows: state.rows.map(item =>
           (item.id !== action.data.id)
@@ -53,7 +53,7 @@ const FormReducer = (state = initialState, action) => {
     }
 
     // Move Row Item
-    case ACTION_TYPES.MOVE_ROW: {
+    case ACTION_TYPES.FORM_ITEM_MOVE: {
       const { dragIndex, hoverIndex } = action;
       const dragRow = state.rows[dragIndex];
       let newRows = state.rows;
@@ -65,7 +65,7 @@ const FormReducer = (state = initialState, action) => {
     }
 
     // Update Field Data
-    case ACTION_TYPES.UPDATE_FIELD_DATA: {
+    case ACTION_TYPES.FORM_FIELD_UPDATE_DATA: {
       switch(action.field) {
 
         case 'dueDate': {
@@ -117,7 +117,7 @@ const FormReducer = (state = initialState, action) => {
     }
 
     // Clear Form Data
-    case ACTION_TYPES.CLEAR_FORM: {
+    case ACTION_TYPES.FORM_CLEAR: {
       return {
         recipient: {
           newRecipient: true,
@@ -134,7 +134,7 @@ const FormReducer = (state = initialState, action) => {
     }
 
     // Toggle Field
-    case ACTION_TYPES.TOGGLE_FIELD: {
+    case ACTION_TYPES.FORM_FIELD_TOGGLE: {
       return Object.assign({}, state, {
         [action.field]: Object.assign({}, state[action.field], {
           required: !state[action.field].required,

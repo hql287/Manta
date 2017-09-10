@@ -3,14 +3,7 @@ import * as actions from '../contacts';
 
 it('getAllContacts should create GET_ALL_CONTACTS action', () => {
   expect(actions.getAllContacts()).toEqual({
-    type: ACTION_TYPES.GET_ALL_CONTACTS,
-  });
-});
-
-it('getOneContact should create GET_ONE_CONTACT action', () => {
-  expect(actions.getOneContact('jon_snow')).toEqual({
-    type: ACTION_TYPES.GET_ONE_CONTACT,
-    _id: 'jon_snow',
+    type: ACTION_TYPES.CONTACT_GET_ALL,
   });
 });
 
@@ -21,14 +14,14 @@ it('saveContact should create SAVE_CONTACT action', () => {
     email: 'jon@snow.got',
   };
   expect(actions.saveContact(contactData)).toEqual({
-    type: ACTION_TYPES.SAVE_CONTACT,
+    type: ACTION_TYPES.CONTACT_SAVE,
     data: contactData,
   });
 });
 
 it('deleteContact should create DELETE_CONTACT action', () => {
   expect(actions.deleteContact('jon_snow')).toEqual({
-    type: ACTION_TYPES.DELETE_CONTACT,
+    type: ACTION_TYPES.CONTACT_DELETE,
     _id: 'jon_snow',
   });
 });

@@ -6,23 +6,22 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 
 const InvoicesMW = () => next => action => {
   switch (action.type) {
-    case ACTION_TYPES.GET_INITIAL_SETTINGS: {
+    case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
         info: appConfig.get('info'),
         appSettings: appConfig.get('appSettings'),
         printOptions: appConfig.get('printOptions'),
       };
-      next({
-        type: ACTION_TYPES.GET_INITIAL_SETTINGS,
+      next(Object.assign({}, action, {
         data: {
           current: savedSettings,
           saved: savedSettings,
-        },
-      });
+        }
+      }));
       break;
     }
 
-    case ACTION_TYPES.SAVE_SETTINGS: {
+    case ACTION_TYPES.SETTINGS_SAVE: {
       // Sate Settings
       appConfig.set('info', action.data.info);
       appConfig.set('appSettings', action.data.appSettings);

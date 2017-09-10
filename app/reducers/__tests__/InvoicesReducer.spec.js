@@ -19,7 +19,7 @@ describe('Invoices Reducer', () => {
     ];
     expect(
       InvoicesReducer(initialState, {
-        type: ACTION_TYPES.GET_INVOICES,
+        type: ACTION_TYPES.INVOICE_GET_ALL,
         data: allInvoices,
       }),
     ).toEqual(
@@ -39,7 +39,7 @@ describe('Invoices Reducer', () => {
     ];
     expect(
       InvoicesReducer(initialState, {
-        type: ACTION_TYPES.SAVE_INVOICE,
+        type: ACTION_TYPES.INVOICE_SAVE,
         data: newInvoices,
       }),
     ).toEqual(
@@ -57,7 +57,7 @@ describe('Invoices Reducer', () => {
     ];
     expect(
       InvoicesReducer(initialState, {
-        type: ACTION_TYPES.DELETE_INVOICE,
+        type: ACTION_TYPES.INVOICE_DELETE,
         data: remainingInvoices,
       }),
     ).toEqual(

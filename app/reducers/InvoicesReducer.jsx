@@ -9,20 +9,20 @@ const initialState = {
 const InvoicesReducer = (state = initialState, action) => {
   switch (action.type) {
     // Get All Invoices
-    case ACTION_TYPES.GET_INVOICES: {
+    case ACTION_TYPES.INVOICE_GET_ALL: {
       return Object.assign({}, state, {
         loaded: true,
         data: action.data,
       });
     }
     // Save Invoice
-    case ACTION_TYPES.SAVE_INVOICE: {
+    case ACTION_TYPES.INVOICE_SAVE: {
       return Object.assign({}, state, {
         data: action.data,
       });
     }
     // Delete A Invoice
-    case ACTION_TYPES.DELETE_INVOICE: {
+    case ACTION_TYPES.INVOICE_DELETE: {
       return Object.assign({}, state, {
         data: action.data,
       });
