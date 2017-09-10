@@ -4,27 +4,28 @@ import PropTypes from 'prop-types';
 
 // Styles
 import styled from 'styled-components';
-const AllNotis = styled.div`
+const Wrapper = styled.div`
   position: fixed;
   height: auto;
   bottom: 0;
   width: 100%;
+  padding: 40px 40px 20px 40px;
 `;
 
 // Component
 import Notification from '../../components/shared/Notification';
 
-function AppNoti({notifications, removeNoti}) {
-  const notificationsComponent = notifications.map(noti =>
+function AppNoti({notifications, removeNoti})  {
+  const notificationsComponent = notifications.map(notification => (
     <Notification
-      key={noti.id}
-      noti={noti}
+      key={notification.id}
+      notification={notification}
       removeNoti={removeNoti} />
-  );
+  ));
   return (
-    <AllNotis>
-      {notificationsComponent}
-    </AllNotis>
+    <Wrapper>
+      { notificationsComponent }
+    </Wrapper>
   );
 }
 

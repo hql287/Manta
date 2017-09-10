@@ -25,7 +25,7 @@ class App extends Component {
   shouldComponentUpdate(nextProps) {
     return (
       this.props.UI.activeTab !== nextProps.UI.activeTab ||
-      this.props.UI.notifications.length !== nextProps.UI.notifications.length
+      this.props.UI.notifications !== nextProps.UI.notifications
     );
   }
 
@@ -34,9 +34,9 @@ class App extends Component {
     dispatch(Actions.changeActiveTab(tabName));
   }
 
-  removeNoti(id) {
+  removeNoti() {
     const {dispatch} = this.props;
-    dispatch(Actions.removeNoti(id));
+    dispatch(Actions.removeNoti());
   }
 
   render() {
