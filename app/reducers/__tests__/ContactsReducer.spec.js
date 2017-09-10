@@ -15,27 +15,13 @@ describe('Contacts Reducer', () => {
     const allDocs = [{_id: 1, name: 'Jon Snow'}, {_id: 2, name: 'Ned Stark'}];
     expect(
       ContactsReducer(initialState, {
-        type: ACTION_TYPES.GET_ALL_CONTACTS,
+        type: ACTION_TYPES.CONTACT_GET_ALL,
         data: allDocs,
       }),
     ).toEqual(
       Object.assign({}, initialState, {
         loaded: true,
         data: allDocs,
-      }),
-    );
-  });
-
-  it('should handle get one contact', () => {
-    const doc = {_id: 2, name: 'Ned Stark'};
-    expect(
-      ContactsReducer(initialState, {
-        type: ACTION_TYPES.GET_ONE_CONTACT,
-        data: doc,
-      }),
-    ).toEqual(
-      Object.assign({}, initialState, {
-        data: doc,
       }),
     );
   });
@@ -48,7 +34,7 @@ describe('Contacts Reducer', () => {
     ];
     expect(
       ContactsReducer(initialState, {
-        type: ACTION_TYPES.SAVE_CONTACT,
+        type: ACTION_TYPES.CONTACT_SAVE,
         data: newDocs,
       }),
     ).toEqual(
@@ -65,7 +51,7 @@ describe('Contacts Reducer', () => {
     ];
     expect(
       ContactsReducer(initialState, {
-        type: ACTION_TYPES.DELETE_CONTACT,
+        type: ACTION_TYPES.CONTACT_DELETE,
         data: remainingDocs,
       }),
     ).toEqual(

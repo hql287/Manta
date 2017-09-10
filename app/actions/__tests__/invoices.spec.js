@@ -3,7 +3,7 @@ import * as actions from '../invoices';
 
 it('getInvoices should create GET_INVOICES action', () => {
   expect(actions.getInvoices()).toEqual({
-    type: ACTION_TYPES.GET_INVOICES,
+    type: ACTION_TYPES.INVOICE_GET_ALL,
   });
 });
 
@@ -14,14 +14,14 @@ it('saveInvoice should create SAVE_INVOICE action', () => {
     email: 'jon@snow.got',
   };
   expect(actions.saveInvoice(invoiceData)).toEqual({
-    type: ACTION_TYPES.SAVE_INVOICE,
+    type: ACTION_TYPES.INVOICE_SAVE,
     data: invoiceData,
   });
 });
 
 it('deleteInvoice should create DELETE_INVOICE action', () => {
   expect(actions.deleteInvoice('jon_snow')).toEqual({
-    type: ACTION_TYPES.DELETE_INVOICE,
+    type: ACTION_TYPES.INVOICE_DELETE,
     _id: 'jon_snow',
   });
 });

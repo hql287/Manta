@@ -5,14 +5,14 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 // Get All Invoices
 export const getInvoices = () => {
   return {
-    type: ACTION_TYPES.GET_INVOICES,
+    type: ACTION_TYPES.INVOICE_GET_ALL,
   };
 };
 
 // Save an Invoice
 export const saveInvoice = data => {
   return {
-    type: ACTION_TYPES.SAVE_INVOICE,
+    type: ACTION_TYPES.INVOICE_SAVE,
     data,
   };
 };
@@ -20,7 +20,7 @@ export const saveInvoice = data => {
 // Delete an invoice
 export const deleteInvoice = _id => {
   return {
-    type: ACTION_TYPES.DELETE_INVOICE,
+    type: ACTION_TYPES.INVOICE_DELETE,
     _id,
   };
 };

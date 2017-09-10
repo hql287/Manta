@@ -18,14 +18,14 @@ describe('Form Reducer should handle', () => {
 
   it('adding a row item', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.ADD_ITEM,
+      type: ACTION_TYPES.FORM_ITEM_ADD,
     });
     expect(newState.rows).toHaveLength(5);
   });
 
   it('remove a row item', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.REMOVE_ITEM,
+      type: ACTION_TYPES.FORM_ITEM_REMOVE,
       id: 'Arya Stark'
     });
     expect(newState.rows).toHaveLength(3);
@@ -33,7 +33,7 @@ describe('Form Reducer should handle', () => {
 
   it('update a row item', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_ITEM,
+      type: ACTION_TYPES.FORM_ITEM_UPDATE,
       data: {
         id: 'Tyrion Lannister',
         description: 'The Lannisters always pay their debts',
@@ -48,7 +48,7 @@ describe('Form Reducer should handle', () => {
 
   it('drag row item', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.MOVE_ROW,
+      type: ACTION_TYPES.FORM_ITEM_MOVE,
       dragIndex: 2,
       hoverIndex: 3,
     });
@@ -63,7 +63,7 @@ describe('Form Reducer should handle', () => {
 
   it('clear the form', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.CLEAR_FORM,
+      type: ACTION_TYPES.FORM_CLEAR,
     });
     expect(newState.recipient).toEqual({
       newRecipient: true,
@@ -94,7 +94,7 @@ describe('Form Reducer should handle toggle', () => {
 
   it('currency field', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.TOGGLE_FIELD,
+      type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       field: 'currency',
     });
     expect(newState.currency.required).toBe(true);
@@ -102,7 +102,7 @@ describe('Form Reducer should handle toggle', () => {
 
   it('dueDate field', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.TOGGLE_FIELD,
+      type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       field: 'dueDate',
     });
     expect(newState.dueDate.required).toBe(true);
@@ -110,7 +110,7 @@ describe('Form Reducer should handle toggle', () => {
 
   it('discount field', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.TOGGLE_FIELD,
+      type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       field: 'discount',
     });
     expect(newState.discount.required).toBe(true);
@@ -118,7 +118,7 @@ describe('Form Reducer should handle toggle', () => {
 
   it('note field', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.TOGGLE_FIELD,
+      type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       field: 'note',
     });
     expect(newState.note.required).toBe(true);
@@ -126,7 +126,7 @@ describe('Form Reducer should handle toggle', () => {
 
   it('vat field', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.TOGGLE_FIELD,
+      type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       field: 'vat',
     });
     expect(newState.vat.required).toBe(true);
@@ -149,7 +149,7 @@ describe('Form Reducer should handle update', () => {
 
   it('recipient data', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_RECIPIENT,
+      type: ACTION_TYPES.FORM_RECIPIENT_UPDATE,
       data: {
         newRecipient: false,
         select: {
@@ -178,7 +178,7 @@ describe('Form Reducer should handle update', () => {
 
   it('currency data', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_FIELD_DATA,
+      type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       field: 'currency',
       data: 'VND',
     });
@@ -188,7 +188,7 @@ describe('Form Reducer should handle update', () => {
 
   it('dueDate data', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_FIELD_DATA,
+      type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       field: 'dueDate',
       data: '28/07/1988',
     });
@@ -197,7 +197,7 @@ describe('Form Reducer should handle update', () => {
 
   it('discount data', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_FIELD_DATA,
+      type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       field: 'discount',
       data: {
         type: 'percentage',
@@ -212,7 +212,7 @@ describe('Form Reducer should handle update', () => {
 
   it('vat data', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_FIELD_DATA,
+      type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       field: 'vat',
       data: {
         amount: 5,
@@ -224,7 +224,7 @@ describe('Form Reducer should handle update', () => {
 
   it('note data', () => {
     const newState = FormReducer(currentState, {
-      type: ACTION_TYPES.UPDATE_FIELD_DATA,
+      type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       field: 'note',
       data: {
         content: 'You know nothing, Jon Snow',
