@@ -93,6 +93,12 @@ function AppNav({activeTab, changeTab}) {
   const marginLeftValue = setMarginValue(activeTab);
   return (
     <TopBar>
+      <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
+        {({marginLeft}) =>
+          <ActiveIndicator>
+            <div style={{marginLeft: `${marginLeft}%`}} />
+          </ActiveIndicator>}
+      </Motion>
       <Tab href="#" onClick={() => changeTab('form')}>
         <Icon id="form" className="ion-android-list" />
         Create
@@ -109,12 +115,6 @@ function AppNav({activeTab, changeTab}) {
         <Icon id="settings" className="ion-ios-gear" />
         Settings
       </Tab>
-      <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
-        {({marginLeft}) =>
-          <ActiveIndicator>
-            <div style={{marginLeft: `${marginLeft}%`}} />
-          </ActiveIndicator>}
-      </Motion>
     </TopBar>
   );
 }

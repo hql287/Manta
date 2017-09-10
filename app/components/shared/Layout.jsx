@@ -45,7 +45,7 @@ const PageHeaderTitleStyle = styled.p`
 `;
 
 const PageHeaderActionsStyle = styled.div`
-  a { margin-left: 10px; }
+  button { margin-left: 10px; }
 `;
 
 const PageContentStyle = styled.div`
