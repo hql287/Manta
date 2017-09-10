@@ -11,7 +11,7 @@ const moment = require('moment');
 const _ = require('lodash');
 
 // Custom Component
-import { TR, TD } from '../shared/Table';
+import {TR, TD} from '../shared/Table';
 
 // Component
 class Invoice extends Component {
@@ -26,7 +26,7 @@ class Invoice extends Component {
   }
 
   deleteInvoice() {
-    const { data, deleteInvoice } = this.props;
+    const {data, deleteInvoice} = this.props;
     deleteInvoice(data._id);
   }
 
@@ -44,16 +44,20 @@ class Invoice extends Component {
           {_.truncate(invoice._id, {
             length: 8,
             omission: '',
-            })}
+          })}
         </TD>
-        <TD primary >{recipient.fullname}</TD>
+        <TD bold>
+          {recipient.fullname}
+        </TD>
         <TD>
-          {moment(invoice.DueDate).format('DD/MM/YYYY')}
+          {invoice.DueDate
+            ? moment(invoice.DueDate).format('DD/MM/YYYY')
+            : '--'}
         </TD>
         <TD muted>
           {format(invoice.created_at, 'DD/MM/YYYY')}
         </TD>
-        <TD bold success >
+        <TD bold success>
           {invoice.currency} {invoice.grandTotal}
         </TD>
         <TD actions>
