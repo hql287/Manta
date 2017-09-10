@@ -1,6 +1,10 @@
 // Electron libs
 const ipc = require('electron').ipcRenderer;
 
+// Custom Libs
+const openDialog = require('../renderers/dialog.js');
+import sounds from '../../libs/sounds.js';
+
 // React Libraries
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
@@ -9,10 +13,6 @@ import PropTypes from 'prop-types';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from '../actions/invoices';
-
-// Custom Libs
-const openDialog = require('../renderers/dialog.js');
-import sounds from '../../libs/sounds.js';
 
 // Layout
 import {
@@ -28,16 +28,7 @@ import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation'
 // Custom Components
 import Invoice from '../components/invoices/Invoice';
 import Message from '../components/shared/Message';
-
-// Styles
-import styled from 'styled-components';
-
-const InvoicesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-`;
+import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
 
 // Component
 class Invoices extends Component {
@@ -64,7 +55,7 @@ class Invoices extends Component {
   }
 
   // Optimization
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate(nextProps, nextState) {
     return this.props.invoices !== nextProps.invoices;
   }
 
@@ -93,6 +84,20 @@ class Invoices extends Component {
     dispatch(Actions.deleteInvoice(invoiceId));
   }
 
+  // Open Confirm Dialog
+  deleteSelectedInvoices() {
+    openDialog(
+      {
+        type: 'warning',
+        title: 'Delete These Invoices',
+        message: 'Are You Sure?',
+        buttons: ['Yes', 'No'],
+      },
+      'confirmed-delete-invoice',
+      this.state.selectedItems
+    );
+  }
+
   // Render
   render() {
     const {invoices} = this.props;
@@ -113,10 +118,22 @@ class Invoices extends Component {
         </PageHeader>
         <PageContent>
           {invoices.data.length === 0
-            ? <Message info text="You don't have any invoice yet"/>
-            : <InvoicesContainer>
-                {invoicesComponent}
-              </InvoicesContainer>}
+            ? <Message info text="You don't have any invoice yet" />
+            : <Table hasBorders bg>
+                <THead>
+                  <TR>
+                    <TH>ID</TH>
+                    <TH>Client</TH>
+                    <TH>DueDate</TH>
+                    <TH>Created</TH>
+                    <TH>Value</TH>
+                    <TH actions>Actions</TH>
+                  </TR>
+                </THead>
+                <TBody>
+                  {invoicesComponent}
+                </TBody>
+              </Table>}
         </PageContent>
       </PageWrapper>
     );
@@ -130,6 +147,6 @@ Invoices.propTypes = {
 
 // Export
 export default compose(
-  connect(state => ({ invoices: state.InvoicesReducer })),
+  connect(state => ({invoices: state.InvoicesReducer})),
   _withFadeInAnimation
 )(Invoices);

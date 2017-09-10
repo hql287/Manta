@@ -1,51 +1,85 @@
 // Electron libs
 const ipc = require('electron').ipcRenderer;
 
+// Custom Libs
+const openDialog = require('../renderers/dialog.js');
+import sounds from '../../libs/sounds.js';
+
 // React Libraries
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from '../actions/contacts';
 
 // Custom Components
 import Contact from '../components/contacts/Contact';
 import Message from '../components/shared/Message';
+import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
 
 // Layout
 import {
   PageWrapper,
   PageHeader,
   PageHeaderTitle,
-  PageHeaderActions,
   PageContent,
-  PageFooter,
-  } from '../components/shared/Layout';
+} from '../components/shared/Layout';
 
 // Animation
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Component
 class Contacts extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteContact = this.deleteContact.bind(this);
+  }
 
-  componentDidMount = () => {
+  componentDidMount() {
+    // Get All Contacts
     if (!this.props.contacts.loaded) {
       const {dispatch} = this.props;
       dispatch(Actions.getAllContacts());
     }
-  };
 
-  deleteContact = _id => {
-    const {dispatch} = this.props;
-    dispatch(Actions.deleteContact(_id));
-  };
+    // Add Event Listener
+    ipc.on('confirmed-delete-contact', (event, index, contactId) => {
+      if (index === 0) {
+        this.confirmedDeleteContact(contactId);
+        sounds.play('REMOVE');
+      }
+    });
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.contacts !== nextProps.contacts;
+  }
 
   componentWillUnmount() {
     ipc.removeAllListeners('confirmed-delete-contact');
   }
 
-  render = () => {
+  deleteContact(contactId) {
+    openDialog(
+      {
+        type: 'warning',
+        title: 'Delete This Contact',
+        message: 'Are You Sure?',
+        buttons: ['Yes', 'No'],
+      },
+      'confirmed-delete-contact',
+      contactId
+    );
+  }
+
+  confirmedDeleteContact(contactId) {
+    const {dispatch} = this.props;
+    dispatch(Actions.deleteContact(contactId));
+  }
+
+  render() {
     const {contacts} = this.props;
     const contactsComponent = contacts.data.map((contact, index) => {
       return (
@@ -65,23 +99,33 @@ class Contacts extends Component {
         <PageContent>
           {contacts.data.length === 0
             ? <Message info text="You don't have any contacts yet!" />
-            : <div className="row">
-                {contactsComponent}
-              </div>}
+            : <Table hasBorders bg>
+                <THead>
+                  <TR>
+                    <TH>Contact</TH>
+                    <TH>Phone</TH>
+                    <TH>Email</TH>
+                    <TH actions>Actions</TH>
+                  </TR>
+                </THead>
+                <TBody>
+                  {contactsComponent}
+                </TBody>
+              </Table>}
         </PageContent>
       </PageWrapper>
     );
-  };
+  }
 }
 
 // PropTypes
 Contacts.propTypes = {
   contacts: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-// Map state to props & Add Faded In Animation
-Contacts = connect(state => ({ contacts: state.ContactsReducer }))(Contacts);
-Contacts = _withFadeInAnimation(Contacts);
-
 // Export
-export default Contacts;
+export default compose(
+  connect(state => ({ contacts: state.ContactsReducer })),
+  _withFadeInAnimation
+)(Contacts);
