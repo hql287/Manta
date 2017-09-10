@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Styles
 import styled from 'styled-components';
 
-const ButtonStyle = styled.a`
+const ButtonStyle = styled.button`
   display: inline-flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -38,14 +38,12 @@ function Button(props) {
 
 Button.propTypes = {
   danger: PropTypes.bool,
-  href: PropTypes.string,
   onClick: PropTypes.func,
   primary: PropTypes.bool,
   success: PropTypes.bool,
 };
 
 Button.defaultProps = {
-  href: '#',
   primary: false,
   success: false,
   danger: false,
