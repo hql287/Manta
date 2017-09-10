@@ -25,38 +25,26 @@ const getAllDocs = () =>
       });
   });
 
-// Get A Single Doc Helper
-const getSingleDoc = _id => {
-  new Promise((resolve, reject) => {
-    db
-      .get(_id)
-      .then(doc => {
-        resolve(doc);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-};
-
-const ContactsMW = () => next => action => {
+const ContactsMW = ({dispatch}) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.GET_ALL_CONTACTS: {
-      getAllDocs().then(allDocs => {
-        next(Object.assign({}, action, {
-          data: allDocs,
-        }));
-      });
-      break;
-    }
-
-    case ACTION_TYPES.GET_ONE_CONTACT: {
-      getSingleDoc(action._id).then(doc => {
-        next({
-          type: ACTION_TYPES.GET_ONE_CONTACT,
-          data: doc,
+      getAllDocs()
+        .then(allDocs => {
+          next(
+            Object.assign({}, action, {
+              data: allDocs,
+            }),
+          );
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
         });
-      });
       break;
     }
 
@@ -73,6 +61,15 @@ const ContactsMW = () => next => action => {
             type: ACTION_TYPES.SAVE_CONTACT,
             data: newDocs,
           });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
         });
       break;
     }
@@ -86,6 +83,22 @@ const ContactsMW = () => next => action => {
           next({
             type: ACTION_TYPES.DELETE_CONTACT,
             data: remainingDocs,
+          });
+          dispatch({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'success',
+              message: 'Deleted Successfully',
+            },
+          });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
           });
         });
       break;

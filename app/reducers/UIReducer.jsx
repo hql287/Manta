@@ -17,13 +17,13 @@ const UIReducer = (state = initialState, action) => {
 
     // Show Notification
     case ACTION_TYPES.UI_NEW_NOTIFICATION: {
-      const newNotication = {
+      const newNotification = {
         id: uuidv4(),
         type: action.payload.type,
         message: action.payload.message,
       };
       return Object.assign({}, state, {
-        notifications: [ newNotication ]
+        notifications: [ newNotification ]
       });
     }
 

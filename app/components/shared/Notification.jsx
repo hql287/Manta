@@ -14,10 +14,15 @@ const Noti = styled.div`
   height: 70px;
   padding: 20px 40px;
   margin-top: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.1);
   border-top: 4px solid #469FE5;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${ props => props.type ==='warning' && `border-top: 4px solid #F9D548;`}
+  ${ props => props.type ==='success' && `border-top: 4px solid #6BBB69;`}
+  ${ props => props.type ==='danger' && `border-top: 4px solid #EC476E;`}
 `;
 
 const Message = styled.p`
@@ -36,20 +41,19 @@ class Notification extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.noti.id !== nextProps.noti.id;
+    return this.props.notification !== nextProps.notification;
   }
 
   removeNoti() {
-    const {noti, removeNoti} = this.props;
-    removeNoti(noti.id);
+    this.props.removeNoti();
   }
 
   render() {
-    const {noti} = this.props;
+    const {notification} = this.props;
     return (
-      <Noti type={noti.type} onClick={this.removeNoti}>
+      <Noti type={notification.type} onClick={this.removeNoti}>
         <Message>
-          {noti.message}
+          {notification.message}
         </Message>
         <a href="#" onClick={this.removeNoti}>
           <i className="ion-android-close"/>
@@ -60,7 +64,7 @@ class Notification extends Component {
 }
 
 Notification.propTypes = {
-  noti: PropTypes.object.isRequired,
+  notification: PropTypes.object.isRequired,
   removeNoti: PropTypes.func.isRequired,
 };
 

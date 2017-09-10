@@ -30,7 +30,7 @@ const getAllDocs = () =>
 const getSubtotal = data => {
   // Set all subtotal
   let subtotal = 0;
-  data.rows.forEach((row, index) => {
+  data.rows.forEach(row => {
     subtotal += row.subtotal;
   });
   return subtotal;
@@ -55,7 +55,7 @@ const getGrandTotal = data => {
   return grandTotal;
 };
 
-const InvoicesMW = () => next => action => {
+const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.GET_INVOICES: {
       getAllDocs()
@@ -63,6 +63,15 @@ const InvoicesMW = () => next => action => {
           next(Object.assign({}, action, {
             data: allDocs,
           }));
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'warning',
+              message: err.message
+            }
+          });
         });
       break;
     }
@@ -87,6 +96,15 @@ const InvoicesMW = () => next => action => {
             type: ACTION_TYPES.SAVE_INVOICE,
             data: newDocs,
           });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'warning',
+              message: err.message
+            }
+          });
         });
       break;
     }
@@ -100,6 +118,22 @@ const InvoicesMW = () => next => action => {
           next({
             type: ACTION_TYPES.DELETE_INVOICE,
             data: remainingDocs,
+          });
+          dispatch({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'success',
+              message: 'Deleted Successfully'
+            }
+          });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            payload: {
+              type: 'warning',
+              message: err.message
+            }
           });
         });
       break;
