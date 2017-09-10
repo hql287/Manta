@@ -8,7 +8,8 @@ import Button from '../Button';
 describe('Renders correctly to the DOM', () => {
   it('renders a Link(a) element', () => {
     const button = mount(<Button/>);
-    expect(button.find('a')).toHaveLength(1);
+    expect(button.find('a')).toHaveLength(0);
+    expect(button.find('button')).toHaveLength(1);
   });
   it('renders its children element', () => {
     const button = mount(<Button>A Button</Button>);

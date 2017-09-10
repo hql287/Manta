@@ -18,53 +18,48 @@ class RecipientsList extends Component {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
-  // Set & Update Selected Recipient on Mount
+
   componentWillMount() {
-    const {recipients, currentSelectedRecipient} = this.props;
-    if (!currentSelectedRecipient._id) {
-      this.updateSelectedRecipient(recipients[0]._id);
+    const {contacts, selectedContact} = this.props;
+    if (_.isEmpty(selectedContact)) {
+      this.updateSelectedRecipient(contacts[0]._id);
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.currentSelectedRecipient !== nextProps.currentSelectedRecipient;
-  }
-
-  // Handle Selection Change
   handleInputChange(event) {
     this.updateSelectedRecipient(event.target.value);
   }
 
-  // Update Selected Recipient State
-  updateSelectedRecipient(selectedRecipientId) {
-    const {recipients, handleRecipientSelectChange} = this.props;
-    const recipientIndex = _.findIndex(recipients, {_id: selectedRecipientId});
-    const recipient = recipients[recipientIndex];
-    handleRecipientSelectChange(recipient);
+  updateSelectedRecipient(selectedContactId) {
+    const {contacts, updateRecipientList} = this.props;
+    // Find selected Contact in Contacts Array via ID
+    const contactIndex = _.findIndex(contacts, {_id: selectedContactId});
+    const selectedContact = contacts[contactIndex];
+    // Send update to parent Component
+    updateRecipientList(selectedContact);
   }
 
   // Render Component
   render() {
-    console.log('Render Recipient List');
-    const {recipients, currentSelectedRecipient} = this.props;
-    const recipientOptions = recipients.map(recipient => {
-      return (
-        <option value={recipient._id} key={recipient._id}>
-          {recipient.fullname ? recipient.fullname : recipient.company} ({' '}
-          {recipient.email} )
-        </option>
-      );
-    });
+    const {contacts, selectedContact} = this.props;
+    const optionsComponent = contacts.map(contact => (
+      <option
+        key={contact._id}
+        value={contact._id}>
+        {contact.fullname ? contact.fullname : contact.company}
+        ({' '} {contact.email})
+      </option>
+    ));
     return (
       <List>
         <select
           onChange={this.handleInputChange}
           value={
-            currentSelectedRecipient._id
-              ? currentSelectedRecipient._id
-              : recipients[0]._id
+            selectedContact._id
+              ? selectedContact._id
+              : contacts[0]._id
           }>
-          {recipientOptions}
+          {optionsComponent}
         </select>
       </List>
     );
@@ -73,13 +68,13 @@ class RecipientsList extends Component {
 
 // PropTypes Validation
 RecipientsList.propTypes = {
-  recipients: PropTypes.array.isRequired,
-  currentSelectedRecipient: PropTypes.object,
-  handleRecipientSelectChange: PropTypes.func.isRequired,
+  contacts: PropTypes.array.isRequired,
+  selectedContact: PropTypes.object.isRequired,
+  updateRecipientList: PropTypes.func.isRequired,
 };
 
 RecipientsList.defaultProps = {
-  currentSelectedRecipient: {},
+  selectedContact: {},
 };
 
 export default _withFadeInAnimation(RecipientsList);
