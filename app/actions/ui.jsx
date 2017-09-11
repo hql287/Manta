@@ -19,8 +19,9 @@ export const newNoti = (messageType, messageContent) => {
   };
 };
 
-export const removeNoti = () => {
+export const removeNoti = id => {
   return {
     type: ACTION_TYPES.UI_NOTIFICATION_REMOVE,
+    payload: { id },
   };
 };
