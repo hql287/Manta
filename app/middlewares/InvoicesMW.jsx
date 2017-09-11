@@ -66,7 +66,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         })
         .catch(err => {
           next({
-            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
               message: err.message
@@ -93,13 +93,13 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         .then(getAllDocs)
         .then(newDocs => {
           next({
-            type: ACTION_TYPES.SAVE_INVOICE,
+            type: ACTION_TYPES.INVOICE_SAVE,
             data: newDocs,
           });
         })
         .catch(err => {
           next({
-            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
               message: err.message
@@ -116,11 +116,11 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         .then(getAllDocs)
         .then(remainingDocs => {
           next({
-            type: ACTION_TYPES.DELETE_INVOICE,
+            type: ACTION_TYPES.INVOICE_DELETE,
             data: remainingDocs,
           });
           dispatch({
-            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
               message: 'Deleted Successfully'
@@ -129,7 +129,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         })
         .catch(err => {
           next({
-            type: ACTION_TYPES.UI_NEW_NOTIFICATION,
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
               message: err.message
