@@ -34,9 +34,9 @@ class App extends Component {
     dispatch(Actions.changeActiveTab(tabName));
   }
 
-  removeNoti() {
+  removeNoti(id) {
     const {dispatch} = this.props;
-    dispatch(Actions.removeNoti());
+    dispatch(Actions.removeNoti(id));
   }
 
   render() {
@@ -45,12 +45,7 @@ class App extends Component {
       <AppWrapper>
         <AppNav activeTab={activeTab} changeTab={this.changeTab} />
         <AppMain activeTab={activeTab} />
-        {notifications.length > 0
-          ? <AppNoti
-              notifications={notifications}
-              removeNoti={this.removeNoti}
-            />
-          : null}
+        <AppNoti notifications={notifications} removeNoti={this.removeNoti} />
       </AppWrapper>
     );
   }

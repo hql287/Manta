@@ -1,11 +1,6 @@
 // React Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'redux';
-
-// Animation
-import _withFadeInAnimation from './hoc/_withFadeInAnimation';
-import _withShowUpAnimation from './hoc/_withShowUpAnimation';
 
 // Styles
 import styled from 'styled-components';
@@ -40,12 +35,24 @@ class Notification extends Component {
     this.removeNoti = this.removeNoti.bind(this);
   }
 
+  componentDidMount() {
+    this.timeout = setTimeout(() => {
+      this.removeNoti();
+    }, 3000);
+  }
+
   shouldComponentUpdate(nextProps) {
     return this.props.notification !== nextProps.notification;
   }
 
+  ComponentWillUnmount() {
+    clearTimeout(this.timeout);
+  }
+
   removeNoti() {
-    this.props.removeNoti();
+    clearTimeout(this.timeout);
+    const {removeNoti, notification} = this.props;
+    removeNoti(notification.id);
   }
 
   render() {
@@ -68,7 +75,4 @@ Notification.propTypes = {
   removeNoti: PropTypes.func.isRequired,
 };
 
-export default compose(
-  _withFadeInAnimation,
-  _withShowUpAnimation
-)(Notification);
+export default Notification;

@@ -23,14 +23,17 @@ const UIReducer = (state = initialState, action) => {
         message: action.payload.message,
       };
       return Object.assign({}, state, {
-        notifications: [ newNotification ]
+        notifications: [
+          newNotification,
+          ...state.notifications
+        ]
       });
     }
 
     // Remove Notification
     case ACTION_TYPES.UI_NOTIFICATION_REMOVE: {
       return Object.assign({}, state, {
-        notifications: []
+        notifications: state.notifications.filter(item => item.id !== action.payload.id)
       });
     }
 

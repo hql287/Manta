@@ -14,17 +14,21 @@ const Wrapper = styled.div`
 
 // Component
 import Notification from '../../components/shared/Notification';
+import Transition from '../../components/shared/Transition';
 
-function AppNoti({notifications, removeNoti})  {
-  const notificationsComponent = notifications.map(notification => (
+function AppNoti({notifications, removeNoti}) {
+  const notificationsComponent = notifications.map(notification =>
     <Notification
       key={notification.id}
       notification={notification}
-      removeNoti={removeNoti} />
-  ));
+      removeNoti={removeNoti}
+    />
+  );
   return (
     <Wrapper>
-      { notificationsComponent }
+      <Transition>
+        {notificationsComponent}
+      </Transition>
     </Wrapper>
   );
 }
