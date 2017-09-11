@@ -4,7 +4,7 @@ const appConfig = require('electron').remote.require('electron-settings');
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-const InvoicesMW = () => next => action => {
+const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
@@ -28,6 +28,13 @@ const InvoicesMW = () => next => action => {
       appConfig.set('printOptions', action.data.printOptions);
       // Continue
       next(action);
+      dispatch({
+        type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+        payload: {
+          type: 'success',
+          message: 'All Settings Are Saved'
+        }
+      });
       break;
     }
 
