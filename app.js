@@ -132,6 +132,7 @@ function setInitialValues() {
   // Default App Settings
   if (!appConfig.has('appSettings')) {
     appConfig.set('appSettings', {
+      language: 'en',
       currency: 'USD',
       sound: 'default',
       muted: false,

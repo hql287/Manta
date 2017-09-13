@@ -53,24 +53,24 @@ class Settings extends Component {
   settingsSaved() {
     const {current, saved} = this.props.settings;
     return _.isEqual(current, saved);
-  };
+  }
 
   // Save Settings to App Config
   saveSettingsState() {
     const {dispatch, settings} = this.props;
     dispatch(Actions.saveSettings(settings.current));
-  };
+  }
 
   // Update Setting
   updateSettings(setting, data) {
     const {dispatch} = this.props;
     dispatch(Actions.updateSettings(setting, data));
-  };
+  }
 
   // Switch Tab
   changeTab(tabNum) {
     this.setState({visibleTab: tabNum});
-  };
+  }
 
   // Render Main Content
   renderSettingsContent() {
@@ -137,12 +137,12 @@ class Settings extends Component {
 
 // PropTypes Validation
 Settings.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   settings: PropTypes.shape({
     current: PropTypes.object,
     loaded: PropTypes.bool.isRequired,
     save: PropTypes.object,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
 // Export
