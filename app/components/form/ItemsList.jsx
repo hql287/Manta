@@ -3,16 +3,16 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import * as Actions from '../../actions/form.jsx';
-import {compose} from 'redux';
 
 // DragnDrop
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 // Animation
-import {Motion, spring} from 'react-motion';
+import TransitionList from '../../components/shared/TransitionList';
 
 // Custom Libs
 import sounds from '../../../libs/sounds.js';
@@ -120,12 +120,11 @@ class ItemsList extends Component {
           <ItemsListHeader>
             <label className="itemLabel">Product/Service *</label>
           </ItemsListHeader>
-          <Motion style={{height: spring(rows.length * 50)}}>
-            {({height}) =>
-              <ItemsListDiv style={{height: `${height}px`}}>
-                {rowsComponent}
-              </ItemsListDiv>}
-          </Motion>
+          <ItemsListDiv>
+            <TransitionList componentHeight={50}>
+              {rowsComponent}
+            </TransitionList>
+          </ItemsListDiv>
           <div className="itemsListActions">
             <ItemsListActionsBtn
               primary

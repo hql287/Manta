@@ -9,12 +9,13 @@ const Wrapper = styled.div`
   height: auto;
   bottom: 0;
   width: 100%;
-  padding: 40px 40px 20px 40px;
+  padding-left: 40px;
+  padding-right: 40px;
 `;
 
 // Component
 import Notification from '../../components/shared/Notification';
-import Transition from '../../components/shared/Transition';
+import TransitionList from '../../components/shared/TransitionList';
 
 function AppNoti({notifications, removeNoti}) {
   const notificationsComponent = notifications.map(notification =>
@@ -26,9 +27,9 @@ function AppNoti({notifications, removeNoti}) {
   );
   return (
     <Wrapper>
-      <Transition>
+      <TransitionList componentHeight={90}>
         {notificationsComponent}
-      </Transition>
+      </TransitionList>
     </Wrapper>
   );
 }

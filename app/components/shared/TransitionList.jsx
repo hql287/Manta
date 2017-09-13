@@ -1,9 +1,12 @@
 // Libs
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+// React Motion
 import {TransitionMotion, spring} from 'react-motion';
 
 // HOC Componen
-class Transition extends Component {
+class TransitionList extends Component {
   constructor(props) {
     super(props);
     this.getDefaultStyles = this.getDefaultStyles.bind(this);
@@ -13,14 +16,14 @@ class Transition extends Component {
   }
 
   getDefaultStyles() {
-    const {children} = this.props;
+    const {children, componentHeight} = this.props;
     const defaultStyles = children.map(child => {
       return {
         key: child.key,
         data: {child},
         style: {
-          height: 0,
-          opacity: 1,
+          height: componentHeight,
+          opacity: 0,
         },
       };
     });
@@ -28,13 +31,13 @@ class Transition extends Component {
   }
 
   getStyles() {
-    const {children} = this.props;
+    const {children, componentHeight} = this.props;
     const styles = children.map(child => {
       return {
         key: child.key,
         data: {child},
         style: {
-          height: spring(60),
+          height: spring(componentHeight),
           opacity: spring(1),
         },
       };
@@ -45,7 +48,7 @@ class Transition extends Component {
   willEnter() {
     return {
       height: 0,
-      opacity: 1,
+      opacity: 0,
     };
   }
 
@@ -76,4 +79,9 @@ class Transition extends Component {
   }
 }
 
-export default Transition;
+TransitionList.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  componentHeight: PropTypes.number.isRequired,
+};
+
+export default TransitionList;
