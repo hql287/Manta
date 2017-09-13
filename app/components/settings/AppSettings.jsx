@@ -66,7 +66,6 @@ class AppSettings extends Component {
                 value={this.state.sound}
                 onChange={this.handleInputChange}>
                 <option value="default">Default</option>
-                <option value="modern">Modern</option>
                 <option value="cs">Counter Strike</option>
               </select>
             </div>

@@ -2,10 +2,24 @@ const path = require('path');
 const VOLUME = 0.25;
 
 module.exports = {
-
   STARTUP: {
     url: path.join('file://', __dirname, './startup.wav'),
     volume: VOLUME * 2
+  },
+
+  DIALOG: {
+    url: path.join('file://', __dirname, './dialog.wav'),
+    volume: VOLUME
+  },
+
+  SUCCESS: {
+    url: path.join('file://', __dirname, './success.wav'),
+    volume: VOLUME
+  },
+
+  WARNING: {
+    url: path.join('file://', __dirname, './warning.wav'),
+    volume: VOLUME
   },
 
   ADD: {
@@ -18,23 +32,8 @@ module.exports = {
     volume: VOLUME
   },
 
-  DIALOG: {
-    url: path.join('file://', __dirname, './dialog.wav'),
-    volume: VOLUME
-  },
-
-  COMPLETE: {
-    url: path.join('file://', __dirname, './complete.wav'),
-    volume: VOLUME
-  },
-
   RELOAD: {
     url: path.join('file://', __dirname, './reload.wav'),
-    volume: VOLUME
-  },
-
-  TRASH: {
-    url: path.join('file://', __dirname, './trash.wav'),
     volume: VOLUME
   },
 

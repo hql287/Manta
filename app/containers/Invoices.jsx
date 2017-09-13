@@ -3,7 +3,6 @@ const ipc = require('electron').ipcRenderer;
 
 // Custom Libs
 const openDialog = require('../renderers/dialog.js');
-import sounds from '../../libs/sounds.js';
 
 // React Libraries
 import React, {Component} from 'react';
@@ -49,7 +48,6 @@ class Invoices extends Component {
     ipc.on('confirmed-delete-invoice', (event, index, invoiceId) => {
       if (index === 0) {
         this.confirmedDeleteInvoice(invoiceId);
-        sounds.play('REMOVE');
       }
     });
   }
@@ -142,7 +140,11 @@ class Invoices extends Component {
 
 // PropTypes Validation
 Invoices.propTypes = {
-  invoices: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  invoices: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+    data: PropTypes.array,
+  }).isRequired,
 };
 
 // Export

@@ -61,6 +61,13 @@ const ContactsMW = ({dispatch}) => next => action => {
             type: ACTION_TYPES.CONTACT_SAVE,
             data: newDocs,
           });
+          dispatch({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: 'Contact Created Successfully'
+            }
+          });
         })
         .catch(err => {
           next({

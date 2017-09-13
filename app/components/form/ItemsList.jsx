@@ -14,9 +14,6 @@ import HTML5Backend from 'react-dnd-html5-backend';
 // Animation
 import TransitionList from '../../components/shared/TransitionList';
 
-// Custom Libs
-import sounds from '../../../libs/sounds.js';
-
 // Custom Component
 import Button from '../shared/Button.jsx';
 import { Section } from '../shared/Section';
@@ -74,16 +71,12 @@ class ItemsList extends Component {
   addRow() {
     const {dispatch} = this.props;
     dispatch(Actions.addItem());
-    // Play a sound
-    sounds.play('ADD');
   }
 
   // Remove A Row
   removeRow(rowId) {
     const {dispatch} = this.props;
     dispatch(Actions.removeItem(rowId));
-    // Play a sound
-    sounds.play('REMOVE');
   }
 
   // Update Row Data
@@ -139,7 +132,19 @@ class ItemsList extends Component {
 }
 
 ItemsList.propTypes = {
-  currentInvoice: PropTypes.object.isRequired,
+  currentInvoice: PropTypes.shape({
+    recipient: PropTypes.shape({
+      newRecipient: PropTypes.bool.isRequired,
+      select: PropTypes.object.isRequired,
+      new: PropTypes.object.isRequired,
+    }),
+    rows: PropTypes.array,
+    dueDate:  PropTypes.object,
+    currency: PropTypes.object,
+    discount: PropTypes.object,
+    vat:      PropTypes.object,
+    note:     PropTypes.object,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

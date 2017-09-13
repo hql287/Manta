@@ -3,7 +3,6 @@ const ipc = require('electron').ipcRenderer;
 
 // Custom Libs
 const openDialog = require('../renderers/dialog.js');
-import sounds from '../../libs/sounds.js';
 
 // React Libraries
 import React, {Component} from 'react';
@@ -48,7 +47,6 @@ class Contacts extends Component {
     ipc.on('confirmed-delete-contact', (event, index, contactId) => {
       if (index === 0) {
         this.confirmedDeleteContact(contactId);
-        sounds.play('REMOVE');
       }
     });
   }
@@ -120,7 +118,10 @@ class Contacts extends Component {
 
 // PropTypes
 Contacts.propTypes = {
-  contacts: PropTypes.object.isRequired,
+  contacts: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+    data: PropTypes.array,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

@@ -153,8 +153,23 @@ class Recipient extends Component {
 
 // PropTypes Validation
 Recipient.propTypes = {
-  currentInvoice: PropTypes.object.isRequired,
-  contacts: PropTypes.object.isRequired,
+  contacts: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+    data: PropTypes.array,
+  }).isRequired,
+  currentInvoice: PropTypes.shape({
+    recipient: PropTypes.shape({
+      newRecipient: PropTypes.bool.isRequired,
+      select: PropTypes.object.isRequired,
+      new: PropTypes.object.isRequired,
+    }),
+    rows: PropTypes.array,
+    dueDate:  PropTypes.object,
+    currency: PropTypes.object,
+    discount: PropTypes.object,
+    vat:      PropTypes.object,
+    note:     PropTypes.object,
+  }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
