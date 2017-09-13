@@ -37,7 +37,7 @@ class Notification extends Component {
   componentDidMount() {
     this.timeout = setTimeout(() => {
       this.removeNoti();
-    }, 3000);
+    }, 4000);
   }
 
   shouldComponentUpdate(nextProps) {

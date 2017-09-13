@@ -17,12 +17,14 @@ import ContactsMW from './middlewares/ContactsMW';
 import InvoicesMW from './middlewares/InvoicesMW';
 import SettingsMW from './middlewares/SettingsMW';
 import MeasureMW from './middlewares/MeasureMW';
+import UIMiddleware from './middlewares/UIMiddleware';
 
 const middlewares = [
   MeasureMW,
   ContactsMW,
   InvoicesMW,
   SettingsMW,
+  UIMiddleware,
   ReduxThunk,
   Logger,
 ];

@@ -3,20 +3,28 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import * as InvoicesActions from '../actions/invoices';
 import * as ContactsActions from '../actions/contacts';
 import * as FormActions from '../actions/form';
-import * as UIActions from '../actions/ui';
 
 // 3rd Party Libs
 import _ from 'lodash';
 
 // Custom Libs
-import sounds from '../../libs/sounds';
 const openDialog = require('../renderers/dialog');
 
-// Layout
+// Custom Components
+import Recipient from '../components/form/Recipient';
+import ItemsList from '../components/form/ItemsList';
+import Currency from '../components/form/Currency';
+import Discount from '../components/form/Discount';
+import DueDate from '../components/form/DueDate';
+import Vat from '../components/form/Vat';
+import Note from '../components/form/Note';
+import Settings from '../components/form/Settings';
+import Button from '../components/shared/Button';
 import {
   PageWrapper,
   PageHeader,
@@ -27,17 +35,6 @@ import {
 
 // Animation
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
-
-// Components
-import Recipient from '../components/form/Recipient';
-import ItemsList from '../components/form/ItemsList';
-import Currency from '../components/form/Currency';
-import Discount from '../components/form/Discount';
-import DueDate from '../components/form/DueDate';
-import Vat from '../components/form/Vat';
-import Note from '../components/form/Note';
-import Settings from '../components/form/Settings';
-import Button from '../components/shared/Button';
 
 // Component
 class Form extends Component {
@@ -67,36 +64,22 @@ class Form extends Component {
     }
     // Save Invoice To DB
     this.saveInvoiceToDB(getInvoiceData(currentInvoice));
-    // Show Success Notification
-    this.newNotification('success', 'Invoice Created Successfully!');
     // Clear The Form
-    this.clearFormData('muted');
-    // Play a Sound
-    sounds.play('ADD');
-  };
+    this.clearFormData();
+  }
 
   // Clear Form Data
-  clearFormData(vol) {
+  clearFormData() {
     this.setState({ isSettingsOpened: false }, () => {
       const {dispatch} = this.props;
       dispatch(FormActions.clearForm());
-      // Play A Sound
-      if (!vol) sounds.play('RELOAD');
     });
   }
 
-  // Show Notification
-  newNotification(type, message) {
-    const { dispatch } = this.props;
-    dispatch(UIActions.newNoti(type, message));
-  }
-
   // ToggleField
-  toggleField(field, cb=null) {
+  toggleField(field) {
     const {dispatch} = this.props;
     dispatch(FormActions.toggleField(field));
-    // Execute Call Back
-    cb && cb();
   }
 
   // Update Field Data
@@ -176,9 +159,20 @@ class Form extends Component {
 
 // PropTypes Validation
 Form.propTypes = {
-  invoices: PropTypes.object.isRequired,
-  recipients: PropTypes.object.isRequired,
-  currentInvoice: PropTypes.object.isRequired,
+  currentInvoice: PropTypes.shape({
+    recipient: PropTypes.shape({
+      newRecipient: PropTypes.bool.isRequired,
+      select: PropTypes.object.isRequired,
+      new: PropTypes.object.isRequired,
+    }),
+    rows: PropTypes.array,
+    dueDate:  PropTypes.object,
+    currency: PropTypes.object,
+    discount: PropTypes.object,
+    vat:      PropTypes.object,
+    note:     PropTypes.object,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 // HELPERS
@@ -403,16 +397,8 @@ function validateNote(note) {
   return true;
 }
 
-// Map State to Props
-Form = connect(state => ({
-  UI:             state.UIReducer,
-  invoices:       state.InvoicesReducer,
-  recipients:     state.ContactsReducer,
-  currentInvoice: state.FormReducer,
-}))(Form);
-
-// Add Faded In Animation
-Form = _withFadeInAnimation(Form);
-
 // Export
-export default Form;
+export default compose(
+  connect(state => ({ currentInvoice: state.FormReducer })),
+  _withFadeInAnimation
+)(Form);

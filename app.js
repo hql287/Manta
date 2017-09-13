@@ -133,8 +133,8 @@ function setInitialValues() {
   if (!appConfig.has('appSettings')) {
     appConfig.set('appSettings', {
       currency: 'USD',
+      sound: 'default',
       muted: false,
-      sound: 'default,'
     });
   }
 
@@ -177,7 +177,6 @@ function initialize() {
       createMainWindow();
     }
   });
-  // console.log(appConfig.getAll());
 }
 
 // Imports Main Process Files

@@ -1,5 +1,6 @@
 // Node Libs
 const appConfig = require('electron').remote.require('electron-settings');
+import sounds from '../../libs/sounds';
 
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -26,8 +27,11 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       appConfig.set('info', action.data.info);
       appConfig.set('appSettings', action.data.appSettings);
       appConfig.set('printOptions', action.data.printOptions);
+      // Reload Sounds Cache
+      sounds.preload();
       // Continue
       next(action);
+      // Create Notification
       dispatch({
         type: ACTION_TYPES.UI_NOTIFICATION_NEW,
         payload: {

@@ -96,6 +96,13 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.INVOICE_SAVE,
             data: newDocs,
           });
+          dispatch({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: 'Inovice Created Successfully'
+            }
+          });
         })
         .catch(err => {
           next({

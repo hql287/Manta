@@ -137,7 +137,12 @@ class Settings extends Component {
 
 // PropTypes Validation
 Settings.propTypes = {
-  settings: PropTypes.object.isRequired,
+  settings: PropTypes.shape({
+    current: PropTypes.object,
+    loaded: PropTypes.bool.isRequired,
+    save: PropTypes.object,
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
 // Export
