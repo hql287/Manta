@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
-import {compose} from 'redux';
+import {compose} from 'recompose';
 import {connect} from 'react-redux';
 import * as Actions from '../../actions/form.jsx';
 

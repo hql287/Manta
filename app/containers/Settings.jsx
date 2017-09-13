@@ -3,8 +3,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
+import {compose} from 'recompose';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
 import * as Actions from '../actions/settings';
 
 // 3rd Party Libs

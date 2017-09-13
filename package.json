@@ -49,6 +49,7 @@
     "react-hot-loader": "next",
     "react-motion": "^0.5.0",
     "react-redux": "^5.0.5",
+    "recompose": "^0.25.0",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
