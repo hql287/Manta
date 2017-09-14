@@ -11,7 +11,7 @@ const UIReducer = (state = initialState, action) => {
     // Change Active Tab
     case ACTION_TYPES.UI_TAB_CHANGE: {
       return Object.assign({}, state, {
-        activeTab: action.payload,
+        activeTab: action.payload.tabName,
       });
     }
 

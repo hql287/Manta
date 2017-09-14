@@ -5,7 +5,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 export const changeActiveTab = tabName => {
   return {
     type: ACTION_TYPES.UI_TAB_CHANGE,
-    payload: tabName,
+    payload: { tabName },
   };
 };
 
