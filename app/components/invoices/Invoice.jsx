@@ -50,8 +50,8 @@ class Invoice extends Component {
           {recipient.fullname}
         </TD>
         <TD>
-          {invoice.DueDate
-            ? moment(invoice.DueDate).format('DD/MM/YYYY')
+          {invoice.dueDate
+            ? moment(invoice.dueDate).format('DD/MM/YYYY')
             : '--'}
         </TD>
         <TD muted>
