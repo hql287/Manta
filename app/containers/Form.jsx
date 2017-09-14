@@ -65,14 +65,14 @@ class Form extends Component {
     // Save Invoice To DB
     this.saveInvoiceToDB(getInvoiceData(currentInvoice));
     // Clear The Form
-    this.clearFormData();
+    this.clearFormData('muted');
   }
 
   // Clear Form Data
-  clearFormData() {
+  clearFormData(vol) {
     this.setState({ isSettingsOpened: false }, () => {
       const {dispatch} = this.props;
-      dispatch(FormActions.clearForm());
+      dispatch(FormActions.clearForm(vol));
     });
   }
 

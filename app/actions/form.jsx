@@ -38,9 +38,10 @@ export const moveRow = (dragIndex, hoverIndex) => {
 };
 
 // Form Actions
-export const clearForm = () => {
+export const clearForm = vol => {
   return {
     type: ACTION_TYPES.FORM_CLEAR,
+    payload: { vol }
   };
 };
 
