@@ -1,33 +1,25 @@
-// Electron libs
-const ipc = require('electron').ipcRenderer;
-
-// Custom Libs
-const openDialog = require('../renderers/dialog.js');
-
-// React Libraries
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// Redux
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
+const openDialog = require('../renderers/dialog.js');
+const ipc = require('electron').ipcRenderer;
+
+// Actions
 import * as Actions from '../actions/contacts';
 
-// Custom Components
+// Components
 import Contact from '../components/contacts/Contact';
 import Message from '../components/shared/Message';
 import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
-
-// Layout
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
   PageHeader,
   PageHeaderTitle,
   PageContent,
 } from '../components/shared/Layout';
-
-// Animation
-import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Component
 class Contacts extends Component {
@@ -37,13 +29,6 @@ class Contacts extends Component {
   }
 
   componentDidMount() {
-    // Get All Contacts
-    if (!this.props.contacts.loaded) {
-      const {dispatch} = this.props;
-      dispatch(Actions.getAllContacts());
-    }
-
-    // Add Event Listener
     ipc.on('confirmed-delete-contact', (event, index, contactId) => {
       if (index === 0) {
         this.confirmedDeleteContact(contactId);

@@ -1,26 +1,12 @@
-// React
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// Redux
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
-import * as Actions from '../actions/settings';
-
-// 3rd Party Libs
 const _ = require('lodash');
 
-// Layout
-import {
-  PageWrapper,
-  PageHeader,
-  PageHeaderTitle,
-  PageHeaderActions,
-  PageContent,
-} from '../components/shared/Layout';
-
-// Animation
-import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
+// Actions
+import * as Actions from '../actions/settings';
 
 // Components
 import Info from '../components/settings/Info';
@@ -32,6 +18,14 @@ import {
   Tabs,
   TabContent,
 } from '../components/shared/Tabs';
+import {
+  PageWrapper,
+  PageHeader,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageContent,
+} from '../components/shared/Layout';
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Component
 class Settings extends Component {

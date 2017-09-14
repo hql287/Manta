@@ -1,19 +1,19 @@
-// Electron libs
-const ipc = require('electron').ipcRenderer;
-
-// Custom Libs
-const openDialog = require('../renderers/dialog.js');
-
-// React Libraries
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// Redux
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
+const openDialog = require('../renderers/dialog.js');
+const ipc = require('electron').ipcRenderer;
+
+// Actions
 import * as Actions from '../actions/invoices';
 
-// Layout
+// Components
+import Invoice from '../components/invoices/Invoice';
+import Message from '../components/shared/Message';
+import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
   PageHeader,
@@ -21,15 +21,6 @@ import {
   PageContent,
 } from '../components/shared/Layout';
 
-// Animation
-import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
-
-// Custom Components
-import Invoice from '../components/invoices/Invoice';
-import Message from '../components/shared/Message';
-import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
-
-// Component
 class Invoices extends Component {
   constructor(props) {
     super(props);

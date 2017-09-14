@@ -5,9 +5,7 @@ const glob = require('glob');
 const os   = require('os');
 
 // Electron Libs
-const electron      = require('electron');
-const app           = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { app, BrowserWindow } = require('electron');
 
 // 3rd Party Libs
 const appConfig = require('electron-settings');
