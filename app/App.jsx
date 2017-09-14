@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 // Redux
 import {connect} from 'react-redux';
 import * as Actions from './actions/ui';
+import * as SettingsAction from './actions/settings';
+import * as InvoicesActions from './actions/invoices';
+import * as ContactsActions from './actions/contacts';
 
 // Custom Components
 import AppNav from './components/layout/AppNav';
@@ -20,6 +23,13 @@ class App extends Component {
     super(props);
     this.changeTab = this.changeTab.bind(this);
     this.removeNoti = this.removeNoti.bind(this);
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(SettingsAction.getInitalSettings());
+    dispatch(ContactsActions.getAllContacts());
+    dispatch(InvoicesActions.getInvoices());
   }
 
   shouldComponentUpdate(nextProps) {
@@ -56,4 +66,6 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(state => ({UI: state.UIReducer}))(App);
+export default connect(state => ({
+  UI: state.UIReducer,
+}))(App);
