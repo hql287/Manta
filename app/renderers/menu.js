@@ -1,12 +1,11 @@
-// Electron Libs
-const {app, Menu, BrowserWindow} = require('electron').remote;
-const appConfig = require('electron').remote.require('electron-settings');
+// Libs
+const { Menu, BrowserWindow} = require('electron').remote;
+const appConfig              = require('electron').remote.require('electron-settings');
+const ipc                    = require('electron').ipcRenderer;
 
-// Get Windows Objects
+// Get mainWindow Object
 const mainWindowID = appConfig.get('mainWindowID');
-const prevWindowID = appConfig.get('previewWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
-const prevWindow = BrowserWindow.fromId(prevWindowID);
 
 // Set App Menu
 const menuTemplate = [
@@ -135,7 +134,7 @@ const menuTemplate = [
   {
     label: 'View',
     submenu: [
-      {role: 'reload'},
+      {role: 'forcereload'},
       {role: 'toggledevtools'},
       {type: 'separator'},
       {role: 'togglefullscreen'},
@@ -178,8 +177,7 @@ if (process.platform === 'darwin') {
         label: 'Quite App',
         accelerator: 'CmdOrCtrl+Q',
         click() {
-          prevWindow.destroy();
-          app.quit();
+          ipc.send('quit-app');
         }
       }
     ],

@@ -49,8 +49,9 @@ it('moveRow should create MOVE_ROW action', () => {
 
 // Form Actions
 it('clearForm should create CLEAR_FORM action', () => {
-  expect(actions.clearForm()).toEqual({
+  expect(actions.clearForm('muted')).toEqual({
     type: ACTION_TYPES.FORM_CLEAR,
+    payload: { vol: 'muted' }
   });
 });
 

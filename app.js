@@ -5,7 +5,7 @@ const glob = require('glob');
 const os   = require('os');
 
 // Electron Libs
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 // 3rd Party Libs
 const appConfig = require('electron-settings');
@@ -49,19 +49,17 @@ function createMainWindow() {
     mainWindow.focus();
   });
 
-  mainWindow.on('closed', () => {
-    mainWindow = null;
+  mainWindow.on('close', event => {
+    event.preventDefault();
+    mainWindow.webContents.closeDevTools();
+    mainWindow.hide();
   });
 
   ['resize', 'move', 'close'].forEach( event => {
     mainWindow.on(event, storeMainWindowState);
   });
 
-  // Once finished load
   mainWindow.webContents.on('did-finish-load', () => {
-    // Save Window ID To Store
-    appConfig.set('mainWindowID', parseInt(mainWindow.id));
-    // Open Dev Tools
     mainWindow.webContents.openDevTools();
   });
 }
@@ -97,23 +95,20 @@ function createPreviewWindow() {
 
   previewWindow.on('close', event => {
     event.preventDefault();
-    previewWindow.hide();
     previewWindow.webContents.closeDevTools();
+    previewWindow.hide();
   });
 
   ['resize', 'move', 'close'].forEach( event => {
     previewWindow.on(event, storePreviewWindowState);
   });
-
-  // Once finished load
-  previewWindow.webContents.on('did-finish-load', () => {
-    // Save Window ID To Store
-    appConfig.set('previewWindowID', parseInt(previewWindow.id));
-  });
 }
 
 // Set Initial Values
 function setInitialValues() {
+  // Save Window IDs
+  appConfig.set('mainWindowID', parseInt(mainWindow.id));
+  appConfig.set('previewWindowID', parseInt(previewWindow.id));
   // Default Info
   if (!appConfig.has('info')) {
     appConfig.set('info', {
@@ -126,7 +121,6 @@ function setInitialValues() {
       website: '',
     });
   }
-
   // Default App Settings
   if (!appConfig.has('appSettings')) {
     appConfig.set('appSettings', {
@@ -136,7 +130,6 @@ function setInitialValues() {
       muted: false,
     });
   }
-
   // Default Print Options
   if (!appConfig.has('printOptions')) {
     appConfig.set('printOptions', {
@@ -163,18 +156,17 @@ function initialize() {
     createPreviewWindow();
     // Set Initial Values
     setInitialValues();
-  });
-
-  app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
+    // Add Event Listener
+    ipcMain.on('quit-app', () => {
+      previewWindow.destroy();
+      mainWindow.destroy();
       app.quit();
-    }
+    });
   });
 
   app.on('activate', () => {
-    if (mainWindow === null) {
-      createMainWindow();
-    }
+    mainWindow.show();
+    mainWindow.focus();
   });
 }
 
