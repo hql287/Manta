@@ -1,6 +1,7 @@
 // Libraries
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 // Animation
 import {Motion, spring} from 'react-motion';
@@ -12,21 +13,33 @@ const springConfig = {
 };
 
 const setMarginValue = activeTab => {
-  switch (activeTab) {
-    case 'invoices': {
-      return 25;
-    }
-    case 'contacts': {
-      return 50;
-    }
-    case 'settings': {
-      return 75;
-    }
-    default: {
-      return 0;
-    }
-  }
+  const multiplier = 100 / allTabs.length;
+  const activeTabIndex = _.findIndex(allTabs, {name: activeTab});
+  return activeTabIndex * multiplier;
 };
+
+const allTabs = [
+  {
+    title: 'Create',
+    name: 'form',
+    icon: 'ion-android-list',
+  },
+  {
+    title: 'Invoices',
+    name: 'invoices',
+    icon: 'ion-ios-filing',
+  },
+  {
+    title: 'Contacts',
+    name: 'contacts',
+    icon: 'ion-person-stalker',
+  },
+  {
+    title: 'Settings',
+    name: 'settings',
+    icon: 'ion-ios-gear',
+  },
+];
 
 // Styles
 import styled from 'styled-components';
@@ -68,7 +81,7 @@ const Icon = styled.i`
   ${props => props.id === 'form' && `color: #6bbb69;`} ${props =>
       props.id === 'contacts' && `color: #469fe5;`} ${props =>
       props.id === 'settings' && `color: #C4C8CC;`} ${props =>
-      props.id === 'archive' &&
+      props.id === 'invoices' &&
       `
     color: #cbc189;
     font-size: 24px;
@@ -84,37 +97,32 @@ const ActiveIndicator = styled.div`
   padding: 0 40px;
   > div {
     background: #469fe5;
-    width: 25%;
     height: 100%;
   }
 `;
 
 function AppNav({activeTab, changeTab}) {
   const marginLeftValue = setMarginValue(activeTab);
+  const allTabsComponent = allTabs.map(tab =>
+    <Tab key={tab.name} href="#" onClick={() => changeTab(tab.name)}>
+      <Icon id={tab.name} className={tab.icon} />
+      {tab.title}
+    </Tab>
+  );
   return (
     <TopBar>
       <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
         {({marginLeft}) =>
           <ActiveIndicator>
-            <div style={{marginLeft: `${marginLeft}%`}} />
+            <div
+              style={{
+                width: `${100 / allTabs.length}%`,
+                marginLeft: `${marginLeft}%`,
+              }}
+            />
           </ActiveIndicator>}
       </Motion>
-      <Tab href="#" onClick={() => changeTab('form')}>
-        <Icon id="form" className="ion-android-list" />
-        Create
-      </Tab>
-      <Tab href="#" onClick={() => changeTab('invoices')}>
-        <Icon id="archive" className="ion-ios-filing" />
-        Archive
-      </Tab>
-      <Tab href="#" onClick={() => changeTab('contacts')}>
-        <Icon id="contacts" className="ion-person-stalker" />
-        Contacts
-      </Tab>
-      <Tab href="#" onClick={() => changeTab('settings')}>
-        <Icon id="settings" className="ion-ios-gear" />
-        Settings
-      </Tab>
+      {allTabsComponent}
     </TopBar>
   );
 }

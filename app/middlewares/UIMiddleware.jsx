@@ -1,12 +1,16 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 import sounds from '../../libs/sounds';
 
-const UIMiddleware = () => next => action => {
+const UIMiddleware = ({ getState }) => next => action => {
   switch (action.type) {
     // Changing Tabs
     case ACTION_TYPES.UI_TAB_CHANGE: {
-      sounds.play('TAP');
-      next(action);
+      const currentState = getState();
+      const currentTab = currentState.UIReducer.activeTab;
+      if (action.payload.tabName !== currentTab) {
+        sounds.play('TAP');
+        next(action);
+      }
       break;
     }
 
@@ -40,7 +44,9 @@ const UIMiddleware = () => next => action => {
     }
 
     case ACTION_TYPES.FORM_CLEAR: {
-      sounds.play('RELOAD');
+      if (action.payload.vol !== 'muted') {
+        sounds.play('RELOAD');
+      }
       next(action);
       break;
     }

@@ -49,6 +49,18 @@ class AppSettings extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
+              <label className="itemLabel">Default Language</label>
+              <select
+                name="language"
+                value={this.state.language}
+                onChange={this.handleInputChange}>
+                <option value="en">English</option>
+                <option value="vi">Vietnamese</option>
+              </select>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="pageItem">
               <label className="itemLabel">Default Currency</label>
               <select
                 name="currency"
@@ -58,6 +70,9 @@ class AppSettings extends Component {
               </select>
             </div>
           </div>
+        </div>
+
+        <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
               <label className="itemLabel">Sound</label>
@@ -70,19 +85,20 @@ class AppSettings extends Component {
               </select>
             </div>
           </div>
-        </div>
-
-        <div className="pageItem">
-          <label className="itemLabel">Muted?</label>
-          <label className="switch">
-            <input
-              name="muted"
-              type="checkbox"
-              checked={this.state.muted}
-              onChange={this.handleInputChange}
-            />
-            <span className="slider round"></span>
-          </label>
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Muted?</label>
+              <label className="switch">
+                <input
+                  name="muted"
+                  type="checkbox"
+                  checked={this.state.muted}
+                  onChange={this.handleInputChange}
+                />
+                <span className="slider round"></span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     );

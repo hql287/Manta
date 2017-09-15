@@ -1,26 +1,12 @@
-// React
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// Redux
+import {compose} from 'recompose';
 import {connect} from 'react-redux';
-import {compose} from 'redux';
-import * as Actions from '../actions/settings';
-
-// 3rd Party Libs
 const _ = require('lodash');
 
-// Layout
-import {
-  PageWrapper,
-  PageHeader,
-  PageHeaderTitle,
-  PageHeaderActions,
-  PageContent,
-} from '../components/shared/Layout';
-
-// Animation
-import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
+// Actions
+import * as Actions from '../actions/settings';
 
 // Components
 import Info from '../components/settings/Info';
@@ -32,6 +18,14 @@ import {
   Tabs,
   TabContent,
 } from '../components/shared/Tabs';
+import {
+  PageWrapper,
+  PageHeader,
+  PageHeaderTitle,
+  PageHeaderActions,
+  PageContent,
+} from '../components/shared/Layout';
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Component
 class Settings extends Component {
@@ -53,24 +47,24 @@ class Settings extends Component {
   settingsSaved() {
     const {current, saved} = this.props.settings;
     return _.isEqual(current, saved);
-  };
+  }
 
   // Save Settings to App Config
   saveSettingsState() {
     const {dispatch, settings} = this.props;
     dispatch(Actions.saveSettings(settings.current));
-  };
+  }
 
   // Update Setting
   updateSettings(setting, data) {
     const {dispatch} = this.props;
     dispatch(Actions.updateSettings(setting, data));
-  };
+  }
 
   // Switch Tab
   changeTab(tabNum) {
     this.setState({visibleTab: tabNum});
-  };
+  }
 
   // Render Main Content
   renderSettingsContent() {
@@ -137,12 +131,12 @@ class Settings extends Component {
 
 // PropTypes Validation
 Settings.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   settings: PropTypes.shape({
     current: PropTypes.object,
     loaded: PropTypes.bool.isRequired,
     save: PropTypes.object,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
 
 // Export

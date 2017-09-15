@@ -8,7 +8,6 @@ import _ from 'lodash';
 // Redux
 import {connect} from 'react-redux';
 import * as FormActions from '../../actions/form';
-import * as ContactsActions from '../../actions/contacts';
 
 // Custom Components
 import RecipientForm from './RecipientForm';
@@ -23,14 +22,6 @@ class Recipient extends Component {
     this.toggleForm = this.toggleForm.bind(this);
     this.updateRecipientForm = this.updateRecipientForm.bind(this);
     this.updateRecipientList = this.updateRecipientList.bind(this);
-  }
-
-  // Retrieve all contacts once the component is mounted
-  componentDidMount() {
-    if (!this.props.contacts.loaded) {
-      const {dispatch} = this.props;
-      dispatch(ContactsActions.getAllContacts());
-    }
   }
 
   // Handle Reset Form

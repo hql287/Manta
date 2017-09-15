@@ -3,7 +3,7 @@ const path = require('path');
 const url  = require('url');
 
 // Electron Libs
-const BrowserWindow = require('electron').remote.BrowserWindow;
+const { BrowserWindow } = require('electron').remote
 
 // Custom Libs
 const sounds = require(path.join(__dirname, '../../libs/sounds.js'));

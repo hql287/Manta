@@ -1,17 +1,20 @@
-// Libraries
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// Redux
 import {connect} from 'react-redux';
-import * as Actions from './actions/ui';
+const ipc = require('electron').ipcRenderer;
 
-// Custom Components
+// Actions
+import * as UIActions from './actions/ui';
+import * as FormActions from './actions/form';
+import * as SettingsActions from './actions/settings';
+import * as InvoicesActions from './actions/invoices';
+import * as ContactsActions from './actions/contacts';
+
+// Components
 import AppNav from './components/layout/AppNav';
 import AppMain from './components/layout/AppMain';
 import AppNoti from './components/layout/AppNoti';
-
-// Layout
 import {AppWrapper} from './components/shared/Layout';
 
 // Components
@@ -22,6 +25,42 @@ class App extends Component {
     this.removeNoti = this.removeNoti.bind(this);
   }
 
+  componentDidMount() {
+    const {dispatch} = this.props;
+    // Get All Data
+    dispatch(SettingsActions.getInitalSettings());
+    dispatch(ContactsActions.getAllContacts());
+    dispatch(InvoicesActions.getInvoices());
+    // Add Event Listener
+    ipc.on('menu-change-tab', (event, tabName) => {
+      this.changeTab(tabName);
+    });
+    ipc.on('menu-invoice-save', event => {
+      dispatch(FormActions.saveFormData());
+    });
+    ipc.on('menu-invoice-clear', event => {
+      dispatch(FormActions.clearForm());
+    });
+    ipc.on('menu-invoice-add-item', event => {
+      dispatch(FormActions.addItem());
+    });
+    ipc.on('menu-invoice-toggle-dueDate', event => {
+      dispatch(FormActions.toggleField('dueDate'));
+    });
+    ipc.on('menu-invoice-toggle-currency', event => {
+      dispatch(FormActions.toggleField('currency'));
+    });
+    ipc.on('menu-invoice-toggle-vat', event => {
+      dispatch(FormActions.toggleField('vat'));
+    });
+    ipc.on('menu-invoice-toggle-discount', event => {
+      dispatch(FormActions.toggleField('discount'));
+    });
+    ipc.on('menu-invoice-toggle-note', event => {
+      dispatch(FormActions.toggleField('note'));
+    });
+  }
+
   shouldComponentUpdate(nextProps) {
     return (
       this.props.UI.activeTab !== nextProps.UI.activeTab ||
@@ -29,14 +68,28 @@ class App extends Component {
     );
   }
 
+  componentWillUnmount() {
+    ipc.removeAllListeners([
+      'menu-change-tab',
+      'menu-invoice-save',
+      'menu-invoice-clear',
+      'menu-invoice-add-item',
+      'menu-invoice-toggle-dueDate',
+      'menu-invoice-toggle-currency',
+      'menu-invoice-toggle-discount',
+      'menu-invoice-toggle-vat',
+      'menu-invoice-toggle-note',
+    ]);
+  }
+
   changeTab(tabName) {
     const {dispatch} = this.props;
-    dispatch(Actions.changeActiveTab(tabName));
+    dispatch(UIActions.changeActiveTab(tabName));
   }
 
   removeNoti(id) {
     const {dispatch} = this.props;
-    dispatch(Actions.removeNoti(id));
+    dispatch(UIActions.removeNoti(id));
   }
 
   render() {
@@ -52,8 +105,10 @@ class App extends Component {
 }
 
 App.propTypes = {
-  UI: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  UI: PropTypes.object.isRequired,
 };
 
-export default connect(state => ({UI: state.UIReducer}))(App);
+export default connect(state => ({
+  UI: state.UIReducer,
+}))(App);
