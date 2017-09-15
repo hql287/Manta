@@ -1,12 +1,10 @@
 // Electron Libs
-const electron = require('electron');
-const BrowserWindow = electron.BrowserWindow;
-const ipc = electron.ipcMain;
+const { BrowserWindow, ipcMain } = require('electron');
 
 // 3rd Party Libs
 const appConfig = require('electron-settings');
 
-ipc.on('preview-invoice', (event, invoiceData) => {
+ipcMain.on('preview-invoice', (event, invoiceData) => {
   openPreviewWindow(invoiceData);
 });
 
