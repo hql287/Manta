@@ -1,5 +1,5 @@
 import _ from 'lodash';
-const openDialog = require('../../renderers/dialog');
+const openDialog = require('../renderers/dialog');
 
 function validateFormData(currentInvoice) {
   const {

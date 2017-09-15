@@ -10,21 +10,27 @@ import combineReducers from './reducers';
 // Root Component
 import App from './App';
 
-// Middleware
+// 3rd Party MWs
 import ReduxThunk from 'redux-thunk';
 import Logger from 'redux-logger';
+
+// Custom Middleware
+import MeasureMW from './middlewares/MeasureMW';
+import FormMW from './middlewares/FormMW';
 import ContactsMW from './middlewares/ContactsMW';
 import InvoicesMW from './middlewares/InvoicesMW';
 import SettingsMW from './middlewares/SettingsMW';
-import MeasureMW from './middlewares/MeasureMW';
 import UIMiddleware from './middlewares/UIMiddleware';
+import MainProcessMW from './middlewares/MainProcessMW';
 
 const middlewares = [
   MeasureMW,
+  FormMW,
   ContactsMW,
   InvoicesMW,
   SettingsMW,
   UIMiddleware,
+  MainProcessMW,
   ReduxThunk,
   Logger,
 ];

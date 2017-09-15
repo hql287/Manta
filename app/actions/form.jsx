@@ -45,6 +45,12 @@ export const clearForm = vol => {
   };
 };
 
+export const saveFormData = () => {
+  return {
+    type: ACTION_TYPES.FORM_SAVE
+  };
+};
+
 export const updateFieldData = (field, data) => {
   return {
     type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,

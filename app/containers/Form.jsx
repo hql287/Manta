@@ -5,8 +5,6 @@ import {compose} from 'recompose';
 import {connect} from 'react-redux';
 
 // Actions
-import * as InvoicesActions from '../actions/invoices';
-import * as ContactsActions from '../actions/contacts';
 import * as FormActions from '../actions/form';
 
 // Components
@@ -28,12 +26,6 @@ import {
 } from '../components/shared/Layout';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
-// Helpers
-import {
-  getInvoiceData,
-  validateFormData,
-} from '../helpers/form/validation';
-
 // Component
 class Form extends Component {
   constructor(props) {
@@ -51,27 +43,17 @@ class Form extends Component {
     this.setState({isSettingsOpened: !this.state.isSettingsOpened});
   }
 
-  // Process Form Data
+  // Save Form Data
   saveFormData() {
-    const {currentInvoice} = this.props;
-    // Validate Form Data
-    if (!validateFormData(currentInvoice)) return;
-    // Save To DB if it's a new contact
-    if (currentInvoice.recipient.newRecipient) {
-      const newContactData = currentInvoice.recipient.new;
-      this.saveRecipienAsNewContact(newContactData);
-    }
-    // Save Invoice To DB
-    this.saveInvoiceToDB(getInvoiceData(currentInvoice));
-    // Clear The Form
-    this.clearFormData('muted');
+    const {dispatch} = this.props;
+    dispatch(FormActions.saveFormData());
   }
 
   // Clear Form Data
-  clearFormData(vol) {
+  clearFormData() {
     this.setState({isSettingsOpened: false}, () => {
       const {dispatch} = this.props;
-      dispatch(FormActions.clearForm(vol));
+      dispatch(FormActions.clearForm());
     });
   }
 
@@ -87,18 +69,6 @@ class Form extends Component {
     dispatch(FormActions.updateFieldData(field, data));
   }
 
-  // Save Recipient To DB
-  saveRecipienAsNewContact(data) {
-    const {dispatch} = this.props;
-    dispatch(ContactsActions.saveContact(data));
-  }
-
-  // Save Invoice To DB
-  saveInvoiceToDB(data) {
-    const {dispatch} = this.props;
-    dispatch(InvoicesActions.saveInvoice(data));
-  }
-
   // Render The form
   render() {
     const {dueDate, currency, discount, vat, note} = this.props.currentInvoice;
@@ -107,11 +77,11 @@ class Form extends Component {
         <PageHeader>
           <PageHeaderTitle>Create A New Invoice</PageHeaderTitle>
           <PageHeaderActions>
-            <Button primary onClick={this.saveFormData}>
-              Save
-            </Button>
             <Button danger onClick={this.clearFormData}>
               Clear
+            </Button>
+            <Button primary onClick={this.saveFormData}>
+              Save
             </Button>
           </PageHeaderActions>
         </PageHeader>
@@ -169,6 +139,6 @@ Form.propTypes = {
 
 // Export
 export default compose(
-  connect(state => ({currentInvoice: state.FormReducer})),
+  connect(state => ({ currentInvoice: state.FormReducer })),
   _withFadeInAnimation
 )(Form);

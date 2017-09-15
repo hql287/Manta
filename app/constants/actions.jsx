@@ -10,6 +10,7 @@ export const FORM_ITEM_UPDATE = 'FORM_ITEM_UPDATE';
 export const FORM_ITEM_MOVE   = 'FORM_ITEM_MOVE';
 
 // Fields
+export const FORM_SAVE              = 'FORM_SAVE';
 export const FORM_CLEAR             = 'FORM_CLEAR';
 export const FORM_FIELD_TOGGLE      = 'FORM_FIELD_TOGGLE';
 export const FORM_FIELD_UPDATE_DATA = 'FORM_FIELD_UPDATE_DATA';
