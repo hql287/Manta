@@ -83,6 +83,7 @@ class Viewer extends Component {
         <TopBar
           printPDF={this.printPDF}
           changeTemplate={this.changeTemplate}
+          template={this.state.template}
         />
         <Invoice
           template={this.state.template}
