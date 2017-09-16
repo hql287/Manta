@@ -26,6 +26,7 @@
     "jest": "^21.0.1",
     "jest-styled-components": "^4.4.1",
     "react-test-renderer": "^15.6.1",
+    "redux-logger": "^3.0.6",
     "sinon": "^3.2.1",
     "spectron": "^3.7.2"
   },
@@ -51,8 +52,6 @@
     "react-redux": "^5.0.5",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0",
     "styled-components": "^2.1.2",
     "uuid": "^3.1.0"
   }
