@@ -32,8 +32,11 @@ class Note extends Component {
     this.setState({content: this.props.content});
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.note !== nextProps.note;
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state !== nextState ||
+      this.props.note !== nextProps.note
+    );
   }
 
   handleInputChange(event) {

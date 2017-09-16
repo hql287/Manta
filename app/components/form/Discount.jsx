@@ -40,8 +40,11 @@ class Discount extends Component {
     });
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.discount !== nextProps.discount;
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state !== nextState ||
+      this.props.discount !== nextProps.discount
+    );
   }
 
   handleInputChange(event) {
