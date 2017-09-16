@@ -34,8 +34,11 @@ class Vat extends Component {
     });
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.vat !== nextProps.vat;
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      this.state !== nextState ||
+      this.props.vat !== nextProps.vat
+    );
   }
 
   handleInputChange(event) {
