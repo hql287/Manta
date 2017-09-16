@@ -34,10 +34,10 @@ const Select = styled.select`
   margin-right: 20px;
 `
 
-function TopBar({changeTemplate, printPDF}) {
+function TopBar({template, changeTemplate, printPDF}) {
   return (
     <Wrapper className="no-print">
-      <Select onChange={changeTemplate}>
+      <Select value={template} onChange={changeTemplate}>
         <option value="default">Default</option>
         <option value="hosting">Hosting</option>
         <option value="elegant">Elegant</option>
