@@ -11,7 +11,6 @@ import combineReducers from './reducers';
 import App from './App';
 
 // 3rd Party MWs
-import ReduxThunk from 'redux-thunk';
 import Logger from 'redux-logger';
 
 // Custom Middleware
@@ -31,7 +30,6 @@ const middlewares = [
   SettingsMW,
   UIMiddleware,
   MainProcessMW,
-  ReduxThunk,
   Logger,
 ];
 
@@ -39,14 +37,14 @@ const middlewares = [
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Store
-const AppStore = createStore(
+const store = createStore(
   combineReducers,
   composeEnhancers(applyMiddleware(...middlewares))
 );
 
 // Render
 ReactDOM.render(
-  <Provider store={AppStore}>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')
