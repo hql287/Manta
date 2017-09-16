@@ -59,13 +59,13 @@ import Switch from '../shared/Switch';
 // Component
 function Settings(props) {
   const {
-    isSettingsOpened,
     toggleFormSettings,
     toggleField,
     currentInvoice,
   } = props;
 
   const {
+    settingsOpen,
     dueDate,
     currency,
     discount,
@@ -76,8 +76,8 @@ function Settings(props) {
   return (
     <Motion
       style={{
-        height: spring(isSettingsOpened ? 155 : 45),
-        rotate: spring(isSettingsOpened ? 180 : 0),
+        height: spring(settingsOpen ? 155 : 45),
+        rotate: spring(settingsOpen ? 180 : 0),
       }}>
       {({height, rotate}) =>
         <Wrapper style={{ height: `${height}px`}}>
@@ -139,8 +139,20 @@ function Settings(props) {
 }
 
 Settings.propTypes = {
-  isSettingsOpened: PropTypes.bool.isRequired,
-  currentInvoice: PropTypes.object.isRequired,
+  currentInvoice: PropTypes.shape({
+    recipient: PropTypes.shape({
+      newRecipient: PropTypes.bool.isRequired,
+      select: PropTypes.object.isRequired,
+      new: PropTypes.object.isRequired,
+    }),
+    rows: PropTypes.array.isRequired,
+    dueDate: PropTypes.object.isRequired,
+    currency: PropTypes.object.isRequired,
+    discount: PropTypes.object.isRequired,
+    vat: PropTypes.object.isRequired,
+    note: PropTypes.object.isRequired,
+    settingsOpen: PropTypes.bool.isRequired,
+  }).isRequired,
   toggleField: PropTypes.func.isRequired,
   toggleFormSettings: PropTypes.func.isRequired,
 };

@@ -33,6 +33,12 @@ const FormMW = ({dispatch, getState}) => next => action => {
       break;
     }
 
+    case ACTION_TYPES.FORM_CLEAR: {
+      dispatch(FormActions.toggleFormSettings(false));
+      next(action);
+      break;
+    }
+
     default: {
       next(action);
       break;

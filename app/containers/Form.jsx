@@ -30,7 +30,6 @@ import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation'
 class Form extends Component {
   constructor(props) {
     super(props);
-    this.state = {isSettingsOpened: false};
     this.toggleField        = this.toggleField.bind(this);
     this.saveFormData       = this.saveFormData.bind(this);
     this.clearFormData      = this.clearFormData.bind(this);
@@ -38,9 +37,15 @@ class Form extends Component {
     this.toggleFormSettings = this.toggleFormSettings.bind(this);
   }
 
+  // Optimization
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
+  }
+
   // Toggle Form Settings
   toggleFormSettings() {
-    this.setState({isSettingsOpened: !this.state.isSettingsOpened});
+    const { dispatch } = this.props;
+    dispatch(FormActions.toggleFormSettings());
   }
 
   // Save Form Data
@@ -51,10 +56,8 @@ class Form extends Component {
 
   // Clear Form Data
   clearFormData() {
-    this.setState({isSettingsOpened: false}, () => {
-      const {dispatch} = this.props;
-      dispatch(FormActions.clearForm());
-    });
+    const {dispatch} = this.props;
+    dispatch(FormActions.clearForm());
   }
 
   // Toggle Field
@@ -71,7 +74,13 @@ class Form extends Component {
 
   // Render The form
   render() {
-    const {dueDate, currency, discount, vat, note} = this.props.currentInvoice;
+    const {
+      dueDate,
+      currency,
+      discount,
+      vat,
+      note,
+    } = this.props.currentInvoice;
     return (
       <PageWrapper>
         <PageHeader>
@@ -87,7 +96,6 @@ class Form extends Component {
         </PageHeader>
         <PageContent>
           <Settings
-            isSettingsOpened={this.state.isSettingsOpened}
             toggleFormSettings={this.toggleFormSettings}
             toggleField={this.toggleField}
             currentInvoice={this.props.currentInvoice}
@@ -127,12 +135,13 @@ Form.propTypes = {
       select: PropTypes.object.isRequired,
       new: PropTypes.object.isRequired,
     }),
-    rows: PropTypes.array,
-    dueDate: PropTypes.object,
-    currency: PropTypes.object,
-    discount: PropTypes.object,
-    vat: PropTypes.object,
-    note: PropTypes.object,
+    rows: PropTypes.array.isRequired,
+    dueDate: PropTypes.object.isRequired,
+    currency: PropTypes.object.isRequired,
+    discount: PropTypes.object.isRequired,
+    vat: PropTypes.object.isRequired,
+    note: PropTypes.object.isRequired,
+    settingsOpen: PropTypes.bool.isRequired,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };

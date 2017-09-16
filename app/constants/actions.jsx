@@ -14,6 +14,7 @@ export const FORM_SAVE              = 'FORM_SAVE';
 export const FORM_CLEAR             = 'FORM_CLEAR';
 export const FORM_FIELD_TOGGLE      = 'FORM_FIELD_TOGGLE';
 export const FORM_FIELD_UPDATE_DATA = 'FORM_FIELD_UPDATE_DATA';
+export const FORM_SETTING_TOGGLE    = 'FORM_SETTING_TOGGLE';
 
 // INVOICE
 // ===========================================================
@@ -35,6 +36,6 @@ export const SETTINGS_GET_INITIAL = 'SETTINGS_GET_INITIAL';
 
 // UI
 // ===========================================================
-export const UI_TAB_CHANGE = 'UI_TAB_CHANGE';
-export const UI_NOTIFICATION_NEW = 'UI_NOTIFICATION_NEW';
+export const UI_TAB_CHANGE          = 'UI_TAB_CHANGE';
+export const UI_NOTIFICATION_NEW    = 'UI_NOTIFICATION_NEW';
 export const UI_NOTIFICATION_REMOVE = 'UI_NOTIFICATION_REMOVE';

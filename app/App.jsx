@@ -35,29 +35,32 @@ class App extends Component {
     ipc.on('menu-change-tab', (event, tabName) => {
       this.changeTab(tabName);
     });
-    ipc.on('menu-invoice-save', event => {
+    ipc.on('menu-form-save', () => {
       dispatch(FormActions.saveFormData());
     });
-    ipc.on('menu-invoice-clear', event => {
+    ipc.on('menu-form-clear', () => {
       dispatch(FormActions.clearForm());
     });
-    ipc.on('menu-invoice-add-item', event => {
+    ipc.on('menu-form-add-item', () => {
       dispatch(FormActions.addItem());
     });
-    ipc.on('menu-invoice-toggle-dueDate', event => {
+    ipc.on('menu-form-toggle-dueDate', () => {
       dispatch(FormActions.toggleField('dueDate'));
     });
-    ipc.on('menu-invoice-toggle-currency', event => {
+    ipc.on('menu-form-toggle-currency', () => {
       dispatch(FormActions.toggleField('currency'));
     });
-    ipc.on('menu-invoice-toggle-vat', event => {
+    ipc.on('menu-form-toggle-vat', () => {
       dispatch(FormActions.toggleField('vat'));
     });
-    ipc.on('menu-invoice-toggle-discount', event => {
+    ipc.on('menu-form-toggle-discount', () => {
       dispatch(FormActions.toggleField('discount'));
     });
-    ipc.on('menu-invoice-toggle-note', event => {
+    ipc.on('menu-form-toggle-note', () => {
       dispatch(FormActions.toggleField('note'));
+    });
+    ipc.on('menu-form-toggle-settings', () => {
+      dispatch(FormActions.toggleFormSettings());
     });
   }
 
@@ -71,14 +74,15 @@ class App extends Component {
   componentWillUnmount() {
     ipc.removeAllListeners([
       'menu-change-tab',
-      'menu-invoice-save',
-      'menu-invoice-clear',
-      'menu-invoice-add-item',
-      'menu-invoice-toggle-dueDate',
-      'menu-invoice-toggle-currency',
-      'menu-invoice-toggle-discount',
-      'menu-invoice-toggle-vat',
-      'menu-invoice-toggle-note',
+      'menu-form-save',
+      'menu-form-clear',
+      'menu-form-add-item',
+      'menu-form-toggle-dueDate',
+      'menu-form-toggle-currency',
+      'menu-form-toggle-discount',
+      'menu-form-toggle-vat',
+      'menu-form-toggle-note',
+      'menu-form-toggle-settings',
     ]);
   }
 

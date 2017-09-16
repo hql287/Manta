@@ -38,6 +38,7 @@ export const moveRow = (dragIndex, hoverIndex) => {
 };
 
 // Form Actions
+
 export const clearForm = vol => {
   return {
     type: ACTION_TYPES.FORM_CLEAR,
@@ -48,6 +49,13 @@ export const clearForm = vol => {
 export const saveFormData = () => {
   return {
     type: ACTION_TYPES.FORM_SAVE
+  };
+};
+
+export const toggleFormSettings = (newState) => {
+  return {
+    type: ACTION_TYPES.FORM_SETTING_TOGGLE,
+    payload: { state: newState },
   };
 };
 

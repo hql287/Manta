@@ -24,14 +24,14 @@ const menuTemplate = [
         label: 'Save',
         accelerator: 'CmdOrCtrl+S',
         click() {
-          mainWindow.webContents.send('menu-invoice-save');
+          mainWindow.webContents.send('menu-form-save');
         },
       },
       {
         label: 'Reset',
         accelerator: 'CmdOrCtrl+R',
         click() {
-          mainWindow.webContents.send('menu-invoice-clear');
+          mainWindow.webContents.send('menu-form-clear');
         },
       },
       {type: 'separator'},
@@ -39,7 +39,7 @@ const menuTemplate = [
         label: 'Add Item',
         accelerator: 'CmdOrCtrl+I',
         click() {
-          mainWindow.webContents.send('menu-invoice-add-item');
+          mainWindow.webContents.send('menu-form-add-item');
         },
       },
       {type: 'separator'},
@@ -47,38 +47,45 @@ const menuTemplate = [
         label: 'Toggle',
         submenu: [
           {
+            label: 'Toggle Form Settings',
+            accelerator: 'Alt+S',
+            click() {
+              mainWindow.webContents.send('menu-form-toggle-settings');
+            },
+          },
+          {
             label: 'Toggle Due Date',
             accelerator: 'Alt+T',
             click() {
-              mainWindow.webContents.send('menu-invoice-toggle-dueDate');
+              mainWindow.webContents.send('menu-form-toggle-dueDate');
             },
           },
           {
             label: 'Toggle Currency',
             accelerator: 'Alt+C',
             click() {
-              mainWindow.webContents.send('menu-invoice-toggle-currency');
+              mainWindow.webContents.send('menu-form-toggle-currency');
             },
           },
           {
             label: 'Toggle VAT',
             accelerator: 'Alt+V',
             click() {
-              mainWindow.webContents.send('menu-invoice-toggle-vat');
+              mainWindow.webContents.send('menu-form-toggle-vat');
             },
           },
           {
             label: 'Toggle Discount',
             accelerator: 'Alt+D',
             click() {
-              mainWindow.webContents.send('menu-invoice-toggle-discount');
+              mainWindow.webContents.send('menu-form-toggle-discount');
             },
           },
           {
             label: 'Toggle Note',
             accelerator: 'Alt+N',
             click() {
-              mainWindow.webContents.send('menu-invoice-toggle-note');
+              mainWindow.webContents.send('menu-form-toggle-note');
             },
           },
         ],
