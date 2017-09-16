@@ -16,6 +16,7 @@ const initialState = {
   discount: { required: false },
   vat:      { required: false },
   note:     { required: false },
+  settingsOpen: false,
 };
 
 const FormReducer = (state = initialState, action) => {
@@ -130,7 +131,8 @@ const FormReducer = (state = initialState, action) => {
         discount: { required: false },
         vat:      { required: false },
         note:     { required: false },
-      }
+        settingsOpen: false,
+      };
     }
 
     // Toggle Field
@@ -139,6 +141,14 @@ const FormReducer = (state = initialState, action) => {
         [action.field]: Object.assign({}, state[action.field], {
           required: !state[action.field].required,
         })
+      });
+    }
+
+    // Toggle Settings
+    case ACTION_TYPES.FORM_SETTING_TOGGLE: {
+      const newState = action.payload.state;
+      return Object.assign({}, state, {
+        settingsOpen: newState !== undefined ? newState : !state.settingsOpen
       });
     }
 
