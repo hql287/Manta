@@ -32,7 +32,7 @@ const ContactsMW = ({dispatch}) => next => action => {
         .then(allDocs => {
           next(
             Object.assign({}, action, {
-              data: allDocs,
+              payload: allDocs,
             }),
           );
         })
@@ -49,7 +49,7 @@ const ContactsMW = ({dispatch}) => next => action => {
     }
 
     case ACTION_TYPES.CONTACT_SAVE: {
-      const doc = Object.assign({}, action.data, {
+      const doc = Object.assign({}, action.payload, {
         _id: uuidv4(),
         created_at: Date.now(),
       });
@@ -59,7 +59,7 @@ const ContactsMW = ({dispatch}) => next => action => {
         .then(newDocs => {
           next({
             type: ACTION_TYPES.CONTACT_SAVE,
-            data: newDocs,
+            payload: newDocs
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
@@ -83,13 +83,13 @@ const ContactsMW = ({dispatch}) => next => action => {
 
     case ACTION_TYPES.CONTACT_DELETE: {
       db
-        .get(action._id)
+        .get(action.payload)
         .then(doc => db.remove(doc))
         .then(getAllDocs)
         .then(remainingDocs => {
           next({
             type: ACTION_TYPES.CONTACT_DELETE,
-            data: remainingDocs,
+            payload: remainingDocs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,

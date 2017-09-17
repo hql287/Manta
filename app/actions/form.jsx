@@ -4,7 +4,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 export const updateRecipient = data => {
   return {
     type: ACTION_TYPES.FORM_RECIPIENT_UPDATE,
-    data
+    payload: data,
   };
 };
 
@@ -15,62 +15,67 @@ export const addItem = () => {
   };
 };
 
-export const removeItem = id => {
+export const removeItem = itemID => {
   return {
     type: ACTION_TYPES.FORM_ITEM_REMOVE,
-    id
+    payload: itemID,
   };
 };
 
-export const updateItem = data => {
+export const updateItem = itemData => {
   return {
     type: ACTION_TYPES.FORM_ITEM_UPDATE,
-    data
+    payload: itemData,
   };
 };
 
 export const moveRow = (dragIndex, hoverIndex) => {
   return {
     type: ACTION_TYPES.FORM_ITEM_MOVE,
-    dragIndex,
-    hoverIndex,
+    payload: {
+      dragIndex,
+      hoverIndex,
+    }
   };
 };
 
 // Form Actions
 
-export const clearForm = vol => {
+export const clearForm = (muted=false) => {
   return {
     type: ACTION_TYPES.FORM_CLEAR,
-    payload: { vol }
+    payload: muted,
   };
 };
 
-export const saveFormData = () => {
+export const saveFormData = (withPreview=false) => {
   return {
-    type: ACTION_TYPES.FORM_SAVE
+    type: ACTION_TYPES.FORM_SAVE,
+    payload: withPreview
   };
 };
 
-export const toggleFormSettings = (newState) => {
+export const toggleFormSettings = (newState=true) => {
   return {
     type: ACTION_TYPES.FORM_SETTING_TOGGLE,
-    payload: { state: newState },
+    payload: newState,
   };
 };
 
 export const updateFieldData = (field, data) => {
   return {
     type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-    field,
-    data,
+    payload: {
+      field,
+      data,
+    }
   };
 };
 
 export const toggleField = field => {
   return {
     type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-    field,
+    payload: field,
   };
 };
 

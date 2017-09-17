@@ -5,7 +5,7 @@ import sounds from '../../libs/sounds';
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-const InvoicesMW = ({ dispatch }) => next => action => {
+const InvoicesMW = ({dispatch}) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
@@ -13,20 +13,22 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         appSettings: appConfig.get('appSettings'),
         printOptions: appConfig.get('printOptions'),
       };
-      next(Object.assign({}, action, {
-        data: {
-          current: savedSettings,
-          saved: savedSettings,
-        }
-      }));
+      next(
+        Object.assign({}, action, {
+          payload: {
+            current: savedSettings,
+            saved: savedSettings,
+          }
+        })
+      );
       break;
     }
 
     case ACTION_TYPES.SETTINGS_SAVE: {
       // Sate Settings
-      appConfig.set('info', action.data.info);
-      appConfig.set('appSettings', action.data.appSettings);
-      appConfig.set('printOptions', action.data.printOptions);
+      appConfig.set('info', action.payload.info);
+      appConfig.set('appSettings', action.payload.appSettings);
+      appConfig.set('printOptions', action.payload.printOptions);
       // Reload Sounds Cache
       sounds.preload();
       // Continue
@@ -36,8 +38,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         type: ACTION_TYPES.UI_NOTIFICATION_NEW,
         payload: {
           type: 'success',
-          message: 'All Settings Are Saved'
-        }
+          message: 'All Settings Are Saved',
+        },
       });
       break;
     }

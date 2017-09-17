@@ -11,7 +11,7 @@ const UIReducer = (state = initialState, action) => {
     // Change Active Tab
     case ACTION_TYPES.UI_TAB_CHANGE: {
       return Object.assign({}, state, {
-        activeTab: action.payload.tabName,
+        activeTab: action.payload,
       });
     }
 
@@ -33,7 +33,7 @@ const UIReducer = (state = initialState, action) => {
     // Remove Notification
     case ACTION_TYPES.UI_NOTIFICATION_REMOVE: {
       return Object.assign({}, state, {
-        notifications: state.notifications.filter(item => item.id !== action.payload.id)
+        notifications: state.notifications.filter(item => item.id !== action.payload)
       });
     }
 

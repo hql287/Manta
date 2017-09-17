@@ -9,14 +9,16 @@ export const getInitalSettings = () => {
 export const updateSettings = (setting, data) => {
   return {
     type: ACTION_TYPES.SETTINGS_UPDATE,
-    setting,
-    data,
+    payload: {
+      setting,
+      data,
+    }
   };
 };
 
 export const saveSettings = data => {
   return {
     type: ACTION_TYPES.SETTINGS_SAVE,
-    data,
+    payload: data,
   };
 };

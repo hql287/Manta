@@ -51,7 +51,7 @@ class Form extends Component {
   // Save Form Data
   saveFormData() {
     const {dispatch} = this.props;
-    dispatch(FormActions.saveFormData());
+    dispatch(FormActions.saveFormData(true));
   }
 
   // Clear Form Data
@@ -90,7 +90,7 @@ class Form extends Component {
               Clear
             </Button>
             <Button primary onClick={this.saveFormData}>
-              Save
+              Save & Preview
             </Button>
           </PageHeaderActions>
         </PageHeader>

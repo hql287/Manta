@@ -9,10 +9,10 @@ export const getInvoices = () => {
 };
 
 // Save an Invoice
-export const saveInvoice = data => {
+export const saveInvoice = (invoiceData, withPreview=false) => {
   return {
     type: ACTION_TYPES.INVOICE_SAVE,
-    data,
+    payload: { invoiceData, withPreview }
   };
 };
 
@@ -20,14 +20,14 @@ export const saveInvoice = data => {
 export const newInvocieFromContact = contact => {
   return {
     type: ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
-    payload: { contact },
+    payload: contact,
   };
 };
 
 // Delete an invoice
-export const deleteInvoice = _id => {
+export const deleteInvoice = contactID => {
   return {
     type: ACTION_TYPES.INVOICE_DELETE,
-    _id,
+    payload: contactID
   };
 };
