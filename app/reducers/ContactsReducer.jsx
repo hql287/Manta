@@ -12,19 +12,19 @@ const ContactsReducer = (state = initialState, action) => {
     case ACTION_TYPES.CONTACT_GET_ALL: {
       return Object.assign({}, state, {
         loaded: true,
-        data: action.data,
+        data: action.payload,
       });
     }
     // Save Contact
     case ACTION_TYPES.CONTACT_SAVE: {
       return Object.assign({}, state, {
-        data: action.data,
+        data: action.payload,
       });
     }
     // Delete A Contact
     case ACTION_TYPES.CONTACT_DELETE: {
       return Object.assign({}, state, {
-        data: action.data,
+        data: action.payload,
       });
     }
     default: {

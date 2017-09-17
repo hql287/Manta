@@ -7,7 +7,7 @@ const UIMiddleware = ({ getState }) => next => action => {
     case ACTION_TYPES.UI_TAB_CHANGE: {
       const currentState = getState();
       const currentTab = currentState.UIReducer.activeTab;
-      if (action.payload.tabName !== currentTab) {
+      if (action.payload !== currentTab) {
         sounds.play('TAP');
         next(action);
       }
@@ -44,7 +44,7 @@ const UIMiddleware = ({ getState }) => next => action => {
     }
 
     case ACTION_TYPES.FORM_CLEAR: {
-      if (action.payload.vol !== 'muted') {
+      if (!action.payload) {
         sounds.play('RELOAD');
       }
       next(action);

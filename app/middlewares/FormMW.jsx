@@ -26,10 +26,10 @@ const FormMW = ({dispatch, getState}) => next => action => {
 
       // Save Invoice To DB
       const InvoiceData = getInvoiceData(currentInvoice);
-      dispatch(InvoicesActions.saveInvoice(InvoiceData));
+      dispatch(InvoicesActions.saveInvoice(InvoiceData, action.payload));
 
       // Clear The Form
-      dispatch(FormActions.clearForm('muted'));
+      dispatch(FormActions.clearForm(true));
       break;
     }
 

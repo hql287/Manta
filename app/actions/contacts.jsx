@@ -9,17 +9,17 @@ export const getAllContacts = () => {
 };
 
 // Save A Contact
-export const saveContact = data => {
+export const saveContact = invoiceData => {
   return {
     type: ACTION_TYPES.CONTACT_SAVE,
-    data,
+    payload: invoiceData,
   };
 };
 
 // Delete A Contact
-export const deleteContact = _id => {
+export const deleteContact = contactID => {
   return {
     type: ACTION_TYPES.CONTACT_DELETE,
-    _id,
+    payload: contactID,
   };
 };

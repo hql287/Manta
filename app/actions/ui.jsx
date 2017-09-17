@@ -5,7 +5,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 export const changeActiveTab = tabName => {
   return {
     type: ACTION_TYPES.UI_TAB_CHANGE,
-    payload: { tabName },
+    payload: tabName,
   };
 };
 
@@ -19,9 +19,9 @@ export const newNoti = (messageType, messageContent) => {
   };
 };
 
-export const removeNoti = id => {
+export const removeNoti = notificationID => {
   return {
     type: ACTION_TYPES.UI_NOTIFICATION_REMOVE,
-    payload: { id },
+    payload: notificationID,
   };
 };

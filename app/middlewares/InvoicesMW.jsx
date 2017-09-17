@@ -1,6 +1,7 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
 const appConfig = require('electron').remote.require('electron-settings');
+const ipc = require('electron').ipcRenderer;
 
 // PouchDB
 const PouchDB = require('pouchdb-browser');
@@ -65,7 +66,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       // Update Recipient Data
       dispatch(FormActions.updateRecipient({
         new: {},
-        select: action.payload.contact,
+        select: action.payload,
         newRecipient: false,
       }));
     }
@@ -74,7 +75,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       getAllDocs()
         .then(allDocs => {
           next(Object.assign({}, action, {
-            data: allDocs,
+            payload: allDocs,
           }));
         })
         .catch(err => {
@@ -90,15 +91,16 @@ const InvoicesMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.INVOICE_SAVE: {
+      const { invoiceData, withPreview } = action.payload;
       // Set new document
-      const doc = Object.assign({}, action.data, {
+      const doc = Object.assign({}, invoiceData, {
         _id: uuidv4(),
         created_at: Date.now(),
-        currency: action.data.currency
-          ? action.data.currency
+        currency: invoiceData.currency
+          ? invoiceData.currency
           : appConfig.get('appSettings').currency,
-        subtotal: getSubtotal(action.data),
-        grandTotal: getGrandTotal(action.data),
+        subtotal: getSubtotal(invoiceData),
+        grandTotal: getGrandTotal(invoiceData),
       });
       // Save doc to db
       db
@@ -107,7 +109,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         .then(newDocs => {
           next({
             type: ACTION_TYPES.INVOICE_SAVE,
-            data: newDocs,
+            payload: newDocs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
@@ -116,6 +118,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
               message: 'Inovice Created Successfully'
             }
           });
+          // Preview Window
+          withPreview && ipc.send('preview-invoice', doc);
         })
         .catch(err => {
           next({
@@ -131,13 +135,13 @@ const InvoicesMW = ({ dispatch }) => next => action => {
 
     case ACTION_TYPES.INVOICE_DELETE: {
       db
-        .get(action._id)
+        .get(action.payload)
         .then(doc => db.remove(doc))
         .then(getAllDocs)
         .then(remainingDocs => {
           next({
             type: ACTION_TYPES.INVOICE_DELETE,
-            data: remainingDocs,
+            payload: remainingDocs
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,

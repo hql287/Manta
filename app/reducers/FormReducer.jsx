@@ -24,7 +24,7 @@ const FormReducer = (state = initialState, action) => {
     // Update recipient
     case ACTION_TYPES.FORM_RECIPIENT_UPDATE: {
       return Object.assign({}, state, {
-        recipient: action.data
+        recipient: action.payload
       });
     }
 
@@ -38,7 +38,7 @@ const FormReducer = (state = initialState, action) => {
     // Remove Item
     case ACTION_TYPES.FORM_ITEM_REMOVE: {
       return Object.assign({}, state, {
-        rows: state.rows.filter(item => item.id !== action.id),
+        rows: state.rows.filter(item => item.id !== action.payload),
       });
     }
 
@@ -46,16 +46,16 @@ const FormReducer = (state = initialState, action) => {
     case ACTION_TYPES.FORM_ITEM_UPDATE: {
       return Object.assign({}, state, {
         rows: state.rows.map(item =>
-          (item.id !== action.data.id)
+          (item.id !== action.payload.id)
             ? item
-            : action.data
+            : action.payload
         ),
       });
     }
 
     // Move Row Item
     case ACTION_TYPES.FORM_ITEM_MOVE: {
-      const { dragIndex, hoverIndex } = action;
+      const { dragIndex, hoverIndex } = action.payload;
       const dragRow = state.rows[dragIndex];
       let newRows = state.rows;
       newRows.splice(dragIndex, 1);
@@ -67,12 +67,12 @@ const FormReducer = (state = initialState, action) => {
 
     // Update Field Data
     case ACTION_TYPES.FORM_FIELD_UPDATE_DATA: {
-      switch(action.field) {
-
+      const {field, data} = action.payload;
+      switch(field) {
         case 'dueDate': {
           return Object.assign({}, state, {
             dueDate: Object.assign({}, state.dueDate, {
-              selectedDate: action.data,
+              selectedDate: data,
             })
           });
         }
@@ -80,7 +80,7 @@ const FormReducer = (state = initialState, action) => {
         case 'currency': {
           return Object.assign({}, state, {
             currency: Object.assign({}, state.currency, {
-              selectedCurrency: action.data,
+              selectedCurrency: data,
             })
           });
         }
@@ -88,8 +88,8 @@ const FormReducer = (state = initialState, action) => {
         case 'discount': {
           return Object.assign({}, state, {
             discount: Object.assign({}, state.discount, {
-              amount: action.data.amount,
-              type: action.data.type,
+              amount: data.amount,
+              type: data.type,
             })
           });
         }
@@ -97,7 +97,7 @@ const FormReducer = (state = initialState, action) => {
         case 'vat': {
           return Object.assign({}, state, {
             vat: Object.assign({}, state.vat, {
-              amount: action.data.amount,
+              amount: data.amount,
             })
           });
         }
@@ -105,7 +105,7 @@ const FormReducer = (state = initialState, action) => {
         case 'note': {
           return Object.assign({}, state, {
             note: Object.assign({}, state.note, {
-              content: action.data.content,
+              content: data.content,
             })
           });
         }
@@ -113,7 +113,6 @@ const FormReducer = (state = initialState, action) => {
         default: {
           return state;
         }
-
       }
     }
 
@@ -138,17 +137,17 @@ const FormReducer = (state = initialState, action) => {
     // Toggle Field
     case ACTION_TYPES.FORM_FIELD_TOGGLE: {
       return Object.assign({}, state, {
-        [action.field]: Object.assign({}, state[action.field], {
-          required: !state[action.field].required,
+        [action.payload]: Object.assign({}, state[action.payload], {
+          required: !state[action.payload].required,
         })
       });
     }
 
     // Toggle Settings
     case ACTION_TYPES.FORM_SETTING_TOGGLE: {
-      const newState = action.payload.state;
+      const newState = action.payload;
       return Object.assign({}, state, {
-        settingsOpen: newState !== undefined ? newState : !state.settingsOpen
+        settingsOpen: newState !== true ? newState : !state.settingsOpen
       });
     }
 
