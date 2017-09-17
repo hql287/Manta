@@ -18,9 +18,10 @@ export const FORM_SETTING_TOGGLE    = 'FORM_SETTING_TOGGLE';
 
 // INVOICE
 // ===========================================================
-export const INVOICE_GET_ALL = 'INVOICE_GET_ALL';
-export const INVOICE_DELETE  = 'INVOICE_DELETE';
-export const INVOICE_SAVE    = 'INVOICE_SAVE';
+export const INVOICE_SAVE             = 'INVOICE_SAVE';
+export const INVOICE_DELETE           = 'INVOICE_DELETE';
+export const INVOICE_GET_ALL          = 'INVOICE_GET_ALL';
+export const INVOICE_NEW_FROM_CONTACT = 'INVOICE_NEW_FROM_CONTACT';
 
 // CONTACTS
 // ===========================================================

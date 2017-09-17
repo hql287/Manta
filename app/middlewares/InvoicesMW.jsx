@@ -6,8 +6,10 @@ const appConfig = require('electron').remote.require('electron-settings');
 const PouchDB = require('pouchdb-browser');
 const db = new PouchDB('invoices');
 
-// Actions Verbs
+// Actions & Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import * as UIActions from '../actions/ui';
+import * as FormActions from '../actions/form';
 
 // HELPER
 const getAllDocs = () =>
@@ -57,6 +59,17 @@ const getGrandTotal = data => {
 
 const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
+    case ACTION_TYPES.INVOICE_NEW_FROM_CONTACT: {
+      // Change Tab to Form
+      next(UIActions.changeActiveTab('form'));
+      // Update Recipient Data
+      dispatch(FormActions.updateRecipient({
+        new: {},
+        select: action.payload.contact,
+        newRecipient: false,
+      }));
+    }
+
     case ACTION_TYPES.INVOICE_GET_ALL: {
       getAllDocs()
         .then(allDocs => {

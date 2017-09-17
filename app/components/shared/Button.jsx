@@ -16,27 +16,45 @@ const ButtonStyle = styled.button`
   font-size: 12px;
   text-decoration: none;
   color: white;
-  background: #292B2C;
+  background: #292b2c;
   text-transform: uppercase;
   letter-spacing: 1px;
   ${props => props.primary && `background: #469fe5;`}
   ${props => props.success && `background: #6bbb69;`}
   ${props => props.danger && `background: #EC476E;`}
   &:hover {
+    cursor: pointer;
     color: white;
     text-decoration: none;
   }
 `;
 
+const ButtonLinkStyle = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  ${props => props.primary && `color: #469fe5;`}
+  ${props => props.success && `color: #6bbb69;`}
+  ${props => props.danger && `color: #EC476E;`}
+  &:hover { cursor: pointer; }
+`;
+
 function Button(props) {
-  return (
-    <ButtonStyle {...props}>
-      { props.children }
-    </ButtonStyle>
-  );
+  return props.link
+    ? <ButtonLinkStyle {...props}>
+        {props.children}
+      </ButtonLinkStyle>
+    : <ButtonStyle {...props}>
+        {props.children}
+      </ButtonStyle>;
 }
 
 Button.propTypes = {
+  link: PropTypes.bool,
   danger: PropTypes.bool,
   onClick: PropTypes.func,
   primary: PropTypes.bool,
@@ -44,6 +62,7 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
+  link: false,
   primary: false,
   success: false,
   danger: false,
