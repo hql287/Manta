@@ -12,6 +12,7 @@ const _ = require('lodash');
 
 // Custom Component
 import {TR, TD} from '../shared/Table';
+import Button from '../shared/Button';
 
 // Component
 class Invoice extends Component {
@@ -61,12 +62,12 @@ class Invoice extends Component {
           {invoice.currency} {invoice.grandTotal}
         </TD>
         <TD actions>
-          <a href="#" onClick={this.previewInvoice}>
+          <Button link primary onClick={this.previewInvoice}>
             <i className="ion-search" />
-          </a>
-          <a href="#" onClick={this.deleteInvoice}>
-            <i className="ion-android-cancel" />
-          </a>
+          </Button>
+          <Button link danger onClick={this.deleteInvoice}>
+            <i className="ion-close-circled" />
+          </Button>
         </TD>
       </TR>
     );

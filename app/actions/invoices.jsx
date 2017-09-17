@@ -1,7 +1,6 @@
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-// EXPORTED ACTIONS
 // Get All Invoices
 export const getInvoices = () => {
   return {
@@ -14,6 +13,14 @@ export const saveInvoice = data => {
   return {
     type: ACTION_TYPES.INVOICE_SAVE,
     data,
+  };
+};
+
+// New Invoice from Contact
+export const newInvocieFromContact = contact => {
+  return {
+    type: ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
+    payload: { contact },
   };
 };
 

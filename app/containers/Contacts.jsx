@@ -7,7 +7,8 @@ const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
 
 // Actions
-import * as Actions from '../actions/contacts';
+import * as ContactsActions from '../actions/contacts';
+import * as InvoicesActions from '../actions/invoices';
 
 // Components
 import Contact from '../components/contacts/Contact';
@@ -25,6 +26,7 @@ import {
 class Contacts extends Component {
   constructor(props) {
     super(props);
+    this.newInvoice = this.newInvoice.bind(this);
     this.deleteContact = this.deleteContact.bind(this);
   }
 
@@ -44,6 +46,11 @@ class Contacts extends Component {
     ipc.removeAllListeners('confirmed-delete-contact');
   }
 
+  newInvoice(contact) {
+    const {dispatch} = this.props;
+    dispatch(InvoicesActions.newInvocieFromContact(contact));
+  }
+
   deleteContact(contactId) {
     openDialog(
       {
@@ -59,7 +66,7 @@ class Contacts extends Component {
 
   confirmedDeleteContact(contactId) {
     const {dispatch} = this.props;
-    dispatch(Actions.deleteContact(contactId));
+    dispatch(ContactsActions.deleteContact(contactId));
   }
 
   render() {
@@ -71,6 +78,7 @@ class Contacts extends Component {
           data={contact}
           index={index}
           deleteContact={this.deleteContact}
+          newInvoice={this.newInvoice}
         />
       );
     });
