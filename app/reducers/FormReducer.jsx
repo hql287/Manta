@@ -1,8 +1,5 @@
-// Node Libs
-import uuidv4 from 'uuid/v4';
-
-// Actions
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import {handleActions} from 'redux-actions';
 
 const initialState = {
   recipient: {
@@ -10,7 +7,7 @@ const initialState = {
     select: {},
     new: {},
   },
-  rows: [{id: uuidv4()}],
+  rows: [],
   dueDate:  { required: false },
   currency: { required: false },
   discount: { required: false },
@@ -19,42 +16,33 @@ const initialState = {
   settingsOpen: false,
 };
 
-const FormReducer = (state = initialState, action) => {
-  switch (action.type) {
-    // Update recipient
-    case ACTION_TYPES.FORM_RECIPIENT_UPDATE: {
-      return Object.assign({}, state, {
+const FormReducer = handleActions(
+  {
+    [ACTION_TYPES.FORM_RECIPIENT_UPDATE]: (state, action) =>
+      Object.assign({}, state, {
         recipient: action.payload
-      });
-    }
+      }),
 
-    // Add Item
-    case ACTION_TYPES.FORM_ITEM_ADD: {
-      return Object.assign({}, state, {
-        rows: [...state.rows, {id: uuidv4()}],
-      });
-    }
+    [ACTION_TYPES.FORM_ITEM_ADD]: (state, action) =>
+      Object.assign({}, state, {
+        rows: [...state.rows, action.payload],
+      }),
 
-    // Remove Item
-    case ACTION_TYPES.FORM_ITEM_REMOVE: {
-      return Object.assign({}, state, {
+    [ACTION_TYPES.FORM_ITEM_REMOVE]: (state, action) =>
+      Object.assign({}, state, {
         rows: state.rows.filter(item => item.id !== action.payload),
-      });
-    }
+      }),
 
-    // Update Item
-    case ACTION_TYPES.FORM_ITEM_UPDATE: {
-      return Object.assign({}, state, {
+    [ACTION_TYPES.FORM_ITEM_UPDATE]: (state, action) =>
+      Object.assign({}, state, {
         rows: state.rows.map(item =>
           (item.id !== action.payload.id)
             ? item
             : action.payload
         ),
-      });
-    }
+      }),
 
-    // Move Row Item
-    case ACTION_TYPES.FORM_ITEM_MOVE: {
+    [ACTION_TYPES.FORM_ITEM_MOVE]: (state, action) => {
       const { dragIndex, hoverIndex } = action.payload;
       const dragRow = state.rows[dragIndex];
       let newRows = state.rows;
@@ -63,10 +51,9 @@ const FormReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         rows: newRows,
       });
-    }
+    },
 
-    // Update Field Data
-    case ACTION_TYPES.FORM_FIELD_UPDATE_DATA: {
+    [ACTION_TYPES.FORM_FIELD_UPDATE_DATA]: (state, action) => {
       const {field, data} = action.payload;
       switch(field) {
         case 'dueDate': {
@@ -114,48 +101,25 @@ const FormReducer = (state = initialState, action) => {
           return state;
         }
       }
-    }
+    },
 
-    // Clear Form Data
-    case ACTION_TYPES.FORM_CLEAR: {
-      return {
-        recipient: {
-          newRecipient: true,
-          select: {},
-          new: {},
-        },
-        rows: [{id: uuidv4()}],
-        dueDate:  { required: false },
-        currency: { required: false },
-        discount: { required: false },
-        vat:      { required: false },
-        note:     { required: false },
-        settingsOpen: false,
-      };
-    }
-
-    // Toggle Field
-    case ACTION_TYPES.FORM_FIELD_TOGGLE: {
-      return Object.assign({}, state, {
+    [ACTION_TYPES.FORM_FIELD_TOGGLE]: (state, action) =>
+      Object.assign({}, state, {
         [action.payload]: Object.assign({}, state[action.payload], {
           required: !state[action.payload].required,
         })
-      });
-    }
+      }),
 
-    // Toggle Settings
-    case ACTION_TYPES.FORM_SETTING_TOGGLE: {
+    [ACTION_TYPES.FORM_SETTING_TOGGLE]: (state, action) => {
       const newState = action.payload;
       return Object.assign({}, state, {
         settingsOpen: newState !== true ? newState : !state.settingsOpen
       });
-    }
+    },
 
-    // Default
-    default: {
-      return state;
-    }
-  }
-};
+    [ACTION_TYPES.FORM_CLEAR]: () => initialState
+  },
+  initialState
+);
 
 export default FormReducer;

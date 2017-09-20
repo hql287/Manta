@@ -20,7 +20,6 @@ import ContactsMW from './middlewares/ContactsMW';
 import InvoicesMW from './middlewares/InvoicesMW';
 import SettingsMW from './middlewares/SettingsMW';
 import UIMiddleware from './middlewares/UIMiddleware';
-import MainProcessMW from './middlewares/MainProcessMW';
 
 const middlewares = [
   MeasureMW,
@@ -29,7 +28,6 @@ const middlewares = [
   InvoicesMW,
   SettingsMW,
   UIMiddleware,
-  MainProcessMW,
   Logger,
 ];
 

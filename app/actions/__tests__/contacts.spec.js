@@ -15,13 +15,13 @@ it('saveContact should create SAVE_CONTACT action', () => {
   };
   expect(actions.saveContact(contactData)).toEqual({
     type: ACTION_TYPES.CONTACT_SAVE,
-    data: contactData,
+    payload: contactData,
   });
 });
 
 it('deleteContact should create DELETE_CONTACT action', () => {
   expect(actions.deleteContact('jon_snow')).toEqual({
     type: ACTION_TYPES.CONTACT_DELETE,
-    _id: 'jon_snow',
+    payload: 'jon_snow',
   });
 });

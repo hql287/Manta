@@ -1,33 +1,23 @@
-// Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import {createAction} from 'redux-actions';
 
 // Get All Invoices
-export const getInvoices = () => {
-  return {
-    type: ACTION_TYPES.INVOICE_GET_ALL,
-  };
-};
+export const getInvoices = createAction(ACTION_TYPES.INVOICE_GET_ALL);
 
 // Save an Invoice
-export const saveInvoice = (invoiceData, withPreview=false) => {
-  return {
-    type: ACTION_TYPES.INVOICE_SAVE,
-    payload: { invoiceData, withPreview }
-  };
-};
+export const saveInvoice = createAction(
+  ACTION_TYPES.INVOICE_SAVE,
+  (invoiceData, withPreview=false) => ({  invoiceData, withPreview  })
+);
 
 // New Invoice from Contact
-export const newInvocieFromContact = contact => {
-  return {
-    type: ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
-    payload: contact,
-  };
-};
+export const newInvocieFromContact = createAction(
+  ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
+  contact => contact
+);
 
 // Delete an invoice
-export const deleteInvoice = contactID => {
-  return {
-    type: ACTION_TYPES.INVOICE_DELETE,
-    payload: contactID
-  };
-};
+export const deleteInvoice = createAction(
+  ACTION_TYPES.INVOICE_DELETE,
+  contactID => contactID
+);

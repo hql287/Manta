@@ -9,7 +9,7 @@ it('updateRecipient should create UPDATE_RECIPIENT action', () => {
   };
   expect(actions.updateRecipient(recipientData)).toEqual({
     type: ACTION_TYPES.FORM_RECIPIENT_UPDATE,
-    data: recipientData,
+    payload: recipientData,
   });
 });
 
@@ -23,7 +23,7 @@ it('addItem should create ADD_ITEM action', () => {
 it('removeItem should create REMOVE_ITEM action', () => {
   expect(actions.removeItem('jon_snow')).toEqual({
     type: ACTION_TYPES.FORM_ITEM_REMOVE,
-    id: 'jon_snow',
+    payload: 'jon_snow',
   });
 });
 
@@ -35,15 +35,17 @@ it('updateItem should create UPDATE_ITEM action', () => {
   }
   expect(actions.updateItem(itemData)).toEqual({
     type: ACTION_TYPES.FORM_ITEM_UPDATE,
-    data: itemData,
+    payload: itemData,
   });
 });
 
 it('moveRow should create MOVE_ROW action', () => {
   expect(actions.moveRow(2,3)).toEqual({
     type: ACTION_TYPES.FORM_ITEM_MOVE,
-    dragIndex: 2,
-    hoverIndex: 3,
+    payload: {
+      dragIndex: 2,
+      hoverIndex: 3,
+    }
   });
 });
 
@@ -51,7 +53,30 @@ it('moveRow should create MOVE_ROW action', () => {
 it('clearForm should create CLEAR_FORM action', () => {
   expect(actions.clearForm('muted')).toEqual({
     type: ACTION_TYPES.FORM_CLEAR,
-    payload: { vol: 'muted' }
+    payload: 'muted'
+  });
+});
+
+it('saveFormData should create FORM_SAVE action', () => {
+  expect(actions.saveFormData()).toEqual({
+    type: ACTION_TYPES.FORM_SAVE,
+    payload: false,
+  });
+
+  expect(actions.saveFormData(true)).toEqual({
+    type: ACTION_TYPES.FORM_SAVE,
+    payload: true,
+  });
+});
+
+it('toggleFormSettings should create FORM_SETTING_TOGGLE action', () => {
+  expect(actions.toggleFormSettings()).toEqual({
+    type: ACTION_TYPES.FORM_SETTING_TOGGLE,
+    payload: true,
+  });
+  expect(actions.toggleFormSettings(false)).toEqual({
+    type: ACTION_TYPES.FORM_SETTING_TOGGLE,
+    payload: false,
   });
 });
 
@@ -60,30 +85,32 @@ it('updateFieldData should create UPDATE_FIELD_DATA action', () => {
   const data = '28/07/1988';
   expect(actions.updateFieldData(field, data)).toEqual({
     type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-    field,
-    data,
+    payload: {
+      field,
+      data,
+    }
   });
 });
 
 it('toggleField should create TOGGLE_FIELD action', () => {
   expect(actions.toggleField('dueDate')).toEqual({
     type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-    field: 'dueDate'
+    payload: 'dueDate'
   });
   expect(actions.toggleField('currency')).toEqual({
     type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-    field: 'currency'
+    payload: 'currency'
   });
   expect(actions.toggleField('discount')).toEqual({
     type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-    field: 'discount'
+    payload: 'discount'
   });
   expect(actions.toggleField('vat')).toEqual({
     type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-    field: 'vat'
+    payload: 'vat'
   });
   expect(actions.toggleField('note')).toEqual({
     type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-    field: 'note'
+    payload: 'note'
   });
 });

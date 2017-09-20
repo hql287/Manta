@@ -1,39 +1,24 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import {handleActions} from 'redux-actions';
 
-const initialState = {
-  loaded: false,
-};
-
-const SettingsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    // Get Initial Settings
-    case ACTION_TYPES.SETTINGS_GET_INITIAL: {
-      return Object.assign({}, action.payload, {
+const SettingsReducer = handleActions(
+  {
+    [ACTION_TYPES.SETTINGS_GET_INITIAL]: (state, action) =>
+      Object.assign({}, action.payload, {
         loaded: true,
-      });
-    }
-
-    // Update Settings
-    case ACTION_TYPES.SETTINGS_UPDATE: {
-      return Object.assign({}, state, {
+      }),
+    [ACTION_TYPES.SETTINGS_UPDATE]: (state, action) =>
+      Object.assign({}, state, {
         current: Object.assign({}, state.current, {
           [action.payload.setting]: action.payload.data,
         }),
-      });
-    }
-
-    // Save All Settings
-    case ACTION_TYPES.SETTINGS_SAVE: {
-      return Object.assign({}, state, {
+      }),
+    [ACTION_TYPES.SETTINGS_SAVE]: (state, action) =>
+      Object.assign({}, state, {
         saved: action.payload,
-      });
-    }
-
-    // Default Case
-    default: {
-      return state;
-    }
-  }
-};
+      }),
+  },
+  { loaded: false }
+);
 
 export default SettingsReducer;
