@@ -26,7 +26,7 @@ describe('Form Reducer should handle', () => {
   it('remove a row item', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_ITEM_REMOVE,
-      id: 'Arya Stark'
+      payload: 'Arya Stark'
     });
     expect(newState.rows).toHaveLength(3);
   });
@@ -34,7 +34,7 @@ describe('Form Reducer should handle', () => {
   it('update a row item', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_ITEM_UPDATE,
-      data: {
+      payload: {
         id: 'Tyrion Lannister',
         description: 'The Lannisters always pay their debts',
       }
@@ -49,8 +49,10 @@ describe('Form Reducer should handle', () => {
   it('drag row item', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_ITEM_MOVE,
-      dragIndex: 2,
-      hoverIndex: 3,
+      payload: {
+        dragIndex: 2,
+        hoverIndex: 3,
+      }
     });
     expect(newState.rows).toHaveLength(4);
     expect(newState.rows).toEqual([
@@ -70,12 +72,26 @@ describe('Form Reducer should handle', () => {
       select: {},
       new: {},
     });
-    expect(newState.rows).toHaveLength(1);
+    expect(newState.rows).toHaveLength(0);
     expect(newState.dueDate).toEqual({ required: false });
     expect(newState.note).toEqual({ required: false });
     expect(newState.currency).toEqual({ required: false });
     expect(newState.discount).toEqual({ required: false });
     expect(newState.vat).toEqual({ required: false });
+  });
+
+  it('toggle the form settings', () => {
+    const newState1 = FormReducer(currentState, {
+      type: ACTION_TYPES.FORM_SETTING_TOGGLE,
+      payload: false,
+    });
+    expect(newState1.settingsOpen).toEqual(false);
+    const currentState = FormReducer(currentState, { type: 'default' });
+    const newState2 = FormReducer(currentState, {
+      type: ACTION_TYPES.FORM_SETTING_TOGGLE,
+      payload: true,
+    });
+    expect(newState2.settingsOpen).toEqual(!currentState.settingsOpen);
   });
 
 });
@@ -95,7 +111,7 @@ describe('Form Reducer should handle toggle', () => {
   it('currency field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      field: 'currency',
+      payload: 'currency',
     });
     expect(newState.currency.required).toBe(true);
   });
@@ -103,7 +119,7 @@ describe('Form Reducer should handle toggle', () => {
   it('dueDate field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      field: 'dueDate',
+      payload: 'dueDate',
     });
     expect(newState.dueDate.required).toBe(true);
   });
@@ -111,7 +127,7 @@ describe('Form Reducer should handle toggle', () => {
   it('discount field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      field: 'discount',
+      payload: 'discount',
     });
     expect(newState.discount.required).toBe(true);
   });
@@ -119,7 +135,7 @@ describe('Form Reducer should handle toggle', () => {
   it('note field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      field: 'note',
+      payload: 'note',
     });
     expect(newState.note.required).toBe(true);
   });
@@ -127,7 +143,7 @@ describe('Form Reducer should handle toggle', () => {
   it('vat field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      field: 'vat',
+      payload: 'vat',
     });
     expect(newState.vat.required).toBe(true);
   });
@@ -150,7 +166,7 @@ describe('Form Reducer should handle update', () => {
   it('recipient data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_RECIPIENT_UPDATE,
-      data: {
+      payload: {
         newRecipient: false,
         select: {
           fullname: 'Jon Snow',
@@ -179,8 +195,10 @@ describe('Form Reducer should handle update', () => {
   it('currency data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-      field: 'currency',
-      data: 'VND',
+      payload: {
+        field: 'currency',
+        data: 'VND',
+      }
     });
     expect(newState.currency.selectedCurrency).not.toEqual('USD');
     expect(newState.currency.selectedCurrency).toEqual('VND');
@@ -189,8 +207,10 @@ describe('Form Reducer should handle update', () => {
   it('dueDate data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-      field: 'dueDate',
-      data: '28/07/1988',
+      payload: {
+        field: 'dueDate',
+        data: '28/07/1988',
+      }
     });
     expect(newState.dueDate.selectedDate).toEqual('28/07/1988');
   });
@@ -198,10 +218,12 @@ describe('Form Reducer should handle update', () => {
   it('discount data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-      field: 'discount',
-      data: {
-        type: 'percentage',
-        amount: 10,
+      payload: {
+        field: 'discount',
+        data: {
+          type: 'percentage',
+          amount: 10,
+        }
       }
     });
     expect(newState.discount.type).toEqual('percentage');
@@ -213,9 +235,11 @@ describe('Form Reducer should handle update', () => {
   it('vat data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-      field: 'vat',
-      data: {
-        amount: 5,
+      payload: {
+        field: 'vat',
+        data: {
+          amount: 5,
+        }
       }
     });
     expect(newState.vat.amount).toEqual(5);
@@ -225,9 +249,11 @@ describe('Form Reducer should handle update', () => {
   it('note data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-      field: 'note',
-      data: {
-        content: 'You know nothing, Jon Snow',
+      payload: {
+        field: 'note',
+        data: {
+          content: 'You know nothing, Jon Snow',
+        }
       }
     });
     expect(newState.note.content).toEqual('You know nothing, Jon Snow');

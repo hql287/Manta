@@ -16,7 +16,7 @@ describe('Contacts Reducer', () => {
     expect(
       ContactsReducer(initialState, {
         type: ACTION_TYPES.CONTACT_GET_ALL,
-        data: allDocs,
+        payload: allDocs,
       }),
     ).toEqual(
       Object.assign({}, initialState, {
@@ -35,7 +35,7 @@ describe('Contacts Reducer', () => {
     expect(
       ContactsReducer(initialState, {
         type: ACTION_TYPES.CONTACT_SAVE,
-        data: newDocs,
+        payload: newDocs,
       }),
     ).toEqual(
       Object.assign({}, initialState, {
@@ -52,7 +52,7 @@ describe('Contacts Reducer', () => {
     expect(
       ContactsReducer(initialState, {
         type: ACTION_TYPES.CONTACT_DELETE,
-        data: remainingDocs,
+        payload: remainingDocs,
       }),
     ).toEqual(
       Object.assign({}, initialState, {

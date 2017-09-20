@@ -16,8 +16,10 @@ it('updateSettings should create SAVE_SETTINGS action', () => {
   const settingType = 'info';
   expect(actions.updateSettings(settingType, settingsData)).toEqual({
     type: ACTION_TYPES.SETTINGS_UPDATE,
-    setting: settingType,
-    data: settingsData,
+    payload: {
+      setting: settingType,
+      data: settingsData,
+    }
   });
 });
 
@@ -25,7 +27,7 @@ it('saveSettings should create SAVE_SETTINGS action', () => {
   const settingsData = {  };
   expect(actions.saveSettings(settingsData)).toEqual({
     type: ACTION_TYPES.SETTINGS_SAVE,
-    data: settingsData,
+    payload: settingsData,
   });
 });
 

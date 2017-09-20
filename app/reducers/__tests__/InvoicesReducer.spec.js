@@ -20,7 +20,7 @@ describe('Invoices Reducer', () => {
     expect(
       InvoicesReducer(initialState, {
         type: ACTION_TYPES.INVOICE_GET_ALL,
-        data: allInvoices,
+        payload: allInvoices,
       }),
     ).toEqual(
       Object.assign({}, initialState, {
@@ -40,7 +40,7 @@ describe('Invoices Reducer', () => {
     expect(
       InvoicesReducer(initialState, {
         type: ACTION_TYPES.INVOICE_SAVE,
-        data: newInvoices,
+        payload: newInvoices,
       }),
     ).toEqual(
       Object.assign({}, initialState, {
@@ -58,7 +58,7 @@ describe('Invoices Reducer', () => {
     expect(
       InvoicesReducer(initialState, {
         type: ACTION_TYPES.INVOICE_DELETE,
-        data: remainingInvoices,
+        payload: remainingInvoices,
       }),
     ).toEqual(
       Object.assign({}, initialState, {

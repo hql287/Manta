@@ -1,5 +1,6 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 import sounds from '../../libs/sounds';
+import uuidv4 from 'uuid/v4';
 
 const UIMiddleware = ({ getState }) => next => action => {
   switch (action.type) {
@@ -16,6 +17,7 @@ const UIMiddleware = ({ getState }) => next => action => {
 
     // New Notification
     case ACTION_TYPES.UI_NOTIFICATION_NEW: {
+      // Play a sound based on notification type
       switch (action.payload.type) {
         case 'success': {
           sounds.play('SUCCESS');
@@ -26,11 +28,16 @@ const UIMiddleware = ({ getState }) => next => action => {
           break;
         }
       }
-      next(action);
+      // Create a new ID for the notification
+      next(Object.assign({}, action, {
+        payload: Object.assign({}, action.payload, {
+          id: uuidv4(),
+        })
+      }));
       break;
     }
 
-    // OTHERS ACTIONS
+    // Others Actions
     case ACTION_TYPES.FORM_ITEM_ADD: {
       sounds.play('ADD');
       next(action);

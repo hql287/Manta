@@ -1,24 +1,17 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import {createAction} from 'redux-actions';
 
-export const getInitalSettings = () => {
-  return {
-    type: ACTION_TYPES.SETTINGS_GET_INITIAL,
-  };
-};
+// Get Initial Settings
+export const getInitalSettings = createAction(ACTION_TYPES.SETTINGS_GET_INITIAL);
 
-export const updateSettings = (setting, data) => {
-  return {
-    type: ACTION_TYPES.SETTINGS_UPDATE,
-    payload: {
-      setting,
-      data,
-    }
-  };
-};
+// Update Settings
+export const updateSettings = createAction(
+  ACTION_TYPES.SETTINGS_UPDATE,
+  (setting,data) => ({ setting, data})
+);
 
-export const saveSettings = data => {
-  return {
-    type: ACTION_TYPES.SETTINGS_SAVE,
-    payload: data,
-  };
-};
+// Save Settings
+export const saveSettings = createAction(
+  ACTION_TYPES.SETTINGS_SAVE,
+  data => data
+);

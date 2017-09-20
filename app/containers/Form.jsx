@@ -37,6 +37,14 @@ class Form extends Component {
     this.toggleFormSettings = this.toggleFormSettings.bind(this);
   }
 
+  // Populate Form Item
+  componentDidMount() {
+    const { dispatch, currentInvoice } = this.props;
+    if (currentInvoice.rows.length === 0) {
+      dispatch(FormActions.addItem());
+    }
+  }
+
   // Optimization
   shouldComponentUpdate(nextProps) {
     return this.props !== nextProps;

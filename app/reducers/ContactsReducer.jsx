@@ -1,36 +1,28 @@
-// Actions
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import {handleActions} from 'redux-actions';
 
 const initialState = {
   loaded: false,
   data: [],
 };
 
-const ContactsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    // Get All Contacts
-    case ACTION_TYPES.CONTACT_GET_ALL: {
-      return Object.assign({}, state, {
+const ContactsReducer = handleActions(
+  {
+    [ACTION_TYPES.CONTACT_GET_ALL]: (state, action) =>
+      Object.assign({}, state, {
         loaded: true,
         data: action.payload,
-      });
-    }
-    // Save Contact
-    case ACTION_TYPES.CONTACT_SAVE: {
-      return Object.assign({}, state, {
+      }),
+    [ACTION_TYPES.CONTACT_SAVE]: (state, action) =>
+      Object.assign({}, state, {
         data: action.payload,
-      });
-    }
-    // Delete A Contact
-    case ACTION_TYPES.CONTACT_DELETE: {
-      return Object.assign({}, state, {
+      }),
+    [ACTION_TYPES.CONTACT_DELETE]: (state, action) =>
+      Object.assign({}, state, {
         data: action.payload,
-      });
-    }
-    default: {
-      return state;
-    }
-  }
-};
+      }),
+  },
+  initialState
+);
 
 export default ContactsReducer;

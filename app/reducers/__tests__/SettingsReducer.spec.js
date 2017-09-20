@@ -36,13 +36,13 @@ describe('Settings Reducer', () => {
   });
 
   it('should handle get initial setting', () => {
-    const payload = {
+    const data = {
       current: sampleSettings,
       saved: sampleSettings,
     };
     const newState = SettingsReducer(initialState, {
       type: ACTION_TYPES.SETTINGS_GET_INITIAL,
-      data: payload,
+      payload: data,
     });
     expect(newState.loaded).toBeTruthy;
     expect(newState.current).toEqual(sampleSettings);
@@ -50,12 +50,12 @@ describe('Settings Reducer', () => {
   });
 
   it('update save settings', () => {
-    const payload = sampleSettings;
+    const data = sampleSettings;
     const newState = SettingsReducer(initialState, {
       type: ACTION_TYPES.SETTINGS_SAVE,
-      data: payload,
+      payload: data,
     });
-    expect(newState.saved).toEqual(payload);
+    expect(newState.saved).toEqual(data);
   });
 });
 
@@ -70,7 +70,7 @@ describe('Settings Reducer should handle update', () => {
   });
 
   it('app settings', () => {
-    const payload = {
+    const data = {
       currency: 'VND',
       muted: false,
       sound: 'modern',
@@ -78,8 +78,10 @@ describe('Settings Reducer should handle update', () => {
     };
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
-      setting: 'appSettings',
-      data: payload,
+      payload: {
+        setting: 'appSettings',
+        data: data,
+      }
     });
     expect(newState.current.appSettings.currency).toEqual('VND');
     expect(newState.current.appSettings.muted).toBeFalsy;
@@ -88,7 +90,7 @@ describe('Settings Reducer should handle update', () => {
   });
 
   it('info settings', () => {
-    const payload = {
+    const data = {
       fullname: 'Jon Snow',
       company: 'HBO',
       address: 'Winterfell',
@@ -97,8 +99,10 @@ describe('Settings Reducer should handle update', () => {
     };
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
-      setting: 'info',
-      data: payload,
+      payload: {
+        setting: 'info',
+        data: data,
+      }
     });
     expect(newState.current.info.fullname).toEqual('Jon Snow');
     expect(newState.current.info.company).toEqual('HBO');
@@ -108,7 +112,7 @@ describe('Settings Reducer should handle update', () => {
   });
 
   it('print settings', () => {
-    const payload = {
+    const data = {
       template: 'classic',
       pageSize: 'A5',
       printBackground: false,
@@ -117,8 +121,10 @@ describe('Settings Reducer should handle update', () => {
     };
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
-      setting: 'printOptions',
-      data: payload,
+      payload: {
+        setting: 'printOptions',
+        data: data,
+      }
     });
     expect(newState.current.printOptions.template).toEqual('classic');
     expect(newState.current.printOptions.pageSize).toEqual('A5');
