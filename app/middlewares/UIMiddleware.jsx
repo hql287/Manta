@@ -7,7 +7,7 @@ const UIMiddleware = ({ getState }) => next => action => {
     // Changing Tabs
     case ACTION_TYPES.UI_TAB_CHANGE: {
       const currentState = getState();
-      const currentTab = currentState.UIReducer.activeTab;
+      const currentTab = currentState.ui.activeTab;
       if (action.payload !== currentTab) {
         sounds.play('TAP');
         next(action);

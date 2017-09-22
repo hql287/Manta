@@ -65,10 +65,7 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return (
-      this.props.UI.activeTab !== nextProps.UI.activeTab ||
-      this.props.UI.notifications !== nextProps.UI.notifications
-    );
+    return this.props !== nextProps;
   }
 
   componentWillUnmount() {
@@ -97,7 +94,7 @@ class App extends Component {
   }
 
   render() {
-    const {activeTab, notifications} = this.props.UI;
+    const {activeTab, notifications} = this.props.ui;
     return (
       <AppWrapper>
         <AppNav activeTab={activeTab} changeTab={this.changeTab} />
@@ -110,9 +107,12 @@ class App extends Component {
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  UI: PropTypes.object.isRequired,
+  ui: PropTypes.shape({
+    activeTab: PropTypes.string.isRequired,
+    notifications: PropTypes.array.isRequired,
+  }).isRequired,
 };
 
 export default connect(state => ({
-  UI: state.UIReducer,
+  ui: state.ui,
 }))(App);

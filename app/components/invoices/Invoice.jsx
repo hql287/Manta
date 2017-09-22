@@ -1,16 +1,12 @@
-// Electron libs
-const ipc = require('electron').ipcRenderer;
-
-// React Libraries
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// 3rd Party Libs
 const format = require('date-fns/format');
 const moment = require('moment');
+const ipc = require('electron').ipcRenderer;
 const _ = require('lodash');
 
-// Custom Component
+// Custom Components
 import {TR, TD} from '../shared/Table';
 import Button from '../shared/Button';
 
@@ -23,12 +19,12 @@ class Invoice extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.data._id !== nextProps.data._id;
+    return this.props !== nextProps;
   }
 
   deleteInvoice() {
-    const {data, deleteInvoice} = this.props;
-    deleteInvoice(data._id);
+    const {invoice, deleteInvoice} = this.props;
+    deleteInvoice(invoice._id);
   }
 
   previewInvoice() {
@@ -37,8 +33,8 @@ class Invoice extends Component {
 
   // Render
   render() {
-    const invoice = this.props.data;
-    const {recipient} = invoice;
+    const { invoice } = this.props;
+    const { recipient } = invoice;
     return (
       <TR>
         <TD>
@@ -75,7 +71,7 @@ class Invoice extends Component {
 }
 
 Invoice.propTypes = {
-  data: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired,
   deleteInvoice: PropTypes.func.isRequired,
 };
 

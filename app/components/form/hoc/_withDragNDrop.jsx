@@ -79,11 +79,7 @@ const collectTarget = (connect, monitor) => {
 
 class _withDragNDrop extends Component {
   shouldComponentUpdate(nextProps) {
-    return (
-      this.props.index !== nextProps.index ||
-      this.props.isDragging !== nextProps.isDragging ||
-      this.props.hasHandler !== nextProps.hasHandler
-    );
+    return this.props !== nextProps;
   }
 
   render() {

@@ -1,28 +1,22 @@
-import * as ACTION_TYPES from '../constants/actions.jsx';
-import {handleActions} from 'redux-actions';
-
-const initialState = {
-  loaded: false,
-  data: [],
-};
+import {handleActions, combineActions} from 'redux-actions';
+import {createSelector} from 'reselect';
+import * as Actions from '../actions/invoices';
 
 const InvoicesReducer = handleActions(
   {
-    [ACTION_TYPES.INVOICE_GET_ALL]: (state, action) =>
-      Object.assign({}, state, {
-        loaded: true,
-        data: action.payload,
-      }),
-    [ACTION_TYPES.INVOICE_SAVE]: (state, action) =>
-      Object.assign({}, state, {
-        data: action.payload,
-      }),
-    [ACTION_TYPES.INVOICE_DELETE]: (state, action) =>
-      Object.assign({}, state, {
-        data: action.payload,
-      }),
-  },
-  initialState
+    [combineActions(
+      Actions.getInvoices,
+      Actions.saveInvoice,
+      Actions.deleteInvoice
+    )]: (state, action) => action.payload
+  }, []
 );
 
 export default InvoicesReducer;
+
+// Selector
+const getInvoicesState = state => state.invoices;
+export const getInvoices = createSelector(
+  getInvoicesState,
+  invoices => invoices
+);

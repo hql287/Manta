@@ -156,6 +156,6 @@ Form.propTypes = {
 
 // Export
 export default compose(
-  connect(state => ({ currentInvoice: state.FormReducer })),
+  connect(state => ({ currentInvoice: state.form })),
   _withFadeInAnimation
 )(Form);

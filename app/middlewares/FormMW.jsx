@@ -7,24 +7,23 @@ import * as InvoicesActions from '../actions/invoices';
 import * as ContactsActions from '../actions/contacts';
 
 // Helper
-import { getInvoiceData, validateFormData } from '../helpers/form';
+import {getInvoiceData, validateFormData} from '../helpers/form';
 import uuidv4 from 'uuid/v4';
 
 const FormMW = ({dispatch, getState}) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.FORM_SAVE: {
-      const currentState = getState();
-      const currentInvoice = currentState.FormReducer;
+      const currentFormData = getState().form;
       // Validate Form Data
-      if (!validateFormData(currentInvoice)) return;
-      // Save To DB if it's a new contact
-      if (currentInvoice.recipient.newRecipient) {
-        const newContactData = currentInvoice.recipient.new;
+      if (!validateFormData(currentFormData)) return;
+      // Save Invoice To DB
+      const currentInvoiceData = getInvoiceData(currentFormData);
+      dispatch(InvoicesActions.saveInvoice(currentInvoiceData, action.payload));
+      // Save Contact to DB if it's a new one
+      if (currentFormData.recipient.newRecipient) {
+        const newContactData = currentFormData.recipient.new;
         dispatch(ContactsActions.saveContact(newContactData));
       }
-      // Save Invoice To DB
-      const InvoiceData = getInvoiceData(currentInvoice);
-      dispatch(InvoicesActions.saveInvoice(InvoiceData, action.payload));
       // Clear The Form
       dispatch(FormActions.clearForm(true));
       break;

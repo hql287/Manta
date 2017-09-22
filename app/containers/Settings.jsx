@@ -141,6 +141,6 @@ Settings.propTypes = {
 
 // Export
 export default compose(
-  connect(state => ({ settings: state.SettingsReducer })),
+  connect(state => ({ settings: state.settings })),
   _withFadeInAnimation
 )(Settings);

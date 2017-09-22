@@ -1,7 +1,7 @@
-import _ from 'lodash';
 const openDialog = require('../renderers/dialog');
+import _ from 'lodash';
 
-function validateFormData(currentInvoice) {
+function validateFormData(formData) {
   const {
     recipient,
     rows,
@@ -10,9 +10,9 @@ function validateFormData(currentInvoice) {
     discount,
     vat,
     note,
-  } = currentInvoice;
-  if (!validateRows(rows)) return false;
+  } = formData;
   if (!validateRecipient(recipient)) return false;
+  if (!validateRows(rows)) return false;
   if (!validateDueDate(dueDate)) return false;
   if (!validateCurrency(currency)) return false;
   if (!validateDiscount(discount)) return false;
@@ -21,7 +21,7 @@ function validateFormData(currentInvoice) {
   return true;
 }
 
-function getInvoiceData(currentInvoice) {
+function getInvoiceData(formData) {
   const {
     recipient,
     rows,
@@ -30,9 +30,16 @@ function getInvoiceData(currentInvoice) {
     discount,
     vat,
     note,
-  } = currentInvoice;
+  } = formData;
   // Set Initial Value
   let invoiceData = {rows};
+  // Set Recipient
+  if (recipient.newRecipient) {
+    invoiceData.recipient = recipient.new;
+  } else {
+    const {fullname, company, email, phone} = recipient.select;
+    invoiceData.recipient = {fullname, company, email, phone};
+  }
   // Set Invoice DueDate
   if (dueDate.required) invoiceData.dueDate = dueDate.selectedDate;
   // Set Invoice Currency
@@ -41,13 +48,6 @@ function getInvoiceData(currentInvoice) {
   if (note.required) invoiceData.note = note.content;
   // Set Invoice Tax
   if (vat.required) invoiceData.vat = vat.amount;
-  // Set Recipient
-  if (recipient.newRecipient) {
-    invoiceData.recipient = recipient.new;
-  } else {
-    const {fullname, company, email, phone} = recipient.select;
-    invoiceData.recipient = {fullname, company, email, phone};
-  }
   // Set Invoice Discount
   if (discount.required) {
     invoiceData.discount = {
@@ -59,44 +59,6 @@ function getInvoiceData(currentInvoice) {
 }
 
 // VALIDATION RULES
-function validateRows(rows) {
-  let validated = true;
-  for (let i = 0; i < rows.length; i++) {
-    let row = rows[i];
-    // Does it contain description?
-    if (!row.description) {
-      openDialog({
-        type: 'warning',
-        title: 'Required Field',
-        message: 'Description can not be blank',
-      });
-      validated = false;
-      break;
-    }
-    // Is the price presented and greater than 0?
-    if (!row.price || row.price === 0) {
-      openDialog({
-        type: 'warning',
-        title: 'Required Field',
-        message: 'Price must be greater than 0',
-      });
-      validated = false;
-      break;
-    }
-    // Is the quantity presented and greater than 0?
-    if (!row.quantity || row.quantity === 0) {
-      openDialog({
-        type: 'warning',
-        title: 'Required Field',
-        message: 'Quantity must be greater than 0',
-      });
-      validated = false;
-      break;
-    }
-  }
-  return validated;
-}
-
 function validateRecipient(recipient) {
   if (recipient.newRecipient === true) {
     // Is Recipient Form Data Empty?
@@ -135,6 +97,44 @@ function validateRecipient(recipient) {
   }
   // Passed
   return true;
+}
+
+function validateRows(rows) {
+  let validated = true;
+  for (let i = 0; i < rows.length; i++) {
+    let row = rows[i];
+    // Does it contain description?
+    if (!row.description) {
+      openDialog({
+        type: 'warning',
+        title: 'Required Field',
+        message: 'Description can not be blank',
+      });
+      validated = false;
+      break;
+    }
+    // Is the price presented and greater than 0?
+    if (!row.price || row.price === 0) {
+      openDialog({
+        type: 'warning',
+        title: 'Required Field',
+        message: 'Price must be greater than 0',
+      });
+      validated = false;
+      break;
+    }
+    // Is the quantity presented and greater than 0?
+    if (!row.quantity || row.quantity === 0) {
+      openDialog({
+        type: 'warning',
+        title: 'Required Field',
+        message: 'Quantity must be greater than 0',
+      });
+      validated = false;
+      break;
+    }
+  }
+  return validated;
 }
 
 function validateDueDate(dueDate) {
