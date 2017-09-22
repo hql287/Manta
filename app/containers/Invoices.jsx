@@ -9,6 +9,9 @@ const ipc = require('electron').ipcRenderer;
 // Actions
 import * as Actions from '../actions/invoices';
 
+// Selectors
+import { getInvoices } from '../reducers/InvoicesReducer';
+
 // Components
 import Invoice from '../components/invoices/Invoice';
 import Message from '../components/shared/Message';
@@ -29,12 +32,6 @@ class Invoices extends Component {
 
   // Load Invoices & add event listeners
   componentDidMount() {
-    // Get All Invoices
-    if (!this.props.invoices.loaded) {
-      const {dispatch} = this.props;
-      dispatch(Actions.getInvoices());
-    }
-
     // Add Event Listener
     ipc.on('confirmed-delete-invoice', (event, index, invoiceId) => {
       if (index === 0) {
@@ -45,7 +42,7 @@ class Invoices extends Component {
 
   // Optimization
   shouldComponentUpdate(nextProps, nextState) {
-    return this.props.invoices !== nextProps.invoices;
+    return this.props !== nextProps;
   }
 
   // Remove all IPC listeners when unmounted
@@ -73,40 +70,24 @@ class Invoices extends Component {
     dispatch(Actions.deleteInvoice(invoiceId));
   }
 
-  // Open Confirm Dialog
-  deleteSelectedInvoices() {
-    openDialog(
-      {
-        type: 'warning',
-        title: 'Delete These Invoices',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
-      },
-      'confirmed-delete-invoice',
-      this.state.selectedItems
-    );
-  }
-
   // Render
   render() {
     const {invoices} = this.props;
-    const invoicesComponent = invoices.data.map((invoice, index) => {
-      return (
-        <Invoice
-          key={invoice._id}
-          deleteInvoice={this.deleteInvoice}
-          index={index}
-          data={invoice}
-        />
-      );
-    });
+    const invoicesComponent = invoices.map((invoice, index) =>
+      <Invoice
+        key={invoice._id}
+        deleteInvoice={this.deleteInvoice}
+        index={index}
+        invoice={invoice}
+      />
+    );
     return (
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>All Invoices</PageHeaderTitle>
         </PageHeader>
         <PageContent>
-          {invoices.data.length === 0
+          {invoices.length === 0
             ? <Message info text="You don't have any invoice yet" />
             : <Table hasBorders bg>
                 <THead>
@@ -132,14 +113,15 @@ class Invoices extends Component {
 // PropTypes Validation
 Invoices.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  invoices: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    data: PropTypes.array,
-  }).isRequired,
+  invoices: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-// Export
+// Map state to props & Export
+const mapStateToProps = state => ({
+  invoices: getInvoices(state),
+});
+
 export default compose(
-  connect(state => ({invoices: state.InvoicesReducer})),
+  connect(mapStateToProps),
   _withFadeInAnimation
 )(Invoices);

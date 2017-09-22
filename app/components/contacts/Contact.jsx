@@ -1,4 +1,4 @@
-// React Libraries
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,21 +15,21 @@ class Contact extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.data._id !== nextProps.data._id;
+    return this.props !== nextProps;
   }
 
   newInvoice() {
-    const {newInvoice, data} = this.props;
-    newInvoice(data);
+    const {newInvoice, contact} = this.props;
+    newInvoice(contact);
   }
 
   deleteContact() {
-    const {data, deleteContact} = this.props;
-    deleteContact(data._id);
+    const {contact, deleteContact} = this.props;
+    deleteContact(contact._id);
   }
 
   render() {
-    const contact = this.props.data;
+    const {contact} = this.props;
     return (
       <TR>
         <TD bold>
@@ -55,7 +55,7 @@ class Contact extends Component {
 }
 
 Contact.propTypes = {
-  data: PropTypes.object.isRequired,
+  contact: PropTypes.object.isRequired,
   deleteContact: PropTypes.func.isRequired,
   newInvoice: PropTypes.func.isRequired,
 };

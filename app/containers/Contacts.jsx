@@ -22,6 +22,9 @@ import {
   PageContent,
 } from '../components/shared/Layout';
 
+// Selectors
+import { getContacts } from '../reducers/ContactsReducer';
+
 // Component
 class Contacts extends Component {
   constructor(props) {
@@ -39,7 +42,7 @@ class Contacts extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return this.props.contacts !== nextProps.contacts;
+    return this.props !== nextProps;
   }
 
   componentWillUnmount() {
@@ -71,11 +74,11 @@ class Contacts extends Component {
 
   render() {
     const {contacts} = this.props;
-    const contactsComponent = contacts.data.map((contact, index) => {
+    const contactsComponent = contacts.map((contact, index) => {
       return (
         <Contact
           key={contact._id}
-          data={contact}
+          contact={contact}
           index={index}
           deleteContact={this.deleteContact}
           newInvoice={this.newInvoice}
@@ -88,7 +91,7 @@ class Contacts extends Component {
           <PageHeaderTitle>All Contacts</PageHeaderTitle>
         </PageHeader>
         <PageContent>
-          {contacts.data.length === 0
+          {contacts.length === 0
             ? <Message info text="You don't have any contacts yet!" />
             : <Table hasBorders bg>
                 <THead>
@@ -111,15 +114,16 @@ class Contacts extends Component {
 
 // PropTypes
 Contacts.propTypes = {
-  contacts: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    data: PropTypes.array,
-  }).isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 
-// Export
+// Map state to props & Export
+const mapStateToProps = state => ({
+  contacts: getContacts(state),
+});
+
 export default compose(
-  connect(state => ({ contacts: state.ContactsReducer })),
+  connect(mapStateToProps),
   _withFadeInAnimation
 )(Contacts);

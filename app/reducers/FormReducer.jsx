@@ -1,5 +1,6 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 import {handleActions} from 'redux-actions';
+import {createSelector} from 'reselect';
 
 const initialState = {
   recipient: {
@@ -123,3 +124,17 @@ const FormReducer = handleActions(
 );
 
 export default FormReducer;
+
+// Selector Input
+const getFormState = state => state.form;
+
+// Selectors
+export const getRows = createSelector(
+  getFormState,
+  formState => formState.rows
+);
+
+export const getRecipient = createSelector(
+  getFormState,
+  formState => formState.recipient
+);

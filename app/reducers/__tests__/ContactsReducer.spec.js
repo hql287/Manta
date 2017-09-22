@@ -1,63 +1,48 @@
 import ContactsReducer from '../ContactsReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
+import faker from 'faker';
+import uuidv4 from 'uuid/v4';
 
-const initialState = {loaded: false, data: []};
+const initialState = [];
 
 describe('Contacts Reducer', () => {
   it('should handle initial state', () => {
-    expect(ContactsReducer(undefined, {})).toEqual({
-      loaded: false,
-      data: [],
-    });
+    expect(ContactsReducer(undefined, {})).toEqual([]);
+  });
+
+  let docs;
+  beforeEach(()=> {
+    docs = [
+      { id: uuidv4(), name: faker.name.findName() },
+      { id: uuidv4(), name: faker.name.findName() },
+      { id: uuidv4(), name: faker.name.findName() },
+    ];
   });
 
   it('should handle get all contacts', () => {
-    const allDocs = [{_id: 1, name: 'Jon Snow'}, {_id: 2, name: 'Ned Stark'}];
     expect(
       ContactsReducer(initialState, {
         type: ACTION_TYPES.CONTACT_GET_ALL,
-        payload: allDocs,
-      }),
-    ).toEqual(
-      Object.assign({}, initialState, {
-        loaded: true,
-        data: allDocs,
-      }),
-    );
+        payload: docs,
+      })
+    ).toEqual(docs);
   });
 
   it('should handle save contact', () => {
-    const newDocs = [
-      {_id: 1, name: 'Jon Snow'},
-      {_id: 2, name: 'Ned Stark'},
-      {_id: 3, name: 'Dany'},
-    ];
     expect(
       ContactsReducer(initialState, {
         type: ACTION_TYPES.CONTACT_SAVE,
-        payload: newDocs,
-      }),
-    ).toEqual(
-      Object.assign({}, initialState, {
-        data: newDocs,
-      }),
-    );
+        payload: docs,
+      })
+    ).toEqual(docs);
   });
 
   it('should handle get delete contact', () => {
-    const remainingDocs = [
-      {_id: 1, name: 'Jon Snow'},
-      {_id: 3, name: 'Dany'},
-    ];
     expect(
       ContactsReducer(initialState, {
         type: ACTION_TYPES.CONTACT_DELETE,
-        payload: remainingDocs,
-      }),
-    ).toEqual(
-      Object.assign({}, initialState, {
-        data: remainingDocs,
-      }),
-    );
+        payload: docs,
+      })
+    ).toEqual(docs);
   });
 });

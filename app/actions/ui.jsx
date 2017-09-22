@@ -21,12 +21,3 @@ export const removeNoti = createAction(
   ACTION_TYPES.UI_NOTIFICATION_REMOVE,
   notificationID => notificationID
 );
-
-// Show Alert
-export const showAlert = createAction(
-  ACTION_TYPES.UI_ALERT_SHOW,
-  alertMessage => alertMessage
-);
-
-// Hide Alert
-export const hideAlert = createAction(ACTION_TYPES.UI_ALERT_HIDE);

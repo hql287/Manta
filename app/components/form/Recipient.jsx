@@ -14,11 +14,15 @@ import RecipientForm from './RecipientForm';
 import RecipientsList from './RecipientsList';
 import { Section } from '../shared/Section';
 
+// Selectors
+import { getContacts } from '../../reducers/ContactsReducer';
+import { getRecipient } from '../../reducers/FormReducer';
+
 // Component
 class Recipient extends Component {
   constructor(props) {
     super(props);
-    this.state = this.props.currentInvoice.recipient;
+    this.state = this.props.recipient;
     this.toggleForm = this.toggleForm.bind(this);
     this.updateRecipientForm = this.updateRecipientForm.bind(this);
     this.updateRecipientList = this.updateRecipientList.bind(this);
@@ -26,7 +30,7 @@ class Recipient extends Component {
 
   // Handle Reset Form
   componentWillReceiveProps(nextProps) {
-    const { recipient } = nextProps.currentInvoice;
+    const { recipient } = nextProps;
     if (_.isEmpty(recipient.new) && _.isEmpty(recipient.select)) {
       this.setState(
         Object.assign({}, this.state, {
@@ -40,7 +44,10 @@ class Recipient extends Component {
 
   // Optimization
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState;
+    return (
+      this.props !== nextProps ||
+      this.state !== nextState
+    );
   }
 
   // Switch between New Recipient Form or Selection Form
@@ -76,8 +83,8 @@ class Recipient extends Component {
 
   // Render Form or Select Input
   renderComponent() {
-    const { currentInvoice, contacts } = this.props;
-    if (contacts.data.length === 0 ) {
+    const { contacts } = this.props;
+    if (contacts.length === 0 ) {
       return (
         <RecipientForm
           formData={this.state.new}
@@ -96,7 +103,7 @@ class Recipient extends Component {
     } else {
       return(
         <RecipientsList
-          contacts={this.props.contacts.data}
+          contacts={this.props.contacts}
           selectedContact={this.state.select}
           updateRecipientList={this.updateRecipientList}
         />
@@ -111,7 +118,7 @@ class Recipient extends Component {
       <Section>
         <label className="itemLabel">Client *</label>
         { this.renderComponent() }
-        { contacts.data.length > 0
+        { contacts.length > 0
           ? <div>
               <div className="radio">
                 <label>
@@ -144,28 +151,19 @@ class Recipient extends Component {
 
 // PropTypes Validation
 Recipient.propTypes = {
-  contacts: PropTypes.shape({
-    loaded: PropTypes.bool.isRequired,
-    data: PropTypes.array,
-  }).isRequired,
-  currentInvoice: PropTypes.shape({
-    recipient: PropTypes.shape({
-      newRecipient: PropTypes.bool.isRequired,
-      select: PropTypes.object.isRequired,
-      new: PropTypes.object.isRequired,
-    }),
-    rows: PropTypes.array,
-    dueDate:  PropTypes.object,
-    currency: PropTypes.object,
-    discount: PropTypes.object,
-    vat:      PropTypes.object,
-    note:     PropTypes.object,
-  }).isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatch: PropTypes.func.isRequired,
+  recipient: PropTypes.shape({
+    newRecipient: PropTypes.bool.isRequired,
+    select: PropTypes.object.isRequired,
+    new: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 // Map state to props & Export
-export default connect(state => ({
-  currentInvoice: state.FormReducer,
-  contacts: state.ContactsReducer,
-}))(Recipient);
+const mapStateToProps = state => ({
+  contacts: getContacts(state),
+  recipient: getRecipient(state)
+});
+
+export default connect(mapStateToProps)(Recipient);
