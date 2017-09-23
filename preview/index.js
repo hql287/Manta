@@ -18,7 +18,7 @@ const store = createStore(
 );
 
 // Components
-import Viewer from './containers/Viewer';
+import Viewer from './Viewer';
 
 ReactDOM.render(
   <Provider store={store}>
