@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const ButtonStyle = styled.button`
   display: inline-flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   border: none;
   border-radius: 4px;
@@ -19,6 +19,7 @@ const ButtonStyle = styled.button`
   background: #292b2c;
   text-transform: uppercase;
   letter-spacing: 1px;
+  ${props => props.block && `width: 100%;`}
   ${props => props.primary && `background: #469fe5;`}
   ${props => props.success && `background: #6bbb69;`}
   ${props => props.danger && `background: #EC476E;`}

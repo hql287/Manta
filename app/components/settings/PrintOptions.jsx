@@ -86,10 +86,8 @@ class PrintOptions extends Component {
               name="template"
               value={this.state.template}
               onChange={this.handleInputChange}>
-              <option value="default">Default</option>
-              <option value="hosting">Hosting</option>
-              <option value="elegant">Elegant</option>
-              <option value="classic">Classic</option>
+              <option value="copywriter">Copywriter</option>
+              <option value="marketing">Marketing</option>
             </select>
           </div>
         </div>

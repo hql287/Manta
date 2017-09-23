@@ -11,7 +11,7 @@ const shell = electron.shell;
 // 3rd Party Libs
 const appConfig = require('electron-settings');
 
-ipc.on('print-to-pdf', (event, docId) => {
+ipc.on('save-pdf', (event, docId) => {
   const exportDir = appConfig.get('printOptions.exportDir');
   const pdfPath = path.join(exportDir, `${docId}.pdf`);
   const win = BrowserWindow.fromWebContents(event.sender);
@@ -22,6 +22,7 @@ ipc.on('print-to-pdf', (event, docId) => {
   } else {
     printOptions = {};
   }
+
   win.webContents.printToPDF(printOptions, (error, data) => {
     if (error) throw error;
     fs.writeFile(pdfPath, data, error => {

@@ -28,7 +28,7 @@ class Invoice extends Component {
   }
 
   previewInvoice() {
-    ipc.send('preview-invoice', this.props.data);
+    ipc.send('preview-invoice', this.props.invoice);
   }
 
   // Render
