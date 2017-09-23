@@ -1,17 +1,19 @@
-// Actions
 import * as ACTION_TYPES from '../constants/actions.jsx';
+import {createSelector} from 'reselect';
+import {handleActions} from 'redux-actions';
 
-const initialState = {};
-
-const InvoicesReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ACTION_TYPES.SET_INVOICE: {
-      return action.data;
-    }
-    default: {
-      return state;
-    }
-  }
-};
+const InvoicesReducer = handleActions(
+  {
+    [ ACTION_TYPES.INVOICE_UPDATE ]: (state, action) => action.payload
+  },
+  {}
+);
 
 export default InvoicesReducer;
+
+// Selector
+const getInvoiceState = state => state.invoice;
+export const getInvoice = createSelector(
+  getInvoiceState,
+  invoice => invoice
+);

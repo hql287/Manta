@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import InvoiceReducer from './InvoiceReducer';
+import SettingsReducer from './SettingsReducer';
 
 export default combineReducers({
-  InvoiceReducer,
+  invoice: InvoiceReducer,
+  settings: SettingsReducer,
 });

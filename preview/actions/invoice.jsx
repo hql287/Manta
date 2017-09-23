@@ -1,9 +1,7 @@
+import {createAction} from 'redux-actions';
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-// Get All Invoices
-export const setInvoice = invoiceData => {
-  return {
-    type: ACTION_TYPES.SET_INVOICE,
-    data: invoiceData,
-  };
-};
+export const updateInvoice = createAction(
+  ACTION_TYPES.INVOICE_UPDATE,
+  invoiceData => invoiceData
+);
