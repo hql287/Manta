@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const AppWrapperStyle = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100%;
 `;
 
@@ -31,7 +31,7 @@ const PageHeaderStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 50px;
-  padding: 10px 40px;
+  padding: 10px 120px 10px 40px;
   background: #FFF;
   border-bottom: 1px solid rgba(0,0,0,.1);
   z-index: 1;
@@ -54,6 +54,7 @@ const PageContentStyle = styled.div`
   border: 1px solid rgba(0,0,0,.1);
   border-radius: 4px;
   background: #FFF;
+  overflow: hidden;
 `;
 
 const PageFooterStyle = styled.div`
