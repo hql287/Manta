@@ -1,10 +1,9 @@
-// Libraries
+// Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// 3rd Party Libs
-import _ from 'lodash';
+const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
+import _ from 'lodash';
 
 // Custom Components
 import {Section} from '../shared/Section';
@@ -20,7 +19,10 @@ class Currency extends Component {
   }
 
   componentDidMount() {
-    this.props.updateFieldData('currency', 'USD');
+    const currencyCode = appConfig.get('appSettings.currency');
+    this.props.updateFieldData('currency', {
+      selectedCurrency: currencies[currencyCode],
+    });
   }
 
   shouldComponentUpdate(nextProps) {
@@ -29,8 +31,10 @@ class Currency extends Component {
 
   updateCurrency(event) {
     const value = event.target.value;
-    const selectedCurrency = value === '' ? null : value;
-    this.props.updateFieldData('currency', selectedCurrency);
+    const currencyCode = value === '' ? null : value;
+    this.props.updateFieldData('currency', {
+      selectedCurrency: currencies[currencyCode]
+    });
   }
 
   render() {
@@ -46,12 +50,13 @@ class Currency extends Component {
       );
     });
     const {currency} = this.props;
+    const currencyCode = currency.selectedCurrency
+      ? currency.selectedCurrency.code
+      : appConfig.get('appSettings.currency');
     return (
       <Section>
         <label className="itemLabel">Currency</label>
-        <select
-          value={currency.selectedCurrency}
-          onChange={this.updateCurrency}>
+        <select value={currencyCode} onChange={this.updateCurrency}>
           {currenciesOptions}
         </select>
       </Section>

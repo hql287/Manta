@@ -29,7 +29,7 @@ class Note extends Component {
   }
 
   componentWillMount() {
-    this.setState({content: this.props.content});
+    this.setState({content: this.props.note.content});
   }
 
   shouldComponentUpdate(nextProps, nextState) {

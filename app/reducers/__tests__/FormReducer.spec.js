@@ -197,11 +197,21 @@ describe('Form Reducer should handle update', () => {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       payload: {
         field: 'currency',
-        data: 'VND',
+        data: {
+          selectedCurrency: {
+            "symbol": "$",
+            "name": "US Dollar",
+            "symbol_native": "$",
+            "decimal_digits": 2,
+            "rounding": 0,
+            "code": "USD",
+            "name_plural": "US dollars"
+          }
+        }
       }
     });
-    expect(newState.currency.selectedCurrency).not.toEqual('USD');
-    expect(newState.currency.selectedCurrency).toEqual('VND');
+    expect(newState.currency.selectedCurrency.code).not.toEqual('VND');
+    expect(newState.currency.selectedCurrency.code).toEqual('USD');
   });
 
   it('dueDate data', () => {
@@ -209,7 +219,9 @@ describe('Form Reducer should handle update', () => {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       payload: {
         field: 'dueDate',
-        data: '28/07/1988',
+        data: {
+          selectedDate: '28/07/1988',
+        },
       }
     });
     expect(newState.dueDate.selectedDate).toEqual('28/07/1988');

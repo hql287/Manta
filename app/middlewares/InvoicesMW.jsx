@@ -1,5 +1,6 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
+import currencies from '../../libs/currencies.json';
 const appConfig = require('electron').remote.require('electron-settings');
 const ipc = require('electron').ipcRenderer;
 
@@ -98,7 +99,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         created_at: Date.now(),
         currency: invoiceData.currency
           ? invoiceData.currency
-          : appConfig.get('appSettings').currency,
+          : currencies[appConfig.get('appSettings.currency')],
         subtotal: getSubtotal(invoiceData),
         grandTotal: getGrandTotal(invoiceData),
       });
