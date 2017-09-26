@@ -37,8 +37,7 @@ function getInvoiceData(formData) {
   if (recipient.newRecipient) {
     invoiceData.recipient = recipient.new;
   } else {
-    const {fullname, company, email, phone} = recipient.select;
-    invoiceData.recipient = {fullname, company, email, phone};
+    invoiceData.recipient = {...recipient.select};
   }
   // Set Invoice DueDate
   if (dueDate.required) invoiceData.dueDate = dueDate.selectedDate;
