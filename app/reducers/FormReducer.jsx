@@ -56,52 +56,12 @@ const FormReducer = handleActions(
 
     [ACTION_TYPES.FORM_FIELD_UPDATE_DATA]: (state, action) => {
       const {field, data} = action.payload;
-      switch(field) {
-        case 'dueDate': {
-          return Object.assign({}, state, {
-            dueDate: Object.assign({}, state.dueDate, {
-              selectedDate: data,
-            })
-          });
+      return Object.assign({}, state, {
+        [field]: {
+          ...state[field],
+          ...data
         }
-
-        case 'currency': {
-          return Object.assign({}, state, {
-            currency: Object.assign({}, state.currency, {
-              selectedCurrency: data,
-            })
-          });
-        }
-
-        case 'discount': {
-          return Object.assign({}, state, {
-            discount: Object.assign({}, state.discount, {
-              amount: data.amount,
-              type: data.type,
-            })
-          });
-        }
-
-        case 'vat': {
-          return Object.assign({}, state, {
-            vat: Object.assign({}, state.vat, {
-              amount: data.amount,
-            })
-          });
-        }
-
-        case 'note': {
-          return Object.assign({}, state, {
-            note: Object.assign({}, state.note, {
-              content: data.content,
-            })
-          });
-        }
-
-        default: {
-          return state;
-        }
-      }
+      });
     },
 
     [ACTION_TYPES.FORM_FIELD_TOGGLE]: (state, action) =>

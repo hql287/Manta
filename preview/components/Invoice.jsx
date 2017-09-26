@@ -5,21 +5,24 @@ const appConfig = require('electron').remote.require('electron-settings');
 
 // Style
 import styled from 'styled-components';
-const Message = styled.p`
+
+const Page = styled.div`
+  position: relative;
+  width: 21cm;
+  height: 29.7cm;
+  min-height: 29.7cm;
+  min-width: 21cm;
+  margin-left: auto;
+  margin-right: auto;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 12px;
+  border-radius: 4px;
+}
 `;
 
 // Templates
-import DefaultTemplate from '../templates/default/DefaultTemplate.jsx';
-import HostingTemplate from '../templates/hosting/HostingTemplate.jsx';
-import ElegantTemplate from '../templates/elegant/ElegantTemplate.jsx';
-import ClassicTemplate from '../templates/classic/ClassicTemplate.jsx';
+import Copywriter from '../templates/copywriter';
 
 // Component
 class Invoice extends Component {
@@ -28,37 +31,30 @@ class Invoice extends Component {
   }
 
   renderTemplate() {
-    const {invoice, template} = this.props;
-    const data = {
+    const {invoice, template, configs} = this.props;
+    const props = {
       company: appConfig.get('info'),
       invoice,
+      configs,
     };
     switch (template) {
-      case 'elegant': {
-        return <ElegantTemplate data={data} />;
-      }
-      case 'hosting': {
-        return <HostingTemplate data={data} />;
-      }
-      case 'classic': {
-        return <ClassicTemplate data={data} />;
-      }
       default: {
-        return <DefaultTemplate data={data} />;
+        return <Copywriter {...props} />;
       }
     }
   }
 
   render() {
-    return this.props.invoice._id
-      ? this.renderTemplate()
-      : <Message>
-          Choose An Invoice To Preview
-        </Message>;
+    return (
+      <Page>
+        { this.renderTemplate() }
+      </Page>
+    );
   }
 }
 
 Invoice.propTypes = {
+  configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
   template: PropTypes.string.isRequired,
 };

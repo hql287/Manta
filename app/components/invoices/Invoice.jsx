@@ -28,7 +28,7 @@ class Invoice extends Component {
   }
 
   previewInvoice() {
-    ipc.send('preview-invoice', this.props.data);
+    ipc.send('preview-invoice', this.props.invoice);
   }
 
   // Render
@@ -55,7 +55,9 @@ class Invoice extends Component {
           {format(invoice.created_at, 'DD/MM/YYYY')}
         </TD>
         <TD bold success>
-          {invoice.currency} {invoice.grandTotal}
+          {invoice.currency.code}
+          {'\u00A0'}
+          {invoice.grandTotal}
         </TD>
         <TD actions>
           <Button link primary onClick={this.previewInvoice}>
@@ -71,8 +73,8 @@ class Invoice extends Component {
 }
 
 Invoice.propTypes = {
-  invoice: PropTypes.object.isRequired,
   deleteInvoice: PropTypes.func.isRequired,
+  invoice: PropTypes.object.isRequired,
 };
 
 export default Invoice;

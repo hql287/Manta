@@ -39,7 +39,7 @@ class DueDate extends Component {
 
   onDateChange(date) {
     const selectedDate = date === null ? null : moment(date).toObject();
-    this.props.updateFieldData('dueDate', selectedDate);
+    this.props.updateFieldData('dueDate', {selectedDate});
   }
 
   clearDate() {
