@@ -22,7 +22,7 @@ const allTabs = [
   {
     title: 'Create',
     name: 'form',
-    icon: 'ion-android-list',
+    icon: 'ion-document-text',
   },
   {
     title: 'Invoices',
@@ -44,31 +44,31 @@ const allTabs = [
 // Styles
 import styled from 'styled-components';
 
-const TopBar = styled.div`
+const SideBar = styled.div`
+  flex: 1;
   position: relative;
   display: flex;
-  flex: 1;
-  align-items: flex-end;
-  justify-content: space-between;
-  height: 100px;
-  max-height: 100px;
-  min-height: 100px;
-  padding-top: 40px;
-  padding-left: 40px;
-  padding-right: 40px;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  width: 80px;
+  min-width: 80px;
+  max-width: 80px;
+  padding-top: 50px;
   background: #2c323a;
 `;
 
 const Tab = styled.a`
   position: relative;
   color: white;
-  font-size: 14px;
-  line-height: 21px;
-  text-decoration: none;
   display: flex;
   width: 100%;
   align-items: center;
-  padding-bottom: 20px;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1.5;
+  text-decoration: none;
+  height: 60px;
   &:hover {
     color: white;
     text-decoration: none;
@@ -76,54 +76,47 @@ const Tab = styled.a`
 `;
 
 const Icon = styled.i`
-  margin-right: 8px;
-  font-size: 18px;
-  ${props => props.id === 'form' && `color: #6bbb69;`} ${props =>
-      props.id === 'contacts' && `color: #469fe5;`} ${props =>
-      props.id === 'settings' && `color: #C4C8CC;`} ${props =>
-      props.id === 'invoices' &&
-      `
-    color: #cbc189;
-    font-size: 24px;
-  `};
+  ${props => props.id === 'form' && `color: #6bbb69;`};
+  ${props => props.id === 'contacts' && `color: #469fe5;`};
+  ${props => props.id === 'settings' && `color: #C4C8CC;`};
+  ${props => props.id === 'invoices' && `color: #cbc189;`};
 `;
 
 const ActiveIndicator = styled.div`
-  height: 5px;
-  width: 100%;
+  height: ${ allTabs.length * 60 }px;
+  width: 5px;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 0 40px;
+  top: 50px;
   > div {
-    background: #469fe5;
-    height: 100%;
+    position: absolute;
+    background: #292B2C;
+    width: 80px;
+    border-left: 5px solid #469fe5;
   }
 `;
 
 function AppNav({activeTab, changeTab}) {
-  const marginLeftValue = setMarginValue(activeTab);
+  const marginTopValue = setMarginValue(activeTab);
   const allTabsComponent = allTabs.map(tab =>
     <Tab key={tab.name} href="#" onClick={() => changeTab(tab.name)}>
       <Icon id={tab.name} className={tab.icon} />
-      {tab.title}
     </Tab>
   );
   return (
-    <TopBar>
-      <Motion style={{marginLeft: spring(marginLeftValue, springConfig)}}>
-        {({marginLeft}) =>
+    <SideBar>
+      <Motion style={{marginTop: spring(marginTopValue, springConfig)}}>
+        {({marginTop}) =>
           <ActiveIndicator>
             <div
               style={{
-                width: `${100 / allTabs.length}%`,
-                marginLeft: `${marginLeft}%`,
+                height: `${100 / allTabs.length}%`,
+                top: `${marginTop}%`,
               }}
             />
           </ActiveIndicator>}
       </Motion>
       {allTabsComponent}
-    </TopBar>
+    </SideBar>
   );
 }
 
