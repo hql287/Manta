@@ -9,7 +9,7 @@ import * as InvoiceActions from '../actions/invoice';
 
 // Selectors
 import {getInvoice} from '../reducers/InvoiceReducer';
-import { getTemplate, getConfigs } from '../reducers/SettingsReducer';
+import {getTemplate, getConfigs} from '../reducers/SettingsReducer';
 
 // Styles
 import styled from 'styled-components';
@@ -19,8 +19,18 @@ const Wrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
   overflow: scroll;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 30px;
+`;
+
+const Message = styled.p`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+  height: 100%;
+  margin: 0;
 `;
 
 // Components
@@ -46,11 +56,15 @@ class MainContent extends Component {
     const {invoice, template, configs} = this.props;
     return (
       <Wrapper>
-        <Invoice
-          configs={configs}
-          invoice={invoice}
-          template={template}
-        />
+        {invoice._id
+          ? <div className="print-area">
+              <Invoice
+                configs={configs}
+                invoice={invoice}
+                template={template}
+              />
+            </div>
+          : <Message>Choose An Invoice To Preview</Message>}
       </Wrapper>
     );
   }

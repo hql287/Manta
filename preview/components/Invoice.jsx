@@ -12,20 +12,13 @@ const Page = styled.div`
   height: 29.7cm;
   min-height: 29.7cm;
   min-width: 21cm;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   background: #FFFFFF;
-  box-shadow: 0 0 20px rgba(0,0,0,.1);
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
   display: flex;
-`;
-
-const Message = styled.p`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 12px;
+  border-radius: 4px;
+}
 `;
 
 // Templates
@@ -52,13 +45,11 @@ class Invoice extends Component {
   }
 
   render() {
-    return this.props.invoice._id
-      ? <Page>
-          { this.renderTemplate() }
-        </Page>
-      : <Message>
-          Choose An Invoice To Preview
-        </Message>;
+    return (
+      <Page>
+        { this.renderTemplate() }
+      </Page>
+    );
   }
 }
 

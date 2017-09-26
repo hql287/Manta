@@ -18,9 +18,9 @@ const Wrapper = styled.div`
   flex: 1;
   background: #F9FAFA;
   border-right: 1px solid rgba(0,0,0,.1);
-  min-width: 200px;
-  width: 200px;
-  max-width: 200px;
+  min-width: 180px;
+  width: 180px;
+  max-width: 180px;
   padding: 60px 20px 20px 20px;
   justify-content: space-between;
 `;
@@ -36,6 +36,7 @@ class SideBar extends Component {
     this.savePDF = this.savePDF.bind(this);
     this.changeTemplate = this.changeTemplate.bind(this);
     this.updateConfigs = this.updateConfigs.bind(this);
+    this.updateAccentColor = this.updateAccentColor.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -55,6 +56,11 @@ class SideBar extends Component {
     dispatch(SettingsActions.updateConfigs({ name, value }));
   }
 
+  updateAccentColor(color) {
+    const { dispatch } = this.props;
+    dispatch(SettingsActions.updateConfigs({ name: 'accentColor', value: color }));
+  }
+
   savePDF() {
     const invoiceID = this.props.invoice._id;
     ipc.send('save-pdf', invoiceID);
@@ -63,13 +69,14 @@ class SideBar extends Component {
   render() {
     const { template, configs } = this.props;
     return (
-      <Wrapper className="no-print">
+      <Wrapper>
         <TemplateSwitcher
           template={template}
           changeTemplate={this.changeTemplate}/>
         <TemplateConfigs
           configs={configs}
           updateConfigs={this.updateConfigs}
+          updateAccentColor={this.updateAccentColor}
           />
         <Actions savePDF={this.savePDF}/>
       </Wrapper>

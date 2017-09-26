@@ -22,13 +22,13 @@ function TemplateSwitcher({template, changeTemplate}) {
   return (
     <Wrapper>
       <Label>Template</Label>
-      <Select
+      <select
         name="template"
         value={template}
         onChange={changeTemplate}>
         <option value="copywriter">Copywriter</option>
         <option value="marketing">Marketing</option>
-      </Select>
+      </select>
     </Wrapper>
   );
 }
