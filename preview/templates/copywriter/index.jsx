@@ -9,17 +9,10 @@ const Invoice = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 3.57em 10em;
-  font-size: .875em;
-
-  h1 {
-    font-family: 'Source Serif Pro', serif;
-    font-size: 2.1em;
-    color: #2c323a;
-    font-weight: 400;
-    margin-bottom: 1em;
-  }
-
+  padding: 100px 140px;
+  ${ props => props.baseFontSize && `
+    font-size: ${props.baseFontSize};
+  `}
   .label {
     font-family: Montserrat, sans-serif;
     font-weight: 500;
@@ -29,7 +22,6 @@ const Invoice = styled.div`
     margin-bottom: .7em;
     text-transform: uppercase;
   }
-
   p {
     font-family: Montserrat, sans-serif;
     font-weight: 300;
@@ -38,16 +30,6 @@ const Invoice = styled.div`
     margin-bottom: 0;
     margin-top: .5em;
   }
-
-  table {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  th {
-    font-weight: 500;
-  }
 `;
 
 // Child Components
@@ -55,10 +37,29 @@ import Header from './components/Header.jsx';
 import Main from './components/Main.jsx';
 import Footer from './components/Footer.jsx';
 
+function setBaseFontSize(configs) {
+  let size;
+  switch(configs.fontSize) {
+    case 'large': {
+      size = '1.05em';
+      break;
+    }
+    case 'medium': {
+      size = '.95em';
+      break;
+    }
+    default: {
+      size = '.875em';
+      break;
+    }
+  }
+  return size;
+}
+
 // Component
 function Copywriter(props) {
   return (
-    <Invoice>
+    <Invoice baseFontSize={setBaseFontSize(props.configs)}>
       <Header {...props} />
       <Main {...props} />
       <Footer {...props} />

@@ -12,12 +12,28 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
+const Heading = styled.h1`
+  font-family: 'Source Serif Pro', serif;
+  font-size: 2.1em;
+  font-weight: 400;
+  margin-bottom: 1em;
+  color: #2c323a;
+  ${props => props.color && `
+    color: rgba(
+      ${props.color.r},
+      ${props.color.g},
+      ${props.color.b},
+      ${props.color.a}
+    );
+  `}
+`;
+
 // Component
 function Header({invoice, company, configs})  {
   return (
     <Wrapper>
       <div>
-        <h1>Invoice</h1>
+        <Heading color={configs.accentColor}>Invoice</Heading>
         <h4 className="label">
           #
           {_.truncate(invoice._id, {

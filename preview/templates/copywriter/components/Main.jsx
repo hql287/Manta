@@ -7,7 +7,19 @@ import styled from 'styled-components';
 
 const Table = styled.table`
   flex: 1;
-  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 100%;
+  ${ props => props.alignItems && `
+    justify-content: ${props.alignItems};
+  `}
+
+  th {
+    font-weight: 500;
+  }
 `;
 
 const ItemsHeader = styled.tr`
@@ -69,21 +81,46 @@ const InvoiceSummary = styled.tfoot`
   .invoice__total    { color: #6BBB69; }
 `;
 
+function setAlignItems(configs) {
+  let pos;
+  switch(configs.alignItems) {
+    case 'top': {
+      pos = 'flex-start';
+      break;
+    }
+    case 'bottom': {
+      pos = 'flex-end';
+      break;
+    }
+    default: {
+      pos = 'center';
+      break;
+    }
+  }
+  return pos;
+}
+
 // Component
-function Main({invoice}) {
+function Main({invoice, configs}) {
+
+  const currency = configs.useSymbol
+    ? invoice.currency.symbol
+    : invoice.currency.code;
+
   const itemComponents = invoice.rows.map((row, index) =>
     <Item key={index}>
       <td>
         { index + 1 }. {row.description} ({row.quantity})
       </td>
       <td>
-        {invoice.currency} {row.subtotal}
+        {currency} {row.subtotal}
       </td>
     </Item>
   );
 
+
   return (
-    <Table>
+    <Table alignItems={setAlignItems(configs)}>
       <thead>
         <ItemsHeader>
           <th>Item Description</th>
@@ -99,7 +136,7 @@ function Main({invoice}) {
         <tr className="invoice__subtotal">
           <td>Subtotal</td>
           <td>
-            {invoice.currency}
+            {currency}
             {' '}
             {invoice.subtotal}
           </td>
@@ -108,7 +145,7 @@ function Main({invoice}) {
           <tr className="invoice__discount">
             <td>Discount</td>
             <td>
-              {invoice.discount.type === 'flat' ? invoice.currency : '%'}
+              {invoice.discount.type === 'flat' ? currency : '%'}
               {' '}
               {invoice.discount.amount}
             </td>
@@ -123,7 +160,7 @@ function Main({invoice}) {
         <tr className="invoice__total">
           <td>Total</td>
           <td>
-            {invoice.currency}
+            {currency}
             {' '}
             {invoice.grandTotal}
           </td>
@@ -134,6 +171,7 @@ function Main({invoice}) {
 }
 
 Main.propTypes = {
+  configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
 };
 
