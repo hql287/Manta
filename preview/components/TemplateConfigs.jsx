@@ -27,21 +27,14 @@ const Section = styled.div`
   align-items: flex-start;
 `;
 
+const Range = styled.input`
+  width: 100%;
+  -webkit-app-region: no-drag;
+`;
+
 function TemplateConfigs({configs, updateConfigs, updateAccentColor}) {
   return (
     <Wrapper>
-      <Section>
-        <Label>Font Size</Label>
-        <select
-          name="fontSize"
-          value={configs.fontSize}
-          onChange={updateConfigs}>
-          <option value="small">Small</option>
-          <option value="medium">Medium</option>
-          <option value="large">Large</option>
-        </select>
-      </Section>
-
       <Section>
         <Label>Align Items</Label>
         <select
@@ -58,8 +51,21 @@ function TemplateConfigs({configs, updateConfigs, updateAccentColor}) {
         <Label>Accent Color</Label>
         <ColorPicker
           name="accentColor"
-          value={configs.accentColor}
+          accentColor={configs.accentColor}
           updateAccentColor={updateAccentColor}
+        />
+      </Section>
+
+      <Section>
+        <Label>Font Size</Label>
+        <Range
+          name="fontSize"
+          type="range"
+          min="100"
+          max="300"
+          step="100"
+          value={configs.fontSize}
+          onChange={updateConfigs}
         />
       </Section>
 
@@ -106,6 +112,7 @@ function TemplateConfigs({configs, updateConfigs, updateAccentColor}) {
 TemplateConfigs.propTypes = {
   configs: PropTypes.object.isRequired,
   updateConfigs: PropTypes.func.isRequired,
+  updateAccentColor: PropTypes.func.isRequired,
 };
 
 export default TemplateConfigs;

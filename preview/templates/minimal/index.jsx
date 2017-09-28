@@ -40,11 +40,11 @@ import Footer from './components/Footer.jsx';
 function setBaseFontSize(configs) {
   let size;
   switch(configs.fontSize) {
-    case 'large': {
+    case '300': {
       size = '1.05em';
       break;
     }
-    case 'medium': {
+    case '200': {
       size = '.95em';
       break;
     }
@@ -57,7 +57,7 @@ function setBaseFontSize(configs) {
 }
 
 // Component
-function Copywriter(props) {
+function Minimal(props) {
   return (
     <Invoice baseFontSize={setBaseFontSize(props.configs)}>
       <Header {...props} />
@@ -67,10 +67,10 @@ function Copywriter(props) {
   );
 }
 
-Copywriter.propTypes = {
+Minimal.propTypes = {
   invoice: PropTypes.object.isRequired,
   company: PropTypes.object.isRequired,
   configs: PropTypes.object.isRequired,
 };
 
-export default Copywriter;
+export default Minimal;

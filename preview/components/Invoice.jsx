@@ -22,7 +22,7 @@ const Page = styled.div`
 `;
 
 // Templates
-import Copywriter from '../templates/copywriter';
+import Minimal from '../templates/minimal';
 
 // Component
 class Invoice extends Component {
@@ -39,7 +39,7 @@ class Invoice extends Component {
     };
     switch (template) {
       default: {
-        return <Copywriter {...props} />;
+        return <Minimal {...props} />;
       }
     }
   }

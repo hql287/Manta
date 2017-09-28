@@ -9,6 +9,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 
 // 3rd Party Libs
 const appConfig = require('electron-settings');
+require('dotenv').config();
 
 let mainWindow         = null;
 let previewWindow      = null;
@@ -25,7 +26,7 @@ function createMainWindow() {
     y: mainWindowState.bounds && mainWindowState.bounds.y || undefined,
     width: mainWindowState.bounds && mainWindowState.bounds.width || 1000,
     height: mainWindowState.bounds && mainWindowState.bounds.height || 800,
-    minWidth: 700,
+    minWidth: 800,
     minHeight: 600,
     titleBarStyle: 'hiddenInset',
     backgroundColor: '#2e2c29',
@@ -144,16 +145,25 @@ function setInitialValues() {
   }
 }
 
+// Add Devtool Extensions
+function addDevToolsExtension() {
+  BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
+  BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
+}
+
 // Initialize
 function initialize() {
   // Load all main process files
   loadMainProcessFiles();
 
+  // Start the app
   app.on('ready', () => {
     // Create The Main Window
     createMainWindow();
     // Create Preview Window
     createPreviewWindow();
+    // Add Devtools Extenstion
+    addDevToolsExtension();
     // Set Initial Values
     setInitialValues();
     // Add Event Listener

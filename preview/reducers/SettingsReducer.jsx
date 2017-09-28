@@ -5,7 +5,19 @@ import {handleActions} from 'redux-actions';
 
 const initialState = {
   template: appConfig.get('printOptions.template'),
-  configs: {}
+  configs: {
+    accentColor: {
+      r: 55,
+      g: 214,
+      b: 122,
+      a: 1,
+    },
+    alignItems: 'middle',
+    fontSize: '200',
+    showLogo: false,
+    showRecipient: true,
+    useSymbol: true,
+  }
 };
 
 const SettingsReducer = handleActions(

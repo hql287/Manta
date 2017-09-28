@@ -57,12 +57,7 @@ class ColorPicker extends React.Component {
     super(props);
     this.state = {
       showPicker: false,
-      color: {
-        r: 241,
-        g: 112,
-        b: 19,
-        a: 1,
-      },
+      color: props.accentColor,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -97,7 +92,7 @@ class ColorPicker extends React.Component {
           ? <Picker>
               <Cover onClick={this.handleClose} />
               <BlockPicker
-                width="140"
+                width={140}
                 colors={[
                   '#D9E3F0',
                   '#F47373',
@@ -119,6 +114,7 @@ class ColorPicker extends React.Component {
 }
 
 ColorPicker.propTypes = {
+  accentColor: PropTypes.object.isRequired,
   updateAccentColor: PropTypes.func.isRequired,
 };
 
