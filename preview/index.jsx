@@ -1,11 +1,15 @@
 // Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux';
 
 // Root Reducer
 import combineReducers from './reducers';
+
+// Root Component
+import Viewer from './Viewer';
 
 // Middleware
 import Logger from 'redux-logger';
@@ -17,12 +21,14 @@ const store = createStore(
   composeEnhancers(applyMiddleware(Logger))
 );
 
-// Components
-import Viewer from './Viewer';
-
 ReactDOM.render(
   <Provider store={store}>
-    <Viewer/>
+    <AppContainer>
+      <Viewer/>
+    </AppContainer>
   </Provider>,
   document.getElementById('root')
 );
+
+// Accepting Hot Updates
+module.hot && module.hot.accept();

@@ -34,7 +34,7 @@ class PrintOptions extends Component {
 
     ipc.on('confirmed-export-directory', (event, path) => {
       this.setState({exportDir: path}, () => {
-        this.updatePrintOptionsState();
+        this.props.updateSettings('printOptions', this.state);
       });
     });
   }
@@ -86,8 +86,9 @@ class PrintOptions extends Component {
               name="template"
               value={this.state.template}
               onChange={this.handleInputChange}>
-              <option value="copywriter">Copywriter</option>
-              <option value="marketing">Marketing</option>
+              <option value="minimal">Minimal</option>
+              <option value="business">Business</option>
+              <option value="modern">Modern</option>
             </select>
           </div>
         </div>

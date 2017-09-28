@@ -47,7 +47,7 @@ function Header({invoice, company, configs})  {
 
         {invoice.dueDate &&
           <p>
-            Due Date {moment(invoice.dueDate).format('DD/MM/YYYY')}
+            Due {moment(invoice.dueDate).format('DD/MM/YYYY')}
           </p>}
       </div>
       { configs.showLogo &&

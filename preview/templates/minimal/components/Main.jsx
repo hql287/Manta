@@ -69,6 +69,7 @@ const InvoiceSummary = styled.tfoot`
   tr {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: .65em 0;
     border-bottom: 2px solid #ECF1F1;
     &:last-child {

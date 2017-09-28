@@ -1,4 +1,9 @@
 {
-  "presets": ["react", "es2015"],
-  "plugins": ["transform-class-properties", "styled-components", "transform-object-rest-spread"]
+  "presets": [ "es2015", "react" ],
+  "plugins": [
+    "react-hot-loader/babel",
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "styled-components"
+  ]
 }

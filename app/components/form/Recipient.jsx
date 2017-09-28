@@ -31,7 +31,11 @@ class Recipient extends Component {
   // Handle Reset Form
   componentWillReceiveProps(nextProps) {
     const { recipient } = nextProps;
-    if (_.isEmpty(recipient.new) && _.isEmpty(recipient.select)) {
+    if (
+      _.isEmpty(recipient.new) &&
+      _.isEmpty(recipient.select) &&
+      recipient.newRecipient === true
+    ) {
       this.setState(
         Object.assign({}, this.state, {
           newRecipient: true,
@@ -146,7 +150,7 @@ class Recipient extends Component {
           : null}
       </Section>
     );
-  };
+  }
 }
 
 // PropTypes Validation

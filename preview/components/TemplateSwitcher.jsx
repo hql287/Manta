@@ -26,8 +26,9 @@ function TemplateSwitcher({template, changeTemplate}) {
         name="template"
         value={template}
         onChange={changeTemplate}>
-        <option value="copywriter">Copywriter</option>
-        <option value="marketing">Marketing</option>
+        <option value="minimal">Minimal</option>
+        <option value="business">Business</option>
+        <option value="modern">Modern</option>
       </select>
     </Wrapper>
   );
