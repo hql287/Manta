@@ -25,7 +25,7 @@ const DiscountType = styled.div`
 `;
 
 // Component
-class Discount extends Component {
+export class Discount extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);

@@ -51,7 +51,7 @@ class Contacts extends Component {
 
   newInvoice(contact) {
     const {dispatch} = this.props;
-    dispatch(InvoicesActions.newInvocieFromContact(contact));
+    dispatch(InvoicesActions.newInvoiceFromContact(contact));
   }
 
   deleteContact(contactId) {

@@ -56,13 +56,15 @@ const ItemRemoveBtn = styled.a`
 `;
 
 // Component
-class ItemsRow extends Component {
+export class ItemRow extends Component {
   constructor(props) {
     super(props);
-    this.updateSubtotal = this.updateSubtotal.bind(this);
-    this.uploadRowState = this.uploadRowState.bind(this);
     this.handleTextInputChange = this.handleTextInputChange.bind(this);
     this.handleNumberInputChange = this.handleNumberInputChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.updateSubtotal = this.updateSubtotal.bind(this);
+    this.uploadRowState = this.uploadRowState.bind(this);
+    this.removeRow = this.removeRow.bind(this);
   }
 
   componentWillMount() {
@@ -76,13 +78,19 @@ class ItemsRow extends Component {
     });
   }
 
+  handleKeyDown(e) {
+    if (e.which === 13) {
+      this.props.addItem();
+    }
+  }
+
   handleTextInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({[name]: value}, () => {
       this.uploadRowState();
     });
-  };
+  }
 
   handleNumberInputChange(event) {
     const name   = event.target.name;
@@ -91,7 +99,7 @@ class ItemsRow extends Component {
     this.setState({[name]: value}, () => {
       this.updateSubtotal();
     });
-  };
+  }
 
   updateSubtotal() {
     const currentPrice = this.state.price === '' ? 0 : parseInt(this.state.price, 10);
@@ -105,12 +113,16 @@ class ItemsRow extends Component {
     this.setState({subtotal: currentSubtotal}, () => {
       this.uploadRowState();
     });
-  };
+  }
 
   uploadRowState() {
     const {updateRow} = this.props;
     updateRow(this.state);
-  };
+  }
+
+  removeRow() {
+    this.props.removeRow(this.state.id);
+  }
 
   render() {
     const {actions, hasHandler} = this.props;
@@ -121,7 +133,8 @@ class ItemsRow extends Component {
             name="description"
             type="text"
             value={this.state.description}
-            onChange={e => this.handleTextInputChange(e)}
+            onChange={this.handleTextInputChange}
+            onKeyDown={this.handleKeyDown}
             placeholder="Description"
           />
         </div>
@@ -131,8 +144,9 @@ class ItemsRow extends Component {
             name="price"
             type="number"
             value={this.state.price}
-            onChange={e => this.handleNumberInputChange(e)}
+            onChange={this.handleNumberInputChange}
             placeholder="Price"
+            onKeyDown={this.handleKeyDown}
           />
         </div>
 
@@ -141,8 +155,9 @@ class ItemsRow extends Component {
             name="quantity"
             type="number"
             value={this.state.quantity}
-            onChange={e => this.handleNumberInputChange(e)}
+            onChange={this.handleNumberInputChange}
             placeholder="Quantity"
+            onKeyDown={this.handleKeyDown}
           />
         </div>
 
@@ -151,7 +166,7 @@ class ItemsRow extends Component {
             {actions &&
               <ItemRemoveBtn
                 href="#"
-                onClick={() => this.props.removeRow(this.state.id)}>
+                onClick={this.removeRow}>
                 <i className="ion-close-circled" />
               </ItemRemoveBtn>}
           </ItemActions>}
@@ -160,8 +175,9 @@ class ItemsRow extends Component {
   }
 }
 
-ItemsRow.propTypes = {
+ItemRow.propTypes = {
   actions:    PropTypes.bool.isRequired,
+  addItem:    PropTypes.func.isRequired,
   hasHandler: PropTypes.bool.isRequired,
   item:       PropTypes.object.isRequired,
   removeRow:  PropTypes.func.isRequired,
@@ -171,4 +187,4 @@ ItemsRow.propTypes = {
 export default compose (
   _withAnimation,
   _withDragNDrop
-)(ItemsRow);
+)(ItemRow);

@@ -21,7 +21,7 @@ const VatContent = styled.div`
 const VatAmount = styled.div`flex: 1;`;
 
 // Component
-class Vat extends Component {
+export class Vat extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);

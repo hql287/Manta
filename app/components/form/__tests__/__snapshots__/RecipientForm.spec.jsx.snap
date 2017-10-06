@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient Form component matches snapshot 1`] = `
+<div
+  className="RecipientForm__Form-kfNImN lnOGBs"
+>
+  <div
+    className="RecipientForm__Row-cmWZLb cGKRYc"
+  >
+    <div
+      className="RecipientForm__Field-jZBIfq kWilKM"
+    >
+      <label
+        className="itemLabel"
+      >
+        Full Name *
+      </label>
+      <input
+        name="fullname"
+        onChange={[Function]}
+        type="text"
+        value="Jon Snow"
+      />
+    </div>
+    <div
+      className="RecipientForm__Field-jZBIfq kWilKM"
+    >
+      <label
+        className="itemLabel"
+      >
+        Company
+      </label>
+      <input
+        name="company"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+  <div
+    className="RecipientForm__Row-cmWZLb cGKRYc"
+  >
+    <div
+      className="RecipientForm__Field-jZBIfq kWilKM"
+    >
+      <label
+        className="itemLabel"
+      >
+        Email *
+      </label>
+      <input
+        name="email"
+        onChange={[Function]}
+        type="text"
+        value="john@hbo.com"
+      />
+    </div>
+    <div
+      className="RecipientForm__Field-jZBIfq kWilKM"
+    >
+      <label
+        className="itemLabel"
+      >
+        Phone Number
+      </label>
+      <input
+        name="phone"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
+</div>
+`;

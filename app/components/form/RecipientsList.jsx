@@ -13,7 +13,7 @@ import styled from 'styled-components';
 const List = styled.div`margin-bottom: 20px;`;
 
 // Component
-class RecipientsList extends Component {
+export class RecipientsList extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -39,7 +39,6 @@ class RecipientsList extends Component {
     updateRecipientList(selectedContact);
   }
 
-  // Render Component
   render() {
     const {contacts, selectedContact} = this.props;
     const optionsComponent = contacts.map(contact => (
@@ -71,10 +70,6 @@ RecipientsList.propTypes = {
   contacts: PropTypes.array.isRequired,
   selectedContact: PropTypes.object.isRequired,
   updateRecipientList: PropTypes.func.isRequired,
-};
-
-RecipientsList.defaultProps = {
-  selectedContact: {},
 };
 
 export default _withFadeInAnimation(RecipientsList);

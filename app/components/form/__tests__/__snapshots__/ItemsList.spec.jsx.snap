@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note component matches snapshot 1`] = `
+<div
+  className="Section__SectionStyle-KuFAH hVJJBo"
+>
+  <div
+    className="ItemsList__ItemsListWrapper-bhjgHH fFIWaw"
+  >
+    <div
+      className="ItemsList__ItemsListHeader-krJdzW kUjmKX"
+    >
+      <label
+        className="itemLabel"
+      >
+        Product/Service *
+      </label>
+    </div>
+    <div
+      className="ItemsList__ItemsListDiv-iaJoKq gSwaRM"
+    >
+      <div />
+    </div>
+    <div
+      className="itemsListActions"
+    >
+      <button
+        className="ItemsList__ItemsListActionsBtn-iuJoKw kkURDx Button__ButtonStyle-cORGTZ dOzpoX"
+        onClick={[Function]}
+      >
+        Add An Item
+      </button>
+    </div>
+  </div>
+</div>
+`;

@@ -1,12 +1,10 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 import {handleActions} from 'redux-actions';
+import {createSelector} from 'reselect';
 
 const SettingsReducer = handleActions(
   {
-    [ACTION_TYPES.SETTINGS_GET_INITIAL]: (state, action) =>
-      Object.assign({}, action.payload, {
-        loaded: true,
-      }),
+    [ACTION_TYPES.SETTINGS_GET_INITIAL]: (state, action) => action.payload,
     [ACTION_TYPES.SETTINGS_UPDATE]: (state, action) =>
       Object.assign({}, state, {
         current: Object.assign({}, state.current, {
@@ -18,7 +16,19 @@ const SettingsReducer = handleActions(
         saved: action.payload,
       }),
   },
-  { loaded: false }
+  {}
 );
 
 export default SettingsReducer;
+
+// Selectors
+const getSettingsState = state => state.settings;
+export const getCurrentSettings = createSelector(
+  getSettingsState,
+  settings => settings.current
+);
+
+export const getSavedSettings = createSelector(
+  getSettingsState,
+  settings => settings.saved
+);

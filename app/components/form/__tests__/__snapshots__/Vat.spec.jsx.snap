@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note component matches snapshot 1`] = `
+<div
+  className="Section__SectionStyle-KuFAH hVJJBo"
+>
+  <div
+    className="Vat__VatWrapper-dhkKOK mcQjd"
+  >
+    <label
+      className="itemLabel"
+    >
+      Vat (%)
+    </label>
+    <div
+      className="Vat__VatContent-cjUcMd hODULM"
+    >
+      <div
+        className="Vat__VatAmount-fkgylN fyheuP"
+      >
+        <input
+          name="amount"
+          onChange={[Function]}
+          placeholder="Amount"
+          type="number"
+          value={10}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

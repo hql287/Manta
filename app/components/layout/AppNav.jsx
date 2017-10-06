@@ -44,7 +44,7 @@ const allTabs = [
 // Styles
 import styled from 'styled-components';
 
-const SideBar = styled.div`
+export const SideBar = styled.div`
   flex: 1;
   position: relative;
   display: flex;
@@ -58,7 +58,7 @@ const SideBar = styled.div`
   background: #2c323a;
 `;
 
-const Tab = styled.a`
+export const Tab = styled.a`
   position: relative;
   color: white;
   display: flex;
@@ -75,14 +75,14 @@ const Tab = styled.a`
   }
 `;
 
-const Icon = styled.i`
+export const Icon = styled.i`
   ${props => props.id === 'form' && `color: #6bbb69;`};
   ${props => props.id === 'contacts' && `color: #469fe5;`};
   ${props => props.id === 'settings' && `color: #C4C8CC;`};
   ${props => props.id === 'invoices' && `color: #cbc189;`};
 `;
 
-const ActiveIndicator = styled.div`
+export const ActiveIndicator = styled.div`
   height: ${ allTabs.length * 60 }px;
   width: 5px;
   position: absolute;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note component matches snapshot 1`] = `
+<div
+  className="Section__SectionStyle-KuFAH hVJJBo"
+>
+  <label
+    className="itemLabel"
+  >
+    Note
+  </label>
+  <textarea
+    className="Note__NoteContent-cisseN erXQHl"
+    cols="50"
+    onChange={[Function]}
+    placeholder="Note"
+    rows="4"
+    value="something"
+  />
+</div>
+`;

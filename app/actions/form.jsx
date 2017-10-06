@@ -31,14 +31,14 @@ export const clearForm = createAction(
   (muted=false) => muted
 );
 
-export const saveFormData = createAction(
-  ACTION_TYPES.FORM_SAVE,
-  (withPreview=false) => withPreview
-);
+export const saveFormData = createAction(ACTION_TYPES.FORM_SAVE);
 
 export const toggleFormSettings = createAction(
   ACTION_TYPES.FORM_SETTING_TOGGLE,
-  (newState=true) => newState
+);
+
+export const closeFormSettings = createAction(
+  ACTION_TYPES.FORM_SETTING_CLOSE,
 );
 
 export const updateFieldData = createAction(

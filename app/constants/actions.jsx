@@ -15,6 +15,7 @@ export const FORM_CLEAR             = 'FORM_CLEAR';
 export const FORM_FIELD_TOGGLE      = 'FORM_FIELD_TOGGLE';
 export const FORM_FIELD_UPDATE_DATA = 'FORM_FIELD_UPDATE_DATA';
 export const FORM_SETTING_TOGGLE    = 'FORM_SETTING_TOGGLE';
+export const FORM_SETTING_CLOSE     = 'FORM_SETTING_CLOSE';
 
 // INVOICE
 // ===========================================================

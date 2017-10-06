@@ -28,9 +28,9 @@ class App extends Component {
   componentDidMount() {
     const {dispatch} = this.props;
     // Get All Data
-    dispatch(SettingsActions.getInitalSettings());
     dispatch(ContactsActions.getAllContacts());
     dispatch(InvoicesActions.getInvoices());
+    dispatch(SettingsActions.getInitalSettings());
     // Add Event Listener
     ipc.on('menu-change-tab', (event, tabName) => {
       this.changeTab(tabName);

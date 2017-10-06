@@ -1,4 +1,13 @@
-import SettingsReducer from '../SettingsReducer';
+import SettingsReducer, {
+  getCurrentSettings,
+  getSavedSettings,
+} from '../SettingsReducer';
+
+import FormReducer, {
+  getCurrentInvoice,
+  getRows,
+  getRecipient,
+} from '../FormReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
 
 const sampleSettings = {
@@ -28,7 +37,7 @@ const sampleSettings = {
   },
 };
 
-const initialState = {loaded: false};
+const initialState = {};
 
 describe('Settings Reducer', () => {
   it('should handle initial state', () => {
@@ -81,7 +90,7 @@ describe('Settings Reducer should handle update', () => {
       payload: {
         setting: 'appSettings',
         data: data,
-      }
+      },
     });
     expect(newState.current.appSettings.currency).toEqual('VND');
     expect(newState.current.appSettings.muted).toBeFalsy;
@@ -102,7 +111,7 @@ describe('Settings Reducer should handle update', () => {
       payload: {
         setting: 'info',
         data: data,
-      }
+      },
     });
     expect(newState.current.info.fullname).toEqual('Jon Snow');
     expect(newState.current.info.company).toEqual('HBO');
@@ -124,7 +133,7 @@ describe('Settings Reducer should handle update', () => {
       payload: {
         setting: 'printOptions',
         data: data,
-      }
+      },
     });
     expect(newState.current.printOptions.template).toEqual('classic');
     expect(newState.current.printOptions.pageSize).toEqual('A5');
@@ -133,3 +142,23 @@ describe('Settings Reducer should handle update', () => {
     expect(newState.current.printOptions.landscape).toBeTruthy;
   });
 });
+
+
+// Test Selectors
+const state = {
+  settings: {
+    current: {},
+    saved: {},
+  }
+};
+
+describe('Form Selectors', () => {
+  it('getCurrentSettings should return currentSettings state', () => {
+    expect(getCurrentSettings(state)).toEqual(state.settings.current);
+  });
+  it('getSavedSettings should return savedSettings state', () => {
+    expect(getSavedSettings(state)).toEqual(state.settings.saved);
+  });
+});
+
+

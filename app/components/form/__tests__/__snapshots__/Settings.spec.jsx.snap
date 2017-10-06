@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Settings component matches snapshot 1`] = `
+<div
+  className="Settings__Wrapper-gMqoEa dCfACd"
+  style={
+    Object {
+      "height": "45px",
+    }
+  }
+>
+  <a
+    className="Settings__SettingsHeader-lnTDqK GiEZV"
+    href="#"
+    onClick={[Function]}
+  >
+    <label
+      className="Settings__Label-gSCNoi bqzjuj"
+    >
+      Form Settings
+    </label>
+    <div
+      style={
+        Object {
+          "transform": "rotate(0deg)",
+        }
+      }
+    >
+      <i
+        className="ion-arrow-down-b"
+      />
+    </div>
+  </a>
+  <div
+    className="Settings__AllSettings-fvolyT jZlmwB"
+  >
+    <div
+      className="Settings__Setting-iHwWTP dDLCsM"
+    >
+      <label
+        className="Settings__Label-gSCNoi bqzjuj"
+      >
+        Due Date
+      </label>
+      <label
+        className="Switch__SwitchStyle-ghEAwD hvamL"
+      >
+        <input
+          checked={false}
+          className="Switch__Input-kcgNA kNMfpw"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="Switch__Slider-gGmQGK eJVctn"
+        />
+      </label>
+    </div>
+    <div
+      className="Settings__Setting-iHwWTP dDLCsM"
+    >
+      <label
+        className="Settings__Label-gSCNoi bqzjuj"
+      >
+        Currency
+      </label>
+      <label
+        className="Switch__SwitchStyle-ghEAwD hvamL"
+      >
+        <input
+          checked={false}
+          className="Switch__Input-kcgNA kNMfpw"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="Switch__Slider-gGmQGK eJVctn"
+        />
+      </label>
+    </div>
+    <div
+      className="Settings__Setting-iHwWTP dDLCsM"
+    >
+      <label
+        className="Settings__Label-gSCNoi bqzjuj"
+      >
+        Discount
+      </label>
+      <label
+        className="Switch__SwitchStyle-ghEAwD hvamL"
+      >
+        <input
+          checked={false}
+          className="Switch__Input-kcgNA kNMfpw"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="Switch__Slider-gGmQGK eJVctn"
+        />
+      </label>
+    </div>
+    <div
+      className="Settings__Setting-iHwWTP dDLCsM"
+    >
+      <label
+        className="Settings__Label-gSCNoi bqzjuj"
+      >
+        Vat
+      </label>
+      <label
+        className="Switch__SwitchStyle-ghEAwD hvamL"
+      >
+        <input
+          checked={false}
+          className="Switch__Input-kcgNA kNMfpw"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="Switch__Slider-gGmQGK eJVctn"
+        />
+      </label>
+    </div>
+    <div
+      className="Settings__Setting-iHwWTP dDLCsM"
+    >
+      <label
+        className="Settings__Label-gSCNoi bqzjuj"
+      >
+        Note
+      </label>
+      <label
+        className="Switch__SwitchStyle-ghEAwD hvamL"
+      >
+        <input
+          checked={false}
+          className="Switch__Input-kcgNA kNMfpw"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="Switch__Slider-gGmQGK eJVctn"
+        />
+      </label>
+    </div>
+  </div>
+</div>
+`;

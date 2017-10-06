@@ -13,35 +13,35 @@ const Wrapper = styled.div`
   margin-bottom: 20px;
   overflow: hidden;
   border-radius: 4px 4px 0 0;
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const SettingsHeader = styled.a`
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 10px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-decoration: none;
-  color: #2C323A;
+  color: #2c323a;
   &:hover {
     text-decoration: none;
-    color: #2C323A;
+    color: #2c323a;
   }
 `;
 
 const AllSettings = styled.div`
   display: flex;
   padding: 25px 40px;
-  background: #F2F3F4;
+  background: #f2f3f4;
 `;
 
 const Setting = styled.div`
   margin-right: 20px;
   > label {
-    color: #4F555C;
+    color: #4f555c;
     margin-bottom: 10px;
- }
+  }
 `;
 
 const Label = styled.label`
@@ -49,7 +49,7 @@ const Label = styled.label`
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #4F555C;
+  color: #4f555c;
   margin-bottom: 0px;
 `;
 
@@ -58,20 +58,8 @@ import Switch from '../shared/Switch';
 
 // Component
 function Settings(props) {
-  const {
-    toggleFormSettings,
-    toggleField,
-    currentInvoice,
-  } = props;
-
-  const {
-    settingsOpen,
-    dueDate,
-    currency,
-    discount,
-    vat,
-    note,
-  } = currentInvoice;
+  const {toggleField, toggleFormSettings, currentInvoice} = props;
+  const {settingsOpen, dueDate, currency, discount, vat, note} = currentInvoice;
 
   return (
     <Motion
@@ -79,16 +67,15 @@ function Settings(props) {
         height: spring(settingsOpen ? 155 : 45),
         rotate: spring(settingsOpen ? 180 : 0),
       }}>
-      {({height, rotate}) =>
-        <Wrapper style={{ height: `${height}px`}}>
-          <SettingsHeader
-            href="#"
-            onClick={toggleFormSettings}>
+      {({height, rotate}) => (
+        <Wrapper style={{height: `${height}px`}}>
+          <SettingsHeader href="#" onClick={toggleFormSettings}>
             <Label>Form Settings</Label>
-            <div style={{
-                transform: `rotate(${rotate}deg)`
+            <div
+              style={{
+                transform: `rotate(${rotate}deg)`,
               }}>
-              <i className="ion-arrow-down-b"/>
+              <i className="ion-arrow-down-b" />
             </div>
           </SettingsHeader>
 
@@ -133,7 +120,8 @@ function Settings(props) {
               />
             </Setting>
           </AllSettings>
-        </Wrapper>}
+        </Wrapper>
+      )}
     </Motion>
   );
 }

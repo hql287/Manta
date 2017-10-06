@@ -59,24 +59,19 @@ it('clearForm should create CLEAR_FORM action', () => {
 
 it('saveFormData should create FORM_SAVE action', () => {
   expect(actions.saveFormData()).toEqual({
-    type: ACTION_TYPES.FORM_SAVE,
-    payload: false,
-  });
-
-  expect(actions.saveFormData(true)).toEqual({
-    type: ACTION_TYPES.FORM_SAVE,
-    payload: true,
+    type: ACTION_TYPES.FORM_SAVE
   });
 });
 
 it('toggleFormSettings should create FORM_SETTING_TOGGLE action', () => {
   expect(actions.toggleFormSettings()).toEqual({
-    type: ACTION_TYPES.FORM_SETTING_TOGGLE,
-    payload: true,
+    type: ACTION_TYPES.FORM_SETTING_TOGGLE
   });
-  expect(actions.toggleFormSettings(false)).toEqual({
-    type: ACTION_TYPES.FORM_SETTING_TOGGLE,
-    payload: false,
+});
+
+it('closeFormSettings should create FORM_SETTING_CLOSE action', () => {
+  expect(actions.closeFormSettings()).toEqual({
+    type: ACTION_TYPES.FORM_SETTING_CLOSE
   });
 });
 

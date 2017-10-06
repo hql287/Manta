@@ -1,34 +1,16 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
 
-// PouchDB
-const PouchDB = require('pouchdb-browser');
-const db = new PouchDB('contacts');
-
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-// Get All Docs Helper
-const getAllDocs = () =>
-  new Promise((resolve, reject) => {
-    db
-      .allDocs({
-        include_docs: true,
-        attachments: true,
-      })
-      .then(results => {
-        const resultsDocs = results.rows.map(row => row.doc);
-        resolve(resultsDocs);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+// Helpers
+import { getAllDocs, saveDoc, deleteDoc } from '../helpers/pouchDB';
 
 const ContactsMW = ({dispatch}) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.CONTACT_GET_ALL: {
-      getAllDocs()
+      return getAllDocs('contacts')
         .then(allDocs => {
           next(
             Object.assign({}, action, {
@@ -45,7 +27,6 @@ const ContactsMW = ({dispatch}) => next => action => {
             },
           });
         });
-      break;
     }
 
     case ACTION_TYPES.CONTACT_SAVE: {
@@ -53,9 +34,7 @@ const ContactsMW = ({dispatch}) => next => action => {
         _id: uuidv4(),
         created_at: Date.now(),
       });
-      db
-        .put(doc)
-        .then(getAllDocs)
+      return saveDoc('contacts', doc)
         .then(newDocs => {
           next({
             type: ACTION_TYPES.CONTACT_SAVE,
@@ -78,14 +57,10 @@ const ContactsMW = ({dispatch}) => next => action => {
             },
           });
         });
-      break;
     }
 
     case ACTION_TYPES.CONTACT_DELETE: {
-      db
-        .get(action.payload)
-        .then(doc => db.remove(doc))
-        .then(getAllDocs)
+      return deleteDoc('contacts', action.payload)
         .then(remainingDocs => {
           next({
             type: ACTION_TYPES.CONTACT_DELETE,
@@ -108,12 +83,10 @@ const ContactsMW = ({dispatch}) => next => action => {
             },
           });
         });
-      break;
     }
 
     default: {
-      next(action);
-      break;
+      return next(action);
     }
   }
 };

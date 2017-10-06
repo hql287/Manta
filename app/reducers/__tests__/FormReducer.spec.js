@@ -1,4 +1,4 @@
-import FormReducer from '../FormReducer';
+import FormReducer, { getCurrentInvoice, getRows, getRecipient } from '../FormReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
 
 import uuidv4 from 'uuid/v4';
@@ -12,7 +12,8 @@ describe('Form Reducer should handle', () => {
         { id: 'Daenerys Targaryen' },
         { id: 'Tyrion Lannister' },
         { id: 'Arya Stark' },
-      ]
+      ],
+      settingsOpen: true
     };
   });
 
@@ -78,20 +79,31 @@ describe('Form Reducer should handle', () => {
     expect(newState.currency).toEqual({ required: false });
     expect(newState.discount).toEqual({ required: false });
     expect(newState.vat).toEqual({ required: false });
+    expect(newState.settingsOpen).toEqual(false);
   });
 
   it('toggle the form settings', () => {
     const newState1 = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_SETTING_TOGGLE,
-      payload: false,
     });
     expect(newState1.settingsOpen).toEqual(false);
-    const currentState = FormReducer(currentState, { type: 'default' });
-    const newState2 = FormReducer(currentState, {
+    const newState2 = FormReducer(newState1, {
       type: ACTION_TYPES.FORM_SETTING_TOGGLE,
-      payload: true,
     });
-    expect(newState2.settingsOpen).toEqual(!currentState.settingsOpen);
+    expect(newState2.settingsOpen).toEqual(true);
+  });
+
+  it('close the form settings', () => {
+    // Close It
+    const newState1 = FormReducer(currentState, {
+      type: ACTION_TYPES.FORM_SETTING_CLOSE,
+    });
+    expect(newState1.settingsOpen).toEqual(false);
+    // Close Again
+    const newState2 = FormReducer(newState1, {
+      type: ACTION_TYPES.FORM_SETTING_CLOSE,
+    });
+    expect(newState2.settingsOpen).toEqual(false);
   });
 
 });
@@ -273,3 +285,24 @@ describe('Form Reducer should handle update', () => {
   });
 
 });
+
+// Test Selectors
+const state = {
+  form: {
+    rows: [],
+    recipient: {}
+  }
+};
+
+describe('Form Selectors', () => {
+  it('getRows should return form rows', () => {
+    expect(getRows(state)).toEqual(state.form.rows);
+  });
+  it('getRecipient should return form recipient', () => {
+    expect(getRecipient(state)).toEqual(state.form.recipient);
+  });
+  it('getCurrentInvoice should return form state', () => {
+    expect(getCurrentInvoice(state)).toEqual(state.form);
+  });
+});
+

@@ -3,9 +3,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
+import {getCurrentInvoice} from '../reducers/FormReducer';
 
 // Actions
-import * as FormActions from '../actions/form';
+import * as Actions from '../actions/form';
+import {bindActionCreators} from 'redux';
 
 // Components
 import Recipient from '../components/form/Recipient';
@@ -17,6 +19,7 @@ import Vat from '../components/form/Vat';
 import Note from '../components/form/Note';
 import Settings from '../components/form/Settings';
 import Button from '../components/shared/Button';
+import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
   PageHeader,
@@ -24,111 +27,58 @@ import {
   PageHeaderActions,
   PageContent,
 } from '../components/shared/Layout';
-import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 
 // Component
 class Form extends Component {
-  constructor(props) {
-    super(props);
-    this.toggleField        = this.toggleField.bind(this);
-    this.saveFormData       = this.saveFormData.bind(this);
-    this.clearFormData      = this.clearFormData.bind(this);
-    this.updateFieldData    = this.updateFieldData.bind(this);
-    this.toggleFormSettings = this.toggleFormSettings.bind(this);
-  }
-
-  // Populate Form Item
-  componentDidMount() {
-    const { dispatch, currentInvoice } = this.props;
-    if (currentInvoice.rows.length === 0) {
-      dispatch(FormActions.addItem());
-    }
-  }
-
   // Optimization
   shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
-  }
-
-  // Toggle Form Settings
-  toggleFormSettings() {
-    const { dispatch } = this.props;
-    dispatch(FormActions.toggleFormSettings());
-  }
-
-  // Save Form Data
-  saveFormData() {
-    const {dispatch} = this.props;
-    dispatch(FormActions.saveFormData(true));
-  }
-
-  // Clear Form Data
-  clearFormData() {
-    const {dispatch} = this.props;
-    dispatch(FormActions.clearForm());
-  }
-
-  // Toggle Field
-  toggleField(field) {
-    const {dispatch} = this.props;
-    dispatch(FormActions.toggleField(field));
-  }
-
-  // Update Field Data
-  updateFieldData(field, data) {
-    const {dispatch} = this.props;
-    dispatch(FormActions.updateFieldData(field, data));
+    return this.props.currentInvoice !== nextProps.currentInvoice;
   }
 
   // Render The form
   render() {
     const {
-      dueDate,
-      currency,
-      discount,
-      vat,
-      note,
-    } = this.props.currentInvoice;
+      clearForm,  // Works but need to refactor to handle passed click event
+      toggleField,
+      saveFormData,
+      updateFieldData,
+      toggleFormSettings,
+    } = this.props.boundActionCreators;
+    const {dueDate, currency, discount, vat, note} = this.props.currentInvoice;
     return (
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>Create A New Invoice</PageHeaderTitle>
           <PageHeaderActions>
-            <Button danger onClick={this.clearFormData}>
+            <Button danger onClick={clearForm}>
               Clear
             </Button>
-            <Button primary onClick={this.saveFormData}>
+            <Button primary onClick={saveFormData}>
               Save & Preview
             </Button>
           </PageHeaderActions>
         </PageHeader>
         <PageContent>
           <Settings
-            toggleFormSettings={this.toggleFormSettings}
-            toggleField={this.toggleField}
+            toggleField={toggleField}
+            toggleFormSettings={toggleFormSettings}
             currentInvoice={this.props.currentInvoice}
           />
           <Recipient />
           <ItemsList />
-          {dueDate.required &&
-            <DueDate
-              dueDate={dueDate}
-              updateFieldData={this.updateFieldData}
-            />}
-          {currency.required &&
-            <Currency
-              currency={currency}
-              updateFieldData={this.updateFieldData}
-            />}
-          {discount.required &&
-            <Discount
-              discount={discount}
-              updateFieldData={this.updateFieldData}
-            />}
-          {vat.required &&
-            <Vat vat={vat} updateFieldData={this.updateFieldData} />}
-          {note.required &&
-            <Note note={note} updateFieldData={this.updateFieldData} />}
+          {dueDate.required && (
+            <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
+          )}
+          {currency.required && (
+            <Currency currency={currency} updateFieldData={updateFieldData} />
+          )}
+          {discount.required && (
+            <Discount discount={discount} updateFieldData={updateFieldData} />
+          )}
+          {vat.required && <Vat vat={vat} updateFieldData={updateFieldData} />}
+          {note.required && (
+            <Note note={note} updateFieldData={updateFieldData} />
+          )}
         </PageContent>
       </PageWrapper>
     );
@@ -137,6 +87,14 @@ class Form extends Component {
 
 // PropTypes Validation
 Form.propTypes = {
+  boundActionCreators: PropTypes.shape({
+    // Works but need to refactor to handle passed click event
+    clearForm: PropTypes.func.isRequired,
+    saveFormData: PropTypes.func.isRequired,
+    toggleField: PropTypes.func.isRequired,
+    toggleFormSettings: PropTypes.func.isRequired,
+    updateFieldData: PropTypes.func.isRequired,
+  }).isRequired,
   currentInvoice: PropTypes.shape({
     recipient: PropTypes.shape({
       newRecipient: PropTypes.bool.isRequired,
@@ -151,11 +109,19 @@ Form.propTypes = {
     note: PropTypes.object.isRequired,
     settingsOpen: PropTypes.bool.isRequired,
   }).isRequired,
-  dispatch: PropTypes.func.isRequired,
 };
+
+// Map state & dispatch to props
+const mapStateToProps = state => ({
+  currentInvoice: getCurrentInvoice(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  boundActionCreators: bindActionCreators(Actions, dispatch),
+});
 
 // Export
 export default compose(
-  connect(state => ({ currentInvoice: state.form })),
+  connect(mapStateToProps, mapDispatchToProps),
   _withFadeInAnimation
 )(Form);

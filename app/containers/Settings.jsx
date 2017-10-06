@@ -5,6 +5,9 @@ import {compose} from 'recompose';
 import {connect} from 'react-redux';
 const _ = require('lodash');
 
+// Selectors
+import { getCurrentSettings, getSavedSettings } from '../reducers/SettingsReducer';
+
 // Actions
 import * as Actions from '../actions/settings';
 
@@ -36,17 +39,10 @@ class Settings extends Component {
     this.updateSettings = this.updateSettings.bind(this);
   }
 
-  componentDidMount() {
-    if (!this.props.settings.loaded) {
-      const {dispatch} = this.props;
-      dispatch(Actions.getInitalSettings());
-    }
-  }
-
   // Check if settings have been saved
   settingsSaved() {
-    const {current, saved} = this.props.settings;
-    return _.isEqual(current, saved);
+    const {currentSettings, savedSettings} = this.props;
+    return _.isEqual(currentSettings, savedSettings);
   }
 
   // Save Settings to App Config
@@ -68,7 +64,7 @@ class Settings extends Component {
 
   // Render Main Content
   renderSettingsContent() {
-    const {info, appSettings, printOptions} = this.props.settings.current;
+    const {info, appSettings, printOptions} = this.props.currentSettings;
     return (
       <PageWrapper>
         <PageHeader>
@@ -122,7 +118,7 @@ class Settings extends Component {
 
   render() {
     return (
-      this.props.settings.loaded
+      this.props.currentSettings
       ? this.renderSettingsContent()
       : null
     );
@@ -132,15 +128,17 @@ class Settings extends Component {
 // PropTypes Validation
 Settings.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  settings: PropTypes.shape({
-    current: PropTypes.object,
-    loaded: PropTypes.bool.isRequired,
-    save: PropTypes.object,
-  }).isRequired,
+  currentSettings: PropTypes.object.isRequired,
+  savedSettings: PropTypes.object.isRequired,
 };
 
-// Export
+// Map State to Props & Export
+const mapStateToProps = state => ({
+  currentSettings: getCurrentSettings(state),
+  savedSettings: getSavedSettings(state),
+});
+
 export default compose(
-  connect(state => ({ settings: state.settings })),
+  connect(mapStateToProps),
   _withFadeInAnimation
 )(Settings);

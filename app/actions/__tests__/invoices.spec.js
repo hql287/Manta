@@ -15,17 +15,7 @@ it('saveInvoice should create SAVE_INVOICE action', () => {
   };
   expect(actions.saveInvoice(invoiceData)).toEqual({
     type: ACTION_TYPES.INVOICE_SAVE,
-    payload: {
-      invoiceData,
-      withPreview: false
-    }
-  });
-  expect(actions.saveInvoice(invoiceData, true)).toEqual({
-    type: ACTION_TYPES.INVOICE_SAVE,
-    payload: {
-      invoiceData,
-      withPreview: true
-    }
+    payload: invoiceData,
   });
 });
 
@@ -36,13 +26,13 @@ it('deleteInvoice should create DELETE_INVOICE action', () => {
   });
 });
 
-it('newInvocieFromContact should create INVOICE_NEW_FROM_CONTACT action', () => {
+it('newInvoiceFromContact should create INVOICE_NEW_FROM_CONTACT action', () => {
   const contact = {
     id: 'abcxyz',
     name: 'Jon Snow',
     company: 'HBO',
   };
-  expect(actions.newInvocieFromContact(contact)).toEqual({
+  expect(actions.newInvoiceFromContact(contact)).toEqual({
     type: ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
     payload: contact,
   });
