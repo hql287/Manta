@@ -7,11 +7,11 @@ export const getInvoices = createAction(ACTION_TYPES.INVOICE_GET_ALL);
 // Save an Invoice
 export const saveInvoice = createAction(
   ACTION_TYPES.INVOICE_SAVE,
-  (invoiceData, withPreview=false) => ({  invoiceData, withPreview  })
+  invoiceData => invoiceData
 );
 
 // New Invoice from Contact
-export const newInvocieFromContact = createAction(
+export const newInvoiceFromContact = createAction(
   ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
   contact => contact
 );

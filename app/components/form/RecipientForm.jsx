@@ -25,7 +25,7 @@ const Field = styled.div`
   margin: 0 15px 20px 15px;
 `;
 
-function RecipientForm({ formData, updateRecipientForm }) {
+export function RecipientForm({ formData, updateRecipientForm }) {
   const { fullname, company, email, phone } = formData;
   return (
     <Form>

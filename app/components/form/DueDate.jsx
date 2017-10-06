@@ -17,7 +17,7 @@ const DueDateContent = styled.div`display: flex;`;
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
-class DueDate extends Component {
+export class DueDate extends Component {
   constructor(props) {
     super(props);
     this.state = {focused: false};
@@ -27,10 +27,7 @@ class DueDate extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.state !== nextState ||
-      this.props.dueDate !== nextProps.dueDate
-    );
+    return this.state !== nextState || this.props.dueDate != nextProps.dueDate;
   }
 
   onFocusChange() {
@@ -67,14 +64,14 @@ class DueDate extends Component {
             onFocusChange={this.onFocusChange}
             onDateChange={newDate => this.onDateChange(newDate)}
           />
-          <a
-            className={
-              selectedDate === null ? 'clearDateBtn' : 'clearDateBtn active'
-            }
-            href="#"
-            onClick={this.clearDate}>
-            <i className="ion-close-circled" />
-          </a>
+          {selectedDate !== null && (
+            <a
+              className="clearDateBtn active"
+              href="#"
+              onClick={this.clearDate}>
+              <i className="ion-close-circled" />
+            </a>
+          )}
         </DueDateContent>
       </Section>
     );

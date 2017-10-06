@@ -22,7 +22,7 @@ const NoteContent = styled.textarea`
 `;
 
 // Component
-class Note extends Component {
+export class Note extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);

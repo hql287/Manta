@@ -5,13 +5,13 @@ import PropTypes from 'prop-types';
 // Redux
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 import * as Actions from '../../actions/form.jsx';
+import {getRows} from '../../reducers/FormReducer';
 
-// DragnDrop
+// DragNDrop & Animation
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-
-// Animation
 import TransitionList from '../../components/shared/TransitionList';
 
 // Custom Component
@@ -19,11 +19,9 @@ import Button from '../shared/Button.jsx';
 import {Section} from '../shared/Section';
 import ItemRow from './ItemRow.jsx';
 
-// Selectors
-import { getRows } from '../../reducers/FormReducer';
-
-// Styles
+// Styled Components
 import styled from 'styled-components';
+
 const ItemsListWrapper = styled.div`
   position: relative;
   display: flex;
@@ -61,53 +59,39 @@ const ItemsListDiv = styled.div`
 `;
 
 // Component
-class ItemsList extends Component {
-  constructor(props) {
-    super(props);
-    this.addRow    = this.addRow.bind(this);
-    this.removeRow = this.removeRow.bind(this);
-    this.updateRow = this.updateRow.bind(this);
-    this.moveRow   = this.moveRow.bind(this);
+export class ItemsList extends Component {
+  componentDidMount() {
+    const { rows, boundActionCreators } = this.props;
+    if(!rows.length) {
+      boundActionCreators.addItem();
+    }
   }
 
-  // Add A Row
-  addRow() {
-    const {dispatch} = this.props;
-    dispatch(Actions.addItem());
-  }
-
-  // Remove A Row
-  removeRow(rowId) {
-    const {dispatch} = this.props;
-    dispatch(Actions.removeItem(rowId));
-  }
-
-  // Update Row Data
-  updateRow(childComponentState) {
-    const {dispatch} = this.props;
-    dispatch(Actions.updateItem(childComponentState));
-  }
-
-  // Drag Row
-  moveRow(dragIndex, hoverIndex) {
-    const {dispatch} = this.props;
-    dispatch(Actions.moveRow(dragIndex, hoverIndex));
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
   }
 
   render() {
+    const {
+      addItem,
+      moveRow,
+      removeItem,
+      updateItem,
+    } = this.props.boundActionCreators;
     const {rows} = this.props;
-    const rowsComponent = rows.map((item, index) =>
+    const rowsComponent = rows.map((item, index) => (
       <ItemRow
         key={item.id}
         item={item}
         index={index}
         hasHandler={rows.length > 1 ? true : false}
         actions={index === 0 ? false : true}
-        updateRow={this.updateRow}
-        removeRow={this.removeRow}
-        moveRow={this.moveRow}
+        updateRow={updateItem}
+        removeRow={removeItem}
+        moveRow={moveRow}
+        addItem={addItem}
       />
-    );
+    ));
     return (
       <Section>
         <ItemsListWrapper>
@@ -120,7 +104,7 @@ class ItemsList extends Component {
             </TransitionList>
           </ItemsListDiv>
           <div className="itemsListActions">
-            <ItemsListActionsBtn primary onClick={this.addRow}>
+            <ItemsListActionsBtn primary onClick={addItem}>
               Add An Item
             </ItemsListActionsBtn>
           </div>
@@ -131,17 +115,21 @@ class ItemsList extends Component {
 }
 
 ItemsList.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  boundActionCreators: PropTypes.object.isRequired,
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = state => ({
-  currentInvoice: state.form,
-  rows: getRows(state)
+  formState: state.form, // Make drag & drop works
+  rows: getRows(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  boundActionCreators: bindActionCreators(Actions, dispatch),
 });
 
 // Export
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   DragDropContext(HTML5Backend)
 )(ItemsList);

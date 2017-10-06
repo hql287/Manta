@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient List component matches snapshot 1`] = `
+<div
+  className="RecipientsList__List-bIVndU hLpDOi"
+>
+  <select
+    onChange={[Function]}
+    value="first-contact"
+  >
+    <option
+      value="first-contact"
+    >
+      Jon Snow
+      (
+       
+       
+      john@hbo.com
+      )
+    </option>
+    <option
+      value="second-contact"
+    >
+      Ned Stark
+      (
+       
+       
+      ned@hbo.com
+      )
+    </option>
+  </select>
+</div>
+`;

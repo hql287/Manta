@@ -5,7 +5,7 @@ import sounds from '../../libs/sounds';
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-const InvoicesMW = ({dispatch}) => next => action => {
+const SettingsMW = ({dispatch}) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
@@ -13,7 +13,7 @@ const InvoicesMW = ({dispatch}) => next => action => {
         appSettings: appConfig.get('appSettings'),
         printOptions: appConfig.get('printOptions'),
       };
-      next(
+      return next(
         Object.assign({}, action, {
           payload: {
             current: savedSettings,
@@ -21,7 +21,6 @@ const InvoicesMW = ({dispatch}) => next => action => {
           }
         })
       );
-      break;
     }
 
     case ACTION_TYPES.SETTINGS_SAVE: {
@@ -45,10 +44,9 @@ const InvoicesMW = ({dispatch}) => next => action => {
     }
 
     default: {
-      next(action);
-      break;
+      return next(action);
     }
   }
 };
 
-export default InvoicesMW;
+export default SettingsMW;

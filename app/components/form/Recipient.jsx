@@ -2,24 +2,22 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-// 3rd Party Libs
-import _ from 'lodash';
-
-// Redux
+// Redux & Selectors
+import {getContacts} from '../../reducers/ContactsReducer';
+import {getRecipient} from '../../reducers/FormReducer';
 import {connect} from 'react-redux';
 import * as FormActions from '../../actions/form';
+
+// Other Libs
+import _ from 'lodash';
 
 // Custom Components
 import RecipientForm from './RecipientForm';
 import RecipientsList from './RecipientsList';
-import { Section } from '../shared/Section';
-
-// Selectors
-import { getContacts } from '../../reducers/ContactsReducer';
-import { getRecipient } from '../../reducers/FormReducer';
+import {Section} from '../shared/Section';
 
 // Component
-class Recipient extends Component {
+export class Recipient extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.recipient;
@@ -30,7 +28,7 @@ class Recipient extends Component {
 
   // Handle Reset Form
   componentWillReceiveProps(nextProps) {
-    const { recipient } = nextProps;
+    const {recipient} = nextProps;
     if (
       _.isEmpty(recipient.new) &&
       _.isEmpty(recipient.select) &&
@@ -41,22 +39,19 @@ class Recipient extends Component {
           newRecipient: true,
           new: {},
           select: {},
-        })
+        }),
       );
     }
   }
 
   // Optimization
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.props !== nextProps ||
-      this.state !== nextState
-    );
+    return this.props !== nextProps || this.state !== nextState;
   }
 
   // Switch between New Recipient Form or Selection Form
   toggleForm() {
-    this.setState({ newRecipient: !this.state.newRecipient }, () => {
+    this.setState({newRecipient: !this.state.newRecipient}, () => {
       this.updateRecipientData(this.state);
     });
   }
@@ -65,16 +60,19 @@ class Recipient extends Component {
   updateRecipientForm(event) {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({
-      new: Object.assign({}, this.state.new, {[name]: value})
-    }, () => {
-      this.updateRecipientData(this.state);
-    });
+    this.setState(
+      {
+        new: Object.assign({}, this.state.new, {[name]: value}),
+      },
+      () => {
+        this.updateRecipientData(this.state);
+      },
+    );
   }
 
   // Handle Update Recipient Selection Form
   updateRecipientList(selectedContact) {
-    this.setState({ select: selectedContact }, () => {
+    this.setState({select: selectedContact}, () => {
       this.updateRecipientData(this.state);
     });
   }
@@ -87,8 +85,8 @@ class Recipient extends Component {
 
   // Render Form or Select Input
   renderComponent() {
-    const { contacts } = this.props;
-    if (contacts.length === 0 ) {
+    const {contacts} = this.props;
+    if (contacts.length === 0) {
       return (
         <RecipientForm
           formData={this.state.new}
@@ -98,14 +96,14 @@ class Recipient extends Component {
     }
 
     if (this.state.newRecipient) {
-      return(
+      return (
         <RecipientForm
           formData={this.state.new}
           updateRecipientForm={this.updateRecipientForm}
         />
       );
     } else {
-      return(
+      return (
         <RecipientsList
           contacts={this.props.contacts}
           selectedContact={this.state.select}
@@ -117,37 +115,37 @@ class Recipient extends Component {
 
   // Render
   render() {
-    const { contacts } = this.props;
+    const {contacts} = this.props;
     return (
       <Section>
         <label className="itemLabel">Client *</label>
-        { this.renderComponent() }
-        { contacts.length > 0
-          ? <div>
-              <div className="radio">
-                <label>
-                  <input
-                    type="radio"
-                    onChange={this.toggleForm}
-                    checked={this.state.newRecipient === true}
-                    value="new"
-                  />
-                  Add New
-                </label>
-              </div>
-              <div className="radio">
-                <label>
-                  <input
-                    type="radio"
-                    onChange={this.toggleForm}
-                    checked={this.state.newRecipient === false}
-                    value="select"
-                  />
-                  Select
-                </label>
-              </div>
+        {this.renderComponent()}
+        {contacts.length > 0 ? (
+          <div>
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  onChange={this.toggleForm}
+                  checked={this.state.newRecipient === true}
+                  value="new"
+                />
+                Add New
+              </label>
             </div>
-          : null}
+            <div className="radio">
+              <label>
+                <input
+                  type="radio"
+                  onChange={this.toggleForm}
+                  checked={this.state.newRecipient === false}
+                  value="select"
+                />
+                Select
+              </label>
+            </div>
+          </div>
+        ) : null}
       </Section>
     );
   }
@@ -167,7 +165,7 @@ Recipient.propTypes = {
 // Map state to props & Export
 const mapStateToProps = state => ({
   contacts: getContacts(state),
-  recipient: getRecipient(state)
+  recipient: getRecipient(state),
 });
 
 export default connect(mapStateToProps)(Recipient);

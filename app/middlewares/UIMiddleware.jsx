@@ -29,39 +29,34 @@ const UIMiddleware = ({ getState }) => next => action => {
         }
       }
       // Create a new ID for the notification
-      next(Object.assign({}, action, {
+      return next(Object.assign({}, action, {
         payload: Object.assign({}, action.payload, {
           id: uuidv4(),
         })
       }));
-      break;
     }
 
     // Others Actions
     case ACTION_TYPES.FORM_ITEM_ADD: {
       sounds.play('ADD');
-      next(action);
-      break;
+      return next(action);
     }
 
     case ACTION_TYPES.FORM_ITEM_REMOVE: {
       sounds.play('REMOVE');
-      next(action);
-      break;
+      return next(action);
     }
 
     case ACTION_TYPES.FORM_CLEAR: {
       if (!action.payload) {
         sounds.play('RELOAD');
       }
-      next(action);
-      break;
+      return next(action);
     }
 
     // Default
     default: {
-      next(action);
-      break;
+      return next(action);
     }
   }
 };

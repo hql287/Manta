@@ -4,60 +4,14 @@ import currencies from '../../libs/currencies.json';
 const appConfig = require('electron').remote.require('electron-settings');
 const ipc = require('electron').ipcRenderer;
 
-// PouchDB
-const PouchDB = require('pouchdb-browser');
-const db = new PouchDB('invoices');
-
 // Actions & Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 import * as UIActions from '../actions/ui';
 import * as FormActions from '../actions/form';
 
-// HELPER
-const getAllDocs = () =>
-  new Promise((resolve, reject) => {
-    db
-      .allDocs({
-        include_docs: true,
-        attachments: true,
-      })
-      .then(results => {
-        const resultsDocs = results.rows.map(row => row.doc);
-        resolve(resultsDocs);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
-
-// Calculate Subtotal
-const getSubtotal = data => {
-  // Set all subtotal
-  let subtotal = 0;
-  data.rows.forEach(row => {
-    subtotal += row.subtotal;
-  });
-  return subtotal;
-};
-
-// Calculate Grand Total
-const getGrandTotal = data => {
-  let grandTotal = getSubtotal(data);
-  // Apply Discount
-  if (data.discount) {
-    if (data.discount.type === 'percentage') {
-      grandTotal = grandTotal * (100 - data.discount.amount) / 100;
-    } else {
-      grandTotal = grandTotal - data.discount.amount;
-    }
-  }
-  // Apply VAT
-  if (data.vat) {
-    const vatValue = grandTotal * data.vat / 100;
-    grandTotal = grandTotal + vatValue;
-  }
-  return grandTotal;
-};
+// Helpers
+import { getSubtotal, getGrandTotal } from '../helpers/invoice';
+import { getAllDocs, saveDoc, deleteDoc } from '../helpers/pouchDB';
 
 const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
@@ -73,7 +27,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.INVOICE_GET_ALL: {
-      getAllDocs()
+      return getAllDocs('invoices')
         .then(allDocs => {
           next(Object.assign({}, action, {
             payload: allDocs,
@@ -88,11 +42,10 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             }
           });
         });
-      break;
     }
 
     case ACTION_TYPES.INVOICE_SAVE: {
-      const { invoiceData, withPreview } = action.payload;
+      const invoiceData = action.payload;
       // Set new document
       const doc = Object.assign({}, invoiceData, {
         _id: uuidv4(),
@@ -104,9 +57,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         grandTotal: getGrandTotal(invoiceData),
       });
       // Save doc to db
-      db
-        .put(doc)
-        .then(getAllDocs)
+      return saveDoc('invoices', doc)
         .then(newDocs => {
           next({
             type: ACTION_TYPES.INVOICE_SAVE,
@@ -116,11 +67,11 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Inovice Created Successfully'
+              message: 'Invoice Created Successfully'
             }
           });
           // Preview Window
-          withPreview && ipc.send('preview-invoice', doc);
+         ipc.send('preview-invoice', doc);
         })
         .catch(err => {
           next({
@@ -131,14 +82,10 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             }
           });
         });
-      break;
     }
 
     case ACTION_TYPES.INVOICE_DELETE: {
-      db
-        .get(action.payload)
-        .then(doc => db.remove(doc))
-        .then(getAllDocs)
+      return deleteDoc('invoices', action.payload)
         .then(remainingDocs => {
           next({
             type: ACTION_TYPES.INVOICE_DELETE,
@@ -161,12 +108,10 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             }
           });
         });
-      break;
     }
 
     default: {
-      next(action);
-      break;
+      return next(action);
     }
   }
 };

@@ -18,7 +18,7 @@ const FormMW = ({dispatch, getState}) => next => action => {
       if (!validateFormData(currentFormData)) return;
       // Save Invoice To DB
       const currentInvoiceData = getInvoiceData(currentFormData);
-      dispatch(InvoicesActions.saveInvoice(currentInvoiceData, action.payload));
+      dispatch(InvoicesActions.saveInvoice(currentInvoiceData));
       // Save Contact to DB if it's a new one
       if (currentFormData.recipient.newRecipient) {
         const newContactData = currentFormData.recipient.new;
@@ -30,15 +30,14 @@ const FormMW = ({dispatch, getState}) => next => action => {
     }
 
     case ACTION_TYPES.FORM_ITEM_ADD: {
-      next(Object.assign({}, action, {
+      return next(Object.assign({}, action, {
         payload: {id: uuidv4()}
       }));
-      break;
     }
 
     case ACTION_TYPES.FORM_CLEAR: {
       // Close Setting Panel
-      dispatch(FormActions.toggleFormSettings(false));
+      dispatch(FormActions.closeFormSettings());
       // Clear The Form
       next(action);
       // Create An item
@@ -47,8 +46,7 @@ const FormMW = ({dispatch, getState}) => next => action => {
     }
 
     default: {
-      next(action);
-      break;
+      return next(action);
     }
   }
 };

@@ -12,7 +12,7 @@ import {Section} from '../shared/Section';
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
-class Currency extends Component {
+export class Currency extends Component {
   constructor(props) {
     super(props);
     this.updateCurrency = this.updateCurrency.bind(this);

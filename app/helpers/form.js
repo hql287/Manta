@@ -224,4 +224,11 @@ function validateNote(note) {
 export {
   getInvoiceData,
   validateFormData,
+  validateRecipient,
+  validateRows,
+  validateDueDate,
+  validateCurrency,
+  validateDiscount,
+  validateVat,
+  validateNote,
 };

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly to the DOM matches snapshot 1`] = `
+<div
+  className="ItemRow__ItemDiv-diZoy eIVSNU"
+>
+  <div
+    className="flex3"
+  >
+    <input
+      className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
+      name="description"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Description"
+      type="text"
+      value="iPhone X"
+    />
+  </div>
+  <div
+    className="flex1"
+  >
+    <input
+      className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
+      name="price"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Price"
+      type="number"
+      value={999}
+    />
+  </div>
+  <div
+    className="flex1"
+  >
+    <input
+      className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
+      name="quantity"
+      onChange={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Quantity"
+      type="number"
+      value={1}
+    />
+  </div>
+  <div
+    className="ItemRow__ItemActions-boLUjZ hkMtNT"
+  >
+    <a
+      className="ItemRow__ItemRemoveBtn-iXUZiN dYNgej"
+      href="#"
+      onClick={[Function]}
+    >
+      <i
+        className="ion-close-circled"
+      />
+    </a>
+  </div>
+</div>
+`;

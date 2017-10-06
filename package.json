@@ -7,7 +7,7 @@
     "start": "electron .",
     "dev": "webpack-dev-server",
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "date-fns": "^1.28.5",
@@ -36,20 +36,24 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-styled-components": "^1.2.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
     "enzyme": "^3.0.0",
-    "enzyme-adapter-react-15": "^1.0.0",
+    "enzyme-adapter-react-16": "^1.0.1",
+    "eslint-plugin-jest": "^21.2.0",
     "faker": "^4.1.0",
     "jest": "^21.2.1",
     "jest-styled-components": "^4.6.0",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6",
+    "sinon": "^4.0.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.0"
   }

@@ -1,4 +1,4 @@
-import InvoicesReducer from '../InvoicesReducer';
+import InvoicesReducer, { getInvoices } from '../InvoicesReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
 import faker from 'faker';
 import uuidv4 from 'uuid/v4';
@@ -44,5 +44,16 @@ describe('Invoices Reducer', () => {
         payload: docs,
       })
     ).toEqual(docs);
+  });
+});
+
+// Test Selectors
+const state = {
+  invoices: initialState
+};
+
+describe('Invoices Selector', () => {
+  it('should return invoices list', () => {
+    expect(getInvoices(state)).toEqual(state.invoices);
   });
 });

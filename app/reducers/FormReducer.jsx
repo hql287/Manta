@@ -72,9 +72,14 @@ const FormReducer = handleActions(
       }),
 
     [ACTION_TYPES.FORM_SETTING_TOGGLE]: (state, action) => {
-      const newState = action.payload;
       return Object.assign({}, state, {
-        settingsOpen: newState !== true ? newState : !state.settingsOpen
+        settingsOpen: !state.settingsOpen
+      });
+    },
+
+    [ACTION_TYPES.FORM_SETTING_CLOSE]: (state, action) => {
+      return Object.assign({}, state, {
+        settingsOpen: false
       });
     },
 
@@ -89,6 +94,11 @@ export default FormReducer;
 const getFormState = state => state.form;
 
 // Selectors
+export const getCurrentInvoice = createSelector(
+  getFormState,
+  formState => formState
+);
+
 export const getRows = createSelector(
   getFormState,
   formState => formState.rows
