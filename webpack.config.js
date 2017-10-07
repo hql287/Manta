@@ -4,6 +4,11 @@ const webpack = require('webpack');
 module.exports = {
   target: 'electron-renderer',
   entry: {
+    'tourWindow': [
+      // activate HMR for React
+      'react-hot-loader/patch',
+      './tour/index.jsx',
+    ],
     'mainWindow': [
       // activate HMR for React
       'react-hot-loader/patch',
