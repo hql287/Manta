@@ -10,6 +10,7 @@ import { getCurrentSettings, getSavedSettings } from '../reducers/SettingsReduce
 
 // Actions
 import * as Actions from '../actions/settings';
+import {bindActionCreators} from 'redux';
 
 // Components
 import Info from '../components/settings/Info';
@@ -36,7 +37,6 @@ class Settings extends Component {
     super(props);
     this.state = { visibleTab: 1 };
     this.saveSettingsState = this.saveSettingsState.bind(this);
-    this.updateSettings = this.updateSettings.bind(this);
   }
 
   // Check if settings have been saved
@@ -47,14 +47,8 @@ class Settings extends Component {
 
   // Save Settings to App Config
   saveSettingsState() {
-    const {dispatch, settings} = this.props;
-    dispatch(Actions.saveSettings(settings.current));
-  }
-
-  // Update Setting
-  updateSettings(setting, data) {
-    const {dispatch} = this.props;
-    dispatch(Actions.updateSettings(setting, data));
+    const {currentSettings, boundActionCreators} = this.props;
+    boundActionCreators.saveSettings(currentSettings);
   }
 
   // Switch Tab
@@ -65,6 +59,7 @@ class Settings extends Component {
   // Render Main Content
   renderSettingsContent() {
     const {info, appSettings, printOptions} = this.props.currentSettings;
+    const {updateSettings} = this.props.boundActionCreators;
     return (
       <PageWrapper>
         <PageHeader>
@@ -101,15 +96,15 @@ class Settings extends Component {
             {this.state.visibleTab === 1 &&
               <Info
                 info={info}
-                updateSettings={this.updateSettings} />}
+                updateSettings={updateSettings} />}
             {this.state.visibleTab === 2 &&
               <PrintOptions
                 printOptions={printOptions}
-                updateSettings={this.updateSettings} />}
+                updateSettings={updateSettings} />}
             {this.state.visibleTab === 3 &&
               <AppSettings
                 appSettings={appSettings}
-                updateSettings={this.updateSettings} />}
+                updateSettings={updateSettings} />}
           </TabContent>
         </PageContent>
       </PageWrapper>
@@ -127,18 +122,26 @@ class Settings extends Component {
 
 // PropTypes Validation
 Settings.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  boundActionCreators: PropTypes.shape({
+    getInitalSettings: PropTypes.func.isRequired,
+    updateSettings: PropTypes.func.isRequired,
+    saveSettings: PropTypes.func.isRequired,
+  }).isRequired,
   currentSettings: PropTypes.object.isRequired,
   savedSettings: PropTypes.object.isRequired,
 };
 
-// Map State to Props & Export
+// Map State & Dispatch to Props & Export
+const mapDispatchToProps = dispatch => ({
+  boundActionCreators: bindActionCreators(Actions, dispatch),
+});
+
 const mapStateToProps = state => ({
   currentSettings: getCurrentSettings(state),
   savedSettings: getSavedSettings(state),
 });
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   _withFadeInAnimation
 )(Settings);
