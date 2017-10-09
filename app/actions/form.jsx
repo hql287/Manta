@@ -28,7 +28,10 @@ export const moveRow = createAction(
 // Form Actions
 export const clearForm = createAction(
   ACTION_TYPES.FORM_CLEAR,
-  (muted=false) => muted
+  (event, muted=false) => muted
+  // Since clearForm can be called via click event or from other action
+  // such as saveForm, the first argument will be resreved for event and
+  // the second one will be used to determined whether to play a sound or not
 );
 
 export const saveFormData = createAction(ACTION_TYPES.FORM_SAVE);

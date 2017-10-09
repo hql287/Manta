@@ -38,7 +38,7 @@ class Form extends Component {
   // Render The form
   render() {
     const {
-      clearForm,  // Works but need to refactor to handle passed click event
+      clearForm,
       toggleField,
       saveFormData,
       updateFieldData,
