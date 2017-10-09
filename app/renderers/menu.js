@@ -159,6 +159,13 @@ const menuTemplate = [
     role: 'help',
     submenu: [
       {
+        label: 'Show Tutorial',
+        accelerator: 'CmdOrCtrl+T',
+        click() {
+          ipc.send('start-tour');
+        },
+      },
+      {
         label: 'Learn More',
         click() {
           require('electron').shell.openExternal('https://www.paprless.co');
