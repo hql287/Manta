@@ -25,7 +25,7 @@ const FormMW = ({dispatch, getState}) => next => action => {
         dispatch(ContactsActions.saveContact(newContactData));
       }
       // Clear The Form
-      dispatch(FormActions.clearForm(true));
+      dispatch(FormActions.clearForm(null, true));
       break;
     }
 
