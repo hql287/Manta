@@ -6,6 +6,9 @@ const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
 const _ = require('lodash');
 
+// Helper
+import { formatNumber } from '../../helpers/number';
+
 // Custom Components
 import {TR, TD} from '../shared/Table';
 import Button from '../shared/Button';
@@ -57,7 +60,7 @@ class Invoice extends Component {
         <TD bold success>
           {invoice.currency.code}
           {'\u00A0'}
-          {invoice.grandTotal}
+          {formatNumber(invoice.grandTotal)}
         </TD>
         <TD actions>
           <Button link primary onClick={this.previewInvoice}>

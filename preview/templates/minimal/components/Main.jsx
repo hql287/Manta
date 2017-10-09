@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { formatNumber }  from '../../../../app/helpers/number';
+
 // Styles
 import styled from 'styled-components';
 
@@ -111,10 +113,10 @@ function Main({invoice, configs}) {
   const itemComponents = invoice.rows.map((row, index) =>
     <Item key={index}>
       <td>
-        { index + 1 }. {row.description} ({row.quantity})
+        { index + 1 }. {row.description} ({formatNumber(row.quantity)})
       </td>
       <td>
-        {currency} {row.subtotal}
+        {currency} {formatNumber(row.subtotal)}
       </td>
     </Item>
   );
@@ -139,7 +141,7 @@ function Main({invoice, configs}) {
           <td>
             {currency}
             {' '}
-            {invoice.subtotal}
+            {formatNumber(invoice.subtotal)}
           </td>
         </tr>
         { invoice.discount &&
@@ -148,7 +150,7 @@ function Main({invoice, configs}) {
             <td>
               {invoice.discount.type === 'flat' ? currency : '%'}
               {' '}
-              {invoice.discount.amount}
+              {formatNumber(invoice.discount.amount)}
             </td>
           </tr>
         }
@@ -163,7 +165,7 @@ function Main({invoice, configs}) {
           <td>
             {currency}
             {' '}
-            {invoice.grandTotal}
+            {formatNumber(invoice.grandTotal)}
           </td>
         </tr>
       </InvoiceSummary>
