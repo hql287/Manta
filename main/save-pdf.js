@@ -1,26 +1,24 @@
-// Node Libs
+// Libs
+const {BrowserWindow, ipcMain, shell} = require('electron');
+const appConfig = require('electron-settings');
+const path = require('path');
 const fs = require('fs');
 
-// Electron Libs
-const path = require('path');
-const electron = require('electron');
-const BrowserWindow = electron.BrowserWindow;
-const ipc = electron.ipcMain;
-const shell = electron.shell;
-
-// 3rd Party Libs
-const appConfig = require('electron-settings');
-
-ipc.on('save-pdf', (event, docId) => {
-  const exportDir = appConfig.get('printOptions.exportDir');
+ipcMain.on('save-pdf', (event, docId) => {
+  const exportDir = appConfig.get('appSettings.exportDir');
   const pdfPath = path.join(exportDir, `${docId}.pdf`);
   const win = BrowserWindow.fromWebContents(event.sender);
 
   let printOptions;
-  if (appConfig.has('printOptions')) {
-    printOptions = appConfig.get('printOptions');
+  if (appConfig.has('appSettings.printOptions')) {
+    printOptions = appConfig.get('appSettings.printOptions');
   } else {
-    printOptions = {};
+    printOptions = {
+      landscape: false,
+      marginsType: 0,
+      printBackground: true,
+      printSelectionOnly: false,
+    };
   }
 
   win.webContents.printToPDF(printOptions, (error, data) => {

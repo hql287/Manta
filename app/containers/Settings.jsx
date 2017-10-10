@@ -15,7 +15,6 @@ import {bindActionCreators} from 'redux';
 // Components
 import Info from '../components/settings/Info';
 import AppSettings from '../components/settings/AppSettings';
-import PrintOptions from '../components/settings/PrintOptions';
 import Button from '../components/shared/Button';
 import {
   Tab,
@@ -58,7 +57,7 @@ class Settings extends Component {
 
   // Render Main Content
   renderSettingsContent() {
-    const {info, appSettings, printOptions} = this.props.currentSettings;
+    const {info, appSettings} = this.props.currentSettings;
     const {updateSettings} = this.props.boundActionCreators;
     return (
       <PageWrapper>
@@ -83,12 +82,6 @@ class Settings extends Component {
               href="#"
               className={this.state.visibleTab === 2 ? 'active' : ''}
               onClick={() => this.changeTab(2)}>
-              Print Options
-            </Tab>
-            <Tab
-              href="#"
-              className={this.state.visibleTab === 3 ? 'active' : ''}
-              onClick={() => this.changeTab(3)}>
               App Settings
             </Tab>
           </Tabs>
@@ -98,10 +91,6 @@ class Settings extends Component {
                 info={info}
                 updateSettings={updateSettings} />}
             {this.state.visibleTab === 2 &&
-              <PrintOptions
-                printOptions={printOptions}
-                updateSettings={updateSettings} />}
-            {this.state.visibleTab === 3 &&
               <AppSettings
                 appSettings={appSettings}
                 updateSettings={updateSettings} />}
