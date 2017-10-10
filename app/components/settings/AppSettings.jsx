@@ -1,14 +1,12 @@
 // Libraries
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-// Node Libs
+const ipc = require('electron').ipcRenderer;
 import _ from 'lodash';
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
-
-// Animation
+const openDialog = require('../../renderers/dialog.js');
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
@@ -16,10 +14,32 @@ class AppSettings extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.selectExportDir = this.selectExportDir.bind(this);
   }
 
   componentWillMount() {
     this.setState(this.props.appSettings);
+  }
+
+  componentDidMount() {
+    ipc.on('no-access-directory', (event, message) => {
+      openDialog({
+        type: 'warning',
+        title: 'No Access Permisison',
+        message: `${message}. Please choose a different directory!`,
+      });
+    });
+
+    ipc.on('confirmed-export-directory', (event, path) => {
+      this.setState({exportDir: path}, () => {
+        this.props.updateSettings('appSettings', this.state);
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    ipc.removeAllListeners('no-access-directory');
+    ipc.removeAllListeners('confirmed-export-directory');
   }
 
   handleInputChange(event) {
@@ -29,6 +49,10 @@ class AppSettings extends Component {
     this.setState({[name]: value}, () => {
       this.props.updateSettings('appSettings', this.state);
     });
+  }
+
+  selectExportDir() {
+    ipc.send('select-export-directory');
   }
 
   render() {
@@ -46,6 +70,39 @@ class AppSettings extends Component {
 
     return (
       <div>
+        <div className="row">
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">Export Directory</label>
+            <div className="input-group">
+              <input
+                className="form-control"
+                name="exportDir"
+                type="text"
+                value={this.state.exportDir}
+                disabled
+              />
+              <a
+                href="#"
+                className="input-group-customized "
+                onClick={this.selectExportDir}>
+                <i className="ion-folder" />
+              </a>
+            </div>
+          </div>
+
+          <div className="pageItem col-md-6">
+            <label className="itemLabel">Template</label>
+            <select
+              name="template"
+              value={this.state.template}
+              onChange={this.handleInputChange}>
+              <option value="minimal">Minimal</option>
+              <option value="business">Business</option>
+              <option value="modern">Modern</option>
+            </select>
+          </div>
+        </div>
+
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
@@ -95,7 +152,7 @@ class AppSettings extends Component {
                   checked={this.state.muted}
                   onChange={this.handleInputChange}
                 />
-                <span className="slider round"></span>
+                <span className="slider round" />
               </label>
             </div>
           </div>
@@ -110,4 +167,4 @@ AppSettings.propTypes = {
   updateSettings: PropTypes.func.isRequired,
 };
 
-export default _withFadeInAnimation(AppSettings);;
+export default _withFadeInAnimation(AppSettings);

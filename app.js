@@ -22,17 +22,12 @@ function createTourWindow() {
   const tourWindowOptions = {
     width: 600,
     height: 600,
-    minWidth: 600,
-    minHeight: 600,
-    maxWidth: 600,
-    maxHeight: 600,
-    frame: false,
-    backgroundColor: '#F9FAFA',
     show: false,
+    frame: false,
+    resizable: false,
+    movable: false,
     title: 'Welcome Window',
-    webPreferences: {
-      nodeIntegrationInWorker: true,
-    },
+    backgroundColor: '#F9FAFA',
   };
 
   tourWindow = new BrowserWindow(tourWindowOptions);
@@ -48,10 +43,6 @@ function createTourWindow() {
   tourWindow.on('close', event => {
     event.preventDefault();
     tourWindow.hide();
-  });
-
-  tourWindow.webContents.on('did-finish-load', () => {
-    appConfig.set('tourWindowID', parseInt(tourWindow.id));
   });
 }
 
@@ -71,9 +62,6 @@ function createMainWindow() {
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Main Window',
-    webPreferences: {
-      nodeIntegrationInWorker: true,
-    },
   };
 
   mainWindow = new BrowserWindow(mainWindowOptions);
@@ -93,10 +81,6 @@ function createMainWindow() {
 
   ['resize', 'move', 'close'].forEach(event => {
     mainWindow.on(event, storeMainWindowState);
-  });
-
-  mainWindow.webContents.on('did-finish-load', () => {
-    appConfig.set('mainWindowID', parseInt(mainWindow.id));
   });
 }
 
@@ -118,9 +102,6 @@ function createPreviewWindow() {
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Preview Window',
-    webPreferences: {
-      nodeIntegrationInWorker: true,
-    },
   };
 
   previewWindow = new BrowserWindow(previewWindowOptions);
@@ -141,10 +122,6 @@ function createPreviewWindow() {
   ['resize', 'move', 'close'].forEach(event => {
     previewWindow.on(event, storePreviewWindowState);
   });
-
-  previewWindow.webContents.on('did-finish-load', () => {
-    appConfig.set('previewWindowID', parseInt(previewWindow.id));
-  });
 }
 
 // Add Devtool Extensions
@@ -155,6 +132,11 @@ function addDevToolsExtension() {
 
 // Set Initial Values
 function setInitialValues() {
+  // Register WindowsIDs with appConfigs
+  appConfig.set('tourWindowID', parseInt(tourWindow.id));
+  appConfig.set('mainWindowID', parseInt(mainWindow.id));
+  appConfig.set('previewWindowID', parseInt(previewWindow.id));
+
   // Tour
   if (!appConfig.has('tour')) {
     appConfig.set('tour', {
@@ -186,22 +168,12 @@ function setInitialValues() {
   // Default App Settings
   if (!appConfig.has('appSettings')) {
     appConfig.set('appSettings', {
+      exportDir: os.homedir(),
+      template: 'default',
       language: 'en',
       currency: 'USD',
       sound: 'default',
       muted: false,
-    });
-  }
-  // Default Print Options
-  if (!appConfig.has('printOptions')) {
-    appConfig.set('printOptions', {
-      exportDir: os.homedir(),
-      template: 'default',
-      marginsType: 2,
-      pageSize: 'A4',
-      printBackground: true,
-      printSelectionOnly: false,
-      landscape: false,
     });
   }
 }
@@ -226,10 +198,10 @@ function initialize() {
     createMainWindow();
     // Create Preview Window
     createPreviewWindow();
-    // Add Devtools Extenstion
-    addDevToolsExtension();
     // Set Initial Values
     setInitialValues();
+    // Add Devtools Extenstion
+    addDevToolsExtension();
     // Add Event Listener
     addEventListeners();
     // Load all main process files
