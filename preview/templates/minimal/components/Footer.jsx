@@ -11,6 +11,7 @@ const Wrapper = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
   ${ props => props.left && `
     align-items: flex-start;
   `}

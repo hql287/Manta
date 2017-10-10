@@ -14,12 +14,11 @@ require('dotenv').config();
 let tourWindow = null;
 let mainWindow = null;
 let previewWindow = null;
-let mainWindowState = {};
-let previewWindowState = {};
 
-// Create Welcome Window
+// Create Tour Window
 function createTourWindow() {
-  const tourWindowOptions = {
+  // Creating a New Window
+  tourWindow = new BrowserWindow({
     width: 600,
     height: 600,
     show: false,
@@ -28,10 +27,10 @@ function createTourWindow() {
     movable: false,
     title: 'Welcome Window',
     backgroundColor: '#F9FAFA',
-  };
-
-  tourWindow = new BrowserWindow(tourWindowOptions);
-
+  });
+  // Register WindowID with appConfig
+  appConfig.set('tourWindowID', parseInt(tourWindow.id));
+  // Load Content
   tourWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, './tour/index.html'),
@@ -39,33 +38,32 @@ function createTourWindow() {
       slashes: true,
     })
   );
-
-  tourWindow.on('close', event => {
-    event.preventDefault();
-    tourWindow.hide();
-  });
+  // Add Event Listeners
+  tourWindow.onbeforeunload = (e) => {
+    e.returnValue = false;
+  };
 }
 
 // Create Main Window
 function createMainWindow() {
-  if (appConfig.has('windowState.main')) {
-    mainWindowState = appConfig.get('windowState.main');
-  }
-  const mainWindowOptions = {
-    x: (mainWindowState.bounds && mainWindowState.bounds.x) || undefined,
-    y: (mainWindowState.bounds && mainWindowState.bounds.y) || undefined,
-    width: (mainWindowState.bounds && mainWindowState.bounds.width) || 1000,
-    height: (mainWindowState.bounds && mainWindowState.bounds.height) || 800,
+  // Get window state
+  const mainWindownStateKeeper = windowStateKeeper('main');
+  // Creating a new window
+  mainWindow = new BrowserWindow({
+    x: mainWindownStateKeeper.x,
+    y: mainWindownStateKeeper.y,
+    width: mainWindownStateKeeper.width,
+    height: mainWindownStateKeeper.height,
     minWidth: 800,
     minHeight: 600,
     titleBarStyle: 'hiddenInset',
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Main Window',
-  };
-
-  mainWindow = new BrowserWindow(mainWindowOptions);
-
+  });
+  // Register WindowID
+  appConfig.set('mainWindowID', parseInt(mainWindow.id));
+  // Load Content
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, './app/index.html'),
@@ -73,39 +71,35 @@ function createMainWindow() {
       slashes: true,
     })
   );
-
-  mainWindow.on('close', event => {
-    event.preventDefault();
-    mainWindow.hide();
-  });
-
-  ['resize', 'move', 'close'].forEach(event => {
-    mainWindow.on(event, storeMainWindowState);
-  });
+  // Add Event Listeners
+  // Prevent closing window
+  mainWindow.onbeforeunload = (e) => {
+    e.returnValue = false;
+  };
+  // Track window state
+  mainWindownStateKeeper.track(mainWindow);
 }
 
 // Create Preview Window
 function createPreviewWindow() {
-  if (appConfig.has('windowState.preview')) {
-    previewWindowState = appConfig.get('windowState.preview');
-  }
-  const previewWindowOptions = {
-    x: (previewWindowState.bounds && previewWindowState.bounds.x) || undefined,
-    y: (previewWindowState.bounds && previewWindowState.bounds.y) || undefined,
-    width:
-      (previewWindowState.bounds && previewWindowState.bounds.width) || 1000,
-    height:
-      (previewWindowState.bounds && previewWindowState.bounds.height) || 800,
+  // Get window state
+  const previewWindownStateKeeper = windowStateKeeper('preview');
+  // Create New Window
+  previewWindow = new BrowserWindow({
+    x: previewWindownStateKeeper.x,
+    y: previewWindownStateKeeper.y,
+    width: previewWindownStateKeeper.width,
+    height: previewWindownStateKeeper.height,
     minWidth: 1030,
     minHeight: 1000,
     titleBarStyle: 'hiddenInset',
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Preview Window',
-  };
-
-  previewWindow = new BrowserWindow(previewWindowOptions);
-
+  });
+  // Register WindowID
+  appConfig.set('previewWindowID', parseInt(previewWindow.id));
+  // Load Content
   previewWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, './preview/index.html'),
@@ -113,15 +107,13 @@ function createPreviewWindow() {
       slashes: true,
     })
   );
-
-  previewWindow.on('close', event => {
-    event.preventDefault();
-    previewWindow.hide();
-  });
-
-  ['resize', 'move', 'close'].forEach(event => {
-    previewWindow.on(event, storePreviewWindowState);
-  });
+  // Add Event Listener
+  // Prevent closing window
+  previewWindow.onbeforeunload = (e) => {
+    e.returnValue = false;
+  };
+  // Track window state
+  previewWindownStateKeeper.track(previewWindow);
 }
 
 // Add Devtool Extensions
@@ -132,11 +124,6 @@ function addDevToolsExtension() {
 
 // Set Initial Values
 function setInitialValues() {
-  // Register WindowsIDs with appConfigs
-  appConfig.set('tourWindowID', parseInt(tourWindow.id));
-  appConfig.set('mainWindowID', parseInt(mainWindow.id));
-  appConfig.set('previewWindowID', parseInt(previewWindow.id));
-
   // Tour
   if (!appConfig.has('tour')) {
     appConfig.set('tour', {
@@ -144,15 +131,13 @@ function setInitialValues() {
       hasBeenTaken: false,
     });
   }
-
-  // Windows last state
+  // Windows last visible state
   if (!appConfig.has('winsLastVisibleState')) {
     appConfig.set('winsLastVisibleState', {
       isMainWinVisible: true,
       isPreviewWinVisible: false
     });
   }
-
   // Default Info
   if (!appConfig.has('info')) {
     appConfig.set('info', {
@@ -182,8 +167,8 @@ function setInitialValues() {
 function addEventListeners() {
   ipcMain.on('quit-app', () => {
     tourWindow.destroy();
-    previewWindow.destroy();
     mainWindow.destroy();
+    previewWindow.destroy();
     app.quit();
   });
 }
@@ -227,22 +212,48 @@ function loadMainProcessFiles() {
   files.forEach(file => require(file));
 }
 
-// Save Main Window State
-function storeMainWindowState() {
-  // only update bounds if the window isn't currently maximized
-  if (!mainWindowState.isMaximized) {
-    mainWindowState.bounds = mainWindow.getBounds();
-  }
-  mainWindowState.isMaximized = mainWindow.isMaximized();
-  appConfig.set('windowState.mainWindow', mainWindowState);
-}
+// Windows State Keeper
+function windowStateKeeper(windowName) {
+  let window, windowState;
 
-// Save Prevew Window State
-function storePreviewWindowState() {
-  // only update bounds if the window isn't currently maximized
-  if (!previewWindowState.isMaximized) {
-    previewWindowState.bounds = previewWindow.getBounds();
+  function setBounds() {
+    // Restore from appConfig
+    if (appConfig.has(`windowState.${windowName}`)) {
+      windowState = appConfig.get(`windowState.${windowName}`);
+      return;
+    }
+    // Default
+    windowState = {
+      x: undefined,
+      y: undefined,
+      width: 1000,
+      height: 800,
+    };
   }
-  previewWindowState.isMaximized = previewWindow.isMaximized();
-  appConfig.set('windowState.previewWindow', previewWindowState);
+
+  function saveState() {
+    if (!windowState.isMaximized) {
+      windowState = window.getBounds();
+    }
+    windowState.isMaximized = window.isMaximized();
+    appConfig.set(`windowState.${windowName}`, windowState);
+  }
+
+  function track(win) {
+    window = win;
+    ['resize', 'move'].forEach(event => {
+      win.on(event, saveState);
+    });
+  }
+
+  setBounds();
+
+  return({
+    x: windowState.x,
+    y: windowState.y,
+    width: windowState.width,
+    height: windowState.height,
+    isMaximized: windowState.isMaximized,
+    track,
+  });
 }
