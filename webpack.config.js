@@ -39,7 +39,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
   },
   // Use source map for easier debugging
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   // Use babel to transpile jsx
   module: {
     rules: [

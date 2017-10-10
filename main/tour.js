@@ -73,7 +73,7 @@ function showWindow(context) {
 }
 
 function restoreWindows() {
-  const {isMainWinVisible, isPreviewWinVisible} = appConfig.get('windowsLastState');
+  const {isMainWinVisible, isPreviewWinVisible} = appConfig.get('winsLastVisibleState');
   if (!isMainWinVisible  && !isPreviewWinVisible) {
     mainWindow.show();
     mainWindow.focus();
@@ -90,7 +90,7 @@ function hideAllWindows() {
 }
 
 function saveWinsVisibleState() {
-  appConfig.set('windowsLastState', {
+  appConfig.set('winsLastVisibleState', {
     isMainWinVisible: mainWindow.isVisible(),
     isPreviewWinVisible: previewWindow.isVisible(),
   });

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron .",
     "dev": "webpack-dev-server",
+    "build": "webpack -p",
     "test": "jest",
     "test:watch": "jest --watch"
   },

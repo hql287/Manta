@@ -27,8 +27,8 @@ const Invoice = styled.div`
     font-weight: 300;
     font-size: 0.8em;
     color: #71717A;
-    margin-bottom: 0;
-    margin-top: .5em;
+    margin: 0;
+    line-height: 1.75;
   }
 `;
 
