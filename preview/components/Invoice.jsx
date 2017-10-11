@@ -23,6 +23,7 @@ const Page = styled.div`
 
 // Templates
 import Minimal from '../templates/minimal';
+import Business from '../templates/business';
 
 // Component
 class Invoice extends Component {
@@ -38,6 +39,9 @@ class Invoice extends Component {
       configs,
     };
     switch (template) {
+      case 'business': {
+        return <Business {...props} />;
+      }
       default: {
         return <Minimal {...props} />;
       }
