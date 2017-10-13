@@ -39,9 +39,10 @@ function createTourWindow() {
     })
   );
   // Add Event Listeners
-  tourWindow.onbeforeunload = (e) => {
-    e.returnValue = false;
-  };
+  tourWindow.on('close', event => {
+    event.preventDefault();
+    tourWindow.hide();
+  });
 }
 
 // Create Main Window
@@ -63,6 +64,8 @@ function createMainWindow() {
   });
   // Register WindowID
   appConfig.set('mainWindowID', parseInt(mainWindow.id));
+  // Track window state
+  mainWindownStateKeeper.track(mainWindow);
   // Load Content
   mainWindow.loadURL(
     url.format({
@@ -72,12 +75,10 @@ function createMainWindow() {
     })
   );
   // Add Event Listeners
-  // Prevent closing window
-  mainWindow.onbeforeunload = (e) => {
-    e.returnValue = false;
-  };
-  // Track window state
-  mainWindownStateKeeper.track(mainWindow);
+  mainWindow.on('close', event => {
+    event.preventDefault();
+    mainWindow.hide();
+  });
 }
 
 // Create Preview Window
@@ -99,6 +100,8 @@ function createPreviewWindow() {
   });
   // Register WindowID
   appConfig.set('previewWindowID', parseInt(previewWindow.id));
+  // Track window state
+  previewWindownStateKeeper.track(previewWindow);
   // Load Content
   previewWindow.loadURL(
     url.format({
@@ -108,12 +111,10 @@ function createPreviewWindow() {
     })
   );
   // Add Event Listener
-  // Prevent closing window
-  previewWindow.onbeforeunload = (e) => {
-    e.returnValue = false;
-  };
-  // Track window state
-  previewWindownStateKeeper.track(previewWindow);
+  previewWindow.on('close', event => {
+    event.preventDefault();
+    previewWindow.hide();
+  });
 }
 
 // Add Devtool Extensions

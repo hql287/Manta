@@ -19,6 +19,7 @@ const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1;
 `;
 
 const Company = styled.div`margin-bottom: 1.66667em;`;
@@ -26,6 +27,7 @@ const Company = styled.div`margin-bottom: 1.66667em;`;
 const Recipient = styled.div``;
 
 const RightColumn = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

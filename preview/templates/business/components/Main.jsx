@@ -1,6 +1,7 @@
 // React Libraries
 import React from 'react';
 import PropTypes from 'prop-types';
+import { padStart } from 'lodash';
 
 import {formatNumber} from '../../../../app/helpers/number';
 
@@ -103,7 +104,9 @@ function Main({invoice, configs}) {
     : invoice.currency.code;
   const itemComponents = invoice.rows.map((row, index) => (
     <tr key={index}>
-      <td className="w5">{index + 1}.</td>
+      <td className="w5">
+        {padStart(index + 1, 2, 0)}.
+      </td>
       <td>{row.description}</td>
       <td className="w15">
         {currency} {formatNumber(row.price)}
