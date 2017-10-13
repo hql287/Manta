@@ -22,8 +22,8 @@ const Page = styled.div`
 `;
 
 // Templates
-import Minimal from '../templates/minimal';
-import Business from '../templates/business';
+import Minimal from '../../templates/minimal';
+import Business from '../../templates/business';
 
 // Component
 class Invoice extends Component {
@@ -32,13 +32,13 @@ class Invoice extends Component {
   }
 
   renderTemplate() {
-    const {invoice, template, configs} = this.props;
+    const {invoice, configs} = this.props;
     const props = {
       company: appConfig.get('info'),
       invoice,
       configs,
     };
-    switch (template) {
+    switch (configs.template) {
       case 'business': {
         return <Business {...props} />;
       }
@@ -60,7 +60,6 @@ class Invoice extends Component {
 Invoice.propTypes = {
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
-  template: PropTypes.string.isRequired,
 };
 
 export default Invoice;

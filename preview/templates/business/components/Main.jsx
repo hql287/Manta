@@ -10,9 +10,7 @@ import styled from 'styled-components';
 const InvoiceContent = styled.div`
   flex: 1;
   display: flex;
-  ${props =>
-    props.alignItems &&
-    `
+  ${props => props.alignItems && `
     align-items: ${props.alignItems};
   `} margin-top: 3em;
   margin-bottom: 3em;
@@ -25,18 +23,8 @@ const Table = styled.table`
     border-bottom: 4px solid #efefd1;
     padding-bottom: 0.8em;
   }
-  ${props => props.color && `
-    th {
-      border-bottom:
-        4px
-        solid
-        rgba(
-          ${props.color.r},
-          ${props.color.g},
-          ${props.color.b},
-          ${props.color.a}
-        );
-    }
+  ${props => props.accentColor.useCustom && `
+    th { border-bottom: 4px solid ${props.accentColor.color};}
   `};
   td {
     color: #2c323a;
@@ -69,17 +57,9 @@ const InvoiceTotal = styled.tr`
     }
   }
 
-  ${props => props.color && `
+  ${props => props.accentColor.useCustom && `
     td {
-      border-top:
-        4px
-        solid
-        rgba(
-          ${props.color.r},
-          ${props.color.g},
-          ${props.color.b},
-          ${props.color.a}
-        );
+      border-top: 4px solid ${props.accentColor.color};
     }
   `};
 `;
@@ -136,7 +116,7 @@ function Main({invoice, configs}) {
 
   return (
     <InvoiceContent alignItems={setAlignItems(configs)}>
-      <Table color={configs.accentColor}>
+      <Table accentColor={configs.accentColor}>
         <thead>
           <tr>
             <th className="w5">No</th>
@@ -148,6 +128,7 @@ function Main({invoice, configs}) {
         </thead>
 
         <tbody>{itemComponents}</tbody>
+
         <tfoot>
           <tr className="invoice__subtotal">
             <td colSpan="2" />
@@ -182,7 +163,7 @@ function Main({invoice, configs}) {
             </InvoiceVat>
           )}
 
-          <InvoiceTotal color={configs.accentColor}>
+          <InvoiceTotal accentColor={configs.accentColor}>
             <td colSpan="2" />
             <td className="label">Total</td>
             <td colSpan="2">

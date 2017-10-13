@@ -18,22 +18,17 @@ const Heading = styled.h1`
   font-weight: 400;
   margin-bottom: 1em;
   color: #2c323a;
-  ${props => props.color && `
-    color: rgba(
-      ${props.color.r},
-      ${props.color.g},
-      ${props.color.b},
-      ${props.color.a}
-    );
-  `}
+  ${props => props.accentColor.useCustom && `
+    color: ${props.accentColor.color};
+  `};
 `;
 
 // Component
-function Header({invoice, company, configs})  {
+function Header({invoice, company, configs}) {
   return (
     <Wrapper>
       <div>
-        <Heading color={configs.accentColor}>Invoice</Heading>
+        <Heading accentColor={configs.accentColor}>Invoice</Heading>
         <h4 className="label">
           #
           {_.truncate(invoice._id, {
@@ -41,26 +36,25 @@ function Header({invoice, company, configs})  {
             omission: '',
           })}
         </h4>
-        <p>
-          Created {format(invoice.created_at, 'DD/MM/YYYY')}
-        </p>
+        <p>Created {format(invoice.created_at, 'DD/MM/YYYY')}</p>
 
-        {invoice.dueDate &&
-          <p>
-            Due {moment(invoice.dueDate).format('DD/MM/YYYY')}
-          </p>}
+        {invoice.dueDate && (
+          <p>Due {moment(invoice.dueDate).format('DD/MM/YYYY')}</p>
+        )}
       </div>
-      { configs.showLogo &&
+      {configs.showLogo && (
         <div>
-          <img src={company.logo} alt="Logo"/>
+          <img src={company.logo} alt="Logo" />
         </div>
-      }
+      )}
     </Wrapper>
   );
 }
 
 Header.propTypes = {
   invoice: PropTypes.object.isRequired,
+  company: PropTypes.object.isRequired,
+  configs: PropTypes.object.isRequired,
 };
 
 export default Header;

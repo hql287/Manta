@@ -9,27 +9,15 @@ const InvoiceFooter = styled.div`
     padding-bottom: 0.83333em;
     border-bottom: 4px solid #efefd1;
   }
-  ${props =>
-    props.color &&
-    `
-    h4 {
-      border-bottom:
-        4px
-        solid
-        rgba(
-          ${props.color.r},
-          ${props.color.g},
-          ${props.color.b},
-          ${props.color.a}
-        );
-    }
+  ${props => props.accentColor.useCustom && `
+    h4 { border-bottom: 4px solid ${props.accentColor.color}; }
   `};
 `;
 
 // Component
 function Footer({invoice, configs}) {
   return invoice.note ? (
-    <InvoiceFooter color={configs.accentColor}>
+    <InvoiceFooter accentColor={configs.accentColor}>
       <h4>Notice</h4>
       <p>{invoice.note}</p>
     </InvoiceFooter>

@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
 import PropTypes from 'prop-types';
-import ColorPicker from '../components/ColorPicker';
+import ColorPicker from './_ColorPicker';
 
 // Styling
 import styled from 'styled-components';

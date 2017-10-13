@@ -5,36 +5,40 @@ import {connect} from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
 // Actions
-import * as SettingsActions from '../actions/settings';
+import * as ActionsCreator from '../actions';
 
 // Selector
-import { getInvoice } from '../reducers/InvoiceReducer';
-import { getTemplate, getConfigs } from '../reducers/SettingsReducer';
+import { getConfigs, getInvoice } from '../reducers';
 
 import styled from 'styled-components';
 const Wrapper = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;
   background: #F9FAFA;
   border-right: 1px solid rgba(0,0,0,.1);
-  min-width: 180px;
   width: 180px;
+  min-width: 180px;
   max-width: 180px;
-  padding: 60px 20px 20px 20px;
-  justify-content: space-between;
+  padding: 20px;
+  justify-content: flex-start;
+  > div:last-child {
+    flex: 1
+  }
 `;
 
 // Components
-import TemplateSwitcher from '../components/TemplateSwitcher';
-import TemplateConfigs from '../components/TemplateConfigs';
-import Actions from '../components/Actions';
+import Template from '../components/sidebar/Template';
+import Alignment from '../components/sidebar/Alignment';
+import FontSize from '../components/sidebar/FontSize';
+import Toggler from '../components/sidebar/Toggler';
+import AccentColor from '../components/sidebar/AccentColor';
+import Actions from '../components/sidebar/Actions';
 
 class SideBar extends Component {
   constructor(props) {
     super(props);
     this.savePDF = this.savePDF.bind(this);
-    this.changeTemplate = this.changeTemplate.bind(this);
     this.updateConfigs = this.updateConfigs.bind(this);
     this.updateAccentColor = this.updateAccentColor.bind(this);
   }
@@ -43,22 +47,17 @@ class SideBar extends Component {
     return this.props !== nextProps;
   }
 
-  changeTemplate(event) {
-    const { dispatch } = this.props;
-    dispatch(SettingsActions.changeTemplate(event.target.value));
-  }
-
   updateConfigs(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     const { dispatch } = this.props;
-    dispatch(SettingsActions.updateConfigs({ name, value }));
+    dispatch(ActionsCreator.updateConfigs({ name, value }));
   }
 
   updateAccentColor(color) {
     const { dispatch } = this.props;
-    dispatch(SettingsActions.updateConfigs({ name: 'accentColor', value: color }));
+    dispatch(ActionsCreator.updateConfigs({ name: 'accentColor', value: color }));
   }
 
   savePDF() {
@@ -70,14 +69,21 @@ class SideBar extends Component {
     const { template, configs } = this.props;
     return (
       <Wrapper>
-        <TemplateSwitcher
-          template={template}
-          changeTemplate={this.changeTemplate}/>
-        <TemplateConfigs
+        <Template
           configs={configs}
-          updateConfigs={this.updateConfigs}
-          updateAccentColor={this.updateAccentColor}
-          />
+          updateConfigs={this.updateConfigs}/>
+        <Alignment
+          configs={configs}
+          updateConfigs={this.updateConfigs}/>
+        <FontSize
+          configs={configs}
+          updateConfigs={this.updateConfigs}/>
+        <Toggler
+          configs={configs}
+          updateConfigs={this.updateConfigs}/>
+        <AccentColor
+          configs={configs}
+          updateAccentColor={this.updateAccentColor}/>
         <Actions savePDF={this.savePDF}/>
       </Wrapper>
     );
@@ -85,15 +91,13 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
+  configs: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
-  template: PropTypes.string.isRequired,
-  configs: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   invoice: getInvoice(state),
-  template: getTemplate(state),
   configs: getConfigs(state),
 });
 
