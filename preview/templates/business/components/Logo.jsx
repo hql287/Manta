@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const InvoiceLogo = styled.div`
   flex: 1;
-  max-height: 8em;
+  max-height: 6em;
   img {
     width: auto;
     max-height: 4em;

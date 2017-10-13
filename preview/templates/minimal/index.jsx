@@ -9,7 +9,7 @@ const Invoice = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding: 100px 140px;
+  padding: 80px 120px;
   ${ props => props.baseFontSize && `
     font-size: ${props.baseFontSize};
   `}
@@ -32,34 +32,18 @@ const Invoice = styled.div`
   }
 `;
 
+// Helper
+import { setBaseFontSize } from '../../helper';
+
 // Child Components
 import Header from './components/Header.jsx';
 import Main from './components/Main.jsx';
 import Footer from './components/Footer.jsx';
 
-function setBaseFontSize(configs) {
-  let size;
-  switch(configs.fontSize) {
-    case '300': {
-      size = '1.05em';
-      break;
-    }
-    case '200': {
-      size = '.95em';
-      break;
-    }
-    default: {
-      size = '.875em';
-      break;
-    }
-  }
-  return size;
-}
-
 // Component
 function Minimal(props) {
   return (
-    <Invoice baseFontSize={setBaseFontSize(props.configs)}>
+    <Invoice baseFontSize={setBaseFontSize(props.configs.fontSize)}>
       <Header {...props} />
       <Main {...props} />
       <Footer {...props} />

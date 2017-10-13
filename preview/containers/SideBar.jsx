@@ -39,25 +39,29 @@ class SideBar extends Component {
   constructor(props) {
     super(props);
     this.savePDF = this.savePDF.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleAccentColorChange = this.handleAccentColorChange.bind(this);
     this.updateConfigs = this.updateConfigs.bind(this);
-    this.updateAccentColor = this.updateAccentColor.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
     return this.props !== nextProps;
   }
 
-  updateConfigs(event) {
+  handleInputChange(event) {
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    const { dispatch } = this.props;
-    dispatch(ActionsCreator.updateConfigs({ name, value }));
+    const value  = target.type === 'checkbox' ? target.checked : target.value;
+    const name   = target.name;
+    this.updateConfigs({ name, value });
   }
 
-  updateAccentColor(color) {
+  handleAccentColorChange(color) {
+    this.updateConfigs({ name: 'accentColor', value: color });
+  }
+
+  updateConfigs(config) {
     const { dispatch } = this.props;
-    dispatch(ActionsCreator.updateConfigs({ name: 'accentColor', value: color }));
+    dispatch(ActionsCreator.updateConfigs({ name: config.name, value: config.value }));
   }
 
   savePDF() {
@@ -66,24 +70,25 @@ class SideBar extends Component {
   }
 
   render() {
-    const { template, configs } = this.props;
+    const { configs } = this.props;
+    const { template, alignItems, fontSize, accentColor} = configs;
     return (
       <Wrapper>
         <Template
-          configs={configs}
-          updateConfigs={this.updateConfigs}/>
+          template={template}
+          handleInputChange={this.handleInputChange}/>
         <Alignment
-          configs={configs}
-          updateConfigs={this.updateConfigs}/>
+          alignItems={alignItems}
+          handleInputChange={this.handleInputChange}/>
         <FontSize
-          configs={configs}
-          updateConfigs={this.updateConfigs}/>
+          fontSize={fontSize}
+          handleInputChange={this.handleInputChange}/>
         <Toggler
           configs={configs}
-          updateConfigs={this.updateConfigs}/>
+          handleInputChange={this.handleInputChange}/>
         <AccentColor
-          configs={configs}
-          updateAccentColor={this.updateAccentColor}/>
+          accentColor={accentColor}
+          handleAccentColorChange={this.handleAccentColorChange}/>
         <Actions savePDF={this.savePDF}/>
       </Wrapper>
     );

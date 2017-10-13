@@ -51,8 +51,8 @@ class AccentColor extends Component {
     super(props);
     this.state = {
       showPicker: false,
-      useCustom: props.configs.accentColor.useCustom,
-      color: props.configs.accentColor.color,
+      useCustom: props.accentColor.useCustom,
+      color: props.accentColor.color,
     };
     this.handleClick       = this.handleClick.bind(this);
     this.handleClose       = this.handleClose.bind(this);
@@ -85,8 +85,7 @@ class AccentColor extends Component {
   }
 
   dispatchChange() {
-    const { updateAccentColor } = this.props;
-    updateAccentColor({
+    this.props.handleAccentColorChange({
       color: this.state.color,
       useCustom: this.state.useCustom,
     });
@@ -137,8 +136,8 @@ class AccentColor extends Component {
 }
 
 AccentColor.propTypes = {
-  configs: PropTypes.object.isRequired,
-  updateAccentColor: PropTypes.func.isRequired,
+  accentColor: PropTypes.object.isRequired,
+  handleAccentColorChange: PropTypes.func.isRequired,
 };
 
 export default AccentColor;

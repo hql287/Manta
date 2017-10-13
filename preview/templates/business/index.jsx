@@ -2,6 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// Helper
+import { setBaseFontSize } from '../../helper';
+
 // Styles
 import styled from 'styled-components';
 const Invoice = styled.div`
@@ -43,29 +46,10 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 
-function setBaseFontSize(configs) {
-  let size;
-  switch (configs.fontSize) {
-    case '300': {
-      size = '1.05em';
-      break;
-    }
-    case '200': {
-      size = '.95em';
-      break;
-    }
-    default: {
-      size = '.875em';
-      break;
-    }
-  }
-  return size;
-}
-
 // Component
 function Business(props) {
   return (
-    <Invoice baseFontSize={setBaseFontSize(props.configs)}>
+    <Invoice baseFontSize={setBaseFontSize(props.configs.fontSize)}>
       <Logo {...props} />
       <Header {...props} />
       <Main {...props} />
