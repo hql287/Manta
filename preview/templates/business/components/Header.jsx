@@ -45,13 +45,8 @@ const Heading = styled.h1`
   color: #2c323a;
   text-transform: uppercase;
   letter-spacing: 1px;
-  ${props => props.color && `
-    color: rgba(
-      ${props.color.r},
-      ${props.color.g},
-      ${props.color.b},
-      ${props.color.a}
-    );
+  ${props => props.accentColor.useCustom && `
+    color: ${props.accentColor.color};
   `};
 `;
 
@@ -79,7 +74,7 @@ function Header({invoice, company, configs}) {
         )}
       </LeftColumn>
       <RightColumn>
-        <Heading color={configs.accentColor}>Invoice</Heading>
+        <Heading accentColor={configs.accentColor}>Invoice</Heading>
         <h4>
           #
           {_.truncate(invoice._id, {

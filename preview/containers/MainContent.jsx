@@ -5,11 +5,10 @@ import {connect} from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
 // Actions
-import * as InvoiceActions from '../actions/invoice';
+import * as ActionsCreator from '../actions';
 
 // Selectors
-import {getInvoice} from '../reducers/InvoiceReducer';
-import {getTemplate, getConfigs} from '../reducers/SettingsReducer';
+import { getConfigs, getInvoice } from '../reducers';
 
 // Styles
 import styled from 'styled-components';
@@ -34,13 +33,13 @@ const Message = styled.p`
 `;
 
 // Components
-import Invoice from '../components/Invoice';
+import Invoice from '../components/main/Invoice';
 
 class MainContent extends Component {
   componentDidMount() {
     ipc.on('update-preview', (event, invoiceData) => {
       const {dispatch} = this.props;
-      dispatch(InvoiceActions.updateInvoice(invoiceData));
+      dispatch(ActionsCreator.updateInvoice(invoiceData));
     });
   }
 
@@ -53,34 +52,30 @@ class MainContent extends Component {
   }
 
   render() {
-    const {invoice, template, configs} = this.props;
+    const {invoice, configs} = this.props;
     return (
       <Wrapper>
-        {invoice._id
-          ? <div className="print-area">
-              <Invoice
-                configs={configs}
-                invoice={invoice}
-                template={template}
-              />
-            </div>
-          : <Message>Choose An Invoice To Preview</Message>}
+        {invoice._id ? (
+          <div className="print-area">
+            <Invoice configs={configs} invoice={invoice} />
+          </div>
+        ) : (
+          <Message>Choose An Invoice To Preview</Message>
+        )}
       </Wrapper>
     );
   }
 }
 
 MainContent.propTypes = {
+  configs: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
-  template: PropTypes.string.isRequired,
-  configs: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  invoice: getInvoice(state),
-  template: getTemplate(state),
   configs: getConfigs(state),
+  invoice: getInvoice(state),
 });
 
 export default connect(mapStateToProps)(MainContent);

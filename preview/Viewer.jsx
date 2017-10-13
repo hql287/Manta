@@ -1,6 +1,5 @@
 // Libs
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // Style
 import styled from 'styled-components';
@@ -22,10 +21,5 @@ function Viewer() {
     </Wrapper>
   );
 }
-
-Viewer.propTypes = {
-  // dispatch: PropTypes.func.isRequired,
-  // invoice: PropTypes.object.isRequired,
-};
 
 export default Viewer;
