@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { padStart } from 'lodash';
 import { formatNumber }  from '../../../../app/helpers/number';
 
 // Styles
@@ -113,7 +114,7 @@ function Main({invoice, configs}) {
   const itemComponents = invoice.rows.map((row, index) =>
     <Item key={index}>
       <td>
-        { index + 1 }. {row.description} ({formatNumber(row.quantity)})
+        { padStart(index+1, 2, 0) }. {row.description} ({formatNumber(row.quantity)})
       </td>
       <td>
         {currency} {formatNumber(row.subtotal)}
