@@ -5,15 +5,14 @@ import PropTypes from 'prop-types';
 // Styling
 import {Section, Label} from '../shared';
 
-function Template({configs, updateConfigs}) {
-  const { template } = configs;
+function Template({template, handleInputChange}) {
   return (
     <Section>
       <Label>Template</Label>
       <select
         name="template"
         value={template}
-        onChange={updateConfigs}>
+        onChange={handleInputChange}>
         <option value="minimal">Minimal</option>
         <option value="business">Business</option>
         <option value="modern">Modern</option>
@@ -23,8 +22,8 @@ function Template({configs, updateConfigs}) {
 }
 
 Template.propTypes = {
-  configs: PropTypes.object.isRequired,
-  updateConfigs: PropTypes.func.isRequired,
+  template: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
 };
 
 export default Template;

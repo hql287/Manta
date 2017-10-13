@@ -10,10 +10,11 @@ import styled from 'styled-components';
 const InvoiceContent = styled.div`
   flex: 1;
   display: flex;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
   ${props => props.alignItems && `
     align-items: ${props.alignItems};
-  `} margin-top: 3em;
-  margin-bottom: 3em;
+  `}
 `;
 
 const Table = styled.table`
@@ -126,9 +127,7 @@ function Main({invoice, configs}) {
             <th className="w15">Subtotal</th>
           </tr>
         </thead>
-
         <tbody>{itemComponents}</tbody>
-
         <tfoot>
           <tr className="invoice__subtotal">
             <td colSpan="2" />

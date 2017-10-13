@@ -3,14 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Section, Label} from '../shared';
 
-function Alignment({configs, updateConfigs}) {
+function Alignment({alignItems, handleInputChange}) {
   return (
     <Section>
       <Label>Align Items</Label>
       <select
         name="alignItems"
-        value={configs.alignItems}
-        onChange={updateConfigs}>
+        value={alignItems}
+        onChange={handleInputChange}>
         <option value="top">Top</option>
         <option value="middle">Middle</option>
         <option value="bottom">Bottom</option>
@@ -20,8 +20,8 @@ function Alignment({configs, updateConfigs}) {
 }
 
 Alignment.propTypes = {
-  configs: PropTypes.object.isRequired,
-  updateConfigs: PropTypes.func.isRequired,
+  alignItems: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
 };
 
 export default Alignment;

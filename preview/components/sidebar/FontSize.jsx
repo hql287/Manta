@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Section, Label, Range} from '../shared';
 
-function FontSize({configs, updateConfigs}) {
+function FontSize({fontSize, handleInputChange}) {
   return (
     <Section>
       <Label>Font Size</Label>
@@ -11,18 +11,18 @@ function FontSize({configs, updateConfigs}) {
         name="fontSize"
         type="range"
         min="100"
-        max="300"
+        max="500"
         step="100"
-        value={configs.fontSize}
-        onChange={updateConfigs}
+        value={fontSize}
+        onChange={handleInputChange}
       />
     </Section>
   );
 }
 
 FontSize.propTypes = {
-  configs: PropTypes.object.isRequired,
-  updateConfigs: PropTypes.func.isRequired,
+  fontSize: PropTypes.string.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
 };
 
 export default FontSize;
