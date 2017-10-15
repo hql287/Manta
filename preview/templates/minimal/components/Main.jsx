@@ -39,7 +39,7 @@ const ItemsHeader = styled.tr`
 const ItemsList = styled.tbody`
   margin: 1.5em -2.5em;
   padding: 1em 2.5em;
-  font-family: 'Source Serif Pro', serif;
+  font-family: 'Lora', serif;
   font-size: .95em;
   color: #000000;
   background: #F9FAFA;
