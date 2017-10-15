@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-family: 'Source Serif Pro', serif;
+  font-family: 'Lora', serif;
   font-size: 2.1em;
   font-weight: 400;
   margin-bottom: 1em;
@@ -37,7 +37,6 @@ function Header({invoice, company, configs}) {
           })}
         </h4>
         <p>Created {format(invoice.created_at, 'DD/MM/YYYY')}</p>
-
         {invoice.dueDate && (
           <p>Due {moment(invoice.dueDate).format('DD/MM/YYYY')}</p>
         )}
