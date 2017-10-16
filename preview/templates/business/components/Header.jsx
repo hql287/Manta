@@ -1,9 +1,9 @@
 // React Libraries
 import React from 'react';
 import PropTypes from 'prop-types';
+import { truncate } from 'lodash';
 const format = require('date-fns/format');
 const moment = require('moment');
-const _ = require('lodash');
 
 // Styles
 import styled from 'styled-components';
@@ -79,7 +79,7 @@ function Header({invoice, company, configs}) {
         <Heading accentColor={configs.accentColor}>Invoice</Heading>
         <h4>
           #
-          {_.truncate(invoice._id, {
+          {truncate(invoice._id, {
             length: 8,
             omission: '',
           })}

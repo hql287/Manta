@@ -1,72 +1,105 @@
-const path = require('path');
+const path    = require('path');
 const webpack = require('webpack');
+const merge   = require('webpack-merge');
+const parts   = require('./webpack.parts');
+const nodeExternals = require('webpack-node-externals');
+const PATHS = {
+  build: path.resolve(__dirname, 'build'),
+};
 
-module.exports = {
-  target: 'electron-renderer',
-  entry: {
-    'tourWindow': [
-      // activate HMR for React
-      'react-hot-loader/patch',
-      './tour/index.jsx',
-    ],
-    'mainWindow': [
-      // activate HMR for React
-      'react-hot-loader/patch',
-      './app/renderer.js',
-      './app/renderers/dialog.js',
-      './app/renderers/dragNdrop.js',
-      './app/renderers/menu.js',
-      './app/index.jsx'
-    ],
-    'previewWindow': [
-      // activate HMR for React
-      'react-hot-loader/patch',
-      './preview/index.jsx'
-    ],
-    'modalWindow': [
-      // activate HMR for React
-      'react-hot-loader/patch',
-      './modal/modal_index.js'
-    ]
-  },
-  output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, './build'),
-    publicPath: 'http://localhost:3000/',
-  },
-  // No Need to type out these extensions name
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-  },
-  // Use source map for easier debugging
-  devtool: 'source-map',
-  // Use babel to transpile jsx
-  module: {
-    rules: [
-      {
-        test: /\.jsx$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
-    ]
-  },
-  plugins: [
-    // enable HMR globally
-    new webpack.HotModuleReplacementPlugin(),
-    // prints more readable module names in the browser console on HMR updates
-    new webpack.NamedModulesPlugin(),
-    // Ignore stuff
-    new webpack.IgnorePlugin(/vertx/),
-  ],
-  // Dev Server Settings
-  devServer: {
+// PRODUCTION CONFIGS
+const productionConfig = merge([
+  // Clean build folder between builds
+  parts.clean(PATHS.build),
+  // Minify Javascript
+  parts.minifyJavaScript(),
+]);
+
+// DEVELOPMENT CONFIGS
+const developmentConfig = merge([
+  // Dev Server
+  parts.devServer({
     host: 'localhost',
     port: 3000,
-    inline: true,
-    hot: true,
+  }),
+  // Analyze Bundle
+  parts.analyzeBundle(),
+  // Other Plugins
+  {
+    plugins: [
+      // prints more readable module names in the browser console on HMR updates
+      new webpack.NamedModulesPlugin(),
+      // Ignore stuff
+      new webpack.IgnorePlugin(/vertx/)
+    ],
   },
-  node: {
-    // Set relative to the project root
-    __dirname: true
+]);
+
+// SHARED CONFIGS
+const commonConfig = merge([
+  // Separate source map from bundles
+  parts.generateSourceMaps({ type: 'source-map' }),
+  {
+    target: 'electron-renderer',
+    // Set Performance Budget
+    performance: {
+      hints: 'warning', // 'error' or false are valid too
+      maxEntrypointSize: 100000, // in bytes
+      maxAssetSize: 450000, // in bytes
+    },
+    entry: {
+      'tourWindow': [
+        'react-hot-loader/patch',
+        './tour/index.jsx',
+      ],
+      'mainWindow': [
+        'react-hot-loader/patch',
+        './app/renderer.js',
+        './app/renderers/dialog.js',
+        './app/renderers/dragNdrop.js',
+        './app/renderers/menu.js',
+        './app/index.jsx'
+      ],
+      'previewWindow': [
+        'react-hot-loader/patch',
+        './preview/index.jsx'
+      ],
+      'modalWindow': [
+        'react-hot-loader/patch',
+        './modal/modal_index.js'
+      ]
+    },
+    output: {
+      path: PATHS.build,
+      publicPath: 'http://localhost:3000/',
+      filename: '[name].bundle.js',
+    },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
+    module: {
+      rules: [
+        {
+          test: /\.jsx$/,
+          loader: 'babel-loader',
+        }
+      ]
+    },
+    node: {
+      // Set relative to the project root
+      __dirname: true
+    },
+    // Ignore all modules in node_modules folder
+    externals: [nodeExternals({
+      whitelist: ['webpack/hot/dev-server']
+    })],
+  },
+]);
+
+// EXPORT
+module.exports = (env) => {
+  if (env && env.production) {
+    return merge(productionConfig, commonConfig);
   }
+  return merge(developmentConfig, commonConfig);
 };

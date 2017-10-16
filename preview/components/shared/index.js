@@ -1,8 +1,8 @@
 // Libs
 import React from 'react';
-import styled from 'styled-components';
 
-export const Section = styled.div`
+import styled from 'styled-components';
+const Section = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
@@ -10,7 +10,7 @@ export const Section = styled.div`
   align-items: flex-start;
 `;
 
-export const Label = styled.label`
+const Label = styled.label`
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -18,7 +18,13 @@ export const Label = styled.label`
   color: #4F555C;
 `;
 
-export const Range = styled.input`
+const Range = styled.input`
   width: 100%;
   -webkit-app-region: no-drag;
 `;
+
+export {
+  Section,
+  Label,
+  Range,
+};

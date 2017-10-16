@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
-import _ from 'lodash';
+import { keys } from 'lodash';
 
 // Custom Components
 import {Section} from '../shared/Section';
@@ -38,7 +38,7 @@ export class Currency extends Component {
   }
 
   render() {
-    const currenciesKeys = _.keys(currencies);
+    const currenciesKeys = keys(currencies);
     const currenciesOptions = currenciesKeys.map(key => {
       let optionKey = currencies[key]['code'];
       let optionValue = currencies[key]['code'];

@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import * as FormActions from '../../actions/form';
 
 // Other Libs
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
 // Custom Components
 import RecipientForm from './RecipientForm';
@@ -30,8 +30,8 @@ export class Recipient extends Component {
   componentWillReceiveProps(nextProps) {
     const {recipient} = nextProps;
     if (
-      _.isEmpty(recipient.new) &&
-      _.isEmpty(recipient.select) &&
+      isEmpty(recipient.new) &&
+      isEmpty(recipient.select) &&
       recipient.newRecipient === true
     ) {
       this.setState(

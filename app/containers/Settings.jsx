@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {compose} from 'recompose';
 import {connect} from 'react-redux';
-const _ = require('lodash');
+import { isEqual } from 'lodash';
 
 // Selectors
 import { getCurrentSettings, getSavedSettings } from '../reducers/SettingsReducer';
@@ -41,7 +41,7 @@ class Settings extends Component {
   // Check if settings have been saved
   settingsSaved() {
     const {currentSettings, savedSettings} = this.props;
-    return _.isEqual(currentSettings, savedSettings);
+    return isEqual(currentSettings, savedSettings);
   }
 
   // Save Settings to App Config
