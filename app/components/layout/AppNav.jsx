@@ -1,7 +1,7 @@
 // Libraries
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
+import { findIndex } from 'lodash';
 
 // Animation
 import {Motion, spring} from 'react-motion';
@@ -14,7 +14,7 @@ const springConfig = {
 
 const setMarginValue = activeTab => {
   const multiplier = 100 / allTabs.length;
-  const activeTabIndex = _.findIndex(allTabs, {name: activeTab});
+  const activeTabIndex = findIndex(allTabs, {name: activeTab});
   return activeTabIndex * multiplier;
 };
 

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 // 3rd Party Libs
-import _ from 'lodash';
+import { isEmpty, findIndex } from 'lodash';
 
 // Animation
 import _withFadeInAnimation from '../../components/shared/hoc/_withFadeInAnimation';
@@ -21,7 +21,7 @@ export class RecipientsList extends Component {
 
   componentWillMount() {
     const {contacts, selectedContact} = this.props;
-    if (_.isEmpty(selectedContact)) {
+    if (isEmpty(selectedContact)) {
       this.updateSelectedRecipient(contacts[0]._id);
     }
   }
@@ -33,7 +33,7 @@ export class RecipientsList extends Component {
   updateSelectedRecipient(selectedContactId) {
     const {contacts, updateRecipientList} = this.props;
     // Find selected Contact in Contacts Array via ID
-    const contactIndex = _.findIndex(contacts, {_id: selectedContactId});
+    const contactIndex = findIndex(contacts, {_id: selectedContactId});
     const selectedContact = contacts[contactIndex];
     // Send update to parent Component
     updateRecipientList(selectedContact);

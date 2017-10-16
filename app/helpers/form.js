@@ -1,5 +1,5 @@
 const openDialog = require('../renderers/dialog');
-import _ from 'lodash';
+import { isEmpty } from 'lodash';
 
 function validateFormData(formData) {
   const {
@@ -61,7 +61,7 @@ function getInvoiceData(formData) {
 function validateRecipient(recipient) {
   if (recipient.newRecipient === true) {
     // Is Recipient Form Data Empty?
-    if (_.isEmpty(recipient.new)) {
+    if (isEmpty(recipient.new)) {
       openDialog({
         type: 'warning',
         title: 'Invalid Recipient',

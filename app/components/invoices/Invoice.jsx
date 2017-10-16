@@ -1,10 +1,11 @@
 // Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { truncate } from 'lodash';
+
 const format = require('date-fns/format');
 const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
-const _ = require('lodash');
 
 // Helper
 import { formatNumber } from '../../helpers/number';
@@ -41,7 +42,7 @@ class Invoice extends Component {
     return (
       <TR>
         <TD>
-          {_.truncate(invoice._id, {
+          {truncate(invoice._id, {
             length: 8,
             omission: '',
           })}

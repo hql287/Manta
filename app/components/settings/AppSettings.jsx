@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
-import _ from 'lodash';
+import { keys } from 'lodash';
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
@@ -56,7 +56,7 @@ class AppSettings extends Component {
   }
 
   render() {
-    const currenciesKeys = _.keys(currencies);
+    const currenciesKeys = keys(currencies);
     const currenciesOptions = currenciesKeys.map(key => {
       let optionKey = currencies[key]['code'];
       let optionValue = currencies[key]['code'];
