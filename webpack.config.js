@@ -17,15 +17,15 @@ const productionConfig = merge([
 
 // DEVELOPMENT CONFIGS
 const developmentConfig = merge([
+  // Analyze Bundle
+  parts.analyzeBundle(),
   // Dev Server
   parts.devServer({
     host: 'localhost',
     port: 3000,
   }),
-  // Analyze Bundle
-  parts.analyzeBundle(),
-  // Other Plugins
   {
+    // Other Plugins
     plugins: [
       // prints more readable module names in the browser console on HMR updates
       new webpack.NamedModulesPlugin(),
@@ -39,20 +39,32 @@ const developmentConfig = merge([
 const commonConfig = merge([
   // Separate source map from bundles
   parts.generateSourceMaps({ type: 'source-map' }),
+  // Extract Bundle & Code Spliting
+  parts.extractBundles([
+    {
+      name: 'vendor',
+      minChunks: ({ resource }) => (
+        resource &&
+        resource.indexOf('node_modules') >= 0 &&
+        resource.match(/\.js$/)
+      ),
+    },
+  ]),
   {
     target: 'electron-renderer',
     // Set Performance Budget
     performance: {
-      hints: 'warning', // 'error' or false are valid too
+      // Show performance warning. Can use 'error' as well
+      hints: 'warning',
       maxEntrypointSize: 100000, // in bytes
       maxAssetSize: 450000, // in bytes
     },
     entry: {
-      'tourWindow': [
+      'tour': [
         'react-hot-loader/patch',
         './tour/index.jsx',
       ],
-      'mainWindow': [
+      'main': [
         'react-hot-loader/patch',
         './app/renderer.js',
         './app/renderers/dialog.js',
@@ -60,11 +72,11 @@ const commonConfig = merge([
         './app/renderers/menu.js',
         './app/index.jsx'
       ],
-      'previewWindow': [
+      'preview': [
         'react-hot-loader/patch',
         './preview/index.jsx'
       ],
-      'modalWindow': [
+      'modal': [
         'react-hot-loader/patch',
         './modal/modal_index.js'
       ]
