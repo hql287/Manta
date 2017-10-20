@@ -35,21 +35,18 @@ class Notification extends Component {
   }
 
   componentDidMount() {
-    this.timeout = setTimeout(() => {
-      this.removeNoti();
-    }, 4000);
+    this.timeout = setTimeout(this.removeNoti, 4000);
   }
 
   shouldComponentUpdate(nextProps) {
     return this.props.notification !== nextProps.notification;
   }
 
-  ComponentWillUnmount() {
+  componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
   removeNoti() {
-    clearTimeout(this.timeout);
     const {removeNoti, notification} = this.props;
     removeNoti(notification.id);
   }

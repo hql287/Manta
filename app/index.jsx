@@ -18,7 +18,7 @@ ReactDOM.render(
       <App />
     </AppContainer>
   </Provider>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
 
 // Accepting Hot Updates

@@ -1,12 +1,15 @@
 // Libraries
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {AppContainer} from 'react-hot-loader';
+import {render} from 'react-dom';
 
 // Root Component
-import Tour from './containers/Tour';
+import Tour from './Tour';
 
-ReactDOM.render(
-  <Tour/>,
+render(
+  <AppContainer>
+    <Tour/>
+  </AppContainer>,
   document.getElementById('root')
 );
 

@@ -103,7 +103,11 @@ const commonConfig = merge([
     },
     // Ignore all modules in node_modules folder
     externals: [nodeExternals({
-      whitelist: ['webpack/hot/dev-server']
+      // Except Webpack Hot Devserver & Emitter
+      whitelist: [
+        'webpack/hot/dev-server',
+        'webpack/hot/emitter',
+      ]
     })],
   },
 ]);
