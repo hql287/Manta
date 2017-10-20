@@ -19,13 +19,13 @@ let previewWindow = null;
 function createTourWindow() {
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    width: 600,
+    width: 700,
     height: 600,
     show: false,
     frame: false,
     resizable: false,
     movable: false,
-    title: 'Welcome Window',
+    title: 'Tour Window',
     backgroundColor: '#F9FAFA',
   });
   // Register WindowID with appConfig

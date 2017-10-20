@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="597px" height="568px" viewBox="0 0 597 568" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47 (45396) - http://www.bohemiancoding.com/sketch -->
+    <title>Templates</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-4.2%" y="-3.2%" width="108.4%" height="106.4%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-4.2%" y="-3.2%" width="108.4%" height="106.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <filter x="-4.2%" y="-3.2%" width="108.4%" height="106.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Templates" transform="translate(-111.000000, -112.000000)">
+            <g id="Blue" filter="url(#filter-1)" transform="translate(353.769154, 397.410829) rotate(-15.000000) translate(-353.769154, -397.410829) translate(175.269154, 161.410829)">
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="357" height="472" rx="4"></rect>
+                <g id="Group" transform="translate(38.000000, 40.000000)">
+                    <rect id="Rectangle-2" fill="#469FE5" x="1" y="0" width="100" height="30" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy" fill="#C4C8CC" x="213" y="56" width="69" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-2" fill="#C4C8CC" x="1" y="56" width="69" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-3" fill="#C4C8CC" x="1" y="119" width="69" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-4" fill="#6BBB69" x="222" y="328" width="60" height="10" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-3" fill="#F6F4F4" x="232" y="79" width="50" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-5" fill="#F6F4F4" x="1" y="79" width="100" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-10" fill="#F6F4F4" x="1" y="142" width="100" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-6" fill="#F6F4F4" x="1" y="93" width="100" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-11" fill="#F6F4F4" x="1" y="156" width="100" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-7" fill="#469FE5" x="0" y="204" width="282" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-12" fill="#F6F4F4" x="0" y="222" width="282" height="6" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-13" fill="#F6F4F4" x="0" y="240" width="282" height="6" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-14" fill="#F6F4F4" x="0" y="257" width="282" height="6" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-17" fill="#F6F4F4" x="0" y="388" width="282" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-8" fill="#469FE5" x="0" y="371" width="282" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-9" fill="#469FE5" x="195" y="281" width="87" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-4" fill="#F6F4F4" x="232" y="93" width="50" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-3" fill="#F6F4F4" x="238" y="300" width="44" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-4" fill="#F6F4F4" x="238" y="314" width="44" height="4" rx="2"></rect>
+                </g>
+            </g>
+            <g id="Yellow" filter="url(#filter-2)" transform="translate(465.769154, 397.410829) rotate(15.000000) translate(-465.769154, -397.410829) translate(287.269154, 161.410829)">
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="357" height="472" rx="4"></rect>
+                <g id="Group-4" transform="translate(38.000000, 48.000000)">
+                    <rect id="Rectangle-2-Copy" fill="#DBBD8A" x="213" y="0" width="69" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-2" fill="#C4C8CC" x="1" y="0" width="69" height="6" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-4" fill="#6BBB69" x="222" y="312" width="60" height="10" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-3" fill="#F6F4F4" x="232" y="25" width="50" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-5" fill="#F6F4F4" x="1" y="21" width="80" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-6" fill="#F6F4F4" x="1" y="35" width="70" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-22" fill="#F6F4F4" x="1" y="49" width="60" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-7" fill="#DBBD8A" x="0" y="188" width="282" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-12" fill="#F6F4F4" x="0" y="206" width="282" height="6" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-13" fill="#F6F4F4" x="0" y="224" width="282" height="6" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-14" fill="#F6F4F4" x="0" y="241" width="282" height="6" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-17" fill="#F6F4F4" x="0" y="372" width="282" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-8" fill="#DBBD8A" x="0" y="355" width="282" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-9" fill="#DBBD8A" x="195" y="265" width="87" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-4" fill="#F6F4F4" x="232" y="39" width="50" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-3" fill="#F6F4F4" x="238" y="284" width="44" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-4" fill="#F6F4F4" x="238" y="298" width="44" height="4" rx="2"></rect>
+                </g>
+            </g>
+            <g id="Green" filter="url(#filter-3)" transform="translate(231.000000, 122.000000)">
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="357" height="472" rx="4"></rect>
+                <g id="Group-3" transform="translate(48.000000, 45.000000)">
+                    <rect id="Rectangle-2-Copy" fill="#6BBB69" x="36" y="0" width="69" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-2" fill="#C4C8CC" x="36" y="341" width="40" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-5" fill="#C4C8CC" x="181" y="341" width="40" height="10" rx="2"></rect>
+                    <rect id="Rectangle-2-Copy-4" fill="#6BBB69" x="36" y="268" width="185" height="10" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-3" fill="#F6F4F4" x="36" y="23" width="50" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-5" fill="#F6F4F4" x="36" y="364" width="69" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-20" fill="#F6F4F4" x="152" y="364" width="69" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-6" fill="#F6F4F4" x="36" y="378" width="69" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-21" fill="#F6F4F4" x="152" y="378" width="69" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-4" fill="#F6F4F4" x="36" y="37" width="50" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-3" fill="#EC476E" x="36" y="240" width="185" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3-Copy-4" fill="#F9D548" x="36" y="254" width="185" height="4" rx="2"></rect>
+                    <rect id="Rectangle-3" fill="#F9FAFA" x="0" y="66" width="261" height="142" rx="4"></rect>
+                    <g id="Group-2" transform="translate(38.000000, 92.000000)" fill="#F6F4F4">
+                        <rect id="Rectangle-3-Copy-12" x="0" y="0" width="185" height="6" rx="2"></rect>
+                        <rect id="Rectangle-3-Copy-15" x="0" y="21" width="185" height="6" rx="2"></rect>
+                        <rect id="Rectangle-3-Copy-16" x="0" y="42" width="185" height="6" rx="2"></rect>
+                        <rect id="Rectangle-3-Copy-18" x="0" y="63" width="185" height="6" rx="2"></rect>
+                        <rect id="Rectangle-3-Copy-19" x="0" y="84" width="185" height="6" rx="2"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
