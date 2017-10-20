@@ -1,10 +1,8 @@
 // Libs
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {ipcRenderer as ipc} from 'electron';
 
 import styled from 'styled-components';
-
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -13,28 +11,23 @@ const Wrapper = styled.div`
 `;
 
 // Components
-import Slider from './Slider';
-import Actions from '../components/Actions';
+import Slider from './containers/Slider';
+import Actions from './components/Actions';
 
 class Tour extends Component {
   constructor(props) {
     super(props);
-    this.state = {currentSlide: 1};
+    this.state = {currentSlide: 1, totalSlide: 5};
     this.nextSlide = this.nextSlide.bind(this);
-    this.prevSlide = this.prevSlide.bind(this);
     this.endTour = this.endTour.bind(this);
   }
 
-  shouldComponentUpdate() {
-    return true;
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state !== nextState;
   }
 
   nextSlide() {
     this.setState({currentSlide: this.state.currentSlide + 1});
-  }
-
-  prevSlide() {
-    this.setState({currentSlide: this.state.currentSlide - 1});
   }
 
   endTour() {
@@ -46,18 +39,18 @@ class Tour extends Component {
   render() {
     return (
       <Wrapper>
-        <Slider currentSlide={this.state.currentSlide} />
+        <Slider
+          totalSlide={this.state.totalSlide}
+          currentSlide={this.state.currentSlide} />
         <Actions
+          totalSlide={this.state.totalSlide}
           currentSlide={this.state.currentSlide}
           nextSlide={this.nextSlide}
-          prevSlide={this.prevSlide}
           endTour={this.endTour}
         />
       </Wrapper>
     );
   }
 }
-
-Tour.propTypes = {};
 
 export default Tour;
