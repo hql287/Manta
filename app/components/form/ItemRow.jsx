@@ -1,11 +1,10 @@
 // Libs
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
+import {compose} from 'recompose';
 
 // HOCs
-import _withAnimation from './hoc/_withAnimation';
-import _withDragNDrop from './hoc/_withDragNDrop';
+import _withDraggable from './hoc/_withDraggable';
 
 // Styles
 import styled from 'styled-components';
@@ -15,7 +14,6 @@ const ItemDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 14px;
   flex: 1;
 
   & > div {
@@ -65,6 +63,7 @@ export class ItemRow extends Component {
     this.updateSubtotal = this.updateSubtotal.bind(this);
     this.uploadRowState = this.uploadRowState.bind(this);
     this.removeRow = this.removeRow.bind(this);
+    this.stopPropagation = this.stopPropagation.bind(this);
   }
 
   componentWillMount() {
@@ -124,10 +123,26 @@ export class ItemRow extends Component {
     this.props.removeRow(this.state.id);
   }
 
+  // Since react-beautiful-dnd calls event.preventDefault()
+  // on the mousedown event for the Draggable. Hence children element
+  // such as input won't be aware of such event and can't be interactive with
+  // This function overrides this behaviour
+  // & making inputs interactive inside Draggable.
+  // More: https://github.com/atlassian/react-beautiful-dnd
+  // #interactive-child-elements-within-a-draggable
+  stopPropagation(event) {
+    event.stopPropagation();
+  }
+
   render() {
     const {actions, hasHandler} = this.props;
     return (
       <ItemDiv>
+        { hasHandler &&
+          <div className="dragHandler">
+            <i className="ion-grid" />
+          </div>
+        }
         <div className="flex3">
           <ItemDivInput
             name="description"
@@ -136,6 +151,7 @@ export class ItemRow extends Component {
             onChange={this.handleTextInputChange}
             onKeyDown={this.handleKeyDown}
             placeholder="Description"
+            onMouseDown={this.stopPropagation}
           />
         </div>
 
@@ -147,6 +163,7 @@ export class ItemRow extends Component {
             onChange={this.handleNumberInputChange}
             placeholder="Price"
             onKeyDown={this.handleKeyDown}
+            onMouseDown={this.stopPropagation}
           />
         </div>
 
@@ -158,6 +175,7 @@ export class ItemRow extends Component {
             onChange={this.handleNumberInputChange}
             placeholder="Quantity"
             onKeyDown={this.handleKeyDown}
+            onMouseDown={this.stopPropagation}
           />
         </div>
 
@@ -185,6 +203,5 @@ ItemRow.propTypes = {
 };
 
 export default compose (
-  _withAnimation,
-  _withDragNDrop
+  _withDraggable
 )(ItemRow);
