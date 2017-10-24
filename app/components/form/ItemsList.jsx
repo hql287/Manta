@@ -9,10 +9,9 @@ import {bindActionCreators} from 'redux';
 import * as Actions from '../../actions/form.jsx';
 import {getRows} from '../../reducers/FormReducer';
 
-// DragNDrop & Animation
-import {DragDropContext} from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+// DragNDrop
 import TransitionList from '../../components/shared/TransitionList';
+import _withDragNDrop from './hoc/_withDragNDrop';
 
 // Custom Component
 import Button from '../shared/Button.jsx';
@@ -72,26 +71,27 @@ export class ItemsList extends Component {
   }
 
   render() {
+    // Bound Actions
     const {
       addItem,
-      moveRow,
       removeItem,
       updateItem,
     } = this.props.boundActionCreators;
+    // Item Rows
     const {rows} = this.props;
     const rowsComponent = rows.map((item, index) => (
       <ItemRow
         key={item.id}
         item={item}
-        index={index}
         hasHandler={rows.length > 1 ? true : false}
         actions={index === 0 ? false : true}
         updateRow={updateItem}
         removeRow={removeItem}
-        moveRow={moveRow}
         addItem={addItem}
       />
     ));
+
+    // Render
     return (
       <Section>
         <ItemsListWrapper>
@@ -131,5 +131,6 @@ const mapDispatchToProps = dispatch => ({
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  DragDropContext(HTML5Backend)
+  _withDragNDrop
 )(ItemsList);
+
