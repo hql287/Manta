@@ -20,6 +20,7 @@
     "pouchdb-browser": "6.2.0",
     "react": "^16.0.0",
     "react-addons-shallow-compare": "^15.6.2",
+    "react-beautiful-dnd": "^2.4.1",
     "react-color": "^2.13.8",
     "react-dates": "^12.6.0",
     "react-dnd": "^2.5.3",
