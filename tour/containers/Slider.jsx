@@ -9,18 +9,13 @@ const Content = styled.div`
   height: 100%;
 `;
 
-// Welcome Slide
-import Welcome from '../components/slides/Welcome';
-// Explains how Form works
-import Create from '../components/slides/Create';
-// Preview & Customize Template
-import Preview from '../components/slides/Preview';
-// Save PDF & Send
-import Save from '../components/slides/Save';
-// Success
-import Success from '../components/slides/Success';
+import Save from '../components/slides/Save';       // Save PDF & Send
+import Create from '../components/slides/Create';   // Explains how Form works
+import Welcome from '../components/slides/Welcome'; // Welcome Slide
+import Preview from '../components/slides/Preview'; // Preview & Customize Template
+import Success from '../components/slides/Success'; // Success
 
-function Slider({totalSlide, currentSlide}) {
+function Slider({currentSlide}) {
   return (
     <Content>
       {currentSlide === 1 && <Welcome />}
@@ -33,8 +28,7 @@ function Slider({totalSlide, currentSlide}) {
 }
 
 Slider.propTypes = {
-  currentSlide: PropTypes.number.isRequired,
-  totalSlide: PropTypes.number.isRequired,
+  currentSlide: PropTypes.number.isRequired
 };
 
 export default Slider;

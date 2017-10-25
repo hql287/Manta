@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 
 import styled from 'styled-components';
+
 const Content = styled.div`
   flex: 1;
   max-height: 80px;
@@ -85,11 +86,7 @@ Actions.propTypes = {
   currentSlide: PropTypes.number.isRequired,
   endTour: PropTypes.func.isRequired,
   nextSlide: PropTypes.func.isRequired,
-  totalSlide: PropTypes.number,
-};
-
-Actions.defaultProps = {
-  totalSlide: 5,
+  totalSlide: PropTypes.number.isRequired,
 };
 
 export default Actions;
