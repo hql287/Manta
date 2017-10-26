@@ -39,9 +39,7 @@ class Tour extends Component {
   render() {
     return (
       <Wrapper>
-        <Slider
-          totalSlide={this.state.totalSlide}
-          currentSlide={this.state.currentSlide} />
+        <Slider currentSlide={this.state.currentSlide} />
         <Actions
           totalSlide={this.state.totalSlide}
           currentSlide={this.state.currentSlide}
