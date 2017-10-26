@@ -2,8 +2,15 @@
 
 exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div
-  className="ItemRow__ItemDiv-diZoy eIVSNU"
+  className="ItemRow__ItemDiv-diZoy kphhNI"
 >
+  <div
+    className="dragHandler"
+  >
+    <i
+      className="ion-grid"
+    />
+  </div>
   <div
     className="flex3"
   >
