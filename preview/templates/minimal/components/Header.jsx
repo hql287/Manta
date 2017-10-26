@@ -10,6 +10,10 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  img {
+    width: auto;
+    max-height: 5em;
+  }
 `;
 
 const Heading = styled.h1`

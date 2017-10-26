@@ -17,6 +17,7 @@ const Invoice = styled.div`
     font-family: Montserrat, sans-serif;
     font-weight: 500;
     font-size: 0.8em;
+    line-height: 1.75;
     color: #2C323A;
     letter-spacing: 1px;
     margin-bottom: .7em;
