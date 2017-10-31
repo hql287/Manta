@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Paperless Tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tour</title>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css" >
     <link rel="stylesheet" href="../static/css/ionicons.min.css" >
     <link rel="stylesheet" href="../static/css/general.css" >
@@ -10,16 +11,27 @@
   </head>
   <body>
     <div id="root"></div>
-
-    <!-- Javascript -->
     <script>
-      if (typeof module === 'object') {
-        window.module = module; module = undefined;
+      {
+        const scripts = [];
+        const isDev = require('electron-is-dev');
+        if (isDev) {
+          scripts.push(
+            'http://localhost:3000/vendor.dev.js',
+            'http://localhost:3000/tour.dev.js'
+          );
+        } else {
+          scripts.push(
+            '../prod/vendor.prod.js',
+            '../prod/tour.prod.js'
+          );
+        }
+        document.write(
+          scripts
+            .map(script => '<script defer src="' + script + '"><\/script>')
+            .join('')
+        );
       }
     </script>
-    <!-- Renderer -->
-    <script src="http://localhost:3000/vendor.bundle.js"></script>
-    <script src="http://localhost:3000/tour.bundle.js"></script>
-    <script>if (window.module) module = window.module;</script>
   </body>
 </html>

@@ -1,8 +1,9 @@
 // Node Libs
-const path = require('path');
-const url = require('url');
-const glob = require('glob');
-const os = require('os');
+const os    = require('os');
+const url   = require('url');
+const path  = require('path');
+const glob  = require('glob');
+const isDev = require('electron-is-dev');
 
 // Electron Libs
 const {app, BrowserWindow, ipcMain} = require('electron');
@@ -15,7 +16,6 @@ let tourWindow = null;
 let mainWindow = null;
 let previewWindow = null;
 
-// Create Tour Window
 function createTourWindow() {
   // Creating a New Window
   tourWindow = new BrowserWindow({
@@ -39,13 +39,16 @@ function createTourWindow() {
     })
   );
   // Add Event Listeners
+  tourWindow.on('show', event => {
+    if (isDev) tourWindow.webContents.openDevTools();
+  });
   tourWindow.on('close', event => {
     event.preventDefault();
+    if (isDev) tourWindow.webContents.closeDevTools();
     tourWindow.hide();
   });
 }
 
-// Create Main Window
 function createMainWindow() {
   // Get window state
   const mainWindownStateKeeper = windowStateKeeper('main');
@@ -74,14 +77,18 @@ function createMainWindow() {
       slashes: true,
     })
   );
+
   // Add Event Listeners
+  mainWindow.on('show', event => {
+    if (isDev) mainWindow.webContents.openDevTools();
+  });
   mainWindow.on('close', event => {
     event.preventDefault();
+    if (isDev) mainWindow.webContents.closeDevTools();
     mainWindow.hide();
   });
 }
 
-// Create Preview Window
 function createPreviewWindow() {
   // Get window state
   const previewWindownStateKeeper = windowStateKeeper('preview');
@@ -111,19 +118,21 @@ function createPreviewWindow() {
     })
   );
   // Add Event Listener
+  previewWindow.on('show', event => {
+    if (isDev) previewWindow.webContents.openDevTools();
+  });
   previewWindow.on('close', event => {
     event.preventDefault();
+    if (isDev) previewWindow.webContents.closeDevTools();
     previewWindow.hide();
   });
 }
 
-// Add Devtool Extensions
 function addDevToolsExtension() {
   BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
   BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
 }
 
-// Set Initial Values
 function setInitialValues() {
   // Tour
   if (!appConfig.has('tour')) {
@@ -136,7 +145,7 @@ function setInitialValues() {
   if (!appConfig.has('winsLastVisibleState')) {
     appConfig.set('winsLastVisibleState', {
       isMainWinVisible: true,
-      isPreviewWinVisible: false
+      isPreviewWinVisible: false,
     });
   }
   // Default Info
@@ -164,7 +173,6 @@ function setInitialValues() {
   }
 }
 
-// Add Event Listener
 function addEventListeners() {
   ipcMain.on('quit-app', () => {
     tourWindow.destroy();
@@ -174,46 +182,34 @@ function addEventListeners() {
   });
 }
 
-// Initialize
 function initialize() {
-  // Start the app
   app.on('ready', () => {
-    // Create The Welcome Window
     createTourWindow();
-    // Create The Main Window
     createMainWindow();
-    // Create Preview Window
     createPreviewWindow();
-    // Set Initial Values
     setInitialValues();
-    // Add Devtools Extenstion
-    addDevToolsExtension();
-    // Add Event Listener
+    if (isDev) addDevToolsExtension();
     addEventListeners();
-    // Load all main process files
     loadMainProcessFiles();
     // Show Window
-    const { showWindow } = require('./main/tour');
+    const {showWindow} = require('./main/tour');
     showWindow('startup');
   });
-  // Reactive the app
   app.on('activate', () => {
-    const { showWindow } = require('./main/tour');
+    // Reactive the app
+    const {showWindow} = require('./main/tour');
     showWindow('activate');
   });
 }
 
 initialize();
 
-// HELPERS
-// ===========================================
-// Imports Main Process Files
+// Helpers
 function loadMainProcessFiles() {
   const files = glob.sync(path.join(__dirname, 'main/*.js'));
   files.forEach(file => require(file));
 }
 
-// Windows State Keeper
 function windowStateKeeper(windowName) {
   let window, windowState;
 
@@ -249,12 +245,12 @@ function windowStateKeeper(windowName) {
 
   setBounds();
 
-  return({
+  return {
     x: windowState.x,
     y: windowState.y,
     width: windowState.width,
     height: windowState.height,
     isMaximized: windowState.isMaximized,
     track,
-  });
+  };
 }

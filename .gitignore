@@ -1,4 +1,5 @@
 .env
 /node_modules
 /coverage
-/build
+/dist
+/prod
