@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>React App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Manta</title>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="../static/css/ionicons.min.css"></link>
     <link rel="stylesheet" href="../static/css/general.css"></link>
@@ -14,18 +14,28 @@
     <link rel="stylesheet" href="../static/css/date-picker.css"></link>
   </head>
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
     <div id="root"></div>
-    <!-- Javascript -->
     <script>
-      if (typeof module === 'object') {
-        window.module = module; module = undefined;
+      {
+        const scripts = [];
+        const isDev = require('electron-is-dev');
+        if (isDev) {
+          scripts.push(
+            'http://localhost:3000/vendor.dev.js',
+            'http://localhost:3000/main.dev.js'
+          );
+        } else {
+          scripts.push(
+            '../prod/vendor.prod.js',
+            '../prod/main.prod.js'
+          );
+        }
+        document.write(
+          scripts
+            .map(script => '<script defer src="' + script + '"><\/script>')
+            .join('')
+        );
       }
     </script>
-    <script src="http://localhost:3000/vendor.bundle.js"></script>
-    <script src="http://localhost:3000/main.bundle.js"></script>
-    <script>if (window.module) module = window.module;</script>
   </body>
 </html>

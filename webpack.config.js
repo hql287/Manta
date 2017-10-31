@@ -3,16 +3,24 @@ const webpack = require('webpack');
 const merge   = require('webpack-merge');
 const parts   = require('./webpack.parts');
 const nodeExternals = require('webpack-node-externals');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 const PATHS = {
-  build: path.resolve(__dirname, 'build'),
+  prod: path.resolve(__dirname, 'prod'),
 };
 
 // PRODUCTION CONFIGS
 const productionConfig = merge([
   // Clean build folder between builds
-  parts.clean(PATHS.build),
+  parts.clean(PATHS.prod),
   // Minify Javascript
-  parts.minifyJavaScript(),
+  // parts.minifyJavaScript(),
+  // Output
+  {
+    output: {
+      path: PATHS.prod,
+      filename: '[name].prod.js',
+    }
+  }
 ]);
 
 // DEVELOPMENT CONFIGS
@@ -24,14 +32,29 @@ const developmentConfig = merge([
     host: 'localhost',
     port: 3000,
   }),
+  // Output
   {
+    output: {
+      publicPath: 'http://localhost:3000/',
+      filename: '[name].dev.js',
+    },
     // Other Plugins
     plugins: [
       // prints more readable module names in the browser console on HMR updates
       new webpack.NamedModulesPlugin(),
       // Ignore stuff
-      new webpack.IgnorePlugin(/vertx/)
+      new webpack.IgnorePlugin(/vertx/),
+      // Dashboard
+      // new DashboardPlugin(),
     ],
+    // Ignore all modules in node_modules folder
+    externals: [nodeExternals({
+      // Except Webpack Hot Devserver & Emitter
+      whitelist: [
+        'webpack/hot/dev-server',
+        'webpack/hot/emitter',
+      ]
+    })]
   },
 ]);
 
@@ -81,11 +104,6 @@ const commonConfig = merge([
         './modal/modal_index.js'
       ]
     },
-    output: {
-      path: PATHS.build,
-      publicPath: 'http://localhost:3000/',
-      filename: '[name].bundle.js',
-    },
     resolve: {
       extensions: ['.js', '.jsx'],
     },
@@ -99,16 +117,9 @@ const commonConfig = merge([
     },
     node: {
       // Set relative to the project root
-      __dirname: true
-    },
-    // Ignore all modules in node_modules folder
-    externals: [nodeExternals({
-      // Except Webpack Hot Devserver & Emitter
-      whitelist: [
-        'webpack/hot/dev-server',
-        'webpack/hot/emitter',
-      ]
-    })],
+      __dirname: true,
+      __filename: false
+    }
   },
 ]);
 
