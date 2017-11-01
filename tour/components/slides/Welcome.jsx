@@ -14,7 +14,7 @@ function Welcome() {
       toColor="#6979A4"
       heading="👋  Hello!"
       description={description}
-      imgSrc={path.resolve(__dirname, '../../imgs/Welcome.svg')}
+      imgSrc={path.resolve(__dirname, './imgs/Welcome.svg')}
       imgSize="475px"
     />
   );

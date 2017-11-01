@@ -18,10 +18,10 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
   });
   modalWin.loadURL(
     url.format({
-      pathname: path.resolve(__dirname, '../../modal/index.html'),
+      pathname: path.resolve(__dirname, '../modal/index.html'),
       protocol: 'file:',
       slashes: true,
-    }),
+    })
   );
   modalWin.on('close', () => (modalWin = null));
   modalWin.webContents.on('did-finish-load', function() {
@@ -29,7 +29,7 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
       'update-modal',
       dialogOptions,
       returnChannel,
-      ...rest,
+      ...rest
     );
   });
   modalWin.on('ready-to-show', () => {
