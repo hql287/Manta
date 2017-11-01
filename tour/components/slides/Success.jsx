@@ -13,7 +13,7 @@ function Success() {
       toColor="#ECE9E6"
       heading=" Done!!! ✋️"
       description={description}
-      imgSrc={path.resolve(__dirname, '../../imgs/Success.svg')}
+      imgSrc={path.resolve(__dirname, './imgs/Success.svg')}
       imgSize="425px"
     />
   );

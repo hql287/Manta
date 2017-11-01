@@ -14,7 +14,7 @@ function Save() {
       toColor="#B31217"
       heading="3. Save"
       description={description}
-      imgSrc={path.resolve(__dirname, '../../imgs/Save.svg')}
+      imgSrc={path.resolve(__dirname, './imgs/Save.svg')}
       imgSize="360px"
     />
   );

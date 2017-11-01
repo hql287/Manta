@@ -15,8 +15,8 @@
     "build": "webpack --env.production",
     "test": "jest",
     "test:watch": "jest --watch",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "pack": "yarn run build && yarn run dist"
   },
   "build": {
     "appId": "com.electron.manta",

@@ -13,7 +13,7 @@ function Preview() {
       toColor="#F7971E"
       heading="2. Preview"
       description={description}
-      imgSrc={path.resolve(__dirname, '../../imgs/Preview.svg')}
+      imgSrc={path.resolve(__dirname, './imgs/Preview.svg')}
       imgSize="520px"
     />
   );
