@@ -3,42 +3,42 @@ const VOLUME = 0.25;
 
 module.exports = {
   STARTUP: {
-    url: path.resolve(__dirname, './startup.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/startup.wav'),
     volume: VOLUME * 2
   },
 
   DIALOG: {
-    url: path.resolve(__dirname, './dialog.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/dialog.wav'),
     volume: VOLUME
   },
 
   SUCCESS: {
-    url: path.resolve(__dirname, './success.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/success.wav'),
     volume: VOLUME
   },
 
   WARNING: {
-    url: path.resolve(__dirname, './warning.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/warning.wav'),
     volume: VOLUME
   },
 
   ADD: {
-    url: path.resolve(__dirname, './add.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/add.wav'),
     volume: VOLUME
   },
 
   REMOVE: {
-    url: path.resolve(__dirname, './remove.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/remove.wav'),
     volume: VOLUME
   },
 
   RELOAD: {
-    url: path.resolve(__dirname, './reload.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/reload.wav'),
     volume: VOLUME
   },
 
   TAP: {
-    url: path.resolve(__dirname, './tap.wav'),
+    url: path.resolve(__dirname, '../static/sounds/cs/tap.wav'),
     volume: VOLUME
   },
 };

@@ -82,6 +82,9 @@ const commonConfig = merge([
       maxEntrypointSize: 100000, // in bytes
       maxAssetSize: 450000, // in bytes
     },
+
+    context: path.resolve(__dirname),
+
     entry: {
       'tour': [
         'react-hot-loader/patch',
@@ -104,9 +107,11 @@ const commonConfig = merge([
         './modal/modal_index.js'
       ]
     },
+
     resolve: {
       extensions: ['.js', '.jsx'],
     },
+
     module: {
       rules: [
         {
@@ -115,9 +120,10 @@ const commonConfig = merge([
         }
       ]
     },
+
     node: {
       // Set relative to the project root
-      __dirname: true,
+      __dirname: false,
       __filename: false
     }
   },
