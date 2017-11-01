@@ -1,4 +1,5 @@
 // Node Libs
+const fs    = require('fs');
 const os    = require('os');
 const url   = require('url');
 const path  = require('path');
@@ -150,14 +151,19 @@ function setInitialValues() {
   }
   // Default Info
   if (!appConfig.has('info')) {
+    // Set Default Logo
+    const logoPath = path.resolve(__dirname, './static/imgs/default_logo.svg');
+    const logoData = fs.readFileSync(logoPath);
+    const logoBase64String = 'data:image/svg+xml;base64,' + logoData.toString('base64');
+    // Other defaults
     appConfig.set('info', {
-      logo: '',
-      fullname: '',
-      company: '',
-      address: '',
-      email: '',
-      phone: '',
-      website: '',
+      logo: logoBase64String,
+      fullname: 'Manta Ray',
+      company: 'Oceanic Preservation Society',
+      address: '336 Bon Air Center #384 Greenbrae, CA 94904',
+      email: 'info@opsociety.org',
+      phone: '+01 (0) 1-2345-6789',
+      website: 'http://www.opsociety.org/',
     });
   }
   // Default App Settings

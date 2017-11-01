@@ -9,8 +9,8 @@ function detectSVG(filePath) {
 }
 
 function svg2Base64(filePath) {
-  const data = fs.readFileSync(filePath, 'utf8');
-  const base64String = 'data:image/svg+xml;base64,' + btoa(data);
+  const data = fs.readFileSync(filePath);
+  const base64String = 'data:image/svg+xml;base64,' + data.toString('base64');
   return base64String;
 }
 
