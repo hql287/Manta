@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const merge   = require('webpack-merge');
 const parts   = require('./webpack.parts');
 const nodeExternals = require('webpack-node-externals');
-// const DashboardPlugin = require('webpack-dashboard/plugin');
 const PATHS = {
   prod: path.resolve(__dirname, 'prod'),
 };
@@ -13,13 +12,25 @@ const productionConfig = merge([
   // Clean build folder between builds
   parts.clean(PATHS.prod),
   // Minify Javascript
-  // parts.minifyJavaScript(),
+  parts.minifyJavaScript(),
   // Output
   {
     output: {
       path: PATHS.prod,
       filename: '[name].prod.js',
-    }
+    },
+    plugins: [
+      // Ignore stuff
+      new webpack.IgnorePlugin(/vertx/),
+    ],
+    // Exclude NodeModules
+    externals: [nodeExternals({
+      whitelist: [
+        'react-hot-loader',
+        'react-hot-loader/patch',
+        'redux-logger',
+      ]
+    })]
   }
 ]);
 
@@ -44,12 +55,11 @@ const developmentConfig = merge([
       new webpack.NamedModulesPlugin(),
       // Ignore stuff
       new webpack.IgnorePlugin(/vertx/),
-      // Dashboard
-      // new DashboardPlugin(),
     ],
     // Ignore all modules in node_modules folder
     externals: [nodeExternals({
-      // Except Webpack Hot Devserver & Emitter
+      // Except Webpack Hot Devserver & Emitter so
+      // react-hot-loader can work properly
       whitelist: [
         'webpack/hot/dev-server',
         'webpack/hot/emitter',
@@ -60,6 +70,11 @@ const developmentConfig = merge([
 
 // SHARED CONFIGS
 const commonConfig = merge([
+  // Check Duplicates
+  parts.checkDuplicate({
+    verbose: true,
+    emitError: true,
+  }),
   // Separate source map from bundles
   parts.generateSourceMaps({ type: 'source-map' }),
   // Extract Bundle & Code Spliting
@@ -82,8 +97,6 @@ const commonConfig = merge([
       maxEntrypointSize: 100000, // in bytes
       maxAssetSize: 450000, // in bytes
     },
-
-    context: path.resolve(__dirname),
 
     entry: {
       'tour': [
@@ -108,6 +121,8 @@ const commonConfig = merge([
       ]
     },
 
+    context: path.resolve(__dirname),
+
     resolve: {
       extensions: ['.js', '.jsx'],
     },
@@ -116,13 +131,15 @@ const commonConfig = merge([
       rules: [
         {
           test: /\.jsx$/,
+          exclude: [
+            path.resolve(__dirname, 'node_modules')
+          ],
           loader: 'babel-loader',
         }
       ]
     },
 
     node: {
-      // Set relative to the project root
       __dirname: false,
       __filename: false
     }

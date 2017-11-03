@@ -1,5 +1,6 @@
 {
   "name": "Manta",
+  "homepage": "https://www.lequochung.me",
   "productName": "Manta",
   "version": "1.0.0",
   "license": "ISC",
@@ -15,14 +16,8 @@
     "build": "webpack --env.production",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dist": "electron-builder",
+    "dist": "electron-builder -mwl",
     "pack": "yarn run build && yarn run dist"
-  },
-  "build": {
-    "appId": "com.electron.manta",
-    "mac": {
-      "category": "public.app-category.business"
-    }
   },
   "dependencies": {
     "date-fns": "^1.28.5",
@@ -65,6 +60,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "compression-webpack-plugin": "^1.0.1",
     "devtron": "^1.4.0",
+    "duplicate-package-checker-webpack-plugin": "^1.2.6",
     "electron": "^1.7.9",
     "electron-builder": "^19.42.1",
     "enzyme": "^3.0.0",

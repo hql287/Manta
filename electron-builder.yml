@@ -1,0 +1,14 @@
+appId: com.electron.manta
+copyright: Hung Q. Le
+productName: Manta Ray
+mac:
+  category: public.app-category.business
+  target: dmg
+win:
+  target: nsis
+linux:
+  target:
+    - deb
+    - AppImage
+directories:
+  output: dist/

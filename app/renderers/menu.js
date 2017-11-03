@@ -1,14 +1,15 @@
 // Libs
-const { Menu, BrowserWindow} = require('electron').remote;
-const appConfig              = require('electron').remote.require('electron-settings');
-const ipc                    = require('electron').ipcRenderer;
+const {Menu, BrowserWindow} = require('electron').remote;
+const appConfig = require('electron').remote.require('electron-settings');
+const ipc = require('electron').ipcRenderer;
+const isDev = require('electron-is-dev');
 
 // Get mainWindow Object
 const mainWindowID = appConfig.get('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
 // Set App Menu
-const menuTemplate = [
+let menuTemplate = [
   // Invoice
   {
     label: 'Invoice',
@@ -137,17 +138,6 @@ const menuTemplate = [
     ],
   },
 
-  // View Menu
-  {
-    label: 'View',
-    submenu: [
-      {role: 'forcereload'},
-      {role: 'toggledevtools'},
-      {type: 'separator'},
-      {role: 'togglefullscreen'},
-    ],
-  },
-
   // Windows
   {
     role: 'window',
@@ -192,8 +182,21 @@ if (process.platform === 'darwin') {
         accelerator: 'CmdOrCtrl+Q',
         click() {
           ipc.send('quit-app');
-        }
-      }
+        },
+      },
+    ],
+  });
+}
+
+// Developer Tools Menu
+if (isDev) {
+  menuTemplate.splice(3, 0, {
+    label: 'View',
+    submenu: [
+      {role: 'forcereload'},
+      {role: 'toggledevtools'},
+      {type: 'separator'},
+      {role: 'togglefullscreen'},
     ],
   });
 }

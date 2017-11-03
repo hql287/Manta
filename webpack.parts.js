@@ -1,7 +1,9 @@
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BabelWebpackPlugin = require('babel-minify-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
@@ -19,6 +21,13 @@ exports.devServer = ({ host, port } = {}) => ({
 // Source Map
 exports.generateSourceMaps = ({ type }) => ({
   devtool: type,
+});
+
+// Check Duplicates
+exports.checkDuplicate = (options) => ({
+  plugins: [
+    new DuplicatePackageCheckerPlugin(options),
+  ],
 });
 
 // Clean between builds
@@ -42,8 +51,15 @@ exports.analyzeBundle = () => ({
   ],
 });
 
+// Webpack Dashboard
+exports.webpackDashboard = () => ({
+  plugins: [
+    new DashboardPlugin(),
+  ],
+});
+
 // Extract vendor files
-exports.extractBundles = (bundles) => ({
+exports.extractBundles = bundles => ({
   plugins: bundles.map((bundle) => (
     new webpack.optimize.CommonsChunkPlugin(bundle)
   )),
