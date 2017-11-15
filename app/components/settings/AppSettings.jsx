@@ -98,7 +98,9 @@ class AppSettings extends Component {
               onChange={this.handleInputChange}>
               <option value="minimal">Minimal</option>
               <option value="business">Business</option>
-              <option value="modern">Modern</option>
+              {/*
+                <option value="modern">Modern</option>
+              */}
             </select>
           </div>
         </div>

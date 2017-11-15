@@ -15,7 +15,9 @@ function Template({template, handleInputChange}) {
         onChange={handleInputChange}>
         <option value="minimal">Minimal</option>
         <option value="business">Business</option>
+        {/*
         <option value="modern">Modern</option>
+        */}
       </select>
     </Section>
   );
