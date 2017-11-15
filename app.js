@@ -1,3 +1,5 @@
+console.time('init')
+
 // Node Libs
 const fs    = require('fs');
 const os    = require('os');
@@ -188,29 +190,6 @@ function addEventListeners() {
   });
 }
 
-function initialize() {
-  app.on('ready', () => {
-    createTourWindow();
-    createMainWindow();
-    createPreviewWindow();
-    setInitialValues();
-    if (isDev) addDevToolsExtension();
-    addEventListeners();
-    loadMainProcessFiles();
-    // Show Window
-    const {showWindow} = require('./main/tour');
-    showWindow('startup');
-  });
-  app.on('activate', () => {
-    // Reactive the app
-    const {showWindow} = require('./main/tour');
-    showWindow('activate');
-  });
-}
-
-initialize();
-
-// Helpers
 function loadMainProcessFiles() {
   const files = glob.sync(path.join(__dirname, 'main/*.js'));
   files.forEach(file => require(file));
@@ -260,3 +239,26 @@ function windowStateKeeper(windowName) {
     track,
   };
 }
+
+function initialize() {
+  app.on('ready', () => {
+    createTourWindow();
+    createMainWindow();
+    createPreviewWindow();
+    setInitialValues();
+    if (isDev) addDevToolsExtension();
+    addEventListeners();
+    loadMainProcessFiles();
+    // Show Window
+    const {showWindow} = require('./main/tour');
+    showWindow('startup');
+  });
+  app.on('activate', () => {
+    // Reactive the app
+    const {showWindow} = require('./main/tour');
+    showWindow('activate');
+  });
+  console.timeEnd('init');
+}
+
+initialize();

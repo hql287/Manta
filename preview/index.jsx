@@ -1,3 +1,6 @@
+// Prevent window to open dropped file
+require('../libs/dragNdrop.js');
+
 // Libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
