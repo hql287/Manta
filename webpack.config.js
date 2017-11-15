@@ -105,9 +105,8 @@ const commonConfig = merge([
       ],
       'main': [
         'react-hot-loader/patch',
-        './app/renderer.js',
+        './app/renderers/startup.js',
         './app/renderers/dialog.js',
-        './app/renderers/dragNdrop.js',
         './app/renderers/menu.js',
         './app/index.jsx'
       ],
@@ -117,7 +116,7 @@ const commonConfig = merge([
       ],
       'modal': [
         'react-hot-loader/patch',
-        './modal/modal_index.js'
+        './modal/index.js'
       ]
     },
 

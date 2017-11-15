@@ -1,3 +1,6 @@
+// Prevent window to open dropped file
+require('../libs/dragNdrop.js');
+
 // Electron Libs
 const BrowserWindow = require('electron').remote.BrowserWindow;
 const ipc           = require('electron').ipcRenderer;
