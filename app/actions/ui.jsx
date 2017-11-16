@@ -7,6 +7,15 @@ export const changeActiveTab = createAction(
   tabName => tabName
 );
 
+// Update Check For Update Message
+export const checkUpdatesMessage = createAction(
+  ACTION_TYPES.UI_CHECK_UPDATES_MESSAGE,
+  (content, type) => ({
+    content: content,
+    type: type,
+  })
+);
+
 // Create new Notification
 export const newNoti = createAction(
   ACTION_TYPES.UI_NOTIFICATION_NEW,

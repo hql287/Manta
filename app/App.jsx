@@ -15,6 +15,7 @@ import * as ContactsActions from './actions/contacts';
 import AppNav from './components/layout/AppNav';
 import AppMain from './components/layout/AppMain';
 import AppNoti from './components/layout/AppNoti';
+import AppUpdate from './components/layout/AppUpdate';
 import {AppWrapper} from './components/shared/Layout';
 
 // Components
@@ -23,6 +24,7 @@ class App extends Component {
     super(props);
     this.changeTab = this.changeTab.bind(this);
     this.removeNoti = this.removeNoti.bind(this);
+    this.removeUpdateMessage = this.removeUpdateMessage.bind(this);
   }
 
   componentDidMount() {
@@ -62,6 +64,9 @@ class App extends Component {
     ipc.on('menu-form-toggle-settings', () => {
       dispatch(FormActions.toggleFormSettings());
     });
+    ipc.on('check-for-updates-message', (event, message, type) => {
+      dispatch(UIActions.checkUpdatesMessage(message, type));
+    });
   }
 
   shouldComponentUpdate(nextProps) {
@@ -93,13 +98,25 @@ class App extends Component {
     dispatch(UIActions.removeNoti(id));
   }
 
+  removeUpdateMessage() {
+    const {dispatch} = this.props;
+    dispatch(UIActions.checkUpdatesMessage(null, 'info'));
+  }
+
   render() {
-    const {activeTab, notifications} = this.props.ui;
+    const {activeTab, notifications, checkUpdatesMessage} = this.props.ui;
     return (
       <AppWrapper>
-        <AppNav activeTab={activeTab} changeTab={this.changeTab} />
+        <AppNav
+          activeTab={activeTab}
+          changeTab={this.changeTab} />
         <AppMain activeTab={activeTab} />
-        <AppNoti notifications={notifications} removeNoti={this.removeNoti} />
+        <AppNoti
+          notifications={notifications}
+          removeNoti={this.removeNoti} />
+        <AppUpdate
+          message={checkUpdatesMessage}
+          removeMessage={this.removeUpdateMessage}/>
       </AppWrapper>
     );
   }
@@ -110,6 +127,7 @@ App.propTypes = {
   ui: PropTypes.shape({
     activeTab: PropTypes.string.isRequired,
     notifications: PropTypes.array.isRequired,
+    checkUpdatesMessage: PropTypes.object,
   }).isRequired,
 };
 

@@ -1460,6 +1460,15 @@ builder-util-runtime@2.5.0, builder-util-runtime@^2.5.0:
     fs-extra-p "^4.4.4"
     sax "^1.2.4"
 
+builder-util-runtime@~3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/builder-util-runtime/-/builder-util-runtime-3.1.0.tgz#60ec66d3c49f028655230a09d7767e77ff6f15b8"
+  dependencies:
+    bluebird-lst "^1.0.5"
+    debug "^3.1.0"
+    fs-extra-p "^4.4.4"
+    sax "^1.2.4"
+
 builder-util@3.2.0, builder-util@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/builder-util/-/builder-util-3.2.0.tgz#08900f046c6b09c22a1f235f18644ae9eb963bc4"
@@ -2337,6 +2346,20 @@ electron-settings@^3.1.2:
   dependencies:
     clone "^2.1.1"
     jsonfile "^4.0.0"
+
+electron-updater@^2.16.1:
+  version "2.16.1"
+  resolved "https://registry.yarnpkg.com/electron-updater/-/electron-updater-2.16.1.tgz#29e85589ec31ae817ca05bcaf10358bd66119188"
+  dependencies:
+    bluebird-lst "^1.0.5"
+    builder-util-runtime "~3.1.0"
+    electron-is-dev "^0.3.0"
+    fs-extra-p "^4.4.4"
+    js-yaml "^3.10.0"
+    lazy-val "^1.0.2"
+    lodash.isequal "^4.5.0"
+    semver "^5.4.1"
+    source-map-support "^0.5.0"
 
 electron@^1.7.9:
   version "1.7.9"
@@ -4240,6 +4263,10 @@ lodash.assign@^4.0.3, lodash.assign@^4.0.6:
 lodash.flattendeep@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
 lodash.isplainobject@^4.0.6:
   version "4.0.6"

@@ -24,6 +24,7 @@
     "dotenv": "^4.0.0",
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.2",
+    "electron-updater": "^2.16.1",
     "glob": "^7.1.2",
     "is-svg": "^2.1.0",
     "jimp": "^0.2.28",
