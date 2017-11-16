@@ -156,6 +156,13 @@ let menuTemplate = [
         },
       },
       {
+        label: 'Check For Updates',
+        accelerator: 'CmdOrCtrl+U',
+        click() {
+          ipc.send('check-for-updates');
+        },
+      },
+      {
         label: 'Learn More',
         click() {
           require('electron').shell.openExternal('https://www.paprless.co');

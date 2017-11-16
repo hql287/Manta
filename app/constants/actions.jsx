@@ -38,6 +38,8 @@ export const SETTINGS_GET_INITIAL = 'SETTINGS_GET_INITIAL';
 
 // UI
 // ===========================================================
-export const UI_TAB_CHANGE          = 'UI_TAB_CHANGE';
-export const UI_NOTIFICATION_NEW    = 'UI_NOTIFICATION_NEW';
-export const UI_NOTIFICATION_REMOVE = 'UI_NOTIFICATION_REMOVE';
+export const UI_TAB_CHANGE            = 'UI_TAB_CHANGE';
+export const UI_NOTIFICATION_NEW      = 'UI_NOTIFICATION_NEW';
+export const UI_NOTIFICATION_REMOVE   = 'UI_NOTIFICATION_REMOVE';
+export const UI_CHECK_UPDATES_MESSAGE = 'UI_CHECK_UPDATES_MESSAGE';
+

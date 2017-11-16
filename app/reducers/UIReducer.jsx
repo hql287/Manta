@@ -4,10 +4,16 @@ import {handleActions} from 'redux-actions';
 const initialState = {
   activeTab: 'form',
   notifications: [],
+  checkUpdatesMessage: {},
 };
 
 const UIReducer = handleActions(
   {
+    [ACTION_TYPES.UI_CHECK_UPDATES_MESSAGE]: (state, action) =>
+      Object.assign({}, state, {
+        checkUpdatesMessage: action.payload,
+      }),
+
     [ACTION_TYPES.UI_TAB_CHANGE]: (state, action) =>
       Object.assign({}, state, {
         activeTab: action.payload,
