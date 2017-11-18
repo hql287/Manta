@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const BabelWebpackPlugin = require('babel-minify-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const WebpackMonitor = require('webpack-monitor');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
@@ -55,6 +56,18 @@ exports.analyzeBundle = () => ({
 exports.webpackDashboard = () => ({
   plugins: [
     new DashboardPlugin(),
+  ],
+});
+
+// Webpack Monitor
+exports.webpackMonitor = () => ({
+  plugins: [
+    new WebpackMonitor({
+      capture: true, // -> default 'true'
+      target: '../monitor/myStatsStore.json', // default -> '../monitor/stats.json'
+      launch: true, // -> default 'false'
+      port: 3030, // default -> 8081
+    }),
   ],
 });
 

@@ -43,6 +43,8 @@ const developmentConfig = merge([
     host: 'localhost',
     port: 3000,
   }),
+  // Webpack Monitor
+  parts.webpackMonitor(),
   // Output
   {
     output: {
