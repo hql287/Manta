@@ -2,7 +2,7 @@
   "name": "Manta",
   "homepage": "https://www.lequochung.me",
   "productName": "Manta",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "ISC",
   "description": "Digital invoicing with customizable templates",
   "author": {
@@ -16,12 +16,12 @@
     "build": "webpack --env.production",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dist": "electron-builder -mwl -p always",
-    "dist:mac": "electron-builder --mac -p always",
-    "dist:win": "electron-builder --win -p always",
-    "publish": "yarn run build && yarn run dist",
-    "publish:mac": "yarn run build && yarn run dist:mac",
-    "publish:win": "yarn run build && yarn run dist:win"
+    "dist": "electron-builder -mwl",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "pack": "yarn run build && yarn run dist",
+    "pack:mac": "yarn run build && yarn run dist:mac",
+    "pack:win": "yarn run build && yarn run dist:win"
   },
   "dependencies": {
     "date-fns": "^1.28.5",
