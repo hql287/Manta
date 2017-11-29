@@ -6,6 +6,8 @@
 # Manta
 A desktop application for creating invoices with beautiful and customizable templates.
 
+[![Build Status](https://travis-ci.com/hql287/Manta.svg?token=pxxHGwHnxpjzt5yFJEav&branch=dev)](https://travis-ci.com/hql287/Manta)
+
 # Features
 
 * Flexible form (Turn On/Off Fields)
