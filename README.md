@@ -1,35 +1,36 @@
-# Electron React Starter Kit
 
-Quickly get up and running with ReactJS inside Electron app.
+<p align="center">
+  <img src="https://d26dzxoao6i3hh.cloudfront.net/items/070G2F0z433t0F1y3W0j/manta-logo.png?v=3dc70c3c" alt="Manta App Logo" width="256" height="auto"/>
+</p>
+
+# Manta
+A desktop application for creating invoices with beautiful and customizable templates.
+
+# Features
+
+* Flexible form (Turn On/Off Fields)
+* Drag & drop items (Easier editing)
+* Use SVGs for logo (Better for print)
+* 2 custom designed templates
+* Highly customizable
+* Export PDF
+* Total privacy
+* 100% Free. No watermark or anything!
+
+# Tech Stacks
+
+* React
+* Redux
+* React-Motion
+* React-DnD
+* React-Beautiful-DnD
+* Electron
+* Webpack
 
 
-## Requirements
+## Contribution
+If you're interested in contributing to this project. Please [visit the repository](https://github.com/hql287/Manta) instead.
 
-You'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer.
-
-## To Use
-
-From your command line:
-
-```bash
-# Clone this repository
-git clone https://github.com/hungle88/electron-react-starter-kit
-
-# Go into the repository
-cd electron-react-starter-kit
-
-# Install dependencies
-yarn
-
-# Run the app
-yarn start
-```
-
-## Install React Dev Tools
-
-Execute the following from the Console tab of your running Electron app's developer tools:
-
-```bash
-require('electron-react-devtools').install()
-```
+## Author
+Hung Q. Le - @hql287
 

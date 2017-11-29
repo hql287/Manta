@@ -4,6 +4,7 @@ import * as ACTION_TYPES from '../../constants/actions.jsx';
 const initialState = {
   activeTab: 'form',
   notifications: [],
+  checkUpdatesMessage: {},
 };
 
 describe('UI Reducer', () => {
