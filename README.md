@@ -1,4 +1,7 @@
-![Manta Logo](./static/imgs/manta-logo.png)
+
+<p align="center">
+  <img src="https://d26dzxoao6i3hh.cloudfront.net/items/070G2F0z433t0F1y3W0j/manta-logo.png?v=3dc70c3c" alt="Manta App Logo" width="256" height="auto"/>
+</p>
 
 # Manta
 A desktop application for creating invoices with beautiful and customizable templates.
