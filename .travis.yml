@@ -1,0 +1,15 @@
+sudo: false
+language: node_js
+node_js:
+  - "8"
+cache:
+  directories:
+    - node_modules
+notifications:
+  email:
+    recipients:
+      - hi@manta.life
+    on_success: never
+    on_failure: always
+script:
+  - npm test
