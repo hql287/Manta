@@ -41,17 +41,17 @@ The main reason I decided to build this is because I need a simple tool to creat
 ## Goals
 So, my ideal app would need to satisfy these criteria:
 
-* Fast
-* Friendly UI & UX
-* Has nice looking templates
-* Des not touch user’s data
-* Free! :)
+* 🚀 Fast!!!
+* 👍 Friendly UI & UX
+* 🎉 Has nice looking templates
+* 🔒 Does not touch user’s data
+* 💰 Free! :)
 
-I hope you’ll find this product DOES meet its requirements. :)
+This app targets people who don't do invoicing for a living but rather those who need it occasionally such as freelancers designers, developers, photographers or writers...
+
+This is still in beta and it's far from perfect but I still hope you find it useful.
 
 ## Contribution
-If you're interested in contributing to this project. Please [visit the repository](https://github.com/hql287/Manta) instead.
 
-## Author
-Hung Q. Le - @hql287
+Feedbacks, issues or PRs are greatly appreciated! :)
 
