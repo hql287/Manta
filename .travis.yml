@@ -3,6 +3,7 @@ language: node_js
 node_js:
   - "8"
 cache:
+  yarn: true
   directories:
     - node_modules
 notifications:
@@ -12,4 +13,11 @@ notifications:
     on_success: never
     on_failure: always
 script:
-  - npm test
+  - yarn run test
+  - yarn run release
+deploy:
+  provider: releases
+  api_key: $ENCRYPTED_GITHUB_TOKEN
+  skip_cleanup: true
+  on:
+    tags: true
