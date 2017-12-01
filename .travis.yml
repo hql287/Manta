@@ -11,10 +11,9 @@ matrix:
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
-    - os: linux
-      services: docker
-      language: generic
+    # - os: linux
+    #   services: docker
+    #   language: generic
 cache:
   directories:
     - node_modules
