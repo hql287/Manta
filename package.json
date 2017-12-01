@@ -1,10 +1,10 @@
 {
   "name": "Manta",
-  "homepage": "https://www.lequochung.me",
+  "homepage": "https://manta.life",
   "productName": "Manta",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "license": "ISC",
-  "description": "Digital invoicing with customizable templates",
+  "description": "Painless invoicing with customizable templates",
   "author": {
     "name": "Hung Q. Le",
     "email": "lequochung@me.com"
@@ -17,11 +17,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "dist": "electron-builder -mwl",
-    "dist:mac": "electron-builder --mac",
-    "dist:win": "electron-builder --win",
-    "pack": "yarn run build && yarn run dist",
-    "pack:mac": "yarn run build && yarn run dist:mac",
-    "pack:win": "yarn run build && yarn run dist:win"
+    "release": "yarn run build && yarn run dist"
   },
   "dependencies": {
     "date-fns": "^1.28.5",
