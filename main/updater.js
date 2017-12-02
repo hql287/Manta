@@ -1,6 +1,8 @@
 const {ipcMain} = require('electron');
 const {autoUpdater} = require('electron-updater');
 
+// Disable Auto Downloading update;
+autoUpdater.autoDownload = false;
 let mainWindow;
 
 ipcMain.on('check-for-updates', event => {
@@ -10,46 +12,53 @@ ipcMain.on('check-for-updates', event => {
   autoUpdater.checkForUpdates();
 });
 
+// Start Download
+ipcMain.on('update-download-started', () => {
+  autoUpdater.downloadUpdate();
+});
+
+// Upgrade Now
+ipcMain.on('upgrade-now', () => {
+  autoUpdater.quitAndInstall();
+});
+
+// All AutoUpdater Events
+// ====================================
+
 // Checking for Update
 autoUpdater.on('checking-for-update', () => {
-  sendStatusToWindow('Checking for update...');
+  mainWindow.send('update-checking');
 });
 
 // Update Available
 autoUpdater.on('update-available', info => {
-  sendStatusToWindow('Update available. ' + info);
+  mainWindow.send('update-available', info);
 });
 
 // Update Not Available
-autoUpdater.on('update-not-available', info => {
-  sendStatusToWindow('Update not available. ' + info);
+autoUpdater.on('update-not-available', () => {
+  mainWindow.send('update-not-available');
 });
 
-// Error Handling
-autoUpdater.on('error', err => {
-  sendStatusToWindow('Updating Error! ' + err, 'error');
+// Update Error
+autoUpdater.on('error', error => {
+  let errMessage;
+  if (error == null) {
+    errMessage = 'Unknown Error';
+  } else {
+    errMessage = error.toString();
+  }
+  mainWindow.send('update-error', errMessage);
 });
 
 // Download Progress
 autoUpdater.on('download-progress', progressObj => {
-  let log_message = 'Download speed: ' + progressObj.bytesPerSecond;
-  log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
-  log_message =
-    log_message +
-    ' (' +
-    progressObj.transferred +
-    '/' +
-    progressObj.total +
-    ')';
-  sendStatusToWindow(log_message);
+  let message = `Downloaded ${progressObj.percent} %`;
+  mainWindow.send('update-download-progress', message);
 });
 
 // Update Downloaded
 autoUpdater.on('update-downloaded', info => {
-  sendStatusToWindow('Update downloaded. ' + info);
+  mainWindow.send('update-downloaded', info);
 });
 
-// Helper
-function sendStatusToWindow(text, type='info') {
-  mainWindow.send('check-for-updates-message', text, type);
-}
