@@ -16,6 +16,7 @@ A desktop application for creating invoices with beautiful and customizable temp
 * 🔒 Privacy. Your data stays where it belongs.
 * 💯 Totally Free.
 
+
 ## Tech Stacks
 * [Electron](https://github.com/electron/electron)
 * [React](https://github.com/facebook/react)
@@ -25,8 +26,9 @@ A desktop application for creating invoices with beautiful and customizable temp
 * [React-Motion](https://github.com/chenglou/react-motion)
 * [Webpack](https://github.com/webpack/webpack)
 
+
 ## Why?
-The main reason I decided to build this is because I need a simple tool to create good looking invoices/estimates/receipts but couldn't find a product that suits my needs. I don't do invoicing for a living but I do need it occasionally so an ideal invoicing app to be would just need to be good at one thing and one thing only, which is making invoices.
+The main reason I decided to build this is because I need a simple tool to create good looking invoices, estimates, and receipts but couldn't find a product that suits my needs. I don't do invoicing for a living but I do need it occasionally so an ideal invoicing app just need to be good at one thing and one thing only, which is making invoices. I really don't need a full-fledged bookkeeping or accounting software.
 
 I believe there are many people such as freelance designers, developers, photographers or writers... also have such need. Sadly, I did my research and most (if not all) products that I found have these these problems:
 
@@ -40,6 +42,7 @@ I believe there are many people such as freelance designers, developers, photogr
 
 * When you use a web service, most of the time, you’re giving away your data whether you want it or not. Financial data is sensitive and I believe that no one should know about your data except yourself.
 
+
 ## Goals
 With that in mind, I know that Manta would need to satisfy these criteria:
 
@@ -50,6 +53,7 @@ With that in mind, I know that Manta would need to satisfy these criteria:
 * 💰 Free! :)
 
 This is still in beta and it's far from perfect but I hope it did meet those requirements.
+
 
 ## Contribution
 Feedbacks, issues or PRs are greatly appreciated! :)
