@@ -16,7 +16,7 @@
     "build": "webpack --env.production",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dist": "electron-builder -mwl",
+    "dist": "electron-builder --mac",
     "release": "yarn run build && yarn run dist"
   },
   "dependencies": {
@@ -78,7 +78,6 @@
     "webpack-dashboard": "^1.0.0",
     "webpack-dev-server": "^2.9.0",
     "webpack-merge": "^4.1.0",
-    "webpack-monitor": "^1.0.13",
     "webpack-node-externals": "^1.6.0"
   }
 }
