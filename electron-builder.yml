@@ -1,20 +1,20 @@
 appId: com.electron.manta
 copyright: Hung Q. Le
-productName: Manta Ray
-mac:
-  category: public.app-category.business
-  target:
-    - zip
-    - dmg
-win:
-  target: nsis
-linux:
-  target:
-    - deb
-    - AppImage
+productName: Manta
 publish:
   - provider: github
     owner: hql287
     repo: Manta
 directories:
   output: dist/
+mac:
+  category: public.app-category.business
+  target:
+    - zip
+    - dmg
+# win:
+#   target: nsis
+# linux:
+#   target:
+#     - deb
+#     - AppImage
