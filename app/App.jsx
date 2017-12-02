@@ -24,7 +24,6 @@ class App extends Component {
     super(props);
     this.changeTab = this.changeTab.bind(this);
     this.removeNoti = this.removeNoti.bind(this);
-    this.removeUpdateMessage = this.removeUpdateMessage.bind(this);
   }
 
   componentDidMount() {
@@ -64,9 +63,6 @@ class App extends Component {
     ipc.on('menu-form-toggle-settings', () => {
       dispatch(FormActions.toggleFormSettings());
     });
-    ipc.on('check-for-updates-message', (event, message, type) => {
-      dispatch(UIActions.checkUpdatesMessage(message, type));
-    });
   }
 
   shouldComponentUpdate(nextProps) {
@@ -98,11 +94,6 @@ class App extends Component {
     dispatch(UIActions.removeNoti(id));
   }
 
-  removeUpdateMessage() {
-    const {dispatch} = this.props;
-    dispatch(UIActions.checkUpdatesMessage(null, 'info'));
-  }
-
   render() {
     const {activeTab, notifications, checkUpdatesMessage} = this.props.ui;
     return (
@@ -114,9 +105,7 @@ class App extends Component {
         <AppNoti
           notifications={notifications}
           removeNoti={this.removeNoti} />
-        <AppUpdate
-          message={checkUpdatesMessage}
-          removeMessage={this.removeUpdateMessage}/>
+        <AppUpdate/>
       </AppWrapper>
     );
   }
