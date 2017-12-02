@@ -17,14 +17,8 @@ ipcMain.on('update-download-started', () => {
   autoUpdater.downloadUpdate();
 });
 
-// Upgrade Now
-ipcMain.on('upgrade-now', () => {
-  autoUpdater.quitAndInstall();
-});
-
 // All AutoUpdater Events
 // ====================================
-
 // Checking for Update
 autoUpdater.on('checking-for-update', () => {
   mainWindow.send('update-checking');
@@ -46,7 +40,7 @@ autoUpdater.on('error', error => {
   if (error == null) {
     errMessage = 'Unknown Error';
   } else {
-    errMessage = error.toString();
+    errMessage = error.message;
   }
   mainWindow.send('update-error', errMessage);
 });

@@ -124,18 +124,17 @@ class AppUpdate extends Component {
         {
           type: 'info',
           title: 'Update Downloaded',
-          message: 'Do you want to upgrade the application now?',
-          buttons: ['Upgrade Now', 'Upgrade on Quit'],
+          message: 'Do you want to quit the app to upgrade now?',
+          buttons: ['Quit Now', 'Later'],
         },
-        'upgade-confirmed'
+        'upgrade-confirmed'
       );
     });
 
     // Upgrade Confirmation
-    ipc.on('upgade-confirmed', (event, index) => {
-      // Upgrade now
+    ipc.on('upgrade-confirmed', (event, index) => {
       if (index === 0) {
-        ipc.send('upgrade-now');
+        ipc.send('restart-app');
       }
     });
   }

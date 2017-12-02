@@ -182,11 +182,19 @@ function setInitialValues() {
 }
 
 function addEventListeners() {
+  // Close all windows and quit the app
   ipcMain.on('quit-app', () => {
     tourWindow.destroy();
     mainWindow.destroy();
     previewWindow.destroy();
     app.quit();
+  });
+  // Use with autoUpdater
+  ipcMain.on('restart-app', () => {
+    tourWindow.destroy();
+    mainWindow.destroy();
+    previewWindow.destroy();
+    app.relaunch();
   });
 }
 
