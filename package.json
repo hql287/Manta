@@ -16,7 +16,7 @@
     "build": "webpack --env.production",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dist": "electron-builder --mac",
+    "dist": "electron-builder -mwl",
     "release": "yarn run build && yarn run dist"
   },
   "dependencies": {
