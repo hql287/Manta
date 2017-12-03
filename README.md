@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://d26dzxoao6i3hh.cloudfront.net/items/0p043p3z2r2C2T2B2B0I/manta-logo.svg" alt="Manta App Logo" width="180" height="auto"/>
+  <img src="https://d26dzxoao6i3hh.cloudfront.net/items/0M0W110L142j0t2H0W2X/manta-logo.svg" alt="Manta App Logo" width="180" height="auto"/>
 </p>
 
 <h2>
@@ -7,11 +7,11 @@
   <a href="https://travis-ci.com/hql287/Manta">
     <img src="https://travis-ci.com/hql287/Manta.svg?token=pxxHGwHnxpjzt5yFJEav&branch=dev" alt="Build Status">
   </a>
-  <a href="#">
+  <a href="https://github.com/hql287/Manta/releases">
     <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="v1.0.0">
   </a>
-  <a href="./License.md">
-    <img src="https://img.shields.io/npm/l/slate.svg?maxAge=300">
+  <a href="./LICENSE.md">
+    <img src="https://img.shields.io/badge/license-CC0-blue.svg">
   </a>
 </h2>
 
