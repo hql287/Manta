@@ -3,7 +3,7 @@ import path from 'path';
 import Slide from '../Slide';
 
 const description = `
-Welcome and thank you for taking the time to try this out. Now, let's learn how you can use Manta to create stunning invoices in under a minute with these 3 simple steps.
+  Thank you for giving me a try. Let me show you how to create stunning invoices with just 3 simple steps.
 `;
 
 function Welcome() {

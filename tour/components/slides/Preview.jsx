@@ -3,7 +3,7 @@ import path from 'path';
 import Slide from '../Slide';
 
 const description = `
-Preview your invoice with the beautiful templates built in to Manta. If necessary, you can always cutomize it further to match your brand style.
+Manta comes with professional looking templates which can be customized further to match your brand style.
 `;
 
 function Preview() {
@@ -11,7 +11,7 @@ function Preview() {
     <Slide
       fromColor="#FFD200"
       toColor="#F7971E"
-      heading="2. Preview"
+      heading="Step 2. Customize"
       description={description}
       imgSrc={path.resolve(__dirname, './imgs/Preview.svg')}
       imgSize="520px"
