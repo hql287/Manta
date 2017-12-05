@@ -71,53 +71,30 @@ class AppSettings extends Component {
     return (
       <div>
         <div className="row">
-          <div className="pageItem col-md-6">
-            <label className="itemLabel">Export Directory</label>
-            <div className="input-group">
-              <input
-                className="form-control"
-                name="exportDir"
-                type="text"
-                value={this.state.exportDir}
-                disabled
-              />
-              <a
-                href="#"
-                className="input-group-customized "
-                onClick={this.selectExportDir}>
-                <i className="ion-folder" />
-              </a>
-            </div>
-          </div>
+          <div className="col-md-12">
+            <div className="pageItem">
+              <label className="itemLabel">Export Directory</label>
 
-          <div className="pageItem col-md-6">
-            <label className="itemLabel">Template</label>
-            <select
-              name="template"
-              value={this.state.template}
-              onChange={this.handleInputChange}>
-              <option value="minimal">Minimal</option>
-              <option value="business">Business</option>
-              {/*
-                <option value="modern">Modern</option>
-              */}
-            </select>
+              <div className="input-group">
+                <input
+                  className="form-control"
+                  name="exportDir"
+                  type="text"
+                  value={this.state.exportDir}
+                  disabled
+                />
+                <a
+                  href="#"
+                  className="input-group-customized "
+                  onClick={this.selectExportDir}>
+                  <i className="ion-folder" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-md-6">
-            <div className="pageItem">
-              <label className="itemLabel">Default Language</label>
-              <select
-                name="language"
-                value={this.state.language}
-                onChange={this.handleInputChange}>
-                <option value="en">English</option>
-                <option value="vi">Vietnamese</option>
-              </select>
-            </div>
-          </div>
           <div className="col-md-6">
             <div className="pageItem">
               <label className="itemLabel">Default Currency</label>
@@ -126,6 +103,18 @@ class AppSettings extends Component {
                 value={this.state.currency}
                 onChange={this.handleInputChange}>
                 {currenciesOptions}
+              </select>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Default Template</label>
+              <select
+                name="template"
+                value={this.state.template}
+                onChange={this.handleInputChange}>
+                <option value="minimal">Minimal</option>
+                <option value="business">Business</option>
               </select>
             </div>
           </div>
@@ -146,7 +135,7 @@ class AppSettings extends Component {
           </div>
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Muted?</label>
+              <label className="itemLabel">Mute Sound?</label>
               <label className="switch">
                 <input
                   name="muted"
