@@ -9,8 +9,9 @@ Manta comes with professional looking templates which can be customized further 
 function Preview() {
   return (
     <Slide
-      fromColor="#FFD200"
-      toColor="#F7971E"
+      inverted
+      fromColor="#5691c8"
+      toColor="#457fca"
       heading="Step 2. Customize"
       description={description}
       imgSrc={path.resolve(__dirname, './imgs/Preview.svg')}
