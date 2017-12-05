@@ -156,13 +156,6 @@ let menuTemplate = [
         },
       },
       {
-        label: 'Check For Updates',
-        accelerator: 'CmdOrCtrl+U',
-        click() {
-          ipc.send('check-for-updates');
-        },
-      },
-      {
         label: 'Learn More',
         click() {
           require('electron').shell.openExternal('https://www.paprless.co');
@@ -177,6 +170,14 @@ if (process.platform === 'darwin') {
     label: 'My App',
     submenu: [
       {role: 'about'},
+      {type: 'separator'},
+      {
+        label: 'Check For Updates',
+        accelerator: 'CmdOrCtrl+U',
+        click() {
+          ipc.send('check-for-updates');
+        },
+      },
       {type: 'separator'},
       {role: 'services', submenu: []},
       {type: 'separator'},

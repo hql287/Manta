@@ -9,13 +9,12 @@ const description = `
 function Save() {
   return (
     <Slide
-      inverted
-      fromColor="#E52D27"
-      toColor="#B31217"
+      fromColor="#FFD200"
+      toColor="#F7971E"
       heading="3. Save"
       description={description}
       imgSrc={path.resolve(__dirname, './imgs/Save.svg')}
-      imgSize="360px"
+      imgSize="460px"
     />
   );
 }

@@ -52,12 +52,10 @@ class AppUpdate extends Component {
   }
 
   componentDidMount() {
-    // Checkinf For Update
     ipc.on('update-checking', event => {
       this.setState({message: 'Checking for update'});
     });
 
-    // Update available, ask user to download or not
     ipc.on('update-available', () => {
       openDialog(
         {
@@ -70,7 +68,6 @@ class AppUpdate extends Component {
       );
     });
 
-    // Update Not Available
     ipc.on('update-not-available', () => {
       openDialog({
         type: 'info',
@@ -80,7 +77,6 @@ class AppUpdate extends Component {
       this.removeMessage();
     });
 
-    // Update Error
     ipc.on('update-error', (event, error) => {
       openDialog({
         type: 'warning',
@@ -90,7 +86,6 @@ class AppUpdate extends Component {
       this.removeMessage();
     });
 
-    // Update Download Confirm
     ipc.on('update-download-confirmed', (event, index) => {
       // Start the download
       if (index === 0) {
@@ -106,14 +101,12 @@ class AppUpdate extends Component {
       }
     });
 
-    // Download Progress
     ipc.on('update-download-progress', (event, progressMessage) => {
       this.setState({
         message: progressMessage
       });
     });
 
-    // Update Downloaded
     ipc.on('update-downloaded', () => {
       // Update Message
       this.setState({
@@ -131,7 +124,6 @@ class AppUpdate extends Component {
       );
     });
 
-    // Upgrade Confirmation
     ipc.on('upgrade-confirmed', (event, index) => {
       if (index === 0) {
         ipc.send('restart-app');
