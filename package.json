@@ -16,7 +16,11 @@
     "build": "webpack --env.production",
     "test": "jest",
     "test:watch": "jest --watch",
+    "dist:linux": "electron-builder --linux",
+    "dist:win": "electron-builder --win",
     "dist": "electron-builder -mwl",
+    "release:linux": "yarn run build && yarn run dist:linux",
+    "release:win": "yarn run build && yarn run dist:win",
     "release": "yarn run build && yarn run dist"
   },
   "dependencies": {

@@ -4,8 +4,8 @@
 
 <h2>
   Manta
-  <a href="https://travis-ci.com/hql287/Manta">
-    <img src="https://travis-ci.com/hql287/Manta.svg?token=pxxHGwHnxpjzt5yFJEav&branch=dev" alt="Build Status">
+  <a href="https://travis-ci.org/hql287/Manta">
+    <img src="https://travis-ci.org/hql287/Manta.svg?branch=dev" alt="Build Status">
   </a>
   <a href="https://github.com/hql287/Manta/releases">
     <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="v1.0.0">
@@ -19,7 +19,7 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 <a href="#features">Features</a> •
 <a href="#downloads">Downloads</a> •
-<a href="#techs">Techs</a> •
+<a href="#technologies">Technologies</a> •
 <a href="#why">Why?</a> •
 <a href="#goals">Goals</a> •
 <a href="#development">Development</a> •
@@ -36,14 +36,13 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 ### Downloads
 
-Operating System | Tested
------------------|-------
-<a href='https://github.com/hql287/Manta/releases/download/v1.0.0/Manta-1.0.0.dmg'>Download for macOS</a> | ✅  Yes
-<a href="#">Download for Windows</a> | <a href="#support">No. See support</a>
-<a href="#">Download for Linux</a> | <a href="#support">No. See support</a>
+macOS | Windows | Linux
+-----------------| ---| ---|
+<a href='https://github.com/hql287/Manta/releases/download/v1.0.0/Manta-1.0.0.dmg'>Download v1.0.0</a> | <a href="#support">See Build Instruction</a> | <a href="#support">See Build Instruction</a> |
 
+Windows and Linux versions are still being developed. If you're interested in making your own build, please refer to the [build instruction](#support) for more details.
 
-### Techs
+### Technologies
 * [Electron](https://github.com/electron/electron)
 * [React](https://github.com/facebook/react)
 * [Redux](https://github.com/reactjs/redux)
@@ -52,10 +51,11 @@ Operating System | Tested
 * [React-Motion](https://github.com/chenglou/react-motion)
 * [Webpack](https://github.com/webpack/webpack)
 
-### Why
-The main reason I decided to build this is because I need a simple tool to create good looking invoices, estimates, and receipts but couldn't find a product that suits my needs. I don't do invoicing for a living but I do need it occasionally so an ideal invoicing app just need to be good at one thing and one thing only, which is making invoices. I really don't need a full-fledged bookkeeping or accounting software.
 
-I believe there are many people such as freelance designers, developers, photographers or writers... also have such need. Sadly, I did my research and most (if not all) products that I found have these these problems:
+### Why
+The main reason I decided to build this is because I need a simple tool to create good looking invoices, estimates, and receipts but couldn't find one  that suits my needs. I don't do invoicing for a living but I do need it occasionally so an ideal invoicing app just needs to be good at one thing and one thing only, which is making invoices. I really don't need a full-fledged bookkeeping or accounting software.
+
+I believe there are many people such as freelance designers, developers, photographers or writers... also have such need. However, most (if not all) products I found have these these problems:
 
 **Complexity**
 
@@ -68,7 +68,6 @@ I believe there are many people such as freelance designers, developers, photogr
 * When you use a web service, most of the time, you’re giving away your data whether you want it or not. Financial data is sensitive and I believe that no one should know about your data except yourself.
 
 
-
 ### Goals
 With that in mind, I know that Manta would need to satisfy these criteria:
 
@@ -78,20 +77,27 @@ With that in mind, I know that Manta would need to satisfy these criteria:
 * 🔒 Does not touch user’s data
 * 💰 Free! :)
 
-This is still in beta and it's far from perfect but I hope it did meet those requirements.
-
-
+  If you think Manta delivers these, let me know by putting a star on this project 😉
 
 ### Development
 
 It's very easy to get started with these 3 steps:
 
 * Clone this project to your local machine.
+* Run `yarn install` to install dependencies
+* Open terminal and `cd` to the cloned folder,
 * Run `yarn dev` in one tab to start `webpack-dev-server`.
-* Run `yarn start` in another tab to open the electron app.
+* Run `yarn start` in another tab to open the app.
 
-Feedbacks, issues or PRs are greatly appreciated! :)
+This is still in beta and it's far from perfect so feedbacks, issues or PRs are greatly appreciated! :)
 
 ### Support
 
-Manta has been tested only on macOS as I don't have any machine runs Windows/Linux. Future versions might include support for Windows if this project receives enough traction. In the meantime, if you find a bug, please file an issue.
+Future versions might include support for Windows/Linux if there's enough people request it. If you want to test it out on Windows/Linux you can following these steps:
+
+* Clone the project
+* Run `yarn install` to install dependencies.
+* Run `yarn release:win` if you want to build for Windows
+* Run `yarn release:linux` if you want to build for Linux
+
+In the project's root directory, open the `dist` folder and you should see the installer.
