@@ -117,27 +117,34 @@ In the project's root directory, open the `dist` folder and you should see the i
 ### FAQ
 
 * **Is this app built with Electron?**
+
 Yes, it's built on top of [Electron](#).
 Please see the [Technologies](#technologies) section for more info.
 
 * **What boilerplate did you use**
+
 None. This's my attempt to integrate the Electron with React from scratch. The idea was to get a better understanding of how things work together, especially Webpack.
 But I do take cues from other projects.
 
 * **What CSS/UI Framework did you use?**
+
 I wrote all the CSS myself. I only use Bootstrap for prototyping at first. But I gradually encapsulate most of the style to the component with the help of [`styled-components`](https://www.styled-components.com/). There is some places still use Bootstrap mostly for layout purpose but I'll get rid of it eventually.
 
 * **Where did you get the icons?**
+
 [ionicons](http://ionicons.com/). They're great!
 
 * **Why did you name the project Manta? It has nothing to do with invoicing.**
+
 It's actually very common to associate an animal with your brand. There's a reason behind the Twitter bird, the famous MailChimp Freddy or the Docker whale ... It's call the Baby-Face bias. You can read more about it in the book [Designing for Emotion](https://abookapart.com/products/designing-for-emotion) by [Aaron Walter](http://aarronwalter.com/).
 In my case, I was inspired by the movie [Racing Extinction](http://racingextinction.com/) and by naming this project Manta, I hope to raise people's awareness on some environmental issues mentioned in the movie. You can [read more about it here](https://manta.life/about)
 
 * **I like the app's logo, did you design it?**
+
 Yes, I actually did all the illustrations that you see in the app as well.
 
 * **Are you available for hire?**
+
 Yes, kind of. I'm exploring new opportunities at the moment. Please let me know what you have in mind.
 
 
