@@ -17,6 +17,7 @@
 
 A desktop application for creating invoices with beautiful and customizable templates.
 
+<a href="#screenshots">Screenshots</a> •
 <a href="#features">Features</a> •
 <a href="#downloads">Downloads</a> •
 <a href="#technologies">Technologies</a> •
@@ -24,6 +25,16 @@ A desktop application for creating invoices with beautiful and customizable temp
 <a href="#goals">Goals</a> •
 <a href="#development">Development</a> •
 <a href="#support">Support</a>
+
+### Screenshots
+
+Here's a few screenshots:
+
+![Example Invoice 1](https://d26dzxoao6i3hh.cloudfront.net/items/302k0o2c3i2O2K0q2w1i/example1.jpg?v=93291970)
+
+![Example Invoice 2](https://d26dzxoao6i3hh.cloudfront.net/items/2c0L2f1d3H0J1m0x291c/example2.jpg?v=329619d0)
+
+![Form](https://d26dzxoao6i3hh.cloudfront.net/items/04302b2f0w2t321B1f26/formScreenshot.jpg?v=da6fa66b)
 
 ### Features
 * 🎚 Flexible form. You can turn on/off fields
