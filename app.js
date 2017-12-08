@@ -182,18 +182,11 @@ function setInitialValues() {
 }
 
 function addEventListeners() {
-  // Close all windows and quit the app
   ipcMain.on('quit-app', () => {
-    tourWindow.destroy();
-    mainWindow.destroy();
-    previewWindow.destroy();
     app.quit();
   });
   // Use with autoUpdater
   ipcMain.on('restart-app', () => {
-    tourWindow.destroy();
-    mainWindow.destroy();
-    previewWindow.destroy();
     app.relaunch();
   });
 }
@@ -261,10 +254,17 @@ function initialize() {
     const {showWindow} = require('./main/tour');
     showWindow('startup');
   });
+
+  // Reactive the app
   app.on('activate', () => {
-    // Reactive the app
     const {showWindow} = require('./main/tour');
     showWindow('activate');
+  });
+  // Close all windows before quit the app
+  app.on('before-quit', () => {
+    tourWindow.destroy();
+    mainWindow.destroy();
+    previewWindow.destroy();
   });
   console.timeEnd('init');
 }
