@@ -40,6 +40,8 @@ input[type="number"] {
   font-size: 14px;
   color: #3a3e42;
   background: white;
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
 }
 
 .input-group-customized {
