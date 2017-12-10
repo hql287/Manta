@@ -132,8 +132,8 @@ function createPreviewWindow() {
 }
 
 function addDevToolsExtension() {
-  BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
-  BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
+  if (process.env.REACT_DEV_TOOLS_PATH) BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
+  if (process.env.REDUX_DEV_TOOLS_PATH) BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
 }
 
 function setInitialValues() {

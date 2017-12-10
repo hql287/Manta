@@ -45,8 +45,21 @@ const deleteDoc = (dbName, doc) =>
       .catch(err => reject(err));
   });
 
+// update a document
+const updateDoc = (dbName, docId, update) =>
+  new Promise((resolve, reject) => {
+    const db = setDB(dbName);
+    db.get(docId)
+      .then(record => db.put(Object.assign(record, update))
+      .then(getAllDocs(dbName)
+      .then(allDocs => resolve(allDocs)
+      )))
+      .catch(err => reject(err));
+  });
+
 export {
   getAllDocs,
   deleteDoc,
   saveDoc,
+  updateDoc,
 }
