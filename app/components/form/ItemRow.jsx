@@ -146,6 +146,7 @@ export class ItemRow extends Component {
           <ItemDivInput
             name="price"
             type="number"
+            step="0.01"
             value={this.state.price}
             onChange={this.handleNumberInputChange}
             placeholder="Price"
@@ -157,6 +158,7 @@ export class ItemRow extends Component {
           <ItemDivInput
             name="quantity"
             type="number"
+            step="0.01"
             value={this.state.quantity}
             onChange={this.handleNumberInputChange}
             placeholder="Quantity"
