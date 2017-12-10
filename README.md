@@ -114,6 +114,10 @@ Future versions might include support for Windows/Linux if there's enough people
 
 In the project's root directory, open the `dist` folder and you should see the installer.
 
+Note that on Linux you will need additional dependencies to provide the `icns2png` and `gm` commands.
+Ubuntu/Debian users can run: `sudo apt install -y icnsutils graphicsmagick`.
+
+
 ### FAQ
 
 * **Is this app built with Electron?**
