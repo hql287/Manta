@@ -28,6 +28,7 @@ class Invoices extends Component {
   constructor(props) {
     super(props);
     this.deleteInvoice = this.deleteInvoice.bind(this);
+    this.setInvoiceStatus = this.setInvoiceStatus.bind(this);
   }
 
   // Load Invoices & add event listeners
@@ -70,6 +71,12 @@ class Invoices extends Component {
     dispatch(Actions.deleteInvoice(invoiceId));
   }
 
+  // set the invoice status
+  setInvoiceStatus(invoiceId, status) {
+    const {dispatch} = this.props;
+    dispatch(Actions.setInvoiceStatus(invoiceId, status));
+  }
+
   // Render
   render() {
     const {invoices} = this.props;
@@ -77,6 +84,7 @@ class Invoices extends Component {
       <Invoice
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
+        setInvoiceStatus={this.setInvoiceStatus}
         index={index}
         invoice={invoice}
       />
@@ -97,6 +105,7 @@ class Invoices extends Component {
                     <TH>DueDate</TH>
                     <TH>Created</TH>
                     <TH>Value</TH>
+                    <TH>Status</TH>
                     <TH actions>Actions</TH>
                   </TR>
                 </THead>
