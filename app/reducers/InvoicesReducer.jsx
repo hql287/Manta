@@ -7,7 +7,8 @@ const InvoicesReducer = handleActions(
     [combineActions(
       Actions.getInvoices,
       Actions.saveInvoice,
-      Actions.deleteInvoice
+      Actions.deleteInvoice,
+      Actions.setInvoiceStatus
     )]: (state, action) => action.payload
   }, []
 );
