@@ -43,7 +43,7 @@ function createTourWindow() {
   );
   // Add Event Listeners
   tourWindow.on('show', event => {
-    if (isDev) tourWindow.webContents.openDevTools();
+    if (isDev) tourWindow.webContents.openDevTools({mode: 'detach'});
   });
   tourWindow.on('close', event => {
     event.preventDefault();
@@ -83,7 +83,7 @@ function createMainWindow() {
 
   // Add Event Listeners
   mainWindow.on('show', event => {
-    if (isDev) mainWindow.webContents.openDevTools();
+    if (isDev) mainWindow.webContents.openDevTools({mode: 'detach'});
   });
   mainWindow.on('close', event => {
     event.preventDefault();
@@ -122,7 +122,7 @@ function createPreviewWindow() {
   );
   // Add Event Listener
   previewWindow.on('show', event => {
-    if (isDev) previewWindow.webContents.openDevTools();
+    if (isDev) previewWindow.webContents.openDevTools({mode: 'detach'});
   });
   previewWindow.on('close', event => {
     event.preventDefault();
@@ -132,8 +132,10 @@ function createPreviewWindow() {
 }
 
 function addDevToolsExtension() {
-  BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
-  BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
+  if(process.env.REACT_DEV_TOOLS_PATH && process.env.REDUX_DEV_TOOLS_PATH){
+    BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
+    BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
+  }
 }
 
 function setInitialValues() {
