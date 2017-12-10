@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
+import styled from 'styled-components';
 
 const format = require('date-fns/format');
 const moment = require('moment');
@@ -14,12 +15,15 @@ import { formatNumber } from '../../helpers/number';
 import {TR, TD} from '../shared/Table';
 import Button from '../shared/Button';
 
+const StatusSelect = styled.select`margin-right: 10px;`
+
 // Component
 class Invoice extends Component {
   constructor(props) {
     super(props);
     this.deleteInvoice = this.deleteInvoice.bind(this);
     this.previewInvoice = this.previewInvoice.bind(this);
+    this.handleStatusChange = this.handleStatusChange.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -33,6 +37,11 @@ class Invoice extends Component {
 
   previewInvoice() {
     ipc.send('preview-invoice', this.props.invoice);
+  }
+
+  handleStatusChange(event) {
+    const {invoice, setInvoiceStatus} = this.props;
+    setInvoiceStatus(invoice._id, event.target.value)
   }
 
   // Render
@@ -63,6 +72,14 @@ class Invoice extends Component {
           {'\u00A0'}
           {formatNumber(invoice.grandTotal)}
         </TD>
+        <TD bold success>
+          <StatusSelect
+            onChange={this.handleStatusChange}
+            value={invoice.status || 'Pending'}>
+            <option value="Pending">Pending</option>
+            <option value="Paid">Paid</option>
+          </StatusSelect>
+        </TD>
         <TD actions>
           <Button link primary onClick={this.previewInvoice}>
             <i className="ion-search" />
@@ -79,6 +96,7 @@ class Invoice extends Component {
 Invoice.propTypes = {
   deleteInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
+  setInvoiceStatus: PropTypes.func.isRequired,
 };
 
 export default Invoice;
