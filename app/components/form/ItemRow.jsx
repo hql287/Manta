@@ -93,15 +93,15 @@ export class ItemRow extends Component {
   handleNumberInputChange(event) {
     const name   = event.target.name;
     const eValue = event.target.value;
-    const value  = eValue === '' ? '' : parseInt(eValue, 10);
+    const value  = eValue === '' ? '' : parseFloat(eValue);
     this.setState({[name]: value}, () => {
       this.updateSubtotal();
     });
   }
 
   updateSubtotal() {
-    const currentPrice = this.state.price === '' ? 0 : parseInt(this.state.price, 10);
-    const currentQuantity = this.state.quantity === '' ? 0 : parseInt(this.state.quantity, 10);
+    const currentPrice = this.state.price === '' ? 0 : parseFloat(this.state.price);
+    const currentQuantity = this.state.quantity === '' ? 0 : parseFloat(this.state.quantity);
     let currentSubtotal;
     if (this.state.price === '' || this.state.quantity === '') {
       currentSubtotal = '';
