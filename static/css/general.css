@@ -26,7 +26,7 @@ body,
   -webkit-app-region: drag;
 }
 .non-draggable {
-  -webkit-app-region: no-drag;
+  -webkit-app-region: no-drag !important;
 }
 select,
 input[type="text"],
