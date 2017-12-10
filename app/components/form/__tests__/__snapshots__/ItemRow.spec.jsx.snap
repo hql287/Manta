@@ -30,6 +30,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     <input
       className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
       name="price"
+      step="0.01"
       onChange={[Function]}
       onKeyDown={[Function]}
       placeholder="Price"
@@ -43,6 +44,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     <input
       className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
       name="quantity"
+      step="0.01"
       onChange={[Function]}
       onKeyDown={[Function]}
       placeholder="Quantity"
