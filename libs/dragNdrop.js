@@ -3,8 +3,8 @@ document.addEventListener('dragover', event => event.preventDefault());
 document.addEventListener('drop', event => event.preventDefault());
 
 
-// Linux draggable window broken, so monkey patch 
-if(process.platform == 'linux'){
+// Linux and Windows draggable window broken, so monkey patch 
+if(process.platform == 'linux' || process.platform == 'win32'){
     let elements = document.querySelectorAll("body,#root,.appWrapper")
     elements.forEach(element => {
         element.classList.add('non-draggable')
