@@ -97,8 +97,8 @@ class Contacts extends Component {
                 <THead>
                   <TR>
                     <TH>Contact</TH>
-                    <TH>Phone</TH>
                     <TH>Email</TH>
+                    <TH>Phone</TH>
                     <TH actions>Actions</TH>
                   </TR>
                 </THead>
