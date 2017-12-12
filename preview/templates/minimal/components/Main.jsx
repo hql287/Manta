@@ -149,16 +149,16 @@ function Main({invoice, configs}) {
           <tr className="invoice__discount">
             <td>Discount</td>
             <td>
-              {invoice.discount.type === 'flat' ? currency : '%'}
-              {' '}
               {formatNumber(invoice.discount.amount)}
+              {' '}
+              {invoice.discount.type === 'flat' ? currency : '%'}
             </td>
           </tr>
         }
         { invoice.vat &&
           <tr className="invoice__vat">
             <td>Vat</td>
-            <td>% {invoice.vat}</td>
+            <td>{invoice.vat} %</td>
           </tr>
         }
         <tr className="invoice__total">
