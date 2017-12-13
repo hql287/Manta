@@ -96,8 +96,8 @@ With that in mind, I know that Manta would need to satisfy these criteria:
 It's very easy to get started with these 3 steps:
 
 * Clone this project to your local machine.
-* Run `yarn install` to install dependencies
-* Open terminal and `cd` to the cloned folder,
+* Open terminal and `cd` to the cloned folder.
+* Run `yarn install` to install dependencies.
 * Run `yarn dev` in one tab to start `webpack-dev-server`.
 * Run `yarn start` in another tab to open the app.
 
