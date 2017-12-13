@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
-import { keys } from 'lodash';
+import { keys, sortBy } from 'lodash';
 
 // Custom Components
 import {Section} from '../shared/Section';
@@ -39,10 +39,16 @@ export class Currency extends Component {
 
   render() {
     const currenciesKeys = keys(currencies);
-    const currenciesOptions = currenciesKeys.map(key => {
-      let optionKey = currencies[key]['code'];
-      let optionValue = currencies[key]['code'];
-      let optionLabel = currencies[key]['name'];
+    const currenciesKeysAndValues = currenciesKeys.
+      map(key => [key, currencies[key]['name'], currencies[key]['code']]);
+    const currenciesSorted = sortBy(currenciesKeysAndValues, [array => array[1]]);
+    const currenciesOptions = currenciesSorted.map((obj) => {
+      const [key, name, code] = obj;
+
+      let optionKey = code;
+      let optionValue = code;
+      let optionLabel = name;
+
       return (
         <option value={optionValue} key={optionKey}>
           {optionLabel}
