@@ -149,8 +149,8 @@ function Main({invoice, configs}) {
                 Discount
               </td>
               <td>
-                {invoice.discount.type === 'flat' ? currency : '%'}{' '}
-                {formatNumber(invoice.discount.amount)}
+                {formatNumber(invoice.discount.amount)}{' '}
+                {invoice.discount.type === 'flat' ? currency : '%'}
               </td>
             </InvoiceDiscount>
           )}
@@ -161,7 +161,7 @@ function Main({invoice, configs}) {
               <td className="label" colSpan="2">
                 Vat
               </td>
-              <td>% {invoice.vat}</td>
+              <td>{invoice.vat} %</td>
             </InvoiceVat>
           )}
 
