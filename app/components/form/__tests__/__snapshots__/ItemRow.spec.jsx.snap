@@ -33,6 +33,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       onChange={[Function]}
       onKeyDown={[Function]}
       placeholder="Price"
+      step="0.01"
       type="number"
       value={999}
     />
@@ -46,6 +47,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       onChange={[Function]}
       onKeyDown={[Function]}
       placeholder="Quantity"
+      step="0.01"
       type="number"
       value={1}
     />
