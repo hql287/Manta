@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly to the DOM matches snapshot 1`] = `
+<div
+  className="col-lg-6"
+>
+  <div
+    className="Invoice__Wrapper-iBPCPb iuhTYc"
+  >
+    <div
+      className="Invoice__StatusBar-gmZFuj kFdsGo"
+    />
+    <div
+      className="Invoice__Header-cAhbPy ePNeRZ"
+    >
+      <div
+        className="Invoice__Status-eKPgUx eiULaG"
+      >
+        <span>
+          <i
+            className="ion-loop"
+          />
+          Pending
+        </span>
+      </div>
+      <button
+        className="Button__ButtonLinkStyle-ioTbaT eFjcaV"
+        onClick={[Function]}
+      >
+        <i
+          className="ion-trash-a"
+        />
+      </button>
+    </div>
+    <div
+      className="Invoice__Body-dSsrWx qPyCt"
+    >
+      <div
+        className="Invoice__Row-gNlmug hPTbEG"
+      >
+        <div
+          className="Invoice__Field-iXxbne toUew"
+        >
+          <label>
+            Client
+          </label>
+          <h2>
+            Penelope Hettinger
+          </h2>
+        </div>
+      </div>
+      <div
+        className="Invoice__Row-gNlmug hPTbEG"
+      >
+        <div
+          className="Invoice__Field-iXxbne toUew"
+        >
+          <label>
+            Invoice Id
+          </label>
+          <p>
+            37b2804e
+          </p>
+        </div>
+        <div
+          className="Invoice__Field-iXxbne toUew"
+        >
+          <label>
+            Total Value
+          </label>
+          <p>
+            USD
+             
+            3,843
+          </p>
+        </div>
+      </div>
+      <div
+        className="Invoice__Row-gNlmug hPTbEG"
+      >
+        <div
+          className="Invoice__Field-iXxbne toUew"
+        >
+          <label>
+            Created On
+          </label>
+          <p>
+            Invalid Date
+          </p>
+        </div>
+        <div
+          className="Invoice__Field-iXxbne toUew"
+        >
+          <label>
+            Due Date
+          </label>
+          <p>
+            --
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="Invoice__Footer-imOzTt jHuxPK"
+    >
+      <div>
+        <div
+          className="SplitButton__Wrapper-dWaGGO iZVhhz"
+        >
+          <div
+            className="SplitButton__ButtonsGroup-gPFJVZ jhIoxD"
+          >
+            <a
+              href="#"
+              onClick={[Function]}
+            >
+              Mark As Paid
+            </a>
+            <a
+              href="#"
+              onClick={[Function]}
+            >
+              <i
+                className="ion-arrow-down-b"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <button
+        className="Button__ButtonStyle-cORGTZ fhgyv"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+      <button
+        className="Button__ButtonStyle-cORGTZ fhgyv"
+        onClick={[Function]}
+      >
+        View
+      </button>
+    </div>
+  </div>
+</div>
+`;

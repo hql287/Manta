@@ -11,7 +11,7 @@ import * as FormActions from '../actions/form';
 
 // Helpers
 import { getSubtotal, getGrandTotal } from '../helpers/invoice';
-import { getAllDocs, saveDoc, deleteDoc } from '../helpers/pouchDB';
+import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 
 const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
@@ -50,6 +50,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       const doc = Object.assign({}, invoiceData, {
         _id: uuidv4(),
         created_at: Date.now(),
+        status: 'pending',
         currency: invoiceData.currency
           ? invoiceData.currency
           : currencies[appConfig.get('appSettings.currency')],
@@ -96,6 +97,32 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             payload: {
               type: 'success',
               message: 'Deleted Successfully'
+            }
+          });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message
+            }
+          });
+        });
+    }
+
+    case ACTION_TYPES.INVOICE_SET_STATUS: {
+      return updateDoc('invoices', action.payload.invoiceID, { status: action.payload.status })
+        .then(docs => {
+          next({
+            type: ACTION_TYPES.INVOICE_SET_STATUS,
+            payload: docs
+          });
+          dispatch({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: 'Updated Successfully'
             }
           });
         })

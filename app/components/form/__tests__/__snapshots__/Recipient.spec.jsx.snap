@@ -9,10 +9,17 @@ exports[`Recipient component matches snapshot 1`] = `
   >
     Client *
   </label>
-  <div>
+  <div
+    style={
+      Object {
+        "height": "100%",
+      }
+    }
+  >
     <div
       style={
         Object {
+          "height": "100%",
           "opacity": 0,
         }
       }

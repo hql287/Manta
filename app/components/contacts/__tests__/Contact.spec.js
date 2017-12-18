@@ -49,8 +49,8 @@ describe('Renders correctly to the DOM', () => {
       />,
     );
     expect(mountWrapper.prop('contact')).toEqual(contact);
-    expect(wrapper.prop('newInvoice')).not.toEqual(newInvoice);
-    expect(wrapper.prop('deleteContact')).not.toEqual(deleteContact);
+    expect(mountWrapper.prop('newInvoice')).toEqual(newInvoice);
+    expect(mountWrapper.prop('deleteContact')).toEqual(deleteContact);
   });
 
   it('renders 2 buttons in the last TD', () => {

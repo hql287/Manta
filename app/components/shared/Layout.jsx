@@ -49,12 +49,14 @@ const PageHeaderActionsStyle = styled.div`
 `;
 
 const PageContentStyle = styled.div`
-  flex: 1;
+  // flex: 1;
+  // overflow: hidden;
   margin: 90px 40px 40px 40px;
-  border: 1px solid rgba(0,0,0,.1);
-  border-radius: 4px;
-  background: #FFF;
-  overflow: hidden;
+  ${ props => !props.bare && `
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    background: #FFF;
+  `}
 `;
 
 const PageFooterStyle = styled.div`
@@ -97,7 +99,7 @@ const PageHeaderActions = props =>
   </PageHeaderActionsStyle>;
 
 const PageContent = props =>
-  <PageContentStyle>
+  <PageContentStyle bare={props.bare}>
     {props.children}
   </PageContentStyle>;
 

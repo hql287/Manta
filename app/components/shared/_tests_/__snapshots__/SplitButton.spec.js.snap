@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly to the DOM matches snapshot 1`] = `
+<div>
+  <div
+    className="SplitButton__Wrapper-dWaGGO iZVhhz"
+  >
+    <div
+      className="SplitButton__ButtonsGroup-gPFJVZ jhIoxD"
+    >
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Main Action
+      </a>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        <i
+          className="ion-arrow-down-b"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+`;
