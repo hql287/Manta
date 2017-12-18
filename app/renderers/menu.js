@@ -186,7 +186,7 @@ if (process.platform === 'darwin') {
       {role: 'unhide'},
       {type: 'separator'},
       {
-        label: 'Quite App',
+        label: 'Quit App',
         accelerator: 'CmdOrCtrl+Q',
         click() {
           ipc.send('quit-app');
