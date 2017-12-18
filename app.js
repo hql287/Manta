@@ -171,16 +171,23 @@ function setInitialValues() {
     });
   }
   // Default App Settings
-  if (!appConfig.has('appSettings')) {
-    appConfig.set('appSettings', {
-      exportDir: os.homedir(),
-      template: 'default',
-      language: 'en',
-      currency: 'USD',
-      sound: 'default',
-      muted: false,
-    });
-  }
+  const defaultState = {
+    exportDir: os.homedir(),
+    template: 'default',
+    language: 'en',
+    currency: 'USD',
+    sound: 'default',
+    muted: false,
+    dateFormat: 'MM/DD/YYYY',
+  };
+
+  // if any individual setting does not exist, set from default
+  Object.keys(defaultState).forEach(key => {
+    const nestedName = `appSettings.${key}`;
+    if (!appConfig.has(nestedName)) {
+      appConfig.set(nestedName, defaultState[key]);
+    }
+  });
 }
 
 function addEventListeners() {

@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 
+const appConfig = require('electron').remote.require('electron-settings');
+
 const format = require('date-fns/format');
 const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
@@ -38,6 +40,7 @@ class Invoice extends Component {
   // Render
   render() {
     const { invoice } = this.props;
+    const dateFormat = appConfig.get('appSettings.dateFormat');
     const { recipient } = invoice;
     return (
       <TR>
@@ -52,11 +55,11 @@ class Invoice extends Component {
         </TD>
         <TD>
           {invoice.dueDate
-            ? moment(invoice.dueDate).format('DD/MM/YYYY')
+            ? moment(invoice.dueDate).format(dateFormat)
             : '--'}
         </TD>
         <TD muted>
-          {format(invoice.created_at, 'DD/MM/YYYY')}
+          {format(invoice.created_at, dateFormat)}
         </TD>
         <TD bold success>
           {invoice.currency.code}

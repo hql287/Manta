@@ -148,6 +148,19 @@ class AppSettings extends Component {
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Date Format</label>
+              <input
+                name="dateFormat"
+                type="text"
+                value={this.state.dateFormat}
+                onChange={this.handleInputChange}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
