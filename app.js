@@ -182,6 +182,7 @@ function setInitialValues() {
       exportDir: os.homedir(),
       template: 'default',
       currency: 'USD',
+      dateFormat: 'MM/DD/YYYY',
       tax: {
         tin: '123-456-789',
         method: 'default',

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 import styled from 'styled-components';
 
+const appConfig = require('electron').remote.require('electron-settings');
+const dateFormat = appConfig.get('appSettings.dateFormat');
+
 const format = require('date-fns/format');
 const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
@@ -175,6 +178,7 @@ class Invoice extends Component {
   displayStatus() {
     const { invoice } = this.props;
     const { status } = invoice;
+    const { recipient } = invoice;
     switch(status) {
       case 'cancelled': {
         return (
@@ -272,14 +276,14 @@ class Invoice extends Component {
               <Field>
                 <label>Created On</label>
                 <p>
-                  {format(invoice.created_at, 'DD/MM/YYYY')}
+                  {format(invoice.created_at, dateFormat)}
                 </p>
               </Field>
               <Field>
                 <label>Due Date</label>
                 <p>
                   {invoice.dueDate
-                    ? moment(invoice.dueDate).format('DD/MM/YYYY')
+                    ? moment(invoice.dueDate).format(dateFormat)
                     : '--'}
                 </p>
               </Field>
