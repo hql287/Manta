@@ -50,6 +50,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       const doc = Object.assign({}, invoiceData, {
         _id: uuidv4(),
         created_at: Date.now(),
+        status: 'pending',
         currency: invoiceData.currency
           ? invoiceData.currency
           : currencies[appConfig.get('appSettings.currency')],
