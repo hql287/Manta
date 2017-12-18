@@ -15,17 +15,26 @@ const ButtonStyle = styled.button`
   padding: 4px 15px;
   font-size: 12px;
   text-decoration: none;
-  color: white;
-  background: #292b2c;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.1);
   text-transform: uppercase;
   letter-spacing: 1px;
   ${props => props.block && `width: 100%;`}
-  ${props => props.primary && `background: #469fe5;`}
-  ${props => props.success && `background: #6bbb69;`}
-  ${props => props.danger && `background: #EC476E;`}
+  ${props => props.primary && `
+    background: #469fe5;
+    color: white;
+  `}
+  ${props => props.success && `
+    background: #6bbb69;
+    color: white;
+  `}
+  ${props => props.danger && `
+    background: #EC476E;
+    color: white;
+  `}
   &:hover {
     cursor: pointer;
-    color: white;
+    // color: white;
     text-decoration: none;
   }
 `;
