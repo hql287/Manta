@@ -45,12 +45,12 @@ const deleteDoc = (dbName, doc) =>
       .catch(err => reject(err));
   });
 
-// update a document
-const updateDoc = (dbName, docId, update) =>
+// Update A Document
+const updateDoc = (dbName, docId, updatedDoc) =>
   new Promise((resolve, reject) => {
     const db = setDB(dbName);
     db.get(docId)
-      .then(record => db.put(Object.assign(record, update))
+      .then(record => db.put(Object.assign(record, updatedDoc))
       .then(getAllDocs(dbName)
       .then(allDocs => resolve(allDocs)
       )))
@@ -62,4 +62,4 @@ export {
   deleteDoc,
   saveDoc,
   updateDoc,
-}
+};
