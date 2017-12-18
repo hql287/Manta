@@ -61,8 +61,8 @@ function createMainWindow() {
     y: mainWindownStateKeeper.y,
     width: mainWindownStateKeeper.width,
     height: mainWindownStateKeeper.height,
-    minWidth: 800,
-    minHeight: 600,
+    minWidth: 600,
+    minHeight: 400,
     titleBarStyle: 'hiddenInset',
     backgroundColor: '#2e2c29',
     show: false,
@@ -132,10 +132,8 @@ function createPreviewWindow() {
 }
 
 function addDevToolsExtension() {
-  if(process.env.REACT_DEV_TOOLS_PATH && process.env.REDUX_DEV_TOOLS_PATH){
-    BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
-    BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
-  }
+  if (process.env.REACT_DEV_TOOLS_PATH) BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
+  if (process.env.REDUX_DEV_TOOLS_PATH) BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
 }
 
 function setInitialValues() {

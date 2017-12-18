@@ -27,7 +27,6 @@ describe('Invoices Middleware', () => {
   });
 
   describe('should handle INVOICE_GET_ALL action', () => {
-
     it('retrieves data from correct DB', () => {
       middleware(Actions.getInvoices());
 
@@ -91,7 +90,6 @@ describe('Invoices Middleware', () => {
         });
       });
     });
-
   });
 
   describe('should handle INVOICE_SAVE action', () => {
@@ -112,6 +110,7 @@ describe('Invoices Middleware', () => {
           created_at: 'now',
           subtotal: 'subTotal',
           grandTotal: 'grandTotal',
+          status: 'pending',
         }),
       );
     });
@@ -230,6 +229,7 @@ describe('Invoices Middleware', () => {
               created_at: 'now',
               subtotal: 'subTotal',
               grandTotal: 'grandTotal',
+              status: 'pending',
             }),
           );
         });
@@ -275,6 +275,7 @@ describe('Invoices Middleware', () => {
         });
       });
     });
+
   });
 
   describe('should handle INVOICE_DELETE action', () => {

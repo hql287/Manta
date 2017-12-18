@@ -19,5 +19,11 @@ export const newInvoiceFromContact = createAction(
 // Delete an invoice
 export const deleteInvoice = createAction(
   ACTION_TYPES.INVOICE_DELETE,
-  contactID => contactID
+  invoiceID => invoiceID
+);
+
+// set the status of an invoice (pending/paid/etc.)
+export const setInvoiceStatus = createAction(
+  ACTION_TYPES.INVOICE_SET_STATUS,
+  (invoiceID, status) => ({ invoiceID, status })
 );

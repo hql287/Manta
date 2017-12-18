@@ -15,7 +15,6 @@ import { getInvoices } from '../reducers/InvoicesReducer';
 // Components
 import Invoice from '../components/invoices/Invoice';
 import Message from '../components/shared/Message';
-import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
@@ -28,6 +27,7 @@ class Invoices extends Component {
   constructor(props) {
     super(props);
     this.deleteInvoice = this.deleteInvoice.bind(this);
+    this.setInvoiceStatus = this.setInvoiceStatus.bind(this);
   }
 
   // Load Invoices & add event listeners
@@ -41,7 +41,7 @@ class Invoices extends Component {
   }
 
   // Optimization
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
     return this.props !== nextProps;
   }
 
@@ -70,6 +70,12 @@ class Invoices extends Component {
     dispatch(Actions.deleteInvoice(invoiceId));
   }
 
+  // set the invoice status
+  setInvoiceStatus(invoiceId, status) {
+    const {dispatch} = this.props;
+    dispatch(Actions.setInvoiceStatus(invoiceId, status));
+  }
+
   // Render
   render() {
     const {invoices} = this.props;
@@ -77,6 +83,7 @@ class Invoices extends Component {
       <Invoice
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
+        setInvoiceStatus={this.setInvoiceStatus}
         index={index}
         invoice={invoice}
       />
@@ -86,24 +93,12 @@ class Invoices extends Component {
         <PageHeader>
           <PageHeaderTitle>All Invoices</PageHeaderTitle>
         </PageHeader>
-        <PageContent>
+        <PageContent bare>
           {invoices.length === 0
             ? <Message info text="You don't have any invoice yet" />
-            : <Table hasBorders bg>
-                <THead>
-                  <TR>
-                    <TH>ID</TH>
-                    <TH>Client</TH>
-                    <TH>DueDate</TH>
-                    <TH>Created</TH>
-                    <TH>Value</TH>
-                    <TH actions>Actions</TH>
-                  </TR>
-                </THead>
-                <TBody>
-                  {invoicesComponent}
-                </TBody>
-              </Table>}
+            : <div className="row">
+                { invoicesComponent }
+              </div> }
         </PageContent>
       </PageWrapper>
     );
