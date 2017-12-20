@@ -14,26 +14,6 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     value="someSettings"
   >
     <option
-      value="USD"
-    >
-      US Dollar
-    </option>
-    <option
-      value="CAD"
-    >
-      Canadian Dollar
-    </option>
-    <option
-      value="EUR"
-    >
-      Euro
-    </option>
-    <option
-      value="AED"
-    >
-      United Arab Emirates Dirham
-    </option>
-    <option
       value="AFN"
     >
       Afghan Afghani
@@ -44,14 +24,19 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Albanian Lek
     </option>
     <option
-      value="AMD"
+      value="DZD"
     >
-      Armenian Dram
+      Algerian Dinar
     </option>
     <option
       value="ARS"
     >
       Argentine Peso
+    </option>
+    <option
+      value="AMD"
+    >
+      Armenian Dram
     </option>
     <option
       value="AUD"
@@ -64,49 +49,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Azerbaijani Manat
     </option>
     <option
-      value="BAM"
-    >
-      Bosnia-Herzegovina Convertible Mark
-    </option>
-    <option
-      value="BDT"
-    >
-      Bangladeshi Taka
-    </option>
-    <option
-      value="BGN"
-    >
-      Bulgarian Lev
-    </option>
-    <option
       value="BHD"
     >
       Bahraini Dinar
     </option>
     <option
-      value="BIF"
+      value="BDT"
     >
-      Burundian Franc
-    </option>
-    <option
-      value="BND"
-    >
-      Brunei Dollar
-    </option>
-    <option
-      value="BOB"
-    >
-      Bolivian Boliviano
-    </option>
-    <option
-      value="BRL"
-    >
-      Brazilian Real
-    </option>
-    <option
-      value="BWP"
-    >
-      Botswanan Pula
+      Bangladeshi Taka
     </option>
     <option
       value="BYR"
@@ -119,14 +69,69 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Belize Dollar
     </option>
     <option
-      value="CDF"
+      value="BOB"
     >
-      Congolese Franc
+      Bolivian Boliviano
     </option>
     <option
-      value="CHF"
+      value="BAM"
     >
-      Swiss Franc
+      Bosnia-Herzegovina Convertible Mark
+    </option>
+    <option
+      value="BWP"
+    >
+      Botswanan Pula
+    </option>
+    <option
+      value="BRL"
+    >
+      Brazilian Real
+    </option>
+    <option
+      value="GBP"
+    >
+      British Pound Sterling
+    </option>
+    <option
+      value="BND"
+    >
+      Brunei Dollar
+    </option>
+    <option
+      value="BGN"
+    >
+      Bulgarian Lev
+    </option>
+    <option
+      value="BIF"
+    >
+      Burundian Franc
+    </option>
+    <option
+      value="XOF"
+    >
+      CFA Franc BCEAO
+    </option>
+    <option
+      value="XAF"
+    >
+      CFA Franc BEAC
+    </option>
+    <option
+      value="KHR"
+    >
+      Cambodian Riel
+    </option>
+    <option
+      value="CAD"
+    >
+      Canadian Dollar
+    </option>
+    <option
+      value="CVE"
+    >
+      Cape Verdean Escudo
     </option>
     <option
       value="CLP"
@@ -144,14 +149,24 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Colombian Peso
     </option>
     <option
+      value="KMF"
+    >
+      Comorian Franc
+    </option>
+    <option
+      value="CDF"
+    >
+      Congolese Franc
+    </option>
+    <option
       value="CRC"
     >
       Costa Rican Colón
     </option>
     <option
-      value="CVE"
+      value="HRK"
     >
-      Cape Verdean Escudo
+      Croatian Kuna
     </option>
     <option
       value="CZK"
@@ -159,29 +174,19 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Czech Republic Koruna
     </option>
     <option
-      value="DJF"
-    >
-      Djiboutian Franc
-    </option>
-    <option
       value="DKK"
     >
       Danish Krone
     </option>
     <option
+      value="DJF"
+    >
+      Djiboutian Franc
+    </option>
+    <option
       value="DOP"
     >
       Dominican Peso
-    </option>
-    <option
-      value="DZD"
-    >
-      Algerian Dinar
-    </option>
-    <option
-      value="EEK"
-    >
-      Estonian Kroon
     </option>
     <option
       value="EGP"
@@ -194,14 +199,19 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Eritrean Nakfa
     </option>
     <option
+      value="EEK"
+    >
+      Estonian Kroon
+    </option>
+    <option
       value="ETB"
     >
       Ethiopian Birr
     </option>
     <option
-      value="GBP"
+      value="EUR"
     >
-      British Pound Sterling
+      Euro
     </option>
     <option
       value="GEL"
@@ -214,19 +224,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Ghanaian Cedi
     </option>
     <option
-      value="GNF"
-    >
-      Guinean Franc
-    </option>
-    <option
       value="GTQ"
     >
       Guatemalan Quetzal
     </option>
     <option
-      value="HKD"
+      value="GNF"
     >
-      Hong Kong Dollar
+      Guinean Franc
     </option>
     <option
       value="HNL"
@@ -234,9 +239,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Honduran Lempira
     </option>
     <option
-      value="HRK"
+      value="HKD"
     >
-      Croatian Kuna
+      Hong Kong Dollar
     </option>
     <option
       value="HUF"
@@ -244,14 +249,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Hungarian Forint
     </option>
     <option
-      value="IDR"
+      value="ISK"
     >
-      Indonesian Rupiah
-    </option>
-    <option
-      value="ILS"
-    >
-      Israeli New Sheqel
+      Icelandic Króna
     </option>
     <option
       value="INR"
@@ -259,9 +259,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Indian Rupee
     </option>
     <option
-      value="IQD"
+      value="IDR"
     >
-      Iraqi Dinar
+      Indonesian Rupiah
     </option>
     <option
       value="IRR"
@@ -269,9 +269,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Iranian Rial
     </option>
     <option
-      value="ISK"
+      value="IQD"
     >
-      Icelandic Króna
+      Iraqi Dinar
+    </option>
+    <option
+      value="ILS"
+    >
+      Israeli New Sheqel
     </option>
     <option
       value="JMD"
@@ -279,39 +284,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Jamaican Dollar
     </option>
     <option
-      value="JOD"
-    >
-      Jordanian Dinar
-    </option>
-    <option
       value="JPY"
     >
       Japanese Yen
     </option>
     <option
-      value="KES"
+      value="JOD"
     >
-      Kenyan Shilling
-    </option>
-    <option
-      value="KHR"
-    >
-      Cambodian Riel
-    </option>
-    <option
-      value="KMF"
-    >
-      Comorian Franc
-    </option>
-    <option
-      value="KRW"
-    >
-      South Korean Won
-    </option>
-    <option
-      value="KWD"
-    >
-      Kuwaiti Dinar
+      Jordanian Dinar
     </option>
     <option
       value="KZT"
@@ -319,19 +299,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Kazakhstani Tenge
     </option>
     <option
-      value="LBP"
+      value="KES"
     >
-      Lebanese Pound
+      Kenyan Shilling
     </option>
     <option
-      value="LKR"
+      value="KWD"
     >
-      Sri Lankan Rupee
-    </option>
-    <option
-      value="LTL"
-    >
-      Lithuanian Litas
+      Kuwaiti Dinar
     </option>
     <option
       value="LVL"
@@ -339,24 +314,24 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Latvian Lats
     </option>
     <option
+      value="LBP"
+    >
+      Lebanese Pound
+    </option>
+    <option
       value="LYD"
     >
       Libyan Dinar
     </option>
     <option
-      value="MAD"
+      value="LTL"
     >
-      Moroccan Dirham
+      Lithuanian Litas
     </option>
     <option
-      value="MDL"
+      value="MOP"
     >
-      Moldovan Leu
-    </option>
-    <option
-      value="MGA"
-    >
-      Malagasy Ariary
+      Macanese Pataca
     </option>
     <option
       value="MKD"
@@ -364,14 +339,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Macedonian Denar
     </option>
     <option
-      value="MMK"
+      value="MGA"
     >
-      Myanma Kyat
+      Malagasy Ariary
     </option>
     <option
-      value="MOP"
+      value="MYR"
     >
-      Macanese Pataca
+      Malaysian Ringgit
     </option>
     <option
       value="MUR"
@@ -384,9 +359,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Mexican Peso
     </option>
     <option
-      value="MYR"
+      value="MDL"
     >
-      Malaysian Ringgit
+      Moldovan Leu
+    </option>
+    <option
+      value="MAD"
+    >
+      Moroccan Dirham
     </option>
     <option
       value="MZN"
@@ -394,24 +374,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Mozambican Metical
     </option>
     <option
+      value="MMK"
+    >
+      Myanma Kyat
+    </option>
+    <option
       value="NAD"
     >
       Namibian Dollar
-    </option>
-    <option
-      value="NGN"
-    >
-      Nigerian Naira
-    </option>
-    <option
-      value="NIO"
-    >
-      Nicaraguan Córdoba
-    </option>
-    <option
-      value="NOK"
-    >
-      Norwegian Krone
     </option>
     <option
       value="NPR"
@@ -419,9 +389,29 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Nepalese Rupee
     </option>
     <option
+      value="TWD"
+    >
+      New Taiwan Dollar
+    </option>
+    <option
       value="NZD"
     >
       New Zealand Dollar
+    </option>
+    <option
+      value="NIO"
+    >
+      Nicaraguan Córdoba
+    </option>
+    <option
+      value="NGN"
+    >
+      Nigerian Naira
+    </option>
+    <option
+      value="NOK"
+    >
+      Norwegian Krone
     </option>
     <option
       value="OMR"
@@ -429,9 +419,19 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Omani Rial
     </option>
     <option
+      value="PKR"
+    >
+      Pakistani Rupee
+    </option>
+    <option
       value="PAB"
     >
       Panamanian Balboa
+    </option>
+    <option
+      value="PYG"
+    >
+      Paraguayan Guarani
     </option>
     <option
       value="PEN"
@@ -444,19 +444,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Philippine Peso
     </option>
     <option
-      value="PKR"
-    >
-      Pakistani Rupee
-    </option>
-    <option
       value="PLN"
     >
       Polish Zloty
-    </option>
-    <option
-      value="PYG"
-    >
-      Paraguayan Guarani
     </option>
     <option
       value="QAR"
@@ -467,11 +457,6 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       value="RON"
     >
       Romanian Leu
-    </option>
-    <option
-      value="RSD"
-    >
-      Serbian Dinar
     </option>
     <option
       value="RUB"
@@ -489,14 +474,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Saudi Riyal
     </option>
     <option
-      value="SDG"
+      value="RSD"
     >
-      Sudanese Pound
-    </option>
-    <option
-      value="SEK"
-    >
-      Swedish Krona
+      Serbian Dinar
     </option>
     <option
       value="SGD"
@@ -509,39 +489,39 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Somali Shilling
     </option>
     <option
+      value="ZAR"
+    >
+      South African Rand
+    </option>
+    <option
+      value="KRW"
+    >
+      South Korean Won
+    </option>
+    <option
+      value="LKR"
+    >
+      Sri Lankan Rupee
+    </option>
+    <option
+      value="SDG"
+    >
+      Sudanese Pound
+    </option>
+    <option
+      value="SEK"
+    >
+      Swedish Krona
+    </option>
+    <option
+      value="CHF"
+    >
+      Swiss Franc
+    </option>
+    <option
       value="SYP"
     >
       Syrian Pound
-    </option>
-    <option
-      value="THB"
-    >
-      Thai Baht
-    </option>
-    <option
-      value="TND"
-    >
-      Tunisian Dinar
-    </option>
-    <option
-      value="TOP"
-    >
-      Tongan Paʻanga
-    </option>
-    <option
-      value="TRY"
-    >
-      Turkish Lira
-    </option>
-    <option
-      value="TTD"
-    >
-      Trinidad and Tobago Dollar
-    </option>
-    <option
-      value="TWD"
-    >
-      New Taiwan Dollar
     </option>
     <option
       value="TZS"
@@ -549,14 +529,49 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Tanzanian Shilling
     </option>
     <option
-      value="UAH"
+      value="THB"
     >
-      Ukrainian Hryvnia
+      Thai Baht
+    </option>
+    <option
+      value="TOP"
+    >
+      Tongan Paʻanga
+    </option>
+    <option
+      value="TTD"
+    >
+      Trinidad and Tobago Dollar
+    </option>
+    <option
+      value="TND"
+    >
+      Tunisian Dinar
+    </option>
+    <option
+      value="TRY"
+    >
+      Turkish Lira
+    </option>
+    <option
+      value="USD"
+    >
+      US Dollar
     </option>
     <option
       value="UGX"
     >
       Ugandan Shilling
+    </option>
+    <option
+      value="UAH"
+    >
+      Ukrainian Hryvnia
+    </option>
+    <option
+      value="AED"
+    >
+      United Arab Emirates Dirham
     </option>
     <option
       value="UYU"
@@ -579,24 +594,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Vietnamese Dong
     </option>
     <option
-      value="XAF"
-    >
-      CFA Franc BEAC
-    </option>
-    <option
-      value="XOF"
-    >
-      CFA Franc BCEAO
-    </option>
-    <option
       value="YER"
     >
       Yemeni Rial
-    </option>
-    <option
-      value="ZAR"
-    >
-      South African Rand
     </option>
     <option
       value="ZMK"
