@@ -23,6 +23,7 @@ export const INVOICE_SAVE             = 'INVOICE_SAVE';
 export const INVOICE_DELETE           = 'INVOICE_DELETE';
 export const INVOICE_GET_ALL          = 'INVOICE_GET_ALL';
 export const INVOICE_NEW_FROM_CONTACT = 'INVOICE_NEW_FROM_CONTACT';
+export const INVOICE_SET_STATUS       = 'INVOICE_SET_STATUS';
 
 // CONTACTS
 // ===========================================================

@@ -3,8 +3,7 @@
   font-family: 'Montserrat';
   src:
     local('Montserrat'),
-    url(../static/fonts/Montserrat/Montserrat-Light.ttf),
-    format('truetype');
+    url('../../fonts/Montserrat/Montserrat-Light.ttf') format('truetype');
   font-weight: 300;
 }
 
@@ -12,8 +11,7 @@
   font-family: 'Montserrat';
   src:
     local('Montserrat'),
-    url(../static/fonts/Montserrat/Montserrat.ttf),
-    format('truetype');
+    url('../../fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 
@@ -21,8 +19,16 @@
   font-family: 'Montserrat';
   src:
     local('Montserrat'),
-    url(../static/fonts/Montserrat/Montserrat-Medium.ttf),
-    format('truetype');
+    url('../../fonts/Montserrat/Montserrat-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src:
+    local('Montserrat'),
+    url('../../fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
   font-weight: 500;
 }
 
@@ -31,8 +37,7 @@
   font-family: 'Source Serif Pro';
   src:
     local('Source Serif Pro'),
-    url(../static/fonts/SourceSerifPro/SourceSerifPro-Regular.ttf),
-    format('truetype');
+    url('../../fonts/SourceSerifPro/SourceSerifPro-Regular.ttf') format('truetype');
   font-weight: 400;
 }
 
@@ -41,7 +46,6 @@
   font-family: 'Lora';
   src:
     local('Lora'),
-    url(../static/fonts/Lora/Lora-Regular.ttf),
-    format('truetype');
-  font-weight: 400;
+    url('../../fonts/Lora/Lora-Regular.ttf') format('truetype');
+    font-weight: 400;
 }
