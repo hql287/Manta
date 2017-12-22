@@ -12,7 +12,7 @@ const initialState = {
   dueDate:  { required: false },
   currency: { required: false },
   discount: { required: false },
-  vat:      { required: false },
+  tax:      { required: false },
   note:     { required: false },
   settingsOpen: false,
 };

@@ -10,34 +10,34 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Styles
 import styled from 'styled-components';
-const VatWrapper = styled.div`
+const TaxWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const VatContent = styled.div`
+const TaxContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const VatAmount = styled.div`flex: 1;`;
+const TaxAmount = styled.div`flex: 1;`;
 
 // Component
-export class Vat extends Component {
+export class Tax extends Component {
   constructor(props) {
     super(props);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
-    const {vat} = this.props;
+    const {tax} = this.props;
     this.setState({
-      amount: vat.amount ? vat.amount : '',
+      amount: tax.amount ? tax.amount : '',
     });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.state !== nextState ||
-      this.props.vat !== nextProps.vat
+      this.props.tax !== nextProps.tax
     );
   }
 
@@ -46,22 +46,22 @@ export class Vat extends Component {
     const value =
       event.target.value === '' ? '' : parseInt(event.target.value, 10);
     this.setState({[name]: value}, () => {
-      this.updateVatState();
+      this.updateTaxState();
     });
   }
 
-  updateVatState() {
+  updateTaxState() {
     const {updateFieldData} = this.props;
-    updateFieldData('vat', this.state);
+    updateFieldData('tax', this.state);
   }
 
   render() {
     return (
       <Section>
-        <VatWrapper>
-          <label className="itemLabel">Vat (%)</label>
-          <VatContent>
-            <VatAmount>
+        <TaxWrapper>
+          <label className="itemLabel">Tax (%)</label>
+          <TaxContent>
+            <TaxAmount>
               <input
                 name="amount"
                 type="number"
@@ -69,18 +69,18 @@ export class Vat extends Component {
                 onChange={this.handleInputChange}
                 placeholder="Amount"
               />
-            </VatAmount>
-          </VatContent>
-        </VatWrapper>
+            </TaxAmount>
+          </TaxContent>
+        </TaxWrapper>
       </Section>
     );
   }
 }
 
-Vat.propTypes = {
+Tax.propTypes = {
   updateFieldData: PropTypes.func.isRequired,
-  vat: PropTypes.object.isRequired,
+  tax: PropTypes.object.isRequired,
 };
 
 // Exports
-export default _withFadeInAnimation(Vat);
+export default _withFadeInAnimation(Tax);

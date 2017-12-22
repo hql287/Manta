@@ -15,7 +15,7 @@ import ItemsList from '../components/form/ItemsList';
 import Currency from '../components/form/Currency';
 import Discount from '../components/form/Discount';
 import DueDate from '../components/form/DueDate';
-import Vat from '../components/form/Vat';
+import Tax from '../components/form/Tax';
 import Note from '../components/form/Note';
 import Settings from '../components/form/Settings';
 import Button from '../components/shared/Button';
@@ -44,7 +44,7 @@ class Form extends Component {
       updateFieldData,
       toggleFormSettings,
     } = this.props.boundActionCreators;
-    const {dueDate, currency, discount, vat, note} = this.props.currentInvoice;
+    const {dueDate, currency, discount, tax, note} = this.props.currentInvoice;
     return (
       <PageWrapper>
         <PageHeader>
@@ -75,7 +75,7 @@ class Form extends Component {
           {discount.required && (
             <Discount discount={discount} updateFieldData={updateFieldData} />
           )}
-          {vat.required && <Vat vat={vat} updateFieldData={updateFieldData} />}
+          {tax.required && <Tax tax={tax} updateFieldData={updateFieldData} />}
           {note.required && (
             <Note note={note} updateFieldData={updateFieldData} />
           )}
@@ -105,7 +105,7 @@ Form.propTypes = {
     dueDate: PropTypes.object.isRequired,
     currency: PropTypes.object.isRequired,
     discount: PropTypes.object.isRequired,
-    vat: PropTypes.object.isRequired,
+    tax: PropTypes.object.isRequired,
     note: PropTypes.object.isRequired,
     settingsOpen: PropTypes.bool.isRequired,
   }).isRequired,

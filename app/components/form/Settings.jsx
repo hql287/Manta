@@ -59,7 +59,7 @@ import Switch from '../shared/Switch';
 // Component
 function Settings(props) {
   const {toggleField, toggleFormSettings, currentInvoice} = props;
-  const {settingsOpen, dueDate, currency, discount, vat, note} = currentInvoice;
+  const {settingsOpen, dueDate, currency, discount, tax, note} = currentInvoice;
 
   return (
     <Motion
@@ -105,10 +105,10 @@ function Settings(props) {
             </Setting>
 
             <Setting>
-              <Label>Vat</Label>
+              <Label>Tax</Label>
               <Switch
-                checked={vat.required}
-                onChange={() => toggleField('vat')}
+                checked={tax.required}
+                onChange={() => toggleField('tax')}
               />
             </Setting>
 
@@ -137,7 +137,7 @@ Settings.propTypes = {
     dueDate: PropTypes.object.isRequired,
     currency: PropTypes.object.isRequired,
     discount: PropTypes.object.isRequired,
-    vat: PropTypes.object.isRequired,
+    tax: PropTypes.object.isRequired,
     note: PropTypes.object.isRequired,
     settingsOpen: PropTypes.bool.isRequired,
   }).isRequired,
