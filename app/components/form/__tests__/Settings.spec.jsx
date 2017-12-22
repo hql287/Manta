@@ -18,7 +18,7 @@ const currentInvoice = {
   dueDate: { required: false },
   currency: { required: false },
   discount: { required: false },
-  vat: { required: false },
+  tax: { required: false },
   note: { required: false },
   settingsOpen: false,
 };
@@ -60,7 +60,7 @@ describe('Settings component', () => {
     const dueDate  = wrapper.find(Switch).at(0);
     const currency = wrapper.find(Switch).at(1);
     const discount = wrapper.find(Switch).at(2);
-    const vat      = wrapper.find(Switch).at(3);
+    const tax      = wrapper.find(Switch).at(3);
     const note     = wrapper.find(Switch).at(4);
 
     // Execute & Assert
@@ -79,9 +79,9 @@ describe('Settings component', () => {
     expect(toggleField).toHaveBeenCalledWith('discount');
     expect(toggleField).not.toHaveBeenCalledWith('something-else');
 
-    vat.find('input').simulate('change');
+    tax.find('input').simulate('change');
     expect(toggleField).toHaveBeenCalled();
-    expect(toggleField).toHaveBeenCalledWith('vat');
+    expect(toggleField).toHaveBeenCalledWith('tax');
     expect(toggleField).not.toHaveBeenCalledWith('something-else');
 
     note.find('input').simulate('change');

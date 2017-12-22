@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Note component matches snapshot 1`] = `
+<div
+  className="Section__SectionStyle-KuFAH hVJJBo"
+>
+  <div
+    className="Tax__Header-bEbyHB iNlpSO"
+  >
+    <label
+      className="itemLabel"
+    >
+      Tax
+    </label>
+    <a
+      href="#"
+      onClick={[Function]}
+    >
+      Save as default Tax settings?
+    </a>
+  </div>
+  <div
+    className="Tax__Form-iRHWvw fHkjRN"
+  >
+    <div
+      className="Tax__Row-bBlsab dYarfU"
+    >
+      <div
+        className="Tax__Field-jiQvjq buKHXN"
+      >
+        <label
+          className="itemLabel"
+        >
+          Tax ID
+        </label>
+        <div
+          className="Tax__TaxID-hVFBtR kmNFy"
+        >
+          <input
+            name="tin"
+            onChange={[Function]}
+            placeholder="Registration Number"
+            type="text"
+            value="123-456-789"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="Tax__Row-bBlsab dYarfU"
+    >
+      <div
+        className="Tax__Field-jiQvjq buKHXN"
+      >
+        <label
+          className="itemLabel"
+        >
+          Amount (%)
+        </label>
+        <div
+          className="Tax__TaxAmount-hPYwBc cEFumS"
+        >
+          <input
+            name="amount"
+            onChange={[Function]}
+            placeholder="Amount"
+            type="number"
+            value={10}
+          />
+        </div>
+      </div>
+      <div
+        className="Tax__Field-jiQvjq buKHXN"
+      >
+        <label
+          className="itemLabel"
+        >
+          Method
+        </label>
+        <select
+          name="method"
+          onChange={[Function]}
+          value="default"
+        >
+          <option
+            value="default"
+          >
+            Default
+          </option>
+          <option
+            value="reverse"
+          >
+            Reverse Charge
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+`;

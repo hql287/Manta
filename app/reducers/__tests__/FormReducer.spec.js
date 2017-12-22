@@ -78,7 +78,7 @@ describe('Form Reducer should handle', () => {
     expect(newState.note).toEqual({ required: false });
     expect(newState.currency).toEqual({ required: false });
     expect(newState.discount).toEqual({ required: false });
-    expect(newState.vat).toEqual({ required: false });
+    expect(newState.tax).toEqual({ required: false });
     expect(newState.settingsOpen).toEqual(false);
   });
 
@@ -115,7 +115,7 @@ describe('Form Reducer should handle toggle', () => {
       dueDate:  { required: false },
       currency: { required: false },
       discount: { required: false },
-      vat:      { required: false },
+      tax:      { required: false },
       note:     { required: false },
     };
   });
@@ -152,12 +152,12 @@ describe('Form Reducer should handle toggle', () => {
     expect(newState.note.required).toBe(true);
   });
 
-  it('vat field', () => {
+  it('tax field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      payload: 'vat',
+      payload: 'tax',
     });
-    expect(newState.vat.required).toBe(true);
+    expect(newState.tax.required).toBe(true);
   });
 
 
@@ -170,7 +170,7 @@ describe('Form Reducer should handle update', () => {
       dueDate:  { required: true },
       currency: { required: true },
       discount: { required: true },
-      vat:      { required: true },
+      tax:      { required: true },
       note:     { required: true },
     };
   });
@@ -256,18 +256,18 @@ describe('Form Reducer should handle update', () => {
     expect(newState.discount.amount).not.toEqual(5);
   });
 
-  it('vat data', () => {
+  it('tax data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       payload: {
-        field: 'vat',
+        field: 'tax',
         data: {
           amount: 5,
         }
       }
     });
-    expect(newState.vat.amount).toEqual(5);
-    expect(newState.vat.amount).not.toEqual(10);
+    expect(newState.tax.amount).toEqual(5);
+    expect(newState.tax.amount).not.toEqual(10);
   });
 
   it('note data', () => {

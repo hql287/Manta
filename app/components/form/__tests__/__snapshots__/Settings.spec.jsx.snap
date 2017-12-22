@@ -106,7 +106,7 @@ exports[`Settings component matches snapshot 1`] = `
       <label
         className="Settings__Label-gSCNoi bqzjuj"
       >
-        Vat
+        Tax
       </label>
       <label
         className="Switch__SwitchStyle-ghEAwD hvamL"
