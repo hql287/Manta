@@ -25,6 +25,7 @@ const sampleSettings = {
     muted: true,
     sound: 'default',
     lang: 'en',
+    dateFormat: 'MM/DD/YYYY',
   },
   printOptions: {
     exportDir: '/Users/quochungle/Desktop',
@@ -84,6 +85,7 @@ describe('Settings Reducer should handle update', () => {
       muted: false,
       sound: 'modern',
       lang: 'vi',
+      dateFormat: 'DD-YYYY',
     };
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
@@ -96,6 +98,7 @@ describe('Settings Reducer should handle update', () => {
     expect(newState.current.appSettings.muted).toBeFalsy;
     expect(newState.current.appSettings.sound).toEqual('modern');
     expect(newState.current.appSettings.lang).toEqual('vi');
+    expect(newState.current.appSettings.dateFormat).toEqual('DD-YYYY');
   });
 
   it('info settings', () => {

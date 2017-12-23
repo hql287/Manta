@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
+const appConfig = require('electron').remote.require('electron-settings');
 const format = require('date-fns/format');
 const moment = require('moment');
 
@@ -53,8 +54,9 @@ const Heading = styled.h1`
 `;
 
 // Component
-function Header({invoice, company, configs}) {
+function Header({invoice, savedSettings, company, configs}) {
   const { recipient } = invoice;
+  const dateFormat = appConfig.get('appSettings.dateFormat');
   return (
     <InvoiceHeader>
       <LeftColumn>
@@ -84,8 +86,8 @@ function Header({invoice, company, configs}) {
             omission: '',
           })}
         </h4>
-        <p>Created {format(invoice.created_at, 'DD/MM/YYYY')}</p>
-        <p>Due {moment(invoice.dueDate).format('DD/MM/YYYY')}</p>
+        <p>Created {format(invoice.created_at, dateFormat)}</p>
+        <p>Due {moment(invoice.dueDate).format(dateFormat)}</p>
       </RightColumn>
     </InvoiceHeader>
   );
