@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
 import {keys, sortBy} from 'lodash';
+const moment = require('moment');
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
@@ -135,8 +136,8 @@ class Invoice extends Component {
   }
 
   render() {
+    const exampleDate = "07-04-1776";
     const {exportDir, template, currency, tax, required_fields} = this.state;
-
     return (
       <div>
         <label className='itemLabel'>Tax Settings</label>
@@ -269,6 +270,23 @@ class Invoice extends Component {
             </Field>
           </Row>
           <Row>
+            <Field>
+              <label className="itemLabel">Date Format</label>
+              <select
+                name="dateFormat"
+                value={this.state.dateFormat}
+                onChange={this.handleInputChange}>
+                <option value="MMMM Do, YYYY">{moment(exampleDate).format('MMMM Do, YYYY')}</option>
+
+                <option value="MM/DD/YY">{moment(exampleDate).format("MM/DD/YY")}</option>
+                <option value="DD/MM/YY">{moment(exampleDate).format("DD/MM/YY")}</option>
+
+                <option value="MM/DD/YY">{moment(exampleDate).format("MM/DD/YYYY")}</option>
+                <option value="DD/MM/YY">{moment(exampleDate).format("DD/MM/YYYY")}</option>
+
+                <option value="dddd, MMMM Do, YYYY">{moment(exampleDate).format('dddd, MMMM Do, YYYY')}</option>
+              </select>
+            </Field>
             <Field>
               <label className='itemLabel'>PDF Export Directory</label>
               <div className='input-group'>
