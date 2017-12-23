@@ -176,7 +176,7 @@ function setInitialValues() {
     currency: 'USD',
     sound: 'default',
     muted: false,
-    dateFormat: 'MM/DD/YYYY',
+    dateFormat: 'MMMM Do, YYYY',
   };
 
   // if any individual setting does not exist, set from default

@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
 import { keys } from 'lodash';
+import moment from 'moment';
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
@@ -56,6 +57,7 @@ class AppSettings extends Component {
   }
 
   render() {
+    const exampleDate = "07-04-1776";
     const currenciesKeys = keys(currencies);
     const currenciesOptions = currenciesKeys.map(key => {
       let optionKey = currencies[key]['code'];
@@ -152,13 +154,23 @@ class AppSettings extends Component {
           <div className="col-md-6">
             <div className="pageItem">
               <label className="itemLabel">Date Format</label>
-              <input
+              <select
                 name="dateFormat"
-                type="text"
                 value={this.state.dateFormat}
-                onChange={this.handleInputChange}
-              />
+                onChange={this.handleInputChange}>
+                <option value="MMMM Do, YYYY">{moment(exampleDate).format('MMMM Do, YYYY')}</option>
+
+                <option value="MM/DD/YY">{moment(exampleDate).format("MM/DD/YY")}</option>
+                <option value="DD/MM/YY">{moment(exampleDate).format("DD/MM/YY")}</option>
+
+                <option value="MM/DD/YY">{moment(exampleDate).format("MM/DD/YYYY")}</option>
+                <option value="DD/MM/YY">{moment(exampleDate).format("DD/MM/YYYY")}</option>
+
+                <option value="dddd, MMMM Do, YYYY">{moment(exampleDate).format('dddd, MMMM Do, YYYY')}</option>
+              </select>
+
             </div>
+
           </div>
         </div>
       </div>
