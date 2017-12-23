@@ -6,7 +6,6 @@ jest.mock('../../../libs/sounds');
 describe('Settings Middleware', () => {
 
   let next, dispatch, middleware;
-
   beforeEach(() => {
     next = jest.fn();
     dispatch = jest.fn();
@@ -15,9 +14,9 @@ describe('Settings Middleware', () => {
 
   it('should handle SETTINGS_GET_INITIAL action', () => {
     const savedSettings = {
-      info: 'someSettings',
-      appSettings: 'someSettings',
-      printOptions: 'someSettings',
+      profile: 'someSettings',
+      invoice: 'someSettings',
+      general: 'someSettings',
     }
     const action = Actions.getInitalSettings();
     middleware(action);
@@ -34,9 +33,9 @@ describe('Settings Middleware', () => {
   it('should handle SETTINGS_SAVE action', () => {
     const action = Actions.saveSettings({
       payload: {
-        info: 'someSettings',
-        appSettings: 'someSettings',
-        printOptions: 'someSettings',
+        profile: 'someSettings',
+        invoice: 'someSettings',
+        general: 'someSettings',
       }
     });
     middleware(action);

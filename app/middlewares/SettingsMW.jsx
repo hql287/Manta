@@ -9,9 +9,9 @@ const SettingsMW = ({dispatch}) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
-        info: appConfig.get('info'),
-        appSettings: appConfig.get('appSettings'),
-        printOptions: appConfig.get('printOptions'),
+        profile: appConfig.get('profile'),
+        invoice: appConfig.get('invoice'),
+        general: appConfig.get('general'),
       };
       return next(
         Object.assign({}, action, {
@@ -25,9 +25,9 @@ const SettingsMW = ({dispatch}) => next => action => {
 
     case ACTION_TYPES.SETTINGS_SAVE: {
       // Sate Settings
-      appConfig.set('info', action.payload.info);
-      appConfig.set('appSettings', action.payload.appSettings);
-      appConfig.set('printOptions', action.payload.printOptions);
+      appConfig.set('profile', action.payload.profile);
+      appConfig.set('invoice', action.payload.invoice);
+      appConfig.set('general', action.payload.general);
       // Reload Sounds Cache
       sounds.preload();
       // Continue
