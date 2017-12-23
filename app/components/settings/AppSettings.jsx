@@ -2,8 +2,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
-import { keys } from 'lodash';
 import moment from 'moment';
+import { keys, sortBy } from 'lodash';
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
@@ -59,10 +59,16 @@ class AppSettings extends Component {
   render() {
     const exampleDate = "07-04-1776";
     const currenciesKeys = keys(currencies);
-    const currenciesOptions = currenciesKeys.map(key => {
-      let optionKey = currencies[key]['code'];
-      let optionValue = currencies[key]['code'];
-      let optionLabel = currencies[key]['name'];
+    const currenciesKeysAndValues = currenciesKeys.
+      map(key => [key, currencies[key]['name'], currencies[key]['code']]);
+    const currenciesSorted = sortBy(currenciesKeysAndValues, [array => array[1]]);
+    const currenciesOptions = currenciesSorted.map((obj) => {
+      const [key, name, code] = obj;
+
+      let optionKey = code;
+      let optionValue = code;
+      let optionLabel = name;
+
       return (
         <option value={optionValue} key={optionKey}>
           {optionLabel}
