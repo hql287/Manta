@@ -13,8 +13,9 @@ import * as Actions from '../actions/settings';
 import {bindActionCreators} from 'redux';
 
 // Components
-import Info from '../components/settings/Info';
-import AppSettings from '../components/settings/AppSettings';
+import Profile from '../components/settings/Profile';
+import General from '../components/settings/General';
+import Invoice from '../components/settings/Invoice';
 import Button from '../components/shared/Button';
 import {
   Tab,
@@ -57,7 +58,7 @@ class Settings extends Component {
 
   // Render Main Content
   renderSettingsContent() {
-    const {info, appSettings} = this.props.currentSettings;
+    const {profile, general, invoice} = this.props.currentSettings;
     const {updateSettings} = this.props.boundActionCreators;
     return (
       <PageWrapper>
@@ -73,26 +74,36 @@ class Settings extends Component {
         <PageContent>
           <Tabs>
             <Tab
-              href="#"
+              href='#'
               className={this.state.visibleTab === 1 ? 'active' : ''}
               onClick={() => this.changeTab(1)}>
               Profile
             </Tab>
             <Tab
-              href="#"
+              href='#'
               className={this.state.visibleTab === 2 ? 'active' : ''}
               onClick={() => this.changeTab(2)}>
-              App Settings
+              Invoice
+            </Tab>
+            <Tab
+              href='#'
+              className={this.state.visibleTab === 3 ? 'active' : ''}
+              onClick={() => this.changeTab(3)}>
+              General
             </Tab>
           </Tabs>
           <TabContent>
             {this.state.visibleTab === 1 &&
-              <Info
-                info={info}
+              <Profile
+                profile={profile}
                 updateSettings={updateSettings} />}
             {this.state.visibleTab === 2 &&
-              <AppSettings
-                appSettings={appSettings}
+              <Invoice
+                invoice={invoice}
+                updateSettings={updateSettings} />}
+            {this.state.visibleTab === 3 &&
+              <General
+                general={general}
                 updateSettings={updateSettings} />}
           </TabContent>
         </PageContent>
