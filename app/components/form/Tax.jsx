@@ -47,7 +47,7 @@ export class Tax extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state !== nextState) return true;
     if (this.props.tax !== nextProps.tax) return true;
-    if (this.props.taxSettings !== nextProps.taxSettings) return true;
+    if (this.props.savedSetting !== nextProps.savedSetting) return true;
     return false;
   }
 
@@ -55,11 +55,14 @@ export class Tax extends Component {
     const target = event.target;
     const name = target.name;
     const value = name === 'amount' ? parseFloat(target.value) : target.value;
-    this.setState({
-      [name]: value,
-    }, () => {
-      this.updateTaxState();
-    });
+    this.setState(
+      {
+        [name]: value,
+      },
+      () => {
+        this.updateTaxState();
+      },
+    );
   }
 
   updateTaxState() {
@@ -68,11 +71,11 @@ export class Tax extends Component {
   }
 
   isSettingsSaved() {
-    return isEqual(this.state, this.props.taxSettings);
+    return isEqual(this.state, this.props.savedSetting);
   }
 
   saveTaxSettings() {
-    const { saveFormSettings } = this.props;
+    const {saveFormSettings} = this.props;
     saveFormSettings('tax', this.state);
   }
 
@@ -135,10 +138,9 @@ export class Tax extends Component {
 
 Tax.propTypes = {
   saveFormSettings: PropTypes.func.isRequired,
-  tax:              PropTypes.object.isRequired,
-  taxSettings:      PropTypes.object.isRequired,
-  updateFieldData:  PropTypes.func.isRequired,
-  updateSettings:   PropTypes.func.isRequired,
+  tax: PropTypes.object.isRequired,
+  savedSetting: PropTypes.object.isRequired,
+  updateFieldData: PropTypes.func.isRequired,
 };
 
 // Exports

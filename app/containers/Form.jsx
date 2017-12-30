@@ -86,8 +86,8 @@ class Form extends Component {
           {visible_fields.currency && (
             <Currency
               currency={currency}
+              savedSetting={settings.currency}
               updateFieldData={updateFieldData}
-              updateSettings={updateSettings}
               saveFormSettings={saveFormSettings}
             />
           )}
@@ -99,9 +99,8 @@ class Form extends Component {
           {visible_fields.tax && (
             <Tax
               tax={tax}
-              taxSettings={settings.tax}
+              savedSetting={settings.tax}
               updateFieldData={updateFieldData}
-              updateSettings={updateSettings}
               saveFormSettings={saveFormSettings}
             />
           )}

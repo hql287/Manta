@@ -8,7 +8,7 @@ function validateFormData(formData) {
     dueDate,
     currency,
     discount,
-    vat,
+    tax,
     note,
   } = formData;
   if (!validateRecipient(recipient)) return false;
@@ -16,7 +16,7 @@ function validateFormData(formData) {
   if (!validateDueDate(dueDate)) return false;
   if (!validateCurrency(currency)) return false;
   if (!validateDiscount(discount)) return false;
-  if (!validateVat(vat)) return false;
+  if (!validateTax(tax)) return false;
   if (!validateNote(note)) return false;
   return true;
 }
@@ -28,7 +28,7 @@ function getInvoiceData(formData) {
     dueDate,
     currency,
     discount,
-    vat,
+    tax,
     note,
   } = formData;
   // Set Initial Value
@@ -46,7 +46,7 @@ function getInvoiceData(formData) {
   // Set Invoice Note
   if (note.required) invoiceData.note = note.content;
   // Set Invoice Tax
-  if (vat.required) invoiceData.vat = vat.amount;
+  if (tax.required) invoiceData.tax = tax.amount;
   // Set Invoice Discount
   if (discount.required) {
     invoiceData.discount = {
@@ -187,8 +187,8 @@ function validateDiscount(discount) {
   return true;
 }
 
-function validateVat(vat) {
-  const {required, amount} = vat;
+function validateTax(tax) {
+  const { required, amount } = tax;
   if (required) {
     if (!amount || amount === '' || amount === 0) {
       openDialog({
@@ -229,6 +229,6 @@ export {
   validateDueDate,
   validateCurrency,
   validateDiscount,
-  validateVat,
+  validateTax,
   validateNote,
 };
