@@ -1,6 +1,12 @@
+// Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
+// Libs
 import {handleActions} from 'redux-actions';
 import {createSelector} from 'reselect';
+import currencies from '../../libs/currencies.json';
+// Retrive settings
+const appConfig = require('electron').remote.require('electron-settings');
+const invoiceSettings = appConfig.get('invoice');
 
 const initialState = {
   recipient: {
@@ -9,12 +15,19 @@ const initialState = {
     new: {},
   },
   rows: [],
-  dueDate:  { required: false },
-  currency: { required: false },
-  discount: { required: false },
-  tax:      { required: false },
-  note:     { required: false },
-  settingsOpen: false,
+  dueDate: {},
+  discount: {},
+  note: {},
+  // Set default values for currency and tax
+  currency: currencies[invoiceSettings.currency],
+  tax: invoiceSettings.tax,
+  // Invoice settings
+  settings: {
+    open: false,
+    currency: currencies[invoiceSettings.currency],
+    tax: invoiceSettings.tax,
+    visible_fields: invoiceSettings.visible_fields,
+  }
 };
 
 const FormReducer = handleActions(
@@ -66,20 +79,35 @@ const FormReducer = handleActions(
 
     [ACTION_TYPES.FORM_FIELD_TOGGLE]: (state, action) =>
       Object.assign({}, state, {
-        [action.payload]: Object.assign({}, state[action.payload], {
-          required: !state[action.payload].required,
+        settings: Object.assign({}, state.settings, {
+          visible_fields: Object.assign({}, state.settings.visible_fields, {
+            [action.payload]: !state.settings.visible_fields[action.payload]
+          })
         })
       }),
 
-    [ACTION_TYPES.FORM_SETTING_TOGGLE]: (state, action) => {
-      return Object.assign({}, state, {
-        settingsOpen: !state.settingsOpen
-      });
-    },
+    [ACTION_TYPES.FORM_SETTING_TOGGLE]: state =>
+      Object.assign({}, state, {
+        settings: Object.assign({}, state.settings, {
+          open: !state.settings.open
+        })
+      }),
 
-    [ACTION_TYPES.FORM_SETTING_CLOSE]: (state, action) => {
+    [ACTION_TYPES.FORM_SETTING_CLOSE]: state =>
+      Object.assign({}, state, {
+        settings: Object.assign({}, state.settings, {
+          open: false
+        })
+      }),
+
+    [ACTION_TYPES.FORM_SETTING_SAVE]: (state, action) => {
+      const invoiceSettings = action.payload;
       return Object.assign({}, state, {
-        settingsOpen: false
+        settings: Object.assign({}, state.settings, {
+          currency: currencies[invoiceSettings.currency],
+          tax: invoiceSettings.tax,
+          visible_fields: invoiceSettings.visible_fields,
+        })
       });
     },
 

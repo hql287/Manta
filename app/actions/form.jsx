@@ -37,11 +37,16 @@ export const clearForm = createAction(
 export const saveFormData = createAction(ACTION_TYPES.FORM_SAVE);
 
 export const toggleFormSettings = createAction(
-  ACTION_TYPES.FORM_SETTING_TOGGLE,
+  ACTION_TYPES.FORM_SETTING_TOGGLE
 );
 
 export const closeFormSettings = createAction(
-  ACTION_TYPES.FORM_SETTING_CLOSE,
+  ACTION_TYPES.FORM_SETTING_CLOSE
+);
+
+export const saveFormSettings = createAction(
+  ACTION_TYPES.FORM_SETTING_SAVE,
+  (setting, data) => ({setting, data})
 );
 
 export const updateFieldData = createAction(
