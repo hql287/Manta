@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import {getCurrentInvoice} from '../reducers/FormReducer';
 
 // Actions
-import * as Actions from '../actions/form';
+import * as FormActions from '../actions/form';
+import * as SettingsActions from '../actions/settings';
 import {bindActionCreators} from 'redux';
 
 // Components
@@ -30,21 +31,31 @@ import {
 
 // Component
 class Form extends Component {
-  // Optimization
   shouldComponentUpdate(nextProps) {
     return this.props.currentInvoice !== nextProps.currentInvoice;
   }
 
-  // Render The form
   render() {
+    // Form & Settings Actions
+    const {updateSettings} = this.props.boundSettingsActionCreators;
     const {
       clearForm,
       toggleField,
       saveFormData,
       updateFieldData,
       toggleFormSettings,
-    } = this.props.boundActionCreators;
-    const {dueDate, currency, discount, tax, note} = this.props.currentInvoice;
+      saveFormSettings,
+    } = this.props.boundFormActionCreators;
+    // Form Value
+    const {
+      dueDate,
+      currency,
+      discount,
+      tax,
+      note,
+      settings,
+    } = this.props.currentInvoice;
+    const {visible_fields, open} = settings;
     return (
       <PageWrapper>
         <PageHeader>
@@ -62,22 +73,42 @@ class Form extends Component {
           <Settings
             toggleField={toggleField}
             toggleFormSettings={toggleFormSettings}
-            currentInvoice={this.props.currentInvoice}
+            settings={settings}
+            saveFormSettings={saveFormSettings}
           />
           <Recipient />
           <ItemsList />
-          {dueDate.required && (
-            <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
+          {visible_fields.dueDate && (
+            <DueDate
+              dueDate={dueDate}
+              updateFieldData={updateFieldData} />
           )}
-          {currency.required && (
-            <Currency currency={currency} updateFieldData={updateFieldData} />
+          {visible_fields.currency && (
+            <Currency
+              currency={currency}
+              updateFieldData={updateFieldData}
+              updateSettings={updateSettings}
+              saveFormSettings={saveFormSettings}
+            />
           )}
-          {discount.required && (
-            <Discount discount={discount} updateFieldData={updateFieldData} />
+          {visible_fields.discount && (
+            <Discount
+              discount={discount}
+              updateFieldData={updateFieldData} />
           )}
-          {tax.required && <Tax tax={tax} updateFieldData={updateFieldData} />}
-          {note.required && (
-            <Note note={note} updateFieldData={updateFieldData} />
+          {visible_fields.tax && (
+            <Tax
+              tax={tax}
+              taxSettings={settings.tax}
+              updateFieldData={updateFieldData}
+              updateSettings={updateSettings}
+              saveFormSettings={saveFormSettings}
+            />
+          )}
+          {visible_fields.note && (
+            <Note
+              note={note}
+              updateFieldData={updateFieldData} />
           )}
         </PageContent>
       </PageWrapper>
@@ -87,7 +118,7 @@ class Form extends Component {
 
 // PropTypes Validation
 Form.propTypes = {
-  boundActionCreators: PropTypes.shape({
+  boundFormActionCreators: PropTypes.shape({
     // Works but need to refactor to handle passed click event
     clearForm: PropTypes.func.isRequired,
     saveFormData: PropTypes.func.isRequired,
@@ -107,7 +138,7 @@ Form.propTypes = {
     discount: PropTypes.object.isRequired,
     tax: PropTypes.object.isRequired,
     note: PropTypes.object.isRequired,
-    settingsOpen: PropTypes.bool.isRequired,
+    settings: PropTypes.object.isRequired,
   }).isRequired,
 };
 
@@ -117,11 +148,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  boundActionCreators: bindActionCreators(Actions, dispatch),
+  boundFormActionCreators: bindActionCreators(FormActions, dispatch),
+  boundSettingsActionCreators: bindActionCreators(SettingsActions, dispatch),
 });
 
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  _withFadeInAnimation
+  _withFadeInAnimation,
 )(Form);

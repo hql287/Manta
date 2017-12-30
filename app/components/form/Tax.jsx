@@ -1,51 +1,63 @@
 // Libraries
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
+import {isEqual} from 'lodash';
 // Custom Components
-import {Section} from '../shared/Section';
-
+import {Section, Header} from '../shared/Section';
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
-
 // Styles
 import styled from 'styled-components';
-const TaxWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const TaxContent = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const TaxID = styled.div``;
 const TaxAmount = styled.div`flex: 1;`;
+
+const Form = styled.div`
+  padding: 20px;
+  background: #f9fafa;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  border: 1px solid #f2f3f4;
+`;
+
+const Row = styled.div`
+  display: flex;
+  margin: 0 -15px;
+`;
+
+const Field = styled.div`
+  flex: 1;
+  margin: 0 15px 20px 15px;
+`;
 
 // Component
 export class Tax extends Component {
   constructor(props) {
     super(props);
+    this.state = props.tax;
+    this.isSettingsSaved = this.isSettingsSaved.bind(this);
+    this.saveTaxSettings = this.saveTaxSettings.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentWillMount() {
-    const {tax} = this.props;
-    this.setState({
-      amount: tax.amount ? tax.amount : '',
-    });
+  componentWillReceiveProps(nextProps) {
+    // TODO
+    // Handle Reset Form
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.state !== nextState ||
-      this.props.tax !== nextProps.tax
-    );
+    if (this.state !== nextState) return true;
+    if (this.props.tax !== nextProps.tax) return true;
+    if (this.props.taxSettings !== nextProps.taxSettings) return true;
+    return false;
   }
 
   handleInputChange(event) {
-    const name = event.target.name;
-    const value =
-      event.target.value === '' ? '' : parseInt(event.target.value, 10);
-    this.setState({[name]: value}, () => {
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'amount' ? parseFloat(target.value) : target.value;
+    this.setState({
+      [name]: value,
+    }, () => {
       this.updateTaxState();
     });
   }
@@ -55,31 +67,78 @@ export class Tax extends Component {
     updateFieldData('tax', this.state);
   }
 
+  isSettingsSaved() {
+    return isEqual(this.state, this.props.taxSettings);
+  }
+
+  saveTaxSettings() {
+    const { saveFormSettings } = this.props;
+    saveFormSettings('tax', this.state);
+  }
+
   render() {
     return (
       <Section>
-        <TaxWrapper>
-          <label className="itemLabel">Tax (%)</label>
-          <TaxContent>
-            <TaxAmount>
-              <input
-                name="amount"
-                type="number"
-                value={this.state.amount}
-                onChange={this.handleInputChange}
-                placeholder="Amount"
-              />
-            </TaxAmount>
-          </TaxContent>
-        </TaxWrapper>
+        <Header>
+          <label className="itemLabel">Tax</label>
+          {!this.isSettingsSaved() && (
+            <a href="#" onClick={this.saveTaxSettings}>
+              <i className="ion-checkmark" /> Save as default?
+            </a>
+          )}
+        </Header>
+        <Form>
+          <Row>
+            <Field>
+              <label className="itemLabel">Tax ID</label>
+              <TaxID>
+                <input
+                  name="tin"
+                  type="text"
+                  value={this.state.tin}
+                  onChange={this.handleInputChange}
+                  placeholder="Registration Number"
+                />
+              </TaxID>
+            </Field>
+          </Row>
+          <Row>
+            <Field>
+              <label className="itemLabel">Amount (%)</label>
+              <TaxAmount>
+                <input
+                  name="amount"
+                  type="number"
+                  step="0.01"
+                  value={this.state.amount}
+                  onChange={this.handleInputChange}
+                  placeholder="Amount"
+                />
+              </TaxAmount>
+            </Field>
+            <Field>
+              <label className="itemLabel">Method</label>
+              <select
+                name="method"
+                value={this.state.method}
+                onChange={this.handleInputChange}>
+                <option value="default">Default</option>
+                <option value="reverse">Reverse Charge</option>
+              </select>
+            </Field>
+          </Row>
+        </Form>
       </Section>
     );
   }
 }
 
 Tax.propTypes = {
-  updateFieldData: PropTypes.func.isRequired,
-  tax: PropTypes.object.isRequired,
+  saveFormSettings: PropTypes.func.isRequired,
+  tax:              PropTypes.object.isRequired,
+  taxSettings:      PropTypes.object.isRequired,
+  updateFieldData:  PropTypes.func.isRequired,
+  updateSettings:   PropTypes.func.isRequired,
 };
 
 // Exports
