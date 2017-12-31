@@ -26,7 +26,7 @@ const initialState = {
     open: false,
     currency: invoiceSettings.currency,
     tax: invoiceSettings.tax,
-    visible_fields: invoiceSettings.visible_fields,
+    required_fields: invoiceSettings.required_fields,
   }
 };
 
@@ -80,8 +80,8 @@ const FormReducer = handleActions(
     [ACTION_TYPES.FORM_FIELD_TOGGLE]: (state, action) =>
       Object.assign({}, state, {
         settings: Object.assign({}, state.settings, {
-          visible_fields: Object.assign({}, state.settings.visible_fields, {
-            [action.payload]: !state.settings.visible_fields[action.payload]
+          required_fields: Object.assign({}, state.settings.required_fields, {
+            [action.payload]: !state.settings.required_fields[action.payload]
           })
         })
       }),
@@ -106,7 +106,7 @@ const FormReducer = handleActions(
         settings: Object.assign({}, state.settings, {
           currency: invoiceSettings.currency,
           tax: invoiceSettings.tax,
-          visible_fields: invoiceSettings.visible_fields,
+          required_fields: invoiceSettings.required_fields,
         })
       });
     },

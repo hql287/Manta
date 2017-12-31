@@ -95,7 +95,7 @@ class Invoice extends Component {
     const value = target.checked;
     this.setState(
       {
-        visible_fields: Object.assign({}, this.state.visible_fields, {
+        required_fields: Object.assign({}, this.state.required_fields, {
           [name]: value,
         }),
       },
@@ -135,7 +135,7 @@ class Invoice extends Component {
   }
 
   render() {
-    const {exportDir, template, currency, tax, visible_fields} = this.state;
+    const {exportDir, template, currency, tax, required_fields} = this.state;
 
     return (
       <div>
@@ -187,7 +187,7 @@ class Invoice extends Component {
                 <input
                   name='dueDate'
                   type='checkbox'
-                  checked={visible_fields.dueDate}
+                  checked={required_fields.dueDate}
                   onChange={this.handleVisibilityChange}
                 />
                 <span className='slider round' />
@@ -199,7 +199,7 @@ class Invoice extends Component {
                 <input
                   name='currency'
                   type='checkbox'
-                  checked={visible_fields.currency}
+                  checked={required_fields.currency}
                   onChange={this.handleVisibilityChange}
                 />
                 <span className='slider round' />
@@ -212,7 +212,7 @@ class Invoice extends Component {
                 <input
                   name='discount'
                   type='checkbox'
-                  checked={visible_fields.discount}
+                  checked={required_fields.discount}
                   onChange={this.handleVisibilityChange}
                 />
                 <span className='slider round' />
@@ -224,7 +224,7 @@ class Invoice extends Component {
                 <input
                   name='tax'
                   type='checkbox'
-                  checked={visible_fields.tax}
+                  checked={required_fields.tax}
                   onChange={this.handleVisibilityChange}
                 />
                 <span className='slider round' />
@@ -236,7 +236,7 @@ class Invoice extends Component {
                 <input
                   name='note'
                   type='checkbox'
-                  checked={visible_fields.note}
+                  checked={required_fields.note}
                   onChange={this.handleVisibilityChange}
                 />
                 <span className='slider round' />

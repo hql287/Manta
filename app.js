@@ -187,7 +187,7 @@ function setInitialValues() {
         method: 'default',
         amount: 0,
       },
-      visible_fields: {
+      required_fields: {
         dueDate:  false,
         currency: false,
         discount: false,

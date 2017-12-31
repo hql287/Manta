@@ -55,7 +55,7 @@ class Form extends Component {
       note,
       settings,
     } = this.props.currentInvoice;
-    const {visible_fields, open} = settings;
+    const {required_fields, open} = settings;
     return (
       <PageWrapper>
         <PageHeader>
@@ -78,12 +78,12 @@ class Form extends Component {
           />
           <Recipient />
           <ItemsList />
-          {visible_fields.dueDate && (
+          {required_fields.dueDate && (
             <DueDate
               dueDate={dueDate}
               updateFieldData={updateFieldData} />
           )}
-          {visible_fields.currency && (
+          {required_fields.currency && (
             <Currency
               currency={currency}
               savedSetting={settings.currency}
@@ -91,12 +91,12 @@ class Form extends Component {
               saveFormSettings={saveFormSettings}
             />
           )}
-          {visible_fields.discount && (
+          {required_fields.discount && (
             <Discount
               discount={discount}
               updateFieldData={updateFieldData} />
           )}
-          {visible_fields.tax && (
+          {required_fields.tax && (
             <Tax
               tax={tax}
               savedSetting={settings.tax}
@@ -104,7 +104,7 @@ class Form extends Component {
               saveFormSettings={saveFormSettings}
             />
           )}
-          {visible_fields.note && (
+          {required_fields.note && (
             <Note
               note={note}
               updateFieldData={updateFieldData} />
