@@ -178,7 +178,7 @@ class Invoice extends Component {
           </Row>
         </Section>
 
-        <label className='itemLabel'>Form Visibility</label>
+        <label className='itemLabel'>Required Fields</label>
         <Section>
           <Row>
             <Field>
