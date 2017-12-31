@@ -76,7 +76,7 @@ class Invoice extends Component {
   handleTaxChange(event) {
     const target = event.target;
     const name = target.name;
-    const value = target.value;
+    const value = name === 'amount' ? parseFloat(target.value) : target.value;
     this.setState(
       {
         tax: Object.assign({}, this.state.tax, {
@@ -149,6 +149,7 @@ class Invoice extends Component {
                 type='text'
                 value={tax.tin}
                 onChange={this.handleTaxChange}
+                placeholder="Registration Number"
               />
             </Field>
           </Row>
@@ -161,6 +162,7 @@ class Invoice extends Component {
                 step='0.01'
                 value={tax.amount}
                 onChange={this.handleTaxChange}
+                placeholder="Amount"
               />
             </Field>
             <Field>
