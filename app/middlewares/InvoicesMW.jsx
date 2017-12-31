@@ -53,7 +53,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         status: 'pending',
         currency: invoiceData.currency
           ? invoiceData.currency
-          : currencies[appConfig.get('appSettings.currency')],
+          : currencies[appConfig.get('invoice.currency')],
         subtotal: getSubtotal(invoiceData),
         grandTotal: getGrandTotal(invoiceData),
       });
