@@ -21,11 +21,15 @@ const initialState = {
   // Set default values for currency and tax
   currency: currencies[invoiceSettings.currency],
   tax: invoiceSettings.tax,
-  // Invoice settings
+  // Form current settings
   settings: {
     open: false,
-    currency: invoiceSettings.currency,
+    required_fields: invoiceSettings.required_fields,
+  },
+  // Saved settings, reserve for reference
+  savedSettings: {
     tax: invoiceSettings.tax,
+    currency: invoiceSettings.currency,
     required_fields: invoiceSettings.required_fields,
   }
 };
@@ -100,18 +104,26 @@ const FormReducer = handleActions(
         })
       }),
 
-    [ACTION_TYPES.FORM_SETTING_SAVE]: (state, action) => {
+    [ACTION_TYPES.SAVED_FORM_SETTING_UPDATE]: (state, action) => {
       const invoiceSettings = action.payload;
       return Object.assign({}, state, {
-        settings: Object.assign({}, state.settings, {
-          currency: invoiceSettings.currency,
+        savedSettings: Object.assign({}, state.savedSettings, {
           tax: invoiceSettings.tax,
+          currency: invoiceSettings.currency,
           required_fields: invoiceSettings.required_fields,
         })
       });
     },
 
-    [ACTION_TYPES.FORM_CLEAR]: () => initialState
+    [ACTION_TYPES.FORM_CLEAR]: state =>
+      Object.assign({}, initialState, {
+        // Update current settings
+        settings: Object.assign({}, initialState.settings, {
+          required_fields: state.savedSettings.required_fields
+        }),
+        // Updated saved settings to the current saved settings
+        savedSettings: state.savedSettings,
+      })
   },
   initialState
 );

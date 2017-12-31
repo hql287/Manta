@@ -44,8 +44,8 @@ export const closeFormSettings = createAction(
   ACTION_TYPES.FORM_SETTING_CLOSE
 );
 
-export const saveFormSettings = createAction(
-  ACTION_TYPES.FORM_SETTING_SAVE,
+export const updateSavedFormSettings = createAction(
+  ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,
   (setting, data) => ({setting, data})
 );
 

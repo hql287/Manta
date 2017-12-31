@@ -49,13 +49,13 @@ const FormMW = ({dispatch, getState}) => next => action => {
       break;
     }
 
-    case ACTION_TYPES.FORM_SETTING_SAVE: {
+    case ACTION_TYPES.SAVED_FORM_SETTING_UPDATE: {
       // Save setting to DB
       const { setting, data } = action.payload;
       appConfig.set(`invoice.${setting}`, data);
       // Pass new data to action and continue
       next({
-        type: ACTION_TYPES.FORM_SETTING_SAVE,
+        type: ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,
         payload: appConfig.get('invoice'),
       });
       // Reload app settings so that

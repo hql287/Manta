@@ -32,7 +32,8 @@ import {
 // Component
 class Form extends Component {
   shouldComponentUpdate(nextProps) {
-    return this.props.currentInvoice !== nextProps.currentInvoice;
+    if (this.props.currentInvoice !== nextProps.currentInvoice) return true;
+    return false;
   }
 
   render() {
@@ -44,7 +45,7 @@ class Form extends Component {
       saveFormData,
       updateFieldData,
       toggleFormSettings,
-      saveFormSettings,
+      updateSavedFormSettings,
     } = this.props.boundFormActionCreators;
     // Form Value
     const {
@@ -54,6 +55,7 @@ class Form extends Component {
       tax,
       note,
       settings,
+      savedSettings,
     } = this.props.currentInvoice;
     const {required_fields, open} = settings;
     return (
@@ -74,7 +76,8 @@ class Form extends Component {
             toggleField={toggleField}
             toggleFormSettings={toggleFormSettings}
             settings={settings}
-            saveFormSettings={saveFormSettings}
+            savedSetting={savedSettings.required_fields}
+            updateSavedSettings={updateSavedFormSettings}
           />
           <Recipient />
           <ItemsList />
@@ -86,9 +89,9 @@ class Form extends Component {
           {required_fields.currency && (
             <Currency
               currency={currency}
-              savedSetting={settings.currency}
               updateFieldData={updateFieldData}
-              saveFormSettings={saveFormSettings}
+              savedSetting={savedSettings.currency}
+              updateSavedSettings={updateSavedFormSettings}
             />
           )}
           {required_fields.discount && (
@@ -99,9 +102,9 @@ class Form extends Component {
           {required_fields.tax && (
             <Tax
               tax={tax}
-              savedSetting={settings.tax}
               updateFieldData={updateFieldData}
-              saveFormSettings={saveFormSettings}
+              savedSetting={savedSettings.tax}
+              updateSavedSettings={updateSavedFormSettings}
             />
           )}
           {required_fields.note && (
