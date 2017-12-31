@@ -10,14 +10,17 @@ function validateFormData(formData) {
     discount,
     tax,
     note,
+    settings
   } = formData;
+  // Required fields
+  const { required_fields } = settings;
   if (!validateRecipient(recipient)) return false;
   if (!validateRows(rows)) return false;
-  if (!validateDueDate(dueDate)) return false;
-  if (!validateCurrency(currency)) return false;
-  if (!validateDiscount(discount)) return false;
-  if (!validateTax(tax)) return false;
-  if (!validateNote(note)) return false;
+  if (!validateDueDate(required_fields.dueDate, dueDate)) return false;
+  if (!validateCurrency(required_fields.currency, currency)) return false;
+  if (!validateDiscount(required_fields.discount, discount)) return false;
+  if (!validateTax(required_fields.tax, tax)) return false;
+  if (!validateNote(required_fields.note, note)) return false;
   return true;
 }
 
@@ -30,7 +33,10 @@ function getInvoiceData(formData) {
     discount,
     tax,
     note,
+    settings
   } = formData;
+  // Required fields
+  const { required_fields } = settings;
   // Set Initial Value
   let invoiceData = {rows};
   // Set Recipient
@@ -40,20 +46,16 @@ function getInvoiceData(formData) {
     invoiceData.recipient = recipient.select;
   }
   // Set Invoice DueDate
-  if (dueDate.required) invoiceData.dueDate = dueDate.selectedDate;
+  if (required_fields.dueDate) invoiceData.dueDate = dueDate.selectedDate;
   // Set Invoice Currency
-  if (currency.required) invoiceData.currency = currency.selectedCurrency;
-  // Set Invoice Note
-  if (note.required) invoiceData.note = note.content;
-  // Set Invoice Tax
-  if (tax.required) invoiceData.tax = tax.amount;
+  if (required_fields.currency) invoiceData.currency = currency;
   // Set Invoice Discount
-  if (discount.required) {
-    invoiceData.discount = {
-      amount: discount.amount,
-      type: discount.type,
-    };
-  }
+  if (required_fields.discount) invoiceData.discount = discount;
+  // Set Invoice Tax
+  if (required_fields.tax) invoiceData.tax = tax;
+  // Set Invoice Note
+  if (required_fields.note) invoiceData.note = note.content;
+  // Return final value
   return invoiceData;
 }
 
@@ -136,9 +138,9 @@ function validateRows(rows) {
   return validated;
 }
 
-function validateDueDate(dueDate) {
-  const {required, selectedDate} = dueDate;
-  if (required) {
+function validateDueDate(isRequired, dueDate) {
+  const {selectedDate} = dueDate;
+  if (isRequired) {
     if (!selectedDate || selectedDate === null) {
       openDialog({
         type: 'warning',
@@ -153,10 +155,9 @@ function validateDueDate(dueDate) {
   return true;
 }
 
-function validateCurrency(currency) {
-  const {required, selectedCurrency} = currency;
-  if (required) {
-    if (!selectedCurrency || selectedCurrency === null) {
+function validateCurrency(isRequired, currency) {
+  if (isRequired) {
+    if (!currency || currency === null) {
       openDialog({
         type: 'warning',
         title: 'Required Field',
@@ -170,9 +171,9 @@ function validateCurrency(currency) {
   return true;
 }
 
-function validateDiscount(discount) {
-  const {required, amount} = discount;
-  if (required) {
+function validateDiscount(isRequired, discount) {
+  const {amount} = discount;
+  if (isRequired) {
     if (!amount || amount === '' || amount === 0) {
       openDialog({
         type: 'warning',
@@ -187,9 +188,9 @@ function validateDiscount(discount) {
   return true;
 }
 
-function validateTax(tax) {
-  const { required, amount } = tax;
-  if (required) {
+function validateTax(isRequired, tax) {
+  const { amount } = tax;
+  if (isRequired) {
     if (!amount || amount === '' || amount === 0) {
       openDialog({
         type: 'warning',
@@ -204,9 +205,9 @@ function validateTax(tax) {
   return true;
 }
 
-function validateNote(note) {
-  const {required, content} = note;
-  if (required) {
+function validateNote(isRequired, note) {
+  const {content} = note;
+  if (isRequired) {
     if (!content || content === '') {
       openDialog({
         type: 'warning',
