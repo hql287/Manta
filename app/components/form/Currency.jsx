@@ -3,10 +3,10 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
-import { keys, sortBy } from 'lodash';
+import {keys, sortBy, isEqual} from 'lodash';
 
 // Custom Components
-import {Section} from '../shared/Section';
+import {Section, Header} from '../shared/Section';
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
@@ -15,54 +15,86 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 export class Currency extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      code: props.currency.code,
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.updateCurrency = this.updateCurrency.bind(this);
+    this.isSettingsSaved = this.isSettingsSaved.bind(this);
+    this.saveCurrencySettings = this.saveCurrencySettings.bind(this);
   }
 
-  componentDidMount() {
-    const currencyCode = appConfig.get('appSettings.currency');
-    this.props.updateFieldData('currency', {
-      selectedCurrency: currencies[currencyCode],
-    });
+  componentWillReceiveProps(nextProps) {
+    // TODO
+    // Handle Reset Form
   }
 
-  shouldComponentUpdate(nextProps) {
-    return this.props.currency !== nextProps.currency;
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state !== nextState) return true;
+    if (this.props.currency !== nextProps.currency) return true;
+    if (this.props.savedSetting !== nextProps.savedSetting) return true;
+    return false;
   }
 
-  updateCurrency(event) {
+  handleInputChange(event) {
     const value = event.target.value;
-    const currencyCode = value === '' ? null : value;
-    this.props.updateFieldData('currency', {
-      selectedCurrency: currencies[currencyCode]
-    });
+    this.setState(
+      {
+        code: value === '' ? null : value,
+      },
+      () => {
+        this.updateCurrency();
+      },
+    );
+  }
+
+  updateCurrency() {
+    const {updateFieldData} = this.props;
+    updateFieldData('currency', currencies[this.state.code]);
+  }
+
+  isSettingsSaved() {
+    return isEqual(this.state.code, this.props.savedSetting);
+  }
+
+  saveCurrencySettings() {
+    const {saveFormSettings} = this.props;
+    saveFormSettings('currency', this.state.code);
   }
 
   render() {
+    // Sort currencies
     const currenciesKeys = keys(currencies);
-    const currenciesKeysAndValues = currenciesKeys.
-      map(key => [key, currencies[key]['name'], currencies[key]['code']]);
-    const currenciesSorted = sortBy(currenciesKeysAndValues, [array => array[1]]);
-    const currenciesOptions = currenciesSorted.map((obj) => {
+    const currenciesKeysAndValues = currenciesKeys.map(key => [
+      key,
+      currencies[key]['name'],
+      currencies[key]['code'],
+    ]);
+    const currenciesSorted = sortBy(currenciesKeysAndValues, [
+      array => array[1],
+    ]);
+    const currenciesOptions = currenciesSorted.map(obj => {
       const [key, name, code] = obj;
-
       let optionKey = code;
       let optionValue = code;
       let optionLabel = name;
-
       return (
         <option value={optionValue} key={optionKey}>
           {optionLabel}
         </option>
       );
     });
-    const {currency} = this.props;
-    const currencyCode = currency.selectedCurrency
-      ? currency.selectedCurrency.code
-      : appConfig.get('appSettings.currency');
     return (
       <Section>
-        <label className="itemLabel">Currency</label>
-        <select value={currencyCode} onChange={this.updateCurrency}>
+        <Header>
+          <label className="itemLabel">Currency</label>
+          {!this.isSettingsSaved() && (
+            <a href="#" onClick={this.saveCurrencySettings}>
+              <i className="ion-checkmark" /> Save as default?
+            </a>
+          )}
+        </Header>
+        <select value={this.state.code} onChange={this.handleInputChange}>
           {currenciesOptions}
         </select>
       </Section>
@@ -72,7 +104,9 @@ export class Currency extends Component {
 
 Currency.propTypes = {
   currency: PropTypes.object.isRequired,
+  savedSetting: PropTypes.string.isRequired,
   updateFieldData: PropTypes.func.isRequired,
+  saveFormSettings: PropTypes.func.isRequired,
 };
 
 // Export

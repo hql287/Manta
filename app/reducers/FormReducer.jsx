@@ -24,7 +24,7 @@ const initialState = {
   // Invoice settings
   settings: {
     open: false,
-    currency: currencies[invoiceSettings.currency],
+    currency: invoiceSettings.currency,
     tax: invoiceSettings.tax,
     visible_fields: invoiceSettings.visible_fields,
   }
@@ -104,7 +104,7 @@ const FormReducer = handleActions(
       const invoiceSettings = action.payload;
       return Object.assign({}, state, {
         settings: Object.assign({}, state.settings, {
-          currency: currencies[invoiceSettings.currency],
+          currency: invoiceSettings.currency,
           tax: invoiceSettings.tax,
           visible_fields: invoiceSettings.visible_fields,
         })
