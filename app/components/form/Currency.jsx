@@ -21,7 +21,7 @@ export class Currency extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.updateCurrency = this.updateCurrency.bind(this);
     this.isSettingsSaved = this.isSettingsSaved.bind(this);
-    this.saveCurrencySettings = this.saveCurrencySettings.bind(this);
+    this.saveAsDefault = this.saveAsDefault.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,9 +57,9 @@ export class Currency extends Component {
     return isEqual(this.state.code, this.props.savedSetting);
   }
 
-  saveCurrencySettings() {
-    const {saveFormSettings} = this.props;
-    saveFormSettings('currency', this.state.code);
+  saveAsDefault() {
+    const {updateSavedSettings} = this.props;
+    updateSavedSettings('currency', this.state.code);
   }
 
   render() {
@@ -89,7 +89,7 @@ export class Currency extends Component {
         <Header>
           <label className="itemLabel">Currency</label>
           {!this.isSettingsSaved() && (
-            <a href="#" onClick={this.saveCurrencySettings}>
+            <a href="#" onClick={this.saveAsDefault}>
               <i className="ion-checkmark" /> Save as default?
             </a>
           )}
@@ -106,7 +106,7 @@ Currency.propTypes = {
   currency: PropTypes.object.isRequired,
   savedSetting: PropTypes.string.isRequired,
   updateFieldData: PropTypes.func.isRequired,
-  saveFormSettings: PropTypes.func.isRequired,
+  updateSavedSettings: PropTypes.func.isRequired,
 };
 
 // Export

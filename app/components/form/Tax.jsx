@@ -35,7 +35,7 @@ export class Tax extends Component {
     super(props);
     this.state = props.tax;
     this.isSettingsSaved = this.isSettingsSaved.bind(this);
-    this.saveTaxSettings = this.saveTaxSettings.bind(this);
+    this.saveAsDefault = this.saveAsDefault.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
@@ -74,9 +74,9 @@ export class Tax extends Component {
     return isEqual(this.state, this.props.savedSetting);
   }
 
-  saveTaxSettings() {
-    const {saveFormSettings} = this.props;
-    saveFormSettings('tax', this.state);
+  saveAsDefault() {
+    const {updateSavedSettings} = this.props;
+    updateSavedSettings('tax', this.state);
   }
 
   render() {
@@ -85,7 +85,7 @@ export class Tax extends Component {
         <Header>
           <label className="itemLabel">Tax</label>
           {!this.isSettingsSaved() && (
-            <a href="#" onClick={this.saveTaxSettings}>
+            <a href="#" onClick={this.saveAsDefault}>
               <i className="ion-checkmark" /> Save as default?
             </a>
           )}
@@ -137,7 +137,7 @@ export class Tax extends Component {
 }
 
 Tax.propTypes = {
-  saveFormSettings: PropTypes.func.isRequired,
+  updateSavedSettings: PropTypes.func.isRequired,
   tax: PropTypes.object.isRequired,
   savedSetting: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,
