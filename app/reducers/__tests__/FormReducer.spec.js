@@ -1,5 +1,6 @@
 import FormReducer, { getCurrentInvoice, getRows, getRecipient } from '../FormReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
+import currencies from '../../../libs/currencies.json';
 
 import uuidv4 from 'uuid/v4';
 
@@ -87,11 +88,11 @@ describe('Form Reducer should handle', () => {
       new: {},
     });
     expect(newState.rows).toHaveLength(0);
-    // expect(newState.dueDate).toEqual({});
-    // expect(newState.note).toEqual({});
-    // expect(newState.currency).toEqual({});
-    // expect(newState.discount).toEqual({});
-    // expect(newState.tax).toEqual({});
+    expect(newState.dueDate).toEqual({});
+    expect(newState.note).toEqual({});
+    expect(newState.currency).toEqual(currencies[currentState.savedSettings.currency]);
+    expect(newState.discount).toEqual({});
+    expect(newState.tax).toEqual({});
     expect(newState.settings.open).toEqual(false);
   });
 

@@ -123,7 +123,8 @@ const FormReducer = handleActions(
         tax: state.savedSettings.tax,
         // Update current settings
         settings: Object.assign({}, state.settings, {
-          required_fields: state.savedSettings.required_fields
+          open: false,
+          required_fields: state.savedSettings.required_fields,
         }),
         // Updated saved settings to the current saved settings
         savedSettings: state.savedSettings,
