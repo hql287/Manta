@@ -18,3 +18,10 @@ linux:
   target:
     - deb
     - AppImage
+    - snap
+snap:
+  plugs:
+    - defaults
+    - desktop
+  after:
+    - desktop-gtk2
