@@ -12,7 +12,7 @@ const tax = {
   tin: '123-456-789',
   mode: 'default',
 };
-const savedSetting = {
+const savedSettings = {
   amount: 10,
   tin: '123-456-789',
   mode: 'default',
@@ -26,7 +26,7 @@ describe('Note component', () => {
     wrapper = mount(
       <Tax
         tax={tax}
-        savedSetting={savedSetting}
+        savedSettings={savedSettings}
         updateSavedSettings={updateSavedSettings}
         updateFieldData={updateFieldData}
       />,
@@ -56,7 +56,7 @@ describe('Note component', () => {
     const wrap = mount(
       <Tax
         tax={tax}
-        savedSetting={savedSetting}
+        savedSettings={savedSettings}
         updateSavedSettings={updateSavedSettings}
         updateFieldData={updateFieldData}
       />,
@@ -81,7 +81,7 @@ describe('Note component', () => {
       .create(
         <Tax
           tax={tax}
-          savedSetting={savedSetting}
+          savedSettings={savedSettings}
           updateSavedSettings={updateSavedSettings}
           updateFieldData={updateFieldData}
         />,

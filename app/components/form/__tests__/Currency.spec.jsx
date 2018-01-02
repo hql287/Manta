@@ -11,7 +11,7 @@ import {Section} from '../../shared/Section';
 
 // Mocks
 const currency = currencies['USD'];
-const savedSetting = 'USD';
+const savedSettings = 'USD';
 const updateFieldData = jest.fn();
 const updateSavedSettings = jest.fn();
 
@@ -21,7 +21,7 @@ describe('Renders correctly to the DOM', () => {
     wrapper = mount(
       <Currency
         currency={currency}
-        savedSetting={savedSetting}
+        savedSettings={savedSettings}
         updateFieldData={updateFieldData}
         updateSavedSettings={updateSavedSettings}
       />
@@ -58,7 +58,7 @@ describe('Renders correctly to the DOM', () => {
       .create(
         <Currency
           currency={currency}
-          savedSetting={savedSetting}
+          savedSettings={savedSettings}
           updateFieldData={updateFieldData}
           updateSavedSettings={updateSavedSettings}
         />

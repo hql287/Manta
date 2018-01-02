@@ -52,7 +52,7 @@ describe('Settings component', () => {
     wrapper = mount(
       <Settings
         settings={currentInvoice.settings}
-        savedSetting={currentInvoice.savedSettings.required_fields}
+        savedSettings={currentInvoice.savedSettings.required_fields}
         toggleField={toggleField}
         toggleFormSettings={toggleFormSettings}
         updateSavedSettings={updateSavedSettings}
@@ -121,7 +121,7 @@ describe('Settings component', () => {
       .create(
         <Settings
           settings={currentInvoice.settings}
-          savedSetting={currentInvoice.savedSettings.required_fields}
+          savedSettings={currentInvoice.savedSettings.required_fields}
           toggleField={toggleField}
           toggleFormSettings={toggleFormSettings}
           updateSavedSettings={updateSavedSettings}
