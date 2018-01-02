@@ -7,18 +7,30 @@ import {mount} from 'enzyme';
 import {Tax} from '../Tax.jsx';
 
 // Mocks
-const updateFieldData = jest.fn();
 const tax = {
-  required: true,
   amount: 10,
   tin: '123-456-789',
   mode: 'default',
 };
+const savedSetting = {
+  amount: 10,
+  tin: '123-456-789',
+  mode: 'default',
+};
+const updateFieldData = jest.fn();
+const updateSavedSettings = jest.fn();
 
 describe('Note component', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = mount(<Tax tax={tax} updateFieldData={updateFieldData} />);
+    wrapper = mount(
+      <Tax
+        tax={tax}
+        savedSetting={savedSetting}
+        updateSavedSettings={updateSavedSettings}
+        updateFieldData={updateFieldData}
+      />,
+    );
   });
 
   // PROPS & STATE
@@ -40,8 +52,15 @@ describe('Note component', () => {
 
   // PRIVATE METHOD
   it('handleInputChange correctly', () => {
-    const spy  = jest.spyOn(Tax.prototype, 'handleInputChange');
-    const wrap = mount(<Tax tax={tax} updateFieldData={updateFieldData} />);
+    const spy = jest.spyOn(Tax.prototype, 'handleInputChange');
+    const wrap = mount(
+      <Tax
+        tax={tax}
+        savedSetting={savedSetting}
+        updateSavedSettings={updateSavedSettings}
+        updateFieldData={updateFieldData}
+      />,
+    );
     // Changing Amount
     const amount = wrap.find('input').last();
     amount.simulate('change', {target: {value: '20'}});
@@ -59,7 +78,14 @@ describe('Note component', () => {
   // SNAPSHOT
   it('matches snapshot', () => {
     const tree = renderer
-      .create(<Tax tax={tax} updateFieldData={updateFieldData} />)
+      .create(
+        <Tax
+          tax={tax}
+          savedSetting={savedSetting}
+          updateSavedSettings={updateSavedSettings}
+          updateFieldData={updateFieldData}
+        />,
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

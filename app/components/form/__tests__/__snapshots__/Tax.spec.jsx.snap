@@ -5,19 +5,13 @@ exports[`Note component matches snapshot 1`] = `
   className="Section__SectionStyle-KuFAH hVJJBo"
 >
   <div
-    className="Tax__Header-bEbyHB iNlpSO"
+    className="Section__HeaderStyle-fSAzGW jpivnX"
   >
     <label
       className="itemLabel"
     >
       Tax
     </label>
-    <a
-      href="#"
-      onClick={[Function]}
-    >
-      Save as default Tax settings?
-    </a>
   </div>
   <div
     className="Tax__Form-iRHWvw fHkjRN"
@@ -64,6 +58,7 @@ exports[`Note component matches snapshot 1`] = `
             name="amount"
             onChange={[Function]}
             placeholder="Amount"
+            step="0.01"
             type="number"
             value={10}
           />
@@ -80,7 +75,7 @@ exports[`Note component matches snapshot 1`] = `
         <select
           name="method"
           onChange={[Function]}
-          value="default"
+          value={undefined}
         >
           <option
             value="default"

@@ -15,33 +15,58 @@ const currentInvoice = {
     select: {},
   },
   rows: [],
-  dueDate: { required: false },
-  currency: { required: false },
-  discount: { required: false },
-  tax: { required: false },
-  note: { required: false },
-  settingsOpen: false,
+  dueDate: {},
+  currency: {},
+  discount: {},
+  tax: {},
+  note: {},
+  settings: {
+    open: false,
+    required_fields: {
+      dueDate: false,
+      currency: false,
+      discount: false,
+      tax: false,
+      note: false,
+    },
+  },
+  savedSettings: {
+    tax: {},
+    currency: 'USD',
+    required_fields: {
+      dueDate: false,
+      currency: false,
+      discount: false,
+      tax: false,
+      note: false,
+    },
+  },
 };
 const toggleField = jest.fn();
 const toggleFormSettings = jest.fn();
+const updateSavedSettings = jest.fn();
 
 describe('Settings component', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <Settings
+        settings={currentInvoice.settings}
+        savedSetting={currentInvoice.savedSettings.required_fields}
         toggleField={toggleField}
         toggleFormSettings={toggleFormSettings}
-        currentInvoice={currentInvoice}
+        updateSavedSettings={updateSavedSettings}
       />,
     );
   });
 
   // PROPS & STATE
   it('receives correct props', () => {
+    expect(wrapper.prop('settings')).toEqual(currentInvoice.settings);
     expect(wrapper.prop('toggleField')).toEqual(toggleField);
     expect(wrapper.prop('toggleFormSettings')).toEqual(toggleFormSettings);
-    expect(wrapper.prop('currentInvoice')).toEqual(currentInvoice);
+    expect(wrapper.prop('updateSavedSettings')).toEqual(updateSavedSettings);
+    // expect(wrapper.prop('currentInvoice')).toEqual(currentInvoice);
   });
 
   // RENDER
@@ -57,11 +82,11 @@ describe('Settings component', () => {
   // PRIsettingsE METHOD
   it('toggle field correctly', () => {
     // Setup
-    const dueDate  = wrapper.find(Switch).at(0);
+    const dueDate = wrapper.find(Switch).at(0);
     const currency = wrapper.find(Switch).at(1);
     const discount = wrapper.find(Switch).at(2);
-    const tax      = wrapper.find(Switch).at(3);
-    const note     = wrapper.find(Switch).at(4);
+    const tax = wrapper.find(Switch).at(3);
+    const note = wrapper.find(Switch).at(4);
 
     // Execute & Assert
     dueDate.find('input').simulate('change');
@@ -95,9 +120,11 @@ describe('Settings component', () => {
     const tree = renderer
       .create(
         <Settings
+          settings={currentInvoice.settings}
+          savedSetting={currentInvoice.savedSettings.required_fields}
           toggleField={toggleField}
           toggleFormSettings={toggleFormSettings}
-          currentInvoice={currentInvoice}
+          updateSavedSettings={updateSavedSettings}
         />,
       )
       .toJSON();

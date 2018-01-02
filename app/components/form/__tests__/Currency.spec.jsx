@@ -10,14 +10,21 @@ import {Currency} from '../Currency';
 import {Section} from '../../shared/Section';
 
 // Mocks
-const updateFieldData = jest.fn();
 const currency = currencies['USD'];
+const savedSetting = 'USD';
+const updateFieldData = jest.fn();
+const updateSavedSettings = jest.fn();
 
 describe('Renders correctly to the DOM', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
-      <Currency currency={currency} updateFieldData={updateFieldData} />,
+      <Currency
+        currency={currency}
+        savedSetting={savedSetting}
+        updateFieldData={updateFieldData}
+        updateSavedSettings={updateSavedSettings}
+      />
     );
   });
 
@@ -26,20 +33,6 @@ describe('Renders correctly to the DOM', () => {
 
   });
 
-  it('calls componentDidMount', () => {
-    const spy = jest.spyOn(Currency.prototype, 'componentDidMount');
-    const wrapper2 = mount(
-      <Currency currency={currency} updateFieldData={updateFieldData} />
-    );
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('called update currency once mounted', () => {
-    expect(updateFieldData).toHaveBeenCalled();
-    expect(updateFieldData).toHaveBeenCalledWith('currency', {
-      selectedCurrency: currencies[appConfig.get('appSettings.currency')],
-    });
-  });
 
   it('renders necessary element', () => {
     // Section
@@ -57,15 +50,18 @@ describe('Renders correctly to the DOM', () => {
     const selectEl = wrapper.find('select');
     selectEl.simulate('change', {target: {value: 'VND'}});
     expect(updateFieldData).toHaveBeenCalled();
-    expect(updateFieldData).toHaveBeenCalledWith('currency', {
-      selectedCurrency: currencies['VND'],
-    });
+    expect(updateFieldData).toHaveBeenCalledWith('currency', currencies['VND']);
   });
 
   it('matches snapshot', () => {
     const tree = renderer
       .create(
-        <Currency currency={currency} updateFieldData={updateFieldData} />,
+        <Currency
+          currency={currency}
+          savedSetting={savedSetting}
+          updateFieldData={updateFieldData}
+          updateSavedSettings={updateSavedSettings}
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
