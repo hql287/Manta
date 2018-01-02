@@ -15,54 +15,33 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 export class Currency extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      code: props.currency.code,
-    };
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.updateCurrency = this.updateCurrency.bind(this);
     this.isSettingsSaved = this.isSettingsSaved.bind(this);
     this.saveAsDefault = this.saveAsDefault.bind(this);
+    this.sortCurrencies = this.sortCurrencies.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // TODO
-    // Handle Reset Form
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state !== nextState) return true;
+  shouldComponentUpdate(nextProps) {
     if (this.props.currency !== nextProps.currency) return true;
     if (this.props.savedSetting !== nextProps.savedSetting) return true;
-    return false;
+    return true;
   }
 
   handleInputChange(event) {
     const value = event.target.value;
-    this.setState(
-      {
-        code: value === '' ? null : value,
-      },
-      () => {
-        this.updateCurrency();
-      },
-    );
-  }
-
-  updateCurrency() {
-    const {updateFieldData} = this.props;
-    updateFieldData('currency', currencies[this.state.code]);
+    this.props.updateFieldData('currency', currencies[value]);
   }
 
   isSettingsSaved() {
-    return isEqual(this.state.code, this.props.savedSetting);
+    return isEqual(this.props.currency.code, this.props.savedSetting);
   }
 
   saveAsDefault() {
     const {updateSavedSettings} = this.props;
-    updateSavedSettings('currency', this.state.code);
+    updateSavedSettings('currency', this.props.currency);
   }
 
-  render() {
+  sortCurrencies() {
     // Sort currencies
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [
@@ -73,7 +52,7 @@ export class Currency extends Component {
     const currenciesSorted = sortBy(currenciesKeysAndValues, [
       array => array[1],
     ]);
-    const currenciesOptions = currenciesSorted.map(obj => {
+    return currenciesSorted.map(obj => {
       const [key, name, code] = obj;
       let optionKey = code;
       let optionValue = code;
@@ -84,6 +63,9 @@ export class Currency extends Component {
         </option>
       );
     });
+  }
+
+  render() {
     return (
       <Section>
         <Header>
@@ -94,8 +76,10 @@ export class Currency extends Component {
             </a>
           )}
         </Header>
-        <select value={this.state.code} onChange={this.handleInputChange}>
-          {currenciesOptions}
+        <select
+          value={this.props.currency.code}
+          onChange={this.handleInputChange}>
+          {this.sortCurrencies()}
         </select>
       </Section>
     );

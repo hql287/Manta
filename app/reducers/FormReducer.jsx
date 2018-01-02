@@ -115,15 +115,21 @@ const FormReducer = handleActions(
       });
     },
 
-    [ACTION_TYPES.FORM_CLEAR]: state =>
-      Object.assign({}, initialState, {
+    [ACTION_TYPES.FORM_CLEAR]: state => {
+      return Object.assign({}, initialState, {
+        // Reset to lastest saved settings
+        currency: currencies[state.savedSettings.currency],
+        // Reset to lastest saved settings
+        tax: state.savedSettings.tax,
         // Update current settings
-        settings: Object.assign({}, initialState.settings, {
+        settings: Object.assign({}, state.settings, {
           required_fields: state.savedSettings.required_fields
         }),
         // Updated saved settings to the current saved settings
         savedSettings: state.savedSettings,
-      })
+      });
+    }
+
   },
   initialState
 );

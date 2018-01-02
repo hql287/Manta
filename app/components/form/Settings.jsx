@@ -82,43 +82,27 @@ import Switch from '../shared/Switch';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    // Set initial state as saved settings
-    this.state = props.savedSetting;
     this.isSettingsSaved = this.isSettingsSaved.bind(this);
     this.saveAsDefault = this.saveAsDefault.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state !== nextState) return true;
-    if (this.props !== nextProps) return true;
-    return true;
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
   }
 
   // Update local state
   handleInputChange(event) {
-    const name = event.target.name;
-    const value = event.target.checked;
-    this.setState(
-      {
-        [name]: value,
-      },
-      // Then toggle the field
-      () => {
-        this.props.toggleField(name);
-      }
-    );
+    this.props.toggleField(event.target.name);
   }
 
   isSettingsSaved() {
-    // If the local state (current settings) is not equal with the saved Settings
-    // It means the settings are not saved
-    return isEqual(this.state, this.props.savedSetting);
+    return isEqual(this.props.settings.required_fields, this.props.savedSetting);
   }
 
   saveAsDefault() {
     const {updateSavedSettings} = this.props;
-    updateSavedSettings('required_fields', this.state);
+    updateSavedSettings('required_fields', this.props.settings.required_fields);
   }
 
   render() {

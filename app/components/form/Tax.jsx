@@ -39,9 +39,20 @@ export class Tax extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  // Handle Form Clear
   componentWillReceiveProps(nextProps) {
-    // TODO
-    // Handle Reset Form
+    // Already made changes but not saved
+    if (this.state !== this.props.savedSetting) {
+      // Reset to savedSetting if the below confition is met
+      if ( nextProps.tax === nextProps.savedSetting ) {
+        this.setState(
+          nextProps.savedSetting,
+          () => {
+            this.updateTaxState();
+          }
+        );
+      }
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
