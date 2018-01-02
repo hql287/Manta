@@ -42,11 +42,11 @@ export class Tax extends Component {
   // Handle Form Clear
   componentWillReceiveProps(nextProps) {
     // Already made changes but not saved
-    if (this.state !== this.props.savedSetting) {
-      // Reset to savedSetting if the below confition is met
-      if ( nextProps.tax === nextProps.savedSetting ) {
+    if (this.state !== this.props.savedSettings) {
+      // Reset to savedSettings if the below confition is met
+      if ( nextProps.tax === nextProps.savedSettings ) {
         this.setState(
-          nextProps.savedSetting,
+          nextProps.savedSettings,
           () => {
             this.updateTaxState();
           }
@@ -58,7 +58,7 @@ export class Tax extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state !== nextState) return true;
     if (this.props.tax !== nextProps.tax) return true;
-    if (this.props.savedSetting !== nextProps.savedSetting) return true;
+    if (this.props.savedSettings !== nextProps.savedSettings) return true;
     return false;
   }
 
@@ -82,7 +82,7 @@ export class Tax extends Component {
   }
 
   isSettingsSaved() {
-    return isEqual(this.state, this.props.savedSetting);
+    return isEqual(this.state, this.props.savedSettings);
   }
 
   saveAsDefault() {
@@ -150,7 +150,7 @@ export class Tax extends Component {
 Tax.propTypes = {
   updateSavedSettings: PropTypes.func.isRequired,
   tax: PropTypes.object.isRequired,
-  savedSetting: PropTypes.object.isRequired,
+  savedSettings: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,
 };
 

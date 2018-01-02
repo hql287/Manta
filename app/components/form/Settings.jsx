@@ -97,7 +97,7 @@ class Settings extends Component {
   }
 
   isSettingsSaved() {
-    return isEqual(this.props.settings.required_fields, this.props.savedSetting);
+    return isEqual(this.props.settings.required_fields, this.props.savedSettings);
   }
 
   saveAsDefault() {
@@ -194,7 +194,7 @@ class Settings extends Component {
 
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
-  savedSetting: PropTypes.object.isRequired,
+  savedSettings: PropTypes.object.isRequired,
   toggleField: PropTypes.func.isRequired,
   toggleFormSettings: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,

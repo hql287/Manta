@@ -23,7 +23,7 @@ export class Currency extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (this.props.currency !== nextProps.currency) return true;
-    if (this.props.savedSetting !== nextProps.savedSetting) return true;
+    if (this.props.savedSettings !== nextProps.savedSettings) return true;
     return true;
   }
 
@@ -33,12 +33,12 @@ export class Currency extends Component {
   }
 
   isSettingsSaved() {
-    return isEqual(this.props.currency.code, this.props.savedSetting);
+    return isEqual(this.props.currency.code, this.props.savedSettings);
   }
 
   saveAsDefault() {
     const {updateSavedSettings} = this.props;
-    updateSavedSettings('currency', this.props.currency);
+    updateSavedSettings('currency', this.props.currency.code);
   }
 
   sortCurrencies() {
@@ -88,7 +88,7 @@ export class Currency extends Component {
 
 Currency.propTypes = {
   currency: PropTypes.object.isRequired,
-  savedSetting: PropTypes.string.isRequired,
+  savedSettings: PropTypes.string.isRequired,
   updateFieldData: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,
 };

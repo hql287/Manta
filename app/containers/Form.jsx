@@ -76,7 +76,7 @@ class Form extends Component {
             toggleField={toggleField}
             toggleFormSettings={toggleFormSettings}
             settings={settings}
-            savedSetting={savedSettings.required_fields}
+            savedSettings={savedSettings.required_fields}
             updateSavedSettings={updateSavedFormSettings}
           />
           <Recipient />
@@ -90,7 +90,7 @@ class Form extends Component {
             <Currency
               currency={currency}
               updateFieldData={updateFieldData}
-              savedSetting={savedSettings.currency}
+              savedSettings={savedSettings.currency}
               updateSavedSettings={updateSavedFormSettings}
             />
           )}
@@ -103,7 +103,7 @@ class Form extends Component {
             <Tax
               tax={tax}
               updateFieldData={updateFieldData}
-              savedSetting={savedSettings.tax}
+              savedSettings={savedSettings.tax}
               updateSavedSettings={updateSavedFormSettings}
             />
           )}
