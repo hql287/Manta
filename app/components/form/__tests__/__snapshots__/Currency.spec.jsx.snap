@@ -4,14 +4,18 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div
   className="Section__SectionStyle-KuFAH hVJJBo"
 >
-  <label
-    className="itemLabel"
+  <div
+    className="Section__HeaderStyle-fSAzGW jpivnX"
   >
-    Currency
-  </label>
+    <label
+      className="itemLabel"
+    >
+      Currency
+    </label>
+  </div>
   <select
     onChange={[Function]}
-    value="someSettings"
+    value="USD"
   >
     <option
       value="AFN"

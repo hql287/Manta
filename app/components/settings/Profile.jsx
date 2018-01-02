@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Custom Component
-import Logo from './Logo';
+import Logo from './_partials/Logo';
 const Hint = styled.p`
   margin: -15px 0 20px 0;
   font-size: 80%;
@@ -15,33 +15,30 @@ const Hint = styled.p`
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
-class Info extends Component {
+class Profile extends Component {
   constructor(props) {
     super(props);
+    this.state = this.props.profile;
     this.handleLogoChange = this.handleLogoChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  componentWillMount() {
-    this.setState(this.props.info);
   }
 
   handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({[name]: value}, () => {
-      this.props.updateSettings('info', this.state);
+      this.props.updateSettings('profile', this.state);
     });
   }
 
   handleLogoChange(base64String) {
     this.setState({logo: base64String}, () => {
-      this.updateInfoState();
+      this.updateProfileState();
     });
   }
 
-  updateInfoState() {
-    this.props.updateSettings('info', this.state);
+  updateProfileState() {
+    this.props.updateSettings('profile', this.state);
   }
 
   render() {
@@ -124,9 +121,9 @@ class Info extends Component {
   }
 }
 
-Info.propTypes = {
-  info: PropTypes.object.isRequired,
+Profile.propTypes = {
+  profile: PropTypes.object.isRequired,
   updateSettings: PropTypes.func.isRequired,
 };
 
-export default _withFadeInAnimation(Info);
+export default _withFadeInAnimation(Profile);

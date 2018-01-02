@@ -34,7 +34,7 @@ class Invoice extends Component {
   renderTemplate() {
     const {invoice, configs} = this.props;
     const props = {
-      company: appConfig.get('info'),
+      company: appConfig.get('profile'),
       invoice,
       configs,
     };

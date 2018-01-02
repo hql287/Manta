@@ -6,7 +6,7 @@ import {handleActions} from 'redux-actions';
 const initialState = {
   invoice: {},
   configs: {
-    template: appConfig.get('appSettings.template'),
+    template: appConfig.get('invoice.template'),
     accentColor: {
       useCustom: false,
       color: '#2CCCE4',

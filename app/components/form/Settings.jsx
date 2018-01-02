@@ -1,6 +1,7 @@
 // Libraries
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {isEqual} from 'lodash';
 
 // Animation
 import {Motion, spring} from 'react-motion';
@@ -32,7 +33,7 @@ const SettingsHeader = styled.a`
 
 const AllSettings = styled.div`
   display: flex;
-  padding: 25px 40px;
+  padding: 10px 40px 25px 40px;
   background: #f2f3f4;
 `;
 
@@ -53,96 +54,150 @@ const Label = styled.label`
   margin-bottom: 0px;
 `;
 
+const Helper = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  padding: 0 40px;
+  background: #F2F3F4;
+  color: #B4B7BA;
+  p {
+    font-size: 14px;
+    font-weight: 100;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+  a {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+`;
+
 // Custom Components
 import Switch from '../shared/Switch';
 
 // Component
-function Settings(props) {
-  const {toggleField, toggleFormSettings, currentInvoice} = props;
-  const {settingsOpen, dueDate, currency, discount, vat, note} = currentInvoice;
 
-  return (
-    <Motion
-      style={{
-        height: spring(settingsOpen ? 155 : 45),
-        rotate: spring(settingsOpen ? 180 : 0),
-      }}>
-      {({height, rotate}) => (
-        <Wrapper style={{height: `${height}px`}}>
-          <SettingsHeader href="#" onClick={toggleFormSettings}>
-            <Label>Form Settings</Label>
-            <div
-              style={{
-                transform: `rotate(${rotate}deg)`,
-              }}>
-              <i className="ion-arrow-down-b" />
-            </div>
-          </SettingsHeader>
+class Settings extends Component {
+  constructor(props) {
+    super(props);
+    this.isSettingsSaved = this.isSettingsSaved.bind(this);
+    this.saveAsDefault = this.saveAsDefault.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
 
-          <AllSettings>
-            <Setting>
-              <Label>Due Date</Label>
-              <Switch
-                checked={dueDate.required}
-                onChange={() => toggleField('dueDate')}
-              />
-            </Setting>
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
+  }
 
-            <Setting>
-              <Label>Currency</Label>
-              <Switch
-                checked={currency.required}
-                onChange={() => toggleField('currency')}
-              />
-            </Setting>
+  // Update local state
+  handleInputChange(event) {
+    this.props.toggleField(event.target.name);
+  }
 
-            <Setting>
-              <Label>Discount</Label>
-              <Switch
-                checked={discount.required}
-                onChange={() => toggleField('discount')}
-              />
-            </Setting>
+  isSettingsSaved() {
+    return isEqual(this.props.settings.required_fields, this.props.savedSettings);
+  }
 
-            <Setting>
-              <Label>Vat</Label>
-              <Switch
-                checked={vat.required}
-                onChange={() => toggleField('vat')}
-              />
-            </Setting>
+  saveAsDefault() {
+    const {updateSavedSettings} = this.props;
+    updateSavedSettings('required_fields', this.props.settings.required_fields);
+  }
 
-            <Setting>
-              <Label>Note</Label>
-              <Switch
-                checked={note.required}
-                onChange={() => toggleField('note')}
-              />
-            </Setting>
-          </AllSettings>
-        </Wrapper>
-      )}
-    </Motion>
-  );
+  render() {
+    const {toggleFormSettings, settings} = this.props;
+    const {required_fields, open} = settings;
+    return (
+      <Motion
+        style={{
+          height: spring(open ? 180 : 45),
+          rotate: spring(open ? 180 : 0),
+        }}>
+        {({height, rotate}) => (
+          <Wrapper style={{height: `${height}px`}}>
+            <SettingsHeader href="#" onClick={toggleFormSettings}>
+              <Label>Form Settings</Label>
+              <div
+                style={{
+                  transform: `rotate(${rotate}deg)`,
+                }}>
+                <i className="ion-arrow-down-b" />
+              </div>
+            </SettingsHeader>
+
+            <Helper>
+              {this.isSettingsSaved()
+              ?
+                <p>
+                  Toogle any field to make it required in the form.
+                </p>
+              :
+                <a href="#" onClick={this.saveAsDefault}>
+                  <i className="ion-checkmark" /> Save as default?
+                </a>
+              }
+            </Helper>
+
+            <AllSettings>
+              <Setting>
+                <Label>Due Date</Label>
+                <Switch
+                  name='dueDate'
+                  checked={required_fields.dueDate}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
+
+              <Setting>
+                <Label>Currency</Label>
+                <Switch
+                  name='currency'
+                  checked={required_fields.currency}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
+
+              <Setting>
+                <Label>Discount</Label>
+                <Switch
+                  name='discount'
+                  checked={required_fields.discount}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
+
+              <Setting>
+                <Label>Tax</Label>
+                <Switch
+                  name='tax'
+                  checked={required_fields.tax}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
+
+              <Setting>
+                <Label>Note</Label>
+                <Switch
+                  name='note'
+                  checked={required_fields.note}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
+            </AllSettings>
+          </Wrapper>
+        )}
+      </Motion>
+    );
+  }
 }
 
 Settings.propTypes = {
-  currentInvoice: PropTypes.shape({
-    recipient: PropTypes.shape({
-      newRecipient: PropTypes.bool.isRequired,
-      select: PropTypes.object.isRequired,
-      new: PropTypes.object.isRequired,
-    }),
-    rows: PropTypes.array.isRequired,
-    dueDate: PropTypes.object.isRequired,
-    currency: PropTypes.object.isRequired,
-    discount: PropTypes.object.isRequired,
-    vat: PropTypes.object.isRequired,
-    note: PropTypes.object.isRequired,
-    settingsOpen: PropTypes.bool.isRequired,
-  }).isRequired,
+  settings: PropTypes.object.isRequired,
+  savedSettings: PropTypes.object.isRequired,
   toggleField: PropTypes.func.isRequired,
   toggleFormSettings: PropTypes.func.isRequired,
+  updateSavedSettings: PropTypes.func.isRequired,
 };
 
 // Export

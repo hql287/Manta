@@ -7,7 +7,7 @@ import HTML5Backend, {NativeTypes} from 'react-dnd-html5-backend';
 import {DragDropContext} from 'react-dnd';
 
 // Helpers
-import {processImg} from '../../helpers/image';
+import {processImg} from '../../../helpers/image';
 
 // Node Libs
 import {ipcRenderer as ipc} from 'electron';

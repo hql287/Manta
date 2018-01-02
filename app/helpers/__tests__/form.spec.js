@@ -11,7 +11,7 @@ import {
   validateDueDate,
   validateCurrency,
   validateDiscount,
-  validateVat,
+  validateTax,
   validateNote,
 } from '../form';
 
@@ -51,12 +51,32 @@ describe('getInvoiceData', () => {
           quantity: faker.random.number(100),
         },
       ],
-      dueDate: {required: false},
-      currency: {required: false},
-      discount: {required: false},
-      vat: {required: false},
-      note: {required: false},
-      settingsOpen: false,
+      dueDate: {},
+      currency: {},
+      discount: {},
+      tax: {},
+      note: {},
+      settings: {
+        open: false,
+        required_fields: {
+          dueDate: false,
+          currency: false,
+          discount: false,
+          tax: false,
+          note: false,
+        },
+      },
+      savedSettings: {
+        tax: {},
+        currency: 'USD',
+        required_fields: {
+          dueDate: false,
+          currency: false,
+          discount: false,
+          tax: false,
+          note: false,
+        },
+      },
     };
   });
 
@@ -65,14 +85,14 @@ describe('getInvoiceData', () => {
     // Include Rows & Recipient Data
     expect(invoiceData).toHaveProperty('rows');
     expect(invoiceData).toHaveProperty('recipient');
-
     // Not include non-required data
     expect(invoiceData).not.toHaveProperty('dueDate');
     expect(invoiceData).not.toHaveProperty('currency');
     expect(invoiceData).not.toHaveProperty('discount');
-    expect(invoiceData).not.toHaveProperty('vat');
+    expect(invoiceData).not.toHaveProperty('tax');
     expect(invoiceData).not.toHaveProperty('note');
-    expect(invoiceData).not.toHaveProperty('settingsOpen');
+    expect(invoiceData).not.toHaveProperty('settings');
+    expect(invoiceData).not.toHaveProperty('savedSettings');
   });
 
   it('Should return rows data correctly', () => {
@@ -94,9 +114,8 @@ describe('getInvoiceData', () => {
     expect(invoiceData.recipient).not.toHaveProperty('phone');
 
     // Choose selected contact data
-    (formData.recipient.newRecipient = false), (invoiceData = getInvoiceData(
-      formData,
-    ));
+    (formData.recipient.newRecipient = false),
+      (invoiceData = getInvoiceData(formData));
     expect(invoiceData.recipient).toHaveProperty('fullname');
     expect(invoiceData.recipient).toHaveProperty('email');
     expect(invoiceData.recipient).toHaveProperty('company');
@@ -105,15 +124,21 @@ describe('getInvoiceData', () => {
   });
 
   it('should return dueDate data when required', () => {
-    formData.dueDate = {
-      required: true,
-      selectedDate: {
-        date: 20,
-        months: 9,
-        years: 2017,
+    const newFormData = Object.assign({}, formData, {
+      dueDate: {
+        selectedDate: {
+          date: 20,
+          months: 9,
+          years: 2017,
+        },
       },
-    };
-    const invoiceData = getInvoiceData(formData);
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          dueDate: true,
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.dueDate).toEqual({
       date: 20,
       months: 9,
@@ -127,14 +152,19 @@ describe('getInvoiceData', () => {
   });
 
   it('should return currency data when required', () => {
-    formData.currency = {
-      required: true,
-      selectedCurrency: {
+    const newFormData = Object.assign({}, formData, {
+      currency: {
         code: 'USD',
         symbol: '$',
       },
-    };
-    const invoiceData = getInvoiceData(formData);
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          currency: true,
+        }),
+      }),
+    });
+
+    const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.currency).toEqual({
       code: 'USD',
       symbol: '$',
@@ -146,34 +176,53 @@ describe('getInvoiceData', () => {
   });
 
   it('should return note data when required', () => {
-    formData.note = {
-      required: true,
-      content: faker.lorem.paragraph(),
-    };
-    const invoiceData = getInvoiceData(formData);
-    expect(invoiceData.note).toEqual(formData.note.content);
+    const newFormData = Object.assign({}, formData, {
+      note: {
+        content: faker.lorem.paragraph(),
+      },
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          note: true,
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
+    expect(invoiceData.note).toEqual(newFormData.note.content);
   });
 
-  it('should return vat data when required', () => {
-    formData.vat = {
-      required: true,
-      amount: faker.random.number(20),
-    };
-    const invoiceData = getInvoiceData(formData);
-    expect(invoiceData.vat).toEqual(formData.vat.amount);
-    expect(invoiceData.vat).not.toEqual(21);
+  it('should return tax data when required', () => {
+    const newFormData = Object.assign({}, formData, {
+      tax: {
+        amount: faker.random.number(20),
+        method: 'reverse',
+        tin: '123-456-789'
+      },
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          tax: true,
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
+    expect(invoiceData.tax).toEqual(newFormData.tax);
   });
 
   it('should return discount when required', () => {
-    formData.discount = {
-      required: true,
-      amount: faker.random.number(20),
-      type: 'flat',
-    };
-    const invoiceData = getInvoiceData(formData);
+    const newFormData = Object.assign({}, formData, {
+      discount: {
+        amount: faker.random.number(20),
+        type: 'flat',
+      },
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          discount: true,
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.discount).toEqual({
-      amount: formData.discount.amount,
-      type: formData.discount.type,
+      type: newFormData.discount.type,
+      amount: newFormData.discount.amount,
     });
   });
 });
@@ -192,37 +241,58 @@ describe('validateFormData', () => {
           phone: faker.phone.phoneNumber(),
         },
       },
-      rows: [{
-        id: uuidv4(),
-        description: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        quantity: faker.random.number(100),
-      }],
+      rows: [
+        {
+          id: uuidv4(),
+          description: faker.commerce.productName(),
+          price: faker.commerce.price(),
+          quantity: faker.random.number(100),
+        },
+      ],
       dueDate: {
-        required: true,
         selectedDate: faker.date.future(),
       },
       currency: {
-        required: true,
-        selectedCurrency: {
-          code: 'USD',
-          symbol: '$'
-        }
+        code: 'USD',
+        symbol: '$',
       },
       discount: {
-        required: true,
         type: 'percentage',
         amount: 10,
       },
-      vat: {
-        required: true,
+      tax: {
         amount: 10,
+        method: 'reverse',
+        tin: '123-456-789'
       },
       note: {
-        required: true,
         content: faker.lorem.paragraph(),
       },
-      settingsOpen: false,
+      settings: {
+        open: false,
+        required_fields: {
+          dueDate: true,
+          currency: true,
+          discount: true,
+          tax: true,
+          note: true,
+        }
+      },
+      savedSettings: {
+        tax: {
+          amount: 10,
+          method: 'reverse',
+          tin: '123-456-789'
+        },
+        currency: 'USD',
+        required_fields: {
+          dueDate: true,
+          currency: true,
+          discount: true,
+          tax: true,
+          note: true,
+        }
+      }
     };
   });
 
@@ -232,8 +302,12 @@ describe('validateFormData', () => {
   });
 
   it('should NOT pass with INCORRECT recipient data', () => {
-    formData.recipient.new = {};
-    const validation = validateFormData(formData);
+    const newFormData = Object.assign({}, formData, {
+      recipient: Object.assign({}, formData.recipient, {
+        new: {}
+      })
+    });
+    const validation = validateFormData(newFormData);
     expect(validation).toEqual(false);
   });
 
@@ -250,7 +324,7 @@ describe('validateFormData', () => {
   });
 
   it('should NOT pass with INCORRECT currency data', () => {
-    formData.currency.selectedCurrency = null;
+    formData.currency = null;
     const validation = validateFormData(formData);
     expect(validation).toEqual(false);
   });
@@ -261,8 +335,8 @@ describe('validateFormData', () => {
     expect(validation).toEqual(false);
   });
 
-  it('should NOT pass with INCORRECT vat data', () => {
-    formData.vat.amount = 0;
+  it('should NOT pass with INCORRECT tax data', () => {
+    formData.tax.amount = 0;
     const validation = validateFormData(formData);
     expect(validation).toEqual(false);
   });
@@ -348,9 +422,7 @@ describe('validateRecipient', () => {
 
 describe('validateRows', () => {
   it('should validate item description', () => {
-    const rows = [
-      { description: '' },
-    ];
+    const rows = [{description: ''}];
     const validation = validateRows(rows);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
@@ -381,7 +453,7 @@ describe('validateRows', () => {
       {
         description: faker.commerce.productName(),
         price: faker.commerce.price(),
-        quantity: 0
+        quantity: 0,
       },
     ];
     const validation = validateRows(rows);
@@ -409,10 +481,9 @@ describe('validateRows', () => {
 describe('validateDueDate', () => {
   it('should validate selectedDate', () => {
     const dueDate = {
-      required: true,
-      selectedDate: null
+      selectedDate: null,
     };
-    const validation = validateDueDate(dueDate);
+    const validation = validateDueDate(true, dueDate);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
@@ -423,29 +494,25 @@ describe('validateDueDate', () => {
 
   it('should pass when not required', () => {
     const dueDate = {
-      required: false,
+      selectedDate: null,
     };
-    const validation = validateDueDate(dueDate);
+    const validation = validateDueDate(false, dueDate);
     expect(validation).toEqual(true);
   });
 
   it('should pass correct dueDate data', () => {
     const dueDate = {
-      required: true,
-      selectedDate: faker.date.future()
+      selectedDate: faker.date.future(),
     };
-    const validation = validateDueDate(dueDate);
+    const validation = validateDueDate(true, dueDate);
     expect(validation).toEqual(true);
   });
 });
 
 describe('validateCurrency', () => {
   it('should validate Currency', () => {
-    const currency = {
-      required: true,
-      selectedCurrency: null
-    };
-    const validation = validateCurrency(currency);
+    const currency = null;
+    const validation = validateCurrency(true, currency);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
@@ -455,22 +522,17 @@ describe('validateCurrency', () => {
   });
 
   it('should pass when not required', () => {
-    const currency = {
-      required: false,
-    };
-    const validation = validateCurrency(currency);
+    const currency = {}
+    const validation = validateCurrency(false, currency);
     expect(validation).toEqual(true);
   });
 
   it('should pass correct currency data', () => {
     const currency = {
-      required: true,
-      selectedCurrency: {
-        code: 'USD',
-        symbol: '$'
-      }
+      code: 'USD',
+      symbol: '$',
     };
-    const validation = validateCurrency(currency);
+    const validation = validateCurrency(true, currency);
     expect(validation).toEqual(true);
   });
 });
@@ -478,11 +540,10 @@ describe('validateCurrency', () => {
 describe('validateDiscount', () => {
   it('should validate discount data', () => {
     const discount = {
-      required: true,
       type: 'flat',
-      amount: 0
+      amount: 0,
     };
-    const validation = validateDiscount(discount);
+    const validation = validateDiscount(true, discount);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
@@ -492,31 +553,27 @@ describe('validateDiscount', () => {
   });
 
   it('should pass when not required', () => {
-    const discount = {
-      required: false,
-    };
-    const validation = validateDiscount(discount);
+    const discount = {};
+    const validation = validateDiscount(false, discount);
     expect(validation).toEqual(true);
   });
 
   it('should pass correct discount data', () => {
     const discount = {
-      required: true,
       type: 'flat',
-      amount: 10
+      amount: 10,
     };
-    const validation = validateDiscount(discount);
+    const validation = validateDiscount(true, discount);
     expect(validation).toEqual(true);
   });
 });
 
-describe('validateVat', () => {
-  it('should validate vat data', () => {
-    const vat = {
-      required: true,
-      amount: 0
+describe('validateTax', () => {
+  it('should validate tax data', () => {
+    const tax = {
+      amount: 0,
     };
-    const validation = validateVat(vat);
+    const validation = validateTax(true, tax);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
@@ -526,19 +583,16 @@ describe('validateVat', () => {
   });
 
   it('should pass when not required', () => {
-    const vat = {
-      required: false,
-    };
-    const validation = validateVat(vat);
+    const tax = {};
+    const validation = validateTax(false, tax);
     expect(validation).toEqual(true);
   });
 
-  it('should pass correct vat data', () => {
-    const vat = {
-      required: true,
-      amount: 10
+  it('should pass correct tax data', () => {
+    const tax = {
+      amount: 10,
     };
-    const validation = validateVat(vat);
+    const validation = validateTax(true, tax);
     expect(validation).toEqual(true);
   });
 });
@@ -546,10 +600,9 @@ describe('validateVat', () => {
 describe('validateNote', () => {
   it('should validate note data', () => {
     const note = {
-      required: true,
-      content: ''
+      content: '',
     };
-    const validation = validateNote(note);
+    const validation = validateNote(true, note);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
@@ -559,19 +612,16 @@ describe('validateNote', () => {
   });
 
   it('should pass when not required', () => {
-    const note = {
-      required: false,
-    };
-    const validation = validateNote(note);
+    const note = {};
+    const validation = validateNote(false, note);
     expect(validation).toEqual(true);
   });
 
   it('should pass correct note data', () => {
     const note = {
-      required: true,
-      content: faker.lorem.paragraph()
+      content: faker.lorem.paragraph(),
     };
-    const validation = validateNote(note);
+    const validation = validateNote(true, note);
     expect(validation).toEqual(true);
   });
 });

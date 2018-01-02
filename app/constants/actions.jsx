@@ -10,12 +10,13 @@ export const FORM_ITEM_UPDATE = 'FORM_ITEM_UPDATE';
 export const FORM_ITEM_MOVE   = 'FORM_ITEM_MOVE';
 
 // Fields
-export const FORM_SAVE              = 'FORM_SAVE';
-export const FORM_CLEAR             = 'FORM_CLEAR';
-export const FORM_FIELD_TOGGLE      = 'FORM_FIELD_TOGGLE';
-export const FORM_FIELD_UPDATE_DATA = 'FORM_FIELD_UPDATE_DATA';
-export const FORM_SETTING_TOGGLE    = 'FORM_SETTING_TOGGLE';
-export const FORM_SETTING_CLOSE     = 'FORM_SETTING_CLOSE';
+export const FORM_SAVE                 = 'FORM_SAVE';
+export const FORM_CLEAR                = 'FORM_CLEAR';
+export const FORM_FIELD_TOGGLE         = 'FORM_FIELD_TOGGLE';
+export const FORM_FIELD_UPDATE_DATA    = 'FORM_FIELD_UPDATE_DATA';
+export const FORM_SETTING_TOGGLE       = 'FORM_SETTING_TOGGLE';
+export const FORM_SETTING_CLOSE        = 'FORM_SETTING_CLOSE';
+export const SAVED_FORM_SETTING_UPDATE = 'SAVED_FORM_SETTING_UPDATE';
 
 // INVOICE
 // ===========================================================

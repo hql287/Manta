@@ -6,7 +6,8 @@ import {connect} from 'react-redux';
 import {getCurrentInvoice} from '../reducers/FormReducer';
 
 // Actions
-import * as Actions from '../actions/form';
+import * as FormActions from '../actions/form';
+import * as SettingsActions from '../actions/settings';
 import {bindActionCreators} from 'redux';
 
 // Components
@@ -15,7 +16,7 @@ import ItemsList from '../components/form/ItemsList';
 import Currency from '../components/form/Currency';
 import Discount from '../components/form/Discount';
 import DueDate from '../components/form/DueDate';
-import Vat from '../components/form/Vat';
+import Tax from '../components/form/Tax';
 import Note from '../components/form/Note';
 import Settings from '../components/form/Settings';
 import Button from '../components/shared/Button';
@@ -30,21 +31,33 @@ import {
 
 // Component
 class Form extends Component {
-  // Optimization
   shouldComponentUpdate(nextProps) {
-    return this.props.currentInvoice !== nextProps.currentInvoice;
+    if (this.props.currentInvoice !== nextProps.currentInvoice) return true;
+    return false;
   }
 
-  // Render The form
   render() {
+    // Form & Settings Actions
+    const {updateSettings} = this.props.boundSettingsActionCreators;
     const {
       clearForm,
       toggleField,
       saveFormData,
       updateFieldData,
       toggleFormSettings,
-    } = this.props.boundActionCreators;
-    const {dueDate, currency, discount, vat, note} = this.props.currentInvoice;
+      updateSavedFormSettings,
+    } = this.props.boundFormActionCreators;
+    // Form Value
+    const {
+      dueDate,
+      currency,
+      discount,
+      tax,
+      note,
+      settings,
+      savedSettings,
+    } = this.props.currentInvoice;
+    const {required_fields, open} = settings;
     return (
       <PageWrapper>
         <PageHeader>
@@ -62,22 +75,42 @@ class Form extends Component {
           <Settings
             toggleField={toggleField}
             toggleFormSettings={toggleFormSettings}
-            currentInvoice={this.props.currentInvoice}
+            settings={settings}
+            savedSettings={savedSettings.required_fields}
+            updateSavedSettings={updateSavedFormSettings}
           />
           <Recipient />
           <ItemsList />
-          {dueDate.required && (
-            <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
+          {required_fields.dueDate && (
+            <DueDate
+              dueDate={dueDate}
+              updateFieldData={updateFieldData} />
           )}
-          {currency.required && (
-            <Currency currency={currency} updateFieldData={updateFieldData} />
+          {required_fields.currency && (
+            <Currency
+              currency={currency}
+              updateFieldData={updateFieldData}
+              savedSettings={savedSettings.currency}
+              updateSavedSettings={updateSavedFormSettings}
+            />
           )}
-          {discount.required && (
-            <Discount discount={discount} updateFieldData={updateFieldData} />
+          {required_fields.discount && (
+            <Discount
+              discount={discount}
+              updateFieldData={updateFieldData} />
           )}
-          {vat.required && <Vat vat={vat} updateFieldData={updateFieldData} />}
-          {note.required && (
-            <Note note={note} updateFieldData={updateFieldData} />
+          {required_fields.tax && (
+            <Tax
+              tax={tax}
+              updateFieldData={updateFieldData}
+              savedSettings={savedSettings.tax}
+              updateSavedSettings={updateSavedFormSettings}
+            />
+          )}
+          {required_fields.note && (
+            <Note
+              note={note}
+              updateFieldData={updateFieldData} />
           )}
         </PageContent>
       </PageWrapper>
@@ -87,7 +120,7 @@ class Form extends Component {
 
 // PropTypes Validation
 Form.propTypes = {
-  boundActionCreators: PropTypes.shape({
+  boundFormActionCreators: PropTypes.shape({
     // Works but need to refactor to handle passed click event
     clearForm: PropTypes.func.isRequired,
     saveFormData: PropTypes.func.isRequired,
@@ -105,9 +138,9 @@ Form.propTypes = {
     dueDate: PropTypes.object.isRequired,
     currency: PropTypes.object.isRequired,
     discount: PropTypes.object.isRequired,
-    vat: PropTypes.object.isRequired,
+    tax: PropTypes.object.isRequired,
     note: PropTypes.object.isRequired,
-    settingsOpen: PropTypes.bool.isRequired,
+    settings: PropTypes.object.isRequired,
   }).isRequired,
 };
 
@@ -117,11 +150,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  boundActionCreators: bindActionCreators(Actions, dispatch),
+  boundFormActionCreators: bindActionCreators(FormActions, dispatch),
+  boundSettingsActionCreators: bindActionCreators(SettingsActions, dispatch),
 });
 
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  _withFadeInAnimation
+  _withFadeInAnimation,
 )(Form);

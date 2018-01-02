@@ -32,7 +32,14 @@ exports[`Settings component matches snapshot 1`] = `
     </div>
   </a>
   <div
-    className="Settings__AllSettings-fvolyT jZlmwB"
+    className="Settings__Helper-HfVur jcZSkK"
+  >
+    <p>
+      Toogle any field to make it required in the form.
+    </p>
+  </div>
+  <div
+    className="Settings__AllSettings-fvolyT ggAIJH"
   >
     <div
       className="Settings__Setting-iHwWTP dDLCsM"
@@ -48,6 +55,7 @@ exports[`Settings component matches snapshot 1`] = `
         <input
           checked={false}
           className="Switch__Input-kcgNA kNMfpw"
+          name="dueDate"
           onChange={[Function]}
           type="checkbox"
         />
@@ -70,6 +78,7 @@ exports[`Settings component matches snapshot 1`] = `
         <input
           checked={false}
           className="Switch__Input-kcgNA kNMfpw"
+          name="currency"
           onChange={[Function]}
           type="checkbox"
         />
@@ -92,6 +101,7 @@ exports[`Settings component matches snapshot 1`] = `
         <input
           checked={false}
           className="Switch__Input-kcgNA kNMfpw"
+          name="discount"
           onChange={[Function]}
           type="checkbox"
         />
@@ -106,7 +116,7 @@ exports[`Settings component matches snapshot 1`] = `
       <label
         className="Settings__Label-gSCNoi bqzjuj"
       >
-        Vat
+        Tax
       </label>
       <label
         className="Switch__SwitchStyle-ghEAwD hvamL"
@@ -114,6 +124,7 @@ exports[`Settings component matches snapshot 1`] = `
         <input
           checked={false}
           className="Switch__Input-kcgNA kNMfpw"
+          name="tax"
           onChange={[Function]}
           type="checkbox"
         />
@@ -136,6 +147,7 @@ exports[`Settings component matches snapshot 1`] = `
         <input
           checked={false}
           className="Switch__Input-kcgNA kNMfpw"
+          name="note"
           onChange={[Function]}
           type="checkbox"
         />

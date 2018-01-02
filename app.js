@@ -151,14 +151,14 @@ function setInitialValues() {
       isPreviewWinVisible: false,
     });
   }
-  // Default Info
-  if (!appConfig.has('info')) {
+  // Default Profile
+  if (!appConfig.has('profile')) {
     // Set Default Logo
     const logoPath = path.resolve(__dirname, './static/imgs/default_logo.svg');
     const logoData = fs.readFileSync(logoPath);
     const logoBase64String = 'data:image/svg+xml;base64,' + logoData.toString('base64');
     // Other defaults
-    appConfig.set('info', {
+    appConfig.set('profile', {
       logo: logoBase64String,
       fullname: 'Manta Ray',
       company: 'Oceanic Preservation Society',
@@ -169,14 +169,31 @@ function setInitialValues() {
     });
   }
   // Default App Settings
-  if (!appConfig.has('appSettings')) {
-    appConfig.set('appSettings', {
-      exportDir: os.homedir(),
-      template: 'default',
+  if (!appConfig.has('general')) {
+    appConfig.set('general', {
       language: 'en',
-      currency: 'USD',
       sound: 'default',
       muted: false,
+    });
+  }
+  // Default Invoice Settings
+  if (!appConfig.has('invoice')) {
+    appConfig.set('invoice', {
+      exportDir: os.homedir(),
+      template: 'default',
+      currency: 'USD',
+      tax: {
+        tin: '123-456-789',
+        method: 'default',
+        amount: 0,
+      },
+      required_fields: {
+        dueDate:  false,
+        currency: false,
+        discount: false,
+        tax:      false,
+        note:     false,
+      }
     });
   }
 }

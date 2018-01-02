@@ -1,5 +1,6 @@
 import FormReducer, { getCurrentInvoice, getRows, getRecipient } from '../FormReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
+import currencies from '../../../libs/currencies.json';
 
 import uuidv4 from 'uuid/v4';
 
@@ -13,7 +14,20 @@ describe('Form Reducer should handle', () => {
         { id: 'Tyrion Lannister' },
         { id: 'Arya Stark' },
       ],
-      settingsOpen: true
+      dueDate: {},
+      note: {},
+      currency: {},
+      discount: {},
+      tax: {},
+      settings: {
+        open: true,
+        required_fields: {}
+      },
+      savedSettings: {
+        tax: {},
+        currency: 'USD',
+        required_fields: {}
+      }
     };
   });
 
@@ -74,23 +88,23 @@ describe('Form Reducer should handle', () => {
       new: {},
     });
     expect(newState.rows).toHaveLength(0);
-    expect(newState.dueDate).toEqual({ required: false });
-    expect(newState.note).toEqual({ required: false });
-    expect(newState.currency).toEqual({ required: false });
-    expect(newState.discount).toEqual({ required: false });
-    expect(newState.vat).toEqual({ required: false });
-    expect(newState.settingsOpen).toEqual(false);
+    expect(newState.dueDate).toEqual({});
+    expect(newState.note).toEqual({});
+    expect(newState.currency).toEqual(currencies[currentState.savedSettings.currency]);
+    expect(newState.discount).toEqual({});
+    expect(newState.tax).toEqual({});
+    expect(newState.settings.open).toEqual(false);
   });
 
   it('toggle the form settings', () => {
     const newState1 = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_SETTING_TOGGLE,
     });
-    expect(newState1.settingsOpen).toEqual(false);
+    expect(newState1.settings.open).toEqual(false);
     const newState2 = FormReducer(newState1, {
       type: ACTION_TYPES.FORM_SETTING_TOGGLE,
     });
-    expect(newState2.settingsOpen).toEqual(true);
+    expect(newState2.settings.open).toEqual(true);
   });
 
   it('close the form settings', () => {
@@ -98,12 +112,12 @@ describe('Form Reducer should handle', () => {
     const newState1 = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_SETTING_CLOSE,
     });
-    expect(newState1.settingsOpen).toEqual(false);
+    expect(newState1.settings.open).toEqual(false);
     // Close Again
     const newState2 = FormReducer(newState1, {
       type: ACTION_TYPES.FORM_SETTING_CLOSE,
     });
-    expect(newState2.settingsOpen).toEqual(false);
+    expect(newState2.settings.open).toEqual(false);
   });
 
 });
@@ -112,11 +126,20 @@ describe('Form Reducer should handle toggle', () => {
   let currentState;
   beforeEach(() => {
     currentState = {
-      dueDate:  { required: false },
-      currency: { required: false },
-      discount: { required: false },
-      vat:      { required: false },
-      note:     { required: false },
+      dueDate:  {},
+      currency: {},
+      discount: {},
+      tax:      {},
+      note:     {},
+      settings: {
+        required_fields: {
+          dueDate:  false,
+          currency: false,
+          discount: false,
+          tax:      false,
+          note:     false,
+        }
+      },
     };
   });
 
@@ -125,7 +148,7 @@ describe('Form Reducer should handle toggle', () => {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       payload: 'currency',
     });
-    expect(newState.currency.required).toBe(true);
+    expect(newState.settings.required_fields.currency).toBe(true);
   });
 
   it('dueDate field', () => {
@@ -133,7 +156,7 @@ describe('Form Reducer should handle toggle', () => {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       payload: 'dueDate',
     });
-    expect(newState.dueDate.required).toBe(true);
+    expect(newState.settings.required_fields.dueDate).toBe(true);
   });
 
   it('discount field', () => {
@@ -141,7 +164,7 @@ describe('Form Reducer should handle toggle', () => {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       payload: 'discount',
     });
-    expect(newState.discount.required).toBe(true);
+    expect(newState.settings.required_fields.discount).toBe(true);
   });
 
   it('note field', () => {
@@ -149,17 +172,16 @@ describe('Form Reducer should handle toggle', () => {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
       payload: 'note',
     });
-    expect(newState.note.required).toBe(true);
+    expect(newState.settings.required_fields.note).toBe(true);
   });
 
-  it('vat field', () => {
+  it('tax field', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_TOGGLE,
-      payload: 'vat',
+      payload: 'tax',
     });
-    expect(newState.vat.required).toBe(true);
+    expect(newState.settings.required_fields.tax).toBe(true);
   });
-
 
 });
 
@@ -170,7 +192,7 @@ describe('Form Reducer should handle update', () => {
       dueDate:  { required: true },
       currency: { required: true },
       discount: { required: true },
-      vat:      { required: true },
+      tax:      { required: true },
       note:     { required: true },
     };
   });
@@ -256,18 +278,18 @@ describe('Form Reducer should handle update', () => {
     expect(newState.discount.amount).not.toEqual(5);
   });
 
-  it('vat data', () => {
+  it('tax data', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
       payload: {
-        field: 'vat',
+        field: 'tax',
         data: {
           amount: 5,
         }
       }
     });
-    expect(newState.vat.amount).toEqual(5);
-    expect(newState.vat.amount).not.toEqual(10);
+    expect(newState.tax.amount).toEqual(5);
+    expect(newState.tax.amount).not.toEqual(10);
   });
 
   it('note data', () => {

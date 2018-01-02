@@ -25,18 +25,14 @@ const NoteContent = styled.textarea`
 export class Note extends Component {
   constructor(props) {
     super(props);
+    this.state = {content: this.props.note.content};
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  componentWillMount() {
-    this.setState({content: this.props.note.content});
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
-    return (
-      this.state !== nextState ||
-      this.props.note !== nextProps.note
-    );
+    if (this.state !== nextState) return true;
+    if (this.props.note.content !== nextProps.note.content) return true;
+    return false;
   }
 
   handleInputChange(event) {
