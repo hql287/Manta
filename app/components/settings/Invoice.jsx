@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
 import {keys, sortBy} from 'lodash';
+const moment = require('moment');
 
 // Custom Libs
 import currencies from '../../../libs/currencies.json';
@@ -135,8 +136,7 @@ class Invoice extends Component {
   }
 
   render() {
-    const {exportDir, template, currency, tax, required_fields} = this.state;
-
+    const {exportDir, template, currency, tax, required_fields, dateFormat} = this.state;
     return (
       <div>
         <label className='itemLabel'>Tax Settings</label>
@@ -149,7 +149,7 @@ class Invoice extends Component {
                 type='text'
                 value={tax.tin}
                 onChange={this.handleTaxChange}
-                placeholder="Registration Number"
+                placeholder='Registration Number'
               />
             </Field>
           </Row>
@@ -162,7 +162,7 @@ class Invoice extends Component {
                 step='0.01'
                 value={tax.amount}
                 onChange={this.handleTaxChange}
-                placeholder="Amount"
+                placeholder='Amount'
               />
             </Field>
             <Field>
@@ -269,6 +269,54 @@ class Invoice extends Component {
             </Field>
           </Row>
           <Row>
+            <Field>
+              <label className='itemLabel'>Date Format</label>
+              <select
+                name='dateFormat'
+                value={dateFormat}
+                onChange={this.handleInputChange}>
+                <option value='dddd, MMMM Do, YYYY'>
+                  {moment(Date.now()).format('dddd, MMMM Do, YYYY')}
+                  {' '}
+                  (dddd, MMMM Do, YYYY)
+                </option>
+                <option value='MMMM Do, YYYY'>
+                  { moment(Date.now()).format('MMMM Do, YYYY') }
+                  {' '}
+                  (MMMM Do, YYYY)
+                </option>
+                <option value='MM/DD/YYYY'>
+                  {moment(Date.now()).format('MM/DD/YYYY')}
+                  {' '}
+                  (MM/DD/YYYY)
+                </option>
+                <option value='MM/DD/YY'>
+                  {moment(Date.now()).format('MM/DD/YY')}
+                  {' '}
+                  (MM/DD/YY)
+                </option>
+                <option value='dddd, DD MMMM YYYY'>
+                  {moment(Date.now()).format('dddd, DD MMMM YYYY')}
+                  {' '}
+                  (dddd, DD MMMM YYYY)
+                </option>
+                <option value='DD/MMMM/YYYY'>
+                  {moment(Date.now()).format('DD/MMMM/YYYY')}
+                  {' '}
+                  (DD/MMMM/YYYY)
+                </option>
+                <option value='DD/MM/YYYY'>
+                  {moment(Date.now()).format('DD/MM/YYYY')}
+                  {' '}
+                  (DD/MM/YYYY)
+                </option>
+                <option value='DD/MM/YY'>
+                  {moment(Date.now()).format('DD/MM/YY')}
+                  {' '}
+                  (DD/MM/YY)
+                </option>
+              </select>
+            </Field>
             <Field>
               <label className='itemLabel'>PDF Export Directory</label>
               <div className='input-group'>

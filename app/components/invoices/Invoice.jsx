@@ -175,6 +175,7 @@ class Invoice extends Component {
   displayStatus() {
     const { invoice } = this.props;
     const { status } = invoice;
+    const { recipient } = invoice;
     switch(status) {
       case 'cancelled': {
         return (
@@ -214,7 +215,7 @@ class Invoice extends Component {
   }
 
   render() {
-    const { invoice, setInvoiceStatus } = this.props;
+    const { invoice, setInvoiceStatus, dateFormat } = this.props;
     const { recipient, status } = invoice;
     const statusActions = [
       {
@@ -272,14 +273,14 @@ class Invoice extends Component {
               <Field>
                 <label>Created On</label>
                 <p>
-                  {format(invoice.created_at, 'DD/MM/YYYY')}
+                  {format(invoice.created_at, dateFormat)}
                 </p>
               </Field>
               <Field>
                 <label>Due Date</label>
                 <p>
                   {invoice.dueDate
-                    ? moment(invoice.dueDate).format('DD/MM/YYYY')
+                    ? moment(invoice.dueDate).format(dateFormat)
                     : '--'}
                 </p>
               </Field>
@@ -310,6 +311,7 @@ Invoice.propTypes = {
   deleteInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,
+  dateFormat: PropTypes.string.isRequired,
 };
 
 export default Invoice;
