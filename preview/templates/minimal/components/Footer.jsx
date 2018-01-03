@@ -21,16 +21,16 @@ const Column = styled.div`
 `;
 
 // Component
-function Footer({invoice, company, configs}) {
+function Footer({invoice, profile, configs}) {
   const { recipient } = invoice;
   return (
     <Wrapper>
       <Column left>
-        <h4 className="label">{company.company}</h4>
-        <p>{company.fullname}</p>
-        <p>{company.address}</p>
-        <p>{company.email}</p>
-        <p>{company.phone}</p>
+        <h4 className="label">{profile.company}</h4>
+        <p>{profile.fullname}</p>
+        <p>{profile.address}</p>
+        <p>{profile.email}</p>
+        <p>{profile.phone}</p>
       </Column>
       {configs.showRecipient &&
         <Column right>
@@ -46,7 +46,7 @@ function Footer({invoice, company, configs}) {
 
 Footer.propTypes = {
   configs: PropTypes.object.isRequired,
-  company: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
 };
 

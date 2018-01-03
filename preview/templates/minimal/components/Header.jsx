@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
-const appConfig = require('electron').remote.require('electron-settings');
 const format = require('date-fns/format');
 const moment = require('moment');
 
@@ -29,8 +28,7 @@ const Heading = styled.h1`
 `;
 
 // Component
-function Header({invoice, company, configs}) {
-  const dateFormat = appConfig.get('appSettings.dateFormat');
+function Header({invoice, profile, configs}) {
   return (
     <Wrapper>
       <div>
@@ -42,14 +40,14 @@ function Header({invoice, company, configs}) {
             omission: '',
           })}
         </h4>
-        <p>Created {format(invoice.created_at, dateFormat)}</p>
+        <p>Created {format(invoice.created_at, configs.dateFormat)}</p>
         {invoice.dueDate && (
-          <p>Due {moment(invoice.dueDate).format(dateFormat)}</p>
+          <p>Due {moment(invoice.dueDate).format(configs.dateFormat)}</p>
         )}
       </div>
       {configs.showLogo && (
         <div>
-          <img src={company.logo} alt="Logo" />
+          <img src={profile.logo} alt="Logo" />
         </div>
       )}
     </Wrapper>
@@ -58,7 +56,7 @@ function Header({invoice, company, configs}) {
 
 Header.propTypes = {
   invoice: PropTypes.object.isRequired,
-  company: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   configs: PropTypes.object.isRequired,
 };
 
