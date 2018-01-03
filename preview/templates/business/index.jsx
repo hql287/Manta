@@ -60,7 +60,7 @@ function Business(props) {
 
 Business.propTypes = {
   invoice: PropTypes.object.isRequired,
-  company: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   configs: PropTypes.object.isRequired,
 };
 

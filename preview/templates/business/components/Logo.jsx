@@ -15,17 +15,17 @@ const InvoiceLogo = styled.div`
 `;
 
 // Component
-function Logo({company, configs}) {
+function Logo({profile, configs}) {
   return configs.showLogo ? (
     <InvoiceLogo>
-      <img src={company.logo} alt="Logo" />
+      <img src={profile.logo} alt="Logo" />
     </InvoiceLogo>
   ) : null;
 }
 
 Logo.propTypes = {
   configs: PropTypes.object.isRequired,
-  company: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 export default Logo;
