@@ -34,6 +34,7 @@ const invoice = {
 
 const deleteInvoice = jest.fn();
 const setInvoiceStatus = jest.fn();
+const dateFormat = 'MM/DD/YY';
 
 // Tests
 describe('Renders correctly to the DOM', () => {
@@ -44,6 +45,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={invoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
       />,
     );
   });
@@ -54,6 +56,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={invoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
       />,
     );
     expect(mountWrapper.prop('invoice')).toEqual(invoice);
@@ -89,6 +92,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={paidInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
       />,
     );
     expect(
@@ -106,6 +110,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={cancelledInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
       />,
     );
     expect(
@@ -123,6 +128,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={refundedInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
       />,
     );
     expect(
@@ -150,6 +156,7 @@ describe('Renders correctly to the DOM', () => {
           invoice={invoice}
           deleteInvoice={deleteInvoice}
           setInvoiceStatus={setInvoiceStatus}
+          dateFormat={dateFormat}
         />,
       )
       .toJSON();
@@ -167,6 +174,7 @@ describe('handle clicks correctly', () => {
         invoice={invoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
       />,
     );
     viewBtn = wrapper
