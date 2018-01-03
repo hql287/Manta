@@ -55,7 +55,7 @@ class Invoice extends Component {
 
     ipc.on('confirmed-export-directory', (event, path) => {
       this.setState({exportDir: path}, () => {
-        this.props.updateSettings('appSettings', this.state);
+        this.props.updateSettings('invoice', this.state);
       });
     });
   }
