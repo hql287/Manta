@@ -1,12 +1,14 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-const appConfig = require('electron').remote.require('electron-settings');
 import {createSelector} from 'reselect';
 import {handleActions} from 'redux-actions';
+const appConfig = require('electron').remote.require('electron-settings');
+const invoiceSettings = appConfig.get('invoice');
+const profile = appConfig.get('profile');
 
 const initialState = {
   invoice: {},
+  profile: profile,
   configs: {
-    template: appConfig.get('invoice.template'),
     accentColor: {
       useCustom: false,
       color: '#2CCCE4',
@@ -16,6 +18,8 @@ const initialState = {
     showLogo: true,
     showRecipient: true,
     useSymbol: true,
+    template: invoiceSettings.template,
+    dateFormat: invoiceSettings.dateFormat,
   }
 };
 
@@ -47,4 +51,9 @@ export const getConfigs = createSelector(
 export const getInvoice = createSelector(
   getState,
   state => state.invoice
+);
+
+export const getProfile = createSelector(
+  getState,
+  state => state.profile
 );
