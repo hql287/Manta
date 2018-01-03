@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 import styled from 'styled-components';
 
-const appConfig = require('electron').remote.require('electron-settings');
-const dateFormat = appConfig.get('appSettings.dateFormat');
-
 const format = require('date-fns/format');
 const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
@@ -218,7 +215,7 @@ class Invoice extends Component {
   }
 
   render() {
-    const { invoice, setInvoiceStatus } = this.props;
+    const { invoice, setInvoiceStatus, dateFormat } = this.props;
     const { recipient, status } = invoice;
     const statusActions = [
       {
@@ -314,6 +311,7 @@ Invoice.propTypes = {
   deleteInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,
+  dateFormat: PropTypes.string.isRequired,
 };
 
 export default Invoice;

@@ -11,6 +11,7 @@ import * as Actions from '../actions/invoices';
 
 // Selectors
 import { getInvoices } from '../reducers/InvoicesReducer';
+import { getDateFormat } from '../reducers/SettingsReducer';
 
 // Components
 import Invoice from '../components/invoices/Invoice';
@@ -78,13 +79,14 @@ class Invoices extends Component {
 
   // Render
   render() {
-    const {invoices} = this.props;
+    const {invoices, dateFormat} = this.props;
     const invoicesComponent = invoices.map((invoice, index) =>
       <Invoice
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
         setInvoiceStatus={this.setInvoiceStatus}
         index={index}
+        dateFormat={dateFormat}
         invoice={invoice}
       />
     );
@@ -114,6 +116,7 @@ Invoices.propTypes = {
 // Map state to props & Export
 const mapStateToProps = state => ({
   invoices: getInvoices(state),
+  dateFormat: getDateFormat(state),
 });
 
 export default compose(
