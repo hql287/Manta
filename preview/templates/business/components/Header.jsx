@@ -44,7 +44,7 @@ const Heading = styled.h1`
   margin: 0 0 10px 0;
   font-size: 2em;
   font-weight: 400;
-  color: #2c323a;
+  color: #CBC189;
   text-transform: uppercase;
   letter-spacing: 1px;
   ${props => props.accentColor.useCustom && `
