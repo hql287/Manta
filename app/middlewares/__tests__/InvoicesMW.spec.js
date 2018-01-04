@@ -11,7 +11,7 @@ const {
   deleteDoc,
   mockData,
 } = require('../../helpers/pouchDB');
-import {getSubtotal, getGrandTotal} from '../../helpers/invoice.js';
+import {getInvoiceValue} from '../../helpers/invoice';
 import {ipcRenderer} from 'electron';
 jest.mock('../../helpers/pouchDB');
 jest.mock('../../helpers/invoice');
@@ -178,6 +178,7 @@ describe('Invoices Middleware', () => {
                   created_at: 'now',
                   subtotal: 'subTotal',
                   grandTotal: 'grandTotal',
+                  status: 'pending',
                 }),
               ],
             }),
