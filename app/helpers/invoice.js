@@ -1,33 +1,51 @@
-// Calculate Subtotal
-const getSubtotal = data => {
-  // Set all subtotal
-  let subtotal = 0;
-  data.rows.forEach(row => {
-    subtotal += row.subtotal;
-  });
-  return subtotal;
-};
+function getInvoiceValue(data) {
+  function calSub(data) {
+    return data.rows.reduce((value, row) => value + row.subtotal, 0);
+  }
 
-// Calculate Grand Total
-const getGrandTotal = data => {
-  let grandTotal = getSubtotal(data);
-  // Apply Discount
-  if (data.discount) {
-    if (data.discount.type === 'percentage') {
-      grandTotal = grandTotal * (100 - data.discount.amount) / 100;
-    } else {
-      grandTotal = grandTotal - data.discount.amount;
+  function calDiscount(data) {
+    if (data.discount) {
+      if (data.discount.type === 'percentage') {
+        const subtotal = calSub(data);
+        return subtotal * data.discount.amount / 100;
+      }
+      return data.discount.amount;
     }
   }
-  // Apply VAT
-  if (data.vat) {
-    const vatValue = grandTotal * data.vat / 100;
-    grandTotal = grandTotal + vatValue;
-  }
-  return grandTotal;
-};
 
-export {
-  getSubtotal,
-  getGrandTotal,
+  function calTax(data) {
+    if (data.tax) {
+      const subtotal = calSub(data);
+      if (data.discount) {
+        const discount = calDiscount(data);
+        const afterDiscount = subtotal - discount;
+        return afterDiscount * data.tax.amount / 100;
+      }
+      return subtotal * data.tax.amount / 100;
+    }
+  }
+
+  function calTotal() {
+    let grandTotal = calSub(data);
+    if (data.discount) {
+      const discountAmount = calDiscount(data);
+      grandTotal = grandTotal - discountAmount;
+    }
+    if (data.tax) {
+      const taxAmount = calTax(data);
+      if (data.tax.method === 'default') {
+        grandTotal = grandTotal + taxAmount;
+      }
+    }
+    return grandTotal;
+  }
+
+  return {
+    subtotal: calSub(data),
+    discount: calDiscount(data),
+    taxAmount: calTax(data),
+    grandTotal: calTotal(),
+  };
 }
+
+export {getInvoiceValue};
