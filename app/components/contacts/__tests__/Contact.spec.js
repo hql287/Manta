@@ -1,11 +1,11 @@
 // Libs
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // Component
 import Contact from '../Contact';
-import {TR, TD} from '../../shared/Table';
+import { TR, TD } from '../../shared/Table';
 import Button from '../../shared/Button';
 
 // Mocks
@@ -26,7 +26,7 @@ describe('Renders correctly to the DOM', () => {
         contact={contact}
         newInvoice={newInvoice}
         deleteContact={deleteContact}
-      />,
+      />
     );
   });
 
@@ -46,7 +46,7 @@ describe('Renders correctly to the DOM', () => {
         contact={contact}
         newInvoice={newInvoice}
         deleteContact={deleteContact}
-      />,
+      />
     );
     expect(mountWrapper.prop('contact')).toEqual(contact);
     expect(mountWrapper.prop('newInvoice')).toEqual(newInvoice);
@@ -58,13 +58,13 @@ describe('Renders correctly to the DOM', () => {
       wrapper
         .find(TD)
         .last()
-        .find(Button),
+        .find(Button)
     ).toHaveLength(2);
     expect(
       wrapper
         .find(TD)
         .last()
-        .find(Button),
+        .find(Button)
     ).not.toHaveLength(3);
   });
 
@@ -102,7 +102,7 @@ describe('Renders correctly to the DOM', () => {
           contact={contact}
           newInvoice={newInvoice}
           deleteContact={deleteContact}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

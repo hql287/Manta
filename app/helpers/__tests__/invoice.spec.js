@@ -1,7 +1,12 @@
-import {getInvoiceValue} from '../invoice';
+import { getInvoiceValue } from '../invoice';
 
 const data1 = {
-  rows: [{subtotal: 20}, {subtotal: 40}, {subtotal: 60}, {subtotal: 80}],
+  rows: [
+    { subtotal: 20 },
+    { subtotal: 40 },
+    { subtotal: 60 },
+    { subtotal: 80 },
+  ],
   discount: {
     type: 'flat',
     amount: 100,
@@ -13,7 +18,12 @@ const data1 = {
 };
 
 const data2 = {
-  rows: [{subtotal: 10}, {subtotal: 30}, {subtotal: 50}, {subtotal: 70}],
+  rows: [
+    { subtotal: 10 },
+    { subtotal: 30 },
+    { subtotal: 50 },
+    { subtotal: 70 },
+  ],
   discount: {
     type: 'percentage',
     amount: 10,
@@ -25,7 +35,7 @@ const data2 = {
 };
 
 const data3 = {
-  rows: [{subtotal: 50}, {subtotal: 100}, {subtotal: 150}],
+  rows: [{ subtotal: 50 }, { subtotal: 100 }, { subtotal: 150 }],
 };
 
 it('should return correct subtotal value', () => {

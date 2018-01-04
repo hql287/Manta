@@ -1,8 +1,8 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {BlockPicker} from 'react-color';
-import {Section, Label} from '../shared';
+import { BlockPicker } from 'react-color';
+import { Section, Label } from '../shared';
 
 // Styles
 import styled from 'styled-components';
@@ -27,7 +27,9 @@ const Color = styled.div`
   flex: 1;
   border-radius: 2px;
   background: rgba(241, 112, 19, 1);
-  ${props => props.color && `
+  ${props =>
+    props.color &&
+    `
     background: ${props.color};
   `};
 `;
@@ -54,34 +56,31 @@ class AccentColor extends Component {
       useCustom: props.accentColor.useCustom,
       color: props.accentColor.color,
     };
-    this.handleClick       = this.handleClick.bind(this);
-    this.handleClose       = this.handleClose.bind(this);
-    this.handleChange      = this.handleChange.bind(this);
-    this.dispatchChange    = this.dispatchChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.dispatchChange = this.dispatchChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return(
-      this.state !== nextState ||
-      this.props !== nextProps
-    );
+    return this.state !== nextState || this.props !== nextProps;
   }
 
   handleClick() {
-    this.setState({showPicker: !this.state.showPicker});
+    this.setState({ showPicker: !this.state.showPicker });
   }
 
   handleClose() {
-    this.setState({showPicker: false});
+    this.setState({ showPicker: false });
   }
 
   handleChange(color) {
-    this.setState({color: color.hex}, this.dispatchChange);
+    this.setState({ color: color.hex }, this.dispatchChange);
   }
 
   handleInputChange(event) {
-    this.setState({useCustom: event.target.checked}, this.dispatchChange);
+    this.setState({ useCustom: event.target.checked }, this.dispatchChange);
   }
 
   dispatchChange() {

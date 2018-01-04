@@ -19,15 +19,14 @@ it('updateSettings should create SAVE_SETTINGS action', () => {
     payload: {
       setting: settingType,
       data: settingsData,
-    }
+    },
   });
 });
 
 it('saveSettings should create SAVE_SETTINGS action', () => {
-  const settingsData = {  };
+  const settingsData = {};
   expect(actions.saveSettings(settingsData)).toEqual({
     type: ACTION_TYPES.SETTINGS_SAVE,
     payload: settingsData,
   });
 });
-

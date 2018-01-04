@@ -7,7 +7,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 // Helpers
 import { getAllDocs, saveDoc, deleteDoc } from '../helpers/pouchDB';
 
-const ContactsMW = ({dispatch}) => next => action => {
+const ContactsMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.CONTACT_GET_ALL: {
       return getAllDocs('contacts')
@@ -15,7 +15,7 @@ const ContactsMW = ({dispatch}) => next => action => {
           next(
             Object.assign({}, action, {
               payload: allDocs,
-            }),
+            })
           );
         })
         .catch(err => {
@@ -38,14 +38,14 @@ const ContactsMW = ({dispatch}) => next => action => {
         .then(newDocs => {
           next({
             type: ACTION_TYPES.CONTACT_SAVE,
-            payload: newDocs
+            payload: newDocs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Contact Created Successfully'
-            }
+              message: 'Contact Created Successfully',
+            },
           });
         })
         .catch(err => {

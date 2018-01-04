@@ -1,9 +1,9 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
-import {Section} from '../shared/Section';
+import { Section } from '../shared/Section';
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
@@ -18,7 +18,9 @@ const DiscountContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const DiscountAmount = styled.div`flex: 1;`;
+const DiscountAmount = styled.div`
+  flex: 1;
+`;
 const DiscountType = styled.div`
   flex: 1;
   margin-top: 10px;
@@ -33,7 +35,7 @@ export class Discount extends Component {
   }
 
   componentWillMount() {
-    const {discount} = this.props;
+    const { discount } = this.props;
     this.setState({
       amount: discount.amount ? discount.amount : '',
       type: discount.type ? discount.type : 'percentage',
@@ -42,8 +44,7 @@ export class Discount extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      this.state !== nextState ||
-      this.props.discount !== nextProps.discount
+      this.state !== nextState || this.props.discount !== nextProps.discount
     );
   }
 
@@ -56,13 +57,13 @@ export class Discount extends Component {
     } else {
       value = eValue === '' ? '' : parseInt(eValue, 10);
     }
-    this.setState({[name]: value}, () => {
+    this.setState({ [name]: value }, () => {
       this.updateDiscountState();
     });
   }
 
   updateDiscountState() {
-    const {updateFieldData} = this.props;
+    const { updateFieldData } = this.props;
     updateFieldData('discount', this.state);
   }
 

@@ -1,16 +1,16 @@
 module.exports = {
   app: jest.fn(),
   ipcRenderer: {
-    send: jest.fn()
+    send: jest.fn(),
   },
   remote: {
-    require: jest.fn((name) => {
+    require: jest.fn(name => {
       if (name === 'electron-settings') {
         return {
           set: jest.fn(),
-          get: jest.fn(() => 'someSettings')
-        }
+          get: jest.fn(() => 'someSettings'),
+        };
       }
     }),
-  }
+  },
 };

@@ -1,11 +1,11 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux & Selectors
-import {getContacts} from '../../reducers/ContactsReducer';
-import {getRecipient} from '../../reducers/FormReducer';
-import {connect} from 'react-redux';
+import { getContacts } from '../../reducers/ContactsReducer';
+import { getRecipient } from '../../reducers/FormReducer';
+import { connect } from 'react-redux';
 import * as FormActions from '../../actions/form';
 
 // Other Libs
@@ -14,7 +14,7 @@ import { isEmpty } from 'lodash';
 // Custom Components
 import RecipientForm from './RecipientForm';
 import RecipientsList from './RecipientsList';
-import {Section} from '../shared/Section';
+import { Section } from '../shared/Section';
 
 // Component
 export class Recipient extends Component {
@@ -28,7 +28,7 @@ export class Recipient extends Component {
 
   // Handle Reset Form
   componentWillReceiveProps(nextProps) {
-    const {recipient} = nextProps;
+    const { recipient } = nextProps;
     if (
       isEmpty(recipient.new) &&
       isEmpty(recipient.select) &&
@@ -39,7 +39,7 @@ export class Recipient extends Component {
           newRecipient: true,
           new: {},
           select: {},
-        }),
+        })
       );
     }
   }
@@ -51,7 +51,7 @@ export class Recipient extends Component {
 
   // Switch between New Recipient Form or Selection Form
   toggleForm() {
-    this.setState({newRecipient: !this.state.newRecipient}, () => {
+    this.setState({ newRecipient: !this.state.newRecipient }, () => {
       this.updateRecipientData(this.state);
     });
   }
@@ -62,30 +62,30 @@ export class Recipient extends Component {
     const value = event.target.value;
     this.setState(
       {
-        new: Object.assign({}, this.state.new, {[name]: value}),
+        new: Object.assign({}, this.state.new, { [name]: value }),
       },
       () => {
         this.updateRecipientData(this.state);
-      },
+      }
     );
   }
 
   // Handle Update Recipient Selection Form
   updateRecipientList(selectedContact) {
-    this.setState({select: selectedContact}, () => {
+    this.setState({ select: selectedContact }, () => {
       this.updateRecipientData(this.state);
     });
   }
 
   // Update Recipient Date to Current Invoice
   updateRecipientData(data) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(FormActions.updateRecipient(data));
   }
 
   // Render Form or Select Input
   renderComponent() {
-    const {contacts} = this.props;
+    const { contacts } = this.props;
     if (contacts.length === 0) {
       return (
         <RecipientForm
@@ -102,20 +102,19 @@ export class Recipient extends Component {
           updateRecipientForm={this.updateRecipientForm}
         />
       );
-    } else {
-      return (
-        <RecipientsList
-          contacts={this.props.contacts}
-          selectedContact={this.state.select}
-          updateRecipientList={this.updateRecipientList}
-        />
-      );
     }
+    return (
+      <RecipientsList
+        contacts={this.props.contacts}
+        selectedContact={this.state.select}
+        updateRecipientList={this.updateRecipientList}
+      />
+    );
   }
 
   // Render
   render() {
-    const {contacts} = this.props;
+    const { contacts } = this.props;
     return (
       <Section>
         <label className="itemLabel">Client *</label>

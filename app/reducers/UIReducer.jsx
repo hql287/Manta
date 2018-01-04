@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {handleActions} from 'redux-actions';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
   activeTab: 'form',
@@ -28,7 +28,7 @@ const UIReducer = handleActions(
       Object.assign({}, state, {
         notifications: state.notifications.filter(
           item => item.id !== action.payload
-        )
+        ),
       }),
   },
   initialState

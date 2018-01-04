@@ -1,3 +1,3 @@
-module.exports = jest.fn(() => {
+module.exports = jest.fn(() => ({
   name: 'test',
-});;
+}));

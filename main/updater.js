@@ -1,5 +1,5 @@
-const {ipcMain} = require('electron');
-const {autoUpdater} = require('electron-updater');
+const { ipcMain } = require('electron');
+const { autoUpdater } = require('electron-updater');
 
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
@@ -47,7 +47,7 @@ autoUpdater.on('error', error => {
 
 // Download Progress
 autoUpdater.on('download-progress', progressObj => {
-  let message = `Downloaded ${progressObj.percent} %`;
+  const message = `Downloaded ${progressObj.percent} %`;
   mainWindow.send('update-download-progress', message);
 });
 
@@ -55,4 +55,3 @@ autoUpdater.on('download-progress', progressObj => {
 autoUpdater.on('update-downloaded', info => {
   mainWindow.send('update-downloaded', info);
 });
-

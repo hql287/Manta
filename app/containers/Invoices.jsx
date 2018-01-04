@@ -1,8 +1,8 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
-import {connect} from 'react-redux';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
 
@@ -67,20 +67,20 @@ class Invoices extends Component {
 
   // Confirm Delete an invoice
   confirmedDeleteInvoice(invoiceId) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(Actions.deleteInvoice(invoiceId));
   }
 
   // set the invoice status
   setInvoiceStatus(invoiceId, status) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(Actions.setInvoiceStatus(invoiceId, status));
   }
 
   // Render
   render() {
-    const {invoices, dateFormat} = this.props;
-    const invoicesComponent = invoices.map((invoice, index) =>
+    const { invoices, dateFormat } = this.props;
+    const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
@@ -89,18 +89,18 @@ class Invoices extends Component {
         dateFormat={dateFormat}
         invoice={invoice}
       />
-    );
+    ));
     return (
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>All Invoices</PageHeaderTitle>
         </PageHeader>
         <PageContent bare>
-          {invoices.length === 0
-            ? <Message info text="You don't have any invoice yet" />
-            : <div className="row">
-                { invoicesComponent }
-              </div> }
+          {invoices.length === 0 ? (
+            <Message info text="You don't have any invoice yet" />
+          ) : (
+            <div className="row">{invoicesComponent}</div>
+          )}
         </PageContent>
       </PageWrapper>
     );
@@ -119,7 +119,6 @@ const mapStateToProps = state => ({
   dateFormat: getDateFormat(state),
 });
 
-export default compose(
-  connect(mapStateToProps),
-  _withFadeInAnimation
-)(Invoices);
+export default compose(connect(mapStateToProps), _withFadeInAnimation)(
+  Invoices
+);

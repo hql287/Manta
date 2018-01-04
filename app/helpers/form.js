@@ -10,7 +10,7 @@ function validateFormData(formData) {
     discount,
     tax,
     note,
-    settings
+    settings,
   } = formData;
   // Required fields
   const { required_fields } = settings;
@@ -33,12 +33,12 @@ function getInvoiceData(formData) {
     discount,
     tax,
     note,
-    settings
+    settings,
   } = formData;
   // Required fields
   const { required_fields } = settings;
   // Set Initial Value
-  let invoiceData = {rows};
+  const invoiceData = { rows };
   // Set Recipient
   if (recipient.newRecipient) {
     invoiceData.recipient = recipient.new;
@@ -103,7 +103,7 @@ function validateRecipient(recipient) {
 function validateRows(rows) {
   let validated = true;
   for (let i = 0; i < rows.length; i++) {
-    let row = rows[i];
+    const row = rows[i];
     // Does it contain description?
     if (!row.description) {
       openDialog({
@@ -139,7 +139,7 @@ function validateRows(rows) {
 }
 
 function validateDueDate(isRequired, dueDate) {
-  const {selectedDate} = dueDate;
+  const { selectedDate } = dueDate;
   if (isRequired) {
     if (!selectedDate || selectedDate === null) {
       openDialog({
@@ -148,9 +148,8 @@ function validateDueDate(isRequired, dueDate) {
         message: 'Must Select A Due Date',
       });
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   return true;
 }
@@ -164,15 +163,14 @@ function validateCurrency(isRequired, currency) {
         message: 'Must Select A Currency',
       });
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   return true;
 }
 
 function validateDiscount(isRequired, discount) {
-  const {amount} = discount;
+  const { amount } = discount;
   if (isRequired) {
     if (!amount || amount === '' || amount === 0) {
       openDialog({
@@ -181,9 +179,8 @@ function validateDiscount(isRequired, discount) {
         message: 'Discount Amount Must Be Greater Than 0',
       });
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   return true;
 }
@@ -198,15 +195,14 @@ function validateTax(isRequired, tax) {
         message: 'Tax Amount Must Be Greater Than 0',
       });
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   return true;
 }
 
 function validateNote(isRequired, note) {
-  const {content} = note;
+  const { content } = note;
   if (isRequired) {
     if (!content || content === '') {
       openDialog({
@@ -215,9 +211,8 @@ function validateNote(isRequired, note) {
         message: 'Note Content Must Not Be Blank',
       });
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   return true;
 }

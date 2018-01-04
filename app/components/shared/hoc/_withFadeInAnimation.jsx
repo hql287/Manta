@@ -1,23 +1,27 @@
 // Libs
 import React from 'react';
-import {TransitionMotion, spring, presets} from 'react-motion';
+import { TransitionMotion, spring, presets } from 'react-motion';
 
 function getDefaultStyles() {
-  return [{
-    key: 'randomString',
-    style: {
-      opacity: 0,
-    }
-  }];
+  return [
+    {
+      key: 'randomString',
+      style: {
+        opacity: 0,
+      },
+    },
+  ];
 }
 
 function getStyles() {
-  return [{
-    key: 'randomString',
-    style: {
-      opacity: spring(1, presets.gentle),
-    }
-  }];
+  return [
+    {
+      key: 'randomString',
+      style: {
+        opacity: spring(1, presets.gentle),
+      },
+    },
+  ];
 }
 
 function willEnter() {
@@ -40,15 +44,17 @@ const _withFadeInTransition = ComposedComponent => props => {
       willEnter={() => willEnter()}
       willLeave={() => willLeave()}
       defaultStyles={getDefaultStyles()}
-      styles={getStyles()}>
-      {values =>
+      styles={getStyles()}
+    >
+      {values => (
         <div style={wrapperStyle}>
-          {values.map(({key, style}) =>
-            <div key={key} style={{...style, ...wrapperStyle}}>
-              <ComposedComponent {...props}/>
+          {values.map(({ key, style }) => (
+            <div key={key} style={{ ...style, ...wrapperStyle }}>
+              <ComposedComponent {...props} />
             </div>
-          )}
-        </div>}
+          ))}
+        </div>
+      )}
     </TransitionMotion>
   );
 };

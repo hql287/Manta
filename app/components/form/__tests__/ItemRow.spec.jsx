@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {ItemRow} from '../ItemRow.jsx';
+import { ItemRow } from '../ItemRow.jsx';
 
 // Mocks
 const actions = true;
@@ -69,7 +69,7 @@ describe('Renders correctly to the DOM', () => {
         item={item}
         removeRow={removeRow}
         updateRow={updateRow}
-      />,
+      />
     );
     // Execute
     const textChange = {
@@ -94,7 +94,7 @@ describe('Renders correctly to the DOM', () => {
         item={item}
         removeRow={removeRow}
         updateRow={updateRow}
-      />,
+      />
     );
 
     // Execute
@@ -121,11 +121,11 @@ describe('Renders correctly to the DOM', () => {
         item={item}
         removeRow={removeRow}
         updateRow={updateRow}
-      />,
+      />
     );
     // Execute
     const keyChange = {
-      which: 13
+      which: 13,
     };
     const descriptionInput = wrap.find('input').first();
     descriptionInput.simulate('keyDown', keyChange);
@@ -144,7 +144,7 @@ describe('Renders correctly to the DOM', () => {
         item={item}
         removeRow={removeRow}
         updateRow={updateRow}
-      />,
+      />
     );
 
     // Execute
@@ -177,7 +177,7 @@ describe('Renders correctly to the DOM', () => {
           item={item}
           removeRow={removeRow}
           updateRow={updateRow}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

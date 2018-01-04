@@ -15,7 +15,7 @@ const InvoiceLogo = styled.div`
 `;
 
 // Component
-function Logo({profile, configs}) {
+function Logo({ profile, configs }) {
   return configs.showLogo ? (
     <InvoiceLogo>
       <img src={profile.logo} alt="Logo" />

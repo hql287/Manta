@@ -1,6 +1,6 @@
 // Libs
-import React, {Component} from 'react';
-import {ipcRenderer as ipc} from 'electron';
+import React, { Component } from 'react';
+import { ipcRenderer as ipc } from 'electron';
 
 import styled from 'styled-components';
 const Wrapper = styled.div`
@@ -17,7 +17,7 @@ import Actions from './components/Actions';
 class Tour extends Component {
   constructor(props) {
     super(props);
-    this.state = {currentSlide: 1, totalSlide: 5};
+    this.state = { currentSlide: 1, totalSlide: 5 };
     this.nextSlide = this.nextSlide.bind(this);
     this.endTour = this.endTour.bind(this);
   }
@@ -27,11 +27,11 @@ class Tour extends Component {
   }
 
   nextSlide() {
-    this.setState({currentSlide: this.state.currentSlide + 1});
+    this.setState({ currentSlide: this.state.currentSlide + 1 });
   }
 
   endTour() {
-    this.setState({currentSlide: 1}, () => {
+    this.setState({ currentSlide: 1 }, () => {
       ipc.send('end-tour');
     });
   }

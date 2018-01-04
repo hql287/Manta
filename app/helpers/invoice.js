@@ -29,12 +29,12 @@ function getInvoiceValue(data) {
     let grandTotal = calSub(data);
     if (data.discount) {
       const discountAmount = calDiscount(data);
-      grandTotal = grandTotal - discountAmount;
+      grandTotal -= discountAmount;
     }
     if (data.tax) {
       const taxAmount = calTax(data);
       if (data.tax.method === 'default') {
-        grandTotal = grandTotal + taxAmount;
+        grandTotal += taxAmount;
       }
     }
     return grandTotal;
@@ -48,4 +48,4 @@ function getInvoiceValue(data) {
   };
 }
 
-export {getInvoiceValue};
+export { getInvoiceValue };

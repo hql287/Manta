@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Section, Label} from '../shared';
+import { Section, Label } from '../shared';
 import Button from '../../../app/components/shared/Button';
 
-function Actions({savePDF}) {
+function Actions({ savePDF }) {
   return (
     <Section>
       <Label>Actions</Label>

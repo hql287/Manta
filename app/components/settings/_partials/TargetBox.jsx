@@ -1,7 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {DropTarget} from 'react-dnd';
-
+import { DropTarget } from 'react-dnd';
 
 const style = {
   flex: '1',
@@ -29,12 +28,10 @@ class TargetBox extends Component {
   }
 
   render() {
-    const {canDrop, isOver, connectDropTarget} = this.props;
+    const { canDrop, isOver, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
     return connectDropTarget(
-      <div style={style}>
-        {isActive ? 'Release to drop' : 'Drag file here'}
-      </div>
+      <div style={style}>{isActive ? 'Release to drop' : 'Drag file here'}</div>
     );
   }
 }

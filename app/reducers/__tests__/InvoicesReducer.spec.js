@@ -11,7 +11,7 @@ describe('Invoices Reducer', () => {
   });
 
   let docs;
-  beforeEach(()=> {
+  beforeEach(() => {
     docs = [
       { id: uuidv4(), name: faker.name.findName() },
       { id: uuidv4(), name: faker.name.findName() },
@@ -49,7 +49,7 @@ describe('Invoices Reducer', () => {
 
 // Test Selectors
 const state = {
-  invoices: initialState
+  invoices: initialState,
 };
 
 describe('Invoices Selector', () => {

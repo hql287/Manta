@@ -22,7 +22,9 @@ const LeftColumn = styled.div`
   flex: 1;
 `;
 
-const Company = styled.div`margin-bottom: 1.66667em;`;
+const Company = styled.div`
+  margin-bottom: 1.66667em;
+`;
 
 const Recipient = styled.div``;
 
@@ -44,16 +46,18 @@ const Heading = styled.h1`
   margin: 0 0 10px 0;
   font-size: 2em;
   font-weight: 400;
-  color: #CBC189;
+  color: #cbc189;
   text-transform: uppercase;
   letter-spacing: 1px;
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     color: ${props.accentColor.color};
   `};
 `;
 
 // Component
-function Header({invoice, profile, configs}) {
+function Header({ invoice, profile, configs }) {
   const { recipient } = invoice;
   return (
     <InvoiceHeader>

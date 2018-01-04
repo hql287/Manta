@@ -11,8 +11,8 @@ const {
   deleteDoc,
   mockData,
 } = require('../../helpers/pouchDB');
-import {getInvoiceValue} from '../../helpers/invoice';
-import {ipcRenderer} from 'electron';
+import { getInvoiceValue } from '../../helpers/invoice';
+import { ipcRenderer } from 'electron';
 jest.mock('../../helpers/pouchDB');
 jest.mock('../../helpers/invoice');
 Date.now = jest.fn(() => 'now');
@@ -23,7 +23,7 @@ describe('Invoices Middleware', () => {
   beforeEach(() => {
     next = jest.fn();
     dispatch = jest.fn();
-    middleware = InvoicesMW({dispatch})(next);
+    middleware = InvoicesMW({ dispatch })(next);
   });
 
   describe('should handle INVOICE_GET_ALL action', () => {
@@ -50,7 +50,7 @@ describe('Invoices Middleware', () => {
           expect(next).toHaveBeenCalledWith(
             Object.assign({}, action, {
               payload: data,
-            }),
+            })
           );
         });
       });
@@ -68,7 +68,7 @@ describe('Invoices Middleware', () => {
           type: ACTION_TYPES.UI_NOTIFICATION_NEW,
           payload: {
             type: 'warning',
-            message: expectedError.message
+            message: expectedError.message,
           },
         });
       });
@@ -77,18 +77,18 @@ describe('Invoices Middleware', () => {
     it('handle unknown error correctly', () => {
       const unknownError = new Error('Something broke');
       getAllDocs.mockImplementationOnce(() => Promise.reject(unknownError));
-      middleware(Actions.getInvoices()).then(() => {
-        return getAllDocs().catch(err => {
+      middleware(Actions.getInvoices()).then(() =>
+        getAllDocs().catch(err => {
           expect(next).toHaveBeenCalled();
           expect(next).toHaveBeenCalledWith({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: unknownError.message
+              message: unknownError.message,
             },
           });
-        });
-      });
+        })
+      );
     });
   });
 
@@ -111,7 +111,7 @@ describe('Invoices Middleware', () => {
           subtotal: 'subTotal',
           grandTotal: 'grandTotal',
           status: 'pending',
-        }),
+        })
       );
     });
 
@@ -135,12 +135,12 @@ describe('Invoices Middleware', () => {
         ],
       };
       // Execute
-      middleware(Actions.saveInvoice(newInvoice)).then(() => {
-        return saveDoc('invoices', newInvoice).then(data => {
+      middleware(Actions.saveInvoice(newInvoice)).then(() =>
+        saveDoc('invoices', newInvoice).then(data => {
           // Expect
-          expect(data).toEqual([ ...mockData.invoicesRecords, newInvoice ]);
+          expect(data).toEqual([...mockData.invoicesRecords, newInvoice]);
         })
-      });
+      );
     });
 
     it('should call next and dispatch notification ', () => {
@@ -165,8 +165,8 @@ describe('Invoices Middleware', () => {
 
       // Execute
       const action = Actions.saveInvoice(newInvoice);
-      middleware(action).then(() => {
-        return saveDoc('invoices', newInvoice).then(data => {
+      middleware(action).then(() =>
+        saveDoc('invoices', newInvoice).then(data => {
           // Call next after the promised is returned
           expect(next.mock.calls.length).toBe(1);
           expect(next).toHaveBeenCalledWith(
@@ -181,7 +181,7 @@ describe('Invoices Middleware', () => {
                   status: 'pending',
                 }),
               ],
-            }),
+            })
           );
           // Dispatch success notification
           expect(dispatch.mock.calls.length).toBe(1);
@@ -192,8 +192,8 @@ describe('Invoices Middleware', () => {
               message: 'Invoice Created Successfully',
             },
           });
-        });
-      });
+        })
+      );
     });
 
     it('tell main process to open preview window with invoice data', () => {
@@ -215,13 +215,13 @@ describe('Invoices Middleware', () => {
           },
         ],
       };
-      middleware(Actions.saveInvoice(newInvoice)).then(() => {
-        return saveDoc('invoices', newInvoice).then(data => {
+      middleware(Actions.saveInvoice(newInvoice)).then(() =>
+        saveDoc('invoices', newInvoice).then(data => {
           // ipc to main process
           expect(ipcRenderer.send).toHaveBeenCalled();
           expect(ipcRenderer.send).not.toHaveBeenCalledWith(
             'preview-invoice',
-            newInvoice,
+            newInvoice
           );
           expect(ipcRenderer.send).toHaveBeenCalledWith(
             'preview-invoice',
@@ -231,10 +231,10 @@ describe('Invoices Middleware', () => {
               subtotal: 'subTotal',
               grandTotal: 'grandTotal',
               status: 'pending',
-            }),
+            })
           );
-        });
-      });
+        })
+      );
     });
 
     it('handle syntax error correctly', () => {
@@ -258,7 +258,7 @@ describe('Invoices Middleware', () => {
         recipient: {
           fullname: faker.name.findName(),
           email: faker.internet.email(),
-        }
+        },
       };
       const expectedError = new Error('Something Broken!');
       saveDoc.mockImplementationOnce(() => Promise.reject(expectedError));
@@ -271,23 +271,22 @@ describe('Invoices Middleware', () => {
           type: ACTION_TYPES.UI_NOTIFICATION_NEW,
           payload: {
             type: 'warning',
-            message: expectedError.message
+            message: expectedError.message,
           },
         });
       });
     });
-
   });
 
   describe('should handle INVOICE_DELETE action', () => {
     it('should remove record from DB correctly', () => {
       const invoiceID = 'jon-invoice';
-      middleware(Actions.deleteInvoice(invoiceID)).then(() => {
-        return deleteDoc('invoices', invoiceID).then(data => {
+      middleware(Actions.deleteInvoice(invoiceID)).then(() =>
+        deleteDoc('invoices', invoiceID).then(data => {
           // Correctly resolves
           expect(data).toEqual([]);
-        });
-      });
+        })
+      );
     });
 
     it('should call next and dispatch notification ', () => {
@@ -295,14 +294,14 @@ describe('Invoices Middleware', () => {
       const invoiceID = 'jon-invoice';
       const action = Actions.deleteInvoice(invoiceID);
       // Execute
-      middleware(action).then(() => {
-        return deleteDoc('invoices', invoiceID).then(data => {
+      middleware(action).then(() =>
+        deleteDoc('invoices', invoiceID).then(data => {
           // Call next after the promised is returned
           expect(next.mock.calls.length).toBe(1);
           expect(next).toHaveBeenCalledWith(
             Object.assign({}, action, {
               payload: [],
-            }),
+            })
           );
           // Dispatch success notification
           expect(dispatch.mock.calls.length).toBe(1);
@@ -313,14 +312,14 @@ describe('Invoices Middleware', () => {
               message: 'Deleted Successfully',
             },
           });
-        });
-      });
+        })
+      );
     });
 
     it('handle error correctly', () => {
       // Setup
       const invoiceID = 'ned-stark';
-      const expectedError = new Error('No invoice found!')
+      const expectedError = new Error('No invoice found!');
       // Execute
       middleware(Actions.deleteInvoice(invoiceID)).then(() => {
         // Expect
@@ -329,7 +328,7 @@ describe('Invoices Middleware', () => {
           type: ACTION_TYPES.UI_NOTIFICATION_NEW,
           payload: {
             type: 'warning',
-            message: expectedError.message
+            message: expectedError.message,
           },
         });
       });
@@ -363,7 +362,7 @@ describe('Invoices Middleware', () => {
   });
 
   it('let other actions pass through', () => {
-    const action = {type: 'TEST'};
+    const action = { type: 'TEST' };
     middleware(action);
     expect(next).toHaveBeenCalledWith(action);
   });

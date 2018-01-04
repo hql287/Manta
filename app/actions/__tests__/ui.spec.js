@@ -45,6 +45,6 @@ it('removeNoti should create UI_NOTIFICATION_REMOVE action', () => {
   const notificationID = 'asdkja83hadk83basdakhbd';
   expect(actions.removeNoti(notificationID)).toEqual({
     type: ACTION_TYPES.UI_NOTIFICATION_REMOVE,
-    payload: notificationID
+    payload: notificationID,
   });
 });

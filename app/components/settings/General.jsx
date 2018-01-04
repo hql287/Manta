@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Libs
@@ -20,7 +20,7 @@ class General extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.setState({[name]: value}, () => {
+    this.setState({ [name]: value }, () => {
       this.props.updateSettings('general', this.state);
     });
   }
@@ -28,30 +28,31 @@ class General extends Component {
   render() {
     return (
       <div>
-        <div className='row'>
-          <div className='col-md-6'>
-            <div className='pageItem'>
-              <label className='itemLabel'>Sound</label>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Sound</label>
               <select
-                name='sound'
+                name="sound"
                 value={this.state.sound}
-                onChange={this.handleInputChange}>
-                <option value='default'>Default</option>
-                <option value='cs'>Counter Strike</option>
+                onChange={this.handleInputChange}
+              >
+                <option value="default">Default</option>
+                <option value="cs">Counter Strike</option>
               </select>
             </div>
           </div>
-          <div className='col-md-6'>
-            <div className='pageItem'>
-              <label className='itemLabel'>Mute Sound?</label>
-              <label className='switch'>
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Mute Sound?</label>
+              <label className="switch">
                 <input
-                  name='muted'
-                  type='checkbox'
+                  name="muted"
+                  type="checkbox"
                   checked={this.state.muted}
                   onChange={this.handleInputChange}
                 />
-                <span className='slider round' />
+                <span className="slider round" />
               </label>
             </div>
           </div>

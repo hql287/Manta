@@ -1,5 +1,5 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 import styled from 'styled-components';
@@ -18,11 +18,11 @@ import SplitButton from '../shared/SplitButton';
 // Invoice Container
 const Wrapper = styled.div`
   position: relative;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   background: white;
   margin-bottom: 30px;
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 // Invoice Header
@@ -34,7 +34,7 @@ const Header = styled.div`
   i.ion-trash-a {
     font-size: 24px;
     line-height: 24px;
-    color: #C4C8CC;
+    color: #c4c8cc;
   }
   i.ion-checkmark {
     font-size: 16px;
@@ -61,10 +61,10 @@ const StatusBar = styled.div`
   width: 100%;
   height: 6px;
   border-radius: 4px 4px 0 0;
-  ${props => props.status === 'pending' && `background: #469FE5;`}
-  ${props => props.status === 'paid' && `background: #6BBB69;`}
-  ${props => props.status === 'refunded' && `background: #4F555C;`}
-  ${props => props.status === 'cancelled' && `background: #EC476E;`}
+  ${props => props.status === 'pending' && `background: #469FE5;`} ${props =>
+      props.status === 'paid' && `background: #6BBB69;`} ${props =>
+      props.status === 'refunded' && `background: #4F555C;`} ${props =>
+      props.status === 'cancelled' && `background: #EC476E;`};
 `;
 
 const Status = styled.div`
@@ -72,11 +72,10 @@ const Status = styled.div`
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  ${props => props.status === 'pending' && `color: #469FE5;`}
-  ${props => props.status === 'paid' && `color: #6BBB69;`}
-  ${props => props.status === 'refunded' && `color: #4F555C;`}
-  ${props => props.status === 'cancelled' && `color: #EC476E;`}
-  span {
+  ${props => props.status === 'pending' && `color: #469FE5;`} ${props =>
+      props.status === 'paid' && `color: #6BBB69;`} ${props =>
+      props.status === 'refunded' && `color: #4F555C;`} ${props =>
+      props.status === 'cancelled' && `color: #EC476E;`} span {
     display: flex;
     align-items: center;
     i {
@@ -92,7 +91,7 @@ const Body = styled.div`
 
 // Invoice Footer
 const Footer = styled.div`
-  border-top: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding: 20px;
   display: flex;
   justify-content: space-between;
@@ -101,7 +100,7 @@ const Footer = styled.div`
     flex: 1;
     margin: 0 10px;
     &:first-child {
-      flex: 3
+      flex: 3;
     }
   }
 `;
@@ -129,7 +128,7 @@ const Field = styled.div`
   }
   label {
     font-size: 11px;
-    color: #B4B7BA;
+    color: #b4b7ba;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-bottom: 4px;
@@ -146,8 +145,8 @@ const Field = styled.div`
 class Invoice extends Component {
   constructor(props) {
     super(props);
-    this.viewInvoice   = this.viewInvoice.bind(this);
-    this.editInvoice   = this.editInvoice.bind(this);
+    this.viewInvoice = this.viewInvoice.bind(this);
+    this.editInvoice = this.editInvoice.bind(this);
     this.deleteInvoice = this.deleteInvoice.bind(this);
     this.displayStatus = this.displayStatus.bind(this);
   }
@@ -160,7 +159,7 @@ class Invoice extends Component {
   }
 
   deleteInvoice() {
-    const {invoice, deleteInvoice} = this.props;
+    const { invoice, deleteInvoice } = this.props;
     deleteInvoice(invoice._id);
   }
 
@@ -176,11 +175,11 @@ class Invoice extends Component {
     const { invoice } = this.props;
     const { status } = invoice;
     const { recipient } = invoice;
-    switch(status) {
+    switch (status) {
       case 'cancelled': {
         return (
           <span>
-            <i className="ion-backspace"/>
+            <i className="ion-backspace" />
             Cancelled
           </span>
         );
@@ -189,7 +188,7 @@ class Invoice extends Component {
       case 'paid': {
         return (
           <span>
-            <i className="ion-checkmark"/>
+            <i className="ion-checkmark" />
             Paid
           </span>
         );
@@ -198,7 +197,7 @@ class Invoice extends Component {
       case 'refunded': {
         return (
           <span>
-            <i className="ion-arrow-return-left"/>
+            <i className="ion-arrow-return-left" />
             Refunded
           </span>
         );
@@ -206,7 +205,7 @@ class Invoice extends Component {
       default: {
         return (
           <span>
-            <i className="ion-loop"/>
+            <i className="ion-loop" />
             Pending
           </span>
         );
@@ -220,27 +219,25 @@ class Invoice extends Component {
     const statusActions = [
       {
         label: 'Pending',
-        action: () => setInvoiceStatus(invoice._id, 'pending')
+        action: () => setInvoiceStatus(invoice._id, 'pending'),
       },
       {
         label: 'Refunded',
-        action: () => setInvoiceStatus(invoice._id, 'refunded')
+        action: () => setInvoiceStatus(invoice._id, 'refunded'),
       },
       {
         label: 'Cancelled',
-        action: () => setInvoiceStatus(invoice._id, 'cancelled')
+        action: () => setInvoiceStatus(invoice._id, 'cancelled'),
       },
     ];
     return (
       <div className="col-lg-6">
         <Wrapper>
-          <StatusBar status={status}/>
+          <StatusBar status={status} />
           <Header>
-            <Status status={status}>
-              { this.displayStatus() }
-            </Status>
+            <Status status={status}>{this.displayStatus()}</Status>
             <Button link onClick={this.deleteInvoice}>
-              <i className="ion-trash-a"/>
+              <i className="ion-trash-a" />
             </Button>
           </Header>
           <Body>
@@ -263,18 +260,14 @@ class Invoice extends Component {
               <Field>
                 <label>Total Value</label>
                 <p>
-                  {invoice.currency.code}
-                  {' '}
-                  {formatNumber(invoice.grandTotal)}
+                  {invoice.currency.code} {formatNumber(invoice.grandTotal)}
                 </p>
               </Field>
             </Row>
             <Row>
               <Field>
                 <label>Created On</label>
-                <p>
-                  {format(invoice.created_at, dateFormat)}
-                </p>
+                <p>{format(invoice.created_at, dateFormat)}</p>
               </Field>
               <Field>
                 <label>Due Date</label>
@@ -290,16 +283,12 @@ class Invoice extends Component {
             <SplitButton
               mainButton={{
                 label: 'Mark As Paid',
-                action: () => setInvoiceStatus(invoice._id, 'paid')
+                action: () => setInvoiceStatus(invoice._id, 'paid'),
               }}
               options={statusActions}
             />
-            <Button onClick={this.editInvoice}>
-              Edit
-            </Button>
-            <Button onClick={this.viewInvoice}>
-              View
-            </Button>
+            <Button onClick={this.editInvoice}>Edit</Button>
+            <Button onClick={this.viewInvoice}>View</Button>
           </Footer>
         </Wrapper>
       </div>

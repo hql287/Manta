@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {Note} from '../Note.jsx';
+import { Note } from '../Note.jsx';
 
 // Mocks
 const updateFieldData = jest.fn();

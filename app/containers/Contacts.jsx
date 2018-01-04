@@ -1,8 +1,8 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
-import {connect} from 'react-redux';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
 
@@ -13,7 +13,7 @@ import * as InvoicesActions from '../actions/invoices';
 // Components
 import Contact from '../components/contacts/Contact';
 import Message from '../components/shared/Message';
-import {Table, THead, TBody, TH, TR} from '../components/shared/Table';
+import { Table, THead, TBody, TH, TR } from '../components/shared/Table';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
@@ -50,7 +50,7 @@ class Contacts extends Component {
   }
 
   newInvoice(contact) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(InvoicesActions.newInvoiceFromContact(contact));
   }
 
@@ -68,44 +68,42 @@ class Contacts extends Component {
   }
 
   confirmedDeleteContact(contactId) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(ContactsActions.deleteContact(contactId));
   }
 
   render() {
-    const {contacts} = this.props;
-    const contactsComponent = contacts.map((contact, index) => {
-      return (
-        <Contact
-          key={contact._id}
-          contact={contact}
-          index={index}
-          deleteContact={this.deleteContact}
-          newInvoice={this.newInvoice}
-        />
-      );
-    });
+    const { contacts } = this.props;
+    const contactsComponent = contacts.map((contact, index) => (
+      <Contact
+        key={contact._id}
+        contact={contact}
+        index={index}
+        deleteContact={this.deleteContact}
+        newInvoice={this.newInvoice}
+      />
+    ));
     return (
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>All Contacts</PageHeaderTitle>
         </PageHeader>
         <PageContent>
-          {contacts.length === 0
-            ? <Message info text="You don't have any contacts yet!" />
-            : <Table hasBorders bg>
-                <THead>
-                  <TR>
-                    <TH>Contact</TH>
-                    <TH>Email</TH>
-                    <TH>Phone</TH>
-                    <TH actions>Actions</TH>
-                  </TR>
-                </THead>
-                <TBody>
-                  {contactsComponent}
-                </TBody>
-              </Table>}
+          {contacts.length === 0 ? (
+            <Message info text="You don't have any contacts yet!" />
+          ) : (
+            <Table hasBorders bg>
+              <THead>
+                <TR>
+                  <TH>Contact</TH>
+                  <TH>Email</TH>
+                  <TH>Phone</TH>
+                  <TH actions>Actions</TH>
+                </TR>
+              </THead>
+              <TBody>{contactsComponent}</TBody>
+            </Table>
+          )}
         </PageContent>
       </PageWrapper>
     );
@@ -123,7 +121,6 @@ const mapStateToProps = state => ({
   contacts: getContacts(state),
 });
 
-export default compose(
-  connect(mapStateToProps),
-  _withFadeInAnimation
-)(Contacts);
+export default compose(connect(mapStateToProps), _withFadeInAnimation)(
+  Contacts
+);

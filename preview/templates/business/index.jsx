@@ -14,10 +14,11 @@ const Invoice = styled.div`
   padding: 3.33333em;
   width: 100%;
   font-family: 'Montserrat';
-  ${props => props.baseFontSize && `
+  ${props =>
+    props.baseFontSize &&
+    `
     font-size: ${props.baseFontSize};
-  `}
-  .label, h4, th {
+  `} .label, h4, th {
     font-weight: 500;
     font-size: 0.66667em;
     text-transform: uppercase;
@@ -26,18 +27,28 @@ const Invoice = styled.div`
     color: #2c323a;
     margin: 0;
   }
-  h4 { margin-bottom: 0.66667em; }
+  h4 {
+    margin-bottom: 0.66667em;
+  }
   p {
     font-weight: 300;
     font-size: 0.66667em;
-    color: #2C323A;
+    color: #2c323a;
     line-height: 1.75;
     margin: 0;
   }
-  .w5 { width: 5%; }
-  .w10 { width: 10%; }
-  .w15 { width: 15%; }
-  .w20 { width: 20%; }
+  .w5 {
+    width: 5%;
+  }
+  .w10 {
+    width: 10%;
+  }
+  .w15 {
+    width: 15%;
+  }
+  .w20 {
+    width: 20%;
+  }
 `;
 
 // Child Components

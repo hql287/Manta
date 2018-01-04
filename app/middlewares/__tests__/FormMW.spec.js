@@ -17,10 +17,10 @@ describe('Form Middleware', () => {
       getState = jest.fn(() => ({
         form: {
           validation: true,
-          recipient: {newRecipient: true},
+          recipient: { newRecipient: true },
         },
       }));
-      const middleware = FormMW({dispatch, getState})(next);
+      const middleware = FormMW({ dispatch, getState })(next);
 
       // Action
       const action = Actions.saveFormData();
@@ -39,10 +39,10 @@ describe('Form Middleware', () => {
       getState = jest.fn(() => ({
         form: {
           validation: true,
-          recipient: {newRecipient: false},
+          recipient: { newRecipient: false },
         },
       }));
-      const middleware = FormMW({dispatch, getState})(next);
+      const middleware = FormMW({ dispatch, getState })(next);
 
       // Action
       const action = Actions.saveFormData();
@@ -57,28 +57,28 @@ describe('Form Middleware', () => {
     });
   });
 
-    it('should NOT pass validation', () => {
-      // Setup
-      getState = jest.fn(() => ({
-        form: { validation: false },
-      }));
-      const middleware = FormMW({dispatch, getState})(next);
+  it('should NOT pass validation', () => {
+    // Setup
+    getState = jest.fn(() => ({
+      form: { validation: false },
+    }));
+    const middleware = FormMW({ dispatch, getState })(next);
 
-      // Action
-      const action = Actions.saveFormData();
-      middleware(action);
+    // Action
+    const action = Actions.saveFormData();
+    middleware(action);
 
-      // Expect
-      expect(getState.mock.calls.length).toBe(1);
-      // No calling to Dispatch or Next since it failed validation
-      expect(dispatch.mock.calls.length).toBe(0);
-      expect(next.mock.calls.length).toBe(0);
-    });
+    // Expect
+    expect(getState.mock.calls.length).toBe(1);
+    // No calling to Dispatch or Next since it failed validation
+    expect(dispatch.mock.calls.length).toBe(0);
+    expect(next.mock.calls.length).toBe(0);
+  });
 
   it('should hanlde FORM_ITEM_ADD action', () => {
     // Setup
     getState = jest.fn();
-    const middleware = FormMW({dispatch, getState})(next);
+    const middleware = FormMW({ dispatch, getState })(next);
 
     // Action
     const action = Actions.addItem();
@@ -99,7 +99,7 @@ describe('Form Middleware', () => {
   it('should hanlde FORM_CLEAR action', () => {
     // Setup
     getState = jest.fn();
-    const middleware = FormMW({dispatch, getState})(next);
+    const middleware = FormMW({ dispatch, getState })(next);
 
     // Action
     const action = Actions.clearForm();
@@ -115,8 +115,8 @@ describe('Form Middleware', () => {
 
   it('let other actions pass through', () => {
     getState = jest.fn();
-    const middleware = FormMW({dispatch, getState})(next);
-    const action = {type: 'TEST'};
+    const middleware = FormMW({ dispatch, getState })(next);
+    const action = { type: 'TEST' };
     middleware(action);
     expect(next).toHaveBeenCalledWith(action);
   });

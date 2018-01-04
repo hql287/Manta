@@ -1,9 +1,9 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // React Motion
-import {TransitionMotion, spring} from 'react-motion';
+import { TransitionMotion, spring } from 'react-motion';
 
 // HOC Componen
 class TransitionList extends Component {
@@ -16,32 +16,28 @@ class TransitionList extends Component {
   }
 
   getDefaultStyles() {
-    const {children, componentHeight} = this.props;
-    const defaultStyles = children.map(child => {
-      return {
-        key: child.key,
-        data: {child},
-        style: {
-          height: componentHeight,
-          opacity: 0,
-        },
-      };
-    });
+    const { children, componentHeight } = this.props;
+    const defaultStyles = children.map(child => ({
+      key: child.key,
+      data: { child },
+      style: {
+        height: componentHeight,
+        opacity: 0,
+      },
+    }));
     return defaultStyles;
   }
 
   getStyles() {
-    const {children, componentHeight} = this.props;
-    const styles = children.map(child => {
-      return {
-        key: child.key,
-        data: {child},
-        style: {
-          height: spring(componentHeight),
-          opacity: spring(1),
-        },
-      };
-    });
+    const { children, componentHeight } = this.props;
+    const styles = children.map(child => ({
+      key: child.key,
+      data: { child },
+      style: {
+        height: spring(componentHeight),
+        opacity: spring(1),
+      },
+    }));
     return styles;
   }
 
@@ -65,15 +61,17 @@ class TransitionList extends Component {
         willEnter={this.willEnter}
         willLeave={this.willLeave}
         styles={this.getStyles()}
-        defaultStyles={this.getDefaultStyles()}>
-        {values =>
+        defaultStyles={this.getDefaultStyles()}
+      >
+        {values => (
           <div>
-            {values.map(({key, style, data}) =>
+            {values.map(({ key, style, data }) => (
               <div key={key} style={style}>
                 {data.child}
               </div>
-            )}
-          </div>}
+            ))}
+          </div>
+        )}
       </TransitionMotion>
     );
   }

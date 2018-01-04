@@ -1,14 +1,14 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
-import {connect} from 'react-redux';
-import {getCurrentInvoice} from '../reducers/FormReducer';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { getCurrentInvoice } from '../reducers/FormReducer';
 
 // Actions
 import * as FormActions from '../actions/form';
 import * as SettingsActions from '../actions/settings';
-import {bindActionCreators} from 'redux';
+import { bindActionCreators } from 'redux';
 
 // Components
 import Recipient from '../components/form/Recipient';
@@ -38,7 +38,7 @@ class Form extends Component {
 
   render() {
     // Form & Settings Actions
-    const {updateSettings} = this.props.boundSettingsActionCreators;
+    const { updateSettings } = this.props.boundSettingsActionCreators;
     const {
       clearForm,
       toggleField,
@@ -57,7 +57,7 @@ class Form extends Component {
       settings,
       savedSettings,
     } = this.props.currentInvoice;
-    const {required_fields, open} = settings;
+    const { required_fields, open } = settings;
     return (
       <PageWrapper>
         <PageHeader>
@@ -82,9 +82,7 @@ class Form extends Component {
           <Recipient />
           <ItemsList />
           {required_fields.dueDate && (
-            <DueDate
-              dueDate={dueDate}
-              updateFieldData={updateFieldData} />
+            <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
           )}
           {required_fields.currency && (
             <Currency
@@ -95,9 +93,7 @@ class Form extends Component {
             />
           )}
           {required_fields.discount && (
-            <Discount
-              discount={discount}
-              updateFieldData={updateFieldData} />
+            <Discount discount={discount} updateFieldData={updateFieldData} />
           )}
           {required_fields.tax && (
             <Tax
@@ -108,9 +104,7 @@ class Form extends Component {
             />
           )}
           {required_fields.note && (
-            <Note
-              note={note}
-              updateFieldData={updateFieldData} />
+            <Note note={note} updateFieldData={updateFieldData} />
           )}
         </PageContent>
       </PageWrapper>
@@ -157,5 +151,5 @@ const mapDispatchToProps = dispatch => ({
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  _withFadeInAnimation,
+  _withFadeInAnimation
 )(Form);

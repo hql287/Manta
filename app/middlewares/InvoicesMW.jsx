@@ -13,34 +13,37 @@ import * as FormActions from '../actions/form';
 import { getInvoiceValue } from '../helpers/invoice';
 import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 
-
 const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.INVOICE_NEW_FROM_CONTACT: {
       // Change Tab to Form
       next(UIActions.changeActiveTab('form'));
       // Update Recipient Data
-      dispatch(FormActions.updateRecipient({
-        new: {},
-        select: action.payload,
-        newRecipient: false,
-      }));
+      dispatch(
+        FormActions.updateRecipient({
+          new: {},
+          select: action.payload,
+          newRecipient: false,
+        })
+      );
     }
 
     case ACTION_TYPES.INVOICE_GET_ALL: {
       return getAllDocs('invoices')
         .then(allDocs => {
-          next(Object.assign({}, action, {
-            payload: allDocs,
-          }));
+          next(
+            Object.assign({}, action, {
+              payload: allDocs,
+            })
+          );
         })
         .catch(err => {
           next({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }
@@ -69,19 +72,19 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Invoice Created Successfully'
-            }
+              message: 'Invoice Created Successfully',
+            },
           });
           // Preview Window
-         ipc.send('preview-invoice', doc);
+          ipc.send('preview-invoice', doc);
         })
         .catch(err => {
           next({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }
@@ -91,14 +94,14 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         .then(remainingDocs => {
           next({
             type: ACTION_TYPES.INVOICE_DELETE,
-            payload: remainingDocs
+            payload: remainingDocs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Deleted Successfully'
-            }
+              message: 'Deleted Successfully',
+            },
           });
         })
         .catch(err => {
@@ -106,25 +109,27 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }
 
     case ACTION_TYPES.INVOICE_SET_STATUS: {
-      return updateDoc('invoices', action.payload.invoiceID, { status: action.payload.status })
+      return updateDoc('invoices', action.payload.invoiceID, {
+        status: action.payload.status,
+      })
         .then(docs => {
           next({
             type: ACTION_TYPES.INVOICE_SET_STATUS,
-            payload: docs
+            payload: docs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Updated Successfully'
-            }
+              message: 'Updated Successfully',
+            },
           });
         })
         .catch(err => {
@@ -132,8 +137,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }

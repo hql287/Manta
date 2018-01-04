@@ -14,9 +14,9 @@ const SwitchStyle = styled.label`
 `;
 
 const Input = styled.input`
-  display:none;
+  display: none;
   &:checked + span {
-    background-color: #6BBB69;
+    background-color: #6bbb69;
   }
   &:checked + span:before {
     -webkit-transform: translateX(20px);
@@ -32,33 +32,36 @@ const Slider = styled.span`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #C4C8CC;
-  -webkit-transition: .4s;
-  transition: .4s;
+  background-color: #c4c8cc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     height: 18px;
     width: 18px;
     left: 4px;
     bottom: 3px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
   }
-  ${ props => props.rounded && `
+  ${props =>
+    props.rounded &&
+    `
     border-radius: 34px;
     &::before {
       border-radius: 50%;
     }
-  `}
+  `};
 `;
 
-export const Switch = props =>
+export const Switch = props => (
   <SwitchStyle>
     <Input type="checkbox" {...props} />
-    <Slider rounded/>
-  </SwitchStyle>;
+    <Slider rounded />
+  </SwitchStyle>
+);
 
 Switch.propTypes = {
   checked: PropTypes.bool.isRequired,

@@ -1,9 +1,9 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
-import {Section} from '../shared/Section';
+import { Section } from '../shared/Section';
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
@@ -25,13 +25,13 @@ const NoteContent = styled.textarea`
 export class Note extends Component {
   constructor(props) {
     super(props);
-    this.state = {content: this.props.note.content};
+    this.state = { content: this.props.note.content };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.note.content === undefined) {
-      this.setState({content: ''}, () => {
+      this.setState({ content: '' }, () => {
         this.props.updateFieldData('note', this.state);
       });
     }
@@ -44,7 +44,7 @@ export class Note extends Component {
   }
 
   handleInputChange(event) {
-    this.setState({content: event.target.value}, () => {
+    this.setState({ content: event.target.value }, () => {
       this.props.updateFieldData('note', this.state);
     });
   }

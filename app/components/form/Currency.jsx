@@ -1,12 +1,12 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
-import {keys, sortBy, isEqual} from 'lodash';
+import { keys, sortBy, isEqual } from 'lodash';
 
 // Custom Components
-import {Section, Header} from '../shared/Section';
+import { Section, Header } from '../shared/Section';
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
@@ -37,7 +37,7 @@ export class Currency extends Component {
   }
 
   saveAsDefault() {
-    const {updateSavedSettings} = this.props;
+    const { updateSavedSettings } = this.props;
     updateSavedSettings('currency', this.props.currency.code);
   }
 
@@ -46,17 +46,17 @@ export class Currency extends Component {
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [
       key,
-      currencies[key]['name'],
-      currencies[key]['code'],
+      currencies[key].name,
+      currencies[key].code,
     ]);
     const currenciesSorted = sortBy(currenciesKeysAndValues, [
       array => array[1],
     ]);
     return currenciesSorted.map(obj => {
       const [key, name, code] = obj;
-      let optionKey = code;
-      let optionValue = code;
-      let optionLabel = name;
+      const optionKey = code;
+      const optionValue = code;
+      const optionLabel = name;
       return (
         <option value={optionValue} key={optionKey}>
           {optionLabel}
@@ -78,7 +78,8 @@ export class Currency extends Component {
         </Header>
         <select
           value={this.props.currency.code}
-          onChange={this.handleInputChange}>
+          onChange={this.handleInputChange}
+        >
           {this.sortCurrencies()}
         </select>
       </Section>

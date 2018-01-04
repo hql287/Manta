@@ -1,7 +1,7 @@
 // Libs
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
 // Actions
@@ -15,15 +15,15 @@ const Wrapper = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #F9FAFA;
-  border-right: 1px solid rgba(0,0,0,.1);
+  background: #f9fafa;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
   width: 180px;
   min-width: 180px;
   max-width: 180px;
   padding: 20px;
   justify-content: flex-start;
   > div:last-child {
-    flex: 1
+    flex: 1;
   }
 `;
 
@@ -50,8 +50,8 @@ class SideBar extends Component {
 
   handleInputChange(event) {
     const target = event.target;
-    const value  = target.type === 'checkbox' ? target.checked : target.value;
-    const name   = target.name;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
     this.updateConfigs({ name, value });
   }
 
@@ -61,7 +61,9 @@ class SideBar extends Component {
 
   updateConfigs(config) {
     const { dispatch } = this.props;
-    dispatch(ActionsCreator.updateConfigs({ name: config.name, value: config.value }));
+    dispatch(
+      ActionsCreator.updateConfigs({ name: config.name, value: config.value })
+    );
   }
 
   savePDF() {
@@ -71,25 +73,27 @@ class SideBar extends Component {
 
   render() {
     const { configs } = this.props;
-    const { template, alignItems, fontSize, accentColor} = configs;
+    const { template, alignItems, fontSize, accentColor } = configs;
     return (
       <Wrapper>
         <Template
           template={template}
-          handleInputChange={this.handleInputChange}/>
+          handleInputChange={this.handleInputChange}
+        />
         <Alignment
           alignItems={alignItems}
-          handleInputChange={this.handleInputChange}/>
+          handleInputChange={this.handleInputChange}
+        />
         <FontSize
           fontSize={fontSize}
-          handleInputChange={this.handleInputChange}/>
-        <Toggler
-          configs={configs}
-          handleInputChange={this.handleInputChange}/>
+          handleInputChange={this.handleInputChange}
+        />
+        <Toggler configs={configs} handleInputChange={this.handleInputChange} />
         <AccentColor
           accentColor={accentColor}
-          handleAccentColorChange={this.handleAccentColorChange}/>
-        <Actions savePDF={this.savePDF}/>
+          handleAccentColorChange={this.handleAccentColorChange}
+        />
+        <Actions savePDF={this.savePDF} />
       </Wrapper>
     );
   }
