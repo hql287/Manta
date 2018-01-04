@@ -10,8 +10,9 @@ import * as UIActions from '../actions/ui';
 import * as FormActions from '../actions/form';
 
 // Helpers
-import { getSubtotal, getGrandTotal } from '../helpers/invoice';
+import { getInvoiceValue } from '../helpers/invoice';
 import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
+
 
 const InvoicesMW = ({ dispatch }) => next => action => {
   switch (action.type) {
@@ -54,8 +55,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         currency: invoiceData.currency
           ? invoiceData.currency
           : currencies[appConfig.get('invoice.currency')],
-        subtotal: getSubtotal(invoiceData),
-        grandTotal: getGrandTotal(invoiceData),
+        subtotal: getInvoiceValue(invoiceData).subtotal,
+        grandTotal: getInvoiceValue(invoiceData).grandTotal,
       });
       // Save doc to db
       return saveDoc('invoices', doc)
