@@ -30,8 +30,6 @@ const DiscountType = styled.div`
 export class Discount extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.updateDiscountState = this.updateDiscountState.bind(this);
   }
 
   componentWillMount() {
@@ -48,7 +46,7 @@ export class Discount extends Component {
     );
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const name = event.target.name;
     const eValue = event.target.value;
     let value;
@@ -62,7 +60,7 @@ export class Discount extends Component {
     });
   }
 
-  updateDiscountState() {
+  updateDiscountState = () => {
     const { updateFieldData } = this.props;
     updateFieldData('discount', this.state);
   }

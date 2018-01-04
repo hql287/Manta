@@ -82,9 +82,6 @@ import Switch from '../shared/Switch';
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.isSettingsSaved = this.isSettingsSaved.bind(this);
-    this.saveAsDefault = this.saveAsDefault.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -92,18 +89,18 @@ class Settings extends Component {
   }
 
   // Update local state
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     this.props.toggleField(event.target.name);
   }
 
-  isSettingsSaved() {
+  isSettingsSaved = () => {
     return isEqual(
       this.props.settings.required_fields,
       this.props.savedSettings
     );
   }
 
-  saveAsDefault() {
+  saveAsDefault = () => {
     const { updateSavedSettings } = this.props;
     updateSavedSettings('required_fields', this.props.settings.required_fields);
   }

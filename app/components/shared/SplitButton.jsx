@@ -88,10 +88,6 @@ class SplitButton extends Component {
   constructor(props) {
     super(props);
     this.state = { showOptions: false };
-    this.handleMainAction = this.handleMainAction.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.handleOutsideClick = this.handleOutsideClick.bind(this);
-    this.renderListItems = this.renderListItems.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -101,7 +97,7 @@ class SplitButton extends Component {
     return false;
   }
 
-  handleClick() {
+  handleClick = () => {
     if (!this.state.showOptions) {
       document.addEventListener('click', this.handleOutsideClick, false);
     } else {
@@ -110,20 +106,20 @@ class SplitButton extends Component {
     this.setState({ showOptions: !this.state.showOptions });
   }
 
-  handleOutsideClick(e) {
+  handleOutsideClick = (e) => {
     if (this.node.contains(e.target)) {
       return;
     }
     this.handleClick();
   }
 
-  handleMainAction(e) {
+  handleMainAction = (e) => {
     this.setState({ showOptions: false }, () => {
       this.props.mainButton.action();
     });
   }
 
-  renderListItems() {
+  renderListItems = () => {
     const { options } = this.props;
     return options.map(option => (
       <a

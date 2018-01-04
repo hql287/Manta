@@ -23,25 +23,22 @@ export class DueDate extends Component {
   constructor(props) {
     super(props);
     this.state = { focused: false };
-    this.onFocusChange = this.onFocusChange.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
-    this.clearDate = this.clearDate.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state !== nextState || this.props.dueDate != nextProps.dueDate;
   }
 
-  onFocusChange() {
+  onFocusChange = () => {
     this.setState({ focused: !this.state.focused });
   }
 
-  onDateChange(date) {
+  onDateChange = (date) => {
     const selectedDate = date === null ? null : moment(date).toObject();
     this.props.updateFieldData('dueDate', { selectedDate });
   }
 
-  clearDate() {
+  clearDate = () => {
     this.onDateChange(null);
   }
 

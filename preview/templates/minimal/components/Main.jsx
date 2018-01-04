@@ -115,11 +115,9 @@ function setAlignItems(configs) {
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.displayTax = this.displayTax.bind(this);
-    this.displayDiscount = this.displayDiscount.bind(this);
   }
 
-  displayDiscount() {
+  displayDiscount = () => {
     const { invoice, configs } = this.props;
     const currency = configs.useSymbol
       ? invoice.currency.symbol
@@ -139,7 +137,7 @@ class Main extends Component {
     ) : null;
   }
 
-  displayTax() {
+  displayTax = () => {
     const { invoice, configs } = this.props;
     const { tax } = invoice;
     const { taxAmount } = getInvoiceValue(invoice);

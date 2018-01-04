@@ -22,8 +22,6 @@ import { AppWrapper } from './components/shared/Layout';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.changeTab = this.changeTab.bind(this);
-    this.removeNoti = this.removeNoti.bind(this);
   }
 
   componentDidMount() {
@@ -84,12 +82,12 @@ class App extends Component {
     ]);
   }
 
-  changeTab(tabName) {
+  changeTab = (tabName) => {
     const { dispatch } = this.props;
     dispatch(UIActions.changeActiveTab(tabName));
   }
 
-  removeNoti(id) {
+  removeNoti = (id) => {
     const { dispatch } = this.props;
     dispatch(UIActions.removeNoti(id));
   }

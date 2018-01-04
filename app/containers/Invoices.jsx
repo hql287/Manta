@@ -27,8 +27,6 @@ import {
 class Invoices extends Component {
   constructor(props) {
     super(props);
-    this.deleteInvoice = this.deleteInvoice.bind(this);
-    this.setInvoiceStatus = this.setInvoiceStatus.bind(this);
   }
 
   // Load Invoices & add event listeners
@@ -66,13 +64,13 @@ class Invoices extends Component {
   }
 
   // Confirm Delete an invoice
-  confirmedDeleteInvoice(invoiceId) {
+  confirmedDeleteInvoice = (invoiceId) => {
     const { dispatch } = this.props;
     dispatch(Actions.deleteInvoice(invoiceId));
   }
 
   // set the invoice status
-  setInvoiceStatus(invoiceId, status) {
+  setInvoiceStatus = (invoiceId, status) => {
     const { dispatch } = this.props;
     dispatch(Actions.setInvoiceStatus(invoiceId, status));
   }

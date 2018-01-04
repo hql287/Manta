@@ -9,14 +9,13 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 class General extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
     this.setState(this.props.general);
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;

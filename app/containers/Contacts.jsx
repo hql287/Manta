@@ -29,8 +29,6 @@ import { getContacts } from '../reducers/ContactsReducer';
 class Contacts extends Component {
   constructor(props) {
     super(props);
-    this.newInvoice = this.newInvoice.bind(this);
-    this.deleteContact = this.deleteContact.bind(this);
   }
 
   componentDidMount() {
@@ -49,12 +47,12 @@ class Contacts extends Component {
     ipc.removeAllListeners('confirmed-delete-contact');
   }
 
-  newInvoice(contact) {
+  newInvoice = (contact) => {
     const { dispatch } = this.props;
     dispatch(InvoicesActions.newInvoiceFromContact(contact));
   }
 
-  deleteContact(contactId) {
+  deleteContact = (contactId) => {
     openDialog(
       {
         type: 'warning',

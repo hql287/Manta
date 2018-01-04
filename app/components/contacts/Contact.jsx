@@ -10,20 +10,18 @@ import Button from '../shared/Button';
 class Contact extends Component {
   constructor(props) {
     super(props);
-    this.deleteContact = this.deleteContact.bind(this);
-    this.newInvoice = this.newInvoice.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
     return this.props !== nextProps;
   }
 
-  newInvoice() {
+  newInvoice = () => {
     const { newInvoice, contact } = this.props;
     newInvoice(contact);
   }
 
-  deleteContact() {
+  deleteContact = () => {
     const { contact, deleteContact } = this.props;
     deleteContact(contact._id);
   }

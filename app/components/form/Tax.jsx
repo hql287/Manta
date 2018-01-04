@@ -36,9 +36,6 @@ export class Tax extends Component {
   constructor(props) {
     super(props);
     this.state = props.tax;
-    this.isSettingsSaved = this.isSettingsSaved.bind(this);
-    this.saveAsDefault = this.saveAsDefault.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   // Handle Form Clear
@@ -61,7 +58,7 @@ export class Tax extends Component {
     return false;
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = name === 'amount' ? parseFloat(target.value) : target.value;
@@ -80,11 +77,11 @@ export class Tax extends Component {
     updateFieldData('tax', this.state);
   }
 
-  isSettingsSaved() {
+  isSettingsSaved = () => {
     return isEqual(this.state, this.props.savedSettings);
   }
 
-  saveAsDefault() {
+  saveAsDefault = () => {
     const { updateSavedSettings } = this.props;
     updateSavedSettings('tax', this.state);
   }
