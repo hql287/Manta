@@ -21,7 +21,11 @@
     "dist": "electron-builder -mwl",
     "release:linux": "yarn run build && yarn run dist:linux",
     "release:win": "yarn run build && yarn run dist:win",
-    "release": "yarn run build && yarn run dist"
+    "release": "yarn run build && yarn run dist",
+    "lint": "find . -name \"*.js\" -o -name \"*.jsx\" | grep -v -f .gitignore | xargs eslint",
+    "prettier:base": "prettier --write",
+    "prettify": "find . -name \"*.js\" -o -name \"*.jsx\" | grep -v -f .gitignore | xargs npm run prettier:base",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "date-fns": "^1.28.5",
@@ -70,10 +74,20 @@
     "electron-builder": "^19.42.1",
     "enzyme": "^3.0.0",
     "enzyme-adapter-react-16": "^1.0.1",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jest": "^21.2.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.4.0",
+    "eslint-plugin-react": "^7.5.1",
     "faker": "^4.1.0",
     "jest": "^21.2.1",
     "jest-styled-components": "^4.6.0",
+    "lint-staged": "^6.0.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.9.2",
     "react-hot-loader": "^3.0.0-beta.7",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6",
@@ -83,5 +97,21 @@
     "webpack-dev-server": "^2.9.0",
     "webpack-merge": "^4.1.0",
     "webpack-node-externals": "^1.6.0"
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "lint-staged": {
+    "*.jsx?": [
+      "npm run prettier:base",
+      "eslint",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "proseWrap": "never",
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": true
   }
 }
