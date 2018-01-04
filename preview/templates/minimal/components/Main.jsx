@@ -1,9 +1,9 @@
-// React Libraries
-import React from 'react';
+// Libraries
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { padStart } from 'lodash';
 import { formatNumber }  from '../../../../app/helpers/number';
+import { getInvoiceValue } from '../../../../app/helpers/invoice';
 
 // Styles
 import styled from 'styled-components';
@@ -79,10 +79,17 @@ const InvoiceSummary = styled.tfoot`
       border-bottom: none;
     }
   }
-  .invoice__subtotal { }
-  .invoice__vat      { }
-  .invoice__discount { color: #EC476E; }
-  .invoice__total    { color: #6BBB69; }
+`;
+
+const Subtotal = styled.tr``;
+const Tax = styled.tr`
+  color: #EC476E;
+`;
+const Discount = styled.tr`
+  color: #469FE5;
+`;
+const Total = styled.tr`
+  color: #6BBB69;
 `;
 
 function setAlignItems(configs) {
@@ -105,73 +112,115 @@ function setAlignItems(configs) {
 }
 
 // Component
-function Main({invoice, configs}) {
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.displayTax = this.displayTax.bind(this);
+    this.displayDiscount = this.displayDiscount.bind(this);
+  }
 
-  const currency = configs.useSymbol
-    ? invoice.currency.symbol
-    : invoice.currency.code;
-
-  const itemComponents = invoice.rows.map((row, index) =>
-    <Item key={index}>
-      <td>
-        { padStart(index+1, 2, 0) }. {row.description} ({formatNumber(row.quantity)})
-      </td>
-      <td>
-        {currency} {formatNumber(row.subtotal)}
-      </td>
-    </Item>
-  );
-
-
-  return (
-    <Table alignItems={setAlignItems(configs)}>
-      <thead>
-        <ItemsHeader>
-          <th>Item Description</th>
-          <th>Price</th>
-        </ItemsHeader>
-      </thead>
-
-      <ItemsList>
-        { itemComponents }
-      </ItemsList>
-
-      <InvoiceSummary>
-        <tr className="invoice__subtotal">
-          <td>Subtotal</td>
+  displayDiscount() {
+    const { invoice, configs } = this.props;
+    const currency = configs.useSymbol
+      ? invoice.currency.symbol
+      : invoice.currency.code;
+    return invoice.discount
+      ? (<Discount>
           <td>
-            {currency}
-            {' '}
-            {formatNumber(invoice.subtotal)}
+            Discount
+            { invoice.discount.type === 'percentage' &&
+              <span>
+                {' '}
+                { invoice.discount.amount }%
+              </span>}
           </td>
-        </tr>
-        { invoice.discount &&
-          <tr className="invoice__discount">
-            <td>Discount</td>
+          <td>
+            {currency} {formatNumber(getInvoiceValue(invoice).discount)}
+          </td>
+        </Discount>)
+      : null;
+  }
+
+  displayTax() {
+    const { invoice, configs } = this.props;
+    const { tax } = invoice;
+    const { taxAmount } = getInvoiceValue(invoice);
+    const currency = configs.useSymbol
+      ? invoice.currency.symbol
+      : invoice.currency.code;
+    return tax
+      ? (<Tax>
+          <td>
+            Tax
+            {' '}
+            {tax.amount}%
+          </td>
+          { tax.method === 'reverse'
+            ? (<td>
+                Reverse Charge
+              </td>)
+            : (<td>
+                {currency} {formatNumber(taxAmount)}
+              </td>)}
+        </Tax>)
+      : null;
+  }
+
+  render() {
+    const {invoice, configs} = this.props;
+    const currency = configs.useSymbol
+      ? invoice.currency.symbol
+      : invoice.currency.code;
+
+    const itemComponents = invoice.rows.map((row, index) =>
+      <Item key={index}>
+        <td>
+          { padStart(index+1, 2, 0) }. {row.description} ({formatNumber(row.quantity)})
+        </td>
+        <td>
+          {currency} {formatNumber(row.subtotal)}
+        </td>
+      </Item>
+    );
+
+    return (
+      <Table alignItems={setAlignItems(configs)}>
+        <thead>
+          <ItemsHeader>
+            <th>Item Description</th>
+            <th>Price</th>
+          </ItemsHeader>
+        </thead>
+
+        <ItemsList>
+          { itemComponents }
+        </ItemsList>
+
+        <InvoiceSummary>
+          <Subtotal>
+            <td>Subtotal</td>
             <td>
-              {formatNumber(invoice.discount.amount)}
+              {currency}
               {' '}
-              {invoice.discount.type === 'flat' ? currency : '%'}
+              {formatNumber(invoice.subtotal)}
             </td>
-          </tr>
-        }
-        { invoice.vat &&
-          <tr className="invoice__vat">
-            <td>Vat</td>
-            <td>{invoice.vat} %</td>
-          </tr>
-        }
-        <tr className="invoice__total">
-          <td>Total</td>
-          <td>
-            {currency}
-            {' '}
-            {formatNumber(invoice.grandTotal)}
-          </td>
-        </tr>
-      </InvoiceSummary>
-    </Table>
-  );
+          </Subtotal>
+
+          { this.displayDiscount() }
+          { this.displayTax() }
+
+          <Total>
+            <td>Total</td>
+            <td>
+              {currency}
+              {' '}
+              {formatNumber(invoice.grandTotal)}
+            </td>
+          </Total>
+        </InvoiceSummary>
+      </Table>
+    );
+  }
 }
 
 Main.propTypes = {
