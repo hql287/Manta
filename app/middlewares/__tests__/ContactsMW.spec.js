@@ -8,8 +8,8 @@ import {
   saveDoc,
   deleteDoc,
   getAllDocs,
-  mockData,
-} from '../../helpers/pouchDB.js';
+  mockData, // eslint-disable-line import/named
+} from '../../helpers/pouchDB';
 jest.mock('../../helpers/pouchDB');
 Date.now = jest.fn(() => 'now');
 
@@ -18,7 +18,7 @@ describe('Contacts Middleware', () => {
   beforeEach(() => {
     next = jest.fn();
     dispatch = jest.fn();
-    middleware = ContactsMW({dispatch})(next);
+    middleware = ContactsMW({ dispatch })(next);
   });
 
   describe('should handle CONTACT_GET_ALL action', () => {
@@ -46,7 +46,7 @@ describe('Contacts Middleware', () => {
           expect(next).toHaveBeenCalledWith(
             Object.assign({}, action, {
               payload: data,
-            }),
+            })
           );
         });
       });
@@ -63,27 +63,27 @@ describe('Contacts Middleware', () => {
           type: ACTION_TYPES.UI_NOTIFICATION_NEW,
           payload: {
             type: 'warning',
-            message: expectedError.message
+            message: expectedError.message,
           },
         });
-      })
+      });
     });
 
     it('handle unknown error correctly', () => {
       const unknownError = new Error('Something broke');
       getAllDocs.mockImplementationOnce(() => Promise.reject(unknownError));
-      middleware(Actions.getAllContacts()).then(() => {
-        return getAllDocs().catch(err => {
+      middleware(Actions.getAllContacts()).then(() =>
+        getAllDocs().catch(err => {
           expect(next).toHaveBeenCalled();
           expect(next).toHaveBeenCalledWith({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: unknownError.message
+              message: unknownError.message,
             },
           });
-        });
-      });
+        })
+      );
     });
   });
 
@@ -103,7 +103,7 @@ describe('Contacts Middleware', () => {
         Object.assign({}, newContact, {
           _id: 'id-string',
           created_at: 'now',
-        }),
+        })
       );
     });
 
@@ -114,12 +114,12 @@ describe('Contacts Middleware', () => {
         email: faker.internet.email(),
       };
       // Execute
-      middleware(Actions.saveContact(newContact)).then(() => {
-        return saveDoc('contacts', newContact).then(data => {
+      middleware(Actions.saveContact(newContact)).then(() =>
+        saveDoc('contacts', newContact).then(data => {
           // Expect
-          expect(data).toEqual([ ...mockData.contactsRecords, newContact ]);
+          expect(data).toEqual([...mockData.contactsRecords, newContact]);
         })
-      });
+      );
     });
 
     it('should call next and dispatch notification ', () => {
@@ -131,8 +131,8 @@ describe('Contacts Middleware', () => {
       const action = Actions.saveContact(newContact);
 
       // Execute
-      middleware(action).then(() => {
-        return saveDoc('contacts', newContact).then(data => {
+      middleware(action).then(() =>
+        saveDoc('contacts', newContact).then(data => {
           // Expect calling next
           expect(next.mock.calls.length).toBe(1);
           expect(next).toHaveBeenCalledWith(
@@ -144,7 +144,7 @@ describe('Contacts Middleware', () => {
                   created_at: 'now',
                 }),
               ],
-            }),
+            })
           );
           // Dispatch success notification
           expect(dispatch.mock.calls.length).toBe(1);
@@ -155,9 +155,8 @@ describe('Contacts Middleware', () => {
               message: 'Contact Created Successfully',
             },
           });
-        });
-      });
-
+        })
+      );
     });
 
     it('handle syntax error correctly', () => {
@@ -189,7 +188,7 @@ describe('Contacts Middleware', () => {
           type: ACTION_TYPES.UI_NOTIFICATION_NEW,
           payload: {
             type: 'warning',
-            message: expectedError.message
+            message: expectedError.message,
           },
         });
       });
@@ -202,11 +201,11 @@ describe('Contacts Middleware', () => {
       const contactID = 'jon-snow';
       const action = Actions.deleteContact(contactID);
       // Execute
-      middleware(action).then(() => {
-        return deleteDoc('contacts', contactID).then(data => {
+      middleware(action).then(() =>
+        deleteDoc('contacts', contactID).then(data => {
           expect(data).toEqual([]);
         })
-      })
+      );
     });
 
     it('should call next and dispatch notification ', () => {
@@ -214,14 +213,14 @@ describe('Contacts Middleware', () => {
       const contactID = 'jon-snow';
       const action = Actions.deleteContact(contactID);
       // Execute
-      middleware(action).then(() => {
-        return deleteDoc('contacts', contactID).then(data => {
+      middleware(action).then(() =>
+        deleteDoc('contacts', contactID).then(data => {
           // Call next after the promised is returned
           expect(next.mock.calls.length).toBe(1);
           expect(next).toHaveBeenCalledWith(
             Object.assign({}, action, {
               payload: [],
-            }),
+            })
           );
           // Dispatch success notification
           expect(dispatch.mock.calls.length).toBe(1);
@@ -232,14 +231,14 @@ describe('Contacts Middleware', () => {
               message: 'Deleted Successfully',
             },
           });
-        });
-      });
+        })
+      );
     });
 
     it('handle error correctly', () => {
       // Set up
       const contactID = 'ned-stark';
-      const expectedError = new Error('No contact found!')
+      const expectedError = new Error('No contact found!');
 
       // Execute
       middleware(Actions.deleteContact(contactID)).then(() => {
@@ -249,7 +248,7 @@ describe('Contacts Middleware', () => {
           type: ACTION_TYPES.UI_NOTIFICATION_NEW,
           payload: {
             type: 'warning',
-            message: expectedError.message
+            message: expectedError.message,
           },
         });
       });
@@ -257,7 +256,7 @@ describe('Contacts Middleware', () => {
   });
 
   it('let other actions pass through', () => {
-    const action = {type: 'TEST'};
+    const action = { type: 'TEST' };
     middleware(action);
     expect(next).toHaveBeenCalledWith(action);
   });

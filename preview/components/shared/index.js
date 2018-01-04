@@ -15,7 +15,7 @@ const Label = styled.label`
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
-  color: #4F555C;
+  color: #4f555c;
 `;
 
 const Range = styled.input`
@@ -23,8 +23,4 @@ const Range = styled.input`
   -webkit-app-region: no-drag;
 `;
 
-export {
-  Section,
-  Label,
-  Range,
-};
+export { Section, Label, Range };

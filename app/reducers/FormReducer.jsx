@@ -1,8 +1,8 @@
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 // Libs
-import {handleActions} from 'redux-actions';
-import {createSelector} from 'reselect';
+import { handleActions } from 'redux-actions';
+import { createSelector } from 'reselect';
 import currencies from '../../libs/currencies.json';
 // Retrive settings
 const appConfig = require('electron').remote.require('electron-settings');
@@ -31,14 +31,14 @@ const initialState = {
     tax: invoiceSettings.tax,
     currency: invoiceSettings.currency,
     required_fields: invoiceSettings.required_fields,
-  }
+  },
 };
 
 const FormReducer = handleActions(
   {
     [ACTION_TYPES.FORM_RECIPIENT_UPDATE]: (state, action) =>
       Object.assign({}, state, {
-        recipient: action.payload
+        recipient: action.payload,
       }),
 
     [ACTION_TYPES.FORM_ITEM_ADD]: (state, action) =>
@@ -53,17 +53,15 @@ const FormReducer = handleActions(
 
     [ACTION_TYPES.FORM_ITEM_UPDATE]: (state, action) =>
       Object.assign({}, state, {
-        rows: state.rows.map(item =>
-          (item.id !== action.payload.id)
-            ? item
-            : action.payload
+        rows: state.rows.map(
+          item => (item.id !== action.payload.id ? item : action.payload)
         ),
       }),
 
     [ACTION_TYPES.FORM_ITEM_MOVE]: (state, action) => {
       const { dragIndex, hoverIndex } = action.payload;
       const dragRow = state.rows[dragIndex];
-      let newRows = state.rows;
+      const newRows = state.rows;
       newRows.splice(dragIndex, 1);
       newRows.splice(hoverIndex, 0, dragRow);
       return Object.assign({}, state, {
@@ -72,12 +70,12 @@ const FormReducer = handleActions(
     },
 
     [ACTION_TYPES.FORM_FIELD_UPDATE_DATA]: (state, action) => {
-      const {field, data} = action.payload;
+      const { field, data } = action.payload;
       return Object.assign({}, state, {
         [field]: {
           ...state[field],
-          ...data
-        }
+          ...data,
+        },
       });
     },
 
@@ -85,23 +83,23 @@ const FormReducer = handleActions(
       Object.assign({}, state, {
         settings: Object.assign({}, state.settings, {
           required_fields: Object.assign({}, state.settings.required_fields, {
-            [action.payload]: !state.settings.required_fields[action.payload]
-          })
-        })
+            [action.payload]: !state.settings.required_fields[action.payload],
+          }),
+        }),
       }),
 
     [ACTION_TYPES.FORM_SETTING_TOGGLE]: state =>
       Object.assign({}, state, {
         settings: Object.assign({}, state.settings, {
-          open: !state.settings.open
-        })
+          open: !state.settings.open,
+        }),
       }),
 
     [ACTION_TYPES.FORM_SETTING_CLOSE]: state =>
       Object.assign({}, state, {
         settings: Object.assign({}, state.settings, {
-          open: false
-        })
+          open: false,
+        }),
       }),
 
     [ACTION_TYPES.SAVED_FORM_SETTING_UPDATE]: (state, action) => {
@@ -111,12 +109,12 @@ const FormReducer = handleActions(
           tax: invoiceSettings.tax,
           currency: invoiceSettings.currency,
           required_fields: invoiceSettings.required_fields,
-        })
+        }),
       });
     },
 
-    [ACTION_TYPES.FORM_CLEAR]: state => {
-      return Object.assign({}, initialState, {
+    [ACTION_TYPES.FORM_CLEAR]: state =>
+      Object.assign({}, initialState, {
         // Reset to lastest saved settings
         currency: currencies[state.savedSettings.currency],
         // Reset to lastest saved settings
@@ -128,9 +126,7 @@ const FormReducer = handleActions(
         }),
         // Updated saved settings to the current saved settings
         savedSettings: state.savedSettings,
-      });
-    }
-
+      }),
   },
   initialState
 );

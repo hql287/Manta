@@ -1,0 +1,67 @@
+root: true
+extends:
+  - airbnb
+  - plugin:import/errors
+  - prettier
+plugins:
+  - prettier
+  - jest
+env:
+  node: true
+  commonjs: true
+  es6: true
+  browser: true
+globals:
+  # JEST GLOBALS
+  jest: false
+  it: false
+  describe: false
+  test: false
+  expect: false
+  beforeEach: false
+  beforeAll: false
+  afterEach: false
+  afterAll: false
+rules:
+  # RULES THAT WE CONSCIOUSLY DISABLE
+  radix: off
+
+  # RULES THAT WE SHOULD INVESTIGATE AND PROBABLY ENABLE
+  prefer-template: off
+  no-underscore-dangle: off
+  prefer-destructuring: off
+  no-use-before-define: off
+  no-unused-vars: off
+  global-require: off
+  one-var: off
+  no-unused-expressions: off
+  no-shadow: off
+  no-plusplus: off
+  eqeqeq: off
+  no-multi-assign: off
+  camelcase: off
+  no-restricted-syntax: off
+  no-useless-escape: off
+  consistent-return: off
+  no-sequences: off
+  no-fallthrough: off
+  class-methods-use-this: off
+  no-return-assign: off
+  default-case: off
+  import/no-extraneous-dependencies: off
+  import/extensions: off
+  import/first: off
+  import/newline-after-import: off
+  import/prefer-default-export: off
+  import/no-dynamic-require: off
+  import/no-named-as-default: off
+  react/sort-comp: off
+  react/forbid-prop-types: off
+  react/no-array-index-key: off
+  react/prop-types: off
+  react/no-unused-state: off
+  react/no-unused-prop-types: off
+  react/require-default-props: off
+  react/jsx-filename-extension: off
+  jsx-a11y/label-has-for: off
+  jsx-a11y/anchor-is-valid: off

@@ -17,14 +17,14 @@ const Wrapper = styled.div`
 import Notification from '../../components/shared/Notification';
 import TransitionList from '../../components/shared/TransitionList';
 
-function AppNoti({notifications, removeNoti}) {
-  const notificationsComponent = notifications.map(notification =>
+function AppNoti({ notifications, removeNoti }) {
+  const notificationsComponent = notifications.map(notification => (
     <Notification
       key={notification.id}
       notification={notification}
       removeNoti={removeNoti}
     />
-  );
+  ));
   return (
     <Wrapper>
       <TransitionList componentHeight={90}>

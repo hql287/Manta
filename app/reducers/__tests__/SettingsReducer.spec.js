@@ -31,12 +31,12 @@ const sampleSettings = {
       amount: 0,
     },
     required_fields: {
-      dueDate:  false,
+      dueDate: false,
       currency: false,
       discount: false,
-      tax:      false,
-      note:     false,
-    }
+      tax: false,
+      note: false,
+    },
   },
   general: {
     language: 'en',
@@ -96,7 +96,7 @@ describe('Settings Reducer should handle update', () => {
       type: ACTION_TYPES.SETTINGS_UPDATE,
       payload: {
         setting: 'general',
-        data: data,
+        data,
       },
     });
     expect(newState.current.general.muted).toBeFalsy;
@@ -116,14 +116,16 @@ describe('Settings Reducer should handle update', () => {
       type: ACTION_TYPES.SETTINGS_UPDATE,
       payload: {
         setting: 'profile',
-        data: data,
+        data,
       },
     });
     expect(newState.current.profile.fullname).toEqual('Jon Snow');
     expect(newState.current.profile.company).toEqual('HBO');
     expect(newState.current.profile.address).toEqual('Winterfell');
     expect(newState.current.profile.email).toEqual('jon@snow.com');
-    expect(newState.current.profile.website).toEqual('https://iknownothing.com');
+    expect(newState.current.profile.website).toEqual(
+      'https://iknownothing.com'
+    );
   });
 
   it('invoice settings', () => {
@@ -136,7 +138,7 @@ describe('Settings Reducer should handle update', () => {
       type: ACTION_TYPES.SETTINGS_UPDATE,
       payload: {
         setting: 'invoice',
-        data: data,
+        data,
       },
     });
     expect(newState.current.invoice.template).toEqual('business');
@@ -145,17 +147,16 @@ describe('Settings Reducer should handle update', () => {
   });
 });
 
-
 // Test Selectors
 const state = {
   settings: {
     current: {},
     saved: {
       invoice: {
-        dateFormat: 'DDDD/MMMM/YYYY'
-      }
+        dateFormat: 'DDDD/MMMM/YYYY',
+      },
     },
-  }
+  },
 };
 
 describe('Form Selectors', () => {
@@ -166,8 +167,8 @@ describe('Form Selectors', () => {
     expect(getSavedSettings(state)).toEqual(state.settings.saved);
   });
   it('getDateFormat should return saved dateFormat setting', () => {
-    expect(getDateFormat(state)).toEqual(state.settings.saved.invoice.dateFormat);
+    expect(getDateFormat(state)).toEqual(
+      state.settings.saved.invoice.dateFormat
+    );
   });
 });
-
-

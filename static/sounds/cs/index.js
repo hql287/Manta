@@ -4,43 +4,41 @@ const VOLUME = 0.25;
 module.exports = {
   STARTUP: {
     url: path.resolve(__dirname, '../static/sounds/cs/startup.wav'),
-    volume: VOLUME * 2
+    volume: VOLUME * 2,
   },
 
   DIALOG: {
     url: path.resolve(__dirname, '../static/sounds/cs/dialog.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 
   SUCCESS: {
     url: path.resolve(__dirname, '../static/sounds/cs/success.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 
   WARNING: {
     url: path.resolve(__dirname, '../static/sounds/cs/warning.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 
   ADD: {
     url: path.resolve(__dirname, '../static/sounds/cs/add.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 
   REMOVE: {
     url: path.resolve(__dirname, '../static/sounds/cs/remove.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 
   RELOAD: {
     url: path.resolve(__dirname, '../static/sounds/cs/reload.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 
   TAP: {
     url: path.resolve(__dirname, '../static/sounds/cs/tap.wav'),
-    volume: VOLUME
+    volume: VOLUME,
   },
 };
-
-

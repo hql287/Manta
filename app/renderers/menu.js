@@ -1,5 +1,5 @@
 // Libs
-const {Menu, BrowserWindow} = require('electron').remote;
+const { Menu, BrowserWindow } = require('electron').remote;
 const appConfig = require('electron').remote.require('electron-settings');
 const ipc = require('electron').ipcRenderer;
 const isDev = require('electron-is-dev');
@@ -9,7 +9,7 @@ const mainWindowID = appConfig.get('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
 // Set App Menu
-let menuTemplate = [
+const menuTemplate = [
   // Invoice
   {
     label: 'Invoice',
@@ -35,7 +35,7 @@ let menuTemplate = [
           mainWindow.webContents.send('menu-form-clear');
         },
       },
-      {type: 'separator'},
+      { type: 'separator' },
       {
         label: 'Add Item',
         accelerator: 'CmdOrCtrl+I',
@@ -43,7 +43,7 @@ let menuTemplate = [
           mainWindow.webContents.send('menu-form-add-item');
         },
       },
-      {type: 'separator'},
+      { type: 'separator' },
       {
         label: 'Toggle',
         submenu: [
@@ -126,22 +126,22 @@ let menuTemplate = [
   {
     label: 'Edit',
     submenu: [
-      {role: 'undo'},
-      {role: 'redo'},
-      {type: 'separator'},
-      {role: 'cut'},
-      {role: 'copy'},
-      {role: 'paste'},
-      {role: 'pasteandmatchstyle'},
-      {role: 'delete'},
-      {role: 'selectall'},
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'pasteandmatchstyle' },
+      { role: 'delete' },
+      { role: 'selectall' },
     ],
   },
 
   // Windows
   {
     role: 'window',
-    submenu: [{role: 'minimize'}, {role: 'close'}],
+    submenu: [{ role: 'minimize' }, { role: 'close' }],
   },
 
   // Help
@@ -169,8 +169,8 @@ if (process.platform === 'darwin') {
   menuTemplate.unshift({
     label: 'My App',
     submenu: [
-      {role: 'about'},
-      {type: 'separator'},
+      { role: 'about' },
+      { type: 'separator' },
       {
         label: 'Check For Updates',
         accelerator: 'CmdOrCtrl+U',
@@ -178,13 +178,13 @@ if (process.platform === 'darwin') {
           ipc.send('check-for-updates');
         },
       },
-      {type: 'separator'},
-      {role: 'services', submenu: []},
-      {type: 'separator'},
-      {role: 'hide'},
-      {role: 'hideothers'},
-      {role: 'unhide'},
-      {type: 'separator'},
+      { type: 'separator' },
+      { role: 'services', submenu: [] },
+      { type: 'separator' },
+      { role: 'hide' },
+      { role: 'hideothers' },
+      { role: 'unhide' },
+      { type: 'separator' },
       {
         label: 'Quit App',
         accelerator: 'CmdOrCtrl+Q',
@@ -201,10 +201,10 @@ if (isDev) {
   menuTemplate.splice(3, 0, {
     label: 'View',
     submenu: [
-      {role: 'forcereload'},
-      {role: 'toggledevtools'},
-      {type: 'separator'},
-      {role: 'togglefullscreen'},
+      { role: 'forcereload' },
+      { role: 'toggledevtools' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' },
     ],
   });
 }

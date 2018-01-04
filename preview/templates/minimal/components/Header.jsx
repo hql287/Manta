@@ -22,13 +22,15 @@ const Heading = styled.h1`
   font-weight: 400;
   margin-bottom: 1em;
   color: #2c323a;
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     color: ${props.accentColor.color};
   `};
 `;
 
 // Component
-function Header({invoice, profile, configs}) {
+function Header({ invoice, profile, configs }) {
   return (
     <Wrapper>
       <div>

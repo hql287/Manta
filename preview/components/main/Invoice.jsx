@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Style
@@ -42,11 +42,7 @@ class Invoice extends Component {
   }
 
   render() {
-    return (
-      <Page>
-        { this.renderTemplate() }
-      </Page>
-    );
+    return <Page>{this.renderTemplate()}</Page>;
   }
 }
 

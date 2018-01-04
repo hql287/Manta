@@ -1,11 +1,11 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
-import {SingleDatePicker} from 'react-dates';
+import { mount } from 'enzyme';
+import { SingleDatePicker } from 'react-dates';
 
 // Component
-import {DueDate} from '../DueDate.jsx';
+import { DueDate } from '../DueDate.jsx';
 
 // Mocks
 const updateFieldData = jest.fn();

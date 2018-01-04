@@ -1,8 +1,8 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
-import {keys, sortBy} from 'lodash';
+import { keys, sortBy } from 'lodash';
 const moment = require('moment');
 
 // Custom Libs
@@ -54,7 +54,7 @@ class Invoice extends Component {
     });
 
     ipc.on('confirmed-export-directory', (event, path) => {
-      this.setState({exportDir: path}, () => {
+      this.setState({ exportDir: path }, () => {
         this.props.updateSettings('invoice', this.state);
       });
     });
@@ -69,7 +69,7 @@ class Invoice extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.setState({[name]: value}, () => {
+    this.setState({ [name]: value }, () => {
       this.props.updateSettings('invoice', this.state);
     });
   }
@@ -86,7 +86,7 @@ class Invoice extends Component {
       },
       () => {
         this.props.updateSettings('invoice', this.state);
-      },
+      }
     );
   }
 
@@ -102,7 +102,7 @@ class Invoice extends Component {
       },
       () => {
         this.props.updateSettings('invoice', this.state);
-      },
+      }
     );
   }
 
@@ -114,8 +114,8 @@ class Invoice extends Component {
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [
       key,
-      currencies[key]['name'],
-      currencies[key]['code'],
+      currencies[key].name,
+      currencies[key].code,
     ]);
     const currenciesSorted = sortBy(currenciesKeysAndValues, [
       array => array[1],
@@ -123,9 +123,9 @@ class Invoice extends Component {
     return currenciesSorted.map(obj => {
       const [key, name, code] = obj;
 
-      let optionKey = code;
-      let optionValue = code;
-      let optionLabel = name;
+      const optionKey = code;
+      const optionValue = code;
+      const optionLabel = name;
 
       return (
         <option value={optionValue} key={optionKey}>
@@ -136,202 +136,200 @@ class Invoice extends Component {
   }
 
   render() {
-    const {exportDir, template, currency, tax, required_fields, dateFormat} = this.state;
+    const {
+      exportDir,
+      template,
+      currency,
+      tax,
+      required_fields,
+      dateFormat,
+    } = this.state;
     return (
       <div>
-        <label className='itemLabel'>Tax Settings</label>
+        <label className="itemLabel">Tax Settings</label>
         <Section>
           <Row>
             <Field>
-              <label className='itemLabel'>Tax ID</label>
+              <label className="itemLabel">Tax ID</label>
               <input
-                name='tin'
-                type='text'
+                name="tin"
+                type="text"
                 value={tax.tin}
                 onChange={this.handleTaxChange}
-                placeholder='Registration Number'
+                placeholder="Registration Number"
               />
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className='itemLabel'>Tax Amount</label>
+              <label className="itemLabel">Tax Amount</label>
               <input
-                name='amount'
-                type='number'
-                step='0.01'
+                name="amount"
+                type="number"
+                step="0.01"
                 value={tax.amount}
                 onChange={this.handleTaxChange}
-                placeholder='Amount'
+                placeholder="Amount"
               />
             </Field>
             <Field>
-              <label className='itemLabel'>Tax Method</label>
+              <label className="itemLabel">Tax Method</label>
               <select
-                name='method'
+                name="method"
                 value={tax.method}
-                onChange={this.handleTaxChange}>
-                <option value='default'>Default</option>
-                <option value='reverse'>Reverse Charge</option>
+                onChange={this.handleTaxChange}
+              >
+                <option value="default">Default</option>
+                <option value="reverse">Reverse Charge</option>
               </select>
             </Field>
           </Row>
         </Section>
 
-        <label className='itemLabel'>Required Fields</label>
+        <label className="itemLabel">Required Fields</label>
         <Section>
           <Row>
             <Field>
-              <label className='itemLabel'>Due Date</label>
-              <label className='switch'>
+              <label className="itemLabel">Due Date</label>
+              <label className="switch">
                 <input
-                  name='dueDate'
-                  type='checkbox'
+                  name="dueDate"
+                  type="checkbox"
                   checked={required_fields.dueDate}
                   onChange={this.handleVisibilityChange}
                 />
-                <span className='slider round' />
+                <span className="slider round" />
               </label>
             </Field>
             <Field>
-              <label className='itemLabel'>Currency</label>
-              <label className='switch'>
+              <label className="itemLabel">Currency</label>
+              <label className="switch">
                 <input
-                  name='currency'
-                  type='checkbox'
+                  name="currency"
+                  type="checkbox"
                   checked={required_fields.currency}
                   onChange={this.handleVisibilityChange}
                 />
-                <span className='slider round' />
+                <span className="slider round" />
               </label>
             </Field>
 
             <Field>
-              <label className='itemLabel'>Discount</label>
-              <label className='switch'>
+              <label className="itemLabel">Discount</label>
+              <label className="switch">
                 <input
-                  name='discount'
-                  type='checkbox'
+                  name="discount"
+                  type="checkbox"
                   checked={required_fields.discount}
                   onChange={this.handleVisibilityChange}
                 />
-                <span className='slider round' />
+                <span className="slider round" />
               </label>
             </Field>
             <Field>
-              <label className='itemLabel'>Tax</label>
-              <label className='switch'>
+              <label className="itemLabel">Tax</label>
+              <label className="switch">
                 <input
-                  name='tax'
-                  type='checkbox'
+                  name="tax"
+                  type="checkbox"
                   checked={required_fields.tax}
                   onChange={this.handleVisibilityChange}
                 />
-                <span className='slider round' />
+                <span className="slider round" />
               </label>
             </Field>
             <Field>
-              <label className='itemLabel'>Note</label>
-              <label className='switch'>
+              <label className="itemLabel">Note</label>
+              <label className="switch">
                 <input
-                  name='note'
-                  type='checkbox'
+                  name="note"
+                  type="checkbox"
                   checked={required_fields.note}
                   onChange={this.handleVisibilityChange}
                 />
-                <span className='slider round' />
+                <span className="slider round" />
               </label>
             </Field>
           </Row>
         </Section>
 
-        <label className='itemLabel'>Other</label>
+        <label className="itemLabel">Other</label>
         <Section>
           <Row>
             <Field>
-              <label className='itemLabel'>Currency</label>
+              <label className="itemLabel">Currency</label>
               <select
-                name='currency'
+                name="currency"
                 value={currency}
-                onChange={this.handleInputChange}>
+                onChange={this.handleInputChange}
+              >
                 {this.sortCurrencies()}
               </select>
             </Field>
             <Field>
-              <label className='itemLabel'>Template</label>
+              <label className="itemLabel">Template</label>
               <select
-                name='template'
+                name="template"
                 value={template}
-                onChange={this.handleInputChange}>
-                <option value='minimal'>Minimal</option>
-                <option value='business'>Business</option>
+                onChange={this.handleInputChange}
+              >
+                <option value="minimal">Minimal</option>
+                <option value="business">Business</option>
               </select>
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className='itemLabel'>Date Format</label>
+              <label className="itemLabel">Date Format</label>
               <select
-                name='dateFormat'
+                name="dateFormat"
                 value={dateFormat}
-                onChange={this.handleInputChange}>
-                <option value='dddd, MMMM Do, YYYY'>
-                  {moment(Date.now()).format('dddd, MMMM Do, YYYY')}
-                  {' '}
-                  (dddd, MMMM Do, YYYY)
+                onChange={this.handleInputChange}
+              >
+                <option value="dddd, MMMM Do, YYYY">
+                  {moment(Date.now()).format('dddd, MMMM Do, YYYY')} (dddd, MMMM
+                  Do, YYYY)
                 </option>
-                <option value='MMMM Do, YYYY'>
-                  { moment(Date.now()).format('MMMM Do, YYYY') }
-                  {' '}
-                  (MMMM Do, YYYY)
+                <option value="MMMM Do, YYYY">
+                  {moment(Date.now()).format('MMMM Do, YYYY')} (MMMM Do, YYYY)
                 </option>
-                <option value='MM/DD/YYYY'>
-                  {moment(Date.now()).format('MM/DD/YYYY')}
-                  {' '}
-                  (MM/DD/YYYY)
+                <option value="MM/DD/YYYY">
+                  {moment(Date.now()).format('MM/DD/YYYY')} (MM/DD/YYYY)
                 </option>
-                <option value='MM/DD/YY'>
-                  {moment(Date.now()).format('MM/DD/YY')}
-                  {' '}
-                  (MM/DD/YY)
+                <option value="MM/DD/YY">
+                  {moment(Date.now()).format('MM/DD/YY')} (MM/DD/YY)
                 </option>
-                <option value='dddd, DD MMMM YYYY'>
-                  {moment(Date.now()).format('dddd, DD MMMM YYYY')}
-                  {' '}
-                  (dddd, DD MMMM YYYY)
+                <option value="dddd, DD MMMM YYYY">
+                  {moment(Date.now()).format('dddd, DD MMMM YYYY')} (dddd, DD
+                  MMMM YYYY)
                 </option>
-                <option value='DD/MMMM/YYYY'>
-                  {moment(Date.now()).format('DD/MMMM/YYYY')}
-                  {' '}
-                  (DD/MMMM/YYYY)
+                <option value="DD/MMMM/YYYY">
+                  {moment(Date.now()).format('DD/MMMM/YYYY')} (DD/MMMM/YYYY)
                 </option>
-                <option value='DD/MM/YYYY'>
-                  {moment(Date.now()).format('DD/MM/YYYY')}
-                  {' '}
-                  (DD/MM/YYYY)
+                <option value="DD/MM/YYYY">
+                  {moment(Date.now()).format('DD/MM/YYYY')} (DD/MM/YYYY)
                 </option>
-                <option value='DD/MM/YY'>
-                  {moment(Date.now()).format('DD/MM/YY')}
-                  {' '}
-                  (DD/MM/YY)
+                <option value="DD/MM/YY">
+                  {moment(Date.now()).format('DD/MM/YY')} (DD/MM/YY)
                 </option>
               </select>
             </Field>
             <Field>
-              <label className='itemLabel'>PDF Export Directory</label>
-              <div className='input-group'>
+              <label className="itemLabel">PDF Export Directory</label>
+              <div className="input-group">
                 <input
-                  className='form-control'
-                  name='exportDir'
-                  type='text'
+                  className="form-control"
+                  name="exportDir"
+                  type="text"
                   value={exportDir}
                   disabled
                 />
                 <a
-                  href='#'
-                  className='input-group-customized '
-                  onClick={this.selectExportDir}>
-                  <i className='ion-folder' />
+                  href="#"
+                  className="input-group-customized "
+                  onClick={this.selectExportDir}
+                >
+                  <i className="ion-folder" />
                 </a>
               </div>
             </Field>

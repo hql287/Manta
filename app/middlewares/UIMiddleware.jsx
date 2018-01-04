@@ -29,11 +29,13 @@ const UIMiddleware = ({ getState }) => next => action => {
         }
       }
       // Create a new ID for the notification
-      return next(Object.assign({}, action, {
-        payload: Object.assign({}, action.payload, {
-          id: uuidv4(),
+      return next(
+        Object.assign({}, action, {
+          payload: Object.assign({}, action.payload, {
+            id: uuidv4(),
+          }),
         })
-      }));
+      );
     }
 
     // Others Actions

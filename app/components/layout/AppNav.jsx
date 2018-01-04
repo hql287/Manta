@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { findIndex } from 'lodash';
 
 // Animation
-import {Motion, spring} from 'react-motion';
+import { Motion, spring } from 'react-motion';
 
 const springConfig = {
   stiffness: 350,
@@ -14,7 +14,7 @@ const springConfig = {
 
 const setMarginValue = activeTab => {
   const multiplier = 100 / allTabs.length;
-  const activeTabIndex = findIndex(allTabs, {name: activeTab});
+  const activeTabIndex = findIndex(allTabs, { name: activeTab });
   return activeTabIndex * multiplier;
 };
 
@@ -83,29 +83,29 @@ export const Icon = styled.i`
 `;
 
 export const ActiveIndicator = styled.div`
-  height: ${ allTabs.length * 60 }px;
+  height: ${allTabs.length * 60}px;
   width: 5px;
   position: absolute;
   top: 50px;
   > div {
     position: absolute;
-    background: #292B2C;
+    background: #292b2c;
     width: 80px;
     border-left: 5px solid #469fe5;
   }
 `;
 
-function AppNav({activeTab, changeTab}) {
+function AppNav({ activeTab, changeTab }) {
   const marginTopValue = setMarginValue(activeTab);
-  const allTabsComponent = allTabs.map(tab =>
+  const allTabsComponent = allTabs.map(tab => (
     <Tab key={tab.name} href="#" onClick={() => changeTab(tab.name)}>
       <Icon id={tab.name} className={tab.icon} />
     </Tab>
-  );
+  ));
   return (
     <SideBar>
-      <Motion style={{marginTop: spring(marginTopValue, springConfig)}}>
-        {({marginTop}) =>
+      <Motion style={{ marginTop: spring(marginTopValue, springConfig) }}>
+        {({ marginTop }) => (
           <ActiveIndicator>
             <div
               style={{
@@ -113,7 +113,8 @@ function AppNav({activeTab, changeTab}) {
                 top: `${marginTop}%`,
               }}
             />
-          </ActiveIndicator>}
+          </ActiveIndicator>
+        )}
       </Motion>
       {allTabsComponent}
     </SideBar>

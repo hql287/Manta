@@ -31,10 +31,13 @@ const mockData = {
 const getAllDocs = jest.fn(
   dbName =>
     new Promise((resolve, reject) => {
-      switch(dbName) {
-        case 'contacts': resolve(mockData.contactsRecords);
-        case 'invoices': resolve(mockData.invoicesRecords);
-        default: reject(new Error('Incorrect database!'));
+      switch (dbName) {
+        case 'contacts':
+          resolve(mockData.contactsRecords);
+        case 'invoices':
+          resolve(mockData.invoicesRecords);
+        default:
+          reject(new Error('Incorrect database!'));
       }
     })
 );
@@ -56,13 +59,13 @@ const deleteDoc = jest.fn(
       !docId && reject(new Error('No docID found!'));
       if (dbName === 'contacts') {
         docId == contactDoc.id
-        ? resolve([])
-        : reject(new Error('No contact found!'))
+          ? resolve([])
+          : reject(new Error('No contact found!'));
       }
       if (dbName === 'invoices') {
         docId == invoiceDoc.id
-        ? resolve([])
-        : reject(new Error('No invoice found!'))
+          ? resolve([])
+          : reject(new Error('No invoice found!'));
       }
     })
 );

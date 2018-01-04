@@ -1,3 +1,3 @@
 export const ItemTypes = {
-  ROW: 'Row'
+  ROW: 'Row',
 };

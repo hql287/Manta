@@ -1,9 +1,9 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {padStart} from 'lodash';
-import {formatNumber} from '../../../../app/helpers/number';
-import {getInvoiceValue} from '../../../../app/helpers/invoice';
+import { padStart } from 'lodash';
+import { formatNumber } from '../../../../app/helpers/number';
+import { getInvoiceValue } from '../../../../app/helpers/invoice';
 
 // Styles
 import styled from 'styled-components';
@@ -64,7 +64,7 @@ const InvoiceTotal = styled.tr`
     border-bottom: none;
     line-height: 2;
     border-top: 4px solid #efefd1;
-    color: #6BBB69;
+    color: #6bbb69;
     &:first-child {
       border: none;
     }
@@ -81,7 +81,7 @@ const InvoiceTotal = styled.tr`
 
 const InvoiceDiscount = styled.tr`
   td:last-child {
-    color: #469FE5;
+    color: #469fe5;
   }
 `;
 
@@ -119,7 +119,7 @@ class Main extends Component {
   }
 
   displayDiscount() {
-    const {invoice, configs} = this.props;
+    const { invoice, configs } = this.props;
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -140,9 +140,9 @@ class Main extends Component {
   }
 
   displayTax() {
-    const {invoice, configs} = this.props;
-    const {tax} = invoice;
-    const {taxAmount} = getInvoiceValue(invoice);
+    const { invoice, configs } = this.props;
+    const { tax } = invoice;
+    const { taxAmount } = getInvoiceValue(invoice);
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -166,7 +166,7 @@ class Main extends Component {
   }
 
   render() {
-    const {invoice, configs} = this.props;
+    const { invoice, configs } = this.props;
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;

@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
 import { Recipient } from '../Recipient.jsx';
@@ -39,7 +39,7 @@ describe('Recipient component', () => {
         contacts={contacts}
         recipient={recipient}
         dispatch={dispatch}
-      />,
+      />
     );
   });
 
@@ -66,7 +66,7 @@ describe('Recipient component', () => {
         contacts={contacts}
         recipient={recipient}
         dispatch={dispatch}
-      />,
+      />
     );
     const inputSelect = wrap.find('input').last();
     // Execute
@@ -84,7 +84,7 @@ describe('Recipient component', () => {
           contacts={contacts}
           recipient={recipient}
           dispatch={dispatch}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

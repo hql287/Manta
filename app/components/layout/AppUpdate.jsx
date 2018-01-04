@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 const ipc = require('electron').ipcRenderer;
 import openDialog from '../../renderers/dialog';
 
@@ -53,7 +53,7 @@ class AppUpdate extends Component {
 
   componentDidMount() {
     ipc.on('update-checking', event => {
-      this.setState({message: 'Checking for update'});
+      this.setState({ message: 'Checking for update' });
     });
 
     ipc.on('update-available', () => {
@@ -103,14 +103,14 @@ class AppUpdate extends Component {
 
     ipc.on('update-download-progress', (event, progressMessage) => {
       this.setState({
-        message: progressMessage
+        message: progressMessage,
       });
     });
 
     ipc.on('update-downloaded', () => {
       // Update Message
       this.setState({
-        message: 'Download Completed!'
+        message: 'Download Completed!',
       });
       // Ask user to upgrade now or later
       openDialog(
@@ -132,7 +132,7 @@ class AppUpdate extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return (this.state !== nextState);
+    return this.state !== nextState;
   }
 
   componentWillUnmount() {
@@ -156,7 +156,7 @@ class AppUpdate extends Component {
   }
 
   render() {
-    const {message, type} = this.state;
+    const { message, type } = this.state;
     return message ? (
       <Wrapper>
         <Content type={type}>

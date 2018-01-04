@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // Component
@@ -28,7 +28,7 @@ const options = [
   {
     label: 'Option C',
     action: optionAction3,
-  }
+  },
 ];
 
 describe('Renders correctly to the DOM', () => {
@@ -55,36 +55,29 @@ describe('Renders correctly to the DOM', () => {
     toggleBtn.simulate('click');
     expect(wrapper.state().showOptions).toEqual(true);
     expect(wrapper.find('SplitButton__Addon')).toHaveLength(1);
-    expect(
-      wrapper
-      .find('SplitButton__Addon')
-      .children()
-    ).toHaveLength(
+    expect(wrapper.find('SplitButton__Addon').children()).toHaveLength(
       options.length
     );
   });
 
   it('matches snapshot', () => {
     const tree = renderer
-      .create(
-        <SplitButton mainButton={mainButton} options={options} />
-      )
+      .create(<SplitButton mainButton={mainButton} options={options} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
 
 describe('Handles click correctly', () => {
-  let wrapper,
-      toggleBtn,
-      mainBtn,
-      spyHandleClick,
-      spyHandleOutsideClick;
+  let wrapper, toggleBtn, mainBtn, spyHandleClick, spyHandleOutsideClick;
   beforeEach(() => {
     spyHandleClick = jest.spyOn(SplitButton.prototype, 'handleClick');
-    spyHandleOutsideClick = jest.spyOn(SplitButton.prototype, 'handleOutsideClick');
+    spyHandleOutsideClick = jest.spyOn(
+      SplitButton.prototype,
+      'handleOutsideClick'
+    );
     wrapper = shallow(
-      <SplitButton mainButton={mainButton} options={options} />,
+      <SplitButton mainButton={mainButton} options={options} />
     );
     mainBtn = wrapper.find('a').first();
     toggleBtn = wrapper.find('a').last();
@@ -98,8 +91,14 @@ describe('Handles click correctly', () => {
   it('handle options click correcrtly', () => {
     // Show the dropdown
     toggleBtn.simulate('click');
-    const firstBtn = wrapper.find('SplitButton__Addon').find('a').first();
-    const lastBtn = wrapper.find('SplitButton__Addon').find('a').last();
+    const firstBtn = wrapper
+      .find('SplitButton__Addon')
+      .find('a')
+      .first();
+    const lastBtn = wrapper
+      .find('SplitButton__Addon')
+      .find('a')
+      .last();
     // Click the first btn
     firstBtn.simulate('click');
     expect(optionAction1).toHaveBeenCalled();
@@ -118,4 +117,3 @@ describe('Handles click correctly', () => {
     expect(wrapper.find('SplitButton__Addon')).toHaveLength(0);
   });
 });
-

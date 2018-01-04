@@ -11,7 +11,7 @@ describe('Contacts Reducer', () => {
   });
 
   let docs;
-  beforeEach(()=> {
+  beforeEach(() => {
     docs = [
       { id: uuidv4(), name: faker.name.findName() },
       { id: uuidv4(), name: faker.name.findName() },
@@ -49,7 +49,7 @@ describe('Contacts Reducer', () => {
 
 // Test Selectors
 const state = {
-  contacts: initialState
+  contacts: initialState,
 };
 
 describe('Contact Selector', () => {

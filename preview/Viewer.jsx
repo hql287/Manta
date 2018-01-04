@@ -16,8 +16,8 @@ import MainContent from './containers/MainContent';
 function Viewer() {
   return (
     <Wrapper>
-      <SideBar/>
-      <MainContent/>
+      <SideBar />
+      <MainContent />
     </Wrapper>
   );
 }

@@ -2,28 +2,31 @@
 import React from 'react';
 
 // Animation
-import {Motion, spring} from 'react-motion';
+import { Motion, spring } from 'react-motion';
 
 // HOC Component
 const _withAnimation = ComposedComponent => props => {
-  const {index} = props;
+  const { index } = props;
   return (
     <Motion
       defaultStyle={{
-        top: index*50,
+        top: index * 50,
       }}
       style={{
-        top: spring(index*50),
-      }}>
-      {({top, opacity}) =>
+        top: spring(index * 50),
+      }}
+    >
+      {({ top, opacity }) => (
         <div
           style={{
             position: 'absolute',
             width: '100%',
             top,
-          }}>
+          }}
+        >
           <ComposedComponent {...props} />
-        </div>}
+        </div>
+      )}
     </Motion>
   );
 };

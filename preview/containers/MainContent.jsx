@@ -1,14 +1,14 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
 // Actions
 import * as ActionsCreator from '../actions';
 
 // Selectors
-import {getConfigs, getInvoice, getProfile} from '../reducers';
+import { getConfigs, getInvoice, getProfile } from '../reducers';
 
 // Styles
 import styled from 'styled-components';
@@ -38,7 +38,7 @@ import Invoice from '../components/main/Invoice';
 class MainContent extends Component {
   componentDidMount() {
     ipc.on('update-preview', (event, invoiceData) => {
-      const {dispatch} = this.props;
+      const { dispatch } = this.props;
       dispatch(ActionsCreator.updateInvoice(invoiceData));
     });
   }
@@ -52,7 +52,7 @@ class MainContent extends Component {
   }
 
   render() {
-    const {invoice, configs, profile} = this.props;
+    const { invoice, configs, profile } = this.props;
     return (
       <Wrapper>
         {invoice._id ? (

@@ -5,7 +5,7 @@ import sounds from '../../libs/sounds';
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
-const SettingsMW = ({dispatch}) => next => action => {
+const SettingsMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
@@ -18,7 +18,7 @@ const SettingsMW = ({dispatch}) => next => action => {
           payload: {
             current: savedSettings,
             saved: savedSettings,
-          }
+          },
         })
       );
     }

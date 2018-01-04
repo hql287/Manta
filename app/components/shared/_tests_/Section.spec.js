@@ -3,11 +3,11 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 // Component
-import {Section} from '../Section';
+import { Section } from '../Section';
 
 describe('Renders correctly to the DOM', () => {
   it('renders a DIV element', () => {
-    const section = mount(<Section/>);
+    const section = mount(<Section />);
     expect(section.find('div')).toHaveLength(1);
   });
 
@@ -25,4 +25,3 @@ describe('Renders correctly to the DOM', () => {
     expect(section.find('p')).toHaveLength(1);
   });
 });
-

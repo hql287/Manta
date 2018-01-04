@@ -195,7 +195,7 @@ describe('getInvoiceData', () => {
       tax: {
         amount: faker.random.number(20),
         method: 'reverse',
-        tin: '123-456-789'
+        tin: '123-456-789',
       },
       settings: Object.assign({}, formData.settings, {
         required_fields: Object.assign({}, formData.settings.required_fields, {
@@ -263,7 +263,7 @@ describe('validateFormData', () => {
       tax: {
         amount: 10,
         method: 'reverse',
-        tin: '123-456-789'
+        tin: '123-456-789',
       },
       note: {
         content: faker.lorem.paragraph(),
@@ -276,13 +276,13 @@ describe('validateFormData', () => {
           discount: true,
           tax: true,
           note: true,
-        }
+        },
       },
       savedSettings: {
         tax: {
           amount: 10,
           method: 'reverse',
-          tin: '123-456-789'
+          tin: '123-456-789',
         },
         currency: 'USD',
         required_fields: {
@@ -291,8 +291,8 @@ describe('validateFormData', () => {
           discount: true,
           tax: true,
           note: true,
-        }
-      }
+        },
+      },
     };
   });
 
@@ -304,8 +304,8 @@ describe('validateFormData', () => {
   it('should NOT pass with INCORRECT recipient data', () => {
     const newFormData = Object.assign({}, formData, {
       recipient: Object.assign({}, formData.recipient, {
-        new: {}
-      })
+        new: {},
+      }),
     });
     const validation = validateFormData(newFormData);
     expect(validation).toEqual(false);
@@ -422,7 +422,7 @@ describe('validateRecipient', () => {
 
 describe('validateRows', () => {
   it('should validate item description', () => {
-    const rows = [{description: ''}];
+    const rows = [{ description: '' }];
     const validation = validateRows(rows);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
@@ -522,7 +522,7 @@ describe('validateCurrency', () => {
   });
 
   it('should pass when not required', () => {
-    const currency = {}
+    const currency = {};
     const validation = validateCurrency(false, currency);
     expect(validation).toEqual(true);
   });

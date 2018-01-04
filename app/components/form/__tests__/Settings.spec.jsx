@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 import Switch from '../../shared/Switch';
 
 // Component
@@ -56,7 +56,7 @@ describe('Settings component', () => {
         toggleField={toggleField}
         toggleFormSettings={toggleFormSettings}
         updateSavedSettings={updateSavedSettings}
-      />,
+      />
     );
   });
 
@@ -125,7 +125,7 @@ describe('Settings component', () => {
           toggleField={toggleField}
           toggleFormSettings={toggleFormSettings}
           updateSavedSettings={updateSavedSettings}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

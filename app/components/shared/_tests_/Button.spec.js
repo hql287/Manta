@@ -7,7 +7,7 @@ import Button from '../Button';
 
 describe('Renders correctly to the DOM', () => {
   it('renders a Link(a) element', () => {
-    const button = mount(<Button/>);
+    const button = mount(<Button />);
     expect(button.find('a')).toHaveLength(0);
     expect(button.find('button')).toHaveLength(1);
   });
@@ -19,15 +19,15 @@ describe('Renders correctly to the DOM', () => {
 
 describe('Allows us to set button type via props', () => {
   it('set button type as info', () => {
-    const button = mount(<Button primary/>);
+    const button = mount(<Button primary />);
     expect(button.props().primary).toEqual(true);
   });
   it('set button type as success', () => {
-    const button = mount(<Button success/>);
+    const button = mount(<Button success />);
     expect(button.props().success).toEqual(true);
   });
   it('set button type as danger', () => {
-    const button = mount(<Button danger/>);
+    const button = mount(<Button danger />);
     expect(button.props().danger).toEqual(true);
   });
 });

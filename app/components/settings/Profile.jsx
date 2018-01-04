@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -26,13 +26,13 @@ class Profile extends Component {
   handleInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({[name]: value}, () => {
+    this.setState({ [name]: value }, () => {
       this.props.updateSettings('profile', this.state);
     });
   }
 
   handleLogoChange(base64String) {
-    this.setState({logo: base64String}, () => {
+    this.setState({ logo: base64String }, () => {
       this.updateProfileState();
     });
   }
@@ -49,7 +49,8 @@ class Profile extends Component {
           <Hint>Accepts PNG, JPEG & SVG</Hint>
           <Logo
             logo={this.state.logo}
-            handleLogoChange={this.handleLogoChange}/>
+            handleLogoChange={this.handleLogoChange}
+          />
         </div>
         <div className="row">
           <div className="pageItem col-md-6">

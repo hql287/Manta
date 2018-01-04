@@ -14,7 +14,7 @@ const AppMainContentStyle = styled.div`
   overflow: scroll;
   width: 100%;
   height: 100%;
-  background: #F9FAFA;
+  background: #f9fafa;
 `;
 
 const PageWrapperStyle = styled.div`
@@ -32,8 +32,8 @@ const PageHeaderStyle = styled.div`
   justify-content: space-between;
   height: 50px;
   padding: 10px 120px 10px 40px;
-  background: #FFF;
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   z-index: 1;
 `;
 
@@ -41,72 +41,62 @@ const PageHeaderTitleStyle = styled.p`
   font-size: 18px;
   font-weight: 600;
   margin: 0;
-  letter-spacing: -.5px;
+  letter-spacing: -0.5px;
 `;
 
 const PageHeaderActionsStyle = styled.div`
-  button { margin-left: 10px; }
+  button {
+    margin-left: 10px;
+  }
 `;
 
 const PageContentStyle = styled.div`
   // flex: 1;
   // overflow: hidden;
   margin: 90px 40px 40px 40px;
-  ${ props => !props.bare && `
+  ${props =>
+    !props.bare &&
+    `
     border: 1px solid rgba(0,0,0,.1);
     border-radius: 4px;
     background: #FFF;
-  `}
+  `};
 `;
 
 const PageFooterStyle = styled.div`
   position: fixed;
   width: 100%;
   bottom: 0;
-  background: #F9FAFA;
-  border-top: 1px solid rgba(0,0,0,.1);
+  background: #f9fafa;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 // Components
-const AppWrapper = props =>
-  <AppWrapperStyle>
-    {props.children}
-  </AppWrapperStyle>;
+const AppWrapper = props => <AppWrapperStyle>{props.children}</AppWrapperStyle>;
 
-const AppMainContent = props =>
-  <AppMainContentStyle>
-    {props.children}
-  </AppMainContentStyle>;
+const AppMainContent = props => (
+  <AppMainContentStyle>{props.children}</AppMainContentStyle>
+);
 
-const PageWrapper = props =>
-  <PageWrapperStyle>
-    {props.children}
-  </PageWrapperStyle>;
+const PageWrapper = props => (
+  <PageWrapperStyle>{props.children}</PageWrapperStyle>
+);
 
-const PageHeader = props =>
-  <PageHeaderStyle>
-    {props.children}
-  </PageHeaderStyle>;
+const PageHeader = props => <PageHeaderStyle>{props.children}</PageHeaderStyle>;
 
-const PageHeaderTitle = props =>
-  <PageHeaderTitleStyle>
-    { props.children }
-  </PageHeaderTitleStyle>;
+const PageHeaderTitle = props => (
+  <PageHeaderTitleStyle>{props.children}</PageHeaderTitleStyle>
+);
 
-const PageHeaderActions = props =>
-  <PageHeaderActionsStyle>
-    { props.children }
-  </PageHeaderActionsStyle>;
+const PageHeaderActions = props => (
+  <PageHeaderActionsStyle>{props.children}</PageHeaderActionsStyle>
+);
 
-const PageContent = props =>
-  <PageContentStyle bare={props.bare}>
-    {props.children}
-  </PageContentStyle>;
+const PageContent = props => (
+  <PageContentStyle bare={props.bare}>{props.children}</PageContentStyle>
+);
 
-const PageFooter = props =>
-  <PageFooterStyle>
-    {props.children}
-  </PageFooterStyle>;
+const PageFooter = props => <PageFooterStyle>{props.children}</PageFooterStyle>;
 
 export {
   AppWrapper,

@@ -16,23 +16,25 @@ const ButtonStyle = styled.button`
   font-size: 12px;
   text-decoration: none;
   background: #ffffff;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   text-transform: uppercase;
   letter-spacing: 1px;
-  ${props => props.block && `width: 100%;`}
-  ${props => props.primary && `
+  ${props => props.block && `width: 100%;`} ${props =>
+      props.primary &&
+      `
     background: #469fe5;
     color: white;
-  `}
-  ${props => props.success && `
+  `} ${props =>
+      props.success &&
+      `
     background: #6bbb69;
     color: white;
-  `}
-  ${props => props.danger && `
+  `} ${props =>
+      props.danger &&
+      `
     background: #EC476E;
     color: white;
-  `}
-  &:hover {
+  `} &:hover {
     cursor: pointer;
     // color: white;
     text-decoration: none;
@@ -47,20 +49,19 @@ const ButtonLinkStyle = styled.button`
   border: none;
   padding: 0;
   margin: 0;
-  ${props => props.primary && `color: #469fe5;`}
-  ${props => props.success && `color: #6bbb69;`}
-  ${props => props.danger && `color: #EC476E;`}
-  &:hover { cursor: pointer; }
+  ${props => props.primary && `color: #469fe5;`} ${props =>
+      props.success && `color: #6bbb69;`} ${props =>
+      props.danger && `color: #EC476E;`} &:hover {
+    cursor: pointer;
+  }
 `;
 
 function Button(props) {
-  return props.link
-    ? <ButtonLinkStyle {...props}>
-        {props.children}
-      </ButtonLinkStyle>
-    : <ButtonStyle {...props}>
-        {props.children}
-      </ButtonStyle>;
+  return props.link ? (
+    <ButtonLinkStyle {...props}>{props.children}</ButtonLinkStyle>
+  ) : (
+    <ButtonStyle {...props}>{props.children}</ButtonStyle>
+  );
 }
 
 Button.propTypes = {

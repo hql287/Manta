@@ -10,24 +10,25 @@ const Invoice = styled.div`
   justify-content: space-between;
   width: 100%;
   padding: 80px 120px;
-  ${ props => props.baseFontSize && `
+  ${props =>
+    props.baseFontSize &&
+    `
     font-size: ${props.baseFontSize};
-  `}
-  .label {
+  `} .label {
     font-family: Montserrat, sans-serif;
     font-weight: 500;
     font-size: 0.8em;
     line-height: 1.75;
-    color: #2C323A;
+    color: #2c323a;
     letter-spacing: 1px;
-    margin-bottom: .7em;
+    margin-bottom: 0.7em;
     text-transform: uppercase;
   }
   p {
     font-family: Montserrat, sans-serif;
     font-weight: 300;
     font-size: 0.8em;
-    color: #71717A;
+    color: #71717a;
     margin: 0;
     line-height: 1.75;
   }

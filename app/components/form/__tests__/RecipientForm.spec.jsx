@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {RecipientForm} from '../RecipientForm.jsx';
+import { RecipientForm } from '../RecipientForm.jsx';
 
 // Mocks
 const formData = {
@@ -39,7 +39,7 @@ describe('Recipient Form component', () => {
   it('handleInputCHange correctly', () => {
     const fullname = wrapper.find('input').at(0);
     fullname.simulate('change', {
-      target: {name: 'fullname', value: 'new-name'},
+      target: { name: 'fullname', value: 'new-name' },
     });
     // Assert
     expect(updateRecipientForm).toHaveBeenCalled();

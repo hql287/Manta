@@ -9,13 +9,15 @@ const InvoiceFooter = styled.div`
     padding-bottom: 0.83333em;
     border-bottom: 4px solid #efefd1;
   }
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     h4 { border-bottom: 4px solid ${props.accentColor.color}; }
   `};
 `;
 
 // Component
-function Footer({invoice, configs}) {
+function Footer({ invoice, configs }) {
   return invoice.note ? (
     <InvoiceFooter accentColor={configs.accentColor}>
       <h4>Notice</h4>

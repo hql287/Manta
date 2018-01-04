@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 // Get All Invoices
 export const getInvoices = createAction(ACTION_TYPES.INVOICE_GET_ALL);

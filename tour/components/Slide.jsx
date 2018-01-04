@@ -12,16 +12,21 @@ const Wrapper = styled.div`
   padding: 0 40px;
   background: #f9fafa;
   ${props => `
-    background: -webkit-linear-gradient(to bottom, ${props.fromColor}, ${props.toColor});
-    background: linear-gradient(to bottom, ${props.fromColor}, ${props.toColor});
-  `}
-  > * {
+    background: -webkit-linear-gradient(to bottom, ${props.fromColor}, ${
+    props.toColor
+  });
+    background: linear-gradient(to bottom, ${props.fromColor}, ${
+    props.toColor
+  });
+  `} > * {
     flex: 1;
   }
 `;
 
 const Image = styled.img`
-  ${props => props.size && `
+  ${props =>
+    props.size &&
+    `
     max-width: ${props.size};
   `};
 `;
@@ -34,9 +39,11 @@ const Header = styled.h1`
 const Text = styled.div`
   padding-top: 20px;
   text-align: center;
-  ${ props => props.inverted && `
+  ${props =>
+    props.inverted &&
+    `
     color: white;
-  `}
+  `};
 `;
 
 const Description = styled.p`
@@ -55,9 +62,7 @@ function Slide(props) {
     toColor,
   } = props;
   return (
-    <Wrapper
-      fromColor={fromColor}
-      toColor={toColor}>
+    <Wrapper fromColor={fromColor} toColor={toColor}>
       <Text inverted={inverted}>
         <Header>{heading}</Header>
         <Description>{description}</Description>
@@ -69,18 +74,17 @@ function Slide(props) {
 
 Slide.propTypes = {
   description: PropTypes.string.isRequired,
-  fromColor:   PropTypes.string.isRequired,
-  heading:     PropTypes.string.isRequired,
-  imgSize:     PropTypes.string,
-  imgSrc:      PropTypes.string.isRequired,
-  inverted:    PropTypes.bool,
-  toColor:     PropTypes.string.isRequired,
+  fromColor: PropTypes.string.isRequired,
+  heading: PropTypes.string.isRequired,
+  imgSize: PropTypes.string,
+  imgSrc: PropTypes.string.isRequired,
+  inverted: PropTypes.bool,
+  toColor: PropTypes.string.isRequired,
 };
 
 Slide.defaultProps = {
   imgSize: '400px',
   inverted: false,
 };
-
 
 export default Slide;

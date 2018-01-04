@@ -1,16 +1,16 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // DragNDrop
-import HTML5Backend, {NativeTypes} from 'react-dnd-html5-backend';
-import {DragDropContext} from 'react-dnd';
+import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
 // Helpers
-import {processImg} from '../../../helpers/image';
+import { processImg } from '../../../helpers/image';
 
 // Node Libs
-import {ipcRenderer as ipc} from 'electron';
+import { ipcRenderer as ipc } from 'electron';
 
 // Component
 import TargetBox from './TargetBox';
@@ -51,7 +51,6 @@ const RemoveLogoBtn = styled.a`
     cursor: pointer;
   }
 `;
-
 
 const LogoDropzone = styled.div`
   display: flex;
@@ -122,7 +121,7 @@ class Logo extends Component {
   }
 
   render() {
-    const {FILE} = NativeTypes;
+    const { FILE } = NativeTypes;
     return (
       <LogoContainer>
         {this.props.logo ? (

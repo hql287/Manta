@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 export const updateInvoice = createAction(
   ACTION_TYPES.INVOICE_UPDATE,

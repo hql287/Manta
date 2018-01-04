@@ -5,22 +5,23 @@ import PropTypes from 'prop-types';
 // Styles
 import styled from 'styled-components';
 const Noti = styled.div`
-  background: #FFF;
+  background: #fff;
   height: 70px;
   padding: 20px 40px;
   border-radius: 4px;
-  border: 1px solid rgba(0,0,0,.1);
-  border-top: 4px solid #469FE5;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #469fe5;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${ props => props.type ==='warning' && `border-top: 4px solid #F9D548;`}
-  ${ props => props.type ==='success' && `border-top: 4px solid #6BBB69;`}
-  ${ props => props.type ==='danger' && `border-top: 4px solid #EC476E;`}
+  ${props =>
+    props.type === 'warning' && `border-top: 4px solid #F9D548;`} ${props =>
+      props.type === 'success' && `border-top: 4px solid #6BBB69;`} ${props =>
+      props.type === 'danger' && `border-top: 4px solid #EC476E;`};
 `;
 
 const Message = styled.p`
-  color: #2C323A;
+  color: #2c323a;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -47,19 +48,17 @@ class Notification extends Component {
   }
 
   removeNoti() {
-    const {removeNoti, notification} = this.props;
+    const { removeNoti, notification } = this.props;
     removeNoti(notification.id);
   }
 
   render() {
-    const {notification} = this.props;
+    const { notification } = this.props;
     return (
       <Noti type={notification.type} onClick={this.removeNoti}>
-        <Message>
-          {notification.message}
-        </Message>
+        <Message>{notification.message}</Message>
         <a href="#" onClick={this.removeNoti}>
-          <i className="ion-android-close"/>
+          <i className="ion-android-close" />
         </a>
       </Noti>
     );

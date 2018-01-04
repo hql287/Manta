@@ -1,5 +1,5 @@
 // Libs
-const {BrowserWindow, ipcMain, shell} = require('electron');
+const { BrowserWindow, ipcMain, shell } = require('electron');
 const appConfig = require('electron-settings');
 const path = require('path');
 const fs = require('fs');

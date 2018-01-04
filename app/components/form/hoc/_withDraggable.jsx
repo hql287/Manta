@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import {Draggable} from 'react-beautiful-dnd';
+import { Draggable } from 'react-beautiful-dnd';
 
 const _withDraggable = ComposedComponent => props => (
   <Draggable draggableId={props.item.id}>
@@ -38,7 +38,8 @@ const _withDraggable = ComposedComponent => props => (
             ref={provided.innerRef}
             style={draggableStyle}
             {...provided.dragHandleProps}
-            {...patched}>
+            {...patched}
+          >
             <ComposedComponent {...props} />
           </div>
           {provided.placeholder}

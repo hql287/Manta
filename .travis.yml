@@ -34,6 +34,7 @@ before_script:
   - git lfs pull
 
 script:
+  - yarn lint
   - yarn test
   - |
     if [[ $TRAVIS_BRANCH =~ (master|^v[0-9]+.[0-9]+) ]]; then

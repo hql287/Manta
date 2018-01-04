@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {Discount} from '../Discount';
+import { Discount } from '../Discount';
 
 // Mocks
 const updateFieldData = jest.fn();
@@ -51,9 +51,7 @@ describe('Renders correctly to the DOM', () => {
       // Expect
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(changeData);
-      expect(updateFieldData).toHaveBeenCalledWith(
-      'discount',
-      {
+      expect(updateFieldData).toHaveBeenCalledWith('discount', {
         type: 'flat',
         amount: 100,
       });
@@ -74,9 +72,7 @@ describe('Renders correctly to the DOM', () => {
       // Expect
       expect(spy).toHaveBeenCalled();
       expect(spy).toHaveBeenCalledWith(changeData);
-      expect(updateFieldData).toHaveBeenCalledWith(
-      'discount',
-      {
+      expect(updateFieldData).toHaveBeenCalledWith('discount', {
         type: 'percentage',
         amount: 100,
       });

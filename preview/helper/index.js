@@ -1,6 +1,6 @@
 function setBaseFontSize(level) {
   let size;
-  switch(level) {
+  switch (level) {
     case '500': {
       size = '1.175em';
       break;
@@ -25,6 +25,4 @@ function setBaseFontSize(level) {
   return size;
 }
 
-export {
-  setBaseFontSize
-};
+export { setBaseFontSize };
