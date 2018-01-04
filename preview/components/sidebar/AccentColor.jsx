@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { BlockPicker } from 'react-color';
 import { Section, Label } from '../shared';
@@ -48,7 +48,7 @@ const Cover = styled.div`
   left: 0px;
 `;
 
-class AccentColor extends Component {
+class AccentColor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,10 +61,6 @@ class AccentColor extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.dispatchChange = this.dispatchChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState || this.props !== nextProps;
   }
 
   handleClick() {

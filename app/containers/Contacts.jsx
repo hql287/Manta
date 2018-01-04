@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -26,7 +26,7 @@ import {
 import { getContacts } from '../reducers/ContactsReducer';
 
 // Component
-class Contacts extends Component {
+class Contacts extends PureComponent {
   constructor(props) {
     super(props);
     this.newInvoice = this.newInvoice.bind(this);
@@ -39,10 +39,6 @@ class Contacts extends Component {
         this.confirmedDeleteContact(contactId);
       }
     });
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   componentWillUnmount() {

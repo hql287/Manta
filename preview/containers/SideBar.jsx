@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
@@ -35,17 +35,13 @@ import Toggler from '../components/sidebar/Toggler';
 import AccentColor from '../components/sidebar/AccentColor';
 import Actions from '../components/sidebar/Actions';
 
-class SideBar extends Component {
+class SideBar extends PureComponent {
   constructor(props) {
     super(props);
     this.savePDF = this.savePDF.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAccentColorChange = this.handleAccentColorChange.bind(this);
     this.updateConfigs = this.updateConfigs.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   handleInputChange(event) {

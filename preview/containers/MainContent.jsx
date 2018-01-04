@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
@@ -35,16 +35,12 @@ const Message = styled.p`
 // Components
 import Invoice from '../components/main/Invoice';
 
-class MainContent extends Component {
+class MainContent extends PureComponent {
   componentDidMount() {
     ipc.on('update-preview', (event, invoiceData) => {
       const { dispatch } = this.props;
       dispatch(ActionsCreator.updateInvoice(invoiceData));
     });
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   componentWillUnmount() {
