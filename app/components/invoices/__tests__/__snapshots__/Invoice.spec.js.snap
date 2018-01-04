@@ -5,13 +5,13 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
   className="col-lg-6"
 >
   <div
-    className="Invoice__Wrapper-iBPCPb iuhTYc"
+    className="Invoice__Wrapper-iBPCPb hxnMLw"
   >
     <div
-      className="Invoice__StatusBar-gmZFuj kFdsGo"
+      className="Invoice__StatusBar-gmZFuj aoiDg"
     />
     <div
-      className="Invoice__Header-cAhbPy ePNeRZ"
+      className="Invoice__Header-cAhbPy loejIf"
     >
       <div
         className="Invoice__Status-eKPgUx eiULaG"
@@ -39,7 +39,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         className="Invoice__Row-gNlmug hPTbEG"
       >
         <div
-          className="Invoice__Field-iXxbne toUew"
+          className="Invoice__Field-iXxbne dvBopU"
         >
           <label>
             Client
@@ -53,7 +53,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         className="Invoice__Row-gNlmug hPTbEG"
       >
         <div
-          className="Invoice__Field-iXxbne toUew"
+          className="Invoice__Field-iXxbne dvBopU"
         >
           <label>
             Invoice Id
@@ -63,7 +63,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           </p>
         </div>
         <div
-          className="Invoice__Field-iXxbne toUew"
+          className="Invoice__Field-iXxbne dvBopU"
         >
           <label>
             Total Value
@@ -79,7 +79,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         className="Invoice__Row-gNlmug hPTbEG"
       >
         <div
-          className="Invoice__Field-iXxbne toUew"
+          className="Invoice__Field-iXxbne dvBopU"
         >
           <label>
             Created On
@@ -89,7 +89,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           </p>
         </div>
         <div
-          className="Invoice__Field-iXxbne toUew"
+          className="Invoice__Field-iXxbne dvBopU"
         >
           <label>
             Due Date
@@ -101,7 +101,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="Invoice__Footer-imOzTt jHuxPK"
+      className="Invoice__Footer-imOzTt bLNPOf"
     >
       <div>
         <div
@@ -128,13 +128,13 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         </div>
       </div>
       <button
-        className="Button__ButtonStyle-cORGTZ fhgyv"
+        className="Button__ButtonStyle-cORGTZ bzyUmu"
         onClick={[Function]}
       >
         Edit
       </button>
       <button
-        className="Button__ButtonStyle-cORGTZ fhgyv"
+        className="Button__ButtonStyle-cORGTZ bzyUmu"
         onClick={[Function]}
       >
         View

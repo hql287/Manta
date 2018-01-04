@@ -12,9 +12,7 @@ exports[`Recipient List component matches snapshot 1`] = `
       value="first-contact"
     >
       Jon Snow
-      (
-       
-       
+      ( 
       john@hbo.com
       )
     </option>
@@ -22,9 +20,7 @@ exports[`Recipient List component matches snapshot 1`] = `
       value="second-contact"
     >
       Ned Stark
-      (
-       
-       
+      ( 
       ned@hbo.com
       )
     </option>

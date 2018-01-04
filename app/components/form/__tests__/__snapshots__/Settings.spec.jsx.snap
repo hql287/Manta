@@ -32,7 +32,7 @@ exports[`Settings component matches snapshot 1`] = `
     </div>
   </a>
   <div
-    className="Settings__Helper-HfVur jcZSkK"
+    className="Settings__Helper-HfVur cfOvaA"
   >
     <p>
       Toogle any field to make it required in the form.
@@ -54,13 +54,13 @@ exports[`Settings component matches snapshot 1`] = `
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA kNMfpw"
+          className="Switch__Input-kcgNA eiSnEC"
           name="dueDate"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK eJVctn"
+          className="Switch__Slider-gGmQGK hcqAjS"
         />
       </label>
     </div>
@@ -77,13 +77,13 @@ exports[`Settings component matches snapshot 1`] = `
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA kNMfpw"
+          className="Switch__Input-kcgNA eiSnEC"
           name="currency"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK eJVctn"
+          className="Switch__Slider-gGmQGK hcqAjS"
         />
       </label>
     </div>
@@ -100,13 +100,13 @@ exports[`Settings component matches snapshot 1`] = `
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA kNMfpw"
+          className="Switch__Input-kcgNA eiSnEC"
           name="discount"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK eJVctn"
+          className="Switch__Slider-gGmQGK hcqAjS"
         />
       </label>
     </div>
@@ -123,13 +123,13 @@ exports[`Settings component matches snapshot 1`] = `
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA kNMfpw"
+          className="Switch__Input-kcgNA eiSnEC"
           name="tax"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK eJVctn"
+          className="Switch__Slider-gGmQGK hcqAjS"
         />
       </label>
     </div>
@@ -146,13 +146,13 @@ exports[`Settings component matches snapshot 1`] = `
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA kNMfpw"
+          className="Switch__Input-kcgNA eiSnEC"
           name="note"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK eJVctn"
+          className="Switch__Slider-gGmQGK hcqAjS"
         />
       </label>
     </div>
