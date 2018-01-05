@@ -1,16 +1,14 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-class DragNDrop extends Component {
+class DragNDrop extends PureComponent {
   constructor(props) {
     super(props);
     this.onDragEnd = this.onDragEnd.bind(this);
   }
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
-  }
+
   onDragEnd(result) {
     if (!result.destination) {
       return;

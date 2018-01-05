@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ import {
   PageContent,
 } from '../components/shared/Layout';
 
-class Invoices extends Component {
+class Invoices extends PureComponent {
   constructor(props) {
     super(props);
     this.deleteInvoice = this.deleteInvoice.bind(this);
@@ -39,11 +39,6 @@ class Invoices extends Component {
         this.confirmedDeleteInvoice(invoiceId);
       }
     });
-  }
-
-  // Optimization
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   // Remove all IPC listeners when unmounted

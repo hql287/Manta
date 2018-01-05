@@ -11,6 +11,12 @@ const isDev = require('electron-is-dev');
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
 
+// Disabled for the linux gpu
+
+if(process.platform == 'linux') {
+  app.disableHardwareAcceleration();
+}
+
 // 3rd Party Libs
 const appConfig = require('electron-settings');
 require('dotenv').config();
