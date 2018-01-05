@@ -1,13 +1,13 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
-import {compose} from 'recompose';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { compose } from 'recompose';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as Actions from '../../actions/form.jsx';
-import {getRows} from '../../reducers/FormReducer';
+import { getRows } from '../../reducers/FormReducer';
 
 // DragNDrop
 import TransitionList from '../../components/shared/TransitionList';
@@ -15,7 +15,7 @@ import _withDragNDrop from './hoc/_withDragNDrop';
 
 // Custom Component
 import Button from '../shared/Button.jsx';
-import {Section} from '../shared/Section';
+import { Section } from '../shared/Section';
 import ItemRow from './ItemRow.jsx';
 
 // Styled Components
@@ -61,7 +61,7 @@ const ItemsListDiv = styled.div`
 export class ItemsList extends Component {
   componentDidMount() {
     const { rows, boundActionCreators } = this.props;
-    if(!rows.length) {
+    if (!rows.length) {
       boundActionCreators.addItem();
     }
   }
@@ -72,19 +72,15 @@ export class ItemsList extends Component {
 
   render() {
     // Bound Actions
-    const {
-      addItem,
-      removeItem,
-      updateItem,
-    } = this.props.boundActionCreators;
+    const { addItem, removeItem, updateItem } = this.props.boundActionCreators;
     // Item Rows
-    const {rows} = this.props;
+    const { rows } = this.props;
     const rowsComponent = rows.map((item, index) => (
       <ItemRow
         key={item.id}
         item={item}
-        hasHandler={rows.length > 1 ? true : false}
-        actions={index === 0 ? false : true}
+        hasHandler={rows.length > 1}
+        actions={index !== 0}
         updateRow={updateItem}
         removeRow={removeItem}
         addItem={addItem}
@@ -133,4 +129,3 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   _withDragNDrop
 )(ItemsList);
-

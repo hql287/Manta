@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {ItemsList} from '../ItemsList.jsx';
+import { ItemsList } from '../ItemsList.jsx';
 
 // Mocks
 const rows = [];
@@ -24,7 +24,7 @@ describe('Note component', () => {
         rows={rows}
         formState={formState}
         boundActionCreators={boundActionCreators}
-      />,
+      />
     );
   });
 
@@ -60,7 +60,7 @@ describe('Note component', () => {
           rows={rows}
           formState={formState}
           boundActionCreators={boundActionCreators}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

@@ -1,7 +1,7 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {DragDropContext, Droppable} from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 class DragNDrop extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class DragNDrop extends Component {
     if (!result.destination) {
       return;
     }
-    const {moveRow} = this.props.boundActionCreators;
+    const { moveRow } = this.props.boundActionCreators;
     moveRow(result.source.index, result.destination.index);
   }
   render() {

@@ -6,21 +6,17 @@ import UIMiddleware from '../UIMiddleware';
 jest.mock('../../../libs/sounds');
 const sounds = require('../../../libs/sounds');
 
-describe("UI Middleware", () => {
-
-  let
-    next,
-    getState,
-    middleware;
+describe('UI Middleware', () => {
+  let next, getState, middleware;
   beforeEach(() => {
     next = jest.fn();
     getState = jest.fn(() => ({
       ui: {
         activeTab: 'form',
         notifications: [],
-      }
+      },
     }));
-    middleware = UIMiddleware({getState})(next);
+    middleware = UIMiddleware({ getState })(next);
   });
 
   describe('should handle UI_TAB_CHANGE action', () => {
@@ -43,16 +39,21 @@ describe("UI Middleware", () => {
 
   describe('should handle update notifications', () => {
     it('should handle UI_NOTIFICATION_NEW action', () => {
-      const action = UIActions.newNoti('success', 'Invoice has been created successfully!');
+      const action = UIActions.newNoti(
+        'success',
+        'Invoice has been created successfully!'
+      );
       middleware(action);
       expect(getState.mock.calls.length).toBe(0);
       expect(next.mock.calls.length).toBe(1);
       // Add id field with uuidv4 string to payload
-      expect(next).toHaveBeenCalledWith(Object.assign({}, action, {
-        payload: Object.assign({}, action.payload, {
-          id: 'id-string',
+      expect(next).toHaveBeenCalledWith(
+        Object.assign({}, action, {
+          payload: Object.assign({}, action.payload, {
+            id: 'id-string',
+          }),
         })
-      }));
+      );
       // Test Sound
       expect(sounds.play).toBeCalledWith('SUCCESS');
     });
@@ -63,11 +64,13 @@ describe("UI Middleware", () => {
       expect(getState.mock.calls.length).toBe(0);
       expect(next.mock.calls.length).toBe(1);
       // Add id field with uuidv4 string to payload
-      expect(next).toHaveBeenCalledWith(Object.assign({}, action, {
-        payload: Object.assign({}, action.payload, {
-          id: 'id-string',
+      expect(next).toHaveBeenCalledWith(
+        Object.assign({}, action, {
+          payload: Object.assign({}, action.payload, {
+            id: 'id-string',
+          }),
         })
-      }));
+      );
       // Test Sound
       expect(sounds.play).toBeCalledWith('WARNING');
     });
@@ -108,7 +111,7 @@ describe("UI Middleware", () => {
   });
 
   it('let other actions pass through', () => {
-    const action = {type: 'TEST'};
+    const action = { type: 'TEST' };
     middleware(action);
     expect(next).toHaveBeenCalledWith(action);
   });

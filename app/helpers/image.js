@@ -43,6 +43,4 @@ function handleError(err) {
   });
 }
 
-export {
-  processImg
-};
+export { processImg };

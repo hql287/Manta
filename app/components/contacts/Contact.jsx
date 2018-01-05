@@ -1,9 +1,9 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
-import {TR, TD} from '../shared/Table';
+import { TR, TD } from '../shared/Table';
 import Button from '../shared/Button';
 
 // Component
@@ -19,28 +19,22 @@ class Contact extends Component {
   }
 
   newInvoice() {
-    const {newInvoice, contact} = this.props;
+    const { newInvoice, contact } = this.props;
     newInvoice(contact);
   }
 
   deleteContact() {
-    const {contact, deleteContact} = this.props;
+    const { contact, deleteContact } = this.props;
     deleteContact(contact._id);
   }
 
   render() {
-    const {contact} = this.props;
+    const { contact } = this.props;
     return (
       <TR>
-        <TD bold>
-          {contact.fullname}
-        </TD>
-        <TD>
-          {contact.email}
-        </TD>
-        <TD>
-          {contact.phone}
-        </TD>
+        <TD bold>{contact.fullname}</TD>
+        <TD>{contact.email}</TD>
+        <TD>{contact.phone}</TD>
         <TD actions>
           <Button link primary onClick={this.newInvoice}>
             <i className="ion-plus-round" />

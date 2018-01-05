@@ -1,9 +1,9 @@
-// React Libraries
-import React from 'react';
+// Libraries
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { padStart } from 'lodash';
-
-import {formatNumber} from '../../../../app/helpers/number';
+import { formatNumber } from '../../../../app/helpers/number';
+import { getInvoiceValue } from '../../../../app/helpers/invoice';
 
 // Styles
 import styled from 'styled-components';
@@ -13,9 +13,11 @@ const InvoiceContent = styled.div`
   display: flex;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
-  ${props => props.alignItems && `
+  ${props =>
+    props.alignItems &&
+    `
     align-items: ${props.alignItems};
-  `}
+  `};
 `;
 
 const Table = styled.table`
@@ -24,10 +26,18 @@ const Table = styled.table`
   th {
     border-bottom: 4px solid #efefd1;
     padding-bottom: 0.8em;
+    &:last-child {
+      text-align: right;
+    }
   }
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     th { border-bottom: 4px solid ${props.accentColor.color};}
   `};
+  tr > td:last-child {
+    text-align: right;
+  }
   td {
     color: #2c323a;
     font-weight: 300;
@@ -54,12 +64,15 @@ const InvoiceTotal = styled.tr`
     border-bottom: none;
     line-height: 2;
     border-top: 4px solid #efefd1;
+    color: #6bbb69;
     &:first-child {
       border: none;
     }
   }
 
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     td {
       border-top: 4px solid ${props.accentColor.color};
     }
@@ -68,11 +81,11 @@ const InvoiceTotal = styled.tr`
 
 const InvoiceDiscount = styled.tr`
   td:last-child {
-    color: #6bbb69;
+    color: #469fe5;
   }
 `;
 
-const InvoiceVat = styled.tr`
+const InvoiceTax = styled.tr`
   td:last-child {
     color: #ec476e;
   }
@@ -98,84 +111,118 @@ function setAlignItems(configs) {
 }
 
 // Component
-function Main({invoice, configs}) {
-  const currency = configs.useSymbol
-    ? invoice.currency.symbol
-    : invoice.currency.code;
-  const itemComponents = invoice.rows.map((row, index) => (
-    <tr key={index}>
-      <td className="w5">
-        {padStart(index + 1, 2, 0)}.
-      </td>
-      <td>{row.description}</td>
-      <td className="w15">
-        {currency} {formatNumber(row.price)}
-      </td>
-      <td className="w10">{formatNumber(row.quantity)}</td>
-      <td className="w15">
-        {currency} {formatNumber(row.subtotal)}
-      </td>
-    </tr>
-  ));
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.displayTax = this.displayTax.bind(this);
+    this.displayDiscount = this.displayDiscount.bind(this);
+  }
 
-  return (
-    <InvoiceContent alignItems={setAlignItems(configs)}>
-      <Table accentColor={configs.accentColor}>
-        <thead>
-          <tr>
-            <th className="w5">No</th>
-            <th>Description</th>
-            <th className="w15">Price</th>
-            <th className="w10">Qty</th>
-            <th className="w15">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>{itemComponents}</tbody>
-        <tfoot>
-          <tr className="invoice__subtotal">
-            <td colSpan="2" />
-            <td className="label" colSpan="2">
-              Subtotal
-            </td>
-            <td>
-              {currency} {formatNumber(invoice.subtotal)}
-            </td>
-          </tr>
+  displayDiscount() {
+    const { invoice, configs } = this.props;
+    const currency = configs.useSymbol
+      ? invoice.currency.symbol
+      : invoice.currency.code;
+    return invoice.discount ? (
+      <InvoiceDiscount>
+        <td colSpan="2" />
+        <td className="label" colSpan="2">
+          Discount
+          {invoice.discount.type === 'percentage' && (
+            <span> {invoice.discount.amount}%</span>
+          )}
+        </td>
+        <td>
+          {currency} {formatNumber(getInvoiceValue(invoice).discount)}
+        </td>
+      </InvoiceDiscount>
+    ) : null;
+  }
 
-          {invoice.discount && (
-            <InvoiceDiscount>
+  displayTax() {
+    const { invoice, configs } = this.props;
+    const { tax } = invoice;
+    const { taxAmount } = getInvoiceValue(invoice);
+    const currency = configs.useSymbol
+      ? invoice.currency.symbol
+      : invoice.currency.code;
+    return tax ? (
+      <InvoiceTax>
+        <td colSpan="2" />
+        <td className="label" colSpan={tax.method === 'reverse' ? 1 : 2}>
+          Tax {tax.amount}%
+        </td>
+        {tax.method === 'reverse' ? (
+          <td className="label" colSpan={tax.method === 'reverse' ? 2 : 1}>
+            Reverse Charge
+          </td>
+        ) : (
+          <td>
+            {currency} {formatNumber(taxAmount)}
+          </td>
+        )}
+      </InvoiceTax>
+    ) : null;
+  }
+
+  render() {
+    const { invoice, configs } = this.props;
+    const currency = configs.useSymbol
+      ? invoice.currency.symbol
+      : invoice.currency.code;
+    const itemComponents = invoice.rows.map((row, index) => (
+      <tr key={index}>
+        <td className="w5">{padStart(index + 1, 2, 0)}.</td>
+        <td>{row.description}</td>
+        <td className="w15">
+          {currency} {formatNumber(row.price)}
+        </td>
+        <td className="w10">{formatNumber(row.quantity)}</td>
+        <td className="w15">
+          {currency} {formatNumber(row.subtotal)}
+        </td>
+      </tr>
+    ));
+
+    return (
+      <InvoiceContent alignItems={setAlignItems(configs)}>
+        <Table accentColor={configs.accentColor}>
+          <thead>
+            <tr>
+              <th className="w5">No</th>
+              <th>Description</th>
+              <th className="w15">Price</th>
+              <th className="w10">Qty</th>
+              <th className="w15">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>{itemComponents}</tbody>
+          <tfoot>
+            <tr className="invoice__subtotal">
               <td colSpan="2" />
               <td className="label" colSpan="2">
-                Discount
+                Subtotal
               </td>
               <td>
-                {formatNumber(invoice.discount.amount)}{' '}
-                {invoice.discount.type === 'flat' ? currency : '%'}
+                {currency} {formatNumber(invoice.subtotal)}
               </td>
-            </InvoiceDiscount>
-          )}
+            </tr>
 
-          {invoice.vat && (
-            <InvoiceVat>
+            {this.displayDiscount()}
+            {this.displayTax()}
+
+            <InvoiceTotal accentColor={configs.accentColor}>
               <td colSpan="2" />
-              <td className="label" colSpan="2">
-                Vat
+              <td className="label">Total</td>
+              <td colSpan="2">
+                {currency} {formatNumber(invoice.grandTotal)}
               </td>
-              <td>{invoice.vat} %</td>
-            </InvoiceVat>
-          )}
-
-          <InvoiceTotal accentColor={configs.accentColor}>
-            <td colSpan="2" />
-            <td className="label">Total</td>
-            <td colSpan="2">
-              {currency} {formatNumber(invoice.grandTotal)}
-            </td>
-          </InvoiceTotal>
-        </tfoot>
-      </Table>
-    </InvoiceContent>
-  );
+            </InvoiceTotal>
+          </tfoot>
+        </Table>
+      </InvoiceContent>
+    );
+  }
 }
 
 Main.propTypes = {

@@ -1,9 +1,9 @@
 // Libs
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Section, Label} from '../shared';
+import { Section, Label } from '../shared';
 
-function Toggler({configs, handleInputChange}) {
+function Toggler({ configs, handleInputChange }) {
   const { showLogo, useSymbol, showRecipient } = configs;
   return (
     <Section>

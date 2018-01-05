@@ -1,11 +1,13 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
 import styled from 'styled-components';
 
-const Wrapper = styled.div`position: relative;`;
+const Wrapper = styled.div`
+  position: relative;
+`;
 
 const ButtonsGroup = styled.div`
   display: flex;
@@ -85,11 +87,11 @@ const Addon = styled.div`
 class SplitButton extends Component {
   constructor(props) {
     super(props);
-    this.state = {showOptions: false};
-    this.handleMainAction    = this.handleMainAction.bind(this);
-    this.handleClick        = this.handleClick.bind(this);
+    this.state = { showOptions: false };
+    this.handleMainAction = this.handleMainAction.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleOutsideClick = this.handleOutsideClick.bind(this);
-    this.renderListItems    = this.renderListItems.bind(this);
+    this.renderListItems = this.renderListItems.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -105,7 +107,7 @@ class SplitButton extends Component {
     } else {
       document.removeEventListener('click', this.handleOutsideClick, false);
     }
-    this.setState({showOptions: !this.state.showOptions});
+    this.setState({ showOptions: !this.state.showOptions });
   }
 
   handleOutsideClick(e) {
@@ -116,13 +118,13 @@ class SplitButton extends Component {
   }
 
   handleMainAction(e) {
-    this.setState({showOptions: false}, () => {
+    this.setState({ showOptions: false }, () => {
       this.props.mainButton.action();
     });
   }
 
   renderListItems() {
-    const {options} = this.props;
+    const { options } = this.props;
     return options.map(option => (
       <a
         key={option.label.toString()}
@@ -130,7 +132,8 @@ class SplitButton extends Component {
         onClick={() => {
           option.action();
           this.handleClick();
-        }}>
+        }}
+      >
         {option.label}
       </a>
     ));
@@ -138,7 +141,7 @@ class SplitButton extends Component {
 
   render() {
     return (
-      <div ref={node => this.node = node}>
+      <div ref={node => (this.node = node)}>
         <Wrapper>
           <ButtonsGroup>
             <a href="#" onClick={this.handleMainAction}>
@@ -164,7 +167,7 @@ SplitButton.propTypes = {
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       action: PropTypes.func.isRequired,
-    }),
+    })
   ).isRequired,
 };
 

@@ -36,7 +36,7 @@ describe('UI Reducer', () => {
       payload: {
         type: 'warning',
         message: 'Missing Document',
-      }
+      },
     });
     expect(newState.notifications).toHaveLength(1);
     expect(newState.notifications[0].type).toEqual('warning');
@@ -58,7 +58,7 @@ describe('UI Reducer', () => {
           message: 'Invoice Created Successfully',
         },
       ],
-    }
+    };
     const newState = UIReducer(currentState, {
       type: ACTION_TYPES.UI_NOTIFICATION_REMOVE,
       payload: 'abc',
@@ -72,6 +72,4 @@ describe('UI Reducer', () => {
     expect(newState2.notifications).toHaveLength(1);
     expect(newState2.notifications[0].id).toEqual('abc');
   });
-
 });
-

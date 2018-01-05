@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {Tax} from '../Tax.jsx';
+import { Tax } from '../Tax.jsx';
 
 // Mocks
 const tax = {
@@ -29,7 +29,7 @@ describe('Note component', () => {
         savedSettings={savedSettings}
         updateSavedSettings={updateSavedSettings}
         updateFieldData={updateFieldData}
-      />,
+      />
     );
   });
 
@@ -59,19 +59,19 @@ describe('Note component', () => {
         savedSettings={savedSettings}
         updateSavedSettings={updateSavedSettings}
         updateFieldData={updateFieldData}
-      />,
+      />
     );
     // Changing Amount
     const amount = wrap.find('input').last();
-    amount.simulate('change', {target: {value: '20'}});
+    amount.simulate('change', { target: { value: '20' } });
     expect(spy).toHaveBeenCalled();
     // Changing TIN
     const tin = wrap.find('input').first();
-    tin.simulate('change', {target: {value: '987-654-321'}});
+    tin.simulate('change', { target: { value: '987-654-321' } });
     expect(spy).toHaveBeenCalled();
     // Changing Mode
     const mode = wrap.find('select');
-    mode.simulate('change', {target: {value: 'reverse'}});
+    mode.simulate('change', { target: { value: 'reverse' } });
     expect(spy).toHaveBeenCalled();
   });
 
@@ -84,7 +84,7 @@ describe('Note component', () => {
           savedSettings={savedSettings}
           updateSavedSettings={updateSavedSettings}
           updateFieldData={updateFieldData}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

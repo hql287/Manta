@@ -11,7 +11,7 @@ const appConfig = require('electron-settings');
 
 ipc.on('select-export-directory', event => {
   const window = BrowserWindow.fromWebContents(event.sender);
-  dialog.showOpenDialog(window, {properties: ['openDirectory']}, path => {
+  dialog.showOpenDialog(window, { properties: ['openDirectory'] }, path => {
     if (path) {
       fs.access(path[0], fs.constants.W_OK, err => {
         if (err) {

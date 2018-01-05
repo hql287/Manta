@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 // Component
 import AppNav, { SideBar, Tab, Icon, ActiveIndicator } from '../AppNav';
@@ -9,7 +9,6 @@ import AppNav, { SideBar, Tab, Icon, ActiveIndicator } from '../AppNav';
 const changeTab = jest.fn();
 
 describe('Renders correctly to the DOM', () => {
-
   let wrapper;
   beforeEach(() => {
     wrapper = mount(<AppNav activeTab="form" changeTab={changeTab} />);

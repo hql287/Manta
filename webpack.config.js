@@ -1,7 +1,7 @@
-const path    = require('path');
+const path = require('path');
 const webpack = require('webpack');
-const merge   = require('webpack-merge');
-const parts   = require('./webpack.parts');
+const merge = require('webpack-merge');
+const parts = require('./webpack.parts');
 const nodeExternals = require('webpack-node-externals');
 const PATHS = {
   prod: path.resolve(__dirname, 'prod'),
@@ -24,14 +24,16 @@ const productionConfig = merge([
       new webpack.IgnorePlugin(/vertx/),
     ],
     // Exclude NodeModules
-    externals: [nodeExternals({
-      whitelist: [
-        'react-hot-loader',
-        'react-hot-loader/patch',
-        'redux-logger',
-      ]
-    })]
-  }
+    externals: [
+      nodeExternals({
+        whitelist: [
+          'react-hot-loader',
+          'react-hot-loader/patch',
+          'redux-logger',
+        ],
+      }),
+    ],
+  },
 ]);
 
 // DEVELOPMENT CONFIGS
@@ -57,14 +59,13 @@ const developmentConfig = merge([
       new webpack.IgnorePlugin(/vertx/),
     ],
     // Ignore all modules in node_modules folder
-    externals: [nodeExternals({
-      // Except Webpack Hot Devserver & Emitter so
-      // react-hot-loader can work properly
-      whitelist: [
-        'webpack/hot/dev-server',
-        'webpack/hot/emitter',
-      ]
-    })]
+    externals: [
+      nodeExternals({
+        // Except Webpack Hot Devserver & Emitter so
+        // react-hot-loader can work properly
+        whitelist: ['webpack/hot/dev-server', 'webpack/hot/emitter'],
+      }),
+    ],
   },
 ]);
 
@@ -81,11 +82,10 @@ const commonConfig = merge([
   parts.extractBundles([
     {
       name: 'vendor',
-      minChunks: ({ resource }) => (
+      minChunks: ({ resource }) =>
         resource &&
         resource.indexOf('node_modules') >= 0 &&
-        resource.match(/\.js$/)
-      ),
+        resource.match(/\.js$/),
     },
   ]),
   {
@@ -99,25 +99,16 @@ const commonConfig = merge([
     },
 
     entry: {
-      'tour': [
-        'react-hot-loader/patch',
-        './tour/index.jsx',
-      ],
-      'main': [
+      tour: ['react-hot-loader/patch', './tour/index.jsx'],
+      main: [
         'react-hot-loader/patch',
         './app/renderers/startup.js',
         './app/renderers/dialog.js',
         './app/renderers/menu.js',
-        './app/index.jsx'
+        './app/index.jsx',
       ],
-      'preview': [
-        'react-hot-loader/patch',
-        './preview/index.jsx'
-      ],
-      'modal': [
-        'react-hot-loader/patch',
-        './modal/index.js'
-      ]
+      preview: ['react-hot-loader/patch', './preview/index.jsx'],
+      modal: ['react-hot-loader/patch', './modal/index.js'],
     },
 
     context: path.resolve(__dirname),
@@ -130,23 +121,21 @@ const commonConfig = merge([
       rules: [
         {
           test: /\.jsx$/,
-          exclude: [
-            path.resolve(__dirname, 'node_modules')
-          ],
+          exclude: [path.resolve(__dirname, 'node_modules')],
           loader: 'babel-loader',
-        }
-      ]
+        },
+      ],
     },
 
     node: {
       __dirname: false,
-      __filename: false
-    }
+      __filename: false,
+    },
   },
 ]);
 
 // EXPORT
-module.exports = (env) => {
+module.exports = env => {
   if (env && env.production) {
     return merge(productionConfig, commonConfig);
   }

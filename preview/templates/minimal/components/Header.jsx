@@ -22,13 +22,15 @@ const Heading = styled.h1`
   font-weight: 400;
   margin-bottom: 1em;
   color: #2c323a;
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     color: ${props.accentColor.color};
   `};
 `;
 
 // Component
-function Header({invoice, company, configs}) {
+function Header({ invoice, profile, configs }) {
   return (
     <Wrapper>
       <div>
@@ -40,14 +42,14 @@ function Header({invoice, company, configs}) {
             omission: '',
           })}
         </h4>
-        <p>Created {format(invoice.created_at, 'DD/MM/YYYY')}</p>
+        <p>Created {format(invoice.created_at, configs.dateFormat)}</p>
         {invoice.dueDate && (
-          <p>Due {moment(invoice.dueDate).format('DD/MM/YYYY')}</p>
+          <p>Due {moment(invoice.dueDate).format(configs.dateFormat)}</p>
         )}
       </div>
       {configs.showLogo && (
         <div>
-          <img src={company.logo} alt="Logo" />
+          <img src={profile.logo} alt="Logo" />
         </div>
       )}
     </Wrapper>
@@ -56,7 +58,7 @@ function Header({invoice, company, configs}) {
 
 Header.propTypes = {
   invoice: PropTypes.object.isRequired,
-  company: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
   configs: PropTypes.object.isRequired,
 };
 

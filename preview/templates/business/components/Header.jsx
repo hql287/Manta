@@ -22,7 +22,9 @@ const LeftColumn = styled.div`
   flex: 1;
 `;
 
-const Company = styled.div`margin-bottom: 1.66667em;`;
+const Company = styled.div`
+  margin-bottom: 1.66667em;
+`;
 
 const Recipient = styled.div``;
 
@@ -44,26 +46,28 @@ const Heading = styled.h1`
   margin: 0 0 10px 0;
   font-size: 2em;
   font-weight: 400;
-  color: #2c323a;
+  color: #cbc189;
   text-transform: uppercase;
   letter-spacing: 1px;
-  ${props => props.accentColor.useCustom && `
+  ${props =>
+    props.accentColor.useCustom &&
+    `
     color: ${props.accentColor.color};
   `};
 `;
 
 // Component
-function Header({invoice, company, configs}) {
+function Header({ invoice, profile, configs }) {
   const { recipient } = invoice;
   return (
     <InvoiceHeader>
       <LeftColumn>
         <Company>
-          <h4>{company.company}</h4>
-          <p>{company.fullname}</p>
-          <p>{company.address}</p>
-          <p>{company.email}</p>
-          <p>{company.phone}</p>
+          <h4>{profile.company}</h4>
+          <p>{profile.fullname}</p>
+          <p>{profile.address}</p>
+          <p>{profile.email}</p>
+          <p>{profile.phone}</p>
         </Company>
         {configs.showRecipient && (
           <Recipient>
@@ -84,14 +88,16 @@ function Header({invoice, company, configs}) {
             omission: '',
           })}
         </h4>
-        <p>Created {format(invoice.created_at, 'DD/MM/YYYY')}</p>
-        <p>Due {moment(invoice.dueDate).format('DD/MM/YYYY')}</p>
+        <p>Created {format(invoice.created_at, configs.dateFormat)}</p>
+        <p>Due {moment(invoice.dueDate).format(configs.dateFormat)}</p>
       </RightColumn>
     </InvoiceHeader>
   );
 }
 
 Header.propTypes = {
+  profile: PropTypes.object.isRequired,
+  configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
 };
 

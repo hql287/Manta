@@ -25,7 +25,7 @@ exports[`Note component matches snapshot 1`] = `
       className="itemsListActions"
     >
       <button
-        className="ItemsList__ItemsListActionsBtn-iuJoKw kkURDx Button__ButtonStyle-cORGTZ gqlRsB"
+        className="ItemsList__ItemsListActionsBtn-iuJoKw kkURDx Button__ButtonStyle-cORGTZ iiCalx"
         onClick={[Function]}
       >
         Add An Item

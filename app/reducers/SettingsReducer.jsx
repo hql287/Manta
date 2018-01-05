@@ -1,6 +1,6 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {handleActions} from 'redux-actions';
-import {createSelector} from 'reselect';
+import { handleActions } from 'redux-actions';
+import { createSelector } from 'reselect';
 
 const SettingsReducer = handleActions(
   {
@@ -31,4 +31,9 @@ export const getCurrentSettings = createSelector(
 export const getSavedSettings = createSelector(
   getSettingsState,
   settings => settings.saved
+);
+
+export const getDateFormat = createSelector(
+  getSettingsState,
+  settings => settings.saved.invoice.dateFormat
 );

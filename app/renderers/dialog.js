@@ -3,7 +3,7 @@ const path = require('path');
 const url = require('url');
 
 // Electron Libs
-const {BrowserWindow} = require('electron').remote;
+const { BrowserWindow } = require('electron').remote;
 
 // Custom Libs
 const sounds = require('../../libs/sounds.js');
@@ -24,7 +24,7 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
     })
   );
   modalWin.on('close', () => (modalWin = null));
-  modalWin.webContents.on('did-finish-load', function() {
+  modalWin.webContents.on('did-finish-load', () => {
     modalWin.webContents.send(
       'update-modal',
       dialogOptions,

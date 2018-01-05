@@ -1,15 +1,15 @@
-console.time('init')
+console.time('init');
 
 // Node Libs
-const fs    = require('fs');
-const os    = require('os');
-const url   = require('url');
-const path  = require('path');
-const glob  = require('glob');
+const fs = require('fs');
+const os = require('os');
+const url = require('url');
+const path = require('path');
+const glob = require('glob');
 const isDev = require('electron-is-dev');
 
 // Electron Libs
-const {app, BrowserWindow, ipcMain} = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 
 // 3rd Party Libs
 const appConfig = require('electron-settings');
@@ -43,7 +43,7 @@ function createTourWindow() {
   );
   // Add Event Listeners
   tourWindow.on('show', event => {
-    if (isDev) tourWindow.webContents.openDevTools({mode: 'detach'});
+    if (isDev) tourWindow.webContents.openDevTools({ mode: 'detach' });
   });
   tourWindow.on('close', event => {
     event.preventDefault();
@@ -83,7 +83,7 @@ function createMainWindow() {
 
   // Add Event Listeners
   mainWindow.on('show', event => {
-    if (isDev) mainWindow.webContents.openDevTools({mode: 'detach'});
+    if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
   });
   mainWindow.on('close', event => {
     event.preventDefault();
@@ -122,7 +122,7 @@ function createPreviewWindow() {
   );
   // Add Event Listener
   previewWindow.on('show', event => {
-    if (isDev) previewWindow.webContents.openDevTools({mode: 'detach'});
+    if (isDev) previewWindow.webContents.openDevTools({ mode: 'detach' });
   });
   previewWindow.on('close', event => {
     event.preventDefault();
@@ -132,8 +132,10 @@ function createPreviewWindow() {
 }
 
 function addDevToolsExtension() {
-  if (process.env.REACT_DEV_TOOLS_PATH) BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
-  if (process.env.REDUX_DEV_TOOLS_PATH) BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
+  if (process.env.REACT_DEV_TOOLS_PATH)
+    BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
+  if (process.env.REDUX_DEV_TOOLS_PATH)
+    BrowserWindow.addDevToolsExtension(process.env.REDUX_DEV_TOOLS_PATH);
 }
 
 function setInitialValues() {
@@ -156,7 +158,8 @@ function setInitialValues() {
     // Set Default Logo
     const logoPath = path.resolve(__dirname, './static/imgs/default_logo.svg');
     const logoData = fs.readFileSync(logoPath);
-    const logoBase64String = 'data:image/svg+xml;base64,' + logoData.toString('base64');
+    const logoBase64String =
+      'data:image/svg+xml;base64,' + logoData.toString('base64');
     // Other defaults
     appConfig.set('profile', {
       logo: logoBase64String,
@@ -182,18 +185,19 @@ function setInitialValues() {
       exportDir: os.homedir(),
       template: 'default',
       currency: 'USD',
+      dateFormat: 'MM/DD/YYYY',
       tax: {
         tin: '123-456-789',
         method: 'default',
         amount: 0,
       },
       required_fields: {
-        dueDate:  false,
+        dueDate: false,
         currency: false,
         discount: false,
-        tax:      false,
-        note:     false,
-      }
+        tax: false,
+        note: false,
+      },
     });
   }
 }
@@ -268,13 +272,13 @@ function initialize() {
     addEventListeners();
     loadMainProcessFiles();
     // Show Window
-    const {showWindow} = require('./main/tour');
+    const { showWindow } = require('./main/tour');
     showWindow('startup');
   });
 
   // Reactive the app
   app.on('activate', () => {
-    const {showWindow} = require('./main/tour');
+    const { showWindow } = require('./main/tour');
     showWindow('activate');
   });
   // Close all windows before quit the app

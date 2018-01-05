@@ -1,5 +1,5 @@
-import {handleActions, combineActions} from 'redux-actions';
-import {createSelector} from 'reselect';
+import { handleActions, combineActions } from 'redux-actions';
+import { createSelector } from 'reselect';
 import * as Actions from '../actions/contacts';
 
 const ContactsReducer = handleActions(
@@ -8,8 +8,9 @@ const ContactsReducer = handleActions(
       Actions.getAllContacts,
       Actions.saveContact,
       Actions.deleteContact
-    )]: (state, action) => action.payload
-  }, []
+    )]: (state, action) => action.payload,
+  },
+  []
 );
 
 export default ContactsReducer;

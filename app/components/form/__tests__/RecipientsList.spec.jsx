@@ -1,10 +1,10 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 
 // Component
-import {RecipientsList} from '../RecipientsList.jsx';
+import { RecipientsList } from '../RecipientsList.jsx';
 
 // Mocks
 const contacts = [
@@ -32,7 +32,7 @@ describe('Recipient List component', () => {
         contacts={contacts}
         selectedContact={selectedContact}
         updateRecipientList={updateRecipientList}
-      />,
+      />
     );
   });
 
@@ -67,7 +67,7 @@ describe('Recipient List component', () => {
           contacts={contacts}
           selectedContact={selectedContact}
           updateRecipientList={updateRecipientList}
-        />,
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

@@ -12,9 +12,9 @@ import * as ContactsActions from '../actions/contacts';
 import * as SettingsActions from '../actions/settings';
 
 // Helper
-import {getInvoiceData, validateFormData} from '../helpers/form';
+import { getInvoiceData, validateFormData } from '../helpers/form';
 
-const FormMW = ({dispatch, getState}) => next => action => {
+const FormMW = ({ dispatch, getState }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.FORM_SAVE: {
       const currentFormData = getState().form;
@@ -34,9 +34,11 @@ const FormMW = ({dispatch, getState}) => next => action => {
     }
 
     case ACTION_TYPES.FORM_ITEM_ADD: {
-      return next(Object.assign({}, action, {
-        payload: {id: uuidv4()}
-      }));
+      return next(
+        Object.assign({}, action, {
+          payload: { id: uuidv4() },
+        })
+      );
     }
 
     case ACTION_TYPES.FORM_CLEAR: {

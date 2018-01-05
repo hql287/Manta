@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 // Get All Contacts
 export const getAllContacts = createAction(ACTION_TYPES.CONTACT_GET_ALL);

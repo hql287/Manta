@@ -1,5 +1,5 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
@@ -11,14 +11,13 @@ import Settings from '../../containers/Settings';
 // Layout
 import { AppMainContent } from '../shared/Layout';
 
-
 class AppMain extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.activeTab !== nextProps.activeTab;
   }
 
   render() {
-    const {activeTab} = this.props;
+    const { activeTab } = this.props;
     return (
       <AppMainContent>
         {activeTab === 'form' && <Form />}

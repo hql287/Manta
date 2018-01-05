@@ -5,22 +5,22 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
   className="Table__TRStyle-fOVVkv fFTsJf"
 >
   <td
-    className="Table__TDStyle-bMJTQo kRwydA"
+    className="Table__TDStyle-bMJTQo cqZxl"
   >
     Jon Snow
   </td>
   <td
-    className="Table__TDStyle-bMJTQo bFIiIG"
+    className="Table__TDStyle-bMJTQo fdVlxx"
   >
     jon@snow.hbo
   </td>
   <td
-    className="Table__TDStyle-bMJTQo bFIiIG"
+    className="Table__TDStyle-bMJTQo fdVlxx"
   >
     000-000-000
   </td>
   <td
-    className="Table__TDStyle-bMJTQo kKJXOs"
+    className="Table__TDStyle-bMJTQo gEQkfH"
   >
     <button
       className="Button__ButtonLinkStyle-ioTbaT jOKkVK"

@@ -1,7 +1,7 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
 // Actions
@@ -16,7 +16,7 @@ import AppNav from './components/layout/AppNav';
 import AppMain from './components/layout/AppMain';
 import AppNoti from './components/layout/AppNoti';
 import AppUpdate from './components/layout/AppUpdate';
-import {AppWrapper} from './components/shared/Layout';
+import { AppWrapper } from './components/shared/Layout';
 
 // Components
 class App extends Component {
@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     // Get All Data
     dispatch(ContactsActions.getAllContacts());
     dispatch(InvoicesActions.getInvoices());
@@ -85,27 +85,23 @@ class App extends Component {
   }
 
   changeTab(tabName) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(UIActions.changeActiveTab(tabName));
   }
 
   removeNoti(id) {
-    const {dispatch} = this.props;
+    const { dispatch } = this.props;
     dispatch(UIActions.removeNoti(id));
   }
 
   render() {
-    const {activeTab, notifications, checkUpdatesMessage} = this.props.ui;
+    const { activeTab, notifications, checkUpdatesMessage } = this.props.ui;
     return (
       <AppWrapper>
-        <AppNav
-          activeTab={activeTab}
-          changeTab={this.changeTab} />
+        <AppNav activeTab={activeTab} changeTab={this.changeTab} />
         <AppMain activeTab={activeTab} />
-        <AppNoti
-          notifications={notifications}
-          removeNoti={this.removeNoti} />
-        <AppUpdate/>
+        <AppNoti notifications={notifications} removeNoti={this.removeNoti} />
+        <AppUpdate />
       </AppWrapper>
     );
   }

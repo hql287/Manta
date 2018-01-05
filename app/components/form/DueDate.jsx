@@ -1,17 +1,19 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
-import {Section} from '../shared/Section';
+import { Section } from '../shared/Section';
 
 // React Dates
-import {SingleDatePicker} from 'react-dates';
+import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';
 
 // Styles
 import styled from 'styled-components';
-const DueDateContent = styled.div`display: flex;`;
+const DueDateContent = styled.div`
+  display: flex;
+`;
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
@@ -20,7 +22,7 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 export class DueDate extends Component {
   constructor(props) {
     super(props);
-    this.state = {focused: false};
+    this.state = { focused: false };
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.clearDate = this.clearDate.bind(this);
@@ -31,12 +33,12 @@ export class DueDate extends Component {
   }
 
   onFocusChange() {
-    this.setState({focused: !this.state.focused});
+    this.setState({ focused: !this.state.focused });
   }
 
   onDateChange(date) {
     const selectedDate = date === null ? null : moment(date).toObject();
-    this.props.updateFieldData('dueDate', {selectedDate});
+    this.props.updateFieldData('dueDate', { selectedDate });
   }
 
   clearDate() {
@@ -44,7 +46,7 @@ export class DueDate extends Component {
   }
 
   render() {
-    const {dueDate} = this.props;
+    const { dueDate } = this.props;
     const selectedDate = dueDate.selectedDate
       ? moment(dueDate.selectedDate)
       : null;
@@ -56,9 +58,9 @@ export class DueDate extends Component {
             id="invoice-duedate"
             placeholder="Select A Date"
             firstDayOfWeek={1}
-            withFullScreenPortal={true}
+            withFullScreenPortal
             displayFormat="DD/MM/YYYY"
-            hideKeyboardShortcutsPanel={true}
+            hideKeyboardShortcutsPanel
             date={selectedDate}
             focused={this.state.focused}
             onFocusChange={this.onFocusChange}
@@ -68,7 +70,8 @@ export class DueDate extends Component {
             <a
               className="clearDateBtn active"
               href="#"
-              onClick={this.clearDate}>
+              onClick={this.clearDate}
+            >
               <i className="ion-close-circled" />
             </a>
           )}

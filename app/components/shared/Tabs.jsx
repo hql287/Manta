@@ -10,16 +10,16 @@ const TabsStyle = styled.div`
 `;
 
 const TabStyle = styled.a`
-  background: #F9FBFA;
+  background: #f9fbfa;
   text-decoration: none;
   color: #292b2c;
   font-weight: 400;
   font-size: 16px;
-  border-right: 1px solid rgba(0, 0, 0, .1);
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 6px 12px;
   &:last-child {
-    border-right: 1px solid rgba(0, 0, 0, .1);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
   }
   &.active {
     background: #fff;
@@ -33,29 +33,16 @@ const TabStyle = styled.a`
 
 const TabContentStyle = styled.div`
   padding: 40px;
-  border-top: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin-top: -1px;
   border-top-left-radius: 0;
 `;
 
 // Components
-const Tab = props =>
-  <TabStyle {...props}>
-    {props.children}
-  </TabStyle>;
+const Tab = props => <TabStyle {...props}>{props.children}</TabStyle>;
 
-const TabContent = props =>
-  <TabContentStyle>
-    {props.children}
-  </TabContentStyle>;
+const TabContent = props => <TabContentStyle>{props.children}</TabContentStyle>;
 
-const Tabs = props =>
-  <TabsStyle>
-    {props.children}
-  </TabsStyle>;
+const Tabs = props => <TabsStyle>{props.children}</TabsStyle>;
 
-export {
-  Tab,
-  Tabs,
-  TabContent,
-};
+export { Tab, Tabs, TabContent };

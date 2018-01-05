@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // Component
@@ -34,6 +34,7 @@ const invoice = {
 
 const deleteInvoice = jest.fn();
 const setInvoiceStatus = jest.fn();
+const dateFormat = 'MM/DD/YY';
 
 // Tests
 describe('Renders correctly to the DOM', () => {
@@ -44,7 +45,8 @@ describe('Renders correctly to the DOM', () => {
         invoice={invoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
-      />,
+        dateFormat={dateFormat}
+      />
     );
   });
 
@@ -54,7 +56,8 @@ describe('Renders correctly to the DOM', () => {
         invoice={invoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
-      />,
+        dateFormat={dateFormat}
+      />
     );
     expect(mountWrapper.prop('invoice')).toEqual(invoice);
     expect(mountWrapper.prop('deleteInvoice')).toEqual(deleteInvoice);
@@ -68,7 +71,7 @@ describe('Renders correctly to the DOM', () => {
 
   it('render invoice status in the header', () => {
     expect(
-      wrapper.find('Invoice__Header').find('Invoice__Status'),
+      wrapper.find('Invoice__Header').find('Invoice__Status')
     ).toHaveLength(1);
   });
 
@@ -79,58 +82,63 @@ describe('Renders correctly to the DOM', () => {
         .find('Invoice__Header')
         .find('Invoice__Status')
         .find('span')
-        .text(),
+        .text()
     ).toEqual('Pending');
 
     // Paid Invoice
-    const paidInvoice = Object.assign({}, invoice, {status: 'paid'});
+    const paidInvoice = Object.assign({}, invoice, { status: 'paid' });
     const paidInvoiceWapper = shallow(
       <Invoice
         invoice={paidInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
-      />,
+        dateFormat={dateFormat}
+      />
     );
     expect(
       paidInvoiceWapper
         .find('Invoice__Header')
         .find('Invoice__Status')
         .find('span')
-        .text(),
+        .text()
     ).toEqual('Paid');
 
     // Cancelled Invoice
-    const cancelledInvoice = Object.assign({}, invoice, {status: 'cancelled'});
+    const cancelledInvoice = Object.assign({}, invoice, {
+      status: 'cancelled',
+    });
     const cancelledInvoiceWapper = shallow(
       <Invoice
         invoice={cancelledInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
-      />,
+        dateFormat={dateFormat}
+      />
     );
     expect(
       cancelledInvoiceWapper
         .find('Invoice__Header')
         .find('Invoice__Status')
         .find('span')
-        .text(),
+        .text()
     ).toEqual('Cancelled');
 
     // Refunded Invoice
-    const refundedInvoice = Object.assign({}, invoice, {status: 'refunded'});
+    const refundedInvoice = Object.assign({}, invoice, { status: 'refunded' });
     const refundedInvoiceWapper = shallow(
       <Invoice
         invoice={refundedInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
-      />,
+        dateFormat={dateFormat}
+      />
     );
     expect(
       refundedInvoiceWapper
         .find('Invoice__Header')
         .find('Invoice__Status')
         .find('span')
-        .text(),
+        .text()
     ).toEqual('Refunded');
   });
 
@@ -150,7 +158,8 @@ describe('Renders correctly to the DOM', () => {
           invoice={invoice}
           deleteInvoice={deleteInvoice}
           setInvoiceStatus={setInvoiceStatus}
-        />,
+          dateFormat={dateFormat}
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -167,7 +176,8 @@ describe('handle clicks correctly', () => {
         invoice={invoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
-      />,
+        dateFormat={dateFormat}
+      />
     );
     viewBtn = wrapper
       .find('Invoice__Footer')

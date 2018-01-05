@@ -3,16 +3,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styling
-import {Section, Label} from '../shared';
+import { Section, Label } from '../shared';
 
-function Template({template, handleInputChange}) {
+function Template({ template, handleInputChange }) {
   return (
     <Section>
       <Label>Template</Label>
-      <select
-        name="template"
-        value={template}
-        onChange={handleInputChange}>
+      <select name="template" value={template} onChange={handleInputChange}>
         <option value="minimal">Minimal</option>
         <option value="business">Business</option>
         {/*

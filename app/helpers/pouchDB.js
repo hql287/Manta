@@ -11,7 +11,8 @@ const setDB = dbName => {
 const getAllDocs = dbName =>
   new Promise((resolve, reject) => {
     const db = setDB(dbName);
-    db.allDocs({
+    db
+      .allDocs({
         include_docs: true,
         attachments: true,
       })
@@ -26,10 +27,9 @@ const getAllDocs = dbName =>
 const saveDoc = (dbName, doc) =>
   new Promise((resolve, reject) => {
     const db = setDB(dbName);
-    db.put(doc)
-      .then(getAllDocs(dbName)
-      .then(newDocs => resolve(newDocs)
-      ))
+    db
+      .put(doc)
+      .then(getAllDocs(dbName).then(newDocs => resolve(newDocs)))
       .catch(err => reject(err));
   });
 
@@ -37,11 +37,15 @@ const saveDoc = (dbName, doc) =>
 const deleteDoc = (dbName, doc) =>
   new Promise((resolve, reject) => {
     const db = setDB(dbName);
-    db.get(doc)
-      .then(record => db.remove(record)
-      .then(getAllDocs(dbName)
-      .then(remainingDocs => resolve(remainingDocs)
-      )))
+    db
+      .get(doc)
+      .then(record =>
+        db
+          .remove(record)
+          .then(
+            getAllDocs(dbName).then(remainingDocs => resolve(remainingDocs))
+          )
+      )
       .catch(err => reject(err));
   });
 
@@ -49,17 +53,14 @@ const deleteDoc = (dbName, doc) =>
 const updateDoc = (dbName, docId, updatedDoc) =>
   new Promise((resolve, reject) => {
     const db = setDB(dbName);
-    db.get(docId)
-      .then(record => db.put(Object.assign(record, updatedDoc))
-      .then(getAllDocs(dbName)
-      .then(allDocs => resolve(allDocs)
-      )))
+    db
+      .get(docId)
+      .then(record =>
+        db
+          .put(Object.assign(record, updatedDoc))
+          .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
+      )
       .catch(err => reject(err));
   });
 
-export {
-  getAllDocs,
-  deleteDoc,
-  saveDoc,
-  updateDoc,
-};
+export { getAllDocs, deleteDoc, saveDoc, updateDoc };

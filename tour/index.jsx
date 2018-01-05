@@ -3,15 +3,15 @@ require('../libs/dragNdrop.js');
 
 // Libraries
 import React from 'react';
-import {AppContainer} from 'react-hot-loader';
-import {render} from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import { render } from 'react-dom';
 
 // Root Component
 import Tour from './Tour';
 
 render(
   <AppContainer>
-    <Tour/>
+    <Tour />
   </AppContainer>,
   document.getElementById('root')
 );

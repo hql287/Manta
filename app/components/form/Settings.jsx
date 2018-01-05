@@ -1,10 +1,10 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {isEqual} from 'lodash';
+import { isEqual } from 'lodash';
 
 // Animation
-import {Motion, spring} from 'react-motion';
+import { Motion, spring } from 'react-motion';
 
 // Styles
 import styled from 'styled-components';
@@ -60,8 +60,8 @@ const Helper = styled.div`
   align-items: center;
   height: 40px;
   padding: 0 40px;
-  background: #F2F3F4;
-  color: #B4B7BA;
+  background: #f2f3f4;
+  color: #b4b7ba;
   p {
     font-size: 14px;
     font-weight: 100;
@@ -97,53 +97,55 @@ class Settings extends Component {
   }
 
   isSettingsSaved() {
-    return isEqual(this.props.settings.required_fields, this.props.savedSettings);
+    return isEqual(
+      this.props.settings.required_fields,
+      this.props.savedSettings
+    );
   }
 
   saveAsDefault() {
-    const {updateSavedSettings} = this.props;
+    const { updateSavedSettings } = this.props;
     updateSavedSettings('required_fields', this.props.settings.required_fields);
   }
 
   render() {
-    const {toggleFormSettings, settings} = this.props;
-    const {required_fields, open} = settings;
+    const { toggleFormSettings, settings } = this.props;
+    const { required_fields, open } = settings;
     return (
       <Motion
         style={{
           height: spring(open ? 180 : 45),
           rotate: spring(open ? 180 : 0),
-        }}>
-        {({height, rotate}) => (
-          <Wrapper style={{height: `${height}px`}}>
+        }}
+      >
+        {({ height, rotate }) => (
+          <Wrapper style={{ height: `${height}px` }}>
             <SettingsHeader href="#" onClick={toggleFormSettings}>
               <Label>Form Settings</Label>
               <div
                 style={{
                   transform: `rotate(${rotate}deg)`,
-                }}>
+                }}
+              >
                 <i className="ion-arrow-down-b" />
               </div>
             </SettingsHeader>
 
             <Helper>
-              {this.isSettingsSaved()
-              ?
-                <p>
-                  Toogle any field to make it required in the form.
-                </p>
-              :
+              {this.isSettingsSaved() ? (
+                <p>Toogle any field to make it required in the form.</p>
+              ) : (
                 <a href="#" onClick={this.saveAsDefault}>
                   <i className="ion-checkmark" /> Save as default?
                 </a>
-              }
+              )}
             </Helper>
 
             <AllSettings>
               <Setting>
                 <Label>Due Date</Label>
                 <Switch
-                  name='dueDate'
+                  name="dueDate"
                   checked={required_fields.dueDate}
                   onChange={this.handleInputChange}
                 />
@@ -152,7 +154,7 @@ class Settings extends Component {
               <Setting>
                 <Label>Currency</Label>
                 <Switch
-                  name='currency'
+                  name="currency"
                   checked={required_fields.currency}
                   onChange={this.handleInputChange}
                 />
@@ -161,7 +163,7 @@ class Settings extends Component {
               <Setting>
                 <Label>Discount</Label>
                 <Switch
-                  name='discount'
+                  name="discount"
                   checked={required_fields.discount}
                   onChange={this.handleInputChange}
                 />
@@ -170,7 +172,7 @@ class Settings extends Component {
               <Setting>
                 <Label>Tax</Label>
                 <Switch
-                  name='tax'
+                  name="tax"
                   checked={required_fields.tax}
                   onChange={this.handleInputChange}
                 />
@@ -179,7 +181,7 @@ class Settings extends Component {
               <Setting>
                 <Label>Note</Label>
                 <Switch
-                  name='note'
+                  name="note"
                   checked={required_fields.note}
                   onChange={this.handleInputChange}
                 />

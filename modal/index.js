@@ -3,24 +3,24 @@ require('../libs/dragNdrop.js');
 
 // Electron Libs
 const BrowserWindow = require('electron').remote.BrowserWindow;
-const ipc           = require('electron').ipcRenderer;
+const ipc = require('electron').ipcRenderer;
 
 // 3rd Party Libs
 const appConfig = require('electron').remote.require('electron-settings');
 
-const modal        = document.getElementById('modal');
-const modalType    = document.getElementById('modalType');
-const modalTitle   = document.getElementById('modalTitle');
+const modal = document.getElementById('modal');
+const modalType = document.getElementById('modalType');
+const modalTitle = document.getElementById('modalTitle');
 const modalMessage = document.getElementById('modalMessage');
 const modalButtons = document.getElementById('modalButtons');
-const mainWindow   = BrowserWindow.fromId(appConfig.get('mainWindowID'));
+const mainWindow = BrowserWindow.fromId(appConfig.get('mainWindowID'));
 
 ipc.on('update-modal', (e, dialogOptions, returnChannel, ...rest) => {
   populateModalContent(dialogOptions);
   modal.addEventListener('click', event => {
     event.preventDefault();
     if (event.target.tagName === 'A') {
-      let index = event.target.getAttribute('alt');
+      const index = event.target.getAttribute('alt');
       if (returnChannel !== '') {
         mainWindow.send(returnChannel, parseInt(index), ...rest);
       }
@@ -50,22 +50,22 @@ function populateModalContent(options) {
     }
   }
 
-  modalType.innerHTML    = modalIcon;       // Icon
-  modalTitle.innerHTML   = options.title;   // Update Titlte
+  modalType.innerHTML = modalIcon; // Icon
+  modalTitle.innerHTML = options.title; // Update Titlte
   modalMessage.innerHTML = options.message; // Message
 
   // Default Button
   if (options.buttons === undefined || options.buttons.length === 0) {
-    let defaultBtn    = document.createElement('a');
-    let defaultBtnTxt = document.createTextNode('Ok');
+    const defaultBtn = document.createElement('a');
+    const defaultBtnTxt = document.createTextNode('Ok');
     defaultBtn.appendChild(defaultBtnTxt);
     defaultBtn.setAttribute('href', '#');
     modalButtons.appendChild(defaultBtn);
   } else {
-  // Buttons
+    // Buttons
     options.buttons.forEach((buttonTxt, index) => {
-      let btn    = document.createElement('a');
-      let btnTxt = document.createTextNode(buttonTxt);
+      const btn = document.createElement('a');
+      const btnTxt = document.createTextNode(buttonTxt);
       btn.appendChild(btnTxt);
       btn.setAttribute('href', '#');
       btn.setAttribute('alt', index);

@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 // Recipient
 export const updateRecipient = createAction(
@@ -28,7 +28,7 @@ export const moveRow = createAction(
 // Form Actions
 export const clearForm = createAction(
   ACTION_TYPES.FORM_CLEAR,
-  (event, muted=false) => muted
+  (event, muted = false) => muted
   // Since clearForm can be called via click event or from other action
   // such as saveForm, the first argument will be resreved for event and
   // the second one will be used to determined whether to play a sound or not
@@ -40,18 +40,16 @@ export const toggleFormSettings = createAction(
   ACTION_TYPES.FORM_SETTING_TOGGLE
 );
 
-export const closeFormSettings = createAction(
-  ACTION_TYPES.FORM_SETTING_CLOSE
-);
+export const closeFormSettings = createAction(ACTION_TYPES.FORM_SETTING_CLOSE);
 
 export const updateSavedFormSettings = createAction(
   ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,
-  (setting, data) => ({setting, data})
+  (setting, data) => ({ setting, data })
 );
 
 export const updateFieldData = createAction(
   ACTION_TYPES.FORM_FIELD_UPDATE_DATA,
-  (field, data) => ({field, data})
+  (field, data) => ({ field, data })
 );
 
 export const toggleField = createAction(

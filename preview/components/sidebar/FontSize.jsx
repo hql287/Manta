@@ -1,9 +1,9 @@
 // Libs
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Section, Label, Range} from '../shared';
+import { Section, Label, Range } from '../shared';
 
-function FontSize({fontSize, handleInputChange}) {
+function FontSize({ fontSize, handleInputChange }) {
   return (
     <Section>
       <Label>Font Size</Label>

@@ -1,4 +1,8 @@
-import FormReducer, { getCurrentInvoice, getRows, getRecipient } from '../FormReducer';
+import FormReducer, {
+  getCurrentInvoice,
+  getRows,
+  getRecipient,
+} from '../FormReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
 import currencies from '../../../libs/currencies.json';
 
@@ -21,13 +25,13 @@ describe('Form Reducer should handle', () => {
       tax: {},
       settings: {
         open: true,
-        required_fields: {}
+        required_fields: {},
       },
       savedSettings: {
         tax: {},
         currency: 'USD',
-        required_fields: {}
-      }
+        required_fields: {},
+      },
     };
   });
 
@@ -41,7 +45,7 @@ describe('Form Reducer should handle', () => {
   it('remove a row item', () => {
     const newState = FormReducer(currentState, {
       type: ACTION_TYPES.FORM_ITEM_REMOVE,
-      payload: 'Arya Stark'
+      payload: 'Arya Stark',
     });
     expect(newState.rows).toHaveLength(3);
   });
@@ -52,13 +56,11 @@ describe('Form Reducer should handle', () => {
       payload: {
         id: 'Tyrion Lannister',
         description: 'The Lannisters always pay their debts',
-      }
+      },
     });
-    expect(
-      newState
-      .rows[2]
-      .description
-    ).toEqual('The Lannisters always pay their debts');
+    expect(newState.rows[2].description).toEqual(
+      'The Lannisters always pay their debts'
+    );
   });
 
   it('drag row item', () => {
@@ -67,7 +69,7 @@ describe('Form Reducer should handle', () => {
       payload: {
         dragIndex: 2,
         hoverIndex: 3,
-      }
+      },
     });
     expect(newState.rows).toHaveLength(4);
     expect(newState.rows).toEqual([
@@ -90,7 +92,9 @@ describe('Form Reducer should handle', () => {
     expect(newState.rows).toHaveLength(0);
     expect(newState.dueDate).toEqual({});
     expect(newState.note).toEqual({});
-    expect(newState.currency).toEqual(currencies[currentState.savedSettings.currency]);
+    expect(newState.currency).toEqual(
+      currencies[currentState.savedSettings.currency]
+    );
     expect(newState.discount).toEqual({});
     expect(newState.tax).toEqual({});
     expect(newState.settings.open).toEqual(false);
@@ -119,26 +123,25 @@ describe('Form Reducer should handle', () => {
     });
     expect(newState2.settings.open).toEqual(false);
   });
-
 });
 
 describe('Form Reducer should handle toggle', () => {
   let currentState;
   beforeEach(() => {
     currentState = {
-      dueDate:  {},
+      dueDate: {},
       currency: {},
       discount: {},
-      tax:      {},
-      note:     {},
+      tax: {},
+      note: {},
       settings: {
         required_fields: {
-          dueDate:  false,
+          dueDate: false,
           currency: false,
           discount: false,
-          tax:      false,
-          note:     false,
-        }
+          tax: false,
+          note: false,
+        },
       },
     };
   });
@@ -182,18 +185,17 @@ describe('Form Reducer should handle toggle', () => {
     });
     expect(newState.settings.required_fields.tax).toBe(true);
   });
-
 });
 
 describe('Form Reducer should handle update', () => {
   let currentState;
   beforeEach(() => {
     currentState = {
-      dueDate:  { required: true },
+      dueDate: { required: true },
       currency: { required: true },
       discount: { required: true },
-      tax:      { required: true },
-      note:     { required: true },
+      tax: { required: true },
+      note: { required: true },
     };
   });
 
@@ -209,7 +211,7 @@ describe('Form Reducer should handle update', () => {
           phone: '000000000',
         },
         new: {},
-      }
+      },
     });
     expect(newState.recipient.newRecipient).toBe(false);
     expect(newState.recipient.select).toEqual({
@@ -233,16 +235,16 @@ describe('Form Reducer should handle update', () => {
         field: 'currency',
         data: {
           selectedCurrency: {
-            "symbol": "$",
-            "name": "US Dollar",
-            "symbol_native": "$",
-            "decimal_digits": 2,
-            "rounding": 0,
-            "code": "USD",
-            "name_plural": "US dollars"
-          }
-        }
-      }
+            symbol: '$',
+            name: 'US Dollar',
+            symbol_native: '$',
+            decimal_digits: 2,
+            rounding: 0,
+            code: 'USD',
+            name_plural: 'US dollars',
+          },
+        },
+      },
     });
     expect(newState.currency.selectedCurrency.code).not.toEqual('VND');
     expect(newState.currency.selectedCurrency.code).toEqual('USD');
@@ -256,7 +258,7 @@ describe('Form Reducer should handle update', () => {
         data: {
           selectedDate: '28/07/1988',
         },
-      }
+      },
     });
     expect(newState.dueDate.selectedDate).toEqual('28/07/1988');
   });
@@ -269,8 +271,8 @@ describe('Form Reducer should handle update', () => {
         data: {
           type: 'percentage',
           amount: 10,
-        }
-      }
+        },
+      },
     });
     expect(newState.discount.type).toEqual('percentage');
     expect(newState.discount.type).not.toEqual('flat');
@@ -285,8 +287,8 @@ describe('Form Reducer should handle update', () => {
         field: 'tax',
         data: {
           amount: 5,
-        }
-      }
+        },
+      },
     });
     expect(newState.tax.amount).toEqual(5);
     expect(newState.tax.amount).not.toEqual(10);
@@ -299,21 +301,22 @@ describe('Form Reducer should handle update', () => {
         field: 'note',
         data: {
           content: 'You know nothing, Jon Snow',
-        }
-      }
+        },
+      },
     });
     expect(newState.note.content).toEqual('You know nothing, Jon Snow');
-    expect(newState.note.content).not.toEqual('The Lannisters always pay their debts');
+    expect(newState.note.content).not.toEqual(
+      'The Lannisters always pay their debts'
+    );
   });
-
 });
 
 // Test Selectors
 const state = {
   form: {
     rows: [],
-    recipient: {}
-  }
+    recipient: {},
+  },
 };
 
 describe('Form Selectors', () => {
@@ -327,4 +330,3 @@ describe('Form Selectors', () => {
     expect(getCurrentInvoice(state)).toEqual(state.form);
   });
 });
-

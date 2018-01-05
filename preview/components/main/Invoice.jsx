@@ -1,7 +1,6 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-const appConfig = require('electron').remote.require('electron-settings');
 
 // Style
 import styled from 'styled-components';
@@ -32,34 +31,25 @@ class Invoice extends Component {
   }
 
   renderTemplate() {
-    const {invoice, configs} = this.props;
-    const props = {
-      company: appConfig.get('profile'),
-      invoice,
-      configs,
-    };
-    switch (configs.template) {
+    switch (this.props.configs.template) {
       case 'business': {
-        return <Business {...props} />;
+        return <Business {...this.props} />;
       }
       default: {
-        return <Minimal {...props} />;
+        return <Minimal {...this.props} />;
       }
     }
   }
 
   render() {
-    return (
-      <Page>
-        { this.renderTemplate() }
-      </Page>
-    );
+    return <Page>{this.renderTemplate()}</Page>;
   }
 }
 
 Invoice.propTypes = {
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
 };
 
 export default Invoice;

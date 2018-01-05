@@ -35,7 +35,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           <input
             name="fullname"
             type="text"
-            value={fullname ? fullname : ''}
+            value={fullname || ''}
             onChange={updateRecipientForm}
           />
         </Field>
@@ -44,7 +44,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           <input
             name="company"
             type="text"
-            value={company ? company : ''}
+            value={company || ''}
             onChange={updateRecipientForm}
           />
         </Field>
@@ -55,7 +55,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           <input
             name="email"
             type="text"
-            value={email ? email : ''}
+            value={email || ''}
             onChange={updateRecipientForm}
           />
         </Field>
@@ -64,7 +64,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           <input
             name="phone"
             type="text"
-            value={phone ? phone : ''}
+            value={phone || ''}
             onChange={updateRecipientForm}
           />
         </Field>

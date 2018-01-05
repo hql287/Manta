@@ -1,6 +1,7 @@
 import SettingsReducer, {
   getCurrentSettings,
   getSavedSettings,
+  getDateFormat,
 } from '../SettingsReducer';
 
 import FormReducer, {
@@ -11,29 +12,36 @@ import FormReducer, {
 import * as ACTION_TYPES from '../../constants/actions.jsx';
 
 const sampleSettings = {
-  info: {
-    logo: '',
-    fullname: 'Hung Q. Le',
-    company: 'Paperless Co',
-    address: 'Ratburana, Bangkok',
-    email: 'hi@paperless.co',
-    phone: '+66 (0) 6-4890-3611',
-    website: 'https://www.paperless.co',
+  profile: {
+    fullname: 'Manta Ray',
+    company: 'Oceanic Preservation Society',
+    address: '336 Bon Air Center #384 Greenbrae, CA 94904',
+    email: 'info@opsociety.org',
+    phone: '+01 (0) 1-2345-6789',
+    website: 'http://www.opsociety.org/',
   },
-  appSettings: {
-    currency: 'USD',
-    muted: true,
-    sound: 'default',
-    lang: 'en',
-  },
-  printOptions: {
+  invoice: {
     exportDir: '/Users/quochungle/Desktop',
     template: 'default',
-    marginsType: 2,
-    pageSize: 'A4',
-    printBackground: true,
-    printSelectionOnly: false,
-    landscape: false,
+    currency: 'USD',
+    dateFormat: 'MM/DD/YYYY',
+    tax: {
+      tin: '123-456-789',
+      method: 'default',
+      amount: 0,
+    },
+    required_fields: {
+      dueDate: false,
+      currency: false,
+      discount: false,
+      tax: false,
+      note: false,
+    },
+  },
+  general: {
+    language: 'en',
+    sound: 'default',
+    muted: false,
   },
 };
 
@@ -58,7 +66,7 @@ describe('Settings Reducer', () => {
     expect(newState.saved).toEqual(sampleSettings);
   });
 
-  it('update save settings', () => {
+  it('update saved settings', () => {
     const data = sampleSettings;
     const newState = SettingsReducer(initialState, {
       type: ACTION_TYPES.SETTINGS_SAVE,
@@ -72,15 +80,14 @@ describe('Settings Reducer should handle update', () => {
   let currentState;
   beforeAll(() => {
     currentState = {
-      loaded: true,
+      // loaded: true,
       current: sampleSettings,
       saved: sampleSettings,
     };
   });
 
-  it('app settings', () => {
+  it('general settings', () => {
     const data = {
-      currency: 'VND',
       muted: false,
       sound: 'modern',
       lang: 'vi',
@@ -88,17 +95,16 @@ describe('Settings Reducer should handle update', () => {
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
       payload: {
-        setting: 'appSettings',
-        data: data,
+        setting: 'general',
+        data,
       },
     });
-    expect(newState.current.appSettings.currency).toEqual('VND');
-    expect(newState.current.appSettings.muted).toBeFalsy;
-    expect(newState.current.appSettings.sound).toEqual('modern');
-    expect(newState.current.appSettings.lang).toEqual('vi');
+    expect(newState.current.general.muted).toBeFalsy;
+    expect(newState.current.general.sound).toEqual('modern');
+    expect(newState.current.general.lang).toEqual('vi');
   });
 
-  it('info settings', () => {
+  it('profile settings', () => {
     const data = {
       fullname: 'Jon Snow',
       company: 'HBO',
@@ -109,47 +115,48 @@ describe('Settings Reducer should handle update', () => {
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
       payload: {
-        setting: 'info',
-        data: data,
+        setting: 'profile',
+        data,
       },
     });
-    expect(newState.current.info.fullname).toEqual('Jon Snow');
-    expect(newState.current.info.company).toEqual('HBO');
-    expect(newState.current.info.address).toEqual('Winterfell');
-    expect(newState.current.info.email).toEqual('jon@snow.com');
-    expect(newState.current.info.website).toEqual('https://iknownothing.com');
+    expect(newState.current.profile.fullname).toEqual('Jon Snow');
+    expect(newState.current.profile.company).toEqual('HBO');
+    expect(newState.current.profile.address).toEqual('Winterfell');
+    expect(newState.current.profile.email).toEqual('jon@snow.com');
+    expect(newState.current.profile.website).toEqual(
+      'https://iknownothing.com'
+    );
   });
 
-  it('print settings', () => {
+  it('invoice settings', () => {
     const data = {
-      template: 'classic',
-      pageSize: 'A5',
-      printBackground: false,
-      printSelectionOnly: false,
-      landscape: true,
+      template: 'business',
+      currency: 'THB',
+      dateFormat: 'MMMM/DDDD/YYYY',
     };
     const newState = SettingsReducer(currentState, {
       type: ACTION_TYPES.SETTINGS_UPDATE,
       payload: {
-        setting: 'printOptions',
-        data: data,
+        setting: 'invoice',
+        data,
       },
     });
-    expect(newState.current.printOptions.template).toEqual('classic');
-    expect(newState.current.printOptions.pageSize).toEqual('A5');
-    expect(newState.current.printOptions.printBackground).toBeFalsy;
-    expect(newState.current.printOptions.printSelectionOnly).toBeFalsy;
-    expect(newState.current.printOptions.landscape).toBeTruthy;
+    expect(newState.current.invoice.template).toEqual('business');
+    expect(newState.current.invoice.currency).toEqual('THB');
+    expect(newState.current.invoice.dateFormat).toEqual(data.dateFormat);
   });
 });
-
 
 // Test Selectors
 const state = {
   settings: {
     current: {},
-    saved: {},
-  }
+    saved: {
+      invoice: {
+        dateFormat: 'DDDD/MMMM/YYYY',
+      },
+    },
+  },
 };
 
 describe('Form Selectors', () => {
@@ -159,6 +166,9 @@ describe('Form Selectors', () => {
   it('getSavedSettings should return savedSettings state', () => {
     expect(getSavedSettings(state)).toEqual(state.settings.saved);
   });
+  it('getDateFormat should return saved dateFormat setting', () => {
+    expect(getDateFormat(state)).toEqual(
+      state.settings.saved.invoice.dateFormat
+    );
+  });
 });
-
-

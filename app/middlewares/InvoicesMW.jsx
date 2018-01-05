@@ -10,7 +10,7 @@ import * as UIActions from '../actions/ui';
 import * as FormActions from '../actions/form';
 
 // Helpers
-import { getSubtotal, getGrandTotal } from '../helpers/invoice';
+import { getInvoiceValue } from '../helpers/invoice';
 import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 
 const InvoicesMW = ({ dispatch }) => next => action => {
@@ -19,27 +19,31 @@ const InvoicesMW = ({ dispatch }) => next => action => {
       // Change Tab to Form
       next(UIActions.changeActiveTab('form'));
       // Update Recipient Data
-      dispatch(FormActions.updateRecipient({
-        new: {},
-        select: action.payload,
-        newRecipient: false,
-      }));
+      dispatch(
+        FormActions.updateRecipient({
+          new: {},
+          select: action.payload,
+          newRecipient: false,
+        })
+      );
     }
 
     case ACTION_TYPES.INVOICE_GET_ALL: {
       return getAllDocs('invoices')
         .then(allDocs => {
-          next(Object.assign({}, action, {
-            payload: allDocs,
-          }));
+          next(
+            Object.assign({}, action, {
+              payload: allDocs,
+            })
+          );
         })
         .catch(err => {
           next({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }
@@ -54,8 +58,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         currency: invoiceData.currency
           ? invoiceData.currency
           : currencies[appConfig.get('invoice.currency')],
-        subtotal: getSubtotal(invoiceData),
-        grandTotal: getGrandTotal(invoiceData),
+        subtotal: getInvoiceValue(invoiceData).subtotal,
+        grandTotal: getInvoiceValue(invoiceData).grandTotal,
       });
       // Save doc to db
       return saveDoc('invoices', doc)
@@ -68,19 +72,19 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Invoice Created Successfully'
-            }
+              message: 'Invoice Created Successfully',
+            },
           });
           // Preview Window
-         ipc.send('preview-invoice', doc);
+          ipc.send('preview-invoice', doc);
         })
         .catch(err => {
           next({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }
@@ -90,14 +94,14 @@ const InvoicesMW = ({ dispatch }) => next => action => {
         .then(remainingDocs => {
           next({
             type: ACTION_TYPES.INVOICE_DELETE,
-            payload: remainingDocs
+            payload: remainingDocs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Deleted Successfully'
-            }
+              message: 'Deleted Successfully',
+            },
           });
         })
         .catch(err => {
@@ -105,25 +109,27 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }
 
     case ACTION_TYPES.INVOICE_SET_STATUS: {
-      return updateDoc('invoices', action.payload.invoiceID, { status: action.payload.status })
+      return updateDoc('invoices', action.payload.invoiceID, {
+        status: action.payload.status,
+      })
         .then(docs => {
           next({
             type: ACTION_TYPES.INVOICE_SET_STATUS,
-            payload: docs
+            payload: docs,
           });
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Updated Successfully'
-            }
+              message: 'Updated Successfully',
+            },
           });
         })
         .catch(err => {
@@ -131,8 +137,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'warning',
-              message: err.message
-            }
+              message: err.message,
+            },
           });
         });
     }

@@ -1,7 +1,7 @@
 // Libs
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {compose} from 'recompose';
+import { compose } from 'recompose';
 
 // HOCs
 import _withDraggable from './hoc/_withDraggable';
@@ -66,13 +66,13 @@ export class ItemRow extends Component {
   }
 
   componentWillMount() {
-    const {id, description, quantity, price, subtotal} = this.props.item;
+    const { id, description, quantity, price, subtotal } = this.props.item;
     this.setState({
       id,
-      description: description ? description : '',
-      price: price ? price : '',
-      quantity: quantity ? quantity : '',
-      subtotal: subtotal ? subtotal : '',
+      description: description || '',
+      price: price || '',
+      quantity: quantity || '',
+      subtotal: subtotal || '',
     });
   }
 
@@ -85,36 +85,38 @@ export class ItemRow extends Component {
   handleTextInputChange(event) {
     const name = event.target.name;
     const value = event.target.value;
-    this.setState({[name]: value}, () => {
+    this.setState({ [name]: value }, () => {
       this.uploadRowState();
     });
   }
 
   handleNumberInputChange(event) {
-    const name   = event.target.name;
+    const name = event.target.name;
     const eValue = event.target.value;
-    const value  = eValue === '' ? '' : parseFloat(eValue);
-    this.setState({[name]: value}, () => {
+    const value = eValue === '' ? '' : parseFloat(eValue);
+    this.setState({ [name]: value }, () => {
       this.updateSubtotal();
     });
   }
 
   updateSubtotal() {
-    const currentPrice = this.state.price === '' ? 0 : parseFloat(this.state.price);
-    const currentQuantity = this.state.quantity === '' ? 0 : parseFloat(this.state.quantity);
+    const currentPrice =
+      this.state.price === '' ? 0 : parseFloat(this.state.price);
+    const currentQuantity =
+      this.state.quantity === '' ? 0 : parseFloat(this.state.quantity);
     let currentSubtotal;
     if (this.state.price === '' || this.state.quantity === '') {
       currentSubtotal = '';
     } else {
       currentSubtotal = currentPrice * currentQuantity;
     }
-    this.setState({subtotal: currentSubtotal}, () => {
+    this.setState({ subtotal: currentSubtotal }, () => {
       this.uploadRowState();
     });
   }
 
   uploadRowState() {
-    const {updateRow} = this.props;
+    const { updateRow } = this.props;
     updateRow(this.state);
   }
 
@@ -123,14 +125,14 @@ export class ItemRow extends Component {
   }
 
   render() {
-    const {actions, hasHandler} = this.props;
+    const { actions, hasHandler } = this.props;
     return (
       <ItemDiv>
-        { hasHandler &&
+        {hasHandler && (
           <div className="dragHandler">
             <i className="ion-grid" />
           </div>
-        }
+        )}
         <div className="flex3">
           <ItemDivInput
             name="description"
@@ -166,29 +168,27 @@ export class ItemRow extends Component {
           />
         </div>
 
-        {(actions || hasHandler) &&
+        {(actions || hasHandler) && (
           <ItemActions>
-            {actions &&
-              <ItemRemoveBtn
-                href="#"
-                onClick={this.removeRow}>
+            {actions && (
+              <ItemRemoveBtn href="#" onClick={this.removeRow}>
                 <i className="ion-close-circled" />
-              </ItemRemoveBtn>}
-          </ItemActions>}
+              </ItemRemoveBtn>
+            )}
+          </ItemActions>
+        )}
       </ItemDiv>
     );
   }
 }
 
 ItemRow.propTypes = {
-  actions:    PropTypes.bool.isRequired,
-  addItem:    PropTypes.func.isRequired,
+  actions: PropTypes.bool.isRequired,
+  addItem: PropTypes.func.isRequired,
   hasHandler: PropTypes.bool.isRequired,
-  item:       PropTypes.object.isRequired,
-  removeRow:  PropTypes.func.isRequired,
-  updateRow:  PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  removeRow: PropTypes.func.isRequired,
+  updateRow: PropTypes.func.isRequired,
 };
 
-export default compose (
-  _withDraggable
-)(ItemRow);
+export default compose(_withDraggable)(ItemRow);

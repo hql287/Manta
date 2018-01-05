@@ -1,16 +1,16 @@
 // Libs
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 import currencies from '../../../../libs/currencies.json';
 const appConfig = require('electron').remote.require('electron-settings');
 
 // Component
-import {Currency} from '../Currency';
-import {Section} from '../../shared/Section';
+import { Currency } from '../Currency';
+import { Section } from '../../shared/Section';
 
 // Mocks
-const currency = currencies['USD'];
+const currency = currencies.USD;
 const savedSettings = 'USD';
 const updateFieldData = jest.fn();
 const updateSavedSettings = jest.fn();
@@ -29,10 +29,7 @@ describe('Renders correctly to the DOM', () => {
   });
 
   // TODO
-  it('will not rerender if threre is no change in Props', () => {
-
-  });
-
+  it('will not rerender if threre is no change in Props', () => {});
 
   it('renders necessary element', () => {
     // Section
@@ -48,9 +45,9 @@ describe('Renders correctly to the DOM', () => {
 
   it('handle select change correctly', () => {
     const selectEl = wrapper.find('select');
-    selectEl.simulate('change', {target: {value: 'VND'}});
+    selectEl.simulate('change', { target: { value: 'VND' } });
     expect(updateFieldData).toHaveBeenCalled();
-    expect(updateFieldData).toHaveBeenCalledWith('currency', currencies['VND']);
+    expect(updateFieldData).toHaveBeenCalledWith('currency', currencies.VND);
   });
 
   it('matches snapshot', () => {

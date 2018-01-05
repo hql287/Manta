@@ -1,5 +1,5 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
-import {createAction} from 'redux-actions';
+import { createAction } from 'redux-actions';
 
 // Change Active Tab
 export const changeActiveTab = createAction(
@@ -11,8 +11,8 @@ export const changeActiveTab = createAction(
 export const checkUpdatesMessage = createAction(
   ACTION_TYPES.UI_CHECK_UPDATES_MESSAGE,
   (content, type) => ({
-    content: content,
-    type: type,
+    content,
+    type,
   })
 );
 

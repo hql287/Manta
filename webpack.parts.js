@@ -13,9 +13,7 @@ exports.devServer = ({ host, port } = {}) => ({
     host,
     port,
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 });
 
 // Source Map
@@ -24,43 +22,33 @@ exports.generateSourceMaps = ({ type }) => ({
 });
 
 // Check Duplicates
-exports.checkDuplicate = (options) => ({
-  plugins: [
-    new DuplicatePackageCheckerPlugin(options),
-  ],
+exports.checkDuplicate = options => ({
+  plugins: [new DuplicatePackageCheckerPlugin(options)],
 });
 
 // Clean between builds
-exports.clean = (path) => ({
-  plugins: [
-    new CleanWebpackPlugin([path]),
-  ],
+exports.clean = path => ({
+  plugins: [new CleanWebpackPlugin([path])],
 });
 
 // JS Minification
 exports.minifyJavaScript = () => ({
-  plugins: [
-    new BabelWebpackPlugin(),
-  ],
+  plugins: [new BabelWebpackPlugin()],
 });
 
 // Analyzing Bundle
 exports.analyzeBundle = () => ({
-  plugins: [
-    new BundleAnalyzerPlugin(),
-  ],
+  plugins: [new BundleAnalyzerPlugin()],
 });
 
 // Webpack Dashboard
 exports.webpackDashboard = () => ({
-  plugins: [
-    new DashboardPlugin(),
-  ],
+  plugins: [new DashboardPlugin()],
 });
 
 // Extract vendor files
 exports.extractBundles = bundles => ({
-  plugins: bundles.map((bundle) => (
-    new webpack.optimize.CommonsChunkPlugin(bundle)
-  )),
+  plugins: bundles.map(
+    bundle => new webpack.optimize.CommonsChunkPlugin(bundle)
+  ),
 });

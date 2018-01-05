@@ -1,15 +1,17 @@
 // Libraries
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {isEqual} from 'lodash';
+import { isEqual } from 'lodash';
 // Custom Components
-import {Section, Header} from '../shared/Section';
+import { Section, Header } from '../shared/Section';
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 // Styles
 import styled from 'styled-components';
 const TaxID = styled.div``;
-const TaxAmount = styled.div`flex: 1;`;
+const TaxAmount = styled.div`
+  flex: 1;
+`;
 
 const Form = styled.div`
   padding: 20px;
@@ -44,13 +46,10 @@ export class Tax extends Component {
     // Already made changes but not saved
     if (this.state !== this.props.savedSettings) {
       // Reset to savedSettings if the below confition is met
-      if ( nextProps.tax === nextProps.savedSettings ) {
-        this.setState(
-          nextProps.savedSettings,
-          () => {
-            this.updateTaxState();
-          }
-        );
+      if (nextProps.tax === nextProps.savedSettings) {
+        this.setState(nextProps.savedSettings, () => {
+          this.updateTaxState();
+        });
       }
     }
   }
@@ -72,12 +71,12 @@ export class Tax extends Component {
       },
       () => {
         this.updateTaxState();
-      },
+      }
     );
   }
 
   updateTaxState() {
-    const {updateFieldData} = this.props;
+    const { updateFieldData } = this.props;
     updateFieldData('tax', this.state);
   }
 
@@ -86,7 +85,7 @@ export class Tax extends Component {
   }
 
   saveAsDefault() {
-    const {updateSavedSettings} = this.props;
+    const { updateSavedSettings } = this.props;
     updateSavedSettings('tax', this.state);
   }
 
@@ -135,7 +134,8 @@ export class Tax extends Component {
               <select
                 name="method"
                 value={this.state.method}
-                onChange={this.handleInputChange}>
+                onChange={this.handleInputChange}
+              >
                 <option value="default">Default</option>
                 <option value="reverse">Reverse Charge</option>
               </select>
