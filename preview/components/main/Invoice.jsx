@@ -1,5 +1,5 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // Style
@@ -25,10 +25,7 @@ import Minimal from '../../templates/minimal';
 import Business from '../../templates/business';
 
 // Component
-class Invoice extends Component {
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
-  }
+class Invoice extends PureComponent {
 
   renderTemplate() {
     switch (this.props.configs.template) {
