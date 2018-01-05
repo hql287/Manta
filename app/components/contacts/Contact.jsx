@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // Custom Components
@@ -7,15 +7,11 @@ import { TR, TD } from '../shared/Table';
 import Button from '../shared/Button';
 
 // Component
-class Contact extends Component {
+class Contact extends PureComponent {
   constructor(props) {
     super(props);
     this.deleteContact = this.deleteContact.bind(this);
     this.newInvoice = this.newInvoice.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   newInvoice() {
