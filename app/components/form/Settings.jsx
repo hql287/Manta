@@ -1,5 +1,5 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 
@@ -79,13 +79,9 @@ import Switch from '../shared/Switch';
 
 // Component
 
-class Settings extends Component {
+class Settings extends PureComponent {
   constructor(props) {
     super(props);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   // Update local state

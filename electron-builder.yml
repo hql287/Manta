@@ -18,3 +18,7 @@ linux:
   target:
     - deb
     - AppImage
+    - snap
+snap:
+  after:
+    - desktop-gtk2

@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
@@ -35,27 +35,23 @@ import Toggler from '../components/sidebar/Toggler';
 import AccentColor from '../components/sidebar/AccentColor';
 import Actions from '../components/sidebar/Actions';
 
-class SideBar extends Component {
+class SideBar extends PureComponent {
   constructor(props) {
     super(props);
   }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
-  }
-
-  handleInputChange = (event) => {
+  
+  handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.updateConfigs({ name, value });
   }
 
-  handleAccentColorChange = (color) => {
+  handleAccentColorChange = color => {
     this.updateConfigs({ name: 'accentColor', value: color });
   }
 
-  updateConfigs = (config) => {
+  updateConfigs = config => {
     const { dispatch } = this.props;
     dispatch(
       ActionsCreator.updateConfigs({ name: config.name, value: config.value })

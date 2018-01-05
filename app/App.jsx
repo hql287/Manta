@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
@@ -19,7 +19,7 @@ import AppUpdate from './components/layout/AppUpdate';
 import { AppWrapper } from './components/shared/Layout';
 
 // Components
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -61,10 +61,6 @@ class App extends Component {
     ipc.on('menu-form-toggle-settings', () => {
       dispatch(FormActions.toggleFormSettings());
     });
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   componentWillUnmount() {

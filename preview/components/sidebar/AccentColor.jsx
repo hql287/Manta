@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { BlockPicker } from 'react-color';
 import { Section, Label } from '../shared';
@@ -48,7 +48,7 @@ const Cover = styled.div`
   left: 0px;
 `;
 
-class AccentColor extends Component {
+class AccentColor extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,10 +56,6 @@ class AccentColor extends Component {
       useCustom: props.accentColor.useCustom,
       color: props.accentColor.color,
     };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState || this.props !== nextProps;
   }
 
   handleClick = () => {
@@ -70,11 +66,11 @@ class AccentColor extends Component {
     this.setState({ showPicker: false });
   }
 
-  handleChange = (color) => {
+  handleChange = color => {
     this.setState({ color: color.hex }, this.dispatchChange);
   }
 
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     this.setState({ useCustom: event.target.checked }, this.dispatchChange);
   }
 

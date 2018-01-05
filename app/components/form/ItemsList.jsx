@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 // Redux
@@ -58,16 +58,12 @@ const ItemsListDiv = styled.div`
 `;
 
 // Component
-export class ItemsList extends Component {
+export class ItemsList extends PureComponent {
   componentDidMount() {
     const { rows, boundActionCreators } = this.props;
     if (!rows.length) {
       boundActionCreators.addItem();
     }
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return this.props !== nextProps;
   }
 
   render() {
