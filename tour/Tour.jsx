@@ -18,19 +18,17 @@ class Tour extends Component {
   constructor(props) {
     super(props);
     this.state = { currentSlide: 1, totalSlide: 5 };
-    this.nextSlide = this.nextSlide.bind(this);
-    this.endTour = this.endTour.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state !== nextState;
   }
 
-  nextSlide() {
+  nextSlide = () => {
     this.setState({ currentSlide: this.state.currentSlide + 1 });
   }
 
-  endTour() {
+  endTour = () => {
     this.setState({ currentSlide: 1 }, () => {
       ipc.send('end-tour');
     });

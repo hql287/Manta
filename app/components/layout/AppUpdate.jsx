@@ -48,7 +48,6 @@ class AppUpdate extends Component {
       message: null,
       type: 'info',
     };
-    this.removeMessage = this.removeMessage.bind(this);
   }
 
   componentDidMount() {
@@ -148,7 +147,7 @@ class AppUpdate extends Component {
     ]);
   }
 
-  removeMessage() {
+  removeMessage = () => {
     this.setState({
       message: null,
       type: 'info',

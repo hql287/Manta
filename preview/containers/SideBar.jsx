@@ -38,31 +38,27 @@ import Actions from '../components/sidebar/Actions';
 class SideBar extends PureComponent {
   constructor(props) {
     super(props);
-    this.savePDF = this.savePDF.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleAccentColorChange = this.handleAccentColorChange.bind(this);
-    this.updateConfigs = this.updateConfigs.bind(this);
   }
-
-  handleInputChange(event) {
+  
+  handleInputChange = event => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     this.updateConfigs({ name, value });
   }
 
-  handleAccentColorChange(color) {
+  handleAccentColorChange = color => {
     this.updateConfigs({ name: 'accentColor', value: color });
   }
 
-  updateConfigs(config) {
+  updateConfigs = config => {
     const { dispatch } = this.props;
     dispatch(
       ActionsCreator.updateConfigs({ name: config.name, value: config.value })
     );
   }
 
-  savePDF() {
+  savePDF = () => {
     const invoiceID = this.props.invoice._id;
     ipc.send('save-pdf', invoiceID);
   }

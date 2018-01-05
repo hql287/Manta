@@ -19,11 +19,9 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.profile;
-    this.handleLogoChange = this.handleLogoChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({ [name]: value }, () => {
@@ -31,7 +29,7 @@ class Profile extends Component {
     });
   }
 
-  handleLogoChange(base64String) {
+  handleLogoChange = (base64String) => {
     this.setState({ logo: base64String }, () => {
       this.updateProfileState();
     });

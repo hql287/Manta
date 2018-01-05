@@ -9,13 +9,9 @@ import { TransitionMotion, spring } from 'react-motion';
 class TransitionList extends Component {
   constructor(props) {
     super(props);
-    this.getDefaultStyles = this.getDefaultStyles.bind(this);
-    this.getStyles = this.getStyles.bind(this);
-    this.willEnter = this.willEnter.bind(this);
-    this.willLeave = this.willLeave.bind(this);
   }
 
-  getDefaultStyles() {
+  getDefaultStyles = () => {
     const { children, componentHeight } = this.props;
     const defaultStyles = children.map(child => ({
       key: child.key,
@@ -28,7 +24,7 @@ class TransitionList extends Component {
     return defaultStyles;
   }
 
-  getStyles() {
+  getStyles = () => {
     const { children, componentHeight } = this.props;
     const styles = children.map(child => ({
       key: child.key,
@@ -41,14 +37,14 @@ class TransitionList extends Component {
     return styles;
   }
 
-  willEnter() {
+  willEnter = () => {
     return {
       height: 0,
       opacity: 0,
     };
   }
 
-  willLeave() {
+  willLeave = () => {
     return {
       height: spring(0),
       opacity: spring(0),

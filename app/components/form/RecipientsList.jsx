@@ -18,7 +18,6 @@ const List = styled.div`
 export class RecipientsList extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillMount() {
@@ -28,7 +27,7 @@ export class RecipientsList extends Component {
     }
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     this.updateSelectedRecipient(event.target.value);
   }
 

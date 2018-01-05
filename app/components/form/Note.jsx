@@ -26,7 +26,6 @@ export class Note extends Component {
   constructor(props) {
     super(props);
     this.state = { content: this.props.note.content };
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,7 +42,7 @@ export class Note extends Component {
     return false;
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     this.setState({ content: event.target.value }, () => {
       this.props.updateFieldData('note', this.state);
     });

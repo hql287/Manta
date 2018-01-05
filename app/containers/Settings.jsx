@@ -35,7 +35,6 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = { visibleTab: 1 };
-    this.saveSettingsState = this.saveSettingsState.bind(this);
   }
 
   // Check if settings have been saved
@@ -45,7 +44,7 @@ class Settings extends Component {
   }
 
   // Save Settings to App Config
-  saveSettingsState() {
+  saveSettingsState = () => {
     const { currentSettings, boundActionCreators } = this.props;
     boundActionCreators.saveSettings(currentSettings);
   }

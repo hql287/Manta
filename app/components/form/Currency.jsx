@@ -15,10 +15,6 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 export class Currency extends Component {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.isSettingsSaved = this.isSettingsSaved.bind(this);
-    this.saveAsDefault = this.saveAsDefault.bind(this);
-    this.sortCurrencies = this.sortCurrencies.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -27,21 +23,21 @@ export class Currency extends Component {
     return true;
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const value = event.target.value;
     this.props.updateFieldData('currency', currencies[value]);
   }
 
-  isSettingsSaved() {
+  isSettingsSaved = () => {
     return isEqual(this.props.currency.code, this.props.savedSettings);
   }
 
-  saveAsDefault() {
+  saveAsDefault = () => {
     const { updateSavedSettings } = this.props;
     updateSavedSettings('currency', this.props.currency.code);
   }
 
-  sortCurrencies() {
+  sortCurrencies = () => {
     // Sort currencies
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [

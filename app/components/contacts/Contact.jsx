@@ -10,16 +10,14 @@ import Button from '../shared/Button';
 class Contact extends PureComponent {
   constructor(props) {
     super(props);
-    this.deleteContact = this.deleteContact.bind(this);
-    this.newInvoice = this.newInvoice.bind(this);
   }
 
-  newInvoice() {
+  newInvoice = () => {
     const { newInvoice, contact } = this.props;
     newInvoice(contact);
   }
 
-  deleteContact() {
+  deleteContact = () => {
     const { contact, deleteContact } = this.props;
     deleteContact(contact._id);
   }

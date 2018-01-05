@@ -6,10 +6,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 class DragNDrop extends PureComponent {
   constructor(props) {
     super(props);
-    this.onDragEnd = this.onDragEnd.bind(this);
   }
-
-  onDragEnd(result) {
+  onDragEnd = result => {
     if (!result.destination) {
       return;
     }

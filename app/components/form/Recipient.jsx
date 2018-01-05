@@ -21,9 +21,6 @@ export class Recipient extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.recipient;
-    this.toggleForm = this.toggleForm.bind(this);
-    this.updateRecipientForm = this.updateRecipientForm.bind(this);
-    this.updateRecipientList = this.updateRecipientList.bind(this);
   }
 
   // Handle Reset Form
@@ -50,14 +47,14 @@ export class Recipient extends Component {
   }
 
   // Switch between New Recipient Form or Selection Form
-  toggleForm() {
+  toggleForm = () => {
     this.setState({ newRecipient: !this.state.newRecipient }, () => {
       this.updateRecipientData(this.state);
     });
   }
 
   // Hanlde Update Recipient Form Data
-  updateRecipientForm(event) {
+  updateRecipientForm = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState(
@@ -71,7 +68,7 @@ export class Recipient extends Component {
   }
 
   // Handle Update Recipient Selection Form
-  updateRecipientList(selectedContact) {
+  updateRecipientList = (selectedContact) => {
     this.setState({ select: selectedContact }, () => {
       this.updateRecipientData(this.state);
     });

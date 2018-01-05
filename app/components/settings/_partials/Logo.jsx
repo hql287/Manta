@@ -79,9 +79,6 @@ const SelectLogoBtn = styled.a`
 class Logo extends Component {
   constructor(props) {
     super(props);
-    this.selectLogo = this.selectLogo.bind(this);
-    this.removeLogo = this.removeLogo.bind(this);
-    this.handleFileDrop = this.handleFileDrop.bind(this);
   }
 
   componentDidMount() {
@@ -98,13 +95,13 @@ class Logo extends Component {
     ipc.removeAllListeners('file-selected');
   }
 
-  handleFileUpload(filePath) {
+  handleFileUpload = (filePath) => {
     processImg(filePath, imgSrcString => {
       this.props.handleLogoChange(imgSrcString);
     });
   }
 
-  handleFileDrop(item, monitor) {
+  handleFileDrop = (item, monitor) => {
     if (monitor) {
       const droppedFiles = monitor.getItem().files;
       const filePath = droppedFiles[0].path;
@@ -112,7 +109,7 @@ class Logo extends Component {
     }
   }
 
-  selectLogo() {
+  selectLogo = () => {
     ipc.send('open-file-dialog');
   }
 

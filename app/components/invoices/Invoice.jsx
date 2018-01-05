@@ -145,10 +145,6 @@ const Field = styled.div`
 class Invoice extends Component {
   constructor(props) {
     super(props);
-    this.viewInvoice = this.viewInvoice.bind(this);
-    this.editInvoice = this.editInvoice.bind(this);
-    this.deleteInvoice = this.deleteInvoice.bind(this);
-    this.displayStatus = this.displayStatus.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -158,20 +154,20 @@ class Invoice extends Component {
     return false;
   }
 
-  deleteInvoice() {
+  deleteInvoice = () => {
     const { invoice, deleteInvoice } = this.props;
     deleteInvoice(invoice._id);
   }
 
-  editInvoice() {
+  editInvoice = () => {
     // TODO
   }
 
-  viewInvoice() {
+  viewInvoice = () => {
     ipc.send('preview-invoice', this.props.invoice);
   }
 
-  displayStatus() {
+  displayStatus = () => {
     const { invoice } = this.props;
     const { status } = invoice;
     const { recipient } = invoice;

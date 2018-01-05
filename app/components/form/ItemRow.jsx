@@ -57,12 +57,6 @@ const ItemRemoveBtn = styled.a`
 export class ItemRow extends Component {
   constructor(props) {
     super(props);
-    this.handleTextInputChange = this.handleTextInputChange.bind(this);
-    this.handleNumberInputChange = this.handleNumberInputChange.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.updateSubtotal = this.updateSubtotal.bind(this);
-    this.uploadRowState = this.uploadRowState.bind(this);
-    this.removeRow = this.removeRow.bind(this);
   }
 
   componentWillMount() {
@@ -76,13 +70,13 @@ export class ItemRow extends Component {
     });
   }
 
-  handleKeyDown(e) {
+  handleKeyDown = (e) => {
     if (e.which === 13) {
       this.props.addItem();
     }
   }
 
-  handleTextInputChange(event) {
+  handleTextInputChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({ [name]: value }, () => {
@@ -90,7 +84,7 @@ export class ItemRow extends Component {
     });
   }
 
-  handleNumberInputChange(event) {
+  handleNumberInputChange = (event) => {
     const name = event.target.name;
     const eValue = event.target.value;
     const value = eValue === '' ? '' : parseFloat(eValue);
@@ -99,7 +93,7 @@ export class ItemRow extends Component {
     });
   }
 
-  updateSubtotal() {
+  updateSubtotal = () => {
     const currentPrice =
       this.state.price === '' ? 0 : parseFloat(this.state.price);
     const currentQuantity =
@@ -115,12 +109,12 @@ export class ItemRow extends Component {
     });
   }
 
-  uploadRowState() {
+  uploadRowState = () => {
     const { updateRow } = this.props;
     updateRow(this.state);
   }
 
-  removeRow() {
+  removeRow = () =>{
     this.props.removeRow(this.state.id);
   }
 

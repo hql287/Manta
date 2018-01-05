@@ -32,7 +32,6 @@ const Message = styled.p`
 class Notification extends Component {
   constructor(props) {
     super(props);
-    this.removeNoti = this.removeNoti.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +46,7 @@ class Notification extends Component {
     clearTimeout(this.timeout);
   }
 
-  removeNoti() {
+  removeNoti = () => {
     const { removeNoti, notification } = this.props;
     removeNoti(notification.id);
   }

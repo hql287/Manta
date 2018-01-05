@@ -37,11 +37,6 @@ class Invoice extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.invoice;
-    this.selectExportDir = this.selectExportDir.bind(this);
-    this.sortCurrencies = this.sortCurrencies.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleTaxChange = this.handleTaxChange.bind(this);
-    this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
   componentDidMount() {
@@ -65,7 +60,7 @@ class Invoice extends Component {
     ipc.removeAllListeners('confirmed-export-directory');
   }
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
@@ -74,7 +69,7 @@ class Invoice extends Component {
     });
   }
 
-  handleTaxChange(event) {
+  handleTaxChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = name === 'amount' ? parseFloat(target.value) : target.value;
@@ -90,7 +85,7 @@ class Invoice extends Component {
     );
   }
 
-  handleVisibilityChange(event) {
+  handleVisibilityChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.checked;
@@ -106,11 +101,11 @@ class Invoice extends Component {
     );
   }
 
-  selectExportDir() {
+  selectExportDir = () => {
     ipc.send('select-export-directory');
   }
 
-  sortCurrencies() {
+  sortCurrencies = () => {
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [
       key,

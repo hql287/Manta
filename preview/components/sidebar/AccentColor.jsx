@@ -56,30 +56,25 @@ class AccentColor extends PureComponent {
       useCustom: props.accentColor.useCustom,
       color: props.accentColor.color,
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.dispatchChange = this.dispatchChange.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleClick() {
+  handleClick = () => {
     this.setState({ showPicker: !this.state.showPicker });
   }
 
-  handleClose() {
+  handleClose = () => {
     this.setState({ showPicker: false });
   }
 
-  handleChange(color) {
+  handleChange = color => {
     this.setState({ color: color.hex }, this.dispatchChange);
   }
 
-  handleInputChange(event) {
+  handleInputChange = event => {
     this.setState({ useCustom: event.target.checked }, this.dispatchChange);
   }
 
-  dispatchChange() {
+  dispatchChange = () => {
     this.props.handleAccentColorChange({
       color: this.state.color,
       useCustom: this.state.useCustom,
