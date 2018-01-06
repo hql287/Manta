@@ -11,8 +11,8 @@ const isDev = require('electron-is-dev');
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
 
-// Disabled for the linux gpu
-
+// Prevent Linux GPU Bug
+// https://github.com/electron/electron/issues/4322
 if(process.platform == 'linux') {
   app.disableHardwareAcceleration();
 }
@@ -145,29 +145,22 @@ function addDevToolsExtension() {
 }
 
 function setInitialValues() {
-  // Tour
-  if (!appConfig.has('tour')) {
-    appConfig.set('tour', {
+  // Default Logo
+  const logoPath = path.resolve(__dirname, './static/imgs/default_logo.svg');
+  const logoData = fs.readFileSync(logoPath);
+  const logoBase64String =
+    'data:image/svg+xml;base64,' + logoData.toString('base64');
+  // Default Options
+  const defaultOptions = {
+    tour: {
       isActive: false,
       hasBeenTaken: false,
-    });
-  }
-  // Windows last visible state
-  if (!appConfig.has('winsLastVisibleState')) {
-    appConfig.set('winsLastVisibleState', {
+    },
+    winsLastVisibleState: {
       isMainWinVisible: true,
       isPreviewWinVisible: false,
-    });
-  }
-  // Default Profile
-  if (!appConfig.has('profile')) {
-    // Set Default Logo
-    const logoPath = path.resolve(__dirname, './static/imgs/default_logo.svg');
-    const logoData = fs.readFileSync(logoPath);
-    const logoBase64String =
-      'data:image/svg+xml;base64,' + logoData.toString('base64');
-    // Other defaults
-    appConfig.set('profile', {
+    },
+    profile: {
       logo: logoBase64String,
       fullname: 'Manta Ray',
       company: 'Oceanic Preservation Society',
@@ -175,19 +168,13 @@ function setInitialValues() {
       email: 'info@opsociety.org',
       phone: '+01 (0) 1-2345-6789',
       website: 'http://www.opsociety.org/',
-    });
-  }
-  // Default App Settings
-  if (!appConfig.has('general')) {
-    appConfig.set('general', {
+    },
+    general: {
       language: 'en',
       sound: 'default',
       muted: false,
-    });
-  }
-  // Default Invoice Settings
-  if (!appConfig.has('invoice')) {
-    appConfig.set('invoice', {
+    },
+    invoice: {
       exportDir: os.homedir(),
       template: 'default',
       currency: 'USD',
@@ -204,7 +191,19 @@ function setInitialValues() {
         tax: false,
         note: false,
       },
-    });
+    },
+  };
+  // Set initial values conditionally
+  for (const key in defaultOptions) {
+    if (!appConfig.has(`${key}`)) {
+      appConfig.set(`${key}`, defaultOptions[key]);
+      break;
+    }
+    for (const childKey in defaultOptions[key]) {
+      if (!appConfig.has(`${key}.${childKey}`)) {
+        appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+      }
+    }
   }
 }
 
@@ -281,8 +280,7 @@ function initialize() {
     const { showWindow } = require('./main/tour');
     showWindow('startup');
   });
-
-  // Reactive the app
+  // Reactivate the app
   app.on('activate', () => {
     const { showWindow } = require('./main/tour');
     showWindow('activate');
