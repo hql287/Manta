@@ -1,21 +1,113 @@
+// Setup PouchDB
 const PouchDB = require('pouchdb-browser');
 const contactsDB = new PouchDB('contacts');
 const invoicesDB = new PouchDB('invoices');
 
+// Utility
+import { omit } from 'lodash';
+
+// Handle Data Migration
+async function runMigration(db, version, migrations, done) {
+  try {
+    // Check if there's any migration to run
+    const migrationsToRun = Object.keys(migrations)
+      .filter(k => k > version)
+      .sort();
+    if (!migrationsToRun.length) {
+      return done();
+    }
+    // If there is any migration to run
+    // Get all current docs
+    const results = await db.allDocs({
+      include_docs: true,
+      attachments: true,
+    });
+    // Run each doc through migrations
+    const resultsDocs = results.rows
+      .map(row => row.doc)
+      .map(doc =>
+        migrationsToRun.reduce((prev, k) => migrations[k](prev), doc)
+      );
+    // Save new docs to DB
+    await Promise.all(resultsDocs.map(doc => db.put(doc)));
+    // Finish & update values
+    done(null, migrationsToRun[migrationsToRun.length - 1]);
+  } catch (err) {
+    done(err);
+  }
+}
+
+// Run migration for InvoicesDB
+let invoiceQueue = [];
+let alreadyRunInvoiceMigration = false;
+const invoicesVersion = localStorage.invoicesVersion || 0;
+
+const invoicesMigrations = {
+  1: doc => {
+    // Don't touch newly created docs
+    if (doc.status) return doc;
+    // Update current doc
+    const newDoc = Object.assign({}, doc, {
+      // Set default status as 'pending'
+      status: 'pending',
+      // Update Tax information
+      tax: {
+        tin: '123-456-789',
+        method: 'default',
+        // Get the tax amount from 'vat' key
+        amount: doc.vat,
+      },
+    });
+    // Omit the 'vat' key
+    return omit(newDoc, ['vat']);
+  },
+};
+
+runMigration(
+  invoicesDB,
+  invoicesVersion,
+  invoicesMigrations,
+  (err, latestVersion) => {
+    alreadyRunInvoiceMigration = true;
+    if (latestVersion) {
+      localStorage.invoicesVersion = latestVersion;
+    }
+    // Pass the err to invoiceQueue function
+    invoiceQueue.forEach(f => f(err));
+    // Reset the invoiceQueue
+    invoiceQueue = [];
+  }
+);
+
+// Set DB via dbName
 const setDB = dbName => {
-  if (dbName === 'contacts') return contactsDB;
-  if (dbName === 'invoices') return invoicesDB;
+  return new Promise((resolve, reject) => {
+    if (dbName === 'contacts') {
+      resolve(contactsDB);
+    }
+    if (dbName === 'invoices') {
+      if (alreadyRunInvoiceMigration) {
+        resolve(invoicesDB);
+      }
+      // Wait for runInvoiceMigration() to return a value
+      invoiceQueue.push(err => {
+        if (err) return reject(err);
+        resolve(invoicesDB);
+      });
+    }
+  });
 };
 
 // Get All Document
 const getAllDocs = dbName =>
   new Promise((resolve, reject) => {
-    const db = setDB(dbName);
-    db
-      .allDocs({
-        include_docs: true,
-        attachments: true,
-      })
+    setDB(dbName)
+      .then(db =>
+        db.allDocs({
+          include_docs: true,
+          attachments: true,
+        })
+      )
       .then(results => {
         const resultsDocs = results.rows.map(row => row.doc);
         resolve(resultsDocs);
@@ -26,9 +118,8 @@ const getAllDocs = dbName =>
 // Save a Document
 const saveDoc = (dbName, doc) =>
   new Promise((resolve, reject) => {
-    const db = setDB(dbName);
-    db
-      .put(doc)
+    setDB(dbName)
+      .then(db => db.put(doc))
       .then(getAllDocs(dbName).then(newDocs => resolve(newDocs)))
       .catch(err => reject(err));
   });
@@ -36,14 +127,16 @@ const saveDoc = (dbName, doc) =>
 // Delete A Document
 const deleteDoc = (dbName, doc) =>
   new Promise((resolve, reject) => {
-    const db = setDB(dbName);
-    db
-      .get(doc)
-      .then(record =>
+    setDB(dbName)
+      .then(db =>
         db
-          .remove(record)
-          .then(
-            getAllDocs(dbName).then(remainingDocs => resolve(remainingDocs))
+          .get(doc)
+          .then(record =>
+            db
+              .remove(record)
+              .then(
+                getAllDocs(dbName).then(remainingDocs => resolve(remainingDocs))
+              )
           )
       )
       .catch(err => reject(err));
@@ -52,13 +145,15 @@ const deleteDoc = (dbName, doc) =>
 // Update A Document
 const updateDoc = (dbName, docId, updatedDoc) =>
   new Promise((resolve, reject) => {
-    const db = setDB(dbName);
-    db
-      .get(docId)
-      .then(record =>
+    setDB(dbName)
+      .then(db =>
         db
-          .put(Object.assign(record, updatedDoc))
-          .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
+          .get(docId)
+          .then(record =>
+            db
+              .put(Object.assign(record, updatedDoc))
+              .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
+          )
       )
       .catch(err => reject(err));
   });
