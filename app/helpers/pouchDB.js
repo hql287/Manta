@@ -80,8 +80,8 @@ runMigration(
 );
 
 // Set DB via dbName
-const setDB = dbName => {
-  return new Promise((resolve, reject) => {
+const setDB = dbName =>
+  new Promise((resolve, reject) => {
     if (dbName === 'contacts') {
       resolve(contactsDB);
     }
@@ -96,7 +96,6 @@ const setDB = dbName => {
       });
     }
   });
-};
 
 // Get All Document
 const getAllDocs = dbName =>
