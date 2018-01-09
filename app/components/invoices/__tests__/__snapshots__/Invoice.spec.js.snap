@@ -5,16 +5,16 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
   className="col-lg-6"
 >
   <div
-    className="Invoice__Wrapper-iBPCPb hxnMLw"
+    className="Invoice__Wrapper-cjNJPS coWKLW"
   >
     <div
-      className="Invoice__StatusBar-gmZFuj aoiDg"
+      className="Invoice__StatusBar-jBWtSa joKiG"
     />
     <div
-      className="Invoice__Header-cAhbPy loejIf"
+      className="Invoice__Header-cGSpHV wcQzb"
     >
       <div
-        className="Invoice__Status-eKPgUx eiULaG"
+        className="Invoice__Status-fxIELu cyYgut"
       >
         <span>
           <i
@@ -24,7 +24,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         </span>
       </div>
       <button
-        className="Button__ButtonLinkStyle-ioTbaT eFjcaV"
+        className="Button__ButtonLinkStyle-caVwCA imXwRc"
         onClick={[Function]}
       >
         <i
@@ -33,13 +33,13 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       </button>
     </div>
     <div
-      className="Invoice__Body-dSsrWx qPyCt"
+      className="Invoice__Body-eBItTh igYqzw"
     >
       <div
-        className="Invoice__Row-gNlmug hPTbEG"
+        className="Invoice__Row-hFNBjq cQdnct"
       >
         <div
-          className="Invoice__Field-iXxbne dvBopU"
+          className="Invoice__Field-cZpgXH ccHhHs"
         >
           <label>
             Client
@@ -50,10 +50,10 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         </div>
       </div>
       <div
-        className="Invoice__Row-gNlmug hPTbEG"
+        className="Invoice__Row-hFNBjq cQdnct"
       >
         <div
-          className="Invoice__Field-iXxbne dvBopU"
+          className="Invoice__Field-cZpgXH ccHhHs"
         >
           <label>
             Invoice Id
@@ -63,7 +63,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           </p>
         </div>
         <div
-          className="Invoice__Field-iXxbne dvBopU"
+          className="Invoice__Field-cZpgXH ccHhHs"
         >
           <label>
             Total Value
@@ -76,10 +76,10 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         </div>
       </div>
       <div
-        className="Invoice__Row-gNlmug hPTbEG"
+        className="Invoice__Row-hFNBjq cQdnct"
       >
         <div
-          className="Invoice__Field-iXxbne dvBopU"
+          className="Invoice__Field-cZpgXH ccHhHs"
         >
           <label>
             Created On
@@ -89,7 +89,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           </p>
         </div>
         <div
-          className="Invoice__Field-iXxbne dvBopU"
+          className="Invoice__Field-cZpgXH ccHhHs"
         >
           <label>
             Due Date
@@ -101,14 +101,14 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="Invoice__Footer-imOzTt bLNPOf"
+      className="Invoice__Footer-dcHDEd cJiGTY"
     >
       <div>
         <div
-          className="SplitButton__Wrapper-dWaGGO iZVhhz"
+          className="SplitButton__Wrapper-jsRMIo gVGdJM"
         >
           <div
-            className="SplitButton__ButtonsGroup-gPFJVZ jhIoxD"
+            className="SplitButton__ButtonsGroup-hdzsBq dhTQNh"
           >
             <a
               href="#"
@@ -128,13 +128,13 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         </div>
       </div>
       <button
-        className="Button__ButtonStyle-cORGTZ bzyUmu"
+        className="Button__ButtonStyle-coFSWz llSIFU"
         onClick={[Function]}
       >
         Edit
       </button>
       <button
-        className="Button__ButtonStyle-cORGTZ bzyUmu"
+        className="Button__ButtonStyle-coFSWz llSIFU"
         onClick={[Function]}
       >
         View

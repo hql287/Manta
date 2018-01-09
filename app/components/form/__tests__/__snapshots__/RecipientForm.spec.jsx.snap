@@ -2,13 +2,13 @@
 
 exports[`Recipient Form component matches snapshot 1`] = `
 <div
-  className="RecipientForm__Form-kfNImN lnOGBs"
+  className="RecipientForm__Form-gIRrkZ bvrwsG"
 >
   <div
-    className="RecipientForm__Row-cmWZLb cGKRYc"
+    className="RecipientForm__Row-jotDjU fYoIKq"
   >
     <div
-      className="RecipientForm__Field-jZBIfq kWilKM"
+      className="RecipientForm__Field-hxcUmZ eSPXtV"
     >
       <label
         className="itemLabel"
@@ -17,13 +17,13 @@ exports[`Recipient Form component matches snapshot 1`] = `
       </label>
       <input
         name="fullname"
-        onChange={[Function]}
+        onChange={[MockFunction]}
         type="text"
         value="Jon Snow"
       />
     </div>
     <div
-      className="RecipientForm__Field-jZBIfq kWilKM"
+      className="RecipientForm__Field-hxcUmZ eSPXtV"
     >
       <label
         className="itemLabel"
@@ -32,17 +32,17 @@ exports[`Recipient Form component matches snapshot 1`] = `
       </label>
       <input
         name="company"
-        onChange={[Function]}
+        onChange={[MockFunction]}
         type="text"
         value=""
       />
     </div>
   </div>
   <div
-    className="RecipientForm__Row-cmWZLb cGKRYc"
+    className="RecipientForm__Row-jotDjU fYoIKq"
   >
     <div
-      className="RecipientForm__Field-jZBIfq kWilKM"
+      className="RecipientForm__Field-hxcUmZ eSPXtV"
     >
       <label
         className="itemLabel"
@@ -51,13 +51,13 @@ exports[`Recipient Form component matches snapshot 1`] = `
       </label>
       <input
         name="email"
-        onChange={[Function]}
+        onChange={[MockFunction]}
         type="text"
         value="john@hbo.com"
       />
     </div>
     <div
-      className="RecipientForm__Field-jZBIfq kWilKM"
+      className="RecipientForm__Field-hxcUmZ eSPXtV"
     >
       <label
         className="itemLabel"
@@ -66,7 +66,7 @@ exports[`Recipient Form component matches snapshot 1`] = `
       </label>
       <input
         name="phone"
-        onChange={[Function]}
+        onChange={[MockFunction]}
         type="text"
         value=""
       />
