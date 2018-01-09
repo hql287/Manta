@@ -46,14 +46,14 @@ class ErrorBoundary extends Component {
       return (
         <ErrorContainer>
           <h1>
-            <i className='ion-bug'/>
+            <i className='ion-bug' />
           </h1>
-          <h2>Opps, you've found a bug!</h2>
+          <h2>You have found a bug!</h2>
           <p>
             Please report this to the maintainer of Manta.
-            <br/>
+            <br />
             GitHub: https://github.com/hql287/Manta
-            <br/>
+            <br />
             Email: hi@manta.life
           </p>
         </ErrorContainer>
