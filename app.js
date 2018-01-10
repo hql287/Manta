@@ -7,13 +7,14 @@ const url = require('url');
 const path = require('path');
 const glob = require('glob');
 const isDev = require('electron-is-dev');
+const omit = require('lodash').omit;
 
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
 
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
-if(process.platform == 'linux') {
+if (process.platform == 'linux') {
   app.disableHardwareAcceleration();
 }
 
@@ -207,6 +208,65 @@ function setInitialValues() {
   }
 }
 
+function migrateData() {
+  // Migration scheme
+  const migrations = {
+    1: configs => {
+      // Get the current configs
+      const { info, appSettings } = configs;
+      // Update current configs
+      const migratedConfigs = Object.assign({}, configs, {
+        profile: info,
+        general: {
+          language: appSettings.language,
+          sound: appSettings.sound,
+          muted: appSettings.muted,
+        },
+        invoice: {
+          exportDir: appSettings.exportDir,
+          template: appSettings.template,
+          currency: appSettings.currency,
+          dateFormat: 'MM/DD/YYYY',
+          tax: {
+            tin: '123-456-789',
+            method: 'default',
+            amount: 0,
+          },
+          required_fields: {
+            dueDate: false,
+            currency: false,
+            discount: false,
+            tax: false,
+            note: false,
+          },
+        },
+      });
+      // Omit old keys
+      return omit(migratedConfigs, ['info', 'appSettings', 'printOptions', 'test']);
+    }
+  };
+  // Get the current Config
+  const configs = appConfig.getAll();
+  // Get the current configs
+  const version = appConfig.get('version') || 0;
+  // Handle migration
+  const newMigrations = Object.keys(migrations)
+    .filter(k => k > version)
+    .sort();
+  // Exit if there's no migration to run
+  if (!newMigrations.length) return;
+  // If there's migration to run run the current
+  // config through each migration
+  const migratedConfigs = newMigrations.reduce(
+    (prev, key) => migrations[key](prev),
+    configs
+  );
+  // Save the final config to DB
+  appConfig.deleteAll().setAll(migratedConfigs);
+  // Update the latest config version
+  appConfig.set('version', newMigrations[newMigrations.length - 1]);
+}
+
 function addEventListeners() {
   ipcMain.on('quit-app', () => {
     app.quit();
@@ -273,6 +333,7 @@ function initialize() {
     createMainWindow();
     createPreviewWindow();
     setInitialValues();
+    migrateData();
     if (isDev) addDevToolsExtension();
     addEventListeners();
     loadMainProcessFiles();

@@ -46,11 +46,14 @@ describe('Note component', () => {
   it('render when necessary', () => {});
 
   // PRIVATE METHOD
-  it('handle addItem correctly', () => {
-    const addItemBtn = wrapper.find('button');
-    addItemBtn.simulate('click');
-    expect(boundActionCreators.addItem).toHaveBeenCalled();
-  });
+  // Waiting for thiis issue to be fixed
+  // https://github.com/facebook/jest/issues/4605
+  // it('handle addItem correctly', () => {
+  //   const addItemBtn = wrapper.find('button');
+  //   addItemBtn.simulate('click');
+  //   expect(boundActionCreators.addItem).toHaveBeenCalled();
+  //   expect(rows.length).toEqual(1);
+  // });
 
   // SNAPSHOT
   it('matches snapshot', () => {

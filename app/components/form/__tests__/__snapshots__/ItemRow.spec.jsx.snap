@@ -2,7 +2,7 @@
 
 exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div
-  className="ItemRow__ItemDiv-diZoy kphhNI"
+  className="ItemRow__ItemDiv-khgvaQ zZjdV"
 >
   <div
     className="dragHandler"
@@ -15,7 +15,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     className="flex3"
   >
     <input
-      className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
+      className="ItemRow__ItemDivInput-bHPGoF iXxPpt"
       name="description"
       onChange={[Function]}
       onKeyDown={[Function]}
@@ -28,7 +28,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     className="flex1"
   >
     <input
-      className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
+      className="ItemRow__ItemDivInput-bHPGoF iXxPpt"
       name="price"
       onChange={[Function]}
       onKeyDown={[Function]}
@@ -42,7 +42,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     className="flex1"
   >
     <input
-      className="ItemRow__ItemDivInput-fwqPvy dKoPKE"
+      className="ItemRow__ItemDivInput-bHPGoF iXxPpt"
       name="quantity"
       onChange={[Function]}
       onKeyDown={[Function]}
@@ -53,10 +53,10 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     />
   </div>
   <div
-    className="ItemRow__ItemActions-boLUjZ hkMtNT"
+    className="ItemRow__ItemActions-eRHgOi gPzpEq"
   >
     <a
-      className="ItemRow__ItemRemoveBtn-iXUZiN dYNgej"
+      className="ItemRow__ItemRemoveBtn-kcypni jGmowk"
       href="#"
       onClick={[Function]}
     >

@@ -2,7 +2,7 @@
 
 exports[`Settings component matches snapshot 1`] = `
 <div
-  className="Settings__Wrapper-gMqoEa dCfACd"
+  className="Settings__Wrapper-iXFqbq jshSii"
   style={
     Object {
       "height": "45px",
@@ -10,12 +10,12 @@ exports[`Settings component matches snapshot 1`] = `
   }
 >
   <a
-    className="Settings__SettingsHeader-lnTDqK GiEZV"
+    className="Settings__SettingsHeader-hbrDNs hKQuKk"
     href="#"
-    onClick={[Function]}
+    onClick={[MockFunction]}
   >
     <label
-      className="Settings__Label-gSCNoi bqzjuj"
+      className="Settings__Label-bIhYmz iPSgUQ"
     >
       Form Settings
     </label>
@@ -32,127 +32,127 @@ exports[`Settings component matches snapshot 1`] = `
     </div>
   </a>
   <div
-    className="Settings__Helper-HfVur cfOvaA"
+    className="Settings__Helper-cagYXW jnzDbx"
   >
     <p>
       Toogle any field to make it required in the form.
     </p>
   </div>
   <div
-    className="Settings__AllSettings-fvolyT ggAIJH"
+    className="Settings__AllSettings-hAEgKd cLFeXF"
   >
     <div
-      className="Settings__Setting-iHwWTP dDLCsM"
+      className="Settings__Setting-iSwZaF jiKDp"
     >
       <label
-        className="Settings__Label-gSCNoi bqzjuj"
+        className="Settings__Label-bIhYmz iPSgUQ"
       >
         Due Date
       </label>
       <label
-        className="Switch__SwitchStyle-ghEAwD hvamL"
+        className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA eiSnEC"
+          className="Switch__Input-jIJATX kGoGgc"
           name="dueDate"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK hcqAjS"
+          className="Switch__Slider-iwwTvI egztuK"
         />
       </label>
     </div>
     <div
-      className="Settings__Setting-iHwWTP dDLCsM"
+      className="Settings__Setting-iSwZaF jiKDp"
     >
       <label
-        className="Settings__Label-gSCNoi bqzjuj"
+        className="Settings__Label-bIhYmz iPSgUQ"
       >
         Currency
       </label>
       <label
-        className="Switch__SwitchStyle-ghEAwD hvamL"
+        className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA eiSnEC"
+          className="Switch__Input-jIJATX kGoGgc"
           name="currency"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK hcqAjS"
+          className="Switch__Slider-iwwTvI egztuK"
         />
       </label>
     </div>
     <div
-      className="Settings__Setting-iHwWTP dDLCsM"
+      className="Settings__Setting-iSwZaF jiKDp"
     >
       <label
-        className="Settings__Label-gSCNoi bqzjuj"
+        className="Settings__Label-bIhYmz iPSgUQ"
       >
         Discount
       </label>
       <label
-        className="Switch__SwitchStyle-ghEAwD hvamL"
+        className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA eiSnEC"
+          className="Switch__Input-jIJATX kGoGgc"
           name="discount"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK hcqAjS"
+          className="Switch__Slider-iwwTvI egztuK"
         />
       </label>
     </div>
     <div
-      className="Settings__Setting-iHwWTP dDLCsM"
+      className="Settings__Setting-iSwZaF jiKDp"
     >
       <label
-        className="Settings__Label-gSCNoi bqzjuj"
+        className="Settings__Label-bIhYmz iPSgUQ"
       >
         Tax
       </label>
       <label
-        className="Switch__SwitchStyle-ghEAwD hvamL"
+        className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA eiSnEC"
+          className="Switch__Input-jIJATX kGoGgc"
           name="tax"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK hcqAjS"
+          className="Switch__Slider-iwwTvI egztuK"
         />
       </label>
     </div>
     <div
-      className="Settings__Setting-iHwWTP dDLCsM"
+      className="Settings__Setting-iSwZaF jiKDp"
     >
       <label
-        className="Settings__Label-gSCNoi bqzjuj"
+        className="Settings__Label-bIhYmz iPSgUQ"
       >
         Note
       </label>
       <label
-        className="Switch__SwitchStyle-ghEAwD hvamL"
+        className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
         <input
           checked={false}
-          className="Switch__Input-kcgNA eiSnEC"
+          className="Switch__Input-jIJATX kGoGgc"
           name="note"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="Switch__Slider-gGmQGK hcqAjS"
+          className="Switch__Slider-iwwTvI egztuK"
         />
       </label>
     </div>

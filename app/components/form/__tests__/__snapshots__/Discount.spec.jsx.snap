@@ -2,10 +2,10 @@
 
 exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div
-  className="Section__SectionStyle-KuFAH hVJJBo"
+  className="Section__SectionStyle-dgSKSv cwfAAu"
 >
   <div
-    className="Discount__DiscountWrapper-eiBhZp fxWvtm"
+    className="Discount__DiscountWrapper-kWJKvg LseXW"
   >
     <label
       className="itemLabel"
@@ -13,10 +13,10 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Discount
     </label>
     <div
-      className="Discount__DiscountContent-iHbyRB dVAuHi"
+      className="Discount__DiscountContent-jCPLgI kgtKuP"
     >
       <div
-        className="Discount__DiscountAmount-dKQLVT hngMNh"
+        className="Discount__DiscountAmount-biDXgd btUZyY"
       >
         <input
           name="amount"
@@ -27,7 +27,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         />
       </div>
       <div
-        className="Discount__DiscountType-ganufK jInUVZ"
+        className="Discount__DiscountType-gcYNnb jodsaL"
       >
         <div
           className="radio"

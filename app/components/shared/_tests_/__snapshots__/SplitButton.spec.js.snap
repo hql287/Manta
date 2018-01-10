@@ -3,10 +3,10 @@
 exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div>
   <div
-    className="SplitButton__Wrapper-dWaGGO iZVhhz"
+    className="SplitButton__Wrapper-jsRMIo gVGdJM"
   >
     <div
-      className="SplitButton__ButtonsGroup-gPFJVZ jhIoxD"
+      className="SplitButton__ButtonsGroup-hdzsBq dhTQNh"
     >
       <a
         href="#"

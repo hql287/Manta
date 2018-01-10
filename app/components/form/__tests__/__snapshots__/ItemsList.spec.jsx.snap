@@ -2,13 +2,13 @@
 
 exports[`Note component matches snapshot 1`] = `
 <div
-  className="Section__SectionStyle-KuFAH hVJJBo"
+  className="Section__SectionStyle-dgSKSv cwfAAu"
 >
   <div
-    className="ItemsList__ItemsListWrapper-bhjgHH fFIWaw"
+    className="ItemsList__ItemsListWrapper-iLTMUu Klbgt"
   >
     <div
-      className="ItemsList__ItemsListHeader-krJdzW kUjmKX"
+      className="ItemsList__ItemsListHeader-bCzTFW jphkkC"
     >
       <label
         className="itemLabel"
@@ -17,7 +17,7 @@ exports[`Note component matches snapshot 1`] = `
       </label>
     </div>
     <div
-      className="ItemsList__ItemsListDiv-iaJoKq gSwaRM"
+      className="ItemsList__ItemsListDiv-dbHTJO fqQnDb"
     >
       <div />
     </div>
@@ -25,8 +25,18 @@ exports[`Note component matches snapshot 1`] = `
       className="itemsListActions"
     >
       <button
-        className="ItemsList__ItemsListActionsBtn-iuJoKw kkURDx Button__ButtonStyle-cORGTZ iiCalx"
-        onClick={[Function]}
+        className="ItemsList__ItemsListActionsBtn-fnweJK bouIBy Button__ButtonStyle-coFSWz hJbnhZ"
+        onClick={
+          [MockFunction] {
+            "calls": Array [
+              Array [],
+              Array [],
+              Array [],
+              Array [],
+              Array [],
+            ],
+          }
+        }
       >
         Add An Item
       </button>

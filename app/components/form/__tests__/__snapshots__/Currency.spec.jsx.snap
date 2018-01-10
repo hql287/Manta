@@ -2,10 +2,10 @@
 
 exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div
-  className="Section__SectionStyle-KuFAH hVJJBo"
+  className="Section__SectionStyle-dgSKSv cwfAAu"
 >
   <div
-    className="Section__HeaderStyle-fSAzGW jpivnX"
+    className="Section__HeaderStyle-chmDx gHBKbw"
   >
     <label
       className="itemLabel"

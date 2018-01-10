@@ -2,10 +2,10 @@
 
 exports[`Note component matches snapshot 1`] = `
 <div
-  className="Section__SectionStyle-KuFAH hVJJBo"
+  className="Section__SectionStyle-dgSKSv cwfAAu"
 >
   <div
-    className="Section__HeaderStyle-fSAzGW jpivnX"
+    className="Section__HeaderStyle-chmDx gHBKbw"
   >
     <label
       className="itemLabel"
@@ -14,13 +14,13 @@ exports[`Note component matches snapshot 1`] = `
     </label>
   </div>
   <div
-    className="Tax__Form-iRHWvw fHkjRN"
+    className="Tax__Form-hlyaXp darYVI"
   >
     <div
-      className="Tax__Row-bBlsab dYarfU"
+      className="Tax__Row-hSUxwC ipsqia"
     >
       <div
-        className="Tax__Field-jiQvjq buKHXN"
+        className="Tax__Field-cbJJUC kqTpPt"
       >
         <label
           className="itemLabel"
@@ -28,7 +28,7 @@ exports[`Note component matches snapshot 1`] = `
           Tax ID
         </label>
         <div
-          className="Tax__TaxID-hVFBtR kmNFy"
+          className="Tax__TaxID-jmRTWe QNlQZ"
         >
           <input
             name="tin"
@@ -41,10 +41,10 @@ exports[`Note component matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="Tax__Row-bBlsab dYarfU"
+      className="Tax__Row-hSUxwC ipsqia"
     >
       <div
-        className="Tax__Field-jiQvjq buKHXN"
+        className="Tax__Field-cbJJUC kqTpPt"
       >
         <label
           className="itemLabel"
@@ -52,7 +52,7 @@ exports[`Note component matches snapshot 1`] = `
           Amount (%)
         </label>
         <div
-          className="Tax__TaxAmount-hPYwBc cEFumS"
+          className="Tax__TaxAmount-hmOePo dZzXEm"
         >
           <input
             name="amount"
@@ -65,7 +65,7 @@ exports[`Note component matches snapshot 1`] = `
         </div>
       </div>
       <div
-        className="Tax__Field-jiQvjq buKHXN"
+        className="Tax__Field-cbJJUC kqTpPt"
       >
         <label
           className="itemLabel"

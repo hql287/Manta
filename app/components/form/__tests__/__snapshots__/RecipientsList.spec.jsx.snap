@@ -2,7 +2,7 @@
 
 exports[`Recipient List component matches snapshot 1`] = `
 <div
-  className="RecipientsList__List-bIVndU hLpDOi"
+  className="RecipientsList__List-gBzREO kPrxLW"
 >
   <select
     onChange={[Function]}
