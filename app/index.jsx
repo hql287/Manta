@@ -7,6 +7,7 @@ import configureStore from './store';
 
 // Root Component
 import App from './App';
+import ErrorBoundary from './components/shared/ErrorBoundary';
 
 // Store
 const store = configureStore();
@@ -15,7 +16,9 @@ const store = configureStore();
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </AppContainer>
   </Provider>,
   document.getElementById('root')

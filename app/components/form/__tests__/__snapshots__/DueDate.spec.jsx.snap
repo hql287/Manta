@@ -2,7 +2,7 @@
 
 exports[`Renders correctly to the DOM matches snapshot 1`] = `
 <div
-  className="Section__SectionStyle-KuFAH hVJJBo"
+  className="Section__SectionStyle-dgSKSv cwfAAu"
 >
   <label
     className="itemLabel"
@@ -10,7 +10,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
     Due Date
   </label>
   <div
-    className="DueDate__DueDateContent-gUZPMA iMUdff"
+    className="DueDate__DueDateContent-jGMeZA ddcSFi"
   >
     <div
       className="SingleDatePicker"
