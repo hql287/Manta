@@ -11,6 +11,7 @@ const omit = require('lodash').omit;
 
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
+const electron = require('electron');
 
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
@@ -27,10 +28,18 @@ let mainWindow = null;
 let previewWindow = null;
 
 function createTourWindow() {
+  // Easier to work with when centering tour
+  // window on primary display.
+  const width = 700;
+  const height = 600;
+  // Get Primary Display (screen / monitor)
+  const primaryDisplay = electron.screen.getPrimaryDisplay();
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    width: 700,
-    height: 600,
+    x: primaryDisplay.bounds.x / 2 - width / 2 + primaryDisplay.bounds.x,
+    y: primaryDisplay.bounds.y / 2 + height / 2 + primaryDisplay.bounds.y,
+    width: width,
+    height: height,
     show: false,
     frame: false,
     resizable: false,
@@ -242,8 +251,13 @@ function migrateData() {
         },
       });
       // Omit old keys
-      return omit(migratedConfigs, ['info', 'appSettings', 'printOptions', 'test']);
-    }
+      return omit(migratedConfigs, [
+        'info',
+        'appSettings',
+        'printOptions',
+        'test',
+      ]);
+    },
   };
   // Get the current Config
   const configs = appConfig.getAll();
