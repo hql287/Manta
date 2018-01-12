@@ -7,11 +7,11 @@
   <a href="https://travis-ci.org/hql287/Manta">
     <img src="https://travis-ci.org/hql287/Manta.svg?branch=dev" alt="Build Status">
   </a>
-  <a href="https://github.com/hql287/Manta/releases">
-    <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="v1.0.0">
+  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.0">
+    <img src="https://img.shields.io/badge/version-1.1.0-green.svg" alt="v1.1.0">
   </a>
   <a href="./LICENSE.md">
-    <img src="https://img.shields.io/badge/license-CC0-blue.svg">
+    <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg">
   </a>
 </h2>
 
