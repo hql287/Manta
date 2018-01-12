@@ -263,3 +263,15 @@ select#themeSwitcher {
   -o-animation: rotating 2s linear infinite;
   animation: rotating 2s linear infinite;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #212529;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #212529;
+}

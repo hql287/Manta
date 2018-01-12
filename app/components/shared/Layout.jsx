@@ -11,17 +11,19 @@ const AppWrapperStyle = styled.div`
 `;
 
 const AppMainContentStyle = styled.div`
-  overflow: scroll;
   width: 100%;
   height: 100%;
   background: #f9fafa;
 `;
 
 const PageWrapperStyle = styled.div`
-  overflow: scroll;
+  overflow-x:hidden;
   display: flex;
   flex-direction: column;
   height: 100%;
+  &:hover {
+    overflow-y: scroll;
+  }
 `;
 
 const PageHeaderStyle = styled.div`
