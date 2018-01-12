@@ -35,6 +35,10 @@ const RootReducer = handleActions(
           [action.payload.name]: action.payload.value,
         }),
       }),
+      [ACTION_TYPES.SETTINGS_UPDATE_PROFILE]: (state, action) =>
+      Object.assign({}, state, {
+        profile: action.payload,
+      }),
   },
   initialState
 );
