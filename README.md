@@ -10,7 +10,7 @@
   <a href="https://github.com/hql287/Manta/releases/tag/v1.1.0">
     <img src="https://img.shields.io/badge/version-1.1.0-green.svg" alt="v1.1.0">
   </a>
-  <a href="./LICENSE.md">
+  <a href="./LICENSE">
     <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg">
   </a>
 </h2>
