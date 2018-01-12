@@ -174,6 +174,8 @@ function setInitialValues() {
       language: 'en',
       sound: 'default',
       muted: false,
+      checkUpdate: 'daily',
+      lastCheck: Date.now(),
     },
     invoice: {
       exportDir: os.homedir(),

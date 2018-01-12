@@ -57,6 +57,21 @@ class General extends Component {
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Auto Check For Update</label>
+              <select
+                name="checkUpdate"
+                value={this.state.checkUpdate}
+                onChange={this.handleInputChange}
+              >
+                <option value="daily">Everyday (Recommended)</option>
+                <option value="weekly">Once A Week</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
