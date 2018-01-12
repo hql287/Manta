@@ -38,8 +38,8 @@ function createTourWindow() {
   tourWindow = new BrowserWindow({
     x: primaryDisplay.bounds.x / 2 - width / 2 + primaryDisplay.bounds.x,
     y: primaryDisplay.bounds.y / 2 + height / 2 + primaryDisplay.bounds.y,
-    width: width,
-    height: height,
+    width,
+    height,
     show: false,
     frame: false,
     resizable: false,
