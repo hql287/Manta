@@ -77,7 +77,7 @@ const commonConfig = merge([
     emitError: true,
   }),
   // Separate source map from bundles
-  parts.generateSourceMaps({ type: 'source-map' }),
+  parts.generateSourceMaps({ type: 'none' }),
   // Extract Bundle & Code Spliting
   parts.extractBundles([
     {
