@@ -2,9 +2,9 @@
   "name": "Manta",
   "homepage": "https://manta.life",
   "productName": "Manta",
-  "version": "1.0.0",
-  "license": "ISC",
-  "description": "Painless invoicing with customizable templates",
+  "version": "1.1.0",
+  "license": "GPL-3.0",
+  "description": "Flexible invoicing desktop app with beautiful & customizable templates",
   "author": {
     "name": "Hung Q. Le",
     "email": "lequochung@me.com"
