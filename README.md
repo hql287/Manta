@@ -31,21 +31,22 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 Here's a few screenshots:
 
-![Example Invoice 1](https://d26dzxoao6i3hh.cloudfront.net/items/302k0o2c3i2O2K0q2w1i/example1.jpg?v=93291970)
+![Example Invoice 1](https://d2ffutrenqvap3.cloudfront.net/items/2P1D0S412j0U2G0j443P/Sample%20Invoice%201.jpg?v=caa43ec7)
 
-![Example Invoice 2](https://d26dzxoao6i3hh.cloudfront.net/items/2c0L2f1d3H0J1m0x291c/example2.jpg?v=329619d0)
+![Example Invoice 2](https://d2ffutrenqvap3.cloudfront.net/items/2X2s1z171A0w2j3Z2C0C/Sample%20Invoice%202.jpg?v=6e4e5945)
 
-![Form](https://d26dzxoao6i3hh.cloudfront.net/items/04302b2f0w2t321B1f26/formScreenshot.jpg?v=da6fa66b)
+![Form](https://d2ffutrenqvap3.cloudfront.net/items/2z1m1t2f0E271p3T2w2v/Form%20UI.jpg?v=00bac22e)
 
 ![Invoices](https://d26dzxoao6i3hh.cloudfront.net/items/1u0O110V1R0V3W3f1a1k/screenshots3.jpg?v=8a5b5487)
 
 ### Features
-* 🎚 Flexible form. You can turn on/off fields
+* 🎚 Flexible form. You can turn on/off field and save as default setting.
 * 🏗 Drag & drop for reordering items. This makes editing easier.
 * 📐 Use SVGs for logo for better printing.
-* 🎨 2 Custom designed & highly customizable templates. Will add more in future versions.
+* 🎨  Custom designed & highly customizable templates.
+* 🏷 Custom statuses for invoices.
 * 📊 Export PDF for print or email.
-* 🔒 Privacy. Your data stays where it belongs.
+* 🔒Complete Privacy. You financial data stays where it belongs.
 * 💯 Totally Free.
 
 ### Downloads
