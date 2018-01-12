@@ -1,15 +1,18 @@
-const { ipcMain } = require('electron');
+// Libs
+const { BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
+const appConfig = require('electron-settings');
 
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
-let mainWindow;
 
-ipcMain.on('check-for-updates', event => {
-  // Set mainWindow
-  mainWindow = event.sender;
+// Set mainWindow
+const mainWindowID = appConfig.get('mainWindowID');
+const mainWindow = BrowserWindow.fromId(mainWindowID);
+
   // Check for Updates
-  autoUpdater.checkForUpdates();
+ipcMain.on('check-for-updates', event => {
+  checkForUpdate();
 });
 
 // Start Download
@@ -55,3 +58,12 @@ autoUpdater.on('download-progress', progressObj => {
 autoUpdater.on('update-downloaded', info => {
   mainWindow.send('update-downloaded', info);
 });
+
+// Helper
+function checkForUpdate() {
+  autoUpdater.checkForUpdates();
+}
+
+module.exports = {
+  checkForUpdate,
+};
