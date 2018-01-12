@@ -24,7 +24,6 @@ A desktop application for creating invoices with beautiful and customizable temp
 <a href="#why">Why?</a> •
 <a href="#goals">Goals</a> •
 <a href="#development">Development</a> •
-<a href="#support">Support</a> •
 <a href="#faq">FAQ</a>
 
 ### Screenshots
@@ -53,9 +52,9 @@ Here's a few screenshots:
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/hql287/Manta/releases/download/v1.0.0/Manta-1.0.0.dmg'>Download v1.0.0</a> | <a href="#support">See Build Instruction</a> | <a href="#support">See Build Instruction</a> |
+<a href='https://github.com/hql287/Manta/releases/download/v1.1.0/Manta-1.1.0.dmg'>Download v1.1.0</a> | <a href="https://github.com/hql287/Manta/releases/download/v1.1.0/Manta.Setup.1.1.0.exe">Download v1.1.0</a> | <a href="https://github.com/hql287/Manta/releases/download/v1.1.0/Manta-1.1.0-x86_64.AppImage">Download v1.1.0</a> |
 
-Windows and Linux versions are still being developed. If you're interested in making your own build, please refer to the [build instruction](#support) for more details.
+[More Download Options](https://github.com/hql287/Manta/releases)
 
 ### Technologies
 * [Electron](https://github.com/electron/electron)
@@ -106,20 +105,8 @@ It's very easy to get started with these 3 steps:
 
 This is still in beta and it's far from perfect so feedbacks, issues or PRs are greatly appreciated! :)
 
-### Support
-
-Future versions might include support for Windows/Linux if there's enough people request it. If you want to test it out on Windows/Linux you can following these steps:
-
-* Clone the project
-* Run `yarn install` to install dependencies.
-* Run `yarn release:win` if you want to build for Windows
-* Run `yarn release:linux` if you want to build for Linux
-
-In the project's root directory, open the `dist` folder and you should see the installer.
-
 Note that on Linux you will need additional dependencies to provide the `icns2png` and `gm` commands.
 Ubuntu/Debian users can run: `sudo apt install -y icnsutils graphicsmagick`.
-
 
 ### FAQ
 
