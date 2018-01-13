@@ -7,11 +7,11 @@
   <a href="https://travis-ci.org/hql287/Manta">
     <img src="https://travis-ci.org/hql287/Manta.svg?branch=dev" alt="Build Status">
   </a>
-  <a href="https://github.com/hql287/Manta/releases">
-    <img src="https://img.shields.io/badge/version-1.0.0-green.svg" alt="v1.0.0">
+  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.0">
+    <img src="https://img.shields.io/badge/version-1.1.0-green.svg" alt="v1.1.0">
   </a>
-  <a href="./LICENSE.md">
-    <img src="https://img.shields.io/badge/license-CC0-blue.svg">
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg">
   </a>
 </h2>
 
@@ -24,37 +24,37 @@ A desktop application for creating invoices with beautiful and customizable temp
 <a href="#why">Why?</a> •
 <a href="#goals">Goals</a> •
 <a href="#development">Development</a> •
-<a href="#support">Support</a> •
 <a href="#faq">FAQ</a>
 
 ### Screenshots
 
 Here's a few screenshots:
 
-![Example Invoice 1](https://d26dzxoao6i3hh.cloudfront.net/items/302k0o2c3i2O2K0q2w1i/example1.jpg?v=93291970)
+![Example Invoice 1](https://d2ffutrenqvap3.cloudfront.net/items/2P1D0S412j0U2G0j443P/Sample%20Invoice%201.jpg?v=caa43ec7)
 
-![Example Invoice 2](https://d26dzxoao6i3hh.cloudfront.net/items/2c0L2f1d3H0J1m0x291c/example2.jpg?v=329619d0)
+![Example Invoice 2](https://d2ffutrenqvap3.cloudfront.net/items/2X2s1z171A0w2j3Z2C0C/Sample%20Invoice%202.jpg?v=6e4e5945)
 
-![Form](https://d26dzxoao6i3hh.cloudfront.net/items/04302b2f0w2t321B1f26/formScreenshot.jpg?v=da6fa66b)
+![Form](https://d2ffutrenqvap3.cloudfront.net/items/2z1m1t2f0E271p3T2w2v/Form%20UI.jpg?v=00bac22e)
 
 ![Invoices](https://d26dzxoao6i3hh.cloudfront.net/items/1u0O110V1R0V3W3f1a1k/screenshots3.jpg?v=8a5b5487)
 
 ### Features
-* 🎚 Flexible form. You can turn on/off fields
+* 🎚 Flexible form. You can turn on/off field and save as default setting.
 * 🏗 Drag & drop for reordering items. This makes editing easier.
 * 📐 Use SVGs for logo for better printing.
-* 🎨 2 Custom designed & highly customizable templates. Will add more in future versions.
+* 🎨  Custom designed & highly customizable templates.
+* 🏷 Custom statuses for invoices.
 * 📊 Export PDF for print or email.
-* 🔒 Privacy. Your data stays where it belongs.
+* 🔒Complete Privacy. You financial data stays where it belongs.
 * 💯 Totally Free.
 
 ### Downloads
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/hql287/Manta/releases/download/v1.0.0/Manta-1.0.0.dmg'>Download v1.0.0</a> | <a href="#support">See Build Instruction</a> | <a href="#support">See Build Instruction</a> |
+<a href='https://github.com/hql287/Manta/releases/download/v1.1.0/Manta-1.1.0.dmg'>Download v1.1.0</a> | <a href="https://github.com/hql287/Manta/releases/download/v1.1.0/Manta.Setup.1.1.0.exe">Download v1.1.0</a> | <a href="https://github.com/hql287/Manta/releases/download/v1.1.0/Manta-1.1.0-x86_64.AppImage">Download v1.1.0</a> |
 
-Windows and Linux versions are still being developed. If you're interested in making your own build, please refer to the [build instruction](#support) for more details.
+[More Download Options](https://github.com/hql287/Manta/releases)
 
 ### Technologies
 * [Electron](https://github.com/electron/electron)
@@ -105,20 +105,8 @@ It's very easy to get started with these 3 steps:
 
 This is still in beta and it's far from perfect so feedbacks, issues or PRs are greatly appreciated! :)
 
-### Support
-
-Future versions might include support for Windows/Linux if there's enough people request it. If you want to test it out on Windows/Linux you can following these steps:
-
-* Clone the project
-* Run `yarn install` to install dependencies.
-* Run `yarn release:win` if you want to build for Windows
-* Run `yarn release:linux` if you want to build for Linux
-
-In the project's root directory, open the `dist` folder and you should see the installer.
-
 Note that on Linux you will need additional dependencies to provide the `icns2png` and `gm` commands.
 Ubuntu/Debian users can run: `sudo apt install -y icnsutils graphicsmagick`.
-
 
 ### FAQ
 

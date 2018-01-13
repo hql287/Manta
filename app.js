@@ -174,6 +174,8 @@ function setInitialValues() {
       language: 'en',
       sound: 'default',
       muted: false,
+      checkUpdate: 'daily',
+      lastCheck: Date.now(),
     },
     invoice: {
       exportDir: os.homedir(),
@@ -214,6 +216,10 @@ function migrateData() {
     1: configs => {
       // Get the current configs
       const { info, appSettings } = configs;
+      // Return current configs if this is the first time install
+      if (info === undefined || appSettings === undefined) {
+        return configs;
+      }
       // Update current configs
       const migratedConfigs = Object.assign({}, configs, {
         profile: info,
