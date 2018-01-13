@@ -205,11 +205,11 @@ function setInitialValues() {
       },
     },
   };
+
   // Set initial values conditionally
   for (const key in defaultOptions) {
     if (!appConfig.has(`${key}`)) {
       appConfig.set(`${key}`, defaultOptions[key]);
-      break;
     }
     for (const childKey in defaultOptions[key]) {
       if (!appConfig.has(`${key}.${childKey}`)) {
