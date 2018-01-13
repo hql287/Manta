@@ -8,8 +8,18 @@ const { BrowserWindow } = require('electron').remote;
 // Custom Libs
 const sounds = require('../../libs/sounds.js');
 
+const centerOnPrimaryDisplay = require('../helpers/center-on-primary-display');
+
 function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
+  const width = 450;
+  const height = 220;
+
+  // Get X and Y coordinations on primary display
+  const display = centerOnPrimaryDisplay(width, height);
+
   let modalWin = new BrowserWindow({
+    x: display.y,
+    y: display.y,
     width: 450,
     height: 220,
     backgroundColor: '#282828',

@@ -11,7 +11,9 @@ const omit = require('lodash').omit;
 
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
-const electron = require('electron');
+
+// Place a BrowserWindow in center of primary display
+const centerOnPrimaryDisplay = require('./app/helpers/center-on-primary-display');
 
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
@@ -32,25 +34,14 @@ function createTourWindow() {
   // window on primary display.
   const width = 700;
   const height = 600;
-  // Get Primary Display (screen / monitor)
-  const primaryDisplay = electron.screen.getPrimaryDisplay();
 
-  let x = undefined
-  let y = undefined
-
-  // If monitor 1 is primary display
-  if (primaryDisplay.bounds.x === 0 && primaryDisplay.bounds.y === 0) {
-    x = primaryDisplay.bounds.width / 2 - width / 2
-    y = primaryDisplay.bounds.height / 2 - height / 2
-  } else { // if monitor 2 and higher is primary display
-    x = primaryDisplay.bounds.width / 2 - width / 2 + primaryDisplay.bounds.x
-    y = primaryDisplay.bounds.height / 2 - height / 2 + primaryDisplay.bounds.y
-  }
+  // Get X and Y coordinations on primary display
+  const display = centerOnPrimaryDisplay(width, height);
 
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    x,
-    y,
+    x: display.x,
+    y: display.y,
     width,
     height,
     show: false,
