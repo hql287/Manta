@@ -20,8 +20,8 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
   let modalWin = new BrowserWindow({
     x: display.x,
     y: display.y,
-    width: 450,
-    height: 220,
+    width,
+    height,
     backgroundColor: '#282828',
     frame: false,
     show: false,
