@@ -10,3 +10,9 @@ export const updateConfigs = createAction(
   ACTION_TYPES.SETTINGS_UPDATE_CONFIGS,
   configs => configs
 );
+
+export const updateProfile = createAction(
+  ACTION_TYPES.SETTINGS_UPDATE_PROFILE,
+  profile => profile
+);
+
