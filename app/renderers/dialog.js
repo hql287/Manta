@@ -18,7 +18,7 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
   const display = centerOnPrimaryDisplay(width, height);
 
   let modalWin = new BrowserWindow({
-    x: display.y,
+    x: display.x,
     y: display.y,
     width: 450,
     height: 220,
