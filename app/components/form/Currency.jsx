@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
-import currencies from '../../../libs/currencies.json';
+import { List } from '../../../libs/currencies.js';
 import { keys, sortBy, isEqual } from 'lodash';
 
 // Custom Components
@@ -43,6 +43,7 @@ export class Currency extends Component {
 
   sortCurrencies() {
     // Sort currencies
+    const { currencies } = List()
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [
       key,
@@ -65,6 +66,38 @@ export class Currency extends Component {
     });
   }
 
+  sortCryptoCurrencies() {
+
+    const { cryptocurrencies } = List()
+    
+    const cryptocurrenciesKeys = keys(cryptocurrencies);
+    
+    const cryptocurrenciesKeysAndValues = cryptocurrenciesKeys.map(key => [
+      key,
+      cryptocurrencies[key].name,
+      cryptocurrencies[key].code,
+    ]);
+    
+    const cryptocurrenciesSorted = sortBy(cryptocurrenciesKeysAndValues, [
+      array => array[1],
+    ]);
+    
+    return cryptocurrenciesSorted.map(obj => {
+      const [key, name, code] = obj;
+
+      const optionKey = code;
+      const optionValue = code;
+      const optionLabel = name;
+
+      return (
+        <option value={optionValue} key={optionKey}>
+          {optionLabel}
+        </option>
+      );
+    });
+  }
+
+
   render() {
     return (
       <Section>
@@ -80,7 +113,12 @@ export class Currency extends Component {
           value={this.props.currency.code}
           onChange={this.handleInputChange}
         >
+        <optgroup label="Currencies">
           {this.sortCurrencies()}
+        </optgroup>
+        <optgroup label="Crypto Currencies">
+          {this.sortCryptoCurrencies()}
+        </optgroup>
         </select>
       </Section>
     );

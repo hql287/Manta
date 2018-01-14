@@ -2,7 +2,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
-import currencies from '../../../../libs/currencies.json';
+import { All as currencies } from '../../../../libs/currencies.js';
 const appConfig = require('electron').remote.require('electron-settings');
 
 // Component

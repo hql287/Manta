@@ -1,12 +1,12 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
 import { keys, sortBy } from 'lodash';
 const moment = require('moment');
 
 // Custom Libs
-import currencies from '../../../libs/currencies.json';
+import { List } from '../../../libs/currencies.js';
 const openDialog = require('../../renderers/dialog.js');
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
@@ -33,7 +33,7 @@ const Section = styled.div`
 `;
 
 // Component
-class Invoice extends Component {
+class Invoice extends PureComponent {
   constructor(props) {
     super(props);
     this.state = this.props.invoice;
@@ -110,7 +110,41 @@ class Invoice extends Component {
     ipc.send('select-export-directory');
   }
 
+  sortCryptoCurrencies() {
+
+    const { cryptocurrencies } = List()
+    
+    const cryptocurrenciesKeys = keys(cryptocurrencies);
+    
+    const cryptocurrenciesKeysAndValues = cryptocurrenciesKeys.map(key => [
+      key,
+      cryptocurrencies[key].name,
+      cryptocurrencies[key].code,
+    ]);
+    
+    const cryptocurrenciesSorted = sortBy(cryptocurrenciesKeysAndValues, [
+      array => array[1],
+    ]);
+    
+    return cryptocurrenciesSorted.map(obj => {
+      const [key, name, code] = obj;
+
+      const optionKey = code;
+      const optionValue = code;
+      const optionLabel = name;
+
+      return (
+        <option value={optionValue} key={optionKey}>
+          {optionLabel}
+        </option>
+      );
+    });
+  }
+
+
   sortCurrencies() {
+
+    const { currencies } = List()
     const currenciesKeys = keys(currencies);
     const currenciesKeysAndValues = currenciesKeys.map(key => [
       key,
@@ -262,8 +296,13 @@ class Invoice extends Component {
                 name="currency"
                 value={currency}
                 onChange={this.handleInputChange}
-              >
+              > 
+              <optgroup label="Currencies">
                 {this.sortCurrencies()}
+              </optgroup>
+              <optgroup label="Crypto Currencies">
+                {this.sortCryptoCurrencies()}
+              </optgroup>
               </select>
             </Field>
             <Field>

@@ -4,7 +4,7 @@ import FormReducer, {
   getRecipient,
 } from '../FormReducer';
 import * as ACTION_TYPES from '../../constants/actions.jsx';
-import currencies from '../../../libs/currencies.json';
+import { All as currencies } from '../../../../libs/currencies.js';
 
 import uuidv4 from 'uuid/v4';
 

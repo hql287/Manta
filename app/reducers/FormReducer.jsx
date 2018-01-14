@@ -3,7 +3,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 // Libs
 import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
-import currencies from '../../libs/currencies.json';
+import { All as currencies } from '../../libs/currencies.js';
 // Retrive settings
 const appConfig = require('electron').remote.require('electron-settings');
 const invoiceSettings = appConfig.get('invoice');
