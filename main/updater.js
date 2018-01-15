@@ -2,6 +2,7 @@
 const { BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const appConfig = require('electron-settings');
+const isDev = require('electron-is-dev');
 
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
@@ -12,7 +13,7 @@ const mainWindow = BrowserWindow.fromId(mainWindowID);
 
   // Check for Updates
 ipcMain.on('check-for-updates', event => {
-  checkForUpdate();
+  if(!isDev) checkForUpdate();
 });
 
 // Start Download
