@@ -32,7 +32,7 @@ const SettingsMW = ({ dispatch }) => next => action => {
       // Reload Sounds Cache
       sounds.preload();
       // Notify previewWindow to update
-      ipc.send('update-preview-window', appConfig.getAll());
+      ipc.send('update-preview-window', action.payload);
       // Continue
       next(action);
       // Create Notification
