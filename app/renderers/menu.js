@@ -91,6 +91,14 @@ const menuTemplate = [
           },
         ],
       },
+      { type: 'separator' },
+      {
+        label: 'Quit App',
+        accelerator: 'CmdOrCtrl+Q',
+        click() {
+          ipc.send('quit-app');
+        },
+      },
     ],
   },
 
@@ -149,6 +157,13 @@ const menuTemplate = [
     role: 'help',
     submenu: [
       {
+        label: 'Check For Updates',
+        accelerator: 'CmdOrCtrl+U',
+        click() {
+          ipc.send('check-for-updates');
+        },
+      },
+      {
         label: 'Show Tutorial',
         accelerator: 'CmdOrCtrl+T',
         click() {
@@ -158,7 +173,7 @@ const menuTemplate = [
       {
         label: 'Learn More',
         click() {
-          require('electron').shell.openExternal('https://www.paprless.co');
+          require('electron').shell.openExternal('https://manta.life');
         },
       },
     ],
@@ -171,27 +186,12 @@ if (process.platform === 'darwin') {
     submenu: [
       { role: 'about' },
       { type: 'separator' },
-      {
-        label: 'Check For Updates',
-        accelerator: 'CmdOrCtrl+U',
-        click() {
-          ipc.send('check-for-updates');
-        },
-      },
       { type: 'separator' },
       { role: 'services', submenu: [] },
       { type: 'separator' },
       { role: 'hide' },
       { role: 'hideothers' },
       { role: 'unhide' },
-      { type: 'separator' },
-      {
-        label: 'Quit App',
-        accelerator: 'CmdOrCtrl+Q',
-        click() {
-          ipc.send('quit-app');
-        },
-      },
     ],
   });
 }
