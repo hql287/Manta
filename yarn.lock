@@ -2163,7 +2163,7 @@ crypto-random-string@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-1.0.0.tgz#a230f64f568310e1498009940790ec99545bca7e"
 
-cryptocurrencies@^1.2.0:
+cryptocurrencies@latest:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/cryptocurrencies/-/cryptocurrencies-1.2.0.tgz#def6b95247d029156b118141211c514609fc9eb4"
 

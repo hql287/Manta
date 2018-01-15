@@ -2,7 +2,7 @@ import currencies from './currencies.json';
 import cryptocurrencies from 'cryptocurrencies';
 
 const Crypto = () => {
-    let cryptocurrencie = {};
+    const cryptocurrencie = {};
 
     const keys = Object.keys(cryptocurrencies)
 

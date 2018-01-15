@@ -297,12 +297,12 @@ class Invoice extends PureComponent {
                 value={currency}
                 onChange={this.handleInputChange}
               > 
-              <optgroup label="Currencies">
-                {this.sortCurrencies()}
-              </optgroup>
-              <optgroup label="Crypto Currencies">
-                {this.sortCryptoCurrencies()}
-              </optgroup>
+                <optgroup label="Currencies">
+                  {this.sortCurrencies()}
+                </optgroup>
+                <optgroup label="Crypto Currencies">
+                  {this.sortCryptoCurrencies()}
+                </optgroup>
               </select>
             </Field>
             <Field>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 import { List } from '../../../libs/currencies.js';
 import { keys, sortBy, isEqual } from 'lodash';
-
+const { currencies } = List();
 // Custom Components
 import { Section, Header } from '../shared/Section';
 
@@ -104,21 +104,21 @@ export class Currency extends Component {
         <Header>
           <label className="itemLabel">Currency</label>
           {!this.isSettingsSaved() && (
-            <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> Save as default?
-            </a>
-          )}
+          <a href="#" onClick={this.saveAsDefault}>
+            <i className="ion-checkmark" /> Save as default?
+          </a>
+        )}
         </Header>
         <select
           value={this.props.currency.code}
           onChange={this.handleInputChange}
         >
-        <optgroup label="Currencies">
-          {this.sortCurrencies()}
-        </optgroup>
-        <optgroup label="Crypto Currencies">
-          {this.sortCryptoCurrencies()}
-        </optgroup>
+          <optgroup label="Currencies">
+            {this.sortCurrencies()}
+          </optgroup>
+          <optgroup label="Crypto Currencies">
+            {this.sortCryptoCurrencies()}
+          </optgroup>
         </select>
       </Section>
     );
