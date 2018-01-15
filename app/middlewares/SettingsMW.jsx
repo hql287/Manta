@@ -1,6 +1,7 @@
 // Node Libs
 const appConfig = require('electron').remote.require('electron-settings');
 import sounds from '../../libs/sounds';
+const ipc = require('electron').ipcRenderer;
 
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -30,6 +31,8 @@ const SettingsMW = ({ dispatch }) => next => action => {
       appConfig.set('general', action.payload.general);
       // Reload Sounds Cache
       sounds.preload();
+      // Notify previewWindow to update
+      ipc.send('update-preview-window', appConfig.getAll());
       // Continue
       next(action);
       // Create Notification
