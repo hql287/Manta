@@ -24,6 +24,9 @@ const initialState = {
   // Form current settings
   settings: {
     open: false,
+    editMode: {
+      active: false
+    },
     required_fields: invoiceSettings.required_fields,
   },
   // Saved settings, reserve for reference
@@ -102,6 +105,49 @@ const FormReducer = handleActions(
         }),
       }),
 
+    [ACTION_TYPES.INVOICE_EDIT]: (state, action) => {
+      const {
+        recipient,
+        rows,
+        currency,
+        tax,
+        dueDate,
+        discount,
+        note,
+      } = action.payload;
+      return Object.assign({}, state, {
+        // Populate data
+        recipient: Object.assign({}, state.recipient, {
+          newRecipient: false,
+          select: recipient,
+        }),
+        rows,
+        currency,
+        dueDate: dueDate !== undefined ? Object.assign({}, state.dueDate, {
+          selectedDate: dueDate
+        }) : state.dueDate,
+        discount: discount !== undefined ? discount : state.discount,
+        tax: tax !== undefined ? tax : state.tax,
+        note: note !== undefined ? Object.assign({}, state.note, {
+          content: note
+        }) : state.note,
+        // Update settings
+        settings: Object.assign({}, state.settings, {
+          editMode: {
+            active: true,
+            data: action.payload,
+          },
+          required_fields: Object.assign({}, state.settings.required_fields, {
+            currency: currency.code !== state.savedSettings.currency,
+            tax: tax !== undefined,
+            dueDate: dueDate !== undefined,
+            discount: discount !== undefined,
+            note: note !== undefined,
+          })
+        }),
+      });
+    },
+
     [ACTION_TYPES.SAVED_FORM_SETTING_UPDATE]: (state, action) => {
       const invoiceSettings = action.payload;
       return Object.assign({}, state, {
@@ -122,6 +168,9 @@ const FormReducer = handleActions(
         // Update current settings
         settings: Object.assign({}, state.settings, {
           open: false,
+          editMode: {
+            active: false
+          },
           required_fields: state.savedSettings.required_fields,
         }),
         // Updated saved settings to the current saved settings
