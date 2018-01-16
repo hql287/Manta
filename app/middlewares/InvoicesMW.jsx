@@ -26,6 +26,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
           newRecipient: false,
         })
       );
+      break;
     }
 
     case ACTION_TYPES.INVOICE_GET_ALL: {
@@ -77,6 +78,44 @@ const InvoicesMW = ({ dispatch }) => next => action => {
           });
           // Preview Window
           ipc.send('preview-invoice', doc);
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
+        });
+    }
+
+    case ACTION_TYPES.INVOICE_EDIT: {
+      // Continue
+      next(action);
+      // Change Tab to Form
+      dispatch(UIActions.changeActiveTab('form'));
+      break;
+    }
+
+    case ACTION_TYPES.INVOICE_UPDATE: {
+      return updateDoc('invoices', action.payload.invoiceID, {
+        ...action.payload.data,
+        subtotal: getInvoiceValue(action.payload.data).subtotal,
+        grandTotal: getInvoiceValue(action.payload.data).grandTotal,
+      })
+        .then(docs => {
+          next({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: docs,
+          });
+          dispatch({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: 'Updated Successfully',
+            },
+          });
         })
         .catch(err => {
           next({
