@@ -57,7 +57,7 @@ class Form extends Component {
       settings,
       savedSettings,
     } = this.props.currentInvoice;
-    const { required_fields, open } = settings;
+    const { required_fields, open, editMode } = settings;
     return (
       <PageWrapper>
         <PageHeader>
@@ -66,8 +66,12 @@ class Form extends Component {
             <Button danger onClick={clearForm}>
               Clear
             </Button>
-            <Button primary onClick={saveFormData}>
-              Save & Preview
+            <Button
+              primary={editMode.active}
+              success={editMode.active === false}
+              onClick={saveFormData}
+            >
+              {editMode.active ? 'Update' : 'Save & Preview'}
             </Button>
           </PageHeaderActions>
         </PageHeader>
