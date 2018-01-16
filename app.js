@@ -10,7 +10,8 @@ const isDev = require('electron-is-dev');
 const omit = require('lodash').omit;
 
 // Electron Libs
-const { app, BrowserWindow, ipcMain } = require('electron');
+const electron = require('electron');
+const { app, BrowserWindow, ipcMain } = electron;
 
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
@@ -26,11 +27,34 @@ let tourWindow = null;
 let mainWindow = null;
 let previewWindow = null;
 
+// Calculate X and Y position
+function calPOS(displayBounds, winBounds) {
+  // Explicitly name these values
+  const displayX = displayBounds.x;
+  const displayY = displayBounds.y;
+  const displayWidth = displayBounds.width;
+  const displayHeight = displayBounds.height;
+  const winX = displayX + ( displayWidth - winBounds.width) / 2;
+  const winY = displayY + ( displayHeight - winBounds.height ) / 2;
+  return {
+    x: winX,
+    y: winY,
+  }
+}
+
 function createTourWindow() {
+  const screen = electron.screen;
+  const primaryDisplayBounds = screen.getPrimaryDisplay().bounds;
+  const width = 700;
+  const height = 600;
+  const winPOS = calPOS(primaryDisplayBounds, { width, height });
+
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    width: 700,
-    height: 600,
+    x: winPOS.x,
+    y: winPOS.y,
+    width,
+    height,
     show: false,
     frame: false,
     resizable: false,
