@@ -3,8 +3,7 @@ const PouchDB = require('pouchdb-browser');
 const contactsDB = new PouchDB('contacts');
 const invoicesDB = new PouchDB('invoices');
 
-// Used for ExportDB and ImportDB
-const fs = require('fs');
+// Used for Export and Import PouchDB
 const MemoryStream = require('memorystream');
 const replicationStream = require('pouchdb-replication-stream');
 
@@ -90,113 +89,79 @@ runMigration(
   }
 );
 
-// Export PouchDBs
-const exportDB = path => {
-  // create the export file
-  const file = fs.createWriteStream(path);
+// get PouchDB Invoices (Used for Exporting)
+const pouchDBInvoices = () => {
+  const invoices = new Promise((resolve, reject) => {
+    // Store PouchDB Invoices in memory before writing to file
+    const invoicesStream = new MemoryStream();
+    let invoicesStreamObject
 
-  // Store PouchDB in memory before dumping to file
-  const invoicesStream = new MemoryStream();
-  const contactsStream = new MemoryStream();
+    // Invoices MemoryStream
+    invoicesStream.on('data', chunk => {
+      const json = JSON.parse(chunk.toString());
+      if (json.docs) {
+        invoicesStreamObject = json;
+      }
+    });
 
-  // Temporary objects before merged into one
-  let invoicesStreamObject = {};
-  let contactsStreamObject = {};
+    invoicesStream.on('end', () => {
+      resolve(invoicesStreamObject)
+    });
 
-  // Invoice MemoryStream
-  invoicesStream.on('data', chunk => {
-    const j = JSON.parse(chunk.toString());
-    if (j.docs) {
-      invoicesStreamObject = j;
-    }
-  });
+    // Dump invoices to memoryStream
+    invoicesDB.dump(invoicesStream).then(res => {
+      if (res.ok !== true) {
+        reject({
+          error: {
+            type: 'error',
+            title: 'PouchDB Error',
+            message: 'Exporting PouchDB to CSV failed!',
+          }
+        });
+      }
+    });
+  })
 
-  invoicesStream.on('end', () => {
-    finished();
-  });
+  return invoices
+};
 
-  // Contact MemoryStream
-  contactsStream.on('data', chunk => {
-    const j = JSON.parse(chunk.toString());
-    if (j.docs) {
-      contactsStreamObject = j;
-    }
-  });
+// get PouchDB Contacts (Used for Exporting)
+const pouchDBContacts = () => {
+  const contacts = new Promise((resolve, reject) => {
+    // Store PouchDB Contacts in memory before writing to file
+    const contactsStream = new MemoryStream();
+    let contactsStreamObject
 
-  contactsStream.on('end', () => {
-    finished();
-  });
+    // Contacts MemoryStream
+    contactsStream.on('data', chunk => {
+      const json = JSON.parse(chunk.toString());
+      if (json.docs) {
+        contactsStreamObject = json
+      }
+    });
 
-  // Dump contacts to memoryStream
-  contactsDB.dump(contactsStream).then(res => {
-    // TODO: error handling
-    if (res.ok !== true) {
-      console.log('Dump Failed');
-    }
-  });
+    contactsStream.on('end', () => {
+      resolve(contactsStreamObject)
+    });
 
-  // Dump invoices to memoryStream
-  invoicesDB.dump(invoicesStream).then(res => {
-    // TODO: error handling
-    if (res.ok !== true) {
-      console.log('Dump Failed');
-    }
-  });
+    // Dump contacts to memoryStream
+    contactsDB.dump(contactsStream).then(res => {
+      if (res.ok !== true) {
+        reject({
+          type: 'error',
+          title: 'PouchDB Error',
+          message: 'Importing PouchDB from CSV failed!',
+        });
+      }
+    });
+  })
 
-  // TODO: Improve this!
-  let done = 0;
-  const finished = () => {
-    done += 1;
-    if (done === 2) {
-      writeStreamToCSV();
-    }
-  };
-
-  // Merge and save memory stored PouchDB content to CSV file
-  const writeStreamToCSV = () => {
-    const streamObject = {
-      invoices: invoicesStreamObject,
-      'contacts:': contactsStreamObject,
-    };
-
-    const options = {
-      delimiter: ',',
-      wrap: false,
-      headers: 'full',
-      objectDenote: '.',
-      arrayDenote: '[]',
-    };
-
-    console.log('object', streamObject);
-
-    file.write(csvjson.toCSV(streamObject, options));
-    cleanup();
-  };
-
-  // Close and reset for next export
-  const cleanup = () => {
-    invoicesStreamObject = {};
-    contactsStreamObject = {};
-    file.close();
-    done = 0;
-  };
+  return contacts
 };
 
 // Import PouchDB from CSV file
-const importDB = path => {
-  // Read the CSV file
-  const data = fs.readFileSync(path, 'utf8');
-
-  if (data) {
-    const options = {
-      delimiter: ',',
-      quote: '"',
-    };
-
-    // TODO: This does not output the correct JSON as of now!
-    const j = csvjson.toSchemaObject(data);
-    console.log(j);
-  }
+const DBLoad = load => {
+  // TODO: load invoices and contacts to PouchDB
 };
 
 // Set DB via dbName
@@ -277,4 +242,11 @@ const updateDoc = (dbName, docId, updatedDoc) =>
       .catch(err => reject(err));
   });
 
-export { getAllDocs, deleteDoc, saveDoc, updateDoc, exportDB, importDB };
+export {
+  getAllDocs,
+  deleteDoc,
+  saveDoc,
+  updateDoc,
+  pouchDBInvoices,
+  pouchDBContacts,
+};
