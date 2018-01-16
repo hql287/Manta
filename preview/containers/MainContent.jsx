@@ -37,14 +37,20 @@ import Invoice from '../components/main/Invoice';
 
 class MainContent extends PureComponent {
   componentDidMount() {
+    const { dispatch } = this.props;
     ipc.on('update-preview', (event, invoiceData) => {
-      const { dispatch } = this.props;
       dispatch(ActionsCreator.updateInvoice(invoiceData));
+    });
+    ipc.on('update-preview-window', (event, newConfigs) => {
+      dispatch(ActionsCreator.reloadConfigs(newConfigs));
     });
   }
 
   componentWillUnmount() {
-    ipc.removeAllListeners(['update-preview']);
+    ipc.removeAllListeners([
+      'update-preview',
+      'update-preview-window',
+    ]);
   }
 
   render() {
