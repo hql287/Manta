@@ -15,11 +15,11 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
   const height = 220;
 
   // Get X and Y coordinations on primary display
-  const display = centerOnPrimaryDisplay(width, height);
+  const winPOS = centerOnPrimaryDisplay(width, height);
 
   let modalWin = new BrowserWindow({
-    x: display.x,
-    y: display.y,
+    x: winPOS.x,
+    y: winPOS.y,
     width,
     height,
     backgroundColor: '#282828',

@@ -30,8 +30,6 @@ let mainWindow = null;
 let previewWindow = null;
 
 function createTourWindow() {
-  // Easier to work with when centering tour
-  // window on primary display.
   const width = 700;
   const height = 600;
 
