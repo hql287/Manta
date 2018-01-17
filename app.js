@@ -36,12 +36,12 @@ function createTourWindow() {
   const height = 600;
 
   // Get X and Y coordinations on primary display
-  const display = centerOnPrimaryDisplay(width, height);
+  const winPOS = centerOnPrimaryDisplay(width, height);
 
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    x: display.x,
-    y: display.y,
+    x: winPOS.x,
+    y: winPOS.y,
     width,
     height,
     show: false,
