@@ -1,19 +1,18 @@
 const electron = require('electron');
 
-const centerOnPrimaryDisplay = (width, height) => {
-  // Get Primary Display (screen / monitor)
+const centerOnPrimaryDisplay = (winWidth, winHeight) => {
+  // Get primary display (screen / monitor) bounds
   const primaryDisplay = electron.screen.getPrimaryDisplay();
+  const { x, y, width, height } = primaryDisplay.bounds;
+  
+  // Calculate X and Y coordinates to make rectangular center of primary display
+  const winX = x + (width - winWidth) / 2;
+  const winY = y + (height - winHeight) / 2;
 
-  // TODO: how to do error handling in electron?
-  if (!width || !height) {
-    throw new Error('missing width and / or height!');
-  }
-
-  // X and Y coordinates to make rectangular center of primary display
-  const x = primaryDisplay.bounds.width / 2 - width / 2 + primaryDisplay.bounds.x;
-  const y = primaryDisplay.bounds.height / 2 - height / 2 + primaryDisplay.bounds.y;
-
-  return { x, y };
+  return { 
+    x: winX,
+    y: winY, 
+  };
 };
 
 module.exports = centerOnPrimaryDisplay;
