@@ -17,13 +17,10 @@ const AppMainContentStyle = styled.div`
 `;
 
 const PageWrapperStyle = styled.div`
-  overflow-x:hidden;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   height: 100%;
-  &:hover {
-    overflow-y: scroll;
-  }
 `;
 
 const PageHeaderStyle = styled.div`
