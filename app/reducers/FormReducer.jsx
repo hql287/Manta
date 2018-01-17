@@ -25,7 +25,7 @@ const initialState = {
   settings: {
     open: false,
     editMode: {
-      active: false
+      active: false,
     },
     required_fields: invoiceSettings.required_fields,
   },
@@ -123,14 +123,20 @@ const FormReducer = handleActions(
         }),
         rows,
         currency,
-        dueDate: dueDate !== undefined ? Object.assign({}, state.dueDate, {
-          selectedDate: dueDate
-        }) : state.dueDate,
+        dueDate:
+          dueDate !== undefined
+            ? Object.assign({}, state.dueDate, {
+                selectedDate: dueDate,
+              })
+            : state.dueDate,
         discount: discount !== undefined ? discount : state.discount,
         tax: tax !== undefined ? tax : state.tax,
-        note: note !== undefined ? Object.assign({}, state.note, {
-          content: note
-        }) : state.note,
+        note:
+          note !== undefined
+            ? Object.assign({}, state.note, {
+                content: note,
+              })
+            : state.note,
         // Update settings
         settings: Object.assign({}, state.settings, {
           editMode: {
@@ -143,7 +149,7 @@ const FormReducer = handleActions(
             dueDate: dueDate !== undefined,
             discount: discount !== undefined,
             note: note !== undefined,
-          })
+          }),
         }),
       });
     },
@@ -169,7 +175,7 @@ const FormReducer = handleActions(
         settings: Object.assign({}, state.settings, {
           open: false,
           editMode: {
-            active: false
+            active: false,
           },
           required_fields: state.savedSettings.required_fields,
         }),

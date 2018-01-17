@@ -18,6 +18,11 @@ describe('Form Middleware', () => {
         form: {
           validation: true,
           recipient: { newRecipient: true },
+          settings: {
+            editMode: {
+              active: false,
+            }
+          }
         },
       }));
       const middleware = FormMW({ dispatch, getState })(next);
@@ -40,6 +45,11 @@ describe('Form Middleware', () => {
         form: {
           validation: true,
           recipient: { newRecipient: false },
+          settings: {
+            editMode: {
+              active: false,
+            }
+          }
         },
       }));
       const middleware = FormMW({ dispatch, getState })(next);
@@ -52,6 +62,60 @@ describe('Form Middleware', () => {
       expect(getState.mock.calls.length).toBe(1);
       // Save the Invoice & Clear the Form
       expect(dispatch.mock.calls.length).toBe(2);
+      // No Calling Next
+      expect(next.mock.calls.length).toBe(0);
+    });
+
+    it('should update Invocie, save Contact, Clear the Form and Switch Tab', () => {
+      // Setup
+      getState = jest.fn(() => ({
+        form: {
+          validation: true,
+          recipient: { newRecipient: true },
+          settings: {
+            editMode: {
+              active: true,
+              data: { _id: 'invoice-uuid' }
+            }
+          }
+        },
+      }));
+      const middleware = FormMW({ dispatch, getState })(next);
+      const action = Actions.saveFormData();
+      // Action
+      middleware(action);
+      // Expect
+      expect(getState.mock.calls.length).toBe(1);
+      // Update the Invoice, Save new contact, Clear the Form & Change Tab
+      expect(dispatch.mock.calls.length).toBe(4);
+      // No Calling Next
+      expect(next.mock.calls.length).toBe(0);
+    });
+
+    it('should update Invocie, NOT add new Contact, Clear the Form and Switch Tab', () => {
+      // Setup
+      getState = jest.fn(() => ({
+        form: {
+          validation: true,
+          recipient: { newRecipient: false },
+          settings: {
+            editMode: {
+              active: true,
+              data: { _id: 'invoice-uuid' }
+            }
+          }
+        },
+      }));
+      const middleware = FormMW({ dispatch, getState })(next);
+
+      // Action
+      const action = Actions.saveFormData();
+      middleware(action);
+
+      // Expect
+      expect(getState.mock.calls.length).toBe(1);
+      // Update the Invoice, Clear the Form and Switch Tab
+      expect(dispatch.mock.calls.length).toBe(3);
       // No Calling Next
       expect(next.mock.calls.length).toBe(0);
     });

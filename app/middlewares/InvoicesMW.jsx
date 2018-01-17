@@ -113,7 +113,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Updated Successfully',
+              message: 'Invoice Updated Successfully',
             },
           });
         })
