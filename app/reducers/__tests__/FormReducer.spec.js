@@ -311,6 +311,211 @@ describe('Form Reducer should handle update', () => {
   });
 });
 
+describe('Form Reducer should handle Invoice Edit', () => {
+  let currentState, invoiceData, newState;
+  beforeEach(() => {
+    currentState = {
+      recipient: {
+        newRecipient: true,
+        select: {},
+        new: {},
+      },
+      rows: [],
+      dueDate: {},
+      discount: {},
+      note: {},
+      currency: {
+        code: 'USD',
+        decimal_digits: 2,
+        name: 'US Dollar',
+        name_plural: 'US dollars',
+        rounding: 0,
+        symbol: '$',
+        symbol_native: '$',
+      },
+      tax: {
+        amount: 10,
+        method: 'default',
+        tin: '123-456-789',
+      },
+      settings: {
+        open: false,
+        editMode: {
+          active: false,
+        },
+        required_fields: {
+          dueDate: false,
+          currency: false,
+          discount: false,
+          tax: false,
+          note: false,
+        },
+      },
+      savedSettings: {
+        currency: 'VND',
+      },
+    };
+    invoiceData = {
+      recipient: {
+        fullname: 'Jon Snow',
+        company: 'HBO',
+        email: 'jon@snow.got',
+        phone: '000000000',
+      },
+      rows: [
+        {
+          id: '16bf1a07-71e6-4be4-8a18-d89a715bd191',
+          description: 'iPhone X',
+          price: 999,
+          quantity: 1,
+          subtotal: 999
+        },
+      ],
+      currency: {
+        code: 'USD',
+        decimal_digits: 2,
+        name: 'US Dollar',
+        name_plural: 'US dollars',
+        rounding: 0,
+        symbol: '$',
+        symbol_native: '$',
+      },
+      tax: {
+        amount: 5,
+        method: 'reverse-charge',
+        tin: '555-444-333',
+      },
+      dueDate: {
+        date: 1,
+        hours: 12,
+        milliseconds: 0,
+        minutes: 0,
+        months: 1,
+        seconds: 0,
+        years: 2018,
+      },
+      discount: {
+        amount: 5,
+        type: 'percentage'
+      },
+      note: 'Thank you!',
+    };
+    newState = FormReducer(currentState, {
+      type: ACTION_TYPES.INVOICE_EDIT,
+      payload: invoiceData,
+    });
+  });
+
+  it('change editMode to true and add editData', () => {
+    expect(newState.settings.editMode.active).toEqual(true);
+    expect(newState.settings.editMode.data).toEqual(invoiceData);
+  });
+
+  it('should populate field data', () => {
+    // Recipient
+    expect(newState.recipient.newRecipient).toEqual(false);
+    expect(newState.recipient.select).toEqual(invoiceData.recipient);
+    // Rows
+    expect(newState.rows.length).toEqual(1);
+    expect(newState.rows).toEqual(invoiceData.rows);
+    // Tax
+    expect(newState.tax).toEqual(invoiceData.tax);
+    // Currency
+    expect(newState.currency).toEqual(invoiceData.currency);
+    // Note
+    expect(newState.note.content).toEqual(invoiceData.note);
+    // Discount
+    expect(newState.discount).toEqual(invoiceData.discount);
+    // DueDate
+    expect(newState.dueDate.selectedDate).toEqual(invoiceData.dueDate);
+  });
+
+  it('toggle optional field if necessary', () => {
+    const { required_fields } = newState.settings;
+    expect(required_fields.tax).toEqual(invoiceData.tax !== undefined);
+    expect(required_fields.dueDate).toEqual(invoiceData.dueDate !== undefined);
+    expect(required_fields.discount).toEqual(invoiceData.discount !== undefined);
+    expect(required_fields.note).toEqual(invoiceData.note !== undefined);
+  });
+
+  it('should only show currency field if it is different than default', () => {
+    const currentCurrencyCode = newState.currency.code;
+    const savedCurrencyCode = newState.savedSettings.currency;
+    expect(newState.settings.required_fields.currency).toEqual(
+      currentCurrencyCode !== savedCurrencyCode
+    );
+  });
+});
+
+describe('Form Reducer should handle update Settings', () => {
+  let currentState, newState;
+  beforeEach(() => {
+    currentState = {
+      recipient: {
+        newRecipient: true,
+        select: {},
+        new: {},
+      },
+      rows: [],
+      savedSettings: {
+        tax: {
+          amount: 10,
+          method: 'default',
+          tin: '123-456-789',
+        },
+        currency: 'USD',
+        required_fields: {
+          dueDate: false,
+          currency: false,
+          discount: false,
+          tax: false,
+          note: false,
+        }
+      },
+    };
+    newState = FormReducer(currentState, {
+      type: ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,
+      payload: {
+        tax: {
+          amount: 5,
+          method: 'reverse',
+          tin: '111-111-111',
+        },
+        currency: 'VND',
+        required_fields: {
+          dueDate: true,
+          currency: true,
+          discount: true,
+          tax: true,
+          note: true,
+        }
+      },
+    });
+  });
+
+  it('should save default tax value', () => {
+    expect(newState.savedSettings.tax).toEqual({
+      amount: 5,
+      method: 'reverse',
+      tin: '111-111-111',
+    });
+  });
+
+  it('should save default currency value', () => {
+    expect(newState.savedSettings.currency).toEqual('VND');
+  });
+
+  it('should save default visibility value', () => {
+    expect(newState.savedSettings.required_fields).toEqual({
+      dueDate: true,
+      currency: true,
+      discount: true,
+      tax: true,
+      note: true,
+    });
+  });
+});
+
 // Test Selectors
 const state = {
   form: {

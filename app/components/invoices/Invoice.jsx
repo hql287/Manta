@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 import styled from 'styled-components';
@@ -142,7 +142,7 @@ const Field = styled.div`
 `;
 
 // Component
-class Invoice extends Component {
+class Invoice extends PureComponent {
   constructor(props) {
     super(props);
     this.viewInvoice = this.viewInvoice.bind(this);
@@ -151,20 +151,14 @@ class Invoice extends Component {
     this.displayStatus = this.displayStatus.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.invoice.status !== nextProps.invoice.status) {
-      return true;
-    }
-    return false;
-  }
-
   deleteInvoice() {
     const { invoice, deleteInvoice } = this.props;
     deleteInvoice(invoice._id);
   }
 
   editInvoice() {
-    // TODO
+    const { invoice, editInvoice } = this.props;
+    editInvoice(invoice);
   }
 
   viewInvoice() {
@@ -297,6 +291,7 @@ class Invoice extends Component {
 }
 
 Invoice.propTypes = {
+  editInvoice: PropTypes.func.isRequired,
   deleteInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,
