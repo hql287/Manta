@@ -1,6 +1,7 @@
 // Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { isEmpty } from 'lodash';
 
 // Custom Components
 import { Section } from '../shared/Section';
@@ -40,6 +41,17 @@ export class Discount extends Component {
       amount: discount.amount ? discount.amount : '',
       type: discount.type ? discount.type : 'percentage',
     });
+  }
+
+  // Handle Reset Form
+  componentWillReceiveProps(nextProps) {
+    const { discount } = nextProps;
+    if (isEmpty(discount)) {
+      this.setState({
+        amount: '',
+        type: 'percentage',
+      });
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {

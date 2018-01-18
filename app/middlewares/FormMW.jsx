@@ -10,6 +10,7 @@ import * as FormActions from '../actions/form';
 import * as InvoicesActions from '../actions/invoices';
 import * as ContactsActions from '../actions/contacts';
 import * as SettingsActions from '../actions/settings';
+import * as UIActions from '../actions/ui';
 
 // Helper
 import { getInvoiceData, validateFormData } from '../helpers/form';
@@ -20,9 +21,18 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       const currentFormData = getState().form;
       // Validate Form Data
       if (!validateFormData(currentFormData)) return;
-      // Save Invoice To DB
       const currentInvoiceData = getInvoiceData(currentFormData);
-      dispatch(InvoicesActions.saveInvoice(currentInvoiceData));
+      // Check Edit Mode
+      if (currentFormData.settings.editMode.active) {
+        const invoiceId = currentFormData.settings.editMode.data._id;
+        // Update existing invoice
+        dispatch(InvoicesActions.updateInvoice(invoiceId, currentInvoiceData));
+        // Change Tab to invoices
+        dispatch(UIActions.changeActiveTab('invoices'));
+      } else {
+        // Save Invoice To DB
+        dispatch(InvoicesActions.saveInvoice(currentInvoiceData));
+      }
       // Save Contact to DB if it's a new one
       if (currentFormData.recipient.newRecipient) {
         const newContactData = currentFormData.recipient.new;

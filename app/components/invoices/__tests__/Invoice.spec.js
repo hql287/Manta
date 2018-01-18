@@ -32,6 +32,7 @@ const invoice = {
   },
 };
 
+const editInvoice = jest.fn();
 const deleteInvoice = jest.fn();
 const setInvoiceStatus = jest.fn();
 const dateFormat = 'MM/DD/YY';
@@ -43,6 +44,7 @@ describe('Renders correctly to the DOM', () => {
     wrapper = shallow(
       <Invoice
         invoice={invoice}
+        editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
@@ -54,6 +56,7 @@ describe('Renders correctly to the DOM', () => {
     const mountWrapper = mount(
       <Invoice
         invoice={invoice}
+        editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
@@ -90,6 +93,7 @@ describe('Renders correctly to the DOM', () => {
     const paidInvoiceWapper = shallow(
       <Invoice
         invoice={paidInvoice}
+        editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
@@ -110,6 +114,7 @@ describe('Renders correctly to the DOM', () => {
     const cancelledInvoiceWapper = shallow(
       <Invoice
         invoice={cancelledInvoice}
+        editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
@@ -128,6 +133,7 @@ describe('Renders correctly to the DOM', () => {
     const refundedInvoiceWapper = shallow(
       <Invoice
         invoice={refundedInvoice}
+        editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
@@ -156,6 +162,7 @@ describe('Renders correctly to the DOM', () => {
       .create(
         <Invoice
           invoice={invoice}
+          editInvoice={editInvoice}
           deleteInvoice={deleteInvoice}
           setInvoiceStatus={setInvoiceStatus}
           dateFormat={dateFormat}
@@ -174,6 +181,7 @@ describe('handle clicks correctly', () => {
     wrapper = shallow(
       <Invoice
         invoice={invoice}
+        editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
@@ -188,6 +196,13 @@ describe('handle clicks correctly', () => {
       .find(Button)
       .first();
     deleteBtn = wrapper.find(Button).first();
+  });
+
+  // TODO
+  it('handle edit action correctly', () => {
+    editBtn.simulate('click');
+    expect(editInvoice).toHaveBeenCalled();
+		expect(editInvoice).toHaveBeenCalledWith(invoice);
   });
 
   it('handle delete action correctly', () => {

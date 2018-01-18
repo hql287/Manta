@@ -27,6 +27,7 @@ import {
 class Invoices extends PureComponent {
   constructor(props) {
     super(props);
+    this.editInvoice = this.editInvoice.bind(this);
     this.deleteInvoice = this.deleteInvoice.bind(this);
     this.setInvoiceStatus = this.setInvoiceStatus.bind(this);
   }
@@ -72,6 +73,11 @@ class Invoices extends PureComponent {
     dispatch(Actions.setInvoiceStatus(invoiceId, status));
   }
 
+  editInvoice(invoice) {
+    const { dispatch } = this.props;
+    dispatch(Actions.editInvoice(invoice));
+  }
+
   // Render
   render() {
     const { invoices, dateFormat } = this.props;
@@ -79,6 +85,7 @@ class Invoices extends PureComponent {
       <Invoice
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
+        editInvoice={this.editInvoice}
         setInvoiceStatus={this.setInvoiceStatus}
         index={index}
         dateFormat={dateFormat}
