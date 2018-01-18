@@ -185,6 +185,7 @@ function setInitialValues() {
       language: 'en',
       sound: 'default',
       muted: false,
+      previewPDF: true,
       checkUpdate: 'daily',
       lastCheck: Date.now(),
     },

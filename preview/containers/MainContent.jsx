@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
+import { Notify } from '../helper/notify';
 // Actions
 import * as ActionsCreator from '../actions';
 
@@ -44,10 +45,18 @@ class MainContent extends PureComponent {
     ipc.on('update-preview-window', (event, newConfigs) => {
       dispatch(ActionsCreator.reloadConfigs(newConfigs));
     });
+    ipc.on('pfd-exported', (event, options) => {
+      const noti = Notify(options);
+      // Handle click on notification
+      noti.onclick = () => {
+        ipc.send('reveal-file', options.location);
+      }
+    });
   }
 
   componentWillUnmount() {
     ipc.removeAllListeners([
+      'pfd-exported',
       'update-preview',
       'update-preview-window',
     ]);
