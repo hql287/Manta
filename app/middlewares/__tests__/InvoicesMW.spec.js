@@ -7,6 +7,7 @@ import uuidv4 from 'uuid/v4';
 // Mock Functions
 const {
   getAllDocs,
+  updateDoc,
   saveDoc,
   deleteDoc,
   mockData,
@@ -277,6 +278,122 @@ describe('Invoices Middleware', () => {
       });
     });
   });
+
+  describe('should handle INVOICE_EDIT action', () => {
+    it('should call next and dispatch change Tab action', () => {
+      // Setup
+      const currentInvoice = {
+        recipient: {
+          fullname: faker.name.findName(),
+          email: faker.internet.email(),
+        },
+        currency: {
+          code: 'USD',
+          symbol: '$',
+        },
+        rows: [
+          {
+            id: uuidv4(),
+            description: faker.commerce.productName(),
+            price: faker.commerce.price(),
+            quantity: faker.random.number(10),
+          },
+        ],
+      };
+      // Execute
+      const action = Actions.editInvoice(currentInvoice);
+      middleware(action);
+      // Call next
+      expect(next.mock.calls.length).toBe(1);
+      expect(next).toHaveBeenCalledWith(action);
+      // Dispatch change Tab action
+      expect(dispatch.mock.calls.length).toBe(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ACTION_TYPES.UI_TAB_CHANGE,
+        payload: 'form'
+      });
+    });
+  })
+
+  // TODO
+  describe('should handle INVOICE_UDPATE action', () => {
+    let currentInvoice;
+    beforeEach(() => {
+      currentInvoice = {
+        recipient: {
+          fullname: faker.name.findName(),
+          email: faker.internet.email(),
+        },
+        currency: {
+          code: 'USD',
+          symbol: '$',
+        },
+        rows: [
+          {
+            id: uuidv4(),
+            description: faker.commerce.productName(),
+            price: faker.commerce.price(),
+            quantity: faker.random.number(10),
+          },
+        ],
+      };
+    });
+
+    it('should update the invoice', () => {
+      middleware(Actions.updateInvoice(currentInvoice)).then(() =>
+        updateDoc('invoices', currentInvoice).then(data => {
+          expect(data).toEqual(mockData.invoicesRecords);
+        })
+      );
+    });
+
+    it('should call next and dispatch notification', () => {
+      middleware(Actions.updateInvoice(currentInvoice)).then(() =>
+        updateDoc('invoices', currentInvoice).then(data => {
+          // Call next after the promised is returned
+          expect(next.mock.calls.length).toBe(1);
+          expect(next).toHaveBeenCalledWith({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: mockData.invoicesRecords,
+          });
+          // Dispatch success notification
+          expect(dispatch.mock.calls.length).toBe(1);
+          expect(dispatch).toHaveBeenCalledWith({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: 'Invoice Updated Successfully',
+            },
+          });
+        })
+      );
+    });
+
+    it('should handle syntax error correctly', () => {
+      middleware(Actions.updateInvoice(currentInvoice)).then(() => {
+        const dbError = new Error('No database found!');
+        const docError = new Error('No doc found!');
+        expect(updateDoc()).rejects.toEqual(dbError);
+        expect(updateDoc('invoices')).rejects.toEqual(docError);
+      });
+    });
+
+    it('should handle unkown error correctly', () => {
+      const expectedError = new Error('Something Broken!');
+      updateDoc.mockImplementationOnce(() => Promise.reject(expectedError));
+      middleware(Actions.updateInvoice(currentInvoice)).then(() => {
+        expect(next).toHaveBeenCalled();
+        expect(next).toHaveBeenCalledWith({
+          type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+          payload: {
+            type: 'warning',
+            message: expectedError.message,
+          },
+        });
+      });
+    });
+  })
+
 
   describe('should handle INVOICE_DELETE action', () => {
     it('should remove record from DB correctly', () => {
