@@ -12,6 +12,9 @@ const omit = require('lodash').omit;
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
 
+// Place a BrowserWindow in center of primary display
+const centerOnPrimaryDisplay = require('./app/helpers/center-on-primary-display');
+
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
 if (process.platform == 'linux') {
@@ -27,10 +30,18 @@ let mainWindow = null;
 let previewWindow = null;
 
 function createTourWindow() {
+  const width = 700;
+  const height = 600;
+
+  // Get X and Y coordinations on primary display
+  const winPOS = centerOnPrimaryDisplay(width, height);
+
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    width: 700,
-    height: 600,
+    x: winPOS.x,
+    y: winPOS.y,
+    width,
+    height,
     show: false,
     frame: false,
     resizable: false,
@@ -248,8 +259,13 @@ function migrateData() {
         },
       });
       // Omit old keys
-      return omit(migratedConfigs, ['info', 'appSettings', 'printOptions', 'test']);
-    }
+      return omit(migratedConfigs, [
+        'info',
+        'appSettings',
+        'printOptions',
+        'test',
+      ]);
+    },
   };
   // Get the current Config
   const configs = appConfig.getAll();
