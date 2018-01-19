@@ -56,6 +56,23 @@ macOS | Windows | Linux
 
 [More Download Options](https://github.com/hql287/Manta/releases)
 
+#### Supported Platforms
+Following platforms are supported by Electron:
+
+**macOS**
+The minimum version supported is macOS 10.9.
+
+**Windows**
+Windows 7 and later are supported
+
+**Linux:**
+
+- Ubuntu 12.04 and later
+- Fedora 21
+- Debian 8
+
+[More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
+
 ### Technologies
 * [Electron](https://github.com/electron/electron)
 * [React](https://github.com/facebook/react)
@@ -138,7 +155,7 @@ Yes, I actually did all the illustrations as well as the templates that you see 
 
 * **Are you available for hire?**
 
-Yes, kind of. I'm exploring new opportunities at the moment. Please let me know what you have in mind.
+I'm exploring new opportunities at the moment. Please let me know what you have in mind.
 
 * **How do I contact you?**
 
