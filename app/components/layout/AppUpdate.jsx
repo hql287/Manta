@@ -109,13 +109,13 @@ class AppUpdate extends PureComponent {
         },
         'upgrade-confirmed'
       );
+      this.hideIndicator();
     });
 
     ipc.on('upgrade-confirmed', (event, index) => {
       if (index === 0) {
-        ipc.send('quit-and-upgrade');
+        ipc.send('quit-and-install');
       }
-      this.hideIndicator();
     });
   }
 
