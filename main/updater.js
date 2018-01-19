@@ -7,13 +7,19 @@ const isDev = require('electron-is-dev');
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
 
+// Check for update silently
+let silentMode = true;
+
 // Set mainWindow
 const mainWindowID = appConfig.get('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
   // Check for Updates
-ipcMain.on('check-for-updates', event => {
-  if(!isDev) checkForUpdate();
+ipcMain.on('check-for-updates', (event) => {
+  // Turn off silent mode
+  silentMode = false;
+  // if(!isDev) checkForUpdate();
+  checkForUpdate();
 });
 
 // Start Download
@@ -25,7 +31,10 @@ ipcMain.on('update-download-started', () => {
 // ====================================
 // Checking for Update
 autoUpdater.on('checking-for-update', () => {
-  mainWindow.send('update-checking');
+  // Only notice user when they checked manually
+  if (!silentMode) {
+    mainWindow.send('update-checking');
+  }
 });
 
 // Update Available
@@ -35,7 +44,10 @@ autoUpdater.on('update-available', info => {
 
 // Update Not Available
 autoUpdater.on('update-not-available', () => {
-  mainWindow.send('update-not-available');
+  // Only notice user when they checked manually
+  if (!silentMode) {
+    mainWindow.send('update-not-available');
+  }
 });
 
 // Update Error
@@ -51,8 +63,7 @@ autoUpdater.on('error', error => {
 
 // Download Progress
 autoUpdater.on('download-progress', progressObj => {
-  const message = `Downloaded ${progressObj.percent} %`;
-  mainWindow.send('update-download-progress', message);
+  mainWindow.send('update-download-progress', progressObj.percent);
 });
 
 // Update Downloaded
