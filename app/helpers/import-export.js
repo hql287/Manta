@@ -62,8 +62,8 @@ const exportDB = () => {
     let Contacts;
 
     try {
-      await pouchDBInvoices().then(invoices => Invoices = invoices);
-      await pouchDBContacts().then(contacts => Contacts = contacts);
+      await pouchDBInvoices().then(invoices => (Invoices = invoices));
+      await pouchDBContacts().then(contacts => (Contacts = contacts));
     } catch (err) {
       openDialog({
         type: 'error',
@@ -72,8 +72,8 @@ const exportDB = () => {
       });
     }
 
-    if (Invoices, Contacts) {
-      return {Invoices, Contacts};
+    if ((Invoices, Contacts)) {
+      return { Invoices, Contacts };
     }
   }
 
