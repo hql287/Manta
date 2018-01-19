@@ -1,62 +1,52 @@
 // Libraries
-import React, { Component } from 'react';
-const ipc = require('electron').ipcRenderer;
+import React, { PureComponent } from 'react';
 import openDialog from '../../renderers/dialog';
+import { Circle } from 'rc-progress';
+const ipc = require('electron').ipcRenderer
 
-// Styles
-import styled from 'styled-components';
+// Styled Components
+import styled, { keyframes } from 'styled-components';
 
-const Wrapper = styled.div`
-  position: fixed;
-  height: auto;
-  bottom: 0;
-  width: 100%;
-  padding-left: 120px;
-  padding-right: 40px;
+const breathing = keyframes`
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
 `;
 
-const Message = styled.p`
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: white;
-  margin-bottom: 0px;
-  line-height: 1.75;
-`;
-
-const Content = styled.div`
-  background: #469fe5;
-  border-radius: 4px 4px 0 0;
-  padding: 10px 20px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  text-transform: uppercase;
-  ${props => props.type === 'error' && `background: #EC476E;`};
-  ${props => props.type === 'success' && `background: #6BBB69;`};
+const Indicator = styled.div`
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  button {
-    color: white;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 100%;
+  color: #f2f3f4;
+  i {
+    font-size: 24px;
+    animation: ${breathing} 1s infinite alternate;
+  }
+  svg {
+    width: 24px;
+    height: 24px;
   }
 `;
 
-import Button from '../../components/shared/Button';
-
-class AppUpdate extends Component {
+class AppUpdate extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      message: null,
-      type: 'info',
+      checking: false,
+      downloading: false,
+      progress: null,
     };
-    this.removeMessage = this.removeMessage.bind(this);
+    this.hideIndicator = this.hideIndicator.bind(this);
   }
 
   componentDidMount() {
-    ipc.on('update-checking', event => {
-      this.setState({ message: 'Checking for update' });
+    ipc.on('update-checking', () => {
+      this.setState({ checking: true });
     });
 
     ipc.on('update-available', () => {
+      this.hideIndicator();
       openDialog(
         {
           type: 'info',
@@ -74,7 +64,7 @@ class AppUpdate extends Component {
         title: 'No Updates',
         message: 'Current version is up-to-date',
       });
-      this.removeMessage();
+      this.hideIndicator();
     });
 
     ipc.on('update-error', (event, error) => {
@@ -83,36 +73,33 @@ class AppUpdate extends Component {
         title: 'Update Error',
         message: error,
       });
-      this.removeMessage();
+      this.hideIndicator();
     });
 
     ipc.on('update-download-confirmed', (event, index) => {
-      // Start the download
-      if (index === 0) {
-        this.setState({
-          message: 'Downloading update ...',
-          type: 'success',
-        });
-        ipc.send('update-download-started');
-      }
       // Cancel the download
       if (index === 1) {
-        this.removeMessage();
+        this.hideIndicator();
+        return;
+      }
+      // Start the download
+      if (index === 0) {
+        this.setState(
+          {
+            downloading: true,
+          },
+          ipc.send('update-download-started')
+        );
       }
     });
 
-    ipc.on('update-download-progress', (event, progressMessage) => {
+    ipc.on('update-download-progress', (event, percentage) => {
       this.setState({
-        message: progressMessage,
+        progress: percentage,
       });
     });
 
     ipc.on('update-downloaded', () => {
-      // Update Message
-      this.setState({
-        message: 'Download Completed!',
-      });
-      // Ask user to upgrade now or later
       openDialog(
         {
           type: 'info',
@@ -126,13 +113,10 @@ class AppUpdate extends Component {
 
     ipc.on('upgrade-confirmed', (event, index) => {
       if (index === 0) {
-        ipc.send('restart-app');
+        ipc.send('quit-and-upgrade');
       }
+      this.hideIndicator();
     });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState;
   }
 
   componentWillUnmount() {
@@ -148,25 +132,29 @@ class AppUpdate extends Component {
     ]);
   }
 
-  removeMessage() {
+  hideIndicator() {
     this.setState({
-      message: null,
-      type: 'info',
+      checking: false,
+      downloading: false,
+      progress: null,
     });
   }
 
   render() {
-    const { message, type } = this.state;
-    return message ? (
-      <Wrapper>
-        <Content type={type}>
-          <Message>{message}</Message>
-          <Button link onClick={this.removeMessage}>
-            <i className="ion-close" />
-          </Button>
-        </Content>
-      </Wrapper>
-    ) : null;
+    return (
+      <Indicator>
+        {this.state.checking && <i className="ion-cloud" />}
+        {this.state.downloading && (
+          <Circle
+            percent={this.state.progress}
+            strokeWidth={16}
+            trailWidth={16}
+            trailColor="#4F555C"
+            strokeColor="#469FE5"
+          />
+        )}
+      </Indicator>
+    );
   }
 }
 
