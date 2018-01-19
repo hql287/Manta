@@ -27,8 +27,20 @@ ipcMain.on('save-pdf', (event, docId) => {
       if (error) {
         throw error;
       }
-      shell.openExternal('file://' + pdfPath);
-      event.sender.send('wrote-pdf', pdfPath);
+      if (appConfig.get('general.previewPDF')) {
+        // Open the PDF with default Reader
+        shell.openExternal('file://' + pdfPath);
+      }
+      // Show notification
+      win.webContents.send('pfd-exported', {
+        title: 'PDF Exported',
+        body: 'Click to reveal file.',
+        location: pdfPath,
+      });
     });
   });
+});
+
+ipcMain.on('reveal-file', (event, location) => {
+  shell.showItemInFolder(location);
 });

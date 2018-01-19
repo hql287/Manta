@@ -10,3 +10,8 @@ export const updateConfigs = createAction(
   ACTION_TYPES.SETTINGS_UPDATE_CONFIGS,
   configs => configs
 );
+
+export const reloadConfigs = createAction(
+  ACTION_TYPES.SETTINGS_RELOAD_CONFIGS,
+  newConfigs => newConfigs
+);

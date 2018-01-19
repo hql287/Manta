@@ -41,6 +41,7 @@
     "moment": "^2.20.1",
     "pouchdb-browser": "6.2.0",
     "pouchdb-replication-stream": "^1.2.9",
+    "rc-progress": "^2.2.5",
     "react": "^16.2.0",
     "react-addons-shallow-compare": "^15.6.2",
     "react-beautiful-dnd": "^2.4.1",

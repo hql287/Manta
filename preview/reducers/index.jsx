@@ -35,6 +35,16 @@ const RootReducer = handleActions(
           [action.payload.name]: action.payload.value,
         }),
       }),
+    [ACTION_TYPES.SETTINGS_RELOAD_CONFIGS]: (state, action) => {
+      const { profile, invoice, general} = action.payload;
+      return Object.assign({}, state, {
+        profile,
+        configs: Object.assign({}, state.configs, {
+          template: invoice.template,
+          dateFormat: invoice.dateFormat,
+        }),
+      });
+    }
   },
   initialState
 );
@@ -44,7 +54,5 @@ export default RootReducer;
 // Selectors
 const getState = state => state;
 export const getConfigs = createSelector(getState, state => state.configs);
-
 export const getInvoice = createSelector(getState, state => state.invoice);
-
 export const getProfile = createSelector(getState, state => state.profile);

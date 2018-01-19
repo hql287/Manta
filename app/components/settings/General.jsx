@@ -88,6 +88,20 @@ class General extends Component {
               </select>
             </div>
           </div>
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Auto Preview PDF</label>
+              <label className="switch">
+                <input
+                  name="previewPDF"
+                  type="checkbox"
+                  checked={this.state.previewPDF}
+                  onChange={this.handleInputChange}
+                />
+                <span className="slider round" />
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     );

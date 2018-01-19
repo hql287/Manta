@@ -20,6 +20,8 @@ export const SAVED_FORM_SETTING_UPDATE = 'SAVED_FORM_SETTING_UPDATE';
 
 // INVOICE
 // ===========================================================
+export const INVOICE_EDIT = 'INVOICE_EDIT';
+export const INVOICE_UPDATE = 'INVOICE_UPDATE';
 export const INVOICE_SAVE = 'INVOICE_SAVE';
 export const INVOICE_DELETE = 'INVOICE_DELETE';
 export const INVOICE_GET_ALL = 'INVOICE_GET_ALL';
