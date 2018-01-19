@@ -49,7 +49,7 @@ export const SideBar = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: 100%;
   width: 80px;
   min-width: 80px;
@@ -95,6 +95,8 @@ export const ActiveIndicator = styled.div`
   }
 `;
 
+import AppUpdate from './AppUpdate';
+
 function AppNav({ activeTab, changeTab }) {
   const marginTopValue = setMarginValue(activeTab);
   const allTabsComponent = allTabs.map(tab => (
@@ -104,19 +106,22 @@ function AppNav({ activeTab, changeTab }) {
   ));
   return (
     <SideBar>
-      <Motion style={{ marginTop: spring(marginTopValue, springConfig) }}>
-        {({ marginTop }) => (
-          <ActiveIndicator>
-            <div
-              style={{
-                height: `${100 / allTabs.length}%`,
-                top: `${marginTop}%`,
-              }}
-            />
-          </ActiveIndicator>
-        )}
-      </Motion>
-      {allTabsComponent}
+      <div>
+        <Motion style={{ marginTop: spring(marginTopValue, springConfig) }}>
+          {({ marginTop }) => (
+            <ActiveIndicator>
+              <div
+                style={{
+                  height: `${100 / allTabs.length}%`,
+                  top: `${marginTop}%`,
+                }}
+              />
+            </ActiveIndicator>
+          )}
+        </Motion>
+        {allTabsComponent}
+      </div>
+      <AppUpdate />
     </SideBar>
   );
 }
