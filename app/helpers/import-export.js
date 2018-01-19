@@ -1,54 +1,34 @@
 // Node Libs
 const fs = require('fs');
-const nodePath = require('path');
-// Electron libs
-const { dialog } = require('electron').remote
-// Dialog on errors / Warnings
-const openDialog = require('../renderers/dialog');
-// PouchDB helpers for Exporting
-const { pouchDBInvoices, pouchDBContacts } = require('./pouchDB');
-// CSV to JSON and JSON to CSV
-const csvjson = require('csvjson');
+const path = require('path');
 
-const onError = ({ type, title, message }) => {
-  openDialog({
-    type,
-    title,
-    message,
-  });
-};
+// Electron Libs
+const { dialog } = require('electron').remote;
+
+const openDialog = require('../renderers/dialog'); // Dialog on errors, warnings, info, etc...
+const { pouchDBInvoices, pouchDBContacts } = require('./pouchDB'); // PouchDB helpers
+const csvjson = require('csvjson'); // CSV to JSON and JSON to CSV
 
 // Export PouchDB
 const exportDB = () => {
   // Save PouchDB as CSV
   const saveFile = () => {
-    dialog.showSaveDialog({filters: [{ name: 'CSV', extensions: ['csv'] }] },
-      path => {
+    dialog.showSaveDialog(
+      { filters: [{ name: 'CSV', extensions: ['csv'] }] },
+      savePath => {
         if (path) {
           // Get Directory from path
-          const dir = nodePath.parse(path).dir;
+          const dir = path.parse(savePath).dir;
           // Check whether you have write permission for directory
           fs.access(dir, fs.constants.W_OK, err => {
             if (err) {
-              onError({
+              openDialog({
                 type: 'warning',
-                title: 'No Access Permission',
-                message: `Cant access ${path}, please choose a different directory!`,
+                title: 'No Write Permission',
+                message: `No write permission to ${dir}, please choose a different directory!`,
               });
             } else {
-              const file = fs.createWriteStream(path);
-              const json = DBDump();
-
-              // csvjson options
-              const options = {
-                delimiter: ',',
-                wrap: false,
-                headers: 'full',
-                objectDenote: '.',
-                arrayDenote: '[]',
-              };
-
-              file.write(csvjson.toCSV(json, options));
+              writeFile(savePath);
             }
           });
         }
@@ -56,30 +36,73 @@ const exportDB = () => {
     );
   };
 
-  // Get PouchDB Invoices and Contacts
-  const DBDump = () => {
-    try {
-      pouchDBInvoices().then(val =>{
-        const invoices = val
-      })
-    } catch (err) {
-      onError(err)
-    }
+  async function writeFile(savePath) {
+    const file = fs.createWriteStream(savePath);
+    const data = await getData(); // PouchDB JSON Data
+    // console.log(data) // TO see how the PouchDB JSON looks like
 
-    try {
-      pouchDBContacts().then(val => {
-        const contacts = val
-      })
-    } catch (err) {
-      onError(err)
-    }
+    if (data) {
+      // csvjson options
+      const options = {
+        delimiter: ',',
+        wrap: false,
+        headers: 'full',
+        objectDenote: '.',
+        arrayDenote: '[]',
+      };
 
-    if (invoices, contacts) {
-      return {invoices, contacts}
+      file.write(csvjson.toCSV(data, options));
+      file.close(); // Close when done
     }
   }
 
-   saveFile();
+  async function getData() {
+    // Get PouchDB Data
+    const invoices = await getInvoices();
+    const contacts = await getContacts();
+
+    if ((invoices, contacts)) {
+      return { invoices, contacts };
+    }
+  }
+
+  // Get PouchDB Invoices
+  async function getInvoices() {
+    let Invoices;
+    try {
+      await pouchDBInvoices().then(invoices => {
+        Invoices = invoices;
+      });
+    } catch (err) {
+      openDialog({
+        type: 'error',
+        title: 'PouchDB Error',
+        message: 'Exporting PouchDB to CSV failed!',
+      });
+    }
+
+    return Invoices;
+  }
+
+  // Get PouchDB Contacts
+  async function getContacts() {
+    let Contacts;
+    try {
+      await pouchDBContacts().then(contacts => {
+        Contacts = contacts;
+      });
+    } catch (err) {
+      openDialog({
+        type: 'error',
+        title: 'PouchDB Error',
+        message: 'Importing PouchDB from CSV failed!',
+      });
+    }
+
+    return Contacts;
+  }
+
+  saveFile();
 };
 
 // Import PouchDB
@@ -90,19 +113,19 @@ const importDB = () => {
         filters: [{ name: 'CSV', extensions: ['csv'] }],
         properties: ['openFile'],
       },
-      path => {
-        if (path) {
-          fs.access(path[0], fs.constants.R_OK, err => {
+      openPath => {
+        if (openPath) {
+          fs.access(openPath[0], fs.constants.R_OK, err => {
             if (err) {
-              onError({
+              openDialog({
                 type: 'warning',
-                title: 'No Access Permission',
-                message: `Cant access ${
-                  path[0]
-                }, please choose a different directory!`,
+                title: 'No Read Permission',
+                message: `No read permission on ${
+                  openPath[0]
+                }, please make sure you have read permission!`,
               });
             } else {
-              return path[0];
+              // DBLoad()
             }
           });
         }
@@ -125,9 +148,11 @@ const importDB = () => {
   //     console.log(j);
   //   }
   // }
+  //
+  // openFile();
 };
 
 module.exports = {
   exportDB,
-  importDB
-}
+  importDB,
+};

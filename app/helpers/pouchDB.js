@@ -89,14 +89,12 @@ runMigration(
   }
 );
 
-// get PouchDB Invoices (Used for Exporting)
+// Get PouchDB Invoices (Used for Exporting)
 const pouchDBInvoices = () => {
   const invoices = new Promise((resolve, reject) => {
-    // Store PouchDB Invoices in memory before writing to file
     const invoicesStream = new MemoryStream();
-    let invoicesStreamObject
+    let invoicesStreamObject;
 
-    // Invoices MemoryStream
     invoicesStream.on('data', chunk => {
       const json = JSON.parse(chunk.toString());
       if (json.docs) {
@@ -105,58 +103,46 @@ const pouchDBInvoices = () => {
     });
 
     invoicesStream.on('end', () => {
-      resolve(invoicesStreamObject)
+      resolve(invoicesStreamObject);
     });
 
     // Dump invoices to memoryStream
     invoicesDB.dump(invoicesStream).then(res => {
       if (res.ok !== true) {
-        reject({
-          error: {
-            type: 'error',
-            title: 'PouchDB Error',
-            message: 'Exporting PouchDB to CSV failed!',
-          }
-        });
+        reject(new Error('Exporting PouchDB to CSV failed!'));
       }
     });
-  })
+  });
 
-  return invoices
+  return invoices;
 };
 
-// get PouchDB Contacts (Used for Exporting)
+// Get PouchDB Contacts (Used for Exporting)
 const pouchDBContacts = () => {
   const contacts = new Promise((resolve, reject) => {
-    // Store PouchDB Contacts in memory before writing to file
     const contactsStream = new MemoryStream();
-    let contactsStreamObject
+    let contactsStreamObject;
 
-    // Contacts MemoryStream
     contactsStream.on('data', chunk => {
       const json = JSON.parse(chunk.toString());
       if (json.docs) {
-        contactsStreamObject = json
+        contactsStreamObject = json;
       }
     });
 
     contactsStream.on('end', () => {
-      resolve(contactsStreamObject)
+      resolve(contactsStreamObject);
     });
 
     // Dump contacts to memoryStream
     contactsDB.dump(contactsStream).then(res => {
       if (res.ok !== true) {
-        reject({
-          type: 'error',
-          title: 'PouchDB Error',
-          message: 'Importing PouchDB from CSV failed!',
-        });
+        reject(new Error('Importing PouchDB from CSV failed!'));
       }
     });
-  })
+  });
 
-  return contacts
+  return contacts;
 };
 
 // Import PouchDB from CSV file

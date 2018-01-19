@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Custom Libs
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+import Button from '../shared/Button';
 
 // Export and Import PouchDB
 import { exportDB, importDB } from '../../helpers/import-export.js';
@@ -59,18 +60,13 @@ class General extends Component {
               </label>
             </div>
           </div>
-
-          <div className="row">
-            <div className="col-md-12">
-              <div className="pageItem">
-                <label className="itemLabel">Export / Import</label>
-                <button onClick={exportDB} className="button">
-                  Export
-                </button>
-                <button onClick={importDB} className="button">
-                  Import
-                </button>
-              </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Export / Import</label>
+              <Button onClick={exportDB}>Export</Button>
+              <Button onClick={importDB}>Import</Button>
             </div>
           </div>
         </div>
