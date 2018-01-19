@@ -56,23 +56,14 @@ const exportDB = () => {
     }
   }
 
-  async function getData() {
-    // Get PouchDB Data
-    const invoices = await getInvoices();
-    const contacts = await getContacts();
-
-    if ((invoices, contacts)) {
-      return { invoices, contacts };
-    }
-  }
-
   // Get PouchDB Invoices
-  async function getInvoices() {
+  async function getData() {
     let Invoices;
+    let Contacts;
+
     try {
-      await pouchDBInvoices().then(invoices => {
-        Invoices = invoices;
-      });
+      await pouchDBInvoices().then(invoices => Invoices = invoices);
+      await pouchDBContacts().then(contacts => Contacts = contacts);
     } catch (err) {
       openDialog({
         type: 'error',
@@ -81,25 +72,9 @@ const exportDB = () => {
       });
     }
 
-    return Invoices;
-  }
-
-  // Get PouchDB Contacts
-  async function getContacts() {
-    let Contacts;
-    try {
-      await pouchDBContacts().then(contacts => {
-        Contacts = contacts;
-      });
-    } catch (err) {
-      openDialog({
-        type: 'error',
-        title: 'PouchDB Error',
-        message: 'Importing PouchDB from CSV failed!',
-      });
+    if (Invoices, Contacts) {
+      return {Invoices, Contacts};
     }
-
-    return Contacts;
   }
 
   saveFile();
