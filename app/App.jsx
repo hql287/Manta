@@ -97,7 +97,6 @@ class App extends PureComponent {
         <AppNav activeTab={activeTab} changeTab={this.changeTab} />
         <AppMain activeTab={activeTab} />
         <AppNoti notifications={notifications} removeNoti={this.removeNoti} />
-        <AppUpdate />
       </AppWrapper>
     );
   }
