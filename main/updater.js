@@ -16,10 +16,11 @@ const mainWindow = BrowserWindow.fromId(mainWindowID);
 
   // Check for Updates
 ipcMain.on('check-for-updates', (event) => {
-  // Turn off silent mode
-  silentMode = false;
-  // if(!isDev) checkForUpdate();
-  checkForUpdate();
+  if(!isDev) {
+    // Turn off silent mode
+    silentMode = false;
+    checkForUpdate();
+  }
 });
 
 // Start Download
