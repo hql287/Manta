@@ -15,7 +15,7 @@ describe('Renders correctly to the DOM', () => {
   });
 
   it('renders 4 tabs', () => {
-    // expect(wrapper.find('a')).toHaveLength(4);
+    expect(wrapper.find('a')).toHaveLength(4);
   });
 
   it('has correct porps', () => {
@@ -23,9 +23,9 @@ describe('Renders correctly to the DOM', () => {
     // expect(wrapper.prop('activeTab')).not.toEqual('settings');
   });
 
-  // it('contains active indicator', () => {
+  it('contains active indicator', () => {
   //   const sideBar = shallow(<ActiveIndicator/>);
   //   expect(wrapper.contains(sideBar)).toEqual(true);
-  // });
-  // it('shows active indicator at the correct position');
+  });
+  it('shows active indicator at the correct position');
 });

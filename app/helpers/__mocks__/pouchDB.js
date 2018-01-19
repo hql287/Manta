@@ -52,6 +52,16 @@ const saveDoc = jest.fn(
     })
 );
 
+const updateDoc = jest.fn(
+  (dbName, doc) =>
+    new Promise((resolve, reject) => {
+      !dbName && reject(new Error('No database found!'));
+      !doc && reject(new Error('No doc found!'));
+      dbName === 'contacts' && resolve([...mockData.contactsRecords]);
+      dbName === 'invoices' && resolve([...mockData.invoicesRecords]);
+    })
+);
+
 const deleteDoc = jest.fn(
   (dbName, docId) =>
     new Promise((resolve, reject) => {
@@ -70,9 +80,11 @@ const deleteDoc = jest.fn(
     })
 );
 
+
 module.exports = {
   getAllDocs,
   saveDoc,
+  updateDoc,
   deleteDoc,
   mockData,
 };

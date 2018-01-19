@@ -11,6 +11,10 @@ const omit = require('lodash').omit;
 
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
+const { autoUpdater } = require('electron-updater');
+
+// Place a BrowserWindow in center of primary display
+const centerOnPrimaryDisplay = require('./app/helpers/center-on-primary-display');
 
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
@@ -27,10 +31,18 @@ let mainWindow = null;
 let previewWindow = null;
 
 function createTourWindow() {
+  const width = 700;
+  const height = 600;
+
+  // Get X and Y coordinations on primary display
+  const winPOS = centerOnPrimaryDisplay(width, height);
+
   // Creating a New Window
   tourWindow = new BrowserWindow({
-    width: 700,
-    height: 600,
+    x: winPOS.x,
+    y: winPOS.y,
+    width,
+    height,
     show: false,
     frame: false,
     resizable: false,
@@ -87,7 +99,6 @@ function createMainWindow() {
       slashes: true,
     })
   );
-
   // Add Event Listeners
   mainWindow.on('show', event => {
     if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
@@ -174,6 +185,7 @@ function setInitialValues() {
       language: 'en',
       sound: 'default',
       muted: false,
+      previewPDF: true,
       checkUpdate: 'daily',
       lastCheck: Date.now(),
     },
@@ -248,8 +260,13 @@ function migrateData() {
         },
       });
       // Omit old keys
-      return omit(migratedConfigs, ['info', 'appSettings', 'printOptions', 'test']);
-    }
+      return omit(migratedConfigs, [
+        'info',
+        'appSettings',
+        'printOptions',
+        'test',
+      ]);
+    },
   };
   // Get the current Config
   const configs = appConfig.getAll();
@@ -277,9 +294,19 @@ function addEventListeners() {
   ipcMain.on('quit-app', () => {
     app.quit();
   });
-  // Use with autoUpdater
-  ipcMain.on('restart-app', () => {
-    app.relaunch();
+  // Quit and install
+  // https://github.com/electron-userland/electron-builder/issues/1604#issuecomment-306709572
+  ipcMain.on('quit-and-install', () => {
+    setImmediate(() => {
+      // Remove this listener
+      app.removeAllListeners("window-all-closed");
+      // Force close all windows
+      tourWindow.destroy();
+      mainWindow.destroy();
+      previewWindow.destroy();
+      // Start the quit and update sequence
+      autoUpdater.quitAndInstall(false);
+    })
   });
 }
 
@@ -354,9 +381,11 @@ function initialize() {
   });
   // Close all windows before quit the app
   app.on('before-quit', () => {
-    tourWindow.destroy();
-    mainWindow.destroy();
-    previewWindow.destroy();
+    // Use condition in case quit sequence is initiated by autoUpdater
+    // which will destroy all there windows already before emitting this event
+    if (tourWindow !== null) tourWindow.destroy();
+    if (mainWindow !== null) mainWindow.destroy();
+    if (previewWindow !== null) previewWindow.destroy();
   });
   console.timeEnd('init');
 }
