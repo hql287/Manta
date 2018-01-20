@@ -119,7 +119,7 @@
   "SETTINGS_BTN_SAVE": "Save",
   "SETTINGS_TAB_PROFILE": "Profile",
   "SETTINGS_TAB_INVOICE": "Invoice",
-  "SETTINGS_TAB_GENERAL": "General"
+  "SETTINGS_TAB_GENERAL": "General",
   "SETTINGS_OTHER_DLG_NOACCESS_TITLE": "No Access Permisison",
-  "SETTINGS_OTHER_DLG_NOACCESS_MSG": "Please choose a different directory!",
+  "SETTINGS_OTHER_DLG_NOACCESS_MSG": "Please choose a different directory!"
 }

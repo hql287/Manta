@@ -119,7 +119,7 @@
   "SETTINGS_BTN_SAVE": "Speichern",
   "SETTINGS_TAB_PROFILE": "Profil",
   "SETTINGS_TAB_INVOICE": "Rechnung",
-  "SETTINGS_TAB_GENERAL": "Allgemein"
+  "SETTINGS_TAB_GENERAL": "Allgemein",
   "SETTINGS_OTHER_DLG_NOACCESS_TITLE": "Fehlende Berechtigungen",
-  "SETTINGS_OTHER_DLG_NOACCESS_MSG": "Bitte einen anderen Ordner wählen!",
+  "SETTINGS_OTHER_DLG_NOACCESS_MSG": "Bitte einen anderen Ordner wählen!"
 }
