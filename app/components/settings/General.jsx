@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 // Custom Libs
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Component
 class General extends Component {
   constructor(props) {
@@ -31,20 +33,20 @@ class General extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Sound</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_SOUND) }</label>
               <select
                 name="sound"
                 value={this.state.sound}
                 onChange={this.handleInputChange}
               >
-                <option value="default">Default</option>
-                <option value="cs">Counter Strike</option>
+                <option value="default">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_SOUND_DEFAULT) }</option>
+                <option value="cs">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_SOUND_CS) }</option>
               </select>
             </div>
           </div>
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Mute Sound?</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_SOUND_MUTE) }</label>
               <label className="switch">
                 <input
                   name="muted"
@@ -60,20 +62,20 @@ class General extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Auto Check For Update</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_UPDATE_AUTOCHECK) }</label>
               <select
                 name="checkUpdate"
                 value={this.state.checkUpdate}
                 onChange={this.handleInputChange}
               >
-                <option value="daily">Everyday (Recommended)</option>
-                <option value="weekly">Once A Week</option>
+                <option value="daily">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_UPDATE_EVERYDAY) }</option>
+                <option value="weekly">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_UPDATE_WEEK) }</option>
               </select>
             </div>
           </div>
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Auto Preview PDF</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_AUTOPREVIEWPDF) }</label>
               <label className="switch">
                 <input
                   name="previewPDF"
@@ -94,6 +96,8 @@ class General extends Component {
 General.propTypes = {
   general: PropTypes.object.isRequired,
   updateSettings: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 export default _withFadeInAnimation(General);

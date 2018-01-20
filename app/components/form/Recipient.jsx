@@ -16,6 +16,9 @@ import RecipientForm from './RecipientForm';
 import RecipientsList from './RecipientsList';
 import { Section } from '../shared/Section';
 
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Component
 export class Recipient extends Component {
   constructor(props) {
@@ -91,6 +94,7 @@ export class Recipient extends Component {
         <RecipientForm
           formData={this.state.new}
           updateRecipientForm={this.updateRecipientForm}
+          translateFn={this.props.translate}
         />
       );
     }
@@ -100,6 +104,7 @@ export class Recipient extends Component {
         <RecipientForm
           formData={this.state.new}
           updateRecipientForm={this.updateRecipientForm}
+          translateFn={this.props.translate}
         />
       );
     }
@@ -117,7 +122,7 @@ export class Recipient extends Component {
     const { contacts } = this.props;
     return (
       <Section>
-        <label className="itemLabel">Client *</label>
+        <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.RCP_CLIENT) }</label>
         {this.renderComponent()}
         {contacts.length > 0 ? (
           <div>
@@ -129,7 +134,7 @@ export class Recipient extends Component {
                   checked={this.state.newRecipient === true}
                   value="new"
                 />
-                Add New
+                { this.props.translate(TRANSLATION_LABELS.RCP_ADD_NEW) }
               </label>
             </div>
             <div className="radio">
@@ -140,7 +145,7 @@ export class Recipient extends Component {
                   checked={this.state.newRecipient === false}
                   value="select"
                 />
-                Select
+                { this.props.translate(TRANSLATION_LABELS.RCP_SELECT) }
               </label>
             </div>
           </div>
@@ -159,12 +164,16 @@ Recipient.propTypes = {
     select: PropTypes.object.isRequired,
     new: PropTypes.object.isRequired,
   }).isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Map state to props & Export
 const mapStateToProps = state => ({
   contacts: getContacts(state),
   recipient: getRecipient(state),
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 });
 
 export default connect(mapStateToProps)(Recipient);

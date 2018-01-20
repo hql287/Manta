@@ -97,8 +97,9 @@ export const ActiveIndicator = styled.div`
 
 import AppUpdate from './AppUpdate';
 
-function AppNav({ activeTab, changeTab }) {
+function AppNav({ activeTab, changeTab, translateFn }) {
   const marginTopValue = setMarginValue(activeTab);
+  const translate = translateFn;
   const allTabsComponent = allTabs.map(tab => (
     <Tab key={tab.name} href="#" onClick={() => changeTab(tab.name)}>
       <Icon id={tab.name} className={tab.icon} />
@@ -121,7 +122,7 @@ function AppNav({ activeTab, changeTab }) {
         </Motion>
         {allTabsComponent}
       </div>
-      <AppUpdate />
+      <AppUpdate translate={translate} />
     </SideBar>
   );
 }
@@ -129,6 +130,7 @@ function AppNav({ activeTab, changeTab }) {
 AppNav.propTypes = {
   activeTab: PropTypes.string.isRequired,
   changeTab: PropTypes.func.isRequired,
+  translateFn: PropTypes.func.isRequired,
 };
 
 export default AppNav;

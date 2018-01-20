@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getCurrentInvoice } from '../reducers/FormReducer';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from '../constants/translations';
 
 // Actions
 import * as FormActions from '../actions/form';
@@ -61,7 +63,7 @@ class Form extends Component {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>Create A New Invoice</PageHeaderTitle>
+          <PageHeaderTitle>{ this.props.translate(TRANSLATION_LABELS.FRM_INVOICE_HEADING) }</PageHeaderTitle>
           <PageHeaderActions>
             <Button danger onClick={clearForm}>
               Clear
@@ -71,7 +73,7 @@ class Form extends Component {
               success={editMode.active === false}
               onClick={saveFormData}
             >
-              {editMode.active ? 'Update' : 'Save & Preview'}
+              {editMode.active ? this.props.translate(TRANSLATION_LABELS.FRM_INVOICE_EDITMODE_UPDATE) : this.props.translate(TRANSLATION_LABELS.FRM_INVOICE_EDITMODE_SAVEPREVIEW)}
             </Button>
           </PageHeaderActions>
         </PageHeader>
@@ -82,11 +84,12 @@ class Form extends Component {
             settings={settings}
             savedSettings={savedSettings.required_fields}
             updateSavedSettings={updateSavedFormSettings}
+            translate={this.props.translate}
           />
-          <Recipient />
-          <ItemsList />
+          <Recipient translate={this.props.translate} />
+          <ItemsList translate={this.props.translate} />
           {required_fields.dueDate && (
-            <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
+            <DueDate dueDate={dueDate} updateFieldData={updateFieldData} translate={this.props.translate} />
           )}
           {required_fields.currency && (
             <Currency
@@ -94,10 +97,11 @@ class Form extends Component {
               updateFieldData={updateFieldData}
               savedSettings={savedSettings.currency}
               updateSavedSettings={updateSavedFormSettings}
+              translate={this.props.translate}
             />
           )}
           {required_fields.discount && (
-            <Discount discount={discount} updateFieldData={updateFieldData} />
+            <Discount discount={discount} updateFieldData={updateFieldData} translate={this.props.translate} />
           )}
           {required_fields.tax && (
             <Tax
@@ -105,10 +109,11 @@ class Form extends Component {
               updateFieldData={updateFieldData}
               savedSettings={savedSettings.tax}
               updateSavedSettings={updateSavedFormSettings}
+              translate={this.props.translate}
             />
           )}
           {required_fields.note && (
-            <Note note={note} updateFieldData={updateFieldData} />
+            <Note note={note} updateFieldData={updateFieldData} translate={this.props.translate} />
           )}
         </PageContent>
       </PageWrapper>
@@ -140,11 +145,15 @@ Form.propTypes = {
     note: PropTypes.object.isRequired,
     settings: PropTypes.object.isRequired,
   }).isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Map state & dispatch to props
 const mapStateToProps = state => ({
   currentInvoice: getCurrentInvoice(state),
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 });
 
 const mapDispatchToProps = dispatch => ({

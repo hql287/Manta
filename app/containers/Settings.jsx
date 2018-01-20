@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from '../constants/translations';
 
 // Selectors
 import {
@@ -62,11 +64,11 @@ class Settings extends Component {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>Settings</PageHeaderTitle>
+          <PageHeaderTitle>{ this.props.translate(TRANSLATION_LABELS.SETTINGS_HEADING) }</PageHeaderTitle>
           {!this.settingsSaved() && (
             <PageHeaderActions>
               <Button primary onClick={this.saveSettingsState}>
-                Save
+                { this.props.translate(TRANSLATION_LABELS.SETTINGS_BTN_SAVE) }
               </Button>
             </PageHeaderActions>
           )}
@@ -78,32 +80,32 @@ class Settings extends Component {
               className={this.state.visibleTab === 1 ? 'active' : ''}
               onClick={() => this.changeTab(1)}
             >
-              Profile
+              { this.props.translate(TRANSLATION_LABELS.SETTINGS_TAB_PROFILE) }
             </Tab>
             <Tab
               href="#"
               className={this.state.visibleTab === 2 ? 'active' : ''}
               onClick={() => this.changeTab(2)}
             >
-              Invoice
+              { this.props.translate(TRANSLATION_LABELS.SETTINGS_TAB_INVOICE) }
             </Tab>
             <Tab
               href="#"
               className={this.state.visibleTab === 3 ? 'active' : ''}
               onClick={() => this.changeTab(3)}
             >
-              General
+              { this.props.translate(TRANSLATION_LABELS.SETTINGS_TAB_GENERAL) }
             </Tab>
           </Tabs>
           <TabContent>
             {this.state.visibleTab === 1 && (
-              <Profile profile={profile} updateSettings={updateSettings} />
+              <Profile profile={profile} updateSettings={updateSettings} translate={this.props.translate} />
             )}
             {this.state.visibleTab === 2 && (
-              <Invoice invoice={invoice} updateSettings={updateSettings} />
+              <Invoice invoice={invoice} updateSettings={updateSettings} translate={this.props.translate} />
             )}
             {this.state.visibleTab === 3 && (
-              <General general={general} updateSettings={updateSettings} />
+              <General general={general} updateSettings={updateSettings} translate={this.props.translate} />
             )}
           </TabContent>
         </PageContent>
@@ -135,6 +137,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   currentSettings: getCurrentSettings(state),
   savedSettings: getSavedSettings(state),
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 });
 
 export default compose(

@@ -218,6 +218,14 @@ if (process.platform !== 'darwin') {
       ipc.send('check-for-updates');
     },
   });
+  // Add change langauge to helpMenu
+  helpMenu.submenu.unshift({
+    label: 'Language',
+    click() {
+      // TRANSL: the parameter will be ignored at the moment, when but makes it possible to make own submenus for langanges
+      mainWindow.webContents.send('menu-change-lang', 'de');
+    },
+  });
 }
 // Base menu
 const menuTemplate = [

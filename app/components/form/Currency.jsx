@@ -11,6 +11,8 @@ import { Section, Header } from '../shared/Section';
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Component
 export class Currency extends Component {
   constructor(props) {
@@ -69,10 +71,10 @@ export class Currency extends Component {
     return (
       <Section>
         <Header>
-          <label className="itemLabel">Currency</label>
+          <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.CURRENCY_CURRENCY) }</label>
           {!this.isSettingsSaved() && (
             <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> Save as default?
+              <i className="ion-checkmark" /> { this.props.translate(TRANSLATION_LABELS.CURRENCY_SAVE_DEFAULT) }
             </a>
           )}
         </Header>
@@ -92,6 +94,8 @@ Currency.propTypes = {
   savedSettings: PropTypes.string.isRequired,
   updateFieldData: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Export

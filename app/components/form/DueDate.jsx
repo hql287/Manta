@@ -9,6 +9,8 @@ import { Section } from '../shared/Section';
 import { SingleDatePicker } from 'react-dates';
 import moment from 'moment';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Styles
 import styled from 'styled-components';
 const DueDateContent = styled.div`
@@ -52,11 +54,11 @@ export class DueDate extends Component {
       : null;
     return (
       <Section>
-        <label className="itemLabel">Due Date</label>
+        <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.DUEDATE_DUEDATE) }</label>
         <DueDateContent>
           <SingleDatePicker
             id="invoice-duedate"
-            placeholder="Select A Date"
+            placeholder={ this.props.translate(TRANSLATION_LABELS.DUEDATE_SEL_DATE) }
             firstDayOfWeek={1}
             withFullScreenPortal
             displayFormat="DD/MM/YYYY"
@@ -84,6 +86,8 @@ export class DueDate extends Component {
 DueDate.propTypes = {
   dueDate: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Export

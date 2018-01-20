@@ -6,6 +6,8 @@ import { isEqual } from 'lodash';
 // Animation
 import { Motion, spring } from 'react-motion';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Styles
 import styled from 'styled-components';
 
@@ -117,7 +119,7 @@ class Settings extends PureComponent {
         {({ height, rotate }) => (
           <Wrapper style={{ height: `${height}px` }}>
             <SettingsHeader href="#" onClick={toggleFormSettings}>
-              <Label>Form Settings</Label>
+              <Label>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_HEADING) }</Label>
               <div
                 style={{
                   transform: `rotate(${rotate}deg)`,
@@ -129,17 +131,17 @@ class Settings extends PureComponent {
 
             <Helper>
               {this.isSettingsSaved() ? (
-                <p>Toogle any field to make it required in the form.</p>
+                <p>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_TOGGLE_MANDATORY) }</p>
               ) : (
                 <a href="#" onClick={this.saveAsDefault}>
-                  <i className="ion-checkmark" /> Save as default?
+                  <i className="ion-checkmark" /> { this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_SAVEDEFAULT) }
                 </a>
               )}
             </Helper>
 
             <AllSettings>
               <Setting>
-                <Label>Due Date</Label>
+                <Label>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_DUEDATE) }</Label>
                 <Switch
                   name="dueDate"
                   checked={required_fields.dueDate}
@@ -148,7 +150,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Currency</Label>
+                <Label>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_CURRENCY) }</Label>
                 <Switch
                   name="currency"
                   checked={required_fields.currency}
@@ -157,7 +159,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Discount</Label>
+                <Label>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_DISC) }</Label>
                 <Switch
                   name="discount"
                   checked={required_fields.discount}
@@ -166,7 +168,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Tax</Label>
+                <Label>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_TAX) }</Label>
                 <Switch
                   name="tax"
                   checked={required_fields.tax}
@@ -175,7 +177,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Note</Label>
+                <Label>{ this.props.translate(TRANSLATION_LABELS.SETTINGSFRM_NOTE) }</Label>
                 <Switch
                   name="note"
                   checked={required_fields.note}
@@ -196,6 +198,8 @@ Settings.propTypes = {
   toggleField: PropTypes.func.isRequired,
   toggleFormSettings: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Export

@@ -5,6 +5,7 @@ const initialState = {
   activeTab: 'form',
   notifications: [],
   checkUpdatesMessage: {},
+  locale: 'en',
 };
 
 const UIReducer = handleActions(
@@ -29,6 +30,11 @@ const UIReducer = handleActions(
         notifications: state.notifications.filter(
           item => item.id !== action.payload
         ),
+      }),
+
+    [ACTION_TYPES.UI_CHANGE_LANGUAGE]: (state, action) =>
+      Object.assign({}, state, {
+        locale: action.payload,
       }),
   },
   initialState

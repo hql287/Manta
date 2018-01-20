@@ -5,6 +5,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from '../constants/translations';
 
 // Actions
 import * as Actions from '../actions/invoices';
@@ -52,9 +54,9 @@ class Invoices extends PureComponent {
     openDialog(
       {
         type: 'warning',
-        title: 'Delete This Invoice',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
+        title: this.props.translate(TRANSLATION_LABELS.INVOICE_DLG_DELETE_TITLE),
+        message: this.props.translate(TRANSLATION_LABELS.INVOICE_DLG_DELETE_SURE),
+        buttons: [this.props.translate(TRANSLATION_LABELS.INVOICE_DLG_DELETE_YES), this.props.translate(TRANSLATION_LABELS.INVOICE_DLG_DELETE_NO)],
       },
       'confirmed-delete-invoice',
       invoiceId
@@ -90,16 +92,17 @@ class Invoices extends PureComponent {
         index={index}
         dateFormat={dateFormat}
         invoice={invoice}
+        translate={this.props.translate}
       />
     ));
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>All Invoices</PageHeaderTitle>
+          <PageHeaderTitle>{ this.props.translate(TRANSLATION_LABELS.INVOICES_ALL_CAPTION) }</PageHeaderTitle>
         </PageHeader>
         <PageContent bare>
           {invoices.length === 0 ? (
-            <Message info text="You don't have any invoice yet" />
+            <Message info text={ this.props.translate(TRANSLATION_LABELS.MSG_NO_INVOICES) } />
           ) : (
             <div className="row">{invoicesComponent}</div>
           )}
@@ -119,6 +122,8 @@ Invoices.propTypes = {
 const mapStateToProps = state => ({
   invoices: getInvoices(state),
   dateFormat: getDateFormat(state),
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 });
 
 export default compose(connect(mapStateToProps), _withFadeInAnimation)(
