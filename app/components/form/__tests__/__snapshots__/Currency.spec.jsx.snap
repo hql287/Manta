@@ -603,7 +603,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       Yemeni Rial
     </option>
     <option
-      value="ZMK"
+      value="ZMW"
     >
       Zambian Kwacha
     </option>

@@ -7,8 +7,8 @@
   <a href="https://travis-ci.org/hql287/Manta">
     <img src="https://travis-ci.org/hql287/Manta.svg?branch=dev" alt="Build Status">
   </a>
-  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.1">
-    <img src="https://img.shields.io/badge/version-1.1.1-green.svg" alt="v1.1.1">
+  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.2">
+    <img src="https://img.shields.io/badge/version-1.1.2-green.svg" alt="v1.1.2">
   </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg">
@@ -52,7 +52,7 @@ Here's a few screenshots:
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/hql287/Manta/releases/download/v1.1.1/Manta-1.1.1.dmg'>Download v1.1.1</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.1/Manta.Setup.1.1.1.exe'>Download v1.1.1</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.1/Manta-1.1.1-x86_64.AppImage'>Download v1.1.1</a> |
+<a href='https://github.com/hql287/Manta/releases/download/v1.1.2/Manta-1.1.2.dmg'>Download v1.1.2</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.2/Manta.Setup.1.1.2.exe'>Download v1.1.2</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.2/Manta-1.1.2-x86_64.AppImage'>Download v1.1.2</a> |
 
 [More Download Options](https://github.com/hql287/Manta/releases)
 
