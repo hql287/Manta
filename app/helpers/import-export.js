@@ -6,7 +6,7 @@ const path = require('path');
 const { dialog } = require('electron').remote;
 
 const openDialog = require('../renderers/dialog'); // Dialog on errors, warnings, info, etc...
-const { pouchDBInvoices, pouchDBContacts, getAllDocs } = require('./pouchDB'); // PouchDB helpers
+const { getAllDocs } = require('./pouchDB'); // PouchDB helpers
 const csvjson = require('csvjson'); // CSV to JSON and JSON to CSV
 
 // Export PouchDB
