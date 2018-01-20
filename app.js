@@ -185,6 +185,7 @@ function setInitialValues() {
       language: 'en',
       sound: 'default',
       muted: false,
+      notification: true,
       previewPDF: true,
       checkUpdate: 'daily',
       lastCheck: Date.now(),
@@ -239,6 +240,7 @@ function migrateData() {
           language: appSettings.language,
           sound: appSettings.sound,
           muted: appSettings.muted,
+          notification: appSettings.notification,
         },
         invoice: {
           exportDir: appSettings.exportDir,

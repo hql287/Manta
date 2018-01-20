@@ -4,6 +4,8 @@ const { autoUpdater } = require('electron-updater');
 const appConfig = require('electron-settings');
 const isDev = require('electron-is-dev');
 
+const OSNotification = require('../app/renderers/notification')
+
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
 
@@ -69,6 +71,7 @@ autoUpdater.on('download-progress', progressObj => {
 
 // Update Downloaded
 autoUpdater.on('update-downloaded', info => {
+  OSNotification('Updates has been downloaded')
   mainWindow.send('update-downloaded', info);
 });
 
