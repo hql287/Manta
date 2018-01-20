@@ -3,16 +3,6 @@ const PouchDB = require('pouchdb-browser');
 const contactsDB = new PouchDB('contacts');
 const invoicesDB = new PouchDB('invoices');
 
-// Used for Export and Import PouchDB
-const MemoryStream = require('memorystream');
-const replicationStream = require('pouchdb-replication-stream');
-
-// CSV to JSON and JSON to CSV
-const csvjson = require('csvjson');
-
-PouchDB.plugin(replicationStream.plugin);
-PouchDB.adapter('writableStream', replicationStream.adapters.writableStream);
-
 // Utility
 import { omit } from 'lodash';
 
@@ -88,62 +78,6 @@ runMigration(
     invoiceQueue = [];
   }
 );
-
-// Get PouchDB Invoices (Used for Exporting)
-const pouchDBInvoices = () => {
-  const invoices = new Promise((resolve, reject) => {
-    const invoicesStream = new MemoryStream();
-    let invoicesStreamObject;
-
-    invoicesStream.on('data', chunk => {
-      const json = JSON.parse(chunk.toString());
-      if (json.docs) {
-        invoicesStreamObject = json;
-      }
-    });
-
-    invoicesStream.on('end', () => {
-      resolve(invoicesStreamObject);
-    });
-
-    // Dump invoices to memoryStream
-    invoicesDB.dump(invoicesStream).then(res => {
-      if (res.ok !== true) {
-        reject(new Error('Exporting PouchDB to CSV failed!'));
-      }
-    });
-  });
-
-  return invoices;
-};
-
-// Get PouchDB Contacts (Used for Exporting)
-const pouchDBContacts = () => {
-  const contacts = new Promise((resolve, reject) => {
-    const contactsStream = new MemoryStream();
-    let contactsStreamObject;
-
-    contactsStream.on('data', chunk => {
-      const json = JSON.parse(chunk.toString());
-      if (json.docs) {
-        contactsStreamObject = json;
-      }
-    });
-
-    contactsStream.on('end', () => {
-      resolve(contactsStreamObject);
-    });
-
-    // Dump contacts to memoryStream
-    contactsDB.dump(contactsStream).then(res => {
-      if (res.ok !== true) {
-        reject(new Error('Importing PouchDB from CSV failed!'));
-      }
-    });
-  });
-
-  return contacts;
-};
 
 // Import PouchDB from CSV file
 const DBLoad = load => {
@@ -233,6 +167,4 @@ export {
   deleteDoc,
   saveDoc,
   updateDoc,
-  pouchDBInvoices,
-  pouchDBContacts,
 };

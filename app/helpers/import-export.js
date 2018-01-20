@@ -6,7 +6,7 @@ const path = require('path');
 const { dialog } = require('electron').remote;
 
 const openDialog = require('../renderers/dialog'); // Dialog on errors, warnings, info, etc...
-const { pouchDBInvoices, pouchDBContacts } = require('./pouchDB'); // PouchDB helpers
+const { pouchDBInvoices, pouchDBContacts, getAllDocs } = require('./pouchDB'); // PouchDB helpers
 const csvjson = require('csvjson'); // CSV to JSON and JSON to CSV
 
 // Export PouchDB
@@ -39,7 +39,6 @@ const exportDB = () => {
   async function writeFile(savePath) {
     const file = fs.createWriteStream(savePath);
     const data = await getData(); // PouchDB JSON Data
-    // console.log(data) // TO see how the PouchDB JSON looks like
 
     if (data) {
       // csvjson options
@@ -58,12 +57,12 @@ const exportDB = () => {
 
   // Get PouchDB Invoices
   async function getData() {
-    let Invoices;
-    let Contacts;
+    let Invoices
+    let Contacts
 
     try {
-      await pouchDBInvoices().then(invoices => (Invoices = invoices));
-      await pouchDBContacts().then(contacts => (Contacts = contacts));
+      await getAllDocs('invoices').then(invoices => (Invoices = invoices));
+      await getAllDocs('contacts').then(contacts => (Contacts = contacts));
     } catch (err) {
       openDialog({
         type: 'error',
@@ -72,8 +71,8 @@ const exportDB = () => {
       });
     }
 
-    if ((Invoices, Contacts)) {
-      return { Invoices, Contacts };
+    if (Invoices && Contacts) {
+      return { invocies: {docs: Invoices}, contacts: {docs: Contacts}};
     }
   }
 
