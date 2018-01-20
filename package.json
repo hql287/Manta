@@ -47,6 +47,7 @@
     "react-dnd": "^2.5.3",
     "react-dnd-html5-backend": "^2.5.3",
     "react-dom": "^16.2.0",
+    "react-localize-redux": "^2.13.8",
     "react-motion": "^0.5.1",
     "react-redux": "^5.0.6",
     "recompose": "^0.26.0",

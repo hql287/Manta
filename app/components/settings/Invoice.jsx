@@ -10,6 +10,8 @@ import currencies from '../../../libs/currencies.json';
 const openDialog = require('../../renderers/dialog.js');
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 import styled from 'styled-components';
 
 const Row = styled.div`
@@ -48,8 +50,8 @@ class Invoice extends Component {
     ipc.on('no-access-directory', (event, message) => {
       openDialog({
         type: 'warning',
-        title: 'No Access Permisison',
-        message: `${message}. Please choose a different directory!`,
+        title: this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_DLG_NOACCESS_TITLE),
+        message: message + '. ' + this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_DLG_NOACCESS_MSG),
       });
     });
 
@@ -146,11 +148,11 @@ class Invoice extends Component {
     } = this.state;
     return (
       <div>
-        <label className="itemLabel">Tax Settings</label>
+        <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_TAX_SETUP) }</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Tax ID</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_TAX_ID) }</label>
               <input
                 name="tin"
                 type="text"
@@ -162,7 +164,7 @@ class Invoice extends Component {
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Tax Amount</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_TAX_AMOUNT) }</label>
               <input
                 name="amount"
                 type="number"
@@ -173,24 +175,24 @@ class Invoice extends Component {
               />
             </Field>
             <Field>
-              <label className="itemLabel">Tax Method</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_TAX_METHOD) }</label>
               <select
                 name="method"
                 value={tax.method}
                 onChange={this.handleTaxChange}
               >
-                <option value="default">Default</option>
-                <option value="reverse">Reverse Charge</option>
+                <option value="default">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_TAX_METHOD_DEFAULT) }</option>
+                <option value="reverse">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_TAX_METHOD_REVERSE) }</option>
               </select>
             </Field>
           </Row>
         </Section>
 
-        <label className="itemLabel">Required Fields</label>
+        <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_REQUIRED_FIELDS) }</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Due Date</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_REQ_DUEDATE) }</label>
               <label className="switch">
                 <input
                   name="dueDate"
@@ -202,7 +204,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Currency</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_REQ_CURRENCY) }</label>
               <label className="switch">
                 <input
                   name="currency"
@@ -215,7 +217,7 @@ class Invoice extends Component {
             </Field>
 
             <Field>
-              <label className="itemLabel">Discount</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_REQ_DISC) }</label>
               <label className="switch">
                 <input
                   name="discount"
@@ -227,7 +229,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Tax</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_REQ_TAX) }</label>
               <label className="switch">
                 <input
                   name="tax"
@@ -239,7 +241,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Note</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_REQ_NOTE) }</label>
               <label className="switch">
                 <input
                   name="note"
@@ -253,11 +255,11 @@ class Invoice extends Component {
           </Row>
         </Section>
 
-        <label className="itemLabel">Other</label>
+        <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER) }</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Currency</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_CURRENCY) }</label>
               <select
                 name="currency"
                 value={currency}
@@ -267,20 +269,20 @@ class Invoice extends Component {
               </select>
             </Field>
             <Field>
-              <label className="itemLabel">Template</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_TEMPLATE) }</label>
               <select
                 name="template"
                 value={template}
                 onChange={this.handleInputChange}
               >
-                <option value="minimal">Minimal</option>
-                <option value="business">Business</option>
+                <option value="minimal">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_TEMPLATE_MIN) }</option>
+                <option value="business">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_TEMPLATE_BUSINESS) }</option>
               </select>
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Date Format</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_DATEFMT) }</label>
               <select
                 name="dateFormat"
                 value={dateFormat}
@@ -315,7 +317,7 @@ class Invoice extends Component {
               </select>
             </Field>
             <Field>
-              <label className="itemLabel">PDF Export Directory</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_OTHER_PDFEXPORTDIR) }</label>
               <div className="input-group">
                 <input
                   className="form-control"
@@ -343,6 +345,8 @@ class Invoice extends Component {
 Invoice.propTypes = {
   invoice: PropTypes.object.isRequired,
   updateSettings: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 export default _withFadeInAnimation(Invoice);

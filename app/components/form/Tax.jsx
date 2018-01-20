@@ -6,6 +6,8 @@ import { isEqual } from 'lodash';
 import { Section, Header } from '../shared/Section';
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+// Translation
+import * as TRANSLATION_LABELS from '../../constants/translations';
 // Styles
 import styled from 'styled-components';
 const TaxID = styled.div``;
@@ -93,31 +95,31 @@ export class Tax extends Component {
     return (
       <Section>
         <Header>
-          <label className="itemLabel">Tax</label>
+          <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.TAXFRM_HEADING) }</label>
           {!this.isSettingsSaved() && (
             <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> Save as default?
+              <i className="ion-checkmark" /> { this.props.translate(TRANSLATION_LABELS.TAXFRM_SAVEDEFAULT) }
             </a>
           )}
         </Header>
         <Form>
           <Row>
             <Field>
-              <label className="itemLabel">Tax ID</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.TAXFRM_TAX_ID) }</label>
               <TaxID>
                 <input
                   name="tin"
                   type="text"
                   value={this.state.tin}
                   onChange={this.handleInputChange}
-                  placeholder="Registration Number"
+                  placeholder={ this.props.translate(TRANSLATION_LABELS.TAXFRM_TAX_ID_PLACEHOLDER) }
                 />
               </TaxID>
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Amount (%)</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.TAXFRM_AMOUNT_PCT) }</label>
               <TaxAmount>
                 <input
                   name="amount"
@@ -125,19 +127,19 @@ export class Tax extends Component {
                   step="0.01"
                   value={this.state.amount}
                   onChange={this.handleInputChange}
-                  placeholder="Amount"
+                  placeholder={ this.props.translate(TRANSLATION_LABELS.TAXFRM_AMOUNT_PCT_PLACEHOLDER) }
                 />
               </TaxAmount>
             </Field>
             <Field>
-              <label className="itemLabel">Method</label>
+              <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.TAXFRM_TAX_METHOD) }</label>
               <select
                 name="method"
                 value={this.state.method}
                 onChange={this.handleInputChange}
               >
-                <option value="default">Default</option>
-                <option value="reverse">Reverse Charge</option>
+                <option value="default">{ this.props.translate(TRANSLATION_LABELS.TAXFRM_TAX_METHOD_DEFEAULT) }</option>
+                <option value="reverse">{ this.props.translate(TRANSLATION_LABELS.TAXFRM_TAX_METHOD_REVERSE) }</option>
               </select>
             </Field>
           </Row>
@@ -152,6 +154,8 @@ Tax.propTypes = {
   tax: PropTypes.object.isRequired,
   savedSettings: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Exports

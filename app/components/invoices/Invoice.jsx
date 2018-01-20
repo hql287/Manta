@@ -15,6 +15,8 @@ import { formatNumber } from '../../helpers/number';
 import Button from '../shared/Button';
 import SplitButton from '../shared/SplitButton';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Invoice Container
 const Wrapper = styled.div`
   position: relative;
@@ -174,7 +176,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-backspace" />
-            Cancelled
+            { this.props.translate(TRANSLATION_LABELS.INVOICE_STATUS_CANCELLED) }
           </span>
         );
       }
@@ -183,7 +185,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-checkmark" />
-            Paid
+            { this.props.translate(TRANSLATION_LABELS.INVOICE_STATUS_PAID) }
           </span>
         );
       }
@@ -192,7 +194,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-arrow-return-left" />
-            Refunded
+            { this.props.translate(TRANSLATION_LABELS.INVOICE_STATUS_REFUNDED) }
           </span>
         );
       }
@@ -200,7 +202,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-loop" />
-            Pending
+            { this.props.translate(TRANSLATION_LABELS.INVOICE_STATUS_PENDING) }
           </span>
         );
       }
@@ -237,13 +239,13 @@ class Invoice extends PureComponent {
           <Body>
             <Row>
               <Field>
-                <label>Client</label>
+                <label>{ this.props.translate(TRANSLATION_LABELS.INVOICE_CLIENT) }</label>
                 <h2>{recipient.fullname}</h2>
               </Field>
             </Row>
             <Row>
               <Field>
-                <label>Invoice Id</label>
+                <label>{ this.props.translate(TRANSLATION_LABELS.INVOICE_INVOICEID) }</label>
                 <p>
                   {truncate(invoice._id, {
                     length: 8,
@@ -252,7 +254,7 @@ class Invoice extends PureComponent {
                 </p>
               </Field>
               <Field>
-                <label>Total Value</label>
+                <label>{ this.props.translate(TRANSLATION_LABELS.INVOICE_TOTAL_VALUE) }</label>
                 <p>
                   {invoice.currency.code} {formatNumber(invoice.grandTotal)}
                 </p>
@@ -260,11 +262,11 @@ class Invoice extends PureComponent {
             </Row>
             <Row>
               <Field>
-                <label>Created On</label>
+                <label>{ this.props.translate(TRANSLATION_LABELS.INVOICE_CREATED_ON) }</label>
                 <p>{format(invoice.created_at, dateFormat)}</p>
               </Field>
               <Field>
-                <label>Due Date</label>
+                <label>{ this.props.translate(TRANSLATION_LABELS.INVOICE_DUEDATE) }</label>
                 <p>
                   {invoice.dueDate
                     ? moment(invoice.dueDate).format(dateFormat)
@@ -276,13 +278,13 @@ class Invoice extends PureComponent {
           <Footer>
             <SplitButton
               mainButton={{
-                label: 'Mark As Paid',
+                label: this.props.translate(TRANSLATION_LABELS.INVOICE_MARKPAID),
                 action: () => setInvoiceStatus(invoice._id, 'paid'),
               }}
               options={statusActions}
             />
-            <Button onClick={this.editInvoice}>Edit</Button>
-            <Button onClick={this.viewInvoice}>View</Button>
+            <Button onClick={this.editInvoice}>{ this.props.translate(TRANSLATION_LABELS.INVOICE_EDIT) }</Button>
+            <Button onClick={this.viewInvoice}>{ this.props.translate(TRANSLATION_LABELS.INVOICE_VIEW) }</Button>
           </Footer>
         </Wrapper>
       </div>
@@ -296,6 +298,8 @@ Invoice.propTypes = {
   invoice: PropTypes.object.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,
   dateFormat: PropTypes.string.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 export default Invoice;

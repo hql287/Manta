@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 // Animation
 import _withFadeInAnimation from '../../components/shared/hoc/_withFadeInAnimation';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Styles
 import styled from 'styled-components';
 const Form = styled.div`
@@ -25,13 +27,14 @@ const Field = styled.div`
   margin: 0 15px 20px 15px;
 `;
 
-export function RecipientForm({ formData, updateRecipientForm }) {
+export function RecipientForm({ formData, updateRecipientForm, translateFn }) {
   const { fullname, company, email, phone } = formData;
+  const translate = translateFn;
   return (
     <Form>
       <Row>
         <Field>
-          <label className="itemLabel">Full Name *</label>
+          <label className="itemLabel">{ translate(TRANSLATION_LABELS.RCPFRM_FULLNAME) }</label>
           <input
             name="fullname"
             type="text"
@@ -40,7 +43,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           />
         </Field>
         <Field>
-          <label className="itemLabel">Company</label>
+          <label className="itemLabel">{ translate(TRANSLATION_LABELS.RCPFRM_COMPANY) }</label>
           <input
             name="company"
             type="text"
@@ -51,7 +54,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
       </Row>
       <Row>
         <Field>
-          <label className="itemLabel">Email *</label>
+          <label className="itemLabel">{ translate(TRANSLATION_LABELS.RCPFRM_EMAIL) }</label>
           <input
             name="email"
             type="text"
@@ -60,7 +63,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           />
         </Field>
         <Field>
-          <label className="itemLabel">Phone Number</label>
+          <label className="itemLabel">{ translate(TRANSLATION_LABELS.RCPFRM_PHONE) }</label>
           <input
             name="phone"
             type="text"
@@ -77,6 +80,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
 RecipientForm.propTypes = {
   formData: PropTypes.object,
   updateRecipientForm: PropTypes.func.isRequired,
+  translate: PropTypes.func,
 };
 
 RecipientForm.defaultProps = {

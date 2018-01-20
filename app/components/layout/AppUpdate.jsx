@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import openDialog from '../../renderers/dialog';
 import { Circle } from 'rc-progress';
 const ipc = require('electron').ipcRenderer
+import * as TRANSLATION_LABELS from '../../constants/translations';
 
 // Styled Components
 import styled, { keyframes } from 'styled-components';
@@ -50,9 +51,9 @@ class AppUpdate extends PureComponent {
       openDialog(
         {
           type: 'info',
-          title: 'Update Available',
-          message: 'Do you want to download update in the background now?',
-          buttons: ['Yes', 'No'],
+          title: this.props.translate(TRANSLATION_LABELS.UPD_DLGAVAIL_TITLE),
+          message: this.props.translate(TRANSLATION_LABELS.UPD_DLGAVAIL_DLNOW),
+          buttons: [this.props.translate(TRANSLATION_LABELS.UPD_DLGAVAIL_BTN_YES), this.props.translate(TRANSLATION_LABELS.UPD_DLGAVAIL_BTN_NO)],
         },
         'update-download-confirmed'
       );
@@ -61,8 +62,8 @@ class AppUpdate extends PureComponent {
     ipc.on('update-not-available', () => {
       openDialog({
         type: 'info',
-        title: 'No Updates',
-        message: 'Current version is up-to-date',
+        title: this.props.translate(TRANSLATION_LABELS.UPD_DLG_NOAVAIL_TITLE),
+        message: this.props.translate(TRANSLATION_LABELS.UPD_DLG_NOAVAIL_ISUPD),
       });
       this.hideIndicator();
     });
@@ -70,7 +71,7 @@ class AppUpdate extends PureComponent {
     ipc.on('update-error', (event, error) => {
       openDialog({
         type: 'warning',
-        title: 'Update Error',
+        title: this.props.translate(TRANSLATION_LABELS.UPD_DLG_ERR_TITLE),
         message: error,
       });
       this.hideIndicator();
@@ -103,9 +104,9 @@ class AppUpdate extends PureComponent {
       openDialog(
         {
           type: 'info',
-          title: 'Update Downloaded',
-          message: 'Do you want to quit the app to upgrade now?',
-          buttons: ['Quit Now', 'Later'],
+          title: this.props.translate(TRANSLATION_LABELS.UPD_DLG_DWNL_TITLE),
+          message: this.props.translate(TRANSLATION_LABELS.UPD_DLG_DWNL_ASKQUIT),
+          buttons: [this.props.translate(TRANSLATION_LABELS.UPD_DLG_DWNL_BTN_NOW), this.props.translate(TRANSLATION_LABELS.UPD_DLG_DWNL_BTN_LATER)],
         },
         'upgrade-confirmed'
       );

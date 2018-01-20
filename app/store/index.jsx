@@ -24,6 +24,16 @@ if (isDev) {
   middlewares.unshift(MeasureMW);
   middlewares.push(Logger);
 }
+// For translation
+import { initialize, addTranslationForLanguage, setActiveLanguage  } from 'react-localize-redux';
+// TRANSL: Add languages here
+const languages = [
+  { name: 'English', code: 'en' }, 
+  { name: 'German', code: 'de' }
+];
+// TRANSL: Add files with translations here
+const transEnUs = require('../translations/en_us.json');
+const transDe = require('../translations/de.json');
 
 // Redux Devtool
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -34,6 +44,13 @@ export default function configureStore(initialState) {
     initialState,
     composeEnhancers(applyMiddleware(...middlewares))
   );
+
+  store.dispatch(setActiveLanguage('en'));
+  store.dispatch(initialize(languages, { defaultLanguage: 'en' }));
+  // TRANSL: Load translation files here
+  store.dispatch(addTranslationForLanguage(transEnUs, 'en'));
+  store.dispatch(addTranslationForLanguage(transDe, 'de'));
+
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {

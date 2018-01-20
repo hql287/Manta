@@ -4,6 +4,8 @@ import FormReducer from './FormReducer';
 import InvoicesReducer from './InvoicesReducer';
 import ContactsReducer from './ContactsReducer';
 import SettingsReducer from './SettingsReducer';
+// For translation
+import { localeReducer as locale } from 'react-localize-redux';
 
 export default combineReducers({
   ui: UIReducer,
@@ -11,4 +13,5 @@ export default combineReducers({
   invoices: InvoicesReducer,
   contacts: ContactsReducer,
   settings: SettingsReducer,
+  locale: locale,
 });

@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
+import { getTranslate, getActiveLanguage, setActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from './constants/translations';
+
 // Actions
 import * as UIActions from './actions/ui';
 import * as FormActions from './actions/form';
@@ -35,6 +38,9 @@ class App extends PureComponent {
     // Add Event Listener
     ipc.on('menu-change-tab', (event, tabName) => {
       this.changeTab(tabName);
+    });
+    ipc.on('menu-change-lang', (event, locale) => {
+      this.changeLang(locale);
     });
     ipc.on('menu-form-save', () => {
       dispatch(FormActions.saveFormData());
@@ -85,6 +91,18 @@ class App extends PureComponent {
     dispatch(UIActions.changeActiveTab(tabName));
   }
 
+  changeLang(locale) {
+    const { dispatch } = this.props;
+    if (this.props.currentLanguage == 'en') {
+      locale = 'de';
+    } else {
+      locale = 'en';
+    }
+    console.log('Current language: ', this.props.currentLanguage);
+    console.log('New Language: ', locale);
+    dispatch(setActiveLanguage(locale));
+  }
+
   removeNoti(id) {
     const { dispatch } = this.props;
     dispatch(UIActions.removeNoti(id));
@@ -94,7 +112,7 @@ class App extends PureComponent {
     const { activeTab, notifications, checkUpdatesMessage } = this.props.ui;
     return (
       <AppWrapper>
-        <AppNav activeTab={activeTab} changeTab={this.changeTab} />
+        <AppNav activeTab={activeTab} changeTab={this.changeTab} translate={this.props.translate} />
         <AppMain activeTab={activeTab} />
         <AppNoti notifications={notifications} removeNoti={this.removeNoti} />
       </AppWrapper>
@@ -109,8 +127,12 @@ App.propTypes = {
     notifications: PropTypes.array.isRequired,
     checkUpdatesMessage: PropTypes.object,
   }).isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 export default connect(state => ({
   ui: state.ui,
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 }))(App);

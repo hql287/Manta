@@ -8,6 +8,8 @@ import { Section } from '../shared/Section';
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Styles
 import styled from 'styled-components';
 const NoteContent = styled.textarea`
@@ -52,7 +54,7 @@ export class Note extends Component {
   render() {
     return (
       <Section>
-        <label className="itemLabel">Note</label>
+        <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.NOTE_NOTE) }</label>
         <NoteContent
           cols="50"
           rows="4"
@@ -68,6 +70,8 @@ export class Note extends Component {
 Note.propTypes = {
   note: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Export

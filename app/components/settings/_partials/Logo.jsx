@@ -18,6 +18,8 @@ import TargetBox from './TargetBox';
 // Styles
 import styled from 'styled-components';
 
+import * as TRANSLATION_LABELS from '../../../constants/translations';
+
 const LogoContainer = styled.div`
   position: relative;
   height: 200px;
@@ -139,7 +141,7 @@ class Logo extends Component {
               onDrop={this.handleFileDrop}
             />
             <SelectLogoBtn onClick={this.selectLogo}>
-              Or Select Photo
+              { this.props.translate(TRANSLATION_LABELS.GEN_IMAGE_ORSEL) }
             </SelectLogoBtn>
           </LogoDropzone>
         )}
@@ -151,6 +153,8 @@ class Logo extends Component {
 Logo.propTypes = {
   handleLogoChange: PropTypes.func.isRequired,
   logo: PropTypes.string,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 Logo.defaultProps = {

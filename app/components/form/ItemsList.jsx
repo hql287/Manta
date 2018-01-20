@@ -18,6 +18,9 @@ import Button from '../shared/Button.jsx';
 import { Section } from '../shared/Section';
 import ItemRow from './ItemRow.jsx';
 
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Styled Components
 import styled from 'styled-components';
 
@@ -88,7 +91,7 @@ export class ItemsList extends PureComponent {
       <Section>
         <ItemsListWrapper>
           <ItemsListHeader>
-            <label className="itemLabel">Product/Service *</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.ITEMLIST_PRODUCT) }</label>
           </ItemsListHeader>
           <ItemsListDiv>
             <TransitionList componentHeight={50}>
@@ -97,7 +100,7 @@ export class ItemsList extends PureComponent {
           </ItemsListDiv>
           <div className="itemsListActions">
             <ItemsListActionsBtn primary onClick={addItem}>
-              Add An Item
+              { this.props.translate(TRANSLATION_LABELS.ITEMLIST_ADDITEM) }
             </ItemsListActionsBtn>
           </div>
         </ItemsListWrapper>
@@ -109,11 +112,15 @@ export class ItemsList extends PureComponent {
 ItemsList.propTypes = {
   boundActionCreators: PropTypes.object.isRequired,
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 const mapStateToProps = state => ({
   formState: state.form, // Make drag & drop works
   rows: getRows(state),
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 });
 
 const mapDispatchToProps = dispatch => ({

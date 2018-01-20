@@ -6,6 +6,9 @@ import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
 
+import { getTranslate, getActiveLanguage } from 'react-localize-redux';
+import * as TRANSLATION_LABELS from '../constants/translations';
+
 // Actions
 import * as ContactsActions from '../actions/contacts';
 import * as InvoicesActions from '../actions/invoices';
@@ -54,9 +57,9 @@ class Contacts extends PureComponent {
     openDialog(
       {
         type: 'warning',
-        title: 'Delete This Contact',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
+        title: this.props.translate(TRANSLATION_LABELS.CONTACTS_DLG_DELETE_TITLE),
+        message: this.props.translate(TRANSLATION_LABELS.CONTACTS_DLG_DELETE_SURE),
+        buttons: [this.props.translate(TRANSLATION_LABELS.CONTACTS_DLG_DELETE_BTN_YES), this.props.translate(TRANSLATION_LABELS.CONTACTS_DLG_DELETE_BTN_NO)],
       },
       'confirmed-delete-contact',
       contactId
@@ -82,19 +85,19 @@ class Contacts extends PureComponent {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>All Contacts</PageHeaderTitle>
+          <PageHeaderTitle>{ this.props.translate(TRANSLATION_LABELS.CONTACTS_HEADING) }</PageHeaderTitle>
         </PageHeader>
         <PageContent>
           {contacts.length === 0 ? (
-            <Message info text="You don't have any contacts yet!" />
+            <Message info text={ this.props.translate(TRANSLATION_LABELS.CONTACTS_MSG_NOCONTACTS) } />
           ) : (
             <Table hasBorders bg>
               <THead>
                 <TR>
-                  <TH>Contact</TH>
-                  <TH>Email</TH>
-                  <TH>Phone</TH>
-                  <TH actions>Actions</TH>
+                  <TH>{ this.props.translate(TRANSLATION_LABELS.CONTACTS_TBLHEADER_CONTACT) }</TH>
+                  <TH>{ this.props.translate(TRANSLATION_LABELS.CONTACTS_TBLHEADER_EMAIL) }</TH>
+                  <TH>{ this.props.translate(TRANSLATION_LABELS.CONTACTS_TBLHEADER_PHONE) }</TH>
+                  <TH actions>{ this.props.translate(TRANSLATION_LABELS.CONTACTS_TBLHEADER_ACTIONS) }</TH>
                 </TR>
               </THead>
               <TBody>{contactsComponent}</TBody>
@@ -110,11 +113,15 @@ class Contacts extends PureComponent {
 Contacts.propTypes = {
   contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   dispatch: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Map state to props & Export
 const mapStateToProps = state => ({
   contacts: getContacts(state),
+  translate: getTranslate(state.locale),
+  currentLanguage: getActiveLanguage(state.locale).code,
 });
 
 export default compose(connect(mapStateToProps), _withFadeInAnimation)(

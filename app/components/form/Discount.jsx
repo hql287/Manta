@@ -9,6 +9,8 @@ import { Section } from '../shared/Section';
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Styles
 import styled from 'styled-components';
 const DiscountWrapper = styled.div`
@@ -83,7 +85,7 @@ export class Discount extends Component {
     return (
       <Section>
         <DiscountWrapper>
-          <label className="itemLabel">Discount</label>
+          <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.DISCOUNT_DISCOUNT) }</label>
           <DiscountContent>
             <DiscountAmount>
               <input
@@ -103,7 +105,7 @@ export class Discount extends Component {
                     onChange={this.handleInputChange}
                     checked={this.state.type === 'percentage'}
                     value="percentage"
-                  />Percentage
+                  />{ this.props.translate(TRANSLATION_LABELS.DISCOUNT_PERCENT) }
                 </label>
               </div>
               <div className="radio">
@@ -114,7 +116,7 @@ export class Discount extends Component {
                     onChange={this.handleInputChange}
                     checked={this.state.type === 'flat'}
                     value="flat"
-                  />Flat Rate
+                  />{ this.props.translate(TRANSLATION_LABELS.DISCOUNT_FLATRATE) }
                 </label>
               </div>
             </DiscountType>
@@ -128,6 +130,8 @@ export class Discount extends Component {
 Discount.propTypes = {
   discount: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 // Exports

@@ -114,6 +114,23 @@ const getAllDocs = dbName =>
       .catch(err => reject(err));
   });
 
+// Get a single Document
+const getSingleDoc = (dbName, docKey) =>
+  new Promise((resolve, reject) => {
+    setDB(dbName)
+      .then(db =>
+        db.allDocs({
+          key: docKey,
+          include_docs: true,
+          attachments: true,
+        }))
+        .then(results => {
+          const resultsDocs = result.rows.map(row => row.doc);
+          resolve(resultsDocs);
+        })
+        .catch(err => reject(err));
+  });
+
 // Save a Document
 const saveDoc = (dbName, doc) =>
   new Promise((resolve, reject) => {

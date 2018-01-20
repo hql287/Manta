@@ -7,6 +7,12 @@ export const changeActiveTab = createAction(
   tabName => tabName
 );
 
+// Change Active Language
+export const changeActiveLanguage = createAction(
+  ACTION_TYPES.UI_CHANGE_LANGUAGE,
+  locale => locale
+);
+
 // Update Check For Update Message
 export const checkUpdatesMessage = createAction(
   ACTION_TYPES.UI_CHECK_UPDATES_MESSAGE,

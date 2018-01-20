@@ -11,6 +11,8 @@ const Hint = styled.p`
   color: grey;
 `;
 
+import * as TRANSLATION_LABELS from '../../constants/translations';
+
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
@@ -45,16 +47,17 @@ class Profile extends Component {
     return (
       <div>
         <div className="pageItem">
-          <label className="itemLabel">Logo</label>
-          <Hint>Accepts PNG, JPEG & SVG</Hint>
+          <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_LOGO) }</label>
+          <Hint>{ this.props.translate(TRANSLATION_LABELS.SETTING_LOGO_HINT) }</Hint>
           <Logo
             logo={this.state.logo}
             handleLogoChange={this.handleLogoChange}
+            translate={this.props.translate}
           />
         </div>
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Full Name</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_FULLNAME) }</label>
             <input
               name="fullname"
               type="text"
@@ -64,7 +67,7 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Company</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_COMPANY) }</label>
             <input
               name="company"
               type="text"
@@ -76,7 +79,7 @@ class Profile extends Component {
 
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Address</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_ADDRESS) }</label>
             <input
               name="address"
               type="text"
@@ -86,7 +89,7 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Email</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_EMAIL) }</label>
             <input
               name="email"
               type="text"
@@ -98,7 +101,7 @@ class Profile extends Component {
 
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Phone Number</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_PHONE) }</label>
             <input
               name="phone"
               type="text"
@@ -108,7 +111,7 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Website</label>
+            <label className="itemLabel">{ this.props.translate(TRANSLATION_LABELS.SETTINGS_WEBSITE) }</label>
             <input
               name="website"
               type="text"
@@ -125,6 +128,8 @@ class Profile extends Component {
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
   updateSettings: PropTypes.func.isRequired,
+  translate: PropTypes.func.isRequired,
+  currentLanguage: PropTypes.string,
 };
 
 export default _withFadeInAnimation(Profile);
