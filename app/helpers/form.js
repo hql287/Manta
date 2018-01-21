@@ -102,38 +102,42 @@ function validateRecipient(recipient) {
 
 function validateRows(rows) {
   let validated = true;
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i];
-    // Does it contain description?
-    if (!row.description) {
+  // Added this check as per issue #97 "Allow product lines to be left empty or partially filled in"
+  if (enableEmptyRow === false) {
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      // Does it contain description?
+      if (!row.description) {
       openDialog({
-        type: 'warning',
-        title: 'Required Field',
-        message: 'Description can not be blank',
-      });
-      validated = false;
-      break;
+          type: 'warning',
+          title: 'Required Field',
+          message: 'Description can not be blank',
+        });
+        validated = false;
+        break;
+      }
+      // Is the price presented and greater than 0?
+      if (!row.price || row.price === 0) {
+        openDialog({
+          type: 'warning',
+          title: 'Required Field',
+          message: 'Price must be greater than 0',
+        });
+        validated = false;
+        break;
+      }
+      // Is the quantity presented and greater than 0?
+      if (!row.quantity || row.quantity === 0) {
+        openDialog({
+          type: 'warning',
+          title: 'Required Field',
+          message: 'Quantity must be greater than 0',
+        });
+        validated = false;
+        break;
+      }
     }
-    // Is the price presented and greater than 0?
-    if (!row.price || row.price === 0) {
-      openDialog({
-        type: 'warning',
-        title: 'Required Field',
-        message: 'Price must be greater than 0',
-      });
-      validated = false;
-      break;
-    }
-    // Is the quantity presented and greater than 0?
-    if (!row.quantity || row.quantity === 0) {
-      openDialog({
-        type: 'warning',
-        title: 'Required Field',
-        message: 'Quantity must be greater than 0',
-      });
-      validated = false;
-      break;
-    }
+    return validated;
   }
   return validated;
 }

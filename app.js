@@ -188,6 +188,8 @@ function setInitialValues() {
       previewPDF: true,
       checkUpdate: 'daily',
       lastCheck: Date.now(),
+      // Empty Row checker
+      enableEmptyRow: false,
     },
     invoice: {
       exportDir: os.homedir(),
