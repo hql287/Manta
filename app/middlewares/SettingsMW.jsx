@@ -2,6 +2,7 @@
 const appConfig = require('electron').remote.require('electron-settings');
 import sounds from '../../libs/sounds';
 const ipc = require('electron').ipcRenderer;
+import i18n from '../../i18n/i18n';
 
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -29,6 +30,8 @@ const SettingsMW = ({ dispatch }) => next => action => {
       appConfig.set('profile', action.payload.profile);
       appConfig.set('invoice', action.payload.invoice);
       appConfig.set('general', action.payload.general);
+      // Change language
+      i18n.changeLanguage(appConfig.get('general.language'));
       // Reload Sounds Cache
       sounds.preload();
       // Notify previewWindow to update
