@@ -25,13 +25,13 @@ const Field = styled.div`
   margin: 0 15px 20px 15px;
 `;
 
-export function RecipientForm({ formData, updateRecipientForm }) {
+export function RecipientForm({ t, formData, updateRecipientForm }) {
   const { fullname, company, email, phone } = formData;
   return (
     <Form>
       <Row>
         <Field>
-          <label className="itemLabel">Full Name *</label>
+          <label className="itemLabel">{t('form:fields:recipient:fullname')} *</label>
           <input
             name="fullname"
             type="text"
@@ -40,7 +40,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           />
         </Field>
         <Field>
-          <label className="itemLabel">Company</label>
+          <label className="itemLabel">{t('form:fields:recipient:company')}</label>
           <input
             name="company"
             type="text"
@@ -51,7 +51,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
       </Row>
       <Row>
         <Field>
-          <label className="itemLabel">Email *</label>
+          <label className="itemLabel">{t('form:fields:recipient:email')} *</label>
           <input
             name="email"
             type="text"
@@ -60,7 +60,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
           />
         </Field>
         <Field>
-          <label className="itemLabel">Phone Number</label>
+          <label className="itemLabel">{t('form:fields:recipient:phone')}</label>
           <input
             name="phone"
             type="text"
@@ -76,6 +76,7 @@ export function RecipientForm({ formData, updateRecipientForm }) {
 // PropTypes Validation
 RecipientForm.propTypes = {
   formData: PropTypes.object,
+  t: PropTypes.func.isRequired,
   updateRecipientForm: PropTypes.func.isRequired,
 };
 

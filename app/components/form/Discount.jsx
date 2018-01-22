@@ -80,10 +80,13 @@ export class Discount extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <Section>
         <DiscountWrapper>
-          <label className="itemLabel">Discount</label>
+          <label className="itemLabel">
+            {t('form:fields:discount.name')}
+          </label>
           <DiscountContent>
             <DiscountAmount>
               <input
@@ -91,7 +94,7 @@ export class Discount extends Component {
                 type="number"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
-                placeholder="Amount"
+                placeholder={t('form:common:amount')}
               />
             </DiscountAmount>
             <DiscountType>
@@ -103,7 +106,8 @@ export class Discount extends Component {
                     onChange={this.handleInputChange}
                     checked={this.state.type === 'percentage'}
                     value="percentage"
-                  />Percentage
+                  />
+                  {t('form:fields:discount:percentage')}
                 </label>
               </div>
               <div className="radio">
@@ -114,7 +118,8 @@ export class Discount extends Component {
                     onChange={this.handleInputChange}
                     checked={this.state.type === 'flat'}
                     value="flat"
-                  />Flat Rate
+                  />
+                  {t('form:fields:discount:flat')}
                 </label>
               </div>
             </DiscountType>
@@ -127,6 +132,7 @@ export class Discount extends Component {
 
 Discount.propTypes = {
   discount: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
 };
 
