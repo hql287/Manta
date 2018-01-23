@@ -42,14 +42,15 @@ class Invoice extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTaxChange = this.handleTaxChange.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
+    this.t = this.props.t;
   }
 
   componentDidMount() {
     ipc.on('no-access-directory', (event, message) => {
       openDialog({
         type: 'warning',
-        title: 'No Access Permisison',
-        message: `${message}. Please choose a different directory!`,
+        title: this.t('settings:invoice:noaccess:title'),
+        message: message + this.t('settings:invoice:noaccess:message'),
       });
     });
 
@@ -146,23 +147,23 @@ class Invoice extends Component {
     } = this.state;
     return (
       <div>
-        <label className="itemLabel">Tax Settings</label>
+        <label className="itemLabel">{this.t('settings:invoice:tax:heading')}</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Tax ID</label>
+              <label className="itemLabel">{this.t('settings:invoice:tax:taxid')}</label>
               <input
                 name="tin"
                 type="text"
                 value={tax.tin}
                 onChange={this.handleTaxChange}
-                placeholder="Registration Number"
+                placeholder={this.t('settings:invoice:tax:taxidplaceholder')}
               />
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Tax Amount</label>
+              <label className="itemLabel">{this.t('settings:invoice:tax:amount')}</label>
               <input
                 name="amount"
                 type="number"
@@ -173,24 +174,24 @@ class Invoice extends Component {
               />
             </Field>
             <Field>
-              <label className="itemLabel">Tax Method</label>
+              <label className="itemLabel">{this.t('settings:invoice:tax:method:heading')}</label>
               <select
                 name="method"
                 value={tax.method}
                 onChange={this.handleTaxChange}
               >
-                <option value="default">Default</option>
-                <option value="reverse">Reverse Charge</option>
+                <option value="default">{this.t('settings:invoice:tax:method:default')}</option>
+                <option value="reverse">{this.t('settings:invoice:tax:method:reverse')}</option>
               </select>
             </Field>
           </Row>
         </Section>
 
-        <label className="itemLabel">Required Fields</label>
+        <label className="itemLabel">{this.t('settings:invoice:reqfields:heading')}</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Due Date</label>
+              <label className="itemLabel">{this.t('settings:invoice:reqfields:duedate')}</label>
               <label className="switch">
                 <input
                   name="dueDate"
@@ -202,7 +203,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Currency</label>
+              <label className="itemLabel">{this.t('settings:common:currency')}</label>
               <label className="switch">
                 <input
                   name="currency"
@@ -215,7 +216,7 @@ class Invoice extends Component {
             </Field>
 
             <Field>
-              <label className="itemLabel">Discount</label>
+              <label className="itemLabel">{this.t('settings:invoice:reqfields:discount')}</label>
               <label className="switch">
                 <input
                   name="discount"
@@ -227,7 +228,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Tax</label>
+              <label className="itemLabel">{this.t('settings:invoice:reqfields:tax')}</label>
               <label className="switch">
                 <input
                   name="tax"
@@ -239,7 +240,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Note</label>
+              <label className="itemLabel">{this.t('settings:invoice:reqfields:note')}</label>
               <label className="switch">
                 <input
                   name="note"
@@ -253,11 +254,11 @@ class Invoice extends Component {
           </Row>
         </Section>
 
-        <label className="itemLabel">Other</label>
+        <label className="itemLabel">{this.t('settings:invoice:other:heading')}</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Currency</label>
+              <label className="itemLabel">{this.t('settings:common:currency')}</label>
               <select
                 name="currency"
                 value={currency}
@@ -267,20 +268,20 @@ class Invoice extends Component {
               </select>
             </Field>
             <Field>
-              <label className="itemLabel">Template</label>
+              <label className="itemLabel">{this.t('settings:invoice:other:template:heading')}</label>
               <select
                 name="template"
                 value={template}
                 onChange={this.handleInputChange}
               >
-                <option value="minimal">Minimal</option>
-                <option value="business">Business</option>
+                <option value="minimal">{this.t('settings:invoice:other:template:minimal')}</option>
+                <option value="business">{this.t('settings:invoice:other:template:business')}</option>
               </select>
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Date Format</label>
+              <label className="itemLabel">{this.t('settings:invoice:other:dateformat')}</label>
               <select
                 name="dateFormat"
                 value={dateFormat}
@@ -315,7 +316,7 @@ class Invoice extends Component {
               </select>
             </Field>
             <Field>
-              <label className="itemLabel">PDF Export Directory</label>
+              <label className="itemLabel">{this.t('settings:invoice:other:exportdir')}</label>
               <div className="input-group">
                 <input
                   className="form-control"
