@@ -1,0 +1,77 @@
+{
+  "general": {
+    "heading": "General",
+    "btns": {
+      "save": "Save"
+    },
+    "sound": {
+        "heading": "Sounds",
+        "default": "Default",
+        "counterstrike": "Counter Strike",
+        "mute": "Mute Sound?"
+    },
+    "checkupdates": {
+        "heading": "Auto Check for Update",
+        "daily": "Everyday (Recommended)",
+        "weekly": "Once A Week"
+    },
+    "autopreviewpdf": "Auto Preview PDF",
+    "language": {
+        "heading": "Language",
+        "english": "English",
+        "german": "German",
+        "french": "French",
+        "vietnamese": "Vietnamese"
+    }
+  },
+  "profile": {
+      "heading": "Profile",
+      "logo": "Logo",
+      "filetypes": "Accepts PNG, JPEG & SVG",
+      "fullname": "Full name",
+      "company": "Company",
+      "address": "Address",
+      "email": "Email",
+      "phone": "Phone Number",
+      "website": "Website"
+  },
+  "invoice": {
+      "heading": "Invoice",
+      "noaccess": {
+          "title": "No Access Permisison",
+          "message": ". Please choose a different directory!"
+      },
+      "tax": {
+          "heading": "Tax Settings",
+          "taxid": "Tax ID",
+          "taxidplaceholder": "Registration Number",
+          "amount": "Tax Amount",
+          "method": {
+              "heading": "Zahlungsmethode",
+              "default": "Standard",
+              "reverse": "Umkehr der Steuerschuld"
+          }
+      },
+      "reqfields": {
+          "heading": "Required Fields",
+          "duedate": "Due Date",
+          "currency": "Currency",
+          "discount": "Discount",
+          "tax": "Tax",
+          "note": "Note"
+      },
+      "other": {
+          "heading": "Other",
+          "template": {
+              "heading": "Template",
+              "minimal": "Minimal",
+              "business": "Business"
+          },
+          "dateformat": "Date Format",
+          "exportdir": "PDF Export Directory"
+      }
+  },
+  "common": {
+      "currency": "Currency"
+  }
+}

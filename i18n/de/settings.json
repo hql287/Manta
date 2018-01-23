@@ -1,0 +1,77 @@
+{
+  "general": {
+    "heading": "Allgemeines",
+    "btns": {
+      "save": "Speichern"
+    },
+    "sound": {
+        "heading": "Klänge",
+        "default": "Standard",
+        "counterstrike": "Counter-Strike",
+        "mute": "Stummschalten?"
+    },
+    "checkupdates": {
+        "heading": "Automatisch auf Aktualisierungen prüfen",
+        "daily": "Täglich (empfohlen)",
+        "weekly": "Einmal pro Woche"
+    },
+    "autopreviewpdf": "Automatische PDF Vorschau",
+    "language": {
+        "heading": "Sprache",
+        "english": "Englisch",
+        "german": "Deutsch",
+        "french": "Französisch",
+        "vietnamese": "Vietnamesisch"
+    }
+  },
+  "profile": {
+      "heading": "Profil",
+      "logo": "Logo",
+      "filetypes": "Akzeptiert PNG, JPEG & SVG",
+      "fullname": "Vollständiger Name",
+      "company": "Firma",
+      "address": "Adresse",
+      "email": "E-Mail",
+      "phone": "Telefonnummer",
+      "website": "Webseite"
+  },
+  "invoice": {
+      "heading": "Rechnung",
+      "noaccess": {
+          "title": "Keine Berechtigungen",
+          "message": ". Bitte wählen Sie ein anderes Verzeichnis!"
+      },
+      "tax": {
+          "heading": "Mehrwertsteuer Einstellungen",
+          "taxid": "Mehrwertsteuer-Nummer",
+          "taxidplaceholder": "MwSt.-Nr.",
+          "amount": "MwSt. Satz",
+          "method": {
+              "heading": "Zahlungsmethode",
+              "default": "Standard",
+              "reverse": "Umkehr der Steuerschuld"
+          }
+      },
+      "reqfields": {
+          "heading": "Erforderliche Felder",
+          "duedate": "Fälligkeitsdatum",
+          "currency": "Währung",
+          "discount": "Rabatt",
+          "tax": "Mehrwertsteuer",
+          "note": "Notiz"
+      },
+      "other": {
+          "heading": "Sonstiges",
+          "template": {
+              "heading": "Vorlage",
+              "minimal": "Minimal",
+              "business": "Geschäftlich"
+          },
+          "dateformat": "Datumsformat",
+          "exportdir": "PDF Exportverzeichnis"
+      }
+  },
+  "common": {
+      "currency": "Währung"
+  }
+}

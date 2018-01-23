@@ -9,6 +9,7 @@ const defaultLanguage = appConfig.get('general.language');
 import fr from './fr/index.js';
 import en from './en/index.js';
 import vi from './vi/index.js';
+import de from './de/index.js';
 
 i18n
   // Don't use I18nextProvider
@@ -22,6 +23,7 @@ i18n
       en,
       fr,
       vi,
+      de,
     },
     // React i18next special options (optional)
     react: {
