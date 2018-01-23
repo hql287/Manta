@@ -1,4 +1,4 @@
-import form from './form';
+import form from './form.json';
 
 export default {
   form
