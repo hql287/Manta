@@ -1,0 +1,35 @@
+{
+  "header": "Settings",
+  "tabs": {
+    "profile": "Profile",
+    "invoice": "Invoice",
+    "general": "General"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Accepts PNG, JPG & SVG (Recommended)"
+    },
+    "taxSettings": "Tax Settings",
+    "template": "Template",
+    "dateFormat": "Date Format",
+    "pdfExportDir": "PDF Export Directory",
+    "requiredFields": "Required Fields",
+    "sound": "Sound",
+    "mute": "Mute",
+    "autoCheckUpdate": {
+      "name": "Auto Check for Update",
+      "daily": "Everday (Recommended)",
+      "weekly": "Everyweek"
+    },
+    "openPDFReader": "Open PDF after Exprt",
+    "language": {
+      "name": "Language",
+      "en": "English",
+      "de": "German",
+      "fr": "French",
+      "vi": "Vietnamese"
+    },
+    "other": "Other"
+  }
+}

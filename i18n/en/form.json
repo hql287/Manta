@@ -22,11 +22,7 @@
     "recipient": {
       "name": "Recipient",
       "select": "Select",
-      "add": "Create New",
-      "fullname": "Fullname",
-      "company": "Company",
-      "email": "Email",
-      "phone": "Phone Number"
+      "add": "Create New"
     },
     "discount": {
       "name": "Discount",
@@ -43,16 +39,7 @@
       "method": "Method",
       "reverse": "Reverse Charge"
     },
-    "note": {
-      "name": "Note"
-    },
-    "currency": {
-      "name": "Currency"
-    }
-  },
-  "common": {
-    "default": "Default",
-    "amount": "Amount",
-    "saveAsDefault": "Save as Default?"
+    "note": "Note",
+    "currency": "Currency"
   }
 }

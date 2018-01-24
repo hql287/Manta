@@ -1,0 +1,14 @@
+{
+  "fields": {
+    "fullname": "Full Name",
+    "company": "Company",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone Numner",
+    "website": "Website"
+  },
+  "save": "Save",
+  "amount": "Amount",
+  "default": "Default",
+  "saveAsDefault": "Save as Default?"
+}
