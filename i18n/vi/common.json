@@ -1,0 +1,14 @@
+{
+  "fields": {
+    "fullname": "Họ & Tên",
+    "company": "Công Ty",
+    "address": "Địa chỉ",
+    "email": "Thư điện tử",
+    "phone": "Số điện thoại",
+    "website": "Trang web"
+  },
+  "save": "Lưu Thay Đổi",
+  "amount": "Số lượng",
+  "default": "Bình thường",
+  "saveAsDefault": "Lưu thành mặc định?"
+}

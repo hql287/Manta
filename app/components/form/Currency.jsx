@@ -71,11 +71,11 @@ export class Currency extends Component {
       <Section>
         <Header>
           <label className="itemLabel">
-            {t('form:fields:currency.name')}
+            {t('form:fields:currency')}
           </label>
           {!this.isSettingsSaved() && (
             <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> {t('form:common:saveAsDefault')}
+              <i className="ion-checkmark" /> {t('common:saveAsDefault')}
             </a>
           )}
         </Header>

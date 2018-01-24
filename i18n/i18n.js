@@ -17,6 +17,8 @@ i18n
     lng: defaultLanguage,
     fallbackLng: 'en',
     debug: isDev,
+    ns: ['form', 'common'],
+    defaultNS: 'form',
     // Translations
     resources: {
       en,

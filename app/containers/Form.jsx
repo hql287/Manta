@@ -120,10 +120,10 @@ class Form extends PureComponent {
           )}
           {required_fields.note && (
             <Note
-                t={t}
-                note={note}
-                updateFieldData={updateFieldData}
-              />
+              t={t}
+              note={note}
+              updateFieldData={updateFieldData}
+            />
           )}
         </PageContent>
       </PageWrapper>
@@ -170,6 +170,6 @@ const mapDispatchToProps = dispatch => ({
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  translate('form'),
+  translate(['common', 'form']),
   _withFadeInAnimation
 )(Form);

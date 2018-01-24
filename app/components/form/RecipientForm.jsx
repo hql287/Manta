@@ -31,7 +31,7 @@ export function RecipientForm({ t, formData, updateRecipientForm }) {
     <Form>
       <Row>
         <Field>
-          <label className="itemLabel">{t('form:fields:recipient:fullname')} *</label>
+          <label className="itemLabel">{t('common:fields:fullname')} *</label>
           <input
             name="fullname"
             type="text"
@@ -40,7 +40,7 @@ export function RecipientForm({ t, formData, updateRecipientForm }) {
           />
         </Field>
         <Field>
-          <label className="itemLabel">{t('form:fields:recipient:company')}</label>
+          <label className="itemLabel">{t('common:fields:company')}</label>
           <input
             name="company"
             type="text"
@@ -51,7 +51,7 @@ export function RecipientForm({ t, formData, updateRecipientForm }) {
       </Row>
       <Row>
         <Field>
-          <label className="itemLabel">{t('form:fields:recipient:email')} *</label>
+          <label className="itemLabel">{t('common:fields:email')} *</label>
           <input
             name="email"
             type="text"
@@ -60,7 +60,7 @@ export function RecipientForm({ t, formData, updateRecipientForm }) {
           />
         </Field>
         <Field>
-          <label className="itemLabel">{t('form:fields:recipient:phone')}</label>
+          <label className="itemLabel">{t('common:fields:phone')}</label>
           <input
             name="phone"
             type="text"

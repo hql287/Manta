@@ -97,7 +97,7 @@ export class Tax extends Component {
           <label className="itemLabel">{t('form:fields:tax:name')}</label>
           {!this.isSettingsSaved() && (
             <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> {t('form:common:saveAsDefault')}
+              <i className="ion-checkmark" /> {t('common:saveAsDefault')}
             </a>
           )}
         </Header>
@@ -118,7 +118,7 @@ export class Tax extends Component {
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">{t('form:common:amount')} (%)</label>
+              <label className="itemLabel">{t('common:amount')} (%)</label>
               <TaxAmount>
                 <input
                   name="amount"
@@ -126,7 +126,7 @@ export class Tax extends Component {
                   step="0.01"
                   value={this.state.amount}
                   onChange={this.handleInputChange}
-                  placeholder={t('form:common:amount')}
+                  placeholder={t('common:amount')}
                 />
               </TaxAmount>
             </Field>
@@ -137,7 +137,7 @@ export class Tax extends Component {
                 value={this.state.method}
                 onChange={this.handleInputChange}
               >
-                <option value="default">{t('form:common:default')}</option>
+                <option value="default">{t('common:default')}</option>
                 <option value="reverse">{t('form:fields:tax:reverse')}</option>
               </select>
             </Field>

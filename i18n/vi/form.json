@@ -22,11 +22,7 @@
     "recipient": {
       "name": "Khách Hàng",
       "select": "Lựa chọn",
-      "add": "Tạo mới",
-      "fullname": "Họ và Tên",
-      "company": "Công ty",
-      "email": "Email",
-      "phone": "Số Điện Thoại"
+      "add": "Tạo mới"
     },
     "discount": {
       "name": "Giảm Giá",
@@ -43,16 +39,7 @@
       "method": "Phương Thức",
       "reverse": "Trừ ngược"
     },
-    "note": {
-      "name": "Chú thích"
-    },
-    "currency": {
-      "name": "Đồng Tiền"
-    }
-  },
-  "common": {
-    "default": "Bình thường",
-    "amount": "Số lượng",
-    "saveAsDefault": "Lưu thành mặc định?"
+    "note": "Chú thích",
+    "currency": "Đồng Tiền"
   }
 }

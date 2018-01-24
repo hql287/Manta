@@ -26,25 +26,26 @@ class General extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <div>
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Sound</label>
+              <label className="itemLabel">{t('settings:fields:sound')}</label>
               <select
                 name="sound"
                 value={this.state.sound}
                 onChange={this.handleInputChange}
               >
-                <option value="default">Default</option>
+                <option value="default">{t('common:default')}</option>
                 <option value="cs">Counter Strike</option>
               </select>
             </div>
           </div>
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Mute Sound?</label>
+              <label className="itemLabel">{t('settings:fields:mute')}</label>
               <label className="switch">
                 <input
                   name="muted"
@@ -60,20 +61,20 @@ class General extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Auto Check For Update</label>
+              <label className="itemLabel">{t('settings:fields:autoCheckUpdate:name')}</label>
               <select
                 name="checkUpdate"
                 value={this.state.checkUpdate}
                 onChange={this.handleInputChange}
               >
-                <option value="daily">Everyday (Recommended)</option>
-                <option value="weekly">Once A Week</option>
+                <option value="daily">{t('settings:fields:autoCheckUpdate:daily')}</option>
+                <option value="weekly">{t('settings:fields:autoCheckUpdate:weekly')}</option>
               </select>
             </div>
           </div>
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Auto Preview PDF</label>
+              <label className="itemLabel">{t('settings:fields:openPDFReader')}</label>
               <label className="switch">
                 <input
                   name="previewPDF"
@@ -89,16 +90,16 @@ class General extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Language</label>
+              <label className="itemLabel">{t('settings:fields:language:name')}</label>
               <select
                 name="language"
                 value={this.state.language}
                 onChange={this.handleInputChange}
               >
-                <option value="en">English</option>
-                <option value="de">German</option>
-                <option value="fr">French</option>
-                <option value="vi">Vietnamese</option>
+                <option value="en">{t('settings:fields:language:en')}</option>
+                <option value="de">{t('settings:fields:language:de')}</option>
+                <option value="fr">{t('settings:fields:language:fr')}</option>
+                <option value="vi">{t('settings:fields:language:vi')}</option>
               </select>
             </div>
           </div>
@@ -110,6 +111,7 @@ class General extends Component {
 
 General.propTypes = {
   general: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateSettings: PropTypes.func.isRequired,
 };
 

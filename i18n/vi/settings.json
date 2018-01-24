@@ -1,0 +1,35 @@
+{
+  "header": "Tuỳ Chỉnh",
+  "tabs": {
+    "profile": "Hồ Sơ",
+    "invoice": "Hoá Đơn",
+    "general": "Thông Tin Chung"
+  },
+  "fields": {
+    "logo": {
+      "name": "Ảnh đại diện",
+      "hint": "Chấp nhận ảnh PNG, JPEG và SVG (Tốt Nhất)"
+    },
+    "taxSettings": "Tuỳ chỉnh thuế",
+    "template": "Mẫu sẵn có",
+    "dateFormat": "Định dạng ngày",
+    "pdfExportDir": "Thư mục xuất PDF",
+    "requiredFields": "Thông tin bắt buộc",
+    "sound": "Âm thanh",
+    "mute": "Tắt tiếng",
+    "autoCheckUpdate": {
+      "name": "Tự động kiểm tra cập nhật",
+      "daily": "Hàng Ngày (Tốt Nhất)",
+      "weekly": "Hàng Tuần"
+    },
+    "openPDFReader": "Mở file PDF khi xuất",
+    "language": {
+      "name": "Ngôn ngữ",
+      "en": "Tiếng Anh",
+      "de": "Tiếng Đức",
+      "fr": "Tiếng Pháp",
+      "vi": "Tiếng Việt"
+    },
+    "other": "Thông tin khác"
+  }
+}

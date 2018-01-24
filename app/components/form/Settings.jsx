@@ -132,7 +132,7 @@ class Settings extends PureComponent {
                 <p>{t('form:settings:hint')}</p>
               ) : (
                 <a href="#" onClick={this.saveAsDefault}>
-                  <i className="ion-checkmark" /> {t('form:common:saveAsDefault')}
+                  <i className="ion-checkmark" /> {t('common:saveAsDefault')}
                 </a>
               )}
             </Helper>
@@ -148,7 +148,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>{t('form:fields:currency:name')}</Label>
+                <Label>{t('form:fields:currency')}</Label>
                 <Switch
                   name="currency"
                   checked={required_fields.currency}
@@ -175,7 +175,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>{t('form:fields:note:name')}</Label>
+                <Label>{t('form:fields:note')}</Label>
                 <Switch
                   name="note"
                   checked={required_fields.note}

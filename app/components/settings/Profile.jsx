@@ -42,11 +42,12 @@ class Profile extends Component {
   }
 
   render() {
+   const { t } = this.props;
     return (
       <div>
         <div className="pageItem">
-          <label className="itemLabel">Logo</label>
-          <Hint>Accepts PNG, JPEG & SVG</Hint>
+          <label className="itemLabel">{t('settings:fields:logo:name')}</label>
+          <Hint>{t('settings:fields:logo:hint')}</Hint>
           <Logo
             logo={this.state.logo}
             handleLogoChange={this.handleLogoChange}
@@ -54,7 +55,7 @@ class Profile extends Component {
         </div>
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Full Name</label>
+            <label className="itemLabel">{t('common:fields:fullname')}</label>
             <input
               name="fullname"
               type="text"
@@ -64,7 +65,7 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Company</label>
+            <label className="itemLabel">{t('common:fields:company')}</label>
             <input
               name="company"
               type="text"
@@ -76,7 +77,7 @@ class Profile extends Component {
 
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Address</label>
+            <label className="itemLabel">{t('common:fields:address')}</label>
             <input
               name="address"
               type="text"
@@ -86,7 +87,7 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Email</label>
+            <label className="itemLabel">{t('common:fields:email')}</label>
             <input
               name="email"
               type="text"
@@ -98,7 +99,7 @@ class Profile extends Component {
 
         <div className="row">
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Phone Number</label>
+            <label className="itemLabel">{t('common:fields:phone')}</label>
             <input
               name="phone"
               type="text"
@@ -108,7 +109,7 @@ class Profile extends Component {
           </div>
 
           <div className="pageItem col-md-6">
-            <label className="itemLabel">Website</label>
+            <label className="itemLabel">{t('common:fields:website')}</label>
             <input
               name="website"
               type="text"
@@ -124,6 +125,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateSettings: PropTypes.func.isRequired,
 };
 

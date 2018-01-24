@@ -136,6 +136,7 @@ class Invoice extends Component {
   }
 
   render() {
+    const { t } = this.props;
     const {
       exportDir,
       template,
@@ -146,63 +147,64 @@ class Invoice extends Component {
     } = this.state;
     return (
       <div>
-        <label className="itemLabel">Tax Settings</label>
+        <label className="itemLabel">{t('settings:fields:taxSettings')}</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Tax ID</label>
+              <label className="itemLabel">{t('form:fields:tax:id')}</label>
               <input
                 name="tin"
                 type="text"
                 value={tax.tin}
                 onChange={this.handleTaxChange}
-                placeholder="Registration Number"
+                placeholder={t('form:fields:tax:id')}
               />
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Tax Amount</label>
+              <label className="itemLabel">{t('common:amount')}</label>
               <input
                 name="amount"
                 type="number"
                 step="0.01"
                 value={tax.amount}
                 onChange={this.handleTaxChange}
-                placeholder="Amount"
+                placeholder={t('common:amount')}
               />
             </Field>
             <Field>
-              <label className="itemLabel">Tax Method</label>
+              <label className="itemLabel">{t('form:fields:tax:method')}</label>
               <select
                 name="method"
                 value={tax.method}
                 onChange={this.handleTaxChange}
               >
-                <option value="default">Default</option>
-                <option value="reverse">Reverse Charge</option>
+                <option value="default">{t('common:default')}</option>
+                <option value="reverse">{t('form:fields:tax:reverse')}</option>
               </select>
             </Field>
           </Row>
         </Section>
 
-        <label className="itemLabel">Required Fields</label>
+        <label className="itemLabel">{t('settings:fields:requiredFields')}</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Due Date</label>
+              <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
               <label className="switch">
                 <input
                   name="dueDate"
                   type="checkbox"
                   checked={required_fields.dueDate}
                   onChange={this.handleVisibilityChange}
+                  placeholder={t('form:fields:dueDate:name')}
                 />
                 <span className="slider round" />
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Currency</label>
+              <label className="itemLabel">{t('form:fields:currency')}</label>
               <label className="switch">
                 <input
                   name="currency"
@@ -215,7 +217,7 @@ class Invoice extends Component {
             </Field>
 
             <Field>
-              <label className="itemLabel">Discount</label>
+              <label className="itemLabel">{t('form:fields:discount:name')}</label>
               <label className="switch">
                 <input
                   name="discount"
@@ -227,7 +229,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Tax</label>
+              <label className="itemLabel">{t('form:fields:tax:name')}</label>
               <label className="switch">
                 <input
                   name="tax"
@@ -239,7 +241,7 @@ class Invoice extends Component {
               </label>
             </Field>
             <Field>
-              <label className="itemLabel">Note</label>
+              <label className="itemLabel">{t('form:fields:note')}</label>
               <label className="switch">
                 <input
                   name="note"
@@ -253,11 +255,11 @@ class Invoice extends Component {
           </Row>
         </Section>
 
-        <label className="itemLabel">Other</label>
+        <label className="itemLabel">{t('settings:fields:other')}</label>
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Currency</label>
+              <label className="itemLabel">{t('form:fields:currency')}</label>
               <select
                 name="currency"
                 value={currency}
@@ -267,7 +269,7 @@ class Invoice extends Component {
               </select>
             </Field>
             <Field>
-              <label className="itemLabel">Template</label>
+              <label className="itemLabel">{t('settings:fields:template')}</label>
               <select
                 name="template"
                 value={template}
@@ -280,7 +282,7 @@ class Invoice extends Component {
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Date Format</label>
+              <label className="itemLabel">{t('settings:fields:dateFormat')}</label>
               <select
                 name="dateFormat"
                 value={dateFormat}
@@ -315,7 +317,7 @@ class Invoice extends Component {
               </select>
             </Field>
             <Field>
-              <label className="itemLabel">PDF Export Directory</label>
+              <label className="itemLabel">{t('settings:fields:pdfExportDir')}</label>
               <div className="input-group">
                 <input
                   className="form-control"
@@ -342,6 +344,7 @@ class Invoice extends Component {
 
 Invoice.propTypes = {
   invoice: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateSettings: PropTypes.func.isRequired,
 };
 

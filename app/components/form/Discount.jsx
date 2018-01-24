@@ -94,7 +94,7 @@ export class Discount extends Component {
                 type="number"
                 value={this.state.amount}
                 onChange={this.handleInputChange}
-                placeholder={t('form:common:amount')}
+                placeholder={t('common:amount')}
               />
             </DiscountAmount>
             <DiscountType>

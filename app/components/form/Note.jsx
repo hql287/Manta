@@ -53,13 +53,13 @@ export class Note extends Component {
     const { t } = this.props;
     return (
       <Section>
-        <label className="itemLabel">{t('form:fields:note:name')}</label>
+        <label className="itemLabel">{t('form:fields:note')}</label>
         <NoteContent
           cols="50"
           rows="4"
           onChange={this.handleInputChange}
           value={this.state.content}
-          placeholder={t('form:fields:note:name')}
+          placeholder={t('form:fields:note')}
         />
       </Section>
     );
