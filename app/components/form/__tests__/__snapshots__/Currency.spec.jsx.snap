@@ -9,9 +9,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
   >
     <label
       className="itemLabel"
-    >
-      Currency
-    </label>
+    />
   </div>
   <select
     onChange={[Function]}

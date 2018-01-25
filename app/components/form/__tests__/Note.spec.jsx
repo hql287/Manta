@@ -7,6 +7,7 @@ import { mount } from 'enzyme';
 import { Note } from '../Note.jsx';
 
 // Mocks
+const t = jest.fn();
 const updateFieldData = jest.fn();
 const note = {
   required: true,
@@ -16,7 +17,7 @@ const note = {
 describe('Note component', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = mount(<Note note={note} updateFieldData={updateFieldData} />);
+    wrapper = mount(<Note t={t} note={note} updateFieldData={updateFieldData} />);
   });
 
   // PROPS & STATE
@@ -38,7 +39,7 @@ describe('Note component', () => {
   // PRIVATE METHOD
   it('handleInputChange correctly', () => {
     const spy = jest.spyOn(Note.prototype, 'handleInputChange');
-    const wrap = mount(<Note note={note} updateFieldData={updateFieldData} />);
+    const wrap = mount(<Note t={t} note={note} updateFieldData={updateFieldData} />);
     const textArea = wrap.find('textarea');
     textArea.simulate('change', { target: { value: 'Something Else' } });
     expect(spy).toHaveBeenCalled();
@@ -47,7 +48,7 @@ describe('Note component', () => {
   // SNAPSHOT
   it('matches snapshot', () => {
     const tree = renderer
-      .create(<Note note={note} updateFieldData={updateFieldData} />)
+      .create(<Note t={t} note={note} updateFieldData={updateFieldData} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { reactI18nextModule } from 'react-i18next';
 
 const isDev = require('electron-is-dev');
-const appConfig = require('electron-settings');
+const appConfig = require('electron').remote.require('electron-settings');
 const defaultLanguage = appConfig.get('general.language');
 
 // Language Files

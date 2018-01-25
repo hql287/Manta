@@ -29,6 +29,8 @@ const recipient = {
   select: {},
   newRecipient: true,
 };
+
+const t = jest.fn();
 const dispatch = jest.fn();
 
 describe('Recipient component', () => {
@@ -36,6 +38,7 @@ describe('Recipient component', () => {
   beforeEach(() => {
     wrapper = mount(
       <Recipient
+        t={t}
         contacts={contacts}
         recipient={recipient}
         dispatch={dispatch}
@@ -63,6 +66,7 @@ describe('Recipient component', () => {
     const spy = jest.spyOn(Recipient.prototype, 'toggleForm');
     const wrap = mount(
       <Recipient
+        t={t}
         contacts={contacts}
         recipient={recipient}
         dispatch={dispatch}
@@ -81,6 +85,7 @@ describe('Recipient component', () => {
     const tree = renderer
       .create(
         <Recipient
+          t={t}
           contacts={contacts}
           recipient={recipient}
           dispatch={dispatch}
