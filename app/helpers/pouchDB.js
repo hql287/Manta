@@ -162,9 +162,4 @@ const updateDoc = (dbName, docId, updatedDoc) =>
       .catch(err => reject(err));
   });
 
-export {
-  getAllDocs,
-  deleteDoc,
-  saveDoc,
-  updateDoc,
-};
+export { getAllDocs, deleteDoc, saveDoc, updateDoc };

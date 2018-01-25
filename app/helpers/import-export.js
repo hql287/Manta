@@ -7,7 +7,6 @@ const { dialog } = require('electron').remote;
 
 const openDialog = require('../renderers/dialog'); // Dialog on errors, warnings, info, etc...
 const { getAllDocs } = require('./pouchDB'); // PouchDB helpers
-const csvjson = require('csvjson'); // CSV to JSON and JSON to CSV
 
 // Export PouchDB
 const exportDB = () => {
@@ -16,7 +15,7 @@ const exportDB = () => {
     dialog.showSaveDialog(
       { filters: [{ name: 'CSV', extensions: ['csv'] }] },
       savePath => {
-        if (path) {
+        if (savePath) {
           // Get Directory from path
           const dir = path.parse(savePath).dir;
           // Check whether you have write permission for directory
@@ -36,29 +35,143 @@ const exportDB = () => {
     );
   };
 
+  // Convert JSON to CSV
+  const convert = data => {
+    const obj = {};
+    const keys = [];
+    const rows = {};
+    let totalKeys = 0;
+
+    // Add keys and values to "obj"
+    const add = (key, value, parentKey) => {
+      if (parentKey && (!obj[parentKey] || !obj[parentKey][key])) {
+        if (!obj[parentKey]) {
+          obj[parentKey] = {};
+        }
+        if (!obj[parentKey][key]) {
+          obj[parentKey][key] = [];
+          keys.push(parentKey + '.' + key);
+          totalKeys++;
+        }
+      } else if (!obj[key] && !parentKey) {
+        obj[key] = [];
+        keys.push(key);
+        totalKeys++;
+      }
+      if (parentKey) {
+        obj[parentKey][key].push(value);
+      } else {
+        obj[key].push(value);
+      }
+    };
+
+    // Loop through the JSON Object
+    // and merge all duplicated keys into one.
+    const loopify = (input, parentKey) => {
+      for (const key in input) {
+        if (Array.isArray(input[key])) {
+          for (const index in input[key]) {
+            loopify(input[key][index], key);
+            parentKey = false;
+          }
+        } else if (typeof input[key] === 'object') {
+          loopify(input[key], key);
+          parentKey = false;
+        } else {
+          if (key !== '_rev') {
+            // Dont save _rev
+            add(key, input[key], parentKey);
+          }
+        }
+      }
+    };
+
+    // Get list of keys
+    const getKeys = () => keys;
+
+    // Generate the CSV
+    const getValues = () => {
+      const keys = getKeys();
+      let csv = '';
+
+      // Convert JSON Object into
+      // correct CSV format.
+      for (const key in obj) {
+        const item = obj[key];
+        for (const index in item) {
+          for (const column in keys) {
+            if (typeof item === 'object' && !Array.isArray(item)) {
+              for (const subKey in item[index]) {
+                if (`${key}.${index}` === keys[column]) {
+                  if (!rows[subKey]) {
+                    rows[subKey] = [];
+                    for (let k = totalKeys; k >= 1; k--) {
+                      rows[subKey].push(' ');
+                    }
+                  }
+                  rows[subKey].splice(column, 1, item[index][subKey]);
+                }
+              }
+            } else {
+              if (key === keys[column]) {
+                if (!rows[index]) {
+                  rows[index] = [];
+                  for (let k = totalKeys; k >= 1; k--) {
+                    rows[index].push(' ');
+                  }
+                }
+                rows[index].splice(column, 1, item[index]);
+              }
+            }
+          }
+        }
+      }
+
+      // Make it all a string and add
+      // 'new line' at the end of each row.
+      for (const key in keys) {
+        if (typeof keys[key] === 'object' && !Array.isArra(keys[key])) {
+          for (const k in keys[key]) {
+            if (keys[key][k]) {
+              csv += keys[key][k] + ',';
+            }
+          }
+        } else {
+          csv += keys[key] + ',';
+        }
+      }
+      csv += '\n';
+      for (const row in rows) {
+        csv += rows[row].join(',') + '\n';
+      }
+
+      return csv;
+    };
+
+    loopify(data);
+    const values = getValues();
+
+    return values;
+  };
+
   async function writeFile(savePath) {
     const file = fs.createWriteStream(savePath);
     const data = await getData(); // PouchDB JSON Data
+    // console.log(data)
+
+    const CSVInvoices = await convert(data.invoices);
+    // const CSVContacts = await convert(data.contacts)
 
     if (data) {
-      // csvjson options
-      const options = {
-        delimiter: ',',
-        wrap: false,
-        headers: 'full',
-        objectDenote: '.',
-        arrayDenote: '[]',
-      };
-
-      file.write(csvjson.toCSV(data, options));
-      file.close(); // Close when done
+      file.write(CSVInvoices);
+      file.close();
     }
   }
 
   // Get PouchDB Invoices
   async function getData() {
-    let Invoices
-    let Contacts
+    let Invoices;
+    let Contacts;
 
     try {
       await getAllDocs('invoices').then(invoices => (Invoices = invoices));
@@ -72,7 +185,7 @@ const exportDB = () => {
     }
 
     if (Invoices && Contacts) {
-      return { invocies: {docs: Invoices}, contacts: {docs: Contacts}};
+      return { invoices: { docs: Invoices }, contacts: { docs: Contacts } };
     }
   }
 
