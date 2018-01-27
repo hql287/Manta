@@ -14,7 +14,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
 // Place a BrowserWindow in center of primary display
-const centerOnPrimaryDisplay = require('./app/helpers/center-on-primary-display');
+const centerOnPrimaryDisplay = require('./helpers/center-on-primary-display');
 
 // Prevent Linux GPU Bug
 // https://github.com/electron/electron/issues/4322
@@ -301,14 +301,14 @@ function addEventListeners() {
   ipcMain.on('quit-and-install', () => {
     setImmediate(() => {
       // Remove this listener
-      app.removeAllListeners("window-all-closed");
+      app.removeAllListeners('window-all-closed');
       // Force close all windows
       tourWindow.destroy();
       mainWindow.destroy();
       previewWindow.destroy();
       // Start the quit and update sequence
       autoUpdater.quitAndInstall(false);
-    })
+    });
   });
 }
 

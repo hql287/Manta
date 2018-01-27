@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 const ipc = require('electron').ipcRenderer;
 
-import { Notify } from '../helper/notify';
+import { Notify } from '../../helpers/notify';
 // Actions
 import * as ActionsCreator from '../actions';
 
@@ -50,7 +50,7 @@ class MainContent extends PureComponent {
       // Handle click on notification
       noti.onclick = () => {
         ipc.send('reveal-file', options.location);
-      }
+      };
     });
   }
 

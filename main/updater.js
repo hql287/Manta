@@ -4,7 +4,7 @@ const { autoUpdater } = require('electron-updater');
 const appConfig = require('electron-settings');
 const isDev = require('electron-is-dev');
 
-const OSNotification = require('../app/renderers/notification')
+const { Notify } = require('../helpers/notify');
 
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
@@ -16,9 +16,9 @@ let silentMode = true;
 const mainWindowID = appConfig.get('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
-  // Check for Updates
-ipcMain.on('check-for-updates', (event) => {
-  if(!isDev) {
+// Check for Updates
+ipcMain.on('check-for-updates', event => {
+  if (!isDev) {
     // Turn off silent mode
     silentMode = false;
     checkForUpdate();
@@ -71,7 +71,7 @@ autoUpdater.on('download-progress', progressObj => {
 
 // Update Downloaded
 autoUpdater.on('update-downloaded', info => {
-  OSNotification('Updates has been downloaded')
+  Notify({ title: 'Manta Update', body: 'Updates has been downloaded' });
   mainWindow.send('update-downloaded', info);
 });
 

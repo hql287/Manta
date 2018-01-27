@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 // Custom Libs
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
-import OSNotification from '../../renderers/notification'
+import { Notify } from '../../../helpers/notify';
 
 // Component
 class General extends Component {
@@ -90,7 +90,7 @@ class General extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">Disable Notifications?</label>
+              <label className="itemLabel">Enable Notifications?</label>
               <label className="switch">
                 <input
                   name="notification"
@@ -100,12 +100,6 @@ class General extends Component {
                 />
                 <span className="slider round" />
               </label>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="pageItem">
-              <label className="itemLabel">Disable Notifications?</label>
-              <button onClick={OSNotification('hello world', 'this is body!')}>Click Me</button>
             </div>
           </div>
         </div>
