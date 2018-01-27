@@ -11,21 +11,18 @@ import en from './en/index.js';
 import vi from './vi/index.js';
 
 i18n
-  // Don't use I18nextProvider
   .use(reactI18nextModule)
   .init({
     lng: defaultLanguage,
     fallbackLng: 'en',
     debug: isDev,
-    ns: ['form', 'common'],
+    ns: ['form', 'common', 'invoices'],
     defaultNS: 'form',
-    // Translations
     resources: {
       en,
       fr,
       vi,
     },
-    // React i18next special options (optional)
     react: {
       wait: false,
       bindI18n: 'languageChanged loaded',

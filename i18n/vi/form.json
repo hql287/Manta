@@ -1,6 +1,7 @@
 {
   "header": {
-    "name": "Tạo Hoá Đơn Mới",
+    "new": "Tạo Hoá Đơn Mới",
+    "edit": "Cập Nhật Hoá Đơn",
     "btns": {
       "clear": "Làm Lại",
       "update": "Cập Nhật",

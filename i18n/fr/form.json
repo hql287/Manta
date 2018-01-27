@@ -1,6 +1,7 @@
 {
   "header": {
-    "name": "Créer une nouvelle facture",
+    "new": "Créer une nouvelle facture",
+    "edit": "Créer une nouvelle facture",
     "btns": {
       "clear": "Effacer",
       "update": "Mettre à jour",
@@ -22,11 +23,7 @@
     "recipient": {
       "name": "Titulaire",
       "select": "Sélectionner",
-      "add": "Créer un nouveau contact",
-      "fullname": "Nom et prénom",
-      "company": "Compagnie",
-      "email": "Email",
-      "phone": "Numéro de téléphone"
+      "add": "Créer un nouveau contact"
     },
     "discount": {
       "name": "Remise",
@@ -43,16 +40,7 @@
       "method": "Méthode",
       "reverse": "Autoliquidation"
     },
-    "note": {
-      "name": "Remarque"
-    },
-    "currency": {
-      "name": "Devise"
-    }
-  },
-  "common": {
-    "default": "Par défaut",
-    "amount": "Montant",
-    "saveAsDefault": "Sauvegarder par défaut?"
+    "note": "Remarque",
+    "currency": "Devise"
   }
 }
