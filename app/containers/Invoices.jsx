@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
+import { translate } from 'react-i18next';
 
 // Actions
 import * as Actions from '../actions/invoices';
@@ -80,9 +81,11 @@ class Invoices extends PureComponent {
 
   // Render
   render() {
-    const { invoices, dateFormat } = this.props;
+    const { t, i18n, invoices, dateFormat } = this.props;
     const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
+        t={t}
+        language={i18n.language}
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
         editInvoice={this.editInvoice}
@@ -95,7 +98,7 @@ class Invoices extends PureComponent {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>All Invoices</PageHeaderTitle>
+          <PageHeaderTitle>{t('invoices:header:name')}</PageHeaderTitle>
         </PageHeader>
         <PageContent bare>
           {invoices.length === 0 ? (
@@ -121,6 +124,8 @@ const mapStateToProps = state => ({
   dateFormat: getDateFormat(state),
 });
 
-export default compose(connect(mapStateToProps), _withFadeInAnimation)(
-  Invoices
-);
+export default compose(
+  connect(mapStateToProps),
+  translate(['common', 'form', 'invoices']),
+  _withFadeInAnimation
+)(Invoices);

@@ -59,7 +59,12 @@ class Form extends PureComponent {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>{t('form:header:name')}</PageHeaderTitle>
+          <PageHeaderTitle>
+            { editMode.active
+              ? t('form:header:edit')
+              : t('form:header:new')
+            }
+          </PageHeaderTitle>
           <PageHeaderActions>
             <Button danger onClick={clearForm}>
               {t('form:header:btns:clear')}
