@@ -37,7 +37,7 @@ class ErrorBoundary extends Component {
     this.setState({ hasError: true });
     openDialog({
       type: 'warning',
-      title: 'There was an error occurred',
+      title: 'An error has occurred',
       message: info.componentStack,
     });
   }
