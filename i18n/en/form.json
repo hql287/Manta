@@ -1,6 +1,7 @@
 {
   "header": {
-    "name": "Create A New Invoice",
+    "new": "Create A New Invoice",
+    "edit": "Edit Invoice",
     "btns": {
       "clear": "Clear",
       "update": "Update",
