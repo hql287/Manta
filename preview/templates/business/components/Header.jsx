@@ -2,7 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
-const format = require('date-fns/format');
 const moment = require('moment');
 
 // Styles
@@ -88,7 +87,7 @@ function Header({ invoice, profile, configs }) {
             omission: '',
           })}
         </h4>
-        <p>Created {format(invoice.created_at, configs.dateFormat)}</p>
+        <p>Created {moment(invoice.created_at).format(configs.dateFormat)}</p>
         <p>Due {moment(invoice.dueDate).format(configs.dateFormat)}</p>
       </RightColumn>
     </InvoiceHeader>
