@@ -1,5 +1,6 @@
 const openDialog = require('../renderers/dialog');
 import { isEmpty } from 'lodash';
+import i18n from '../../i18n/i18n';
 
 function validateFormData(formData) {
   const {
@@ -66,8 +67,8 @@ function validateRecipient(recipient) {
     if (isEmpty(recipient.new)) {
       openDialog({
         type: 'warning',
-        title: 'Invalid Recipient',
-        message: 'Recipient Cannnot Be Blank',
+        title: i18n.t('dialog:validation:recipient:empty:title'),
+        message: i18n.t('dialog:validation:recipient:empty:message'),
       });
       return false;
     }
@@ -80,8 +81,8 @@ function validateRecipient(recipient) {
     ) {
       openDialog({
         type: 'warning',
-        title: 'Required Fields Empty',
-        message: 'Please fill in all required field',
+        title: i18n.t('dialog:validation:recipient:requiredFields:title'),
+        message: i18n.t('dialog:validation:recipient:requiredFields:message'),
       });
       return false;
     }
@@ -90,8 +91,8 @@ function validateRecipient(recipient) {
     if (!regex.test(recipient.new.email)) {
       openDialog({
         type: 'warning',
-        title: 'Invalid Email Address',
-        message: 'Please provide a valid email address',
+        title: i18n.t('dialog:validation:recipient:email:title'),
+        message: i18n.t('dialog:validation:recipient:email:message'),
       });
       return false;
     }
@@ -108,8 +109,8 @@ function validateRows(rows) {
     if (!row.description) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Description can not be blank',
+        title: i18n.t('dialog:validation:rows:emptyDescription:title'),
+        message: i18n.t('dialog:validation:rows:emptyDescription:message')
       });
       validated = false;
       break;
@@ -118,8 +119,8 @@ function validateRows(rows) {
     if (!row.price || row.price === 0) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Price must be greater than 0',
+        title: i18n.t('dialog:validation:rows:priceZero:title'),
+        message: i18n.t('dialog:validation:rows:priceZero:message')
       });
       validated = false;
       break;
@@ -128,8 +129,8 @@ function validateRows(rows) {
     if (!row.quantity || row.quantity === 0) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Quantity must be greater than 0',
+        title: i18n.t('dialog:validation:rows:qtyZero:title'),
+        message: i18n.t('dialog:validation:rows:qtyZero:message')
       });
       validated = false;
       break;
@@ -144,8 +145,8 @@ function validateDueDate(isRequired, dueDate) {
     if (!selectedDate || selectedDate === null) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Must Select A Due Date',
+        title: i18n.t('dialog:validation:dueDate:title'),
+        message: i18n.t('dialog:validation:dueDate:message')
       });
       return false;
     }
@@ -159,8 +160,8 @@ function validateCurrency(isRequired, currency) {
     if (!currency || currency === null) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Must Select A Currency',
+        title: i18n.t('dialog:validation:currency:title'),
+        message: i18n.t('dialog:validation:currency:message')
       });
       return false;
     }
@@ -175,8 +176,8 @@ function validateDiscount(isRequired, discount) {
     if (!amount || amount === '' || amount === 0) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Discount Amount Must Be Greater Than 0',
+        title: i18n.t('dialog:validation:discount:title'),
+        message: i18n.t('dialog:validation:discount:message')
       });
       return false;
     }
@@ -191,8 +192,8 @@ function validateTax(isRequired, tax) {
     if (!amount || amount === '' || amount === 0) {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Tax Amount Must Be Greater Than 0',
+        title: i18n.t('dialog:validation:tax:title'),
+        message: i18n.t('dialog:validation:tax:message')
       });
       return false;
     }
@@ -207,8 +208,8 @@ function validateNote(isRequired, note) {
     if (!content || content === '') {
       openDialog({
         type: 'warning',
-        title: 'Required Field',
-        message: 'Note Content Must Not Be Blank',
+        title: i18n.t('dialog:validation:note:title'),
+        message: i18n.t('dialog:validation:note:message')
       });
       return false;
     }
