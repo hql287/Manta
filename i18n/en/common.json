@@ -10,5 +10,7 @@
   "save": "Save",
   "amount": "Amount",
   "default": "Default",
-  "saveAsDefault": "Save as Default?"
+  "saveAsDefault": "Save as Default?",
+  "yes": "Yes",
+  "noThanks": "No, thanks"
 }
