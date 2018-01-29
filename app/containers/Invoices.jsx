@@ -102,7 +102,7 @@ class Invoices extends PureComponent {
         </PageHeader>
         <PageContent bare>
           {invoices.length === 0 ? (
-            <Message info text="You don't have any invoice yet" />
+            <Message info text={t('messages:noInvoice')} />
           ) : (
             <div className="row">{invoicesComponent}</div>
           )}

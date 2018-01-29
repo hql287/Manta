@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
+import { translate } from 'react-i18next';
 
 // Actions
 import * as ContactsActions from '../actions/contacts';
@@ -69,7 +70,7 @@ class Contacts extends PureComponent {
   }
 
   render() {
-    const { contacts } = this.props;
+    const { t, contacts } = this.props;
     const contactsComponent = contacts.map((contact, index) => (
       <Contact
         key={contact._id}
@@ -82,19 +83,19 @@ class Contacts extends PureComponent {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>All Contacts</PageHeaderTitle>
+          <PageHeaderTitle>{t('contacts:header')}</PageHeaderTitle>
         </PageHeader>
         <PageContent>
           {contacts.length === 0 ? (
-            <Message info text="You don't have any contacts yet!" />
+            <Message info text={t('messages:noContact')} />
           ) : (
             <Table hasBorders bg>
               <THead>
                 <TR>
-                  <TH>Contact</TH>
-                  <TH>Email</TH>
-                  <TH>Phone</TH>
-                  <TH actions>Actions</TH>
+                  <TH>{t('contacts:fields:contact')}</TH>
+                  <TH>{t('contacts:fields:email')}</TH>
+                  <TH>{t('contacts:fields:phone')}</TH>
+                  <TH actions>{t('contacts:fields:actions')}</TH>
                 </TR>
               </THead>
               <TBody>{contactsComponent}</TBody>
@@ -117,6 +118,8 @@ const mapStateToProps = state => ({
   contacts: getContacts(state),
 });
 
-export default compose(connect(mapStateToProps), _withFadeInAnimation)(
-  Contacts
-);
+export default compose(
+  connect(mapStateToProps),
+  translate(['common', 'form']),
+  _withFadeInAnimation
+)(Contacts);

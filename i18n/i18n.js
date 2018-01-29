@@ -16,7 +16,7 @@ i18n
     lng: defaultLanguage,
     fallbackLng: 'en',
     debug: isDev,
-    ns: ['form', 'common', 'invoices'],
+    // ns: ['form', 'common', 'invoices'],
     defaultNS: 'form',
     resources: {
       en,

@@ -1,0 +1,12 @@
+{
+  "header": {
+    "name": "All Contacts"
+  },
+  "fields": {
+    "client": "Client",
+    "invoiceID": "Invoice ID",
+    "createdDate": "Created On",
+    "dueDate": "Due Date",
+    "total": "Total Value"
+  }
+}
