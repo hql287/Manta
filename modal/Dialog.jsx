@@ -114,8 +114,6 @@ const Actions = styled.div`
   }
 `;
 
-import Button from '../../app/components/shared/Button';
-
 // Component
 class Dialog extends PureComponent {
   constructor(props) {
