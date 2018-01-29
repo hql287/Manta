@@ -1,0 +1,93 @@
+{
+  "appUpdate" : {
+    "available": {
+      "title": "Có cập nhật mới",
+      "message": "Bạn có muốn tải bản cập nhật ngay bây giờ không?"
+    },
+    "noUpdate": {
+      "title": "Không có cập nhật",
+      "message": "Bạn đang dùng phiên bản mới nhất"
+    },
+    "error": {
+      "title": "Đã có lỗi khi cập nhật"
+    },
+    "downloaded": {
+      "title": "Cập nhật đã tải xong",
+      "message": "Bạn có muốn thoát ứng dụng và tiến hành cập nhật ngay không?",
+      "quitNow": "Cập nhật ngay",
+      "later": "Để sau"
+    }
+  },
+  "noAccess": {
+    "title": "Không Có Quyền Truy Cập",
+    "message": "Vui lòng chọn thư mục khác."
+  },
+  "errorBoundary": "Đã có lỗi xảy ra",
+  "deleteInvoice": {
+    "title": "Xoá Hoá Đơn Này?",
+    "message": "Hoá đơn sẽ bị xoá vĩnh viễn khỏi ứng dụng"
+  },
+  "deleteContact": {
+    "title": "Xoá Khách Hàng Này?",
+    "message": "Thông tin khách hàng sẽ bị xoá vĩnh viễn khỏi ứng dụng"
+  },
+  "fileTypeErr": {
+    "title": "Vui lòng chọn file khác"
+  },
+  "validation": {
+    "recipient": {
+      "empty": {
+        "title": "Lỗi thông tin khách hàng ",
+        "message": "Thông tin khách hàng không được để trống"
+      },
+      "requiredFields": {
+        "title": "Thiếu thông tin bắt buộc",
+        "message": "Vui lòng điền đẩy đủ thông tin"
+      },
+      "email": {
+        "title": "Email không hợp lệ",
+        "message": "Vui lòng chọn địa chỉ email khác"
+      }
+    },
+
+    "rows": {
+      "emptyDescription": {
+        "title": "Mô tả không hợp lệ",
+        "message": "Mô tả sản phẩm không thể để trống"
+      },
+      "priceZero": {
+        "title": "Gía không hợp lệ",
+        "message": "Giá sản phẩm phải lớn hơn 0"
+      },
+      "qtyZero": {
+        "title": "Số lượng không hơp lệ",
+        "message": "Số lượng sản phẩm phải lớn hơn 0"
+      }
+    },
+
+    "dueDate": {
+      "title": "Hạn trả không chính xác",
+      "message": "Vui lòng chọn ngày cho hạn trả"
+    },
+
+    "currency": {
+      "title": "Đơn vị tiền tệ không chính xác",
+      "message": "Vui lòng chọn ngày cho hạn trả"
+    },
+
+    "discount": {
+      "title": "Thông tin khuyễn mãi không chính xác",
+      "message": "Số tiền giảm giá phải lớn hơn 0"
+    },
+
+    "tax": {
+      "title": "Thông tin thuế không chính xác",
+      "message": "Thuế phải lớn hơn 0"
+    },
+
+    "note": {
+      "title": "Chú thích không đúng",
+      "message": "Vui lòng không để trống phần chú thích"
+    }
+  }
+}
