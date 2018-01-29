@@ -81,11 +81,10 @@ class Invoices extends PureComponent {
 
   // Render
   render() {
-    const { t, i18n, invoices, dateFormat } = this.props;
+    const { t, invoices, dateFormat } = this.props;
     const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
         t={t}
-        language={i18n.language}
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
         editInvoice={this.editInvoice}

@@ -85,7 +85,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
             Pending
           </label>
           <p>
-            01/27/18
+            01/29/18
           </p>
         </div>
         <div

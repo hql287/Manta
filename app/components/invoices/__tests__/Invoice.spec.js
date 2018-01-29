@@ -60,7 +60,6 @@ describe('Renders correctly to the DOM', () => {
     wrapper = shallow(
       <Invoice
         t={t}
-        language="en"
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -74,7 +73,6 @@ describe('Renders correctly to the DOM', () => {
     const mountWrapper = mount(
       <Invoice
         t={t}
-        language="en"
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -188,7 +186,6 @@ describe('Renders correctly to the DOM', () => {
       .create(
         <Invoice
           t={t}
-          language="en"
           invoice={invoice}
           editInvoice={editInvoice}
           deleteInvoice={deleteInvoice}
@@ -209,7 +206,6 @@ describe('handle clicks correctly', () => {
     wrapper = shallow(
       <Invoice
         t={t}
-        language="en"
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}

@@ -208,7 +208,6 @@ class Invoice extends PureComponent {
 
   render() {
     const { dateFormat, invoice, language, setInvoiceStatus, t } = this.props;
-    moment.locale(language);
     const { recipient, status } = invoice;
     const statusActions = [
       {
@@ -297,7 +296,6 @@ Invoice.propTypes = {
   deleteInvoice: PropTypes.func.isRequired,
   editInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
-  language: PropTypes.string.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
