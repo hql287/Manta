@@ -1,12 +1,9 @@
 {
-  "header": {
-    "name": "All Contacts"
-  },
+  "header": "All Contacts",
   "fields": {
-    "client": "Client",
-    "invoiceID": "Invoice ID",
-    "createdDate": "Created On",
-    "dueDate": "Due Date",
-    "total": "Total Value"
+    "contact": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "actions": "Actions"
   }
 }
