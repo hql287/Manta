@@ -10,6 +10,9 @@
   <a href="https://github.com/hql287/Manta/releases/tag/v1.1.2">
     <img src="https://img.shields.io/badge/version-1.1.2-green.svg" alt="v1.1.2">
   </a>
+  <a title="Crowdin" target="_blank" href="https://crowdin.com/project/manta">
+    <img src="https://d322cqt584bo4o.cloudfront.net/manta/localized.svg">
+  </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg">
   </a>
@@ -24,7 +27,8 @@ A desktop application for creating invoices with beautiful and customizable temp
 <a href="#why">Why?</a> •
 <a href="#goals">Goals</a> •
 <a href="#development">Development</a> •
-<a href="#faq">FAQ</a>
+<a href="#faq">FAQ</a> •
+<a href="#acknowledgement">Acknowledgement</a>
 
 ### Screenshots
 
@@ -37,6 +41,33 @@ Here's a few screenshots:
 ![Form](https://d2ffutrenqvap3.cloudfront.net/items/2z1m1t2f0E271p3T2w2v/Form%20UI.jpg?v=00bac22e)
 
 ![Invoices](https://d26dzxoao6i3hh.cloudfront.net/items/1u0O110V1R0V3W3f1a1k/screenshots3.jpg?v=8a5b5487)
+
+### Translation
+
+Do you speak multiple languages? We need your help!
+
+If you're interested in translating Manta, please see the [detailed instruction here](https://github.com/hql287/Manta/wiki/Translating-Manta).
+The following languages are currently being translated, if you would like to Manta to support another language, [please submit your request here](https://github.com/hql287/Manta/issues/9).
+
+* [🇨🇳 中文 (Chinese Simplified)](https://crowdin.com/project/manta/zh-CN#)
+* [🇨🇳 中文 (Chinese Traditional)](https://crowdin.com/project/manta/zh-TW#)
+* [🇩🇪 Deutsch (German)](https://crowdin.com/project/manta/de#)
+* [🇩🇰 Dansk (Danish)](https://crowdin.com/project/manta/da#)
+* [🇪🇸 Español (Spanish)](https://crowdin.com/project/manta/es-ES)
+* [🇫🇷 Français (French)](https://crowdin.com/project/manta/fr#)
+* [🇬🇷 Ελληνικά (Greek)](https://crowdin.com/project/manta/el#)
+* [🇮🇩 Indonesian](https://crowdin.com/project/manta/id#)
+* [🇮🇹 Italiano (Italian)](https://crowdin.com/project/manta/it#)
+* [🇯🇵 日本語 (Japanese)](https://crowdin.com/project/manta/ja#)
+* [🇰🇷 한국어 (Korean)](https://crowdin.com/project/manta/ko#)
+* [🇱🇹 Lietuviškai (Lithuanian)](https://crowdin.com/project/manta/lt#)
+* [🇳🇱 Nederlands (Dutch)](https://crowdin.com/project/manta/nl#)
+* [🇵🇹 Português (Portuguese)](https://crowdin.com/project/manta/pt-PT#)
+* [🇧🇷 Portuguese, Brazilian (Brazil)](https://crowdin.com/project/manta/pt-BR#)
+* [🇷🇺 Русский (Russian)](https://crowdin.com/project/manta/ru#)
+* [🇹🇭 ไทย (Thai)](https://crowdin.com/project/manta/th#)
+* [🇹🇷 Türkçe (Turkish)](https://crowdin.com/project/manta/tr#)
+* [🇻🇳 Việt Nam (Vietnamese)](https://crowdin.com/project/manta/vi)
 
 ### Features
 * 🎚 Flexible form. You can turn on/off field and save as default setting.
@@ -55,6 +86,23 @@ macOS | Windows | Linux
 <a href='https://github.com/hql287/Manta/releases/download/v1.1.2/Manta-1.1.2.dmg'>Download v1.1.2</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.2/Manta.Setup.1.1.2.exe'>Download v1.1.2</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.2/Manta-1.1.2-x86_64.AppImage'>Download v1.1.2</a> |
 
 [More Download Options](https://github.com/hql287/Manta/releases)
+
+#### Supported Platforms
+Following platforms are supported by Electron:
+
+**macOS**
+The minimum version supported is macOS 10.9.
+
+**Windows**
+Windows 7 and later are supported
+
+**Linux:**
+
+- Ubuntu 12.04 and later
+- Fedora 21
+- Debian 8
+
+[More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
 
 ### Technologies
 * [Electron](https://github.com/electron/electron)
@@ -138,13 +186,17 @@ Yes, I actually did all the illustrations as well as the templates that you see 
 
 * **Are you available for hire?**
 
-Yes, kind of. I'm exploring new opportunities at the moment. Please let me know what you have in mind.
+Yes, I'm exploring new opportunities at the moment. Please let me know what you have in mind.
 
 * **How do I contact you?**
 
 If you find an issue, please report it here. For everything else, please drop me a line at hi@manta.life
 
+### Acknowledgement
 
+Special thanks to [Crowdin](https://crowdin.com) for providing [an open-source license](https://crowdin.com/page/open-source-project-setup-request) for Manta.
+Feel free to check out [their website](https://crowdin.com/) for more information about this amazing localization management platform.
 
-
-
+<a href="https://crowdin.com/" target="_blank">
+  <img src="https://d2ffutrenqvap3.cloudfront.net/items/0n1W0v3D3y0f3b393v2T/crowdin-CollaborativeTranslationTool-logo.png?v=52f34c6a" height="50px">
+</a>
