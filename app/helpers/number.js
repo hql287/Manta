@@ -6,13 +6,21 @@ function roundValue(value) {
   return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
 }
 
-function formatNumber(number, locale) {
-  if (!locale) {
-    locale = appConfig.get('general.language') || 'en';
+function localeOrDefault(locale) {
+  let usedLocale = locale;
+
+  if (!usedLocale) {
+    usedLocale = appConfig.get('general.language') || 'en';
   }
+}
+
+function formatNumber(number, locale) {
+  const usedLocale = localeOrDefault(locale);
+  const fractions = appConfig.get('invoice.decimalFractions') || 2;
+  
   return roundValue(number).toLocaleString(locale, {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    minimumFractionDigits: fractions,
+    maximumFractionDigits: fractions
   });
 }
 

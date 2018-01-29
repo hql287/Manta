@@ -11,7 +11,7 @@ import * as Actions from '../actions/invoices';
 
 // Selectors
 import { getInvoices } from '../reducers/InvoicesReducer';
-import { getDateFormat } from '../reducers/SettingsReducer';
+import { getDateFormat, getCurrencyPlacement } from '../reducers/SettingsReducer';
 
 // Components
 import Invoice from '../components/invoices/Invoice';
@@ -80,7 +80,7 @@ class Invoices extends PureComponent {
 
   // Render
   render() {
-    const { invoices, dateFormat } = this.props;
+    const { invoices, dateFormat, currencyPlacement } = this.props;
     const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
         key={invoice._id}
@@ -89,6 +89,7 @@ class Invoices extends PureComponent {
         setInvoiceStatus={this.setInvoiceStatus}
         index={index}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
         invoice={invoice}
       />
     ));
@@ -119,6 +120,7 @@ Invoices.propTypes = {
 const mapStateToProps = state => ({
   invoices: getInvoices(state),
   dateFormat: getDateFormat(state),
+  currencyPlacement: getCurrencyPlacement(state),
 });
 
 export default compose(connect(mapStateToProps), _withFadeInAnimation)(

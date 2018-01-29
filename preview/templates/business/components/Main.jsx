@@ -120,6 +120,8 @@ class Main extends Component {
 
   displayDiscount() {
     const { invoice, configs } = this.props;
+    const currencyBefore = configs.currencyPlacement === 'before';
+    console.log('Currency before: ', currencyBefore);
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -133,7 +135,8 @@ class Main extends Component {
           )}
         </td>
         <td>
-          {currency} {formatNumber(getInvoiceValue(invoice).discount)}
+          {currencyBefore ? currency : ''} {formatNumber(getInvoiceValue(invoice).discount)} {currencyBefore ? '' : currency}
+          {/* {currency} {formatNumber(getInvoiceValue(invoice).discount)} */}
         </td>
       </InvoiceDiscount>
     ) : null;
@@ -143,6 +146,7 @@ class Main extends Component {
     const { invoice, configs } = this.props;
     const { tax } = invoice;
     const { taxAmount } = getInvoiceValue(invoice);
+    const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -158,7 +162,7 @@ class Main extends Component {
           </td>
         ) : (
           <td>
-            {currency} {formatNumber(taxAmount)}
+            {currencyBefore ? currency : ''} {formatNumber(taxAmount)} {currencyBefore ? '' : currency}
           </td>
         )}
       </InvoiceTax>
@@ -167,6 +171,7 @@ class Main extends Component {
 
   render() {
     const { invoice, configs } = this.props;
+    const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -175,11 +180,11 @@ class Main extends Component {
         <td className="w5">{padStart(index + 1, 2, 0)}.</td>
         <td>{row.description}</td>
         <td className="w15">
-          {currency} {formatNumber(row.price)}
+          {currencyBefore ? currency : ''} {formatNumber(row.price)} {currencyBefore ? '' : currency}
         </td>
         <td className="w10">{formatNumber(row.quantity)}</td>
         <td className="w15">
-          {currency} {formatNumber(row.subtotal)}
+          {currencyBefore ? currency : ''} {formatNumber(row.subtotal)} {currencyBefore ? '' : currency}
         </td>
       </tr>
     ));
@@ -204,7 +209,7 @@ class Main extends Component {
                 Subtotal
               </td>
               <td>
-                {currency} {formatNumber(invoice.subtotal)}
+                {currencyBefore ? currency : ''} {formatNumber(invoice.subtotal)} {currencyBefore ? '' : currency}
               </td>
             </tr>
 
@@ -215,7 +220,7 @@ class Main extends Component {
               <td colSpan="2" />
               <td className="label">Total</td>
               <td colSpan="2">
-                {currency} {formatNumber(invoice.grandTotal)}
+                {currencyBefore ? currency : ''} {formatNumber(invoice.grandTotal)} {currencyBefore ? '' : currency}
               </td>
             </InvoiceTotal>
           </tfoot>

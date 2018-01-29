@@ -206,6 +206,8 @@ function setInitialValues() {
         tax: false,
         note: false,
       },
+      decimalFractions: 2,
+      currencyPlacement: 'before',
     },
   };
 

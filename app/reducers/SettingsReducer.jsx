@@ -37,3 +37,13 @@ export const getDateFormat = createSelector(
   getSettingsState,
   settings => settings.saved.invoice.dateFormat
 );
+
+export const getDecimalFractions = createSelector(
+  getSettingsState,
+  settings => settings.saved.invoice.decimalFractions
+);
+
+export const getCurrencyPlacement = createSelector(
+  getSettingsState,
+  settings => settings.saved.invoice.currencyPlacement
+);

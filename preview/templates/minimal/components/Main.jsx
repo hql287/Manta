@@ -121,6 +121,7 @@ class Main extends Component {
 
   displayDiscount() {
     const { invoice, configs } = this.props;
+    const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -133,7 +134,7 @@ class Main extends Component {
           )}
         </td>
         <td>
-          {currency} {formatNumber(getInvoiceValue(invoice).discount)}
+          {currencyBefore ? currency : ''} {formatNumber(getInvoiceValue(invoice).discount)} {currencyBefore ? '' : currency}
         </td>
       </Discount>
     ) : null;
@@ -143,6 +144,7 @@ class Main extends Component {
     const { invoice, configs } = this.props;
     const { tax } = invoice;
     const { taxAmount } = getInvoiceValue(invoice);
+    const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -153,7 +155,7 @@ class Main extends Component {
           <td>Reverse Charge</td>
         ) : (
           <td>
-            {currency} {formatNumber(taxAmount)}
+            {currencyBefore ? currency : ''} {formatNumber(taxAmount)} {currencyBefore ? '' : currency}
           </td>
         )}
       </Tax>
@@ -162,6 +164,7 @@ class Main extends Component {
 
   render() {
     const { invoice, configs } = this.props;
+    const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -174,7 +177,7 @@ class Main extends Component {
           )})
         </td>
         <td>
-          {currency} {formatNumber(row.subtotal)}
+          {currencyBefore ? currency : ''} {formatNumber(row.subtotal)} {currencyBefore ? '' : currency}
         </td>
       </Item>
     ));
@@ -194,7 +197,7 @@ class Main extends Component {
           <Subtotal>
             <td>Subtotal</td>
             <td>
-              {currency} {formatNumber(invoice.subtotal)}
+              {currencyBefore ? currency : ''} {formatNumber(invoice.subtotal)} {currencyBefore ? '' : currency}
             </td>
           </Subtotal>
 
@@ -204,7 +207,7 @@ class Main extends Component {
           <Total>
             <td>Total</td>
             <td>
-              {currency} {formatNumber(invoice.grandTotal)}
+              {currencyBefore ? currency : ''} {formatNumber(invoice.grandTotal)} {currencyBefore ? '' : currency}
             </td>
           </Total>
         </InvoiceSummary>

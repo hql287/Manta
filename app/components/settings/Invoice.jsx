@@ -143,6 +143,8 @@ class Invoice extends Component {
       tax,
       required_fields,
       dateFormat,
+      decimalFractions,
+      currencyPlacement,
     } = this.state;
     return (
       <div>
@@ -332,6 +334,29 @@ class Invoice extends Component {
                   <i className="ion-folder" />
                 </a>
               </div>
+            </Field>
+          </Row>
+          <Row>
+            <Field>
+              <label className="itemLabel">Decimal Fractions</label>
+              <input
+                className="form-control"
+                name="decimalFractions"
+                type="number"
+                value={decimalFractions}
+                onChange={this.handleInputChange}
+              />
+            </Field>
+            <Field>
+              <label className="itemLabel">Currency Sign placement</label>
+              <select
+                name="currencyPlacement"
+                value={currencyPlacement}
+                onChange={this.handleInputChange}
+              >
+                <option value="before">Before amount</option>
+                <option value="after">After amount</option>
+              </select>
             </Field>
           </Row>
         </Section>

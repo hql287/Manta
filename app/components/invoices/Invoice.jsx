@@ -208,7 +208,7 @@ class Invoice extends PureComponent {
   }
 
   render() {
-    const { invoice, setInvoiceStatus, dateFormat } = this.props;
+    const { invoice, setInvoiceStatus, dateFormat, currencyPlacement } = this.props;
     const { recipient, status } = invoice;
     const statusActions = [
       {
@@ -224,6 +224,7 @@ class Invoice extends PureComponent {
         action: () => setInvoiceStatus(invoice._id, 'cancelled'),
       },
     ];
+    const currencyBefore = currencyPlacement === 'before';
     return (
       <div className="col-lg-6">
         <Wrapper>
@@ -254,7 +255,7 @@ class Invoice extends PureComponent {
               <Field>
                 <label>Total Value</label>
                 <p>
-                  {invoice.currency.code} {formatNumber(invoice.grandTotal)}
+                  {currencyBefore ? invoice.currency.code : ''} {formatNumber(invoice.grandTotal)} {currencyBefore ? '' : invoice.currency.code}
                 </p>
               </Field>
             </Row>
