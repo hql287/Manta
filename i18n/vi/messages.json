@@ -1,4 +1,16 @@
 {
   "noContact": "Bạn chưa có khách hàng nào trong danh sách",
-  "noInvoice": "Bạn chưa tạo hoá đơn nào"
+  "noInvoice": "Bạn chưa tạo hoá đơn nào",
+  "invoice": {
+    "saved": "Hoá đơn đã được lưu lại thành công",
+    "updated": "Hoá đơn đã được cập nhật thành công",
+    "deleted": "Hoá đơn đã được xoá thành công"
+  },
+  "contact": {
+    "saved": "Thông tin khách hàng đã được lưu lại thành công",
+    "deleted": "Thông tin khách hàng đã được xoá thành công"
+  },
+  "settings": {
+    "saved": "Toàn bộ các tuỳ chỉnh đã được lưu"
+  }
 }
