@@ -27,6 +27,7 @@ const ErrorContainer = styled.div`
     text-align: center;
   }
 `;
+import i18n from '../../../i18n/i18n';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class ErrorBoundary extends Component {
     this.setState({ hasError: true });
     openDialog({
       type: 'warning',
-      title: 'There was an error occurred',
+      title: i18n.t('dialog:errorBoundary'),
       message: info.componentStack,
     });
   }

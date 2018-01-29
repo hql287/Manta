@@ -50,12 +50,16 @@ class Invoices extends PureComponent {
 
   // Open Confirm Dialog
   deleteInvoice(invoiceId) {
+    const { t } = this.props;
     openDialog(
       {
         type: 'warning',
-        title: 'Delete This Invoice',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
+        title: t('dialog:deleteInvoice:title'),
+        message: t('dialog:deleteInvoice:message'),
+        buttons: [
+          t('common:yes'),
+          t('common:noThanks')
+        ],
       },
       'confirmed-delete-invoice',
       invoiceId

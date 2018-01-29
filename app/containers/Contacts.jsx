@@ -52,12 +52,16 @@ class Contacts extends PureComponent {
   }
 
   deleteContact(contactId) {
+    const { t } = this.props;
     openDialog(
       {
         type: 'warning',
-        title: 'Delete This Contact',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
+        title: t('dialog:deleteContact:title'),
+        message: t('dialog:deleteContact:message'),
+        buttons: [
+          t('common:yes'),
+          t('common:noThanks')
+        ],
       },
       'confirmed-delete-contact',
       contactId

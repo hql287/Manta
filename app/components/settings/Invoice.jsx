@@ -45,11 +45,12 @@ class Invoice extends Component {
   }
 
   componentDidMount() {
+    const { t } = this.props;
     ipc.on('no-access-directory', (event, message) => {
       openDialog({
         type: 'warning',
-        title: 'No Access Permisison',
-        message: `${message}. Please choose a different directory!`,
+        title: t('dialog:noAccess:title'),
+        message: `${message}. ${t('dialog:noAccess:message')}`,
       });
     });
 
