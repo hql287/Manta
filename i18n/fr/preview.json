@@ -25,7 +25,7 @@
   },
   "common": {
     "billedTo": "Billed To",
-    "chooseInvoiceToPreview": "Please choose an Invocie to preview",
+    "chooseInvoiceToPreview": "Please choose an Invoice to preview",
     "created": "Created",
     "due": "Due",
     "invoice": "Invoice",
