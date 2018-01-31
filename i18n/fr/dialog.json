@@ -14,7 +14,7 @@
     "downloaded": {
       "title": "Update downloaded",
       "message": "Do you want to quit and upgrade the app now?",
-      "quitNow": "Quit Not",
+      "quitNow": "Quit Now",
       "later": "Later"
     }
   },
