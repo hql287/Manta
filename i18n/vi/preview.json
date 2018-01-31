@@ -1,0 +1,40 @@
+{
+  "sidebar": {
+    "template": "Mẫu thiết kế",
+    "alignment": {
+      "name": "Căn chỉnh",
+      "top": "Trên",
+      "middle": "Giữa",
+      "bottom": "Dưới"
+    },
+    "fontSize": "Cỡ chữ",
+    "toggler": {
+      "name": "Ẩn hiện",
+      "logo": "Logo",
+      "symbol": "Biểu tượng",
+      "recipient": "Người nhận"
+    },
+    "accentColor": {
+      "name" : "Màu đặc trưng",
+      "useCustom": "Chọn màu khác"
+    },
+    "actions": {
+      "name": "Tác vụ",
+      "savePDF": "Xuất Ra PDF"
+    }
+  },
+  "common": {
+    "billedTo": "Gửi tới",
+    "chooseInvoiceToPreview": "Chọn một hoá đơn để xem",
+    "created": "Ngày tạo",
+    "due": "Hạn trả",
+    "invoice": "Hoá Đơn",
+    "itemDescription": "Mô tả sản phẩm, dịch vụ",
+    "notice": "Chú thích",
+    "order": "Stt",
+    "price": "Giá tiền",
+    "qty": "Số lượng",
+    "subtotal": "Tổng phụ",
+    "total": "Tổng"
+  }
+}
