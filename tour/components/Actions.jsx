@@ -35,9 +35,7 @@ const Dot = styled.div`
 
 import Button from '../../app/components/shared/Button';
 
-function Actions(props) {
-  const { endTour, nextSlide, currentSlide, totalSlide } = props;
-
+function Actions({ t, endTour, nextSlide, currentSlide, totalSlide }) {
   const indicators = [];
   for (let i = 0; i < totalSlide; i++) {
     indicators.push(<Dot key={uuidv4()} active={i + 1 === currentSlide} />);
@@ -48,7 +46,7 @@ function Actions(props) {
       <div>
         {currentSlide < totalSlide && (
           <Button link danger onClick={endTour}>
-            Skip
+            {t('tour:actions:skip')}
           </Button>
         )}
       </div>
@@ -56,7 +54,7 @@ function Actions(props) {
       <div>
         {currentSlide === totalSlide ? (
           <Button success onClick={endTour}>
-            Start Invoicing
+            {t('tour:actions:start')}
           </Button>
         ) : (
           indicators
@@ -66,7 +64,7 @@ function Actions(props) {
       <div>
         {currentSlide < totalSlide && (
           <Button primary onClick={nextSlide}>
-            Next
+            {t('tour:actions:next')}
           </Button>
         )}
       </div>
@@ -78,6 +76,7 @@ Actions.propTypes = {
   currentSlide: PropTypes.number.isRequired,
   endTour: PropTypes.func.isRequired,
   nextSlide: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   totalSlide: PropTypes.number.isRequired,
 };
 

@@ -1,6 +1,8 @@
 // Libs
 import React, { Component } from 'react';
+import { compose } from 'recompose';
 import { ipcRenderer as ipc } from 'electron';
+import { translate } from 'react-i18next';
 
 import styled from 'styled-components';
 const Wrapper = styled.div`
@@ -37,10 +39,12 @@ class Tour extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <Wrapper>
-        <Slider currentSlide={this.state.currentSlide} />
+        <Slider t={t} currentSlide={this.state.currentSlide} />
         <Actions
+          t={t}
           totalSlide={this.state.totalSlide}
           currentSlide={this.state.currentSlide}
           nextSlide={this.nextSlide}
@@ -51,4 +55,4 @@ class Tour extends Component {
   }
 }
 
-export default Tour;
+export default compose(translate(['common', 'tour']))(Tour);
