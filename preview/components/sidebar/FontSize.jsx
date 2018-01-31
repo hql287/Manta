@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Section, Label, Range } from '../shared';
 
-function FontSize({ fontSize, handleInputChange }) {
+function FontSize({ t, fontSize, handleInputChange }) {
   return (
     <Section>
-      <Label>Font Size</Label>
+      <Label>{t('preview:sidebar:fontSize')}</Label>
       <Range
         name="fontSize"
         type="range"
@@ -23,6 +23,7 @@ function FontSize({ fontSize, handleInputChange }) {
 FontSize.propTypes = {
   fontSize: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default FontSize;
