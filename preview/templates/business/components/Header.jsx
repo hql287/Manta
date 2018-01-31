@@ -56,7 +56,7 @@ const Heading = styled.h1`
 `;
 
 // Component
-function Header({ invoice, profile, configs }) {
+function Header({ t, invoice, profile, configs }) {
   const { recipient } = invoice;
   return (
     <InvoiceHeader>
@@ -70,7 +70,7 @@ function Header({ invoice, profile, configs }) {
         </Company>
         {configs.showRecipient && (
           <Recipient>
-            <h4> Billed To</h4>
+            <h4>{ t('preview:common:billedTo') }</h4>
             <p>{recipient.company}</p>
             <p>{recipient.fullname}</p>
             <p>{recipient.email}</p>
@@ -79,7 +79,7 @@ function Header({ invoice, profile, configs }) {
         )}
       </LeftColumn>
       <RightColumn>
-        <Heading accentColor={configs.accentColor}>Invoice</Heading>
+        <Heading accentColor={configs.accentColor}>{ t('preview:common:invoice') }</Heading>
         <h4>
           #
           {truncate(invoice._id, {
@@ -87,17 +87,26 @@ function Header({ invoice, profile, configs }) {
             omission: '',
           })}
         </h4>
-        <p>Created {moment(invoice.created_at).format(configs.dateFormat)}</p>
-        <p>Due {moment(invoice.dueDate).format(configs.dateFormat)}</p>
+        <p>
+          { t('preview:common:created') }
+          {' '}
+          {moment(invoice.created_at).format(configs.dateFormat)}
+        </p>
+        <p>
+          { t('preview:common:due') }
+          {' '}
+          {moment(invoice.dueDate).format(configs.dateFormat)}
+        </p>
       </RightColumn>
     </InvoiceHeader>
   );
 }
 
 Header.propTypes = {
-  profile: PropTypes.object.isRequired,
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Header;

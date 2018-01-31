@@ -13,6 +13,7 @@ const Wrapper = styled.div`
     width: auto;
     max-height: 5em;
   }
+  text-transform: capitalize;
 `;
 
 const Heading = styled.h1`
@@ -29,11 +30,13 @@ const Heading = styled.h1`
 `;
 
 // Component
-function Header({ invoice, profile, configs }) {
+function Header({ t, invoice, profile, configs }) {
   return (
     <Wrapper>
       <div>
-        <Heading accentColor={configs.accentColor}>Invoice</Heading>
+        <Heading accentColor={configs.accentColor}>
+          {t('preview:common:invoice')}
+        </Heading>
         <h4 className="label">
           #
           {truncate(invoice._id, {
@@ -41,9 +44,17 @@ function Header({ invoice, profile, configs }) {
             omission: '',
           })}
         </h4>
-        <p>Created {moment(invoice.created_at).format(configs.dateFormat)}</p>
+        <p>
+          {t('preview:common:created')}:
+          {' '}
+          {moment(invoice.created_at).format(configs.dateFormat)}
+        </p>
         {invoice.dueDate && (
-          <p>Due {moment(invoice.dueDate).format(configs.dateFormat)}</p>
+          <p>
+            {t('preview:common:due')}:
+            {' '}
+            {moment(invoice.dueDate).format(configs.dateFormat)}
+          </p>
         )}
       </div>
       {configs.showLogo && (
@@ -56,9 +67,10 @@ function Header({ invoice, profile, configs }) {
 }
 
 Header.propTypes = {
+  configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  configs: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Header;
