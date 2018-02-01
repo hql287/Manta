@@ -121,7 +121,6 @@ class Main extends Component {
   displayDiscount() {
     const { invoice, configs } = this.props;
     const currencyBefore = configs.currencyPlacement === 'before';
-    console.log('Currency before: ', currencyBefore);
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;

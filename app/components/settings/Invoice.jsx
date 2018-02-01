@@ -381,8 +381,8 @@ class Invoice extends Component {
             </Field>
           </Row>
           <Row>
-          <Field>
-          <label className="itemLabel">Decimal Separator</label>
+            <Field>
+              <label className="itemLabel">Decimal Separator</label>
               <select
                 name="decimalSeparator"
                 value={decimalSeparator}
@@ -393,8 +393,7 @@ class Invoice extends Component {
               </select>
             </Field>
             {/* To prevent stretching the first field. Use for next paramter in future and remove comment afterwards */}
-            <Field>
-            </Field>
+            <Field />
           </Row>
         </Section>
       </div>

@@ -11,7 +11,6 @@ function roundValue(value) {
 function localeOrDefault(locale) {
   let usedLocale = locale;
 
-  console.log('Config: ', appConfig.get('general.language'));
   if (!usedLocale || usedLocale === undefined) {
     usedLocale = appConfig.get('general.language') || 'en';
   }
@@ -30,7 +29,7 @@ function replaceSeparators(formatted, decimalSeparator, thousandsSeparator) {
 }
 
 function isNumber(n) {
-  return !isNaN(parseFloat(n)) && !isNaN(n - 0)
+  return !Number.isNaN(parseFloat(n)) && !Number.isNaN(n - 0)
 }
 
 function formatNumber(number) {
