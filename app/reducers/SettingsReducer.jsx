@@ -47,3 +47,8 @@ export const getCurrencyPlacement = createSelector(
   getSettingsState,
   settings => settings.saved.invoice.currencyPlacement
 );
+
+export const getDecimalSeparator = createSelector(
+  getSettingsState,
+  settings => settings.saved.invoice.decimalSeparator
+);

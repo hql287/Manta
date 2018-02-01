@@ -17,3 +17,9 @@ export const saveSettings = createAction(
   ACTION_TYPES.SETTINGS_SAVE,
   data => data
 );
+
+// Notify user about invalid decimal fractions
+export const notifyInvalidDecimalFractions = createAction(
+  ACTION_TYPES.UI_NOTIFICATION_NEW,
+  (type, message) => ({type: 'warning', message: 'Invalid decimal fractions specified! Please correct settings.'})
+);

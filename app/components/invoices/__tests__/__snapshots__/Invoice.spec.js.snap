@@ -71,7 +71,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           <p>
             USD
              
-            3,843
+            3,843.00
+             
+            
           </p>
         </div>
       </div>

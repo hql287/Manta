@@ -208,6 +208,7 @@ function setInitialValues() {
       },
       decimalFractions: 2,
       currencyPlacement: 'before',
+      decimalSeparator: 'dot',
     },
   };
 

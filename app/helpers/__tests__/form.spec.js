@@ -65,6 +65,9 @@ describe('getInvoiceData', () => {
           tax: false,
           note: false,
         },
+        decimalFractions: 2,
+        currencyPlacement: 'before',
+        decimalSeparator: 'dot',
       },
       savedSettings: {
         tax: {},
@@ -76,6 +79,9 @@ describe('getInvoiceData', () => {
           tax: false,
           note: false,
         },
+        decimalFractions: 2,
+        currencyPlacement: 'before',
+        decimalSeparator: 'dot',
       },
     };
   });
@@ -277,6 +283,9 @@ describe('validateFormData', () => {
           tax: true,
           note: true,
         },
+        decimalFractions: 2,
+        currencyPlacement: 'before',
+        decimalSeparator: 'dot',
       },
       savedSettings: {
         tax: {
@@ -292,6 +301,9 @@ describe('validateFormData', () => {
           tax: true,
           note: true,
         },
+        decimalFractions: 2,
+        currencyPlacement: 'before',
+        decimalSeparator: 'dot',
       },
     };
   });

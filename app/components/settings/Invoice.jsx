@@ -66,12 +66,32 @@ class Invoice extends Component {
   }
 
   handleInputChange(event) {
+    const { setSavable } = this.props;
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
+
+    const canSave = this.canSave(name, value);
+    setSavable(canSave);
+    if (!canSave) {
+      // Notifi
+      console.log('Cant save');
+    }
+
     this.setState({ [name]: value }, () => {
       this.props.updateSettings('invoice', this.state);
     });
+  }
+
+  canSave(ctrlName, value) {
+    let valid = true;
+    if (ctrlName === 'decimalFractions' && Number(value) < 0){
+      valid = false;
+      const { invalidFractionMsg } = this.props;
+      invalidFractionMsg();
+    }
+
+    return valid;
   }
 
   handleTaxChange(event) {
@@ -145,6 +165,7 @@ class Invoice extends Component {
       dateFormat,
       decimalFractions,
       currencyPlacement,
+      decimalSeparator,
     } = this.state;
     return (
       <div>
@@ -357,6 +378,22 @@ class Invoice extends Component {
                 <option value="before">Before amount</option>
                 <option value="after">After amount</option>
               </select>
+            </Field>
+          </Row>
+          <Row>
+          <Field>
+          <label className="itemLabel">Decimal Separator</label>
+              <select
+                name="decimalSeparator"
+                value={decimalSeparator}
+                onChange={this.handleInputChange}
+              >
+                <option value="dot">Dot (.)</option>
+                <option value="comma">Comma (,)</option>
+              </select>
+            </Field>
+            {/* To prevent stretching the first field. Use for next paramter in future and remove comment afterwards */}
+            <Field>
             </Field>
           </Row>
         </Section>
