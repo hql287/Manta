@@ -8,6 +8,7 @@ import Invoice from '../Invoice';
 import Button from '../../shared/Button';
 import SplitButton from '../../shared/SplitButton';
 
+
 // Mocks
 const invoice = {
   _id: '37b2804e-bfc1-4289-b1d7-226c5652ac91',
@@ -53,6 +54,8 @@ const t = jest.fn(status => {
   }
 });
 
+Date.now = jest.genMockFunction().mockReturnValue(0);
+
 // Tests
 describe('Renders correctly to the DOM', () => {
   let wrapper;
@@ -95,83 +98,83 @@ describe('Renders correctly to the DOM', () => {
       wrapper.find('Invoice__Header').find('Invoice__Status')
     ).toHaveLength(1);
   });
-  //
-  // it('render invoice status correctly', () => {
-  //   // Pending Invoice (default)
-  //   expect(
-  //     wrapper
-  //       .find('Invoice__Header')
-  //       .find('Invoice__Status')
-  //       .find('span')
-  //       .text()
-  //   ).toEqual('Pending');
-  //
-  //   // Paid Invoice
-  //   const paidInvoice = Object.assign({}, invoice, { status: 'paid' });
-  //   const paidInvoiceWapper = shallow(
-  //     <Invoice
-  //       t={t}
-  //       language="en"
-  //       invoice={paidInvoice}
-  //       editInvoice={editInvoice}
-  //       deleteInvoice={deleteInvoice}
-  //       setInvoiceStatus={setInvoiceStatus}
-  //       dateFormat={dateFormat}
-  //     />
-  //   );
-  //   expect(
-  //     paidInvoiceWapper
-  //       .find('Invoice__Header')
-  //       .find('Invoice__Status')
-  //       .find('span')
-  //       .text()
-  //   ).toEqual('Paid');
-  //
-  //   // Cancelled Invoice
-  //   const cancelledInvoice = Object.assign({}, invoice, {
-  //     status: 'cancelled',
-  //   });
-  //   const cancelledInvoiceWapper = shallow(
-  //     <Invoice
-  //       t={t}
-  //       language="en"
-  //       invoice={cancelledInvoice}
-  //       editInvoice={editInvoice}
-  //       deleteInvoice={deleteInvoice}
-  //       setInvoiceStatus={setInvoiceStatus}
-  //       dateFormat={dateFormat}
-  //     />
-  //   );
-  //   expect(
-  //     cancelledInvoiceWapper
-  //       .find('Invoice__Header')
-  //       .find('Invoice__Status')
-  //       .find('span')
-  //       .text()
-  //   ).toEqual('Cancelled');
-  //
-  //   // Refunded Invoice
-  //   const refundedInvoice = Object.assign({}, invoice, { status: 'refunded' });
-  //   const refundedInvoiceWapper = shallow(
-  //     <Invoice
-  //       t={t}
-  //       language="en"
-  //       invoice={refundedInvoice}
-  //       editInvoice={editInvoice}
-  //       deleteInvoice={deleteInvoice}
-  //       setInvoiceStatus={setInvoiceStatus}
-  //       dateFormat={dateFormat}
-  //     />
-  //   );
-  //   expect(
-  //     refundedInvoiceWapper
-  //       .find('Invoice__Header')
-  //       .find('Invoice__Status')
-  //       .find('span')
-  //       .text()
-  //   ).toEqual('Refunded');
-  // });
-  //
+
+  it('render invoice status correctly', () => {
+    // Pending Invoice (default)
+    expect(
+      wrapper
+        .find('Invoice__Header')
+        .find('Invoice__Status')
+        .find('span')
+        .text()
+    ).toEqual('Pending');
+
+    // Paid Invoice
+    const paidInvoice = Object.assign({}, invoice, { status: 'paid' });
+    const paidInvoiceWapper = shallow(
+      <Invoice
+        t={t}
+        language="en"
+        invoice={paidInvoice}
+        editInvoice={editInvoice}
+        deleteInvoice={deleteInvoice}
+        setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
+      />
+    );
+    expect(
+      paidInvoiceWapper
+        .find('Invoice__Header')
+        .find('Invoice__Status')
+        .find('span')
+        .text()
+    ).toEqual('Paid');
+
+    // Cancelled Invoice
+    const cancelledInvoice = Object.assign({}, invoice, {
+      status: 'cancelled',
+    });
+    const cancelledInvoiceWapper = shallow(
+      <Invoice
+        t={t}
+        language="en"
+        invoice={cancelledInvoice}
+        editInvoice={editInvoice}
+        deleteInvoice={deleteInvoice}
+        setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
+      />
+    );
+    expect(
+      cancelledInvoiceWapper
+        .find('Invoice__Header')
+        .find('Invoice__Status')
+        .find('span')
+        .text()
+    ).toEqual('Cancelled');
+
+    // Refunded Invoice
+    const refundedInvoice = Object.assign({}, invoice, { status: 'refunded' });
+    const refundedInvoiceWapper = shallow(
+      <Invoice
+        t={t}
+        language="en"
+        invoice={refundedInvoice}
+        editInvoice={editInvoice}
+        deleteInvoice={deleteInvoice}
+        setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
+      />
+    );
+    expect(
+      refundedInvoiceWapper
+        .find('Invoice__Header')
+        .find('Invoice__Status')
+        .find('span')
+        .text()
+    ).toEqual('Refunded');
+  });
+
   it('render delete button in the header', () => {
     expect(wrapper.find('Invoice__Header').find(Button)).toHaveLength(1);
   });
