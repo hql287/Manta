@@ -86,6 +86,22 @@ class General extends Component {
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Enable empty rows</label>
+              <label className="switch">
+                <input
+                  name="enableEmptyRow"
+                  type="checkbox"
+                  checked={this.state.enableEmptyRow}
+                  onChange={this.handleInputChange}
+                />
+                <span className="slider round" />
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
