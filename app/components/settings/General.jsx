@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 
 // Custom Libs
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+import Button from '../shared/Button';
+
+// Export and Import PouchDB
+import { exportDB, importDB } from '../../helpers/import-export.js';
 
 // Component
 class General extends Component {
@@ -54,6 +58,15 @@ class General extends Component {
                 />
                 <span className="slider round" />
               </label>
+            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">Export / Import</label>
+              <Button onClick={exportDB}>Export</Button>
+              <Button onClick={importDB}>Import</Button>
             </div>
           </div>
         </div>

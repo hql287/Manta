@@ -79,6 +79,11 @@ runMigration(
   }
 );
 
+// Import PouchDB from CSV file
+const DBLoad = load => {
+  // TODO: load invoices and contacts to PouchDB
+};
+
 // Set DB via dbName
 const setDB = dbName =>
   new Promise((resolve, reject) => {
