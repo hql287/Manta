@@ -87,8 +87,11 @@ class Invoice extends Component {
     let valid = true;
     if (ctrlName === 'decimalFractions' && Number(value) < 0){
       valid = false;
-      const { invalidFractionMsg } = this.props;
-      invalidFractionMsg();
+      openDialog({
+        type: 'warning',
+        title: 'Invalid decimal fraction setting',
+        message: `${value} is an invalid for decimal fractions! Please correct setting to continue.`,
+      });
     }
 
     return valid;

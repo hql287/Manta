@@ -64,7 +64,7 @@ class Settings extends Component {
   // Render Main Content
   renderSettingsContent() {
     const { profile, general, invoice } = this.props.currentSettings;
-    const { updateSettings, notifyInvalidDecimalFractions } = this.props.boundActionCreators;
+    const { updateSettings } = this.props.boundActionCreators;
     return (
       <PageWrapper>
         <PageHeader>
@@ -106,7 +106,7 @@ class Settings extends Component {
               <Profile profile={profile} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
             {this.state.visibleTab === 2 && (
-              <Invoice invoice={invoice} updateSettings={updateSettings} setSavable={this.setSavable} invalidFractionMsg={notifyInvalidDecimalFractions} />
+              <Invoice invoice={invoice} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
             {this.state.visibleTab === 3 && (
               <General general={general} updateSettings={updateSettings} setSavable={this.setSavable} />
