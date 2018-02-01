@@ -7,7 +7,7 @@ function Toggler({ t, configs, handleInputChange }) {
   const { showLogo, useSymbol, showRecipient } = configs;
   return (
     <Section>
-      <Label>{ t('preview:sidebar:toggler:name') }</Label>
+      <Label>{ t('preview:sidebar:toggle:name') }</Label>
       <label>
         <input
           name="showLogo"
@@ -16,7 +16,7 @@ function Toggler({ t, configs, handleInputChange }) {
           onChange={handleInputChange}
         />
         {'\u00A0'}
-        { t('preview:sidebar:toggler:logo') }
+        { t('preview:sidebar:toggle:logo') }
       </label>
       <label>
         <input
@@ -26,7 +26,7 @@ function Toggler({ t, configs, handleInputChange }) {
           onChange={handleInputChange}
         />
         {'\u00A0'}
-        { t('preview:sidebar:toggler:symbol') }
+        { t('preview:sidebar:toggle:symbol') }
       </label>
       <label>
         <input
@@ -36,7 +36,7 @@ function Toggler({ t, configs, handleInputChange }) {
           onChange={handleInputChange}
         />
         {'\u00A0'}
-        { t('preview:sidebar:toggler:recipient') }
+        { t('preview:sidebar:toggle:recipient') }
       </label>
     </Section>
   );

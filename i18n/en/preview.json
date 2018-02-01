@@ -8,8 +8,8 @@
       "bottom": "Bottom"
     },
     "fontSize": "Font Size",
-    "toggler": {
-      "name": "Toggler",
+    "toggle": {
+      "name": "Toggle",
       "logo": "Logo",
       "symbol": "Symbol",
       "recipient": "Recipient"
