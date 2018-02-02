@@ -7,7 +7,7 @@ exports[`Recipient component matches snapshot 1`] = `
   <label
     className="itemLabel"
   >
-    Client *
+     *
   </label>
   <div
     style={
@@ -36,7 +36,7 @@ exports[`Recipient component matches snapshot 1`] = `
             <label
               className="itemLabel"
             >
-              Full Name *
+               *
             </label>
             <input
               name="fullname"
@@ -50,9 +50,7 @@ exports[`Recipient component matches snapshot 1`] = `
           >
             <label
               className="itemLabel"
-            >
-              Company
-            </label>
+            />
             <input
               name="company"
               onChange={[Function]}
@@ -70,7 +68,7 @@ exports[`Recipient component matches snapshot 1`] = `
             <label
               className="itemLabel"
             >
-              Email *
+               *
             </label>
             <input
               name="email"
@@ -84,9 +82,7 @@ exports[`Recipient component matches snapshot 1`] = `
           >
             <label
               className="itemLabel"
-            >
-              Phone Number
-            </label>
+            />
             <input
               name="phone"
               onChange={[Function]}
@@ -109,7 +105,6 @@ exports[`Recipient component matches snapshot 1`] = `
           type="radio"
           value="new"
         />
-        Add New
       </label>
     </div>
     <div
@@ -122,7 +117,6 @@ exports[`Recipient component matches snapshot 1`] = `
           type="radio"
           value="select"
         />
-        Select
       </label>
     </div>
   </div>

@@ -17,10 +17,10 @@ const InvoiceFooter = styled.div`
 `;
 
 // Component
-function Footer({ invoice, configs }) {
+function Footer({ t, invoice, configs }) {
   return invoice.note ? (
     <InvoiceFooter accentColor={configs.accentColor}>
-      <h4>Notice</h4>
+      <h4>{ t('preview:common:notice') }</h4>
       <p>{invoice.note}</p>
     </InvoiceFooter>
   ) : null;
@@ -29,6 +29,7 @@ function Footer({ invoice, configs }) {
 Footer.propTypes = {
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Footer;

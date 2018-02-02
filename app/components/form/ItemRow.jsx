@@ -125,7 +125,7 @@ export class ItemRow extends Component {
   }
 
   render() {
-    const { actions, hasHandler } = this.props;
+    const { t, actions, hasHandler } = this.props;
     return (
       <ItemDiv>
         {hasHandler && (
@@ -140,7 +140,7 @@ export class ItemRow extends Component {
             value={this.state.description}
             onChange={this.handleTextInputChange}
             onKeyDown={this.handleKeyDown}
-            placeholder="Description"
+            placeholder={t('form:fields:items:description')}
           />
         </div>
 
@@ -151,8 +151,8 @@ export class ItemRow extends Component {
             step="0.01"
             value={this.state.price}
             onChange={this.handleNumberInputChange}
-            placeholder="Price"
             onKeyDown={this.handleKeyDown}
+            placeholder={t('form:fields:items:price')}
           />
         </div>
 
@@ -163,8 +163,8 @@ export class ItemRow extends Component {
             step="0.01"
             value={this.state.quantity}
             onChange={this.handleNumberInputChange}
-            placeholder="Quantity"
             onKeyDown={this.handleKeyDown}
+            placeholder={t('form:fields:items:quantity')}
           />
         </div>
 
@@ -185,6 +185,7 @@ export class ItemRow extends Component {
 ItemRow.propTypes = {
   actions: PropTypes.bool.isRequired,
   addItem: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   hasHandler: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
   removeRow: PropTypes.func.isRequired,

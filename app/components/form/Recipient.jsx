@@ -1,6 +1,8 @@
 // Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'recompose';
+import { translate } from 'react-i18next';
 
 // Redux & Selectors
 import { getContacts } from '../../reducers/ContactsReducer';
@@ -85,10 +87,11 @@ export class Recipient extends Component {
 
   // Render Form or Select Input
   renderComponent() {
-    const { contacts } = this.props;
+    const { t, contacts } = this.props;
     if (contacts.length === 0) {
       return (
         <RecipientForm
+          t={t}
           formData={this.state.new}
           updateRecipientForm={this.updateRecipientForm}
         />
@@ -98,6 +101,7 @@ export class Recipient extends Component {
     if (this.state.newRecipient) {
       return (
         <RecipientForm
+          t={t}
           formData={this.state.new}
           updateRecipientForm={this.updateRecipientForm}
         />
@@ -114,10 +118,10 @@ export class Recipient extends Component {
 
   // Render
   render() {
-    const { contacts } = this.props;
+    const { t, contacts } = this.props;
     return (
       <Section>
-        <label className="itemLabel">Client *</label>
+        <label className="itemLabel">{t('form:fields:recipient:name')} *</label>
         {this.renderComponent()}
         {contacts.length > 0 ? (
           <div>
@@ -129,7 +133,7 @@ export class Recipient extends Component {
                   checked={this.state.newRecipient === true}
                   value="new"
                 />
-                Add New
+                {t('form:fields:recipient:add')}
               </label>
             </div>
             <div className="radio">
@@ -140,7 +144,7 @@ export class Recipient extends Component {
                   checked={this.state.newRecipient === false}
                   value="select"
                 />
-                Select
+                {t('form:fields:recipient:select')}
               </label>
             </div>
           </div>
@@ -167,4 +171,7 @@ const mapStateToProps = state => ({
   recipient: getRecipient(state),
 });
 
-export default connect(mapStateToProps)(Recipient);
+export default compose(
+  connect(mapStateToProps),
+  translate('form'),
+)(Recipient);

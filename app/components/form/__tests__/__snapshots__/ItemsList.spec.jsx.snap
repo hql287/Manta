@@ -13,7 +13,7 @@ exports[`Note component matches snapshot 1`] = `
       <label
         className="itemLabel"
       >
-        Product/Service *
+         *
       </label>
     </div>
     <div
@@ -37,9 +37,7 @@ exports[`Note component matches snapshot 1`] = `
             ],
           }
         }
-      >
-        Add An Item
-      </button>
+      />
     </div>
   </div>
 </div>

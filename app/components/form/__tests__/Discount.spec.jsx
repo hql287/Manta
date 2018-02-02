@@ -7,6 +7,7 @@ import { mount } from 'enzyme';
 import { Discount } from '../Discount';
 
 // Mocks
+const t = jest.fn();
 const updateFieldData = jest.fn();
 const discount = {
   type: 'flat',
@@ -17,7 +18,7 @@ describe('Renders correctly to the DOM', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
-      <Discount discount={discount} updateFieldData={updateFieldData} />
+      <Discount t={t} discount={discount} updateFieldData={updateFieldData} />
     );
   });
 
@@ -82,7 +83,7 @@ describe('Renders correctly to the DOM', () => {
   it('matches snapshot', () => {
     const tree = renderer
       .create(
-        <Discount discount={discount} updateFieldData={updateFieldData} />
+        <Discount t={t} discount={discount} updateFieldData={updateFieldData} />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

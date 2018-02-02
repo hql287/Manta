@@ -11,6 +11,7 @@ const formData = {
   fullname: 'Jon Snow',
   email: 'john@hbo.com',
 };
+const t = jest.fn();
 const updateRecipientForm = jest.fn();
 
 describe('Recipient Form component', () => {
@@ -18,6 +19,7 @@ describe('Recipient Form component', () => {
   beforeEach(() => {
     wrapper = mount(
       <RecipientForm
+        t={t}
         formData={formData}
         updateRecipientForm={updateRecipientForm}
       />
@@ -57,6 +59,7 @@ describe('Recipient Form component', () => {
     const tree = renderer
       .create(
         <RecipientForm
+          t={t}
           formData={formData}
           updateRecipientForm={updateRecipientForm}
         />

@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Bỏ qua",
+    "next": "Tiếp theo",
+    "start": "Bắt đầu lập hóa đơn"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋 Xin chào!",
+      "description": "Cám ơn bạn đã dùng thử Manta. Vui lòng xem tiếp để tìm hiểu cách tạo hoá đơn chuyên nghiệp chỉ với 3 bước đơn giản"
+    },
+    "create": {
+      "heading": "Bước 1. Nhập Liệu",
+      "description": "Manta có một giao diện nhập liệu linh hoạt. Mọi thứ được giữ đơn giản mặc định nhưng bạn có thể ẩn hoặc hiện các trường thông tin bổ sung khi cần thiết."
+    },
+    "preview": {
+      "heading": "Bước 2. Tuỳ Chỉnh",
+      "description": "Manta đi kèm với các mẫu thiết kế chuyên nghiệp mà bạn có thể tuỳ chỉnh hơn để cho phù hợp với thương hiệu của mình."
+    },
+    "save": {
+      "heading": "Bước 3. Lưu Hoá Đơn",
+      "description": "Khi đã hài lòng, bạn có thể xuất hoá đơn dưới dạng văn bản PDF để email hoặc in ra. Hãy dùng Manta để tạo ấn tượng tốt với khách hàng của mình!"
+    },
+    "success": {
+      "heading": "Xong!!! ✋️",
+      "description": "Vậy đó, bạn chỉ cần thực hiện 3 bước đơn giản như vậy để có một hoá đơn chuyên nghiệp với Manta. Hãy nhớ thay đổi thông tin và logo của công ty trước khi sử dụng các hoá đơn nhé."
+    }
+  }
+}

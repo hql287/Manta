@@ -17,6 +17,7 @@ const savedSettings = {
   tin: '123-456-789',
   mode: 'default',
 };
+const t = jest.fn();
 const updateFieldData = jest.fn();
 const updateSavedSettings = jest.fn();
 
@@ -25,6 +26,7 @@ describe('Note component', () => {
   beforeEach(() => {
     wrapper = mount(
       <Tax
+        t={t}
         tax={tax}
         savedSettings={savedSettings}
         updateSavedSettings={updateSavedSettings}
@@ -55,6 +57,7 @@ describe('Note component', () => {
     const spy = jest.spyOn(Tax.prototype, 'handleInputChange');
     const wrap = mount(
       <Tax
+        t={t}
         tax={tax}
         savedSettings={savedSettings}
         updateSavedSettings={updateSavedSettings}
@@ -80,6 +83,7 @@ describe('Note component', () => {
     const tree = renderer
       .create(
         <Tax
+          t={t}
           tax={tax}
           savedSettings={savedSettings}
           updateSavedSettings={updateSavedSettings}

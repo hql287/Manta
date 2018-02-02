@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
 import configureStore from './store';
+import i18n from '../i18n/i18n';
 
 // Root Component
 import App from './App';

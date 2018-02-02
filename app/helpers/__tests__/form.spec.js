@@ -1,6 +1,7 @@
 // Libs
 import faker from 'faker';
 import uuidv4 from 'uuid/v4';
+import i18n from '../../../i18n/i18n';
 
 // Helpers to test
 import {
@@ -358,8 +359,8 @@ describe('validateRecipient', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Invalid Recipient',
-      message: 'Recipient Cannnot Be Blank',
+      title: i18n.t('dialog:validation:recipient:empty:title'),
+      message: i18n.t('dialog:validation:recipient:empty:message'),
     });
   });
 
@@ -375,8 +376,8 @@ describe('validateRecipient', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Fields Empty',
-      message: 'Please fill in all required field',
+      title: i18n.t('dialog:validation:recipient:requiredFields:title'),
+      message: i18n.t('dialog:validation:recipient:requiredFields:message'),
     });
   });
 
@@ -392,8 +393,8 @@ describe('validateRecipient', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Invalid Email Address',
-      message: 'Please provide a valid email address',
+      title: i18n.t('dialog:validation:recipient:email:title'),
+      message: i18n.t('dialog:validation:recipient:email:message'),
     });
   });
 
@@ -427,8 +428,8 @@ describe('validateRows', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Description can not be blank',
+      title: i18n.t('dialog:validation:rows:emptyDescription:title'),
+      message: i18n.t('dialog:validation:rows:emptyDescription:message'),
     });
   });
 
@@ -443,8 +444,8 @@ describe('validateRows', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Price must be greater than 0',
+      title: i18n.t('dialog:validation:rows:priceZero:title'),
+      message: i18n.t('dialog:validation:rows:priceZero:message'),
     });
   });
 
@@ -460,8 +461,8 @@ describe('validateRows', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Quantity must be greater than 0',
+      title: i18n.t('dialog:validation:rows:qtyZero:title'),
+      message: i18n.t('dialog:validation:rows:qtyZero:message'),
     });
   });
 
@@ -487,8 +488,8 @@ describe('validateDueDate', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Must Select A Due Date',
+      title: i18n.t('dialog:validation:dueDate:title'),
+      message: i18n.t('dialog:validation:dueDate:message'),
     });
   });
 
@@ -516,8 +517,8 @@ describe('validateCurrency', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Must Select A Currency',
+      title: i18n.t('dialog:validation:currency:title'),
+      message: i18n.t('dialog:validation:currency:message'),
     });
   });
 
@@ -547,8 +548,8 @@ describe('validateDiscount', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Discount Amount Must Be Greater Than 0',
+      title: i18n.t('dialog:validation:discount:title'),
+      message: i18n.t('dialog:validation:discount:message'),
     });
   });
 
@@ -577,8 +578,8 @@ describe('validateTax', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Tax Amount Must Be Greater Than 0',
+      title: i18n.t('dialog:validation:tax:title'),
+      message: i18n.t('dialog:validation:tax:message'),
     });
   });
 
@@ -606,8 +607,8 @@ describe('validateNote', () => {
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: 'Required Field',
-      message: 'Note Content Must Not Be Blank',
+      title: i18n.t('dialog:validation:note:title'),
+      message: i18n.t('dialog:validation:note:message'),
     });
   });
 

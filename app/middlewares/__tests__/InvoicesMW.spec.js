@@ -3,6 +3,7 @@ import * as Actions from '../../actions/invoices';
 import InvoicesMW from '../InvoicesMW';
 import faker from 'faker';
 import uuidv4 from 'uuid/v4';
+import i18n from '../../../i18n/i18n';
 
 // Mock Functions
 const {
@@ -190,7 +191,7 @@ describe('Invoices Middleware', () => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Invoice Created Successfully',
+              message: i18n.t('messages:invoice:saved'),
             },
           });
         })
@@ -362,7 +363,7 @@ describe('Invoices Middleware', () => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Invoice Updated Successfully',
+              message: i18n.t('messages:invoice:updated'),
             },
           });
         })
@@ -426,7 +427,7 @@ describe('Invoices Middleware', () => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Deleted Successfully',
+              message: i18n.t('messages:invoice:deleted'),
             },
           });
         })

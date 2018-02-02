@@ -2,6 +2,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { translate } from 'react-i18next';
 const ipc = require('electron').ipcRenderer;
 
 // Actions
@@ -68,28 +70,36 @@ class SideBar extends PureComponent {
   }
 
   render() {
-    const { configs } = this.props;
+    const { t, configs } = this.props;
     const { template, alignItems, fontSize, accentColor } = configs;
     return (
       <Wrapper>
         <Template
+          t={t}
           template={template}
           handleInputChange={this.handleInputChange}
         />
         <Alignment
+          t={t}
           alignItems={alignItems}
           handleInputChange={this.handleInputChange}
         />
         <FontSize
+          t={t}
           fontSize={fontSize}
           handleInputChange={this.handleInputChange}
         />
-        <Toggler configs={configs} handleInputChange={this.handleInputChange} />
+        <Toggler
+          t={t}
+          configs={configs}
+          handleInputChange={this.handleInputChange}
+        />
         <AccentColor
+          t={t}
           accentColor={accentColor}
           handleAccentColorChange={this.handleAccentColorChange}
         />
-        <Actions savePDF={this.savePDF} />
+        <Actions t={t} savePDF={this.savePDF} />
       </Wrapper>
     );
   }
@@ -99,6 +109,7 @@ SideBar.propTypes = {
   configs: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -106,4 +117,7 @@ const mapStateToProps = state => ({
   configs: getConfigs(state),
 });
 
-export default connect(mapStateToProps)(SideBar);
+export default compose(
+  connect(mapStateToProps),
+  translate(['common', 'preview'])
+)(SideBar);

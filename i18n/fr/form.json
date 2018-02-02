@@ -1,0 +1,46 @@
+{
+  "header": {
+    "new": "Créer une nouvelle facture",
+    "edit": "Modifier la facture",
+    "btns": {
+      "clear": "Supprimer",
+      "update": "Mettre à jour",
+      "saveAndPreview": "Enregistrer et prévisualiser"
+    }
+  },
+  "settings": {
+    "name": "Paramètres du formulaire",
+    "hint": "Activer un champ pour le rendre disponible."
+  },
+  "fields": {
+    "items": {
+      "name": "Produit / Service",
+      "description": "Description",
+      "price": "Prix",
+      "quantity": "Quantité",
+      "add": "Ajouter un nouvel élément"
+    },
+    "recipient": {
+      "name": "Destinataire",
+      "select": "Sélectionner",
+      "add": "Créer un nouveau"
+    },
+    "discount": {
+      "name": "Remise ",
+      "percentage": "Pourcentage",
+      "flat": "Taux Fixe"
+    },
+    "dueDate": {
+      "name": "Échéance",
+      "placeHolder": "Choisir une date"
+    },
+    "tax": {
+      "name": "Taxe",
+      "id": "Numéro de TVA",
+      "method": "Méthode",
+      "reverse": "Autoliquidation"
+    },
+    "note": "Remarque",
+    "currency": "Devise"
+  }
+}

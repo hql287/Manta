@@ -6,14 +6,12 @@ exports[`Note component matches snapshot 1`] = `
 >
   <label
     className="itemLabel"
-  >
-    Note
-  </label>
+  />
   <textarea
     className="Note__NoteContent-enQLsi haIqin"
     cols="50"
     onChange={[Function]}
-    placeholder="Note"
+    placeholder={undefined}
     rows="4"
     value="something"
   />

@@ -6,9 +6,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
 >
   <label
     className="itemLabel"
-  >
-    Due Date
-  </label>
+  />
   <div
     className="DueDate__DueDateContent-jGMeZA ddcSFi"
   >
@@ -24,7 +22,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           >
             <input
               aria-describedby="DateInput__screen-reader-message-invoice-duedate"
-              aria-label="Select A Date"
+              aria-label="Date"
               autoComplete="off"
               className="DateInput__input needsclick"
               disabled={false}
@@ -33,7 +31,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
-              placeholder="Select A Date"
+              placeholder="Date"
               readOnly={false}
               required={false}
               type="text"

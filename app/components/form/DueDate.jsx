@@ -46,17 +46,17 @@ export class DueDate extends Component {
   }
 
   render() {
-    const { dueDate } = this.props;
+    const { t, dueDate } = this.props;
     const selectedDate = dueDate.selectedDate
       ? moment(dueDate.selectedDate)
       : null;
     return (
       <Section>
-        <label className="itemLabel">Due Date</label>
+        <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
         <DueDateContent>
           <SingleDatePicker
             id="invoice-duedate"
-            placeholder="Select A Date"
+            placeholder={t('form:fields:dueDate:placeHolder')}
             firstDayOfWeek={1}
             withFullScreenPortal
             displayFormat="DD/MM/YYYY"
@@ -83,6 +83,7 @@ export class DueDate extends Component {
 
 DueDate.propTypes = {
   dueDate: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
 };
 

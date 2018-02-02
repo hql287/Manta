@@ -1,6 +1,7 @@
 // Libs
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { translate } from 'react-i18next';
 
 // Redux
 import { compose } from 'recompose';
@@ -70,11 +71,12 @@ export class ItemsList extends PureComponent {
     // Bound Actions
     const { addItem, removeItem, updateItem } = this.props.boundActionCreators;
     // Item Rows
-    const { rows } = this.props;
+    const { t, rows } = this.props;
     const rowsComponent = rows.map((item, index) => (
       <ItemRow
         key={item.id}
         item={item}
+        t={t}
         hasHandler={rows.length > 1}
         actions={index !== 0}
         updateRow={updateItem}
@@ -88,7 +90,7 @@ export class ItemsList extends PureComponent {
       <Section>
         <ItemsListWrapper>
           <ItemsListHeader>
-            <label className="itemLabel">Product/Service *</label>
+            <label className="itemLabel">{t('form:fields:items:name')} *</label>
           </ItemsListHeader>
           <ItemsListDiv>
             <TransitionList componentHeight={50}>
@@ -97,7 +99,7 @@ export class ItemsList extends PureComponent {
           </ItemsListDiv>
           <div className="itemsListActions">
             <ItemsListActionsBtn primary onClick={addItem}>
-              Add An Item
+              {t('form:fields:items:add')}
             </ItemsListActionsBtn>
           </div>
         </ItemsListWrapper>
@@ -123,5 +125,6 @@ const mapDispatchToProps = dispatch => ({
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  translate('form'),
   _withDragNDrop
 )(ItemsList);

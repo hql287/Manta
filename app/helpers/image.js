@@ -2,6 +2,7 @@ const Jimp = require('jimp');
 const fs = require('fs');
 const isSvg = require('is-svg');
 const openDialog = require('../renderers/dialog');
+import i18n from '../../i18n/i18n';
 
 function detectSVG(filePath) {
   const data = fs.readFileSync(filePath);
@@ -25,21 +26,25 @@ function processImg(filePath, callback) {
   // Normal Image File such as PNG or JPEG
   Jimp.read(filePath, (err, image) => {
     if (err) handleError(err);
-    image
-      .resize(125, Jimp.AUTO)
-      .quality(100)
-      .getBase64(Jimp.MIME_PNG, (err, result) => {
-        if (err) handleError(err);
-        callback(result);
-      });
+    try {
+      image
+        .resize(125, Jimp.AUTO)
+        .quality(100)
+        .getBase64(Jimp.MIME_PNG, (err, result) => {
+          if (err) handleError(err);
+          callback(result);
+        });
+    } catch(err) {
+      if (err) handleError(err);
+    }
   });
 }
 
 function handleError(err) {
   openDialog({
     type: 'warning',
-    title: err.message,
-    message: 'Please select another file',
+    title: i18n.t('dialog:fileTypeErr:title'),
+    message: err.message,
   });
 }
 

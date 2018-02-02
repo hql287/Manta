@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
+import i18n from '../i18n/i18n';
 
 // Root Reducer
 import combineReducers from './reducers';

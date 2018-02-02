@@ -97,9 +97,10 @@ class AccentColor extends PureComponent {
       '#dce775',
       '#ff8a65',
     ];
+    const { t } = this.props;
     return (
       <Section>
-        <Label>Accent Color</Label>
+        <Label>{ t('preview:sidebar:accentColor:name') }</Label>
         <label>
           <input
             type="checkbox"
@@ -107,7 +108,7 @@ class AccentColor extends PureComponent {
             onChange={this.handleInputChange}
           />
           {'\u00A0'}
-          Use Custom
+          { t('preview:sidebar:accentColor:useCustom') }
         </label>
         <ColorPicker>
           <Swatch onClick={this.handleClick}>
@@ -133,6 +134,7 @@ class AccentColor extends PureComponent {
 AccentColor.propTypes = {
   accentColor: PropTypes.object.isRequired,
   handleAccentColorChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default AccentColor;
