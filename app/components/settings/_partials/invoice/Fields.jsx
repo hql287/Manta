@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 import { Row, Field, Part } from '../../../shared/Part';
 
-function Fields({ required_fields, handleVisibilityChange }) {
+function Fields({ t, required_fields, handleVisibilityChange }) {
   return [
     <label key="label" className="itemLabel">
-      Required Fields
+      {t('settings:fields:requiredFields')}
     </label>,
     <Part key="part">
       <Row>
         <Field>
-          <label className="itemLabel">Due Date</label>
+          <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
           <label className="switch">
             <input
               name="dueDate"
@@ -23,7 +23,7 @@ function Fields({ required_fields, handleVisibilityChange }) {
           </label>
         </Field>
         <Field>
-          <label className="itemLabel">Currency</label>
+          <label className="itemLabel">{t('form:fields:currency')}</label>
           <label className="switch">
             <input
               name="currency"
@@ -36,7 +36,7 @@ function Fields({ required_fields, handleVisibilityChange }) {
         </Field>
 
         <Field>
-          <label className="itemLabel">Discount</label>
+          <label className="itemLabel">{t('form:fields:discount:name')}</label>
           <label className="switch">
             <input
               name="discount"
@@ -48,7 +48,7 @@ function Fields({ required_fields, handleVisibilityChange }) {
           </label>
         </Field>
         <Field>
-          <label className="itemLabel">Tax</label>
+          <label className="itemLabel">{t('form:fields:tax:name')}</label>
           <label className="switch">
             <input
               name="tax"
@@ -60,7 +60,7 @@ function Fields({ required_fields, handleVisibilityChange }) {
           </label>
         </Field>
         <Field>
-          <label className="itemLabel">Note</label>
+          <label className="itemLabel">{t('form:fields:note')}</label>
           <label className="switch">
             <input
               name="note"
@@ -79,6 +79,7 @@ function Fields({ required_fields, handleVisibilityChange }) {
 Fields.propTypes = {
   required_fields: PropTypes.object.isRequired,
   handleVisibilityChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Fields;

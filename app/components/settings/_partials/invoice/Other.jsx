@@ -10,15 +10,16 @@ function Other({
   template,
   selectExportDir,
   handleInputChange,
+  t
 }) {
   return [
     <label key="label" className="itemLabel">
-      Other
+      {t('settings:fields:other')}
     </label>,
     <Part key="part">
       <Row>
         <Field>
-          <label className="itemLabel">PDF Export Directory</label>
+          <label className="itemLabel">{t('settings:fields:pdfExportDir')}</label>
           <div className="input-group">
             <input
               className="form-control"
@@ -39,14 +40,14 @@ function Other({
       </Row>
       <Row>
         <Field>
-          <label className="itemLabel">Template</label>
+          <label className="itemLabel">{t('settings:fields:template')}</label>
           <select name="template" value={template} onChange={handleInputChange}>
             <option value="minimal">Minimal</option>
             <option value="business">Business</option>
           </select>
         </Field>
         <Field>
-          <label className="itemLabel">Date Format</label>
+          <label className="itemLabel">{t('settings:fields:dateFormat')}</label>
           <select
             name="dateFormat"
             value={dateFormat}
@@ -91,6 +92,7 @@ Other.propTypes = {
   template: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
   selectExportDir: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Other;

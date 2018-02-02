@@ -130,11 +130,13 @@ class Invoice extends Component {
         key="required_fields_settings"
         required_fields={required_fields}
         handleVisibilityChange={this.handleVisibilityChange}
+        t={t}
       />,
       <Tax
         key="tax_settings"
         handleTaxChange={this.handleTaxChange}
         tax={tax}
+        t={t}
       />,
       <Currency
         key="currency_settings"
@@ -143,6 +145,7 @@ class Invoice extends Component {
         decimalSeparator={decimalSeparator}
         currencyPlacement={currencyPlacement}
         decimalFractions={decimalFractions}
+        t={t}
       />,
       <Other
         key="other_settings"
@@ -151,6 +154,7 @@ class Invoice extends Component {
         template={template}
         handleInputChange={this.handleInputChange}
         selectExportDir={this.selectExportDir}
+        t={t}
       />
     ];
   }

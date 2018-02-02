@@ -32,45 +32,48 @@ function Currency({
   decimalSeparator,
   currencyPlacement,
   decimalFractions,
+  t
 }) {
   return [
     <label key="label" className="itemLabel">
-      Currency
+      {t('form:fields:currency')}
     </label>,
     <Part key="part">
       <Row>
         <Field>
-          <label className="itemLabel">Currency</label>
+          <label className="itemLabel">
+            {t('form:fields:currency')}
+          </label>
           <select name="currency" value={currency} onChange={handleInputChange}>
             {sortCurrencies()}
           </select>
         </Field>
         <Field>
-          <label className="itemLabel">Decimal Separator</label>
+          <label className="itemLabel">{t('settings:fields:currency:decimalSeparator')}</label>
           <select
             name="decimalSeparator"
             value={decimalSeparator}
             onChange={handleInputChange}
           >
-            <option value="dot">Dot (.)</option>
-            <option value="comma">Comma (,)</option>
+            <option value="dot">{t('settings:fields:currency:dot')}</option>
+            <option value="comma">{t('settings:fields:currency:comma')}</option>
           </select>
         </Field>
       </Row>
       <Row>
         <Field>
-          <label className="itemLabel">Sign placement</label>
+          <label className="itemLabel">{t('settings:fields:currency:signPlacement')}</label>
           <select
             name="currencyPlacement"
             value={currencyPlacement}
             onChange={handleInputChange}
           >
-            <option value="before">Before amount</option>
-            <option value="after">After amount</option>
+            <option value="before">{t('settings:fields:currency:beforeAmount')}</option>
+            <option value="after">{t('settings:fields:currency:afterAmount')}</option>
           </select>
         </Field>
         <Field>
-          <label className="itemLabel">Decimal Fractions</label>
+          <label className="itemLabel">{t('settings:fields:currency:decimalFractions')}</label>
           <input
             className="form-control"
             name="decimalFractions"
@@ -90,6 +93,7 @@ Currency.propTypes = {
   decimalFractions: PropTypes.string.isRequired,
   decimalSeparator: PropTypes.string.isRequired,
   handleInputChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Currency;
