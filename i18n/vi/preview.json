@@ -2,39 +2,39 @@
   "sidebar": {
     "template": "Mẫu thiết kế",
     "alignment": {
-      "name": "Căn chỉnh",
-      "top": "Trên",
+      "name": "Canh lề",
+      "top": "Trên cùng",
       "middle": "Giữa",
-      "bottom": "Dưới"
+      "bottom": "Dưới cùng"
     },
     "fontSize": "Cỡ chữ",
-    "toggle": {
-      "name": "Ẩn hiện",
+    "toggler": {
+      "name": "Ẩn Hiện",
       "logo": "Logo",
       "symbol": "Biểu tượng",
       "recipient": "Người nhận"
     },
     "accentColor": {
-      "name" : "Màu đặc trưng",
-      "useCustom": "Chọn màu khác"
+      "name": "Màu nhấn",
+      "useCustom": "Sử dụng tùy chỉnh"
     },
     "actions": {
       "name": "Tác vụ",
-      "savePDF": "Xuất Ra PDF"
+      "savePDF": "Xuất ra PDF"
     }
   },
   "common": {
-    "billedTo": "Gửi tới",
-    "chooseInvoiceToPreview": "Chọn một hoá đơn để xem",
-    "created": "Ngày tạo",
+    "billedTo": "Lập hoá đơn cho",
+    "chooseInvoiceToPreview": "Hãy chọn một hóa đơn để xem",
+    "created": "Ngày Tạo",
     "due": "Hạn trả",
-    "invoice": "Hoá Đơn",
-    "itemDescription": "Mô tả sản phẩm, dịch vụ",
+    "invoice": "Hoá đơn",
+    "itemDescription": "Mô tả mặt hàng",
     "notice": "Chú thích",
     "order": "Stt",
-    "price": "Giá tiền",
+    "price": "Giá",
     "qty": "Số lượng",
     "subtotal": "Tổng phụ",
-    "total": "Tổng"
+    "total": "Tổng cộng"
   }
 }

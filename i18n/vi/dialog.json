@@ -1,93 +1,87 @@
 {
-  "appUpdate" : {
+  "appUpdate": {
     "available": {
-      "title": "Có cập nhật mới",
-      "message": "Bạn có muốn tải bản cập nhật ngay bây giờ không?"
+      "title": "Có bản cập nhật mới",
+      "message": "Bạn có muốn bắt đầu tải bản cập nhật luôn không?"
     },
     "noUpdate": {
-      "title": "Không có cập nhật",
-      "message": "Bạn đang dùng phiên bản mới nhất"
+      "title": "Không có bản cập nhật mới",
+      "message": "Bạn đang sử dụng phiên bản mới nhất của ứng dụng này"
     },
     "error": {
-      "title": "Đã có lỗi khi cập nhật"
+      "title": "Đã xảy ra lỗi chưa xác định"
     },
     "downloaded": {
-      "title": "Cập nhật đã tải xong",
-      "message": "Bạn có muốn thoát ứng dụng và tiến hành cập nhật ngay không?",
-      "quitNow": "Cập nhật ngay",
+      "title": "Cập nhật đã được tải xong",
+      "message": "Bạn có muốn thoát và nâng cấp ứng dụng luôn không?",
+      "quitNow": "Thoát ngay",
       "later": "Để sau"
     }
   },
   "noAccess": {
-    "title": "Không Có Quyền Truy Cập",
-    "message": "Vui lòng chọn thư mục khác."
+    "title": "Không có quyền truy cập",
+    "message": "Vui lòng chọn một thư mục khác"
   },
-  "errorBoundary": "Đã có lỗi xảy ra",
+  "errorBoundary": "Đã xảy ra lỗi chưa xác định",
   "deleteInvoice": {
-    "title": "Xoá Hoá Đơn Này?",
-    "message": "Hoá đơn sẽ bị xoá vĩnh viễn khỏi ứng dụng"
+    "title": "Xóa bỏ hóa đơn này?",
+    "message": "Hóa đơn sẽ được xoá bỏ vĩnh viễn khỏi cơ sở dữ liệu"
   },
   "deleteContact": {
-    "title": "Xoá Khách Hàng Này?",
-    "message": "Thông tin khách hàng sẽ bị xoá vĩnh viễn khỏi ứng dụng"
+    "title": "Xóa bỏ khách hàng này?",
+    "message": "Khách hàng sẽ bị xóa vĩnh viễn khỏi cơ sở dữ liệu"
   },
   "fileTypeErr": {
-    "title": "Vui lòng chọn file khác"
+    "title": "Vui lòng chọn một file khác"
   },
   "validation": {
     "recipient": {
       "empty": {
-        "title": "Lỗi thông tin khách hàng ",
-        "message": "Thông tin khách hàng không được để trống"
+        "title": "Thông tin không hợp lệ",
+        "message": "Thông tin liên hệ không được để trống"
       },
       "requiredFields": {
-        "title": "Thiếu thông tin bắt buộc",
-        "message": "Vui lòng điền đẩy đủ thông tin"
+        "title": "Các trường thông tin bắt buộc",
+        "message": "Xin vui lòng điền vào tất cả các trường bắt buộc"
       },
       "email": {
         "title": "Email không hợp lệ",
-        "message": "Vui lòng chọn địa chỉ email khác"
+        "message": "Vui lòng chọn một email khác"
       }
     },
-
     "rows": {
       "emptyDescription": {
         "title": "Mô tả không hợp lệ",
-        "message": "Mô tả sản phẩm không thể để trống"
+        "message": "Mô tả không được để trống"
       },
       "priceZero": {
-        "title": "Gía không hợp lệ",
-        "message": "Giá sản phẩm phải lớn hơn 0"
+        "title": "Giá không hợp lệ",
+        "message": "Giá phải lớn hơn 0"
       },
       "qtyZero": {
-        "title": "Số lượng không hơp lệ",
-        "message": "Số lượng sản phẩm phải lớn hơn 0"
+        "title": "Số lượng không hợp lệ",
+        "message": "Số lượng phải lớn hơn 0"
       }
     },
-
     "dueDate": {
-      "title": "Hạn trả không chính xác",
-      "message": "Vui lòng chọn ngày cho hạn trả"
+      "title": "Ngày không hợp lệ",
+      "message": "Hãy chọn một ngày"
     },
-
     "currency": {
-      "title": "Đơn vị tiền tệ không chính xác",
-      "message": "Vui lòng chọn ngày cho hạn trả"
+      "title": "Đơn vị tiền không hợp lệ",
+      "message": "Vui lòng chọn một loại tiền tệ"
     },
-
     "discount": {
-      "title": "Thông tin khuyễn mãi không chính xác",
+      "title": "Khuyến mãi không hợp lệ",
       "message": "Số tiền giảm giá phải lớn hơn 0"
     },
-
     "tax": {
-      "title": "Thông tin thuế không chính xác",
-      "message": "Thuế phải lớn hơn 0"
+      "title": "Thuế không hợp lệ",
+      "message": "Số tiền thuế phải lớn hơn 0"
     },
-
     "note": {
-      "title": "Chú thích không đúng",
-      "message": "Vui lòng không để trống phần chú thích"
+      "title": "Chú thích không hợp lệ",
+      "message": "Nội dung chú thích không được để trống"
     }
   }
 }

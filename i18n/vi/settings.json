@@ -1,35 +1,52 @@
 {
-  "header": "Tuỳ Chỉnh",
+  "header": "Cài đặt",
   "tabs": {
-    "profile": "Hồ Sơ",
-    "invoice": "Hoá Đơn",
-    "general": "Thông Tin Chung"
+    "profile": "Hồ sơ công ty",
+    "invoice": "Hoá đơn",
+    "general": "Tổng quát"
   },
   "fields": {
     "logo": {
-      "name": "Ảnh đại diện",
-      "hint": "Chấp nhận ảnh PNG, JPEG và SVG (Tốt Nhất)"
+      "name": "Logo",
+      "hint": "Chấp nhận PNG, JPG & SVG (Khuyên dùng)"
     },
-    "taxSettings": "Tuỳ chỉnh thuế",
-    "template": "Mẫu sẵn có",
-    "dateFormat": "Định dạng ngày",
+    "taxSettings": "Thiết lập thuế",
+    "template": "Mẫu thiết kế",
+    "dateFormat": "Định dạng ngày tháng",
     "pdfExportDir": "Thư mục xuất PDF",
-    "requiredFields": "Thông tin bắt buộc",
+    "requiredFields": "Các trường bắt buộc",
     "sound": "Âm thanh",
     "mute": "Tắt tiếng",
     "autoCheckUpdate": {
       "name": "Tự động kiểm tra cập nhật",
-      "daily": "Hàng Ngày (Tốt Nhất)",
-      "weekly": "Hàng Tuần"
+      "daily": "Hàng ngày",
+      "weekly": "Hàng tuần"
     },
-    "openPDFReader": "Mở file PDF khi xuất",
+    "openPDFReader": "Mở file PDF sau khi xuất",
     "language": {
       "name": "Ngôn ngữ",
-      "en": "Tiếng Anh",
+      "cs": "Tiếng Séc",
+      "da": "Tiếng Đan Mạch",
       "de": "Tiếng Đức",
+      "el": "Tiếng Hi Lạp",
+      "en": "Tiếng Anh",
+      "esES": "Tiếng Tây Ban Nha",
       "fr": "Tiếng Pháp",
-      "vi": "Tiếng Việt"
+      "id": "Tiếng Indonesia",
+      "it": "Tiếng Ý",
+      "ja": "Tiếng Nhật",
+      "lt": "Tiếng Lithuania",
+      "nl": "Tiếng Hà Lan",
+      "ptBR": "Tiếng Bồ Đào Nha (Brazil)",
+      "ptPT": "Tiếng Bồ Đào Nha",
+      "ru": "Tiếng Nga",
+      "th": "Tiếng Thái",
+      "tl": "Tiếng Philippines",
+      "tr": "Tiếng Thổ Nhĩ Kỳ",
+      "vi": "Tiếng Việt",
+      "zhCN": "Tiếng Trung (Giản Thể)",
+      "zhTW": "Tiếng Trung (Phồn Thể)"
     },
-    "other": "Thông tin khác"
+    "other": "Khác"
   }
 }

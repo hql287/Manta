@@ -1,46 +1,46 @@
 {
   "header": {
-    "new": "Tạo Hoá Đơn Mới",
-    "edit": "Cập Nhật Hoá Đơn",
+    "new": "Tạo một hóa đơn mới",
+    "edit": "Chỉnh sửa hoá đơn",
     "btns": {
-      "clear": "Làm Lại",
-      "update": "Cập Nhật",
-      "saveAndPreview": "Lưu & Xem Trước"
+      "clear": "Làm lại",
+      "update": "Lưu Thay Đổi",
+      "saveAndPreview": "Lưu và Hiển thị"
     }
   },
   "settings": {
-    "name": "Thay Đổi Cấu Hình",
-    "hint": "Click để ẩn hoặc hiện thêm trường thông tin"
+    "name": "Thay Đổi Trường Thông Tin",
+    "hint": "Click để ẩn hoặc hiện các trường thông tin khác."
   },
   "fields": {
     "items": {
       "name": "Sản Phẩm/Dịch Vụ",
-      "description": "Mô tả",
+      "description": "Mô Tả",
       "price": "Giá",
-      "quantity": "Số lượng",
-      "add": "Thêm"
+      "quantity": "Số Lượng",
+      "add": "Thêm mới"
     },
     "recipient": {
-      "name": "Khách Hàng",
-      "select": "Lựa chọn",
+      "name": "Người nhận",
+      "select": "Lựa Chọn",
       "add": "Tạo mới"
     },
     "discount": {
-      "name": "Giảm Giá",
-      "percentage": "Phần Trăm",
+      "name": "Khuyễn mãi",
+      "percentage": "Phần trăm",
       "flat": "Trừ thẳng"
     },
     "dueDate": {
-      "name": "Hạn Trả",
+      "name": "Hạn thanh toán",
       "placeHolder": "Chọn ngày"
     },
     "tax": {
       "name": "Thuế",
       "id": "Mã Số Thuế",
-      "method": "Phương Thức",
-      "reverse": "Trừ ngược"
+      "method": "Phương thức",
+      "reverse": "Đảo ngược phí"
     },
-    "note": "Chú thích",
-    "currency": "Đồng Tiền"
+    "note": "Ghi chú",
+    "currency": "Tiền tệ"
   }
 }

@@ -1,9 +1,9 @@
 {
-  "header": "Danh Sách Khách Hàng",
+  "header": "Toàn bộ danh bạ",
   "fields": {
-    "contact": "Khách hàng",
+    "contact": "Thông tin liên hệ",
     "email": "Thư điện tử",
     "phone": "Điện thoại",
-    "actions": "Tác Vụ"
+    "actions": "Tác vụ"
   }
 }
