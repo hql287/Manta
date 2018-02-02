@@ -22,6 +22,15 @@
       "daily": "Everday (Recommended)",
       "weekly": "Everyweek"
     },
+    "currency": {
+      "afterAmount": "After Amount",
+      "beforeAmount": "Before Amount",
+      "decimalFractions": "Decimal Fractions",
+      "decimalSeparator": "Decimal Separator",
+      "comma": "Comma (,)",
+      "dot": "Dot (.)",
+      "signPlacement": "Sign placement"
+    },
     "openPDFReader": "Open PDF after Export",
     "language": {
       "name": "Language",

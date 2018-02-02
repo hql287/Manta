@@ -22,6 +22,15 @@
       "daily": "Hàng ngày",
       "weekly": "Hàng tuần"
     },
+    "currency": {
+      "afterAmount": "Sau số tiền",
+      "beforeAmount": "Trước số tiền",
+      "decimalFractions": "Phân số thập phân",
+      "decimalSeparator": "Dấu phân cách thập phân",
+      "comma": "Dấu phẩy (,)",
+      "dot": "Dấu chấm (.)",
+      "signPlacement": "Vị trí kí tự"
+    },
     "openPDFReader": "Mở file PDF sau khi xuất",
     "language": {
       "name": "Ngôn ngữ",
