@@ -13,7 +13,9 @@ mac:
     - zip
     - dmg
 win:
-  target: nsis
+  target:
+    - nsis
+    - portable
 linux:
   target:
     - deb
