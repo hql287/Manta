@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 // Custom Component
-import Logo from './_partials/Logo';
+import Logo from './_partials/profile/Logo';
+
 const Hint = styled.p`
   margin: -15px 0 20px 0;
   font-size: 80%;

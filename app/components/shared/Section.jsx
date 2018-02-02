@@ -26,5 +26,4 @@ const HeaderStyle = styled.div`
 
 // Components
 export const Section = props => <SectionStyle>{props.children}</SectionStyle>;
-
 export const Header = props => <HeaderStyle>{props.children}</HeaderStyle>;
