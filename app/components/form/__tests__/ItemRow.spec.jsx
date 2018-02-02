@@ -19,12 +19,14 @@ const item = {
 };
 const removeRow = jest.fn();
 const updateRow = jest.fn();
+const t = jest.fn();
 
 describe('Renders correctly to the DOM', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <ItemRow
+        t={t}
         actions={actions}
         addItem={addItem}
         hasHandler={hasHandler}
@@ -63,6 +65,7 @@ describe('Renders correctly to the DOM', () => {
     const spy = jest.spyOn(ItemRow.prototype, 'handleTextInputChange');
     const wrap = mount(
       <ItemRow
+        t={t}
         actions={actions}
         addItem={addItem}
         hasHandler={hasHandler}
@@ -88,6 +91,7 @@ describe('Renders correctly to the DOM', () => {
     const spy = jest.spyOn(ItemRow.prototype, 'handleNumberInputChange');
     const wrap = mount(
       <ItemRow
+        t={t}
         actions={actions}
         addItem={addItem}
         hasHandler={hasHandler}
@@ -115,6 +119,7 @@ describe('Renders correctly to the DOM', () => {
     const spy = jest.spyOn(ItemRow.prototype, 'handleKeyDown');
     const wrap = mount(
       <ItemRow
+        t={t}
         actions={actions}
         addItem={addItem}
         hasHandler={hasHandler}
@@ -138,6 +143,7 @@ describe('Renders correctly to the DOM', () => {
     const spy = jest.spyOn(ItemRow.prototype, 'updateSubtotal');
     const wrap = mount(
       <ItemRow
+        t={t}
         actions={actions}
         addItem={addItem}
         hasHandler={hasHandler}
@@ -171,6 +177,7 @@ describe('Renders correctly to the DOM', () => {
     const tree = renderer
       .create(
         <ItemRow
+          t={t}
           actions={actions}
           addItem={addItem}
           hasHandler={hasHandler}

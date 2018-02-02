@@ -90,34 +90,35 @@ export class Tax extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <Section>
         <Header>
-          <label className="itemLabel">Tax</label>
+          <label className="itemLabel">{t('form:fields:tax:name')}</label>
           {!this.isSettingsSaved() && (
             <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> Save as default?
+              <i className="ion-checkmark" /> {t('common:saveAsDefault')}
             </a>
           )}
         </Header>
         <Form>
           <Row>
             <Field>
-              <label className="itemLabel">Tax ID</label>
+              <label className="itemLabel">{t('form:fields:tax:id')}</label>
               <TaxID>
                 <input
                   name="tin"
                   type="text"
                   value={this.state.tin}
                   onChange={this.handleInputChange}
-                  placeholder="Registration Number"
+                  placeholder={t('form:fields:tax:id')}
                 />
               </TaxID>
             </Field>
           </Row>
           <Row>
             <Field>
-              <label className="itemLabel">Amount (%)</label>
+              <label className="itemLabel">{t('common:amount')} (%)</label>
               <TaxAmount>
                 <input
                   name="amount"
@@ -125,19 +126,19 @@ export class Tax extends Component {
                   step="0.01"
                   value={this.state.amount}
                   onChange={this.handleInputChange}
-                  placeholder="Amount"
+                  placeholder={t('common:amount')}
                 />
               </TaxAmount>
             </Field>
             <Field>
-              <label className="itemLabel">Method</label>
+              <label className="itemLabel">{t('form:fields:tax:method')}</label>
               <select
                 name="method"
                 value={this.state.method}
                 onChange={this.handleInputChange}
               >
-                <option value="default">Default</option>
-                <option value="reverse">Reverse Charge</option>
+                <option value="default">{t('common:default')}</option>
+                <option value="reverse">{t('form:fields:tax:reverse')}</option>
               </select>
             </Field>
           </Row>
@@ -149,6 +150,7 @@ export class Tax extends Component {
 
 Tax.propTypes = {
   updateSavedSettings: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
   tax: PropTypes.object.isRequired,
   savedSettings: PropTypes.object.isRequired,
   updateFieldData: PropTypes.func.isRequired,

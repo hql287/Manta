@@ -2,6 +2,7 @@ import * as ACTION_TYPES from '../../constants/actions.jsx';
 import * as Actions from '../../actions/contacts';
 import ContactsMW from '../ContactsMW';
 import faker from 'faker';
+import i18n from '../../../i18n/i18n';
 
 // Mocks
 import {
@@ -152,7 +153,7 @@ describe('Contacts Middleware', () => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Contact Created Successfully',
+              message: i18n.t('messages:contact:saved')
             },
           });
         })
@@ -228,7 +229,7 @@ describe('Contacts Middleware', () => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Deleted Successfully',
+              message: i18n.t('messages:contact:deleted')
             },
           });
         })

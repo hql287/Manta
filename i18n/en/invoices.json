@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "All Invoices"
+  },
+  "fields": {
+    "client": "Client",
+    "invoiceID": "Invoice ID",
+    "createdDate": "Created On",
+    "dueDate": "Due Date",
+    "total": "Total Value"
+  },
+  "status": {
+    "pending": "Pending",
+    "paid": "Paid",
+    "refunded": "Refunded",
+    "cancelled": "Cancelled"
+  },
+  "btns": {
+    "view": "View",
+    "edit": "Edit",
+    "markAsPaid": "Mark as Paid"
+  }
+}

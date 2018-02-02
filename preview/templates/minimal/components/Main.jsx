@@ -120,14 +120,15 @@ class Main extends Component {
   }
 
   displayDiscount() {
-    const { invoice, configs } = this.props;
+    const { t, invoice, configs } = this.props;
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
     return invoice.discount ? (
       <Discount>
         <td>
-          Discount
+          { t('form:fields:discount:name') }
+          {' '}
           {invoice.discount.type === 'percentage' && (
             <span> {invoice.discount.amount}%</span>
           )}
@@ -140,7 +141,7 @@ class Main extends Component {
   }
 
   displayTax() {
-    const { invoice, configs } = this.props;
+    const { t, invoice, configs } = this.props;
     const { tax } = invoice;
     const { taxAmount } = getInvoiceValue(invoice);
     const currency = configs.useSymbol
@@ -148,9 +149,11 @@ class Main extends Component {
       : invoice.currency.code;
     return tax ? (
       <Tax>
-        <td>Tax {tax.amount}%</td>
+        <td>
+          { t('form:fields:tax:name') }{' '}{tax.amount}%
+        </td>
         {tax.method === 'reverse' ? (
-          <td>Reverse Charge</td>
+          <td>{t('form:fields:tax:reverse')}</td>
         ) : (
           <td>
             {currency} {formatNumber(taxAmount)}
@@ -161,7 +164,7 @@ class Main extends Component {
   }
 
   render() {
-    const { invoice, configs } = this.props;
+    const { t, invoice, configs } = this.props;
     const currency = configs.useSymbol
       ? invoice.currency.symbol
       : invoice.currency.code;
@@ -183,8 +186,8 @@ class Main extends Component {
       <Table alignItems={setAlignItems(configs)}>
         <thead>
           <ItemsHeader>
-            <th>Item Description</th>
-            <th>Price</th>
+            <th>{t('preview:common:itemDescription')}</th>
+            <th>{t('preview:common:price')}</th>
           </ItemsHeader>
         </thead>
 
@@ -192,7 +195,7 @@ class Main extends Component {
 
         <InvoiceSummary>
           <Subtotal>
-            <td>Subtotal</td>
+            <td>{t('preview:common:subtotal')}</td>
             <td>
               {currency} {formatNumber(invoice.subtotal)}
             </td>
@@ -202,7 +205,7 @@ class Main extends Component {
           {this.displayTax()}
 
           <Total>
-            <td>Total</td>
+            <td>{t('preview:common:total')}</td>
             <td>
               {currency} {formatNumber(invoice.grandTotal)}
             </td>
@@ -216,6 +219,7 @@ class Main extends Component {
 Main.propTypes = {
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Main;

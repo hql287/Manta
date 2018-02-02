@@ -6,6 +6,7 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 
 // Helpers
 import { getAllDocs, saveDoc, deleteDoc } from '../helpers/pouchDB';
+import i18n from '../../i18n/i18n';
 
 const ContactsMW = ({ dispatch }) => next => action => {
   switch (action.type) {
@@ -44,7 +45,7 @@ const ContactsMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Contact Created Successfully',
+              message: i18n.t('messages:contact:saved'),
             },
           });
         })
@@ -70,7 +71,7 @@ const ContactsMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
               type: 'success',
-              message: 'Deleted Successfully',
+              message: i18n.t('messages:contact:deleted'),
             },
           });
         })

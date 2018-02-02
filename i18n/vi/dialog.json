@@ -1,0 +1,87 @@
+{
+  "appUpdate": {
+    "available": {
+      "title": "Có bản cập nhật mới",
+      "message": "Bạn có muốn bắt đầu tải bản cập nhật luôn không?"
+    },
+    "noUpdate": {
+      "title": "Không có bản cập nhật mới",
+      "message": "Bạn đang sử dụng phiên bản mới nhất của ứng dụng này"
+    },
+    "error": {
+      "title": "Đã xảy ra lỗi chưa xác định"
+    },
+    "downloaded": {
+      "title": "Cập nhật đã được tải xong",
+      "message": "Bạn có muốn thoát và nâng cấp ứng dụng luôn không?",
+      "quitNow": "Thoát ngay",
+      "later": "Để sau"
+    }
+  },
+  "noAccess": {
+    "title": "Không có quyền truy cập",
+    "message": "Vui lòng chọn một thư mục khác"
+  },
+  "errorBoundary": "Đã xảy ra lỗi chưa xác định",
+  "deleteInvoice": {
+    "title": "Xóa bỏ hóa đơn này?",
+    "message": "Hóa đơn sẽ được xoá bỏ vĩnh viễn khỏi cơ sở dữ liệu"
+  },
+  "deleteContact": {
+    "title": "Xóa bỏ khách hàng này?",
+    "message": "Khách hàng sẽ bị xóa vĩnh viễn khỏi cơ sở dữ liệu"
+  },
+  "fileTypeErr": {
+    "title": "Vui lòng chọn một file khác"
+  },
+  "validation": {
+    "recipient": {
+      "empty": {
+        "title": "Thông tin không hợp lệ",
+        "message": "Thông tin liên hệ không được để trống"
+      },
+      "requiredFields": {
+        "title": "Các trường thông tin bắt buộc",
+        "message": "Xin vui lòng điền vào tất cả các trường bắt buộc"
+      },
+      "email": {
+        "title": "Email không hợp lệ",
+        "message": "Vui lòng chọn một email khác"
+      }
+    },
+    "rows": {
+      "emptyDescription": {
+        "title": "Mô tả không hợp lệ",
+        "message": "Mô tả không được để trống"
+      },
+      "priceZero": {
+        "title": "Giá không hợp lệ",
+        "message": "Giá phải lớn hơn 0"
+      },
+      "qtyZero": {
+        "title": "Số lượng không hợp lệ",
+        "message": "Số lượng phải lớn hơn 0"
+      }
+    },
+    "dueDate": {
+      "title": "Ngày không hợp lệ",
+      "message": "Hãy chọn một ngày"
+    },
+    "currency": {
+      "title": "Đơn vị tiền không hợp lệ",
+      "message": "Vui lòng chọn một loại tiền tệ"
+    },
+    "discount": {
+      "title": "Khuyến mãi không hợp lệ",
+      "message": "Số tiền giảm giá phải lớn hơn 0"
+    },
+    "tax": {
+      "title": "Thuế không hợp lệ",
+      "message": "Số tiền thuế phải lớn hơn 0"
+    },
+    "note": {
+      "title": "Chú thích không hợp lệ",
+      "message": "Nội dung chú thích không được để trống"
+    }
+  }
+}

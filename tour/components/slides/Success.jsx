@@ -2,17 +2,13 @@ import React from 'react';
 import path from 'path';
 import Slide from '../Slide';
 
-const description = `
-There you have it, the 3 simple steps to create stunning invoices with Manta. Remember to update company profile and logo before actually using the invoice.
-`;
-
-function Success() {
+function Success({t}) {
   return (
     <Slide
       fromColor="#FFFFFF"
       toColor="#ECE9E6"
-      heading=" Done!!! ✋️"
-      description={description}
+      heading={t('tour:slides:success:heading')}
+      description={t('tour:slides:success:description')}
       imgSrc={path.resolve(__dirname, './imgs/Success.svg')}
       imgSize="425px"
     />

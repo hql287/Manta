@@ -9,9 +9,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
   >
     <label
       className="itemLabel"
-    >
-      Discount
-    </label>
+    />
     <div
       className="Discount__DiscountContent-jCPLgI kgtKuP"
     >
@@ -21,7 +19,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         <input
           name="amount"
           onChange={[Function]}
-          placeholder="Amount"
+          placeholder={undefined}
           type="number"
           value={100}
         />
@@ -40,7 +38,6 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
               type="radio"
               value="percentage"
             />
-            Percentage
           </label>
         </div>
         <div
@@ -54,7 +51,6 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
               type="radio"
               value="flat"
             />
-            Flat Rate
           </label>
         </div>
       </div>

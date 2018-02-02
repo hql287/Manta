@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import { Section, Label } from '../shared';
 import Button from '../../../app/components/shared/Button';
 
-function Actions({ savePDF }) {
+function Actions({ t, savePDF }) {
   return (
     <Section>
-      <Label>Actions</Label>
+      <Label>{t('preview:sidebar:actions:name')}</Label>
       <Button block primary onClick={savePDF}>
-        Save As PDF
+        {t('preview:sidebar:actions:savePDF')}
       </Button>
     </Section>
   );
@@ -18,6 +18,7 @@ function Actions({ savePDF }) {
 
 Actions.propTypes = {
   savePDF: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Actions;

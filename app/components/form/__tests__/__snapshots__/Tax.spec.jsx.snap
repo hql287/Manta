@@ -9,9 +9,7 @@ exports[`Note component matches snapshot 1`] = `
   >
     <label
       className="itemLabel"
-    >
-      Tax
-    </label>
+    />
   </div>
   <div
     className="Tax__Form-hlyaXp darYVI"
@@ -24,16 +22,14 @@ exports[`Note component matches snapshot 1`] = `
       >
         <label
           className="itemLabel"
-        >
-          Tax ID
-        </label>
+        />
         <div
           className="Tax__TaxID-jmRTWe QNlQZ"
         >
           <input
             name="tin"
             onChange={[Function]}
-            placeholder="Registration Number"
+            placeholder={undefined}
             type="text"
             value="123-456-789"
           />
@@ -49,7 +45,7 @@ exports[`Note component matches snapshot 1`] = `
         <label
           className="itemLabel"
         >
-          Amount (%)
+           (%)
         </label>
         <div
           className="Tax__TaxAmount-hmOePo dZzXEm"
@@ -57,7 +53,7 @@ exports[`Note component matches snapshot 1`] = `
           <input
             name="amount"
             onChange={[Function]}
-            placeholder="Amount"
+            placeholder={undefined}
             step="0.01"
             type="number"
             value={10}
@@ -69,9 +65,7 @@ exports[`Note component matches snapshot 1`] = `
       >
         <label
           className="itemLabel"
-        >
-          Method
-        </label>
+        />
         <select
           name="method"
           onChange={[Function]}
@@ -79,14 +73,10 @@ exports[`Note component matches snapshot 1`] = `
         >
           <option
             value="default"
-          >
-            Default
-          </option>
+          />
           <option
             value="reverse"
-          >
-            Reverse Charge
-          </option>
+          />
         </select>
       </div>
     </div>

@@ -2,9 +2,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import { translate } from 'react-i18next';
 const ipc = require('electron').ipcRenderer;
-
 import { Notify } from '../../helpers/notify';
+
 // Actions
 import * as ActionsCreator from '../actions';
 
@@ -63,15 +65,20 @@ class MainContent extends PureComponent {
   }
 
   render() {
-    const { invoice, configs, profile } = this.props;
+    const { t, invoice, configs, profile } = this.props;
     return (
       <Wrapper>
         {invoice._id ? (
           <div className="print-area">
-            <Invoice configs={configs} invoice={invoice} profile={profile} />
+            <Invoice
+              t={t}
+              configs={configs}
+              invoice={invoice}
+              profile={profile}
+            />
           </div>
         ) : (
-          <Message>Choose An Invoice To Preview</Message>
+          <Message>{t('preview:common:chooseInvoiceToPreview')}</Message>
         )}
       </Wrapper>
     );
@@ -83,6 +90,7 @@ MainContent.propTypes = {
   dispatch: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -91,4 +99,7 @@ const mapStateToProps = state => ({
   profile: getProfile(state),
 });
 
-export default connect(mapStateToProps)(MainContent);
+export default compose(
+  connect(mapStateToProps),
+  translate(['common', 'preview'])
+)(MainContent);

@@ -12,6 +12,7 @@ import { Section } from '../../shared/Section';
 // Mocks
 const currency = currencies.USD;
 const savedSettings = 'USD';
+const t = jest.fn();
 const updateFieldData = jest.fn();
 const updateSavedSettings = jest.fn();
 
@@ -20,6 +21,7 @@ describe('Renders correctly to the DOM', () => {
   beforeEach(() => {
     wrapper = mount(
       <Currency
+        t={t}
         currency={currency}
         savedSettings={savedSettings}
         updateFieldData={updateFieldData}
@@ -54,6 +56,7 @@ describe('Renders correctly to the DOM', () => {
     const tree = renderer
       .create(
         <Currency
+          t={t}
           currency={currency}
           savedSettings={savedSettings}
           updateFieldData={updateFieldData}

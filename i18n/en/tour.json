@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Skip",
+    "next": "Next",
+    "start": "Start Invoicing"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋  Hello!",
+      "description": "Thank you for giving me a try. Let me show you how to create stunning invoices with just 3 simple steps"
+    },
+    "create": {
+      "heading": "Step 1. Create",
+      "description": "Manta has a flexible form interface. It keeps things simple by default but you can always turn on/off additional fields whenever you find necessary."
+    },
+    "preview": {
+      "heading": "Step 2. Customize",
+      "description": "Manta comes with professional looking templates which can be customized further to match your brand style."
+    },
+    "save": {
+      "heading": "Step 3. Save",
+      "description": "Once happy with the invoice appearance your can save it as PDF for later use. Print it out or email it, let's use Manta to impress your clients now!"
+    },
+    "success": {
+      "heading": "Done!!! ✋️",
+      "description": "There you have it, the 3 simple steps to create stunning invoices with Manta. Remember to update company profile and logo before actually using the invoice."
+    }
+  }
+}

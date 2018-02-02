@@ -26,7 +26,6 @@ import Business from '../../templates/business';
 
 // Component
 class Invoice extends PureComponent {
-
   renderTemplate() {
     switch (this.props.configs.template) {
       case 'business': {
@@ -47,6 +46,7 @@ Invoice.propTypes = {
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Invoice;

@@ -15,14 +15,14 @@ import Welcome from '../components/slides/Welcome'; // Welcome Slide
 import Preview from '../components/slides/Preview'; // Preview & Customize Template
 import Success from '../components/slides/Success'; // Success
 
-function Slider({ currentSlide }) {
+function Slider({ t, currentSlide }) {
   return (
     <Content>
-      {currentSlide === 1 && <Welcome />}
-      {currentSlide === 2 && <Create />}
-      {currentSlide === 3 && <Preview />}
-      {currentSlide === 4 && <Save />}
-      {currentSlide === 5 && <Success />}
+      {currentSlide === 1 && <Welcome t={t} />}
+      {currentSlide === 2 && <Create t={t} />}
+      {currentSlide === 3 && <Preview t={t} />}
+      {currentSlide === 4 && <Save t={t} />}
+      {currentSlide === 5 && <Success t={t} />}
     </Content>
   );
 }

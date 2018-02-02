@@ -8,6 +8,7 @@ import { SingleDatePicker } from 'react-dates';
 import { DueDate } from '../DueDate.jsx';
 
 // Mocks
+const t = jest.fn();
 const updateFieldData = jest.fn();
 const dueDate = {
   required: true,
@@ -26,7 +27,7 @@ describe('Renders correctly to the DOM', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
-      <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
+      <DueDate t={t} dueDate={dueDate} updateFieldData={updateFieldData} />
     );
   });
 
@@ -50,7 +51,7 @@ describe('Renders correctly to the DOM', () => {
     // Setup
     const spy = jest.spyOn(DueDate.prototype, 'clearDate');
     const wrap = mount(
-      <DueDate dueDate={dueDate} updateFieldData={updateFieldData} />
+      <DueDate t={t} dueDate={dueDate} updateFieldData={updateFieldData} />
     );
     const clearDateBtn = wrap.find('.clearDateBtn');
     // Execute
@@ -75,7 +76,9 @@ describe('Renders correctly to the DOM', () => {
 
   it('matches snapshot', () => {
     const tree = renderer
-      .create(<DueDate dueDate={dueDate} updateFieldData={updateFieldData} />)
+      .create(
+        <DueDate t={t} dueDate={dueDate} updateFieldData={updateFieldData} />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
