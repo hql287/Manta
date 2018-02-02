@@ -25,10 +25,27 @@
     "openPDFReader": "Open PDF after Export",
     "language": {
       "name": "Language",
-      "en": "English",
+      "cs": "Czech",
+      "da": "Danish",
       "de": "German",
+      "el": "Greek",
+      "en": "English",
+      "esES": "Spanish",
       "fr": "French",
-      "vi": "Vietnamese"
+      "id": "Indonesian",
+      "it": "Italian",
+      "ja": "Japanese",
+      "lt": "Lithuanian",
+      "nl": "Dutch",
+      "ptBR": "Portuguese, Brazilian",
+      "ptPT": "Portuguese",
+      "ru": "Russian",
+      "th": "Thai",
+      "tl": "Tagalog, Philippines",
+      "tr": "Turkish",
+      "vi": "Vietnamese",
+      "zhCN": "Chinese (Simplified)",
+      "zhTW": "Chinese (Traditional)"
     },
     "other": "Other"
   }
