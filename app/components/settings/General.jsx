@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Custom Libs
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
+import { Notify } from '../../../helpers/notify';
 
 // Component
 class General extends Component {
