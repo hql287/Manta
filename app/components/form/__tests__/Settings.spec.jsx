@@ -45,12 +45,14 @@ const currentInvoice = {
 const toggleField = jest.fn();
 const toggleFormSettings = jest.fn();
 const updateSavedSettings = jest.fn();
+const t = jest.fn();
 
 describe('Settings component', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <Settings
+        t={t}
         settings={currentInvoice.settings}
         savedSettings={currentInvoice.savedSettings.required_fields}
         toggleField={toggleField}
@@ -120,6 +122,7 @@ describe('Settings component', () => {
     const tree = renderer
       .create(
         <Settings
+          t={t}
           settings={currentInvoice.settings}
           savedSettings={currentInvoice.savedSettings.required_fields}
           toggleField={toggleField}

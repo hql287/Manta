@@ -16,9 +16,7 @@ exports[`Settings component matches snapshot 1`] = `
   >
     <label
       className="Settings__Label-bIhYmz iPSgUQ"
-    >
-      Form Settings
-    </label>
+    />
     <div
       style={
         Object {
@@ -34,9 +32,7 @@ exports[`Settings component matches snapshot 1`] = `
   <div
     className="Settings__Helper-cagYXW jnzDbx"
   >
-    <p>
-      Toogle any field to make it required in the form.
-    </p>
+    <p />
   </div>
   <div
     className="Settings__AllSettings-hAEgKd cLFeXF"
@@ -46,9 +42,7 @@ exports[`Settings component matches snapshot 1`] = `
     >
       <label
         className="Settings__Label-bIhYmz iPSgUQ"
-      >
-        Due Date
-      </label>
+      />
       <label
         className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
@@ -69,9 +63,7 @@ exports[`Settings component matches snapshot 1`] = `
     >
       <label
         className="Settings__Label-bIhYmz iPSgUQ"
-      >
-        Currency
-      </label>
+      />
       <label
         className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
@@ -92,9 +84,7 @@ exports[`Settings component matches snapshot 1`] = `
     >
       <label
         className="Settings__Label-bIhYmz iPSgUQ"
-      >
-        Discount
-      </label>
+      />
       <label
         className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
@@ -115,9 +105,7 @@ exports[`Settings component matches snapshot 1`] = `
     >
       <label
         className="Settings__Label-bIhYmz iPSgUQ"
-      >
-        Tax
-      </label>
+      />
       <label
         className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >
@@ -138,9 +126,7 @@ exports[`Settings component matches snapshot 1`] = `
     >
       <label
         className="Settings__Label-bIhYmz iPSgUQ"
-      >
-        Note
-      </label>
+      />
       <label
         className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >

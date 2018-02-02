@@ -119,7 +119,7 @@ class Main extends Component {
   }
 
   displayDiscount() {
-    const { invoice, configs } = this.props;
+    const { invoice, configs, t } = this.props;
     const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
@@ -128,7 +128,7 @@ class Main extends Component {
       <InvoiceDiscount>
         <td colSpan="2" />
         <td className="label" colSpan="2">
-          Discount
+          { t('form:fields:discount:name') }{' '}
           {invoice.discount.type === 'percentage' && (
             <span> {invoice.discount.amount}%</span>
           )}
@@ -142,7 +142,7 @@ class Main extends Component {
   }
 
   displayTax() {
-    const { invoice, configs } = this.props;
+    const { t, invoice, configs } = this.props;
     const { tax } = invoice;
     const { taxAmount } = getInvoiceValue(invoice);
     const currencyBefore = configs.currencyPlacement === 'before';
@@ -153,11 +153,11 @@ class Main extends Component {
       <InvoiceTax>
         <td colSpan="2" />
         <td className="label" colSpan={tax.method === 'reverse' ? 1 : 2}>
-          Tax {tax.amount}%
+          { t('form:fields:tax:name') }{' '}{tax.amount}%
         </td>
         {tax.method === 'reverse' ? (
           <td className="label" colSpan={tax.method === 'reverse' ? 2 : 1}>
-            Reverse Charge
+            {t('form:fields:tax:reverse')}
           </td>
         ) : (
           <td>
@@ -169,7 +169,7 @@ class Main extends Component {
   }
 
   render() {
-    const { invoice, configs } = this.props;
+    const { invoice, configs, t } = this.props;
     const currencyBefore = configs.currencyPlacement === 'before';
     const currency = configs.useSymbol
       ? invoice.currency.symbol
@@ -193,11 +193,11 @@ class Main extends Component {
         <Table accentColor={configs.accentColor}>
           <thead>
             <tr>
-              <th className="w5">No</th>
-              <th>Description</th>
-              <th className="w15">Price</th>
-              <th className="w10">Qty</th>
-              <th className="w15">Subtotal</th>
+              <th className="w5">{t('preview:common:order')}</th>
+              <th>{t('preview:common:itemDescription')}</th>
+              <th className="w15">{t('preview:common:price')}</th>
+              <th className="w10">{t('preview:common:qty')}</th>
+              <th className="w15">{t('preview:common:subtotal')}</th>
             </tr>
           </thead>
           <tbody>{itemComponents}</tbody>
@@ -205,7 +205,7 @@ class Main extends Component {
             <tr className="invoice__subtotal">
               <td colSpan="2" />
               <td className="label" colSpan="2">
-                Subtotal
+                {t('preview:common:subtotal')}
               </td>
               <td>
                 {currencyBefore ? currency : ''} {formatNumber(invoice.subtotal)} {currencyBefore ? '' : currency}
@@ -217,7 +217,9 @@ class Main extends Component {
 
             <InvoiceTotal accentColor={configs.accentColor}>
               <td colSpan="2" />
-              <td className="label">Total</td>
+              <td className="label">
+                {t('preview:common:total')}
+              </td>
               <td colSpan="2">
                 {currencyBefore ? currency : ''} {formatNumber(invoice.grandTotal)} {currencyBefore ? '' : currency}
               </td>
@@ -232,6 +234,7 @@ class Main extends Component {
 Main.propTypes = {
   configs: PropTypes.object.isRequired,
   invoice: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Main;

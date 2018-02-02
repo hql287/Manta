@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 const openDialog = require('../renderers/dialog.js');
 const ipc = require('electron').ipcRenderer;
+import { translate } from 'react-i18next';
 
 // Actions
 import * as Actions from '../actions/invoices';
@@ -49,12 +50,16 @@ class Invoices extends PureComponent {
 
   // Open Confirm Dialog
   deleteInvoice(invoiceId) {
+    const { t } = this.props;
     openDialog(
       {
         type: 'warning',
-        title: 'Delete This Invoice',
-        message: 'Are You Sure?',
-        buttons: ['Yes', 'No'],
+        title: t('dialog:deleteInvoice:title'),
+        message: t('dialog:deleteInvoice:message'),
+        buttons: [
+          t('common:yes'),
+          t('common:noThanks')
+        ],
       },
       'confirmed-delete-invoice',
       invoiceId
@@ -80,9 +85,10 @@ class Invoices extends PureComponent {
 
   // Render
   render() {
-    const { invoices, dateFormat, currencyPlacement } = this.props;
+    const { invoices, dateFormat, currencyPlacement, t } = this.props;
     const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
+        t={t}
         key={invoice._id}
         deleteInvoice={this.deleteInvoice}
         editInvoice={this.editInvoice}
@@ -96,11 +102,11 @@ class Invoices extends PureComponent {
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>All Invoices</PageHeaderTitle>
+          <PageHeaderTitle>{t('invoices:header:name')}</PageHeaderTitle>
         </PageHeader>
         <PageContent bare>
           {invoices.length === 0 ? (
-            <Message info text="You don't have any invoice yet" />
+            <Message info text={t('messages:noInvoice')} />
           ) : (
             <div className="row">{invoicesComponent}</div>
           )}
@@ -123,6 +129,8 @@ const mapStateToProps = state => ({
   currencyPlacement: getCurrencyPlacement(state),
 });
 
-export default compose(connect(mapStateToProps), _withFadeInAnimation)(
-  Invoices
-);
+export default compose(
+  connect(mapStateToProps),
+  translate(['common', 'form', 'invoices']),
+  _withFadeInAnimation
+)(Invoices);

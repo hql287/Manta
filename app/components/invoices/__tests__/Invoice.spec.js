@@ -8,6 +8,7 @@ import Invoice from '../Invoice';
 import Button from '../../shared/Button';
 import SplitButton from '../../shared/SplitButton';
 
+
 // Mocks
 const invoice = {
   _id: '37b2804e-bfc1-4289-b1d7-226c5652ac91',
@@ -37,6 +38,24 @@ const deleteInvoice = jest.fn();
 const setInvoiceStatus = jest.fn();
 const dateFormat = 'MM/DD/YY';
 const currencyPlacement = 'before';
+Date.now = jest.genMockFunction().mockReturnValue(0);
+
+const t = jest.fn(status => {
+  switch (status) {
+    case 'invoices:status:cancelled': {
+      return 'Cancelled';
+    }
+    case 'invoices:status:refunded': {
+      return 'Refunded';
+    }
+    case 'invoices:status:paid': {
+      return 'Paid';
+    }
+    default: {
+      return 'Pending';
+    }
+  }
+});
 
 // Tests
 describe('Renders correctly to the DOM', () => {
@@ -44,6 +63,7 @@ describe('Renders correctly to the DOM', () => {
   beforeEach(() => {
     wrapper = shallow(
       <Invoice
+        t={t}
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -57,6 +77,7 @@ describe('Renders correctly to the DOM', () => {
   it('receives correct props', () => {
     const mountWrapper = mount(
       <Invoice
+        t={t}
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -95,6 +116,8 @@ describe('Renders correctly to the DOM', () => {
     const paidInvoice = Object.assign({}, invoice, { status: 'paid' });
     const paidInvoiceWapper = shallow(
       <Invoice
+        t={t}
+        language="en"
         invoice={paidInvoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -117,6 +140,8 @@ describe('Renders correctly to the DOM', () => {
     });
     const cancelledInvoiceWapper = shallow(
       <Invoice
+        t={t}
+        language="en"
         invoice={cancelledInvoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -137,6 +162,8 @@ describe('Renders correctly to the DOM', () => {
     const refundedInvoice = Object.assign({}, invoice, { status: 'refunded' });
     const refundedInvoiceWapper = shallow(
       <Invoice
+        t={t}
+        language="en"
         invoice={refundedInvoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -167,6 +194,7 @@ describe('Renders correctly to the DOM', () => {
     const tree = renderer
       .create(
         <Invoice
+          t={t}
           invoice={invoice}
           editInvoice={editInvoice}
           deleteInvoice={deleteInvoice}
@@ -187,6 +215,7 @@ describe('handle clicks correctly', () => {
     spyEditAction = jest.spyOn(Invoice.prototype, 'editInvoice');
     wrapper = shallow(
       <Invoice
+        t={t}
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
@@ -206,11 +235,10 @@ describe('handle clicks correctly', () => {
     deleteBtn = wrapper.find(Button).first();
   });
 
-  // TODO
   it('handle edit action correctly', () => {
     editBtn.simulate('click');
     expect(editInvoice).toHaveBeenCalled();
-		expect(editInvoice).toHaveBeenCalledWith(invoice);
+    expect(editInvoice).toHaveBeenCalledWith(invoice);
   });
 
   it('handle delete action correctly', () => {

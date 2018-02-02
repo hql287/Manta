@@ -1,0 +1,16 @@
+{
+  "noContact": "You don't have any contact yet",
+  "noInvoice": "You haven't created any invoice yet",
+  "invoice": {
+    "saved": "Invoice saved successfully",
+    "updated": "Invoice updated successfully",
+    "deleted": "Invoice deleted successfully"
+  },
+  "contact": {
+    "saved": "Contact saved successfully",
+    "deleted": "Contact deleted successfully"
+  },
+  "settings": {
+    "saved": "All settings have been saved successfully"
+  }
+}

@@ -3,8 +3,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 import styled from 'styled-components';
-
-const format = require('date-fns/format');
 const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
 
@@ -120,6 +118,7 @@ const Field = styled.div`
   align-items: flex-start;
   justify-content: center;
   margin-bottom: 15px;
+  text-transform: capitalize;
   h2 {
     font-size: 21px;
     color: #283641;
@@ -166,7 +165,7 @@ class Invoice extends PureComponent {
   }
 
   displayStatus() {
-    const { invoice } = this.props;
+    const { t, invoice } = this.props;
     const { status } = invoice;
     const { recipient } = invoice;
     switch (status) {
@@ -174,7 +173,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-backspace" />
-            Cancelled
+            {t('invoices:status:cancelled')}
           </span>
         );
       }
@@ -183,7 +182,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-checkmark" />
-            Paid
+            {t('invoices:status:paid')}
           </span>
         );
       }
@@ -192,7 +191,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-arrow-return-left" />
-            Refunded
+            {t('invoices:status:refunded')}
           </span>
         );
       }
@@ -200,7 +199,7 @@ class Invoice extends PureComponent {
         return (
           <span>
             <i className="ion-loop" />
-            Pending
+            {t('invoices:status:pending')}
           </span>
         );
       }
@@ -208,19 +207,19 @@ class Invoice extends PureComponent {
   }
 
   render() {
-    const { invoice, setInvoiceStatus, dateFormat, currencyPlacement } = this.props;
+    const { invoice, setInvoiceStatus, dateFormat, currencyPlacement, language, t } = this.props;
     const { recipient, status } = invoice;
     const statusActions = [
       {
-        label: 'Pending',
+        label: t('invoices:status:pending'),
         action: () => setInvoiceStatus(invoice._id, 'pending'),
       },
       {
-        label: 'Refunded',
+        label: t('invoices:status:refunded'),
         action: () => setInvoiceStatus(invoice._id, 'refunded'),
       },
       {
-        label: 'Cancelled',
+        label: t('invoices:status:cancelled'),
         action: () => setInvoiceStatus(invoice._id, 'cancelled'),
       },
     ];
@@ -238,13 +237,13 @@ class Invoice extends PureComponent {
           <Body>
             <Row>
               <Field>
-                <label>Client</label>
+                <label>{t('invoices:fields:client')}</label>
                 <h2>{recipient.fullname}</h2>
               </Field>
             </Row>
             <Row>
               <Field>
-                <label>Invoice Id</label>
+                <label>{t('invoices:fields:invoiceID')}</label>
                 <p>
                   {truncate(invoice._id, {
                     length: 8,
@@ -253,7 +252,7 @@ class Invoice extends PureComponent {
                 </p>
               </Field>
               <Field>
-                <label>Total Value</label>
+                <label>{t('invoices:fields:total')}</label>
                 <p>
                   {currencyBefore ? invoice.currency.code : ''} {formatNumber(invoice.grandTotal)} {currencyBefore ? '' : invoice.currency.code}
                 </p>
@@ -261,11 +260,13 @@ class Invoice extends PureComponent {
             </Row>
             <Row>
               <Field>
-                <label>Created On</label>
-                <p>{format(invoice.created_at, dateFormat)}</p>
+                <label>{t('invoices:fields:createdDate')}</label>
+                <p>
+                  {moment(invoice.created_at).format(dateFormat)}
+                </p>
               </Field>
               <Field>
-                <label>Due Date</label>
+                <label>{t('invoices:fields:dueDate')}</label>
                 <p>
                   {invoice.dueDate
                     ? moment(invoice.dueDate).format(dateFormat)
@@ -277,13 +278,13 @@ class Invoice extends PureComponent {
           <Footer>
             <SplitButton
               mainButton={{
-                label: 'Mark As Paid',
+                label: t('invoices:btns:markAsPaid'),
                 action: () => setInvoiceStatus(invoice._id, 'paid'),
               }}
               options={statusActions}
             />
-            <Button onClick={this.editInvoice}>Edit</Button>
-            <Button onClick={this.viewInvoice}>View</Button>
+            <Button onClick={this.editInvoice}>{t('invoices:btns:edit')}</Button>
+            <Button onClick={this.viewInvoice}>{t('invoices:btns:view')}</Button>
           </Footer>
         </Wrapper>
       </div>
@@ -292,11 +293,12 @@ class Invoice extends PureComponent {
 }
 
 Invoice.propTypes = {
-  editInvoice: PropTypes.func.isRequired,
+  dateFormat: PropTypes.string.isRequired,
   deleteInvoice: PropTypes.func.isRequired,
+  editInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,
-  dateFormat: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Invoice;

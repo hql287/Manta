@@ -15,12 +15,14 @@ const boundActionCreators = {
   removeItem: jest.fn(),
   updateItem: jest.fn(),
 };
+const t = jest.fn();
 
 describe('Note component', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = mount(
       <ItemsList
+        t={t}
         rows={rows}
         formState={formState}
         boundActionCreators={boundActionCreators}
@@ -60,6 +62,7 @@ describe('Note component', () => {
     const tree = renderer
       .create(
         <ItemsList
+          t={t}
           rows={rows}
           formState={formState}
           boundActionCreators={boundActionCreators}

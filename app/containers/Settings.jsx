@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
+import { translate } from 'react-i18next';
 
 // Selectors
 import {
@@ -63,16 +64,17 @@ class Settings extends Component {
 
   // Render Main Content
   renderSettingsContent() {
-    const { profile, general, invoice } = this.props.currentSettings;
+    const { t } = this.props;
     const { updateSettings } = this.props.boundActionCreators;
+    const { profile, general, invoice } = this.props.currentSettings;
     return (
       <PageWrapper>
         <PageHeader>
-          <PageHeaderTitle>Settings</PageHeaderTitle>
+          <PageHeaderTitle>{t('settings:header')}</PageHeaderTitle>
           {!this.settingsSaved() && this.state.canSave && (
             <PageHeaderActions>
               <Button primary onClick={this.saveSettingsState}>
-                Save
+                {t('common:save')}
               </Button>
             </PageHeaderActions>
           )}
@@ -84,32 +86,32 @@ class Settings extends Component {
               className={this.state.visibleTab === 1 ? 'active' : ''}
               onClick={() => this.changeTab(1)}
             >
-              Profile
+              {t('settings:tabs:profile')}
             </Tab>
             <Tab
               href="#"
               className={this.state.visibleTab === 2 ? 'active' : ''}
               onClick={() => this.changeTab(2)}
             >
-              Invoice
+              {t('settings:tabs:invoice')}
             </Tab>
             <Tab
               href="#"
               className={this.state.visibleTab === 3 ? 'active' : ''}
               onClick={() => this.changeTab(3)}
             >
-              General
+              {t('settings:tabs:general')}
             </Tab>
           </Tabs>
           <TabContent>
             {this.state.visibleTab === 1 && (
-              <Profile profile={profile} updateSettings={updateSettings} setSavable={this.setSavable} />
+              <Profile t={t} profile={profile} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
             {this.state.visibleTab === 2 && (
-              <Invoice invoice={invoice} updateSettings={updateSettings} setSavable={this.setSavable} />
+              <Invoice t={t} invoice={invoice} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
             {this.state.visibleTab === 3 && (
-              <General general={general} updateSettings={updateSettings} setSavable={this.setSavable} />
+              <General t={t} general={general} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
           </TabContent>
         </PageContent>
@@ -145,5 +147,6 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  translate(['common', 'form', 'settings']),
   _withFadeInAnimation
 )(Settings);

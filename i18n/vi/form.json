@@ -1,0 +1,46 @@
+{
+  "header": {
+    "new": "Tạo một hóa đơn mới",
+    "edit": "Chỉnh sửa hoá đơn",
+    "btns": {
+      "clear": "Làm lại",
+      "update": "Lưu Thay Đổi",
+      "saveAndPreview": "Lưu và Hiển thị"
+    }
+  },
+  "settings": {
+    "name": "Thay Đổi Trường Thông Tin",
+    "hint": "Click để ẩn hoặc hiện các trường thông tin khác."
+  },
+  "fields": {
+    "items": {
+      "name": "Sản Phẩm/Dịch Vụ",
+      "description": "Mô Tả",
+      "price": "Giá",
+      "quantity": "Số Lượng",
+      "add": "Thêm mới"
+    },
+    "recipient": {
+      "name": "Người nhận",
+      "select": "Lựa Chọn",
+      "add": "Tạo mới"
+    },
+    "discount": {
+      "name": "Khuyễn mãi",
+      "percentage": "Phần trăm",
+      "flat": "Trừ thẳng"
+    },
+    "dueDate": {
+      "name": "Hạn thanh toán",
+      "placeHolder": "Chọn ngày"
+    },
+    "tax": {
+      "name": "Thuế",
+      "id": "Mã Số Thuế",
+      "method": "Phương thức",
+      "reverse": "Đảo ngược phí"
+    },
+    "note": "Ghi chú",
+    "currency": "Tiền tệ"
+  }
+}

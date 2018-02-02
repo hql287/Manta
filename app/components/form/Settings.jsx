@@ -105,7 +105,7 @@ class Settings extends PureComponent {
   }
 
   render() {
-    const { toggleFormSettings, settings } = this.props;
+    const { t, toggleFormSettings, settings } = this.props;
     const { required_fields, open } = settings;
     return (
       <Motion
@@ -117,7 +117,7 @@ class Settings extends PureComponent {
         {({ height, rotate }) => (
           <Wrapper style={{ height: `${height}px` }}>
             <SettingsHeader href="#" onClick={toggleFormSettings}>
-              <Label>Form Settings</Label>
+              <Label>{t('form:settings:name')}</Label>
               <div
                 style={{
                   transform: `rotate(${rotate}deg)`,
@@ -129,17 +129,17 @@ class Settings extends PureComponent {
 
             <Helper>
               {this.isSettingsSaved() ? (
-                <p>Toogle any field to make it required in the form.</p>
+                <p>{t('form:settings:hint')}</p>
               ) : (
                 <a href="#" onClick={this.saveAsDefault}>
-                  <i className="ion-checkmark" /> Save as default?
+                  <i className="ion-checkmark" /> {t('common:saveAsDefault')}
                 </a>
               )}
             </Helper>
 
             <AllSettings>
               <Setting>
-                <Label>Due Date</Label>
+                <Label>{t('form:fields:dueDate:name')}</Label>
                 <Switch
                   name="dueDate"
                   checked={required_fields.dueDate}
@@ -148,7 +148,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Currency</Label>
+                <Label>{t('form:fields:currency')}</Label>
                 <Switch
                   name="currency"
                   checked={required_fields.currency}
@@ -157,7 +157,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Discount</Label>
+                <Label>{t('form:fields:discount:name')}</Label>
                 <Switch
                   name="discount"
                   checked={required_fields.discount}
@@ -166,7 +166,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Tax</Label>
+                <Label>{t('form:fields:tax:name')}</Label>
                 <Switch
                   name="tax"
                   checked={required_fields.tax}
@@ -175,7 +175,7 @@ class Settings extends PureComponent {
               </Setting>
 
               <Setting>
-                <Label>Note</Label>
+                <Label>{t('form:fields:note')}</Label>
                 <Switch
                   name="note"
                   checked={required_fields.note}
@@ -193,6 +193,7 @@ class Settings extends PureComponent {
 Settings.propTypes = {
   settings: PropTypes.object.isRequired,
   savedSettings: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   toggleField: PropTypes.func.isRequired,
   toggleFormSettings: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,

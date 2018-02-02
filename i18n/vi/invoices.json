@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Tất cả hoá đơn"
+  },
+  "fields": {
+    "client": "Khách hàng",
+    "invoiceID": "Mã hoá đơn",
+    "createdDate": "Tạo ngày",
+    "dueDate": "Hạn thanh toán",
+    "total": "Tổng giá trị"
+  },
+  "status": {
+    "pending": "Đang chờ duyệt",
+    "paid": "Đã thanh toán",
+    "refunded": "Đã hoàn tiền",
+    "cancelled": "Đã hủy"
+  },
+  "btns": {
+    "view": "Xem",
+    "edit": "Chỉnh sửa",
+    "markAsPaid": "Đã trả tiền"
+  }
+}

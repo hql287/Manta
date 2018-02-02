@@ -66,13 +66,16 @@ export class Currency extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <Section>
         <Header>
-          <label className="itemLabel">Currency</label>
+          <label className="itemLabel">
+            {t('form:fields:currency')}
+          </label>
           {!this.isSettingsSaved() && (
             <a href="#" onClick={this.saveAsDefault}>
-              <i className="ion-checkmark" /> Save as default?
+              <i className="ion-checkmark" /> {t('common:saveAsDefault')}
             </a>
           )}
         </Header>
@@ -90,6 +93,7 @@ export class Currency extends Component {
 Currency.propTypes = {
   currency: PropTypes.object.isRequired,
   savedSettings: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,
 };

@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import openDialog from '../../renderers/dialog';
 import { Circle } from 'rc-progress';
 const ipc = require('electron').ipcRenderer
+import i18n from '../../../i18n/i18n';
 
 // Styled Components
 import styled, { keyframes } from 'styled-components';
@@ -50,9 +51,12 @@ class AppUpdate extends PureComponent {
       openDialog(
         {
           type: 'info',
-          title: 'Update Available',
-          message: 'Do you want to download update in the background now?',
-          buttons: ['Yes', 'No'],
+          title: i18n.t('dialog:appUpdate:available:title'),
+          message: i18n.t('dialog:appUpdate:available:message'),
+          buttons: [
+            i18n.t('common:yes'),
+            i18n.t('common:noThanks')
+          ],
         },
         'update-download-confirmed'
       );
@@ -61,8 +65,8 @@ class AppUpdate extends PureComponent {
     ipc.on('update-not-available', () => {
       openDialog({
         type: 'info',
-        title: 'No Updates',
-        message: 'Current version is up-to-date',
+        title: i18n.t('dialog:appUpdate:noUpdate:title'),
+        message: i18n.t('dialog:appUpdate:noUpdate:message'),
       });
       this.hideIndicator();
     });
@@ -70,7 +74,7 @@ class AppUpdate extends PureComponent {
     ipc.on('update-error', (event, error) => {
       openDialog({
         type: 'warning',
-        title: 'Update Error',
+        title: i18n.t('dialog:appUpdate:error:title'),
         message: error,
       });
       this.hideIndicator();
@@ -103,9 +107,12 @@ class AppUpdate extends PureComponent {
       openDialog(
         {
           type: 'info',
-          title: 'Update Downloaded',
-          message: 'Do you want to quit the app to upgrade now?',
-          buttons: ['Quit Now', 'Later'],
+          title: i18n.t('dialog:appUpdate:downloaded:title'),
+          message: i18n.t('dialog:appUpdate:downloaded:message'),
+          buttons: [
+            i18n.t('dialog:appUpdate:downloaded:quitNow'),
+            i18n.t('dialog:appUpdate:downloaded:later')
+          ],
         },
         'upgrade-confirmed'
       );

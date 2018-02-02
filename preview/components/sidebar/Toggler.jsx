@@ -3,11 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Section, Label } from '../shared';
 
-function Toggler({ configs, handleInputChange }) {
+function Toggler({ t, configs, handleInputChange }) {
   const { showLogo, useSymbol, showRecipient } = configs;
   return (
     <Section>
-      <Label>Toggle</Label>
+      <Label>{ t('preview:sidebar:toggle:name') }</Label>
       <label>
         <input
           name="showLogo"
@@ -16,7 +16,7 @@ function Toggler({ configs, handleInputChange }) {
           onChange={handleInputChange}
         />
         {'\u00A0'}
-        Logo
+        { t('preview:sidebar:toggle:logo') }
       </label>
       <label>
         <input
@@ -26,7 +26,7 @@ function Toggler({ configs, handleInputChange }) {
           onChange={handleInputChange}
         />
         {'\u00A0'}
-        Symbols
+        { t('preview:sidebar:toggle:symbol') }
       </label>
       <label>
         <input
@@ -36,7 +36,7 @@ function Toggler({ configs, handleInputChange }) {
           onChange={handleInputChange}
         />
         {'\u00A0'}
-        Recipient
+        { t('preview:sidebar:toggle:recipient') }
       </label>
     </Section>
   );
@@ -45,6 +45,7 @@ function Toggler({ configs, handleInputChange }) {
 Toggler.propTypes = {
   configs: PropTypes.object.isRequired,
   handleInputChange: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 export default Toggler;

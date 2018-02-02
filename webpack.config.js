@@ -108,7 +108,7 @@ const commonConfig = merge([
         './app/index.jsx',
       ],
       preview: ['react-hot-loader/patch', './preview/index.jsx'],
-      modal: ['react-hot-loader/patch', './modal/index.js'],
+      modal: ['react-hot-loader/patch', './modal/index.jsx'],
     },
 
     context: path.resolve(__dirname),

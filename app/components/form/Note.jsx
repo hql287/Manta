@@ -50,15 +50,16 @@ export class Note extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
       <Section>
-        <label className="itemLabel">Note</label>
+        <label className="itemLabel">{t('form:fields:note')}</label>
         <NoteContent
           cols="50"
           rows="4"
           onChange={this.handleInputChange}
-          placeholder="Note"
           value={this.state.content}
+          placeholder={t('form:fields:note')}
         />
       </Section>
     );
@@ -67,6 +68,7 @@ export class Note extends Component {
 
 Note.propTypes = {
   note: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
 };
 

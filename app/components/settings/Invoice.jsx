@@ -23,11 +23,12 @@ class Invoice extends Component {
   }
 
   componentDidMount() {
+    const { t } = this.props;
     ipc.on('no-access-directory', (event, message) => {
       openDialog({
         type: 'warning',
-        title: 'No Access Permisison',
-        message: `${message}. Please choose a different directory!`,
+        title: t('dialog:noAccess:title'),
+        message: `${message}. ${t('dialog:noAccess:message')}`,
       });
     });
 
@@ -112,6 +113,7 @@ class Invoice extends Component {
   }
 
   render() {
+    const { t } = this.props;
     const {
       exportDir,
       template,
@@ -156,6 +158,7 @@ class Invoice extends Component {
 
 Invoice.propTypes = {
   invoice: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
   updateSettings: PropTypes.func.isRequired,
 };
 
