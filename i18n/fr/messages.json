@@ -1,16 +1,16 @@
 {
-  "noContact": "You don't have any contact yet",
-  "noInvoice": "You haven't created any invoice yet",
+  "noContact": "Vous n'avez pas encore de contact",
+  "noInvoice": "Vous n'avez pas créé de facture pour le moment",
   "invoice": {
-    "saved": "Invoice saved successfully",
-    "updated": "Invoice updated successfully",
-    "deleted": "Invoice deleted successfully"
+    "saved": "Facture enregistrée avec succès",
+    "updated": "Facture mise à jour avec succès",
+    "deleted": "Facture supprimée avec succès"
   },
   "contact": {
-    "saved": "Contact saved successfully",
-    "deleted": "Contact deleted successfully"
+    "saved": "Contact enregistré avec succès",
+    "deleted": "Contact supprimé avec succès"
   },
   "settings": {
-    "saved": "All settings have been saved successfully"
+    "saved": "Tous les paramètres ont été enregistrés avec succès"
   }
 }

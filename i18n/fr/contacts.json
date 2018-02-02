@@ -1,9 +1,9 @@
 {
-  "header": "All Contacts",
+  "header": "Tous les contacts",
   "fields": {
     "contact": "Contact",
     "email": "Email",
-    "phone": "Phone",
+    "phone": "Téléphone",
     "actions": "Actions"
   }
 }

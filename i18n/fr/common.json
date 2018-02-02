@@ -1,16 +1,16 @@
 {
   "fields": {
-    "fullname": "Full Name",
-    "company": "Company",
-    "address": "Address",
+    "fullname": "Nom et prénom",
+    "company": "Société",
+    "address": "Adresse",
     "email": "Email",
-    "phone": "Phone Number",
-    "website": "Website"
+    "phone": "N° de téléphone",
+    "website": "Site Internet"
   },
-  "save": "Save",
-  "amount": "Amount",
-  "default": "Default",
-  "saveAsDefault": "Save as Default?",
-  "yes": "Yes",
-  "noThanks": "No, thanks"
+  "save": "Sauvegarder",
+  "amount": "Montant",
+  "default": "Valeurs par défaut",
+  "saveAsDefault": "Enregistrer comme valeurs par défaut ?",
+  "yes": "Oui",
+  "noThanks": "Non, merci"
 }

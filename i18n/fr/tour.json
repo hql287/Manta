@@ -1,29 +1,29 @@
 {
   "actions": {
-    "skip": "Skip",
-    "next": "Next",
-    "start": "Start Invoicing"
+    "skip": "Passer",
+    "next": "Suivant",
+    "start": "Commencer la facturation"
   },
   "slides": {
     "welcome": {
-      "heading": "👋  Hello!",
-      "description": "Thank you for giving me a try. Let me show you how to create stunning invoices with just 3 simple steps"
+      "heading": "👋 Salut !",
+      "description": "Merci de me donner une chance. Laissez-moi vous montrer comment créer de sublimes factures en seulement 3 étapes simples"
     },
     "create": {
-      "heading": "Step 1. Create",
-      "description": "Manta has a flexible form interface. It keeps things simple by default but you can always turn on/off additional fields whenever you find necessary."
+      "heading": "Étape 1. Créer",
+      "description": "Manta a une interface de formulaire flexible. Il garde les choses simples par défaut, mais vous pouvez toujours activer/désactiver des champs supplémentaires à chaque fois que cela vous semble nécessaire."
     },
     "preview": {
-      "heading": "Step 2. Customize",
-      "description": "Manta comes with professional looking templates which can be customized further to match your brand style."
+      "heading": "Étape 2. Personnaliser",
+      "description": "Manta est livré avec des modèles professionnels qui peuvent être personnalisés afin de correspondre au style de votre marque."
     },
     "save": {
-      "heading": "Step 3. Save",
-      "description": "Once happy with the invoice appearance your can save it as PDF for later use. Print it out or email it, let's use Manta to impress your clients now!"
+      "heading": "Étape 3. Sauvegarder",
+      "description": "Une fois satisfait de l'apparence de la facture, vous pouvez l'enregistrer en PDF pour plus tard. Imprimez-la ou envoyez-la par email dès maintenant pour impressionner vos clients avec Manta!"
     },
     "success": {
-      "heading": "Done!!! ✋️",
-      "description": "There you have it, the 3 simple steps to create stunning invoices with Manta. Remember to update company profile and logo before actually using the invoice."
+      "heading": "Terminé !!! ✋️",
+      "description": "Et voilà les 3 étapes simples pour créer de superbes factures avec Manta.\nN'oubliez pas de mettre à jour le profil de la société ainsi que son logo avant d'éditer de vraie factures."
     }
   }
 }

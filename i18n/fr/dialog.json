@@ -1,93 +1,87 @@
 {
-  "appUpdate" : {
+  "appUpdate": {
     "available": {
-      "title": "New update available",
-      "message": "Do you want to start download the update in the background?"
+      "title": "Nouvelle mise à jour disponible",
+      "message": "Souhaitez-vous commencer le téléchargement de la mise à jour en arrière-plan ?"
     },
     "noUpdate": {
-      "title": "No update availbale",
-      "message": "You're using the latest version of the app"
+      "title": "Aucune mise à jour disponible",
+      "message": "Vous utilisez la dernière version de l'application"
     },
     "error": {
-      "title": "An error has occurred"
+      "title": "Une erreur s'est produite"
     },
     "downloaded": {
-      "title": "Update downloaded",
-      "message": "Do you want to quit and upgrade the app now?",
-      "quitNow": "Quit Now",
-      "later": "Later"
+      "title": "Mise à jour téléchargée",
+      "message": "Souhaitez-vous quitter et mettre l'application à jour maintenant ?",
+      "quitNow": "Quitter maintenant",
+      "later": "Plus tard"
     }
   },
   "noAccess": {
-    "title": "No access permission",
-    "message": "Please choose another directory"
+    "title": "Aucune autorisation d’accès",
+    "message": "Veuillez choisir un autre répertoire"
   },
-  "errorBoundary": "An error has occurred",
+  "errorBoundary": "Une erreur s'est produite",
   "deleteInvoice": {
-    "title": "Delete this invoice?",
-    "message": "The invoice will be removed permanently from the database"
+    "title": "Supprimer cette facture ?",
+    "message": "La facture sera supprimée définitivement"
   },
   "deleteContact": {
-    "title": "Delete this contact?",
-    "message": "The contact will be removed permanently from the database"
+    "title": "Supprimer ce contact ?",
+    "message": "Ce contact sera supprimé définitivement"
   },
   "fileTypeErr": {
-    "title": "Please choose another file"
+    "title": "Veuillez choisir un autre fichier"
   },
   "validation": {
     "recipient": {
       "empty": {
-        "title": "Invalid contact",
-        "message": "Contact can not be blank"
+        "title": "Contact invalide",
+        "message": "Contact ne peut pas être vide"
       },
       "requiredFields": {
-        "title": "Required fields",
-        "message": "Please fill in all required fields"
+        "title": "Champs requis",
+        "message": "Merci de remplir tous les champs requis"
       },
       "email": {
-        "title": "Invalid email",
-        "message": "Please choose another email"
+        "title": "Email invalide",
+        "message": "Veuillez choisir un autre email"
       }
     },
-
     "rows": {
       "emptyDescription": {
-        "title": "Invalid description",
-        "message": "Description can not be blank"
+        "title": "Description invalide",
+        "message": "La description ne peut pas être vide"
       },
       "priceZero": {
-        "title": "Invalid price",
-        "message": "Price must be greater than zero"
+        "title": "Prix invalide",
+        "message": "Le prix doit être supérieur à zéro"
       },
       "qtyZero": {
-        "title": "Invalid quantity",
-        "message": "Quantity must be greater than zero"
+        "title": "Quantité invalide",
+        "message": "La quantité doit être supérieure à zéro"
       }
     },
-
     "dueDate": {
-      "title": "Invalid due date",
-      "message": "Please select a date"
+      "title": "Échéance invalide",
+      "message": "Veuillez sélectionner une date"
     },
-
     "currency": {
-      "title": "Invalid currency",
-      "message": "Please choose a currency"
+      "title": "Devise invalide",
+      "message": "Veuillez choisir une devise"
     },
-
     "discount": {
-      "title": "Invalid discount",
-      "message": "Discount amount must be greater than zero"
+      "title": "Remise invalide",
+      "message": "Le montant de la remise doit être supérieur à zéro"
     },
-
     "tax": {
-      "title": "Invalid tax",
-      "message": "Tax amount must be greater than zero"
+      "title": "Taxe invalide",
+      "message": "Le montant de la TVA doit être supérieur à zéro"
     },
-
     "note": {
-      "title": "Invalid note",
-      "message": "Note content can not be blank"
+      "title": "Remarque non valide",
+      "message": "Le contenu des remarques ne peut pas être vide"
     }
   }
 }

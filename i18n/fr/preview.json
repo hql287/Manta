@@ -1,40 +1,40 @@
 {
   "sidebar": {
-    "template": "Template",
+    "template": "Modèle",
     "alignment": {
-      "name": "Alignment",
-      "top": "Top",
-      "middle": "Middle",
-      "bottom": "Bottom"
+      "name": "Alignement",
+      "top": "Haut",
+      "middle": "Milieu",
+      "bottom": "Bas"
     },
-    "fontSize": "Font Size",
-    "toggle": {
-      "name": "Toggle",
+    "fontSize": "Taille du texte",
+    "toggler": {
+      "name": "Activer",
       "logo": "Logo",
-      "symbol": "Symbol",
-      "recipient": "Recipient"
+      "symbol": "Symbole",
+      "recipient": "Destinataire"
     },
     "accentColor": {
-      "name" : "Accent Color",
-      "useCustom": "Use Custom"
+      "name": "Couleur secondaire",
+      "useCustom": "Couleur personnalisée"
     },
     "actions": {
       "name": "Actions",
-      "savePDF": "Export PDF"
+      "savePDF": "Exporter en PDF"
     }
   },
   "common": {
-    "billedTo": "Billed To",
-    "chooseInvoiceToPreview": "Please choose an Invoice to preview",
-    "created": "Created",
-    "due": "Due",
-    "invoice": "Invoice",
-    "itemDescription": "Item Description",
+    "billedTo": "Facturé à",
+    "chooseInvoiceToPreview": "Veuillez choisir une facture à visualiser",
+    "created": "Créé",
+    "due": "Échéance",
+    "invoice": "Facture",
+    "itemDescription": "Description de l'élement",
     "notice": "Notice",
     "order": "No",
-    "price": "Price",
-    "qty": "Quantity",
-    "subtotal": "Subtotal",
+    "price": "Prix",
+    "qty": "Quantité",
+    "subtotal": "Sous-total",
     "total": "Total"
   }
 }

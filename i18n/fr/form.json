@@ -1,42 +1,42 @@
 {
   "header": {
     "new": "Créer une nouvelle facture",
-    "edit": "Créer une nouvelle facture",
+    "edit": "Modifier la facture",
     "btns": {
-      "clear": "Effacer",
+      "clear": "Supprimer",
       "update": "Mettre à jour",
-      "saveAndPreview": "Sauvegarder & Aperçu"
+      "saveAndPreview": "Enregistrer et prévisualiser"
     }
   },
   "settings": {
-    "name": "Réglage du formulaire",
-    "hint": "Appuyer pour Afficher/Masquer un champ de donnée."
+    "name": "Paramètres du formulaire",
+    "hint": "Activer un champ pour le rendre disponible."
   },
   "fields": {
     "items": {
-      "name": "Produit/Service",
+      "name": "Produit / Service",
       "description": "Description",
       "price": "Prix",
       "quantity": "Quantité",
-      "add": "Ajouter un nouvel article"
+      "add": "Ajouter un nouvel élément"
     },
     "recipient": {
-      "name": "Titulaire",
+      "name": "Destinataire",
       "select": "Sélectionner",
-      "add": "Créer un nouveau contact"
+      "add": "Créer un nouveau"
     },
     "discount": {
-      "name": "Remise",
+      "name": "Remise ",
       "percentage": "Pourcentage",
-      "flat": "Remise directe"
+      "flat": "Taux Fixe"
     },
     "dueDate": {
       "name": "Échéance",
-      "placeHolder": "Sélectionner une date"
+      "placeHolder": "Choisir une date"
     },
     "tax": {
       "name": "Taxe",
-      "id": "Numéro fiscal",
+      "id": "Numéro de TVA",
       "method": "Méthode",
       "reverse": "Autoliquidation"
     },

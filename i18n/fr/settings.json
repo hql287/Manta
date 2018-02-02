@@ -1,35 +1,52 @@
 {
-  "header": "Settings",
+  "header": "Paramètres",
   "tabs": {
-    "profile": "Profile",
-    "invoice": "Invoice",
-    "general": "General"
+    "profile": "Profil",
+    "invoice": "Facture",
+    "general": "Général"
   },
   "fields": {
     "logo": {
       "name": "Logo",
-      "hint": "Accepts PNG, JPG & SVG (Recommended)"
+      "hint": "Accepte PNG, JPG & SVG (Recommandé)"
     },
-    "taxSettings": "Tax Settings",
-    "template": "Template",
-    "dateFormat": "Date Format",
-    "pdfExportDir": "PDF Export Directory",
-    "requiredFields": "Required Fields",
-    "sound": "Sound",
-    "mute": "Mute",
+    "taxSettings": "Paramètres des Taxes",
+    "template": "Modèle",
+    "dateFormat": "Format de la Date",
+    "pdfExportDir": "Dossier d'export PDF",
+    "requiredFields": "Champs Requis",
+    "sound": "Son",
+    "mute": "Rendre muet",
     "autoCheckUpdate": {
-      "name": "Auto Check for Update",
-      "daily": "Everday (Recommended)",
-      "weekly": "Everyweek"
+      "name": "Verification automatique des mises à jours",
+      "daily": "Tous les jours (recommandé)",
+      "weekly": "Toutes les semaines"
     },
-    "openPDFReader": "Open PDF after Export",
+    "openPDFReader": "Ouvrir le fichier PDF après l'export",
     "language": {
-      "name": "Language",
-      "en": "English",
-      "de": "German",
-      "fr": "French",
-      "vi": "Vietnamese"
+      "name": "Langue",
+      "cs": "Tchèque",
+      "da": "Danois",
+      "de": "Allemand",
+      "el": "Grec",
+      "en": "Anglais",
+      "esES": "Espagnol",
+      "fr": "Français",
+      "id": "Indonésien",
+      "it": "Italien",
+      "ja": "Japonais",
+      "lt": "Lituanien",
+      "nl": "Néerlandais",
+      "ptBR": "Portugais (Brésil)",
+      "ptPT": "Portugais",
+      "ru": "Russe",
+      "th": "Thaï",
+      "tl": "Tagalog, Philippines",
+      "tr": "Turc",
+      "vi": "Vietnamien",
+      "zhCN": "Chinois (Simplifié)",
+      "zhTW": "Chinois (Traditionnel)"
     },
-    "other": "Other"
+    "other": "Autre"
   }
 }
