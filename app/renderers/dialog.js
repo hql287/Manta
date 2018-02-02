@@ -8,7 +8,7 @@ const { BrowserWindow } = require('electron').remote;
 // Custom Libs
 const sounds = require('../../libs/sounds.js');
 
-const centerOnPrimaryDisplay = require('../helpers/center-on-primary-display');
+const centerOnPrimaryDisplay = require('../../helpers/center-on-primary-display');
 
 function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
   const width = 450;
