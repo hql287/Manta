@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { translate } from 'react-i18next';
 const ipc = require('electron').ipcRenderer;
-import { Notify } from '../helper/notify';
+import { Notify } from '../../helpers/notify';
 
 // Actions
 import * as ActionsCreator from '../actions';

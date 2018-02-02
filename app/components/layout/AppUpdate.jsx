@@ -2,8 +2,9 @@
 import React, { PureComponent } from 'react';
 import openDialog from '../../renderers/dialog';
 import { Circle } from 'rc-progress';
-const ipc = require('electron').ipcRenderer
 import i18n from '../../../i18n/i18n';
+import { Notify } from '../../../helpers/notify';
+const ipc = require('electron').ipcRenderer
 
 // Styled Components
 import styled, { keyframes } from 'styled-components';
@@ -104,6 +105,12 @@ class AppUpdate extends PureComponent {
     });
 
     ipc.on('update-downloaded', () => {
+      // Send notification
+      Notify({
+        title: i18n.t('dialog:appUpdate:downloaded:title'),
+        body: i18n.t('dialog:appUpdate:downloaded:message'),
+      });
+      // Open Dialog
       openDialog(
         {
           type: 'info',
