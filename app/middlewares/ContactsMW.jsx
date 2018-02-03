@@ -31,11 +31,7 @@ const ContactsMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.CONTACT_SAVE: {
-      const doc = Object.assign({}, action.payload, {
-        _id: uuidv4(),
-        created_at: Date.now(),
-      });
-      return saveDoc('contacts', doc)
+      return saveDoc('contacts', action.payload)
         .then(newDocs => {
           next({
             type: ACTION_TYPES.CONTACT_SAVE,

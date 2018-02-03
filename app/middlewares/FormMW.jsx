@@ -35,7 +35,7 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       }
       // Save Contact to DB if it's a new one
       if (currentFormData.recipient.newRecipient) {
-        const newContactData = currentFormData.recipient.new;
+        const newContactData = currentInvoiceData.recipient;
         dispatch(ContactsActions.saveContact(newContactData));
       }
       // Clear The Form
