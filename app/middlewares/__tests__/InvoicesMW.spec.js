@@ -303,16 +303,23 @@ describe('Invoices Middleware', () => {
       };
       // Execute
       const action = Actions.editInvoice(currentInvoice);
-      middleware(action);
-      // Call next
-      expect(next.mock.calls.length).toBe(1);
-      expect(next).toHaveBeenCalledWith(action);
-      // Dispatch change Tab action
-      expect(dispatch.mock.calls.length).toBe(1);
-      expect(dispatch).toHaveBeenCalledWith({
-        type: ACTION_TYPES.UI_TAB_CHANGE,
-        payload: 'form'
-      });
+      middleware(action).then(() => {
+        // Call next
+        expect(next.mock.calls.length).toBe(1);
+        expect(next).toHaveBeenCalledWith(
+          Object.assign({}, action, {
+            payload: Object.assign({}, action.payload, {
+              contacts: mockData.contactsRecords
+            })
+          })
+        );
+        // Dispatch change Tab action
+        expect(dispatch.mock.calls.length).toBe(1);
+        expect(dispatch).toHaveBeenCalledWith({
+          type: ACTION_TYPES.UI_TAB_CHANGE,
+          payload: 'form'
+        });
+      })
     });
   })
 

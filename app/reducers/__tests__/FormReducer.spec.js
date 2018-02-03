@@ -7,6 +7,8 @@ import * as ACTION_TYPES from '../../constants/actions.jsx';
 import currencies from '../../../libs/currencies.json';
 
 import uuidv4 from 'uuid/v4';
+import faker from 'faker';
+import { pick } from 'lodash';
 
 describe('Form Reducer should handle', () => {
   let currentState;
@@ -355,12 +357,37 @@ describe('Form Reducer should handle Invoice Edit', () => {
         currency: 'VND',
       },
     };
+
     invoiceData = {
+      contacts: [
+        {
+          _id: 'first-contact',
+          fullname: faker.name.findName(),
+          email: faker.internet.email(),
+          company: faker.company.companyName(),
+          phone: faker.phone.phoneNumber(),
+        },
+        {
+          _id: 'second-contact',
+          fullname: faker.name.findName(),
+          email: faker.internet.email(),
+          company: faker.company.companyName(),
+          phone: faker.phone.phoneNumber(),
+        },
+        {
+          _id: 'third-contact',
+          fullname: faker.name.findName(),
+          email: faker.internet.email(),
+          company: faker.company.companyName(),
+          phone: faker.phone.phoneNumber(),
+        },
+      ],
       recipient: {
-        fullname: 'Jon Snow',
-        company: 'HBO',
-        email: 'jon@snow.got',
-        phone: '000000000',
+        _id: 'random-string',
+        fullname: faker.name.findName(),
+        email: faker.internet.email(),
+        company: faker.company.companyName(),
+        phone: faker.phone.phoneNumber(),
       },
       rows: [
         {
@@ -368,7 +395,7 @@ describe('Form Reducer should handle Invoice Edit', () => {
           description: 'iPhone X',
           price: 999,
           quantity: 1,
-          subtotal: 999
+          subtotal: 999,
         },
       ],
       currency: {
@@ -396,10 +423,11 @@ describe('Form Reducer should handle Invoice Edit', () => {
       },
       discount: {
         amount: 5,
-        type: 'percentage'
+        type: 'percentage',
       },
       note: 'Thank you!',
     };
+
     newState = FormReducer(currentState, {
       type: ACTION_TYPES.INVOICE_EDIT,
       payload: invoiceData,
@@ -411,10 +439,26 @@ describe('Form Reducer should handle Invoice Edit', () => {
     expect(newState.settings.editMode.data).toEqual(invoiceData);
   });
 
-  it('should populate field data', () => {
-    // Recipient
-    expect(newState.recipient.newRecipient).toEqual(false);
-    expect(newState.recipient.select).toEqual(invoiceData.recipient);
+  it('should populate recipient field data correctly', () => {
+    const invoiceData2 = Object.assign({}, invoiceData, {
+      recipient: invoiceData.contacts[0]
+    })
+    const newState2 = FormReducer(currentState, {
+      type: ACTION_TYPES.INVOICE_EDIT,
+      payload: invoiceData2,
+    });
+    expect(newState2.recipient.newRecipient).toEqual(false);
+    expect(newState2.recipient.select).toEqual(invoiceData2.recipient);
+  })
+
+  it('should create a new contact in form if all contacts are deleted', () => {
+    expect(newState.recipient.newRecipient).toEqual(true);
+    expect(newState.recipient.new).toEqual(
+      pick(invoiceData.recipient, ['fullname', 'company', 'phone', 'email'])
+    );
+  });
+
+  it('should populate other fields data correctly', () => {
     // Rows
     expect(newState.rows.length).toEqual(1);
     expect(newState.rows).toEqual(invoiceData.rows);
@@ -434,7 +478,9 @@ describe('Form Reducer should handle Invoice Edit', () => {
     const { required_fields } = newState.settings;
     expect(required_fields.tax).toEqual(invoiceData.tax !== undefined);
     expect(required_fields.dueDate).toEqual(invoiceData.dueDate !== undefined);
-    expect(required_fields.discount).toEqual(invoiceData.discount !== undefined);
+    expect(required_fields.discount).toEqual(
+      invoiceData.discount !== undefined
+    );
     expect(required_fields.note).toEqual(invoiceData.note !== undefined);
   });
 
@@ -470,7 +516,7 @@ describe('Form Reducer should handle update Settings', () => {
           discount: false,
           tax: false,
           note: false,
-        }
+        },
       },
     };
     newState = FormReducer(currentState, {
@@ -488,7 +534,7 @@ describe('Form Reducer should handle update Settings', () => {
           discount: true,
           tax: true,
           note: true,
-        }
+        },
       },
     });
   });
