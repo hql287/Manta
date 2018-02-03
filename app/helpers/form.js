@@ -1,6 +1,7 @@
 const openDialog = require('../renderers/dialog');
-import { isEmpty } from 'lodash';
+import { isEmpty, pick, includes } from 'lodash';
 import i18n from '../../i18n/i18n';
+import uuidv4 from 'uuid/v4';
 
 function validateFormData(formData) {
   const {
@@ -42,8 +43,14 @@ function getInvoiceData(formData) {
   const invoiceData = { rows };
   // Set Recipient
   if (recipient.newRecipient) {
-    invoiceData.recipient = recipient.new;
+    // Add id & created_at so the invoice records will remembers
+    invoiceData.recipient = Object.assign({}, recipient.new, {
+      _id: uuidv4(),
+      created_at: Date.now(),
+    });
   } else {
+    // TODO
+    // Migh as well filter out _rev
     invoiceData.recipient = recipient.select;
   }
   // Set Invoice DueDate
@@ -110,7 +117,7 @@ function validateRows(rows) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:emptyDescription:title'),
-        message: i18n.t('dialog:validation:rows:emptyDescription:message')
+        message: i18n.t('dialog:validation:rows:emptyDescription:message'),
       });
       validated = false;
       break;
@@ -120,7 +127,7 @@ function validateRows(rows) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:priceZero:title'),
-        message: i18n.t('dialog:validation:rows:priceZero:message')
+        message: i18n.t('dialog:validation:rows:priceZero:message'),
       });
       validated = false;
       break;
@@ -130,7 +137,7 @@ function validateRows(rows) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:qtyZero:title'),
-        message: i18n.t('dialog:validation:rows:qtyZero:message')
+        message: i18n.t('dialog:validation:rows:qtyZero:message'),
       });
       validated = false;
       break;
@@ -146,7 +153,7 @@ function validateDueDate(isRequired, dueDate) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:dueDate:title'),
-        message: i18n.t('dialog:validation:dueDate:message')
+        message: i18n.t('dialog:validation:dueDate:message'),
       });
       return false;
     }
@@ -161,7 +168,7 @@ function validateCurrency(isRequired, currency) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:currency:title'),
-        message: i18n.t('dialog:validation:currency:message')
+        message: i18n.t('dialog:validation:currency:message'),
       });
       return false;
     }
@@ -177,7 +184,7 @@ function validateDiscount(isRequired, discount) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:discount:title'),
-        message: i18n.t('dialog:validation:discount:message')
+        message: i18n.t('dialog:validation:discount:message'),
       });
       return false;
     }
@@ -193,7 +200,7 @@ function validateTax(isRequired, tax) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:tax:title'),
-        message: i18n.t('dialog:validation:tax:message')
+        message: i18n.t('dialog:validation:tax:message'),
       });
       return false;
     }
@@ -209,13 +216,30 @@ function validateNote(isRequired, note) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:note:title'),
-        message: i18n.t('dialog:validation:note:message')
+        message: i18n.t('dialog:validation:note:message'),
       });
       return false;
     }
     return true;
   }
   return true;
+}
+
+// SET RECIPIENT INFORMATION IN EDIT MODE
+function setEditRecipient(allContacts, currentContact) {
+  if (allContacts.length) {
+    const contactIDs = allContacts.map(contact => contact._id);
+    if (includes(contactIDs, currentContact._id)) {
+      return {
+        newRecipient: false,
+        select: currentContact,
+      };
+    }
+  }
+  return {
+    newRecipient: true,
+    new: pick(currentContact, ['fullname', 'company', 'phone', 'email']),
+  };
 }
 
 export {
@@ -228,4 +252,5 @@ export {
   validateDiscount,
   validateTax,
   validateNote,
+  setEditRecipient,
 };
