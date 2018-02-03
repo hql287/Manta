@@ -17,7 +17,9 @@ describe('Form Middleware', () => {
       getState = jest.fn(() => ({
         form: {
           validation: true,
-          recipient: { newRecipient: true },
+          recipient: {
+            newRecipient: true
+          },
           settings: {
             editMode: {
               active: false,
@@ -26,11 +28,8 @@ describe('Form Middleware', () => {
         },
       }));
       const middleware = FormMW({ dispatch, getState })(next);
-
       // Action
-      const action = Actions.saveFormData();
-      middleware(action);
-
+      middleware(Actions.saveFormData());
       // Expect
       expect(getState.mock.calls.length).toBe(1);
       // Save the Invoice, Save new contact & Clear the Form

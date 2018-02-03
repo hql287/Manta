@@ -14,6 +14,7 @@ import {
   validateDiscount,
   validateTax,
   validateNote,
+  setEditRecipient
 } from '../form';
 
 // Mocks
@@ -636,5 +637,63 @@ describe('validateNote', () => {
     };
     const validation = validateNote(true, note);
     expect(validation).toEqual(true);
+  });
+});
+
+describe('set correct recipient information to use in edit mode', () => {
+  let allContacts;
+  beforeEach(() => {
+    allContacts = [
+      {
+        _id: uuidv4(),
+        fullname: faker.name.findName(),
+        email: faker.internet.email(),
+        company: faker.company.companyName(),
+        phone: faker.phone.phoneNumber(),
+      },
+      {
+        _id: uuidv4(),
+        fullname: faker.name.findName(),
+        email: faker.internet.email(),
+        company: faker.company.companyName(),
+        phone: faker.phone.phoneNumber(),
+      },
+      {
+        _id: uuidv4(),
+        fullname: faker.name.findName(),
+        email: faker.internet.email(),
+        company: faker.company.companyName(),
+        phone: faker.phone.phoneNumber(),
+      }
+    ];
+  });
+
+  it('should return current contact if it exist', () => {
+    const currentContact = allContacts[1];
+    const editRecipient =  setEditRecipient(allContacts, currentContact);
+    expect(editRecipient).toEqual({
+      newRecipient: false,
+      select: currentContact,
+    })
+  });
+
+  it('should create a new contact if the current contact does not exist', () => {
+    const currentContact = {
+      _id: 'random-string',
+      fullname: faker.name.findName(),
+      email: faker.internet.email(),
+      company: faker.company.companyName(),
+      phone: faker.phone.phoneNumber(),
+    };
+    const editRecipient =  setEditRecipient(allContacts, currentContact);
+    expect(editRecipient).toEqual({
+      newRecipient: true,
+      new: {
+        fullname: currentContact.fullname,
+        email: currentContact.email,
+        company: currentContact.company,
+        phone: currentContact.phone,
+      },
+    })
   });
 });

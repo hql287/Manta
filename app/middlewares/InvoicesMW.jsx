@@ -93,10 +93,27 @@ const InvoicesMW = ({ dispatch }) => next => action => {
 
     case ACTION_TYPES.INVOICE_EDIT: {
       // Continue
-      next(action);
-      // Change Tab to Form
-      dispatch(UIActions.changeActiveTab('form'));
-      break;
+      return getAllDocs('contacts')
+        .then(allDocs => {
+          next(
+            Object.assign({}, action, {
+              payload: Object.assign({}, action.payload, {
+                contacts: allDocs
+              })
+            })
+          );
+          // Change Tab to Form
+          dispatch(UIActions.changeActiveTab('form'));
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
+        });
     }
 
     case ACTION_TYPES.INVOICE_UPDATE: {

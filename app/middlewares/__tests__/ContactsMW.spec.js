@@ -99,13 +99,7 @@ describe('Contacts Middleware', () => {
       middleware(Actions.saveContact(newContact));
       // Expect
       expect(saveDoc).toHaveBeenCalled();
-      expect(saveDoc).toHaveBeenCalledWith(
-        'contacts',
-        Object.assign({}, newContact, {
-          _id: 'id-string',
-          created_at: 'now',
-        })
-      );
+      expect(saveDoc).toHaveBeenCalledWith('contacts', newContact);
     });
 
     it('should save records to DB', () => {
@@ -126,6 +120,8 @@ describe('Contacts Middleware', () => {
     it('should call next and dispatch notification ', () => {
       // Setup
       const newContact = {
+        _id: 'id-string',
+        created_at: 'now',
         fullname: faker.name.findName(),
         email: faker.internet.email(),
       };
@@ -140,10 +136,7 @@ describe('Contacts Middleware', () => {
             Object.assign({}, action, {
               payload: [
                 ...mockData.contactsRecords,
-                Object.assign({}, newContact, {
-                  _id: 'id-string',
-                  created_at: 'now',
-                }),
+                newContact
               ],
             })
           );
