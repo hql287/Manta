@@ -25,6 +25,7 @@ describe('getInvoiceData', () => {
   let formData;
   beforeEach(() => {
     formData = {
+      invoiceID: 'Invoice: 123-456-789',
       recipient: {
         newRecipient: true,
         select: {
@@ -61,6 +62,7 @@ describe('getInvoiceData', () => {
       settings: {
         open: false,
         required_fields: {
+          invoiceID: false,
           dueDate: false,
           currency: false,
           discount: false,
@@ -75,6 +77,7 @@ describe('getInvoiceData', () => {
         tax: {},
         currency: 'USD',
         required_fields: {
+          invoiceID: false,
           dueDate: false,
           currency: false,
           discount: false,
@@ -90,6 +93,8 @@ describe('getInvoiceData', () => {
 
   it('Should return correct data shape', () => {
     const invoiceData = getInvoiceData(formData);
+    // Include custom invoiceID
+    expect(invoiceData).not.toHaveProperty('invoiceID');
     // Include Rows & Recipient Data
     expect(invoiceData).toHaveProperty('rows');
     expect(invoiceData).toHaveProperty('recipient');
@@ -183,21 +188,6 @@ describe('getInvoiceData', () => {
     });
   });
 
-  it('should return note data when required', () => {
-    const newFormData = Object.assign({}, formData, {
-      note: {
-        content: faker.lorem.paragraph(),
-      },
-      settings: Object.assign({}, formData.settings, {
-        required_fields: Object.assign({}, formData.settings.required_fields, {
-          note: true,
-        }),
-      }),
-    });
-    const invoiceData = getInvoiceData(newFormData);
-    expect(invoiceData.note).toEqual(newFormData.note.content);
-  });
-
   it('should return tax data when required', () => {
     const newFormData = Object.assign({}, formData, {
       tax: {
@@ -233,12 +223,40 @@ describe('getInvoiceData', () => {
       amount: newFormData.discount.amount,
     });
   });
+
+  it('should return note data when required', () => {
+    const newFormData = Object.assign({}, formData, {
+      note: {
+        content: faker.lorem.paragraph(),
+      },
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          note: true,
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
+    expect(invoiceData.note).toEqual(newFormData.note.content);
+  });
+
+  it('should return invoiceID data when required', () => {
+    const newFormData = Object.assign({}, formData, {
+      settings: Object.assign({}, formData.settings, {
+        required_fields: Object.assign({}, formData.settings.required_fields, {
+          invoiceID: true,
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
+    expect(invoiceData.invoiceID).toEqual('Invoice: 123-456-789');
+  });
 });
 
 describe('validateFormData', () => {
   let formData;
   beforeEach(() => {
     formData = {
+      invoiceID: 'Invoice 123-456-789',
       recipient: {
         newRecipient: true,
         select: {},
@@ -279,6 +297,7 @@ describe('validateFormData', () => {
       settings: {
         open: false,
         required_fields: {
+          invoiceID: true,
           dueDate: true,
           currency: true,
           discount: true,
@@ -297,6 +316,7 @@ describe('validateFormData', () => {
         },
         currency: 'USD',
         required_fields: {
+          invoiceID: true,
           dueDate: true,
           currency: true,
           discount: true,
@@ -357,6 +377,12 @@ describe('validateFormData', () => {
 
   it('should NOT pass with INCORRECT note data', () => {
     formData.note.content = '';
+    const validation = validateFormData(formData);
+    expect(validation).toEqual(false);
+  });
+
+  it('should NOT pass with INCORRECT invoiceID', () => {
+    formData.invoiceID = '';
     const validation = validateFormData(formData);
     expect(validation).toEqual(false);
   });

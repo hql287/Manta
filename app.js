@@ -200,6 +200,7 @@ function setInitialValues() {
         amount: 0,
       },
       required_fields: {
+        invoiceID: false,
         dueDate: false,
         currency: false,
         discount: false,

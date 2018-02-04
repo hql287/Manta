@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InvoiceID component matches snapshot 1`] = `
+<div
+  className="Section__SectionStyle-dgSKSv cwfAAu"
+>
+  <label
+    className="itemLabel"
+  >
+    Invoice ID
+  </label>
+  <input
+    name="invoiceID"
+    onChange={[Function]}
+    type="text"
+    value="Invoice: 123-456-789"
+  />
+</div>
+`;

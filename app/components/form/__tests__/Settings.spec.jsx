@@ -23,6 +23,7 @@ const currentInvoice = {
   settings: {
     open: false,
     required_fields: {
+      invoiceID: false,
       dueDate: false,
       currency: false,
       discount: false,
@@ -34,6 +35,7 @@ const currentInvoice = {
     tax: {},
     currency: 'USD',
     required_fields: {
+      invoiceID: false,
       dueDate: false,
       currency: false,
       discount: false,
@@ -68,13 +70,12 @@ describe('Settings component', () => {
     expect(wrapper.prop('toggleField')).toEqual(toggleField);
     expect(wrapper.prop('toggleFormSettings')).toEqual(toggleFormSettings);
     expect(wrapper.prop('updateSavedSettings')).toEqual(updateSavedSettings);
-    // expect(wrapper.prop('currentInvoice')).toEqual(currentInvoice);
   });
 
   // RENDER
   it('renders necessary element', () => {
-    expect(wrapper.find('label')).toHaveLength(11);
-    expect(wrapper.find(Switch)).toHaveLength(5);
+    expect(wrapper.find('label')).toHaveLength(13);
+    expect(wrapper.find(Switch)).toHaveLength(6);
   });
 
   // LIFE CYCLE EVENTS
@@ -84,13 +85,19 @@ describe('Settings component', () => {
   // PRIsettingsE METHOD
   it('toggle field correctly', () => {
     // Setup
-    const dueDate = wrapper.find(Switch).at(0);
-    const currency = wrapper.find(Switch).at(1);
-    const discount = wrapper.find(Switch).at(2);
-    const tax = wrapper.find(Switch).at(3);
-    const note = wrapper.find(Switch).at(4);
+    const invoiceID = wrapper.find(Switch).at(0);
+    const dueDate = wrapper.find(Switch).at(1);
+    const currency = wrapper.find(Switch).at(2);
+    const discount = wrapper.find(Switch).at(3);
+    const tax = wrapper.find(Switch).at(4);
+    const note = wrapper.find(Switch).at(5);
 
     // Execute & Assert
+    invoiceID.find('input').simulate('change');
+    expect(toggleField).toHaveBeenCalled();
+    expect(toggleField).toHaveBeenCalledWith('invoiceID');
+    expect(toggleField).not.toHaveBeenCalledWith('something-else');
+
     dueDate.find('input').simulate('change');
     expect(toggleField).toHaveBeenCalled();
     expect(toggleField).toHaveBeenCalledWith('dueDate');

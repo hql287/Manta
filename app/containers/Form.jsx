@@ -19,6 +19,7 @@ import Discount from '../components/form/Discount';
 import DueDate from '../components/form/DueDate';
 import Tax from '../components/form/Tax';
 import Note from '../components/form/Note';
+import InvoiceID from '../components/form/InvoiceID';
 import Settings from '../components/form/Settings';
 import Button from '../components/shared/Button';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
@@ -50,6 +51,7 @@ class Form extends PureComponent {
       discount,
       tax,
       note,
+      invoiceID,
       settings,
       savedSettings,
     } = this.props.currentInvoice;
@@ -89,6 +91,13 @@ class Form extends PureComponent {
             savedSettings={savedSettings.required_fields}
             updateSavedSettings={updateSavedFormSettings}
           />
+          {required_fields.invoiceID && (
+            <InvoiceID
+              t={t}
+              invoiceID={invoiceID}
+              updateFieldData={updateFieldData}
+            />
+          )}
           <Recipient />
           <ItemsList />
           {required_fields.dueDate && (

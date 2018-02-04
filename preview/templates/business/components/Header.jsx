@@ -82,10 +82,12 @@ function Header({ t, invoice, profile, configs }) {
         <Heading accentColor={configs.accentColor}>{ t('preview:common:invoice') }</Heading>
         <h4>
           #
-          {truncate(invoice._id, {
-            length: 8,
-            omission: '',
-          })}
+          { invoice.invoiceID
+            ? invoice.invoiceID
+            : truncate(invoice._id, {
+                length: 8,
+                omission: '', })
+          }
         </h4>
         <p>
           { t('preview:common:created') }
