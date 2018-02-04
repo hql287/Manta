@@ -139,6 +139,15 @@ class Settings extends PureComponent {
 
             <AllSettings>
               <Setting>
+                <Label>Invoice ID</Label>
+                <Switch
+                  name="invoiceID"
+                  checked={required_fields.invoiceID}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
+
+              <Setting>
                 <Label>{t('form:fields:dueDate:name')}</Label>
                 <Switch
                   name="dueDate"
