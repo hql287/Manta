@@ -139,7 +139,7 @@ class Settings extends PureComponent {
 
             <AllSettings>
               <Setting>
-                <Label>Invoice ID</Label>
+                <Label>{t('invoices:fields:invoiceID')}</Label>
                 <Switch
                   name="invoiceID"
                   checked={required_fields.invoiceID}

@@ -192,7 +192,7 @@ class Invoice extends Component {
         <Section>
           <Row>
             <Field>
-              <label className="itemLabel">Invoice ID</label>
+              <label className="itemLabel">{t('invoices:fields:invoiceID')}</label>
               <label className="switch">
                 <input
                   name="invoiceID"
