@@ -38,11 +38,13 @@ function Header({ t, invoice, profile, configs }) {
           {t('preview:common:invoice')}
         </Heading>
         <h4 className="label">
-          #
-          {truncate(invoice._id, {
-            length: 8,
-            omission: '',
-          })}
+          # {' '}
+          { invoice.invoiceID
+            ? invoice.invoiceID
+            : truncate(invoice._id, {
+                length: 8,
+                omission: '', })
+          }
         </h4>
         <p>
           {t('preview:common:created')}:
