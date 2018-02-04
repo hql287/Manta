@@ -20,6 +20,7 @@ const initialState = {
   dueDate: {},
   discount: {},
   note: {},
+  invoiceID: "",
   // Set default values for currency and tax
   currency: currencies[invoiceSettings.currency],
   tax: invoiceSettings.tax,
@@ -76,11 +77,16 @@ const FormReducer = handleActions(
 
     [ACTION_TYPES.FORM_FIELD_UPDATE_DATA]: (state, action) => {
       const { field, data } = action.payload;
+      if (typeof data === 'object') {
+        return Object.assign({}, state, {
+          [field]: {
+            ...state[field],
+            ...data,
+          },
+        });
+      }
       return Object.assign({}, state, {
-        [field]: {
-          ...state[field],
-          ...data,
-        },
+        [field]: data
       });
     },
 

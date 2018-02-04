@@ -192,6 +192,18 @@ class Invoice extends Component {
         <Section>
           <Row>
             <Field>
+              <label className="itemLabel">Invoice ID</label>
+              <label className="switch">
+                <input
+                  name="invoiceID"
+                  type="checkbox"
+                  checked={required_fields.invoiceID}
+                  onChange={this.handleVisibilityChange}
+                />
+                <span className="slider round" />
+              </label>
+            </Field>
+            <Field>
               <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
               <label className="switch">
                 <input
@@ -216,7 +228,6 @@ class Invoice extends Component {
                 <span className="slider round" />
               </label>
             </Field>
-
             <Field>
               <label className="itemLabel">{t('form:fields:discount:name')}</label>
               <label className="switch">

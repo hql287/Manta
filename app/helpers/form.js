@@ -5,6 +5,7 @@ import uuidv4 from 'uuid/v4';
 
 function validateFormData(formData) {
   const {
+    invoiceID,
     recipient,
     rows,
     dueDate,
@@ -16,6 +17,7 @@ function validateFormData(formData) {
   } = formData;
   // Required fields
   const { required_fields } = settings;
+  if (!validateInvoiceID(required_fields.invoiceID, invoiceID)) return false;
   if (!validateRecipient(recipient)) return false;
   if (!validateRows(rows)) return false;
   if (!validateDueDate(required_fields.dueDate, dueDate)) return false;
@@ -28,6 +30,7 @@ function validateFormData(formData) {
 
 function getInvoiceData(formData) {
   const {
+    invoiceID,
     recipient,
     rows,
     dueDate,
@@ -53,6 +56,8 @@ function getInvoiceData(formData) {
     // Migh as well filter out _rev
     invoiceData.recipient = recipient.select;
   }
+  // Set InvoiceID
+  if (required_fields.invoiceID) invoiceData.invoiceID = invoiceID;
   // Set Invoice DueDate
   if (required_fields.dueDate) invoiceData.dueDate = dueDate.selectedDate;
   // Set Invoice Currency
@@ -217,6 +222,21 @@ function validateNote(isRequired, note) {
         type: 'warning',
         title: i18n.t('dialog:validation:note:title'),
         message: i18n.t('dialog:validation:note:message'),
+      });
+      return false;
+    }
+    return true;
+  }
+  return true;
+}
+
+function validateInvoiceID(isRequired, invoiceID) {
+  if (isRequired) {
+    if (!invoiceID || invoiceID === '') {
+      openDialog({
+        type: 'warning',
+        title: i18n.t('dialog:validation:invoiceID:title'),
+        message: i18n.t('dialog:validation:invoiceID:message'),
       });
       return false;
     }

@@ -177,7 +177,6 @@ class Invoice extends PureComponent {
           </span>
         );
       }
-
       case 'paid': {
         return (
           <span>
@@ -186,7 +185,6 @@ class Invoice extends PureComponent {
           </span>
         );
       }
-
       case 'refunded': {
         return (
           <span>
@@ -244,10 +242,12 @@ class Invoice extends PureComponent {
               <Field>
                 <label>{t('invoices:fields:invoiceID')}</label>
                 <p>
-                  {truncate(invoice._id, {
-                    length: 8,
-                    omission: '',
-                  })}
+                  { invoice.invoiceID
+                    ? invoice.invoiceID
+                    : truncate(invoice._id, {
+                        length: 8,
+                        omission: '', })
+                  }
                 </p>
               </Field>
               <Field>
