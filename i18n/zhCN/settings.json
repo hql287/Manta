@@ -1,0 +1,61 @@
+{
+  "header": "设置",
+  "tabs": {
+    "profile": "个人资料",
+    "invoice": "发票",
+    "general": "常规设置"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "接受 PNG、JPG 和 SVG (推荐)"
+    },
+    "taxSettings": "税率设置",
+    "template": "模板",
+    "dateFormat": "日期格式",
+    "pdfExportDir": "PDF 导出目录",
+    "requiredFields": "必填项",
+    "sound": "提示音",
+    "mute": "静音",
+    "autoCheckUpdate": {
+      "name": "自动检查更新",
+      "daily": "每天（推荐）",
+      "weekly": "每周"
+    },
+    "currency": {
+      "afterAmount": "在金额之前",
+      "beforeAmount": "在金额之后",
+      "decimalFractions": "小数",
+      "decimalSeparator": "数字分隔符",
+      "comma": "半角逗号 (,)",
+      "dot": "半角句号 (.)",
+      "signPlacement": "货币符号位置"
+    },
+    "openPDFReader": "导出之后打开 PDF",
+    "language": {
+      "name": "语言",
+      "cs": "捷克文",
+      "da": "丹麦文",
+      "de": "德语",
+      "el": "希腊文",
+      "en": "英语",
+      "esES": "西班牙文",
+      "fr": "法语",
+      "id": "印度尼西亚文",
+      "it": "意大利文",
+      "ja": "日文",
+      "lt": "立陶宛文",
+      "nl": "荷兰文",
+      "ptBR": "葡萄牙文（巴西）",
+      "ptPT": "葡萄牙文",
+      "ru": "俄文",
+      "th": "泰文",
+      "tl": "他加禄文（菲律宾）",
+      "tr": "土耳其文",
+      "vi": "越南语",
+      "zhCN": "中文（简体）",
+      "zhTW": "中文（繁体）"
+    },
+    "other": "其他"
+  }
+}
