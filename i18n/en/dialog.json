@@ -49,7 +49,6 @@
         "message": "Please choose another email"
       }
     },
-
     "rows": {
       "emptyDescription": {
         "title": "Invalid description",
@@ -64,30 +63,29 @@
         "message": "Quantity must be greater than zero"
       }
     },
-
     "dueDate": {
       "title": "Invalid due date",
       "message": "Please select a date"
     },
-
     "currency": {
       "title": "Invalid currency",
       "message": "Please choose a currency"
     },
-
     "discount": {
       "title": "Invalid discount",
       "message": "Discount amount must be greater than zero"
     },
-
     "tax": {
       "title": "Invalid tax",
       "message": "Tax amount must be greater than zero"
     },
-
     "note": {
       "title": "Invalid note",
       "message": "Note content can not be blank"
+    },
+    "invoiceID": {
+      "title": "Invalid Invoice ID",
+      "message": "Invoice ID can not be blank"
     }
   }
 }

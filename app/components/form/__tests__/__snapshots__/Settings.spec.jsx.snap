@@ -42,9 +42,7 @@ exports[`Settings component matches snapshot 1`] = `
     >
       <label
         className="Settings__Label-bIhYmz iPSgUQ"
-      >
-        Invoice ID
-      </label>
+      />
       <label
         className="Switch__SwitchStyle-cIZUZy lcgmHp"
       >

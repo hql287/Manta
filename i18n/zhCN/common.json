@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "fullname": "完整姓名",
+    "company": "公司",
+    "address": "地址",
+    "email": "电子邮件",
+    "phone": "电话号码",
+    "website": "网站"
+  },
+  "save": "保存",
+  "amount": "金额",
+  "default": "默认",
+  "saveAsDefault": "保存为默认？",
+  "yes": "是",
+  "noThanks": "不，谢谢"
+}
