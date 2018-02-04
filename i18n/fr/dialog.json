@@ -82,6 +82,10 @@
     "note": {
       "title": "Remarque non valide",
       "message": "Le contenu des remarques ne peut pas être vide"
+    },
+    "invoiceID": {
+      "title": "Invalid Invoice ID",
+      "message": "Invoice ID can not be blank"
     }
   }
 }
