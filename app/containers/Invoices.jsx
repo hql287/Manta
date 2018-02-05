@@ -12,7 +12,7 @@ import * as Actions from '../actions/invoices';
 
 // Selectors
 import { getInvoices } from '../reducers/InvoicesReducer';
-import { getDateFormat, getCurrencyPlacement } from '../reducers/SettingsReducer';
+import { getDateFormat } from '../reducers/SettingsReducer';
 
 // Components
 import Invoice from '../components/invoices/Invoice';
@@ -85,18 +85,17 @@ class Invoices extends PureComponent {
 
   // Render
   render() {
-    const { invoices, dateFormat, currencyPlacement, t } = this.props;
+    const { dateFormat, invoices, t } = this.props;
     const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
-        t={t}
         key={invoice._id}
+        dateFormat={dateFormat}
         deleteInvoice={this.deleteInvoice}
         editInvoice={this.editInvoice}
         setInvoiceStatus={this.setInvoiceStatus}
         index={index}
-        dateFormat={dateFormat}
-        currencyPlacement={currencyPlacement}
         invoice={invoice}
+        t={t}
       />
     ));
     return (
@@ -120,13 +119,13 @@ class Invoices extends PureComponent {
 Invoices.propTypes = {
   dispatch: PropTypes.func.isRequired,
   invoices: PropTypes.arrayOf(PropTypes.object).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 // Map state to props & Export
 const mapStateToProps = state => ({
   invoices: getInvoices(state),
   dateFormat: getDateFormat(state),
-  currencyPlacement: getCurrencyPlacement(state),
 });
 
 export default compose(
