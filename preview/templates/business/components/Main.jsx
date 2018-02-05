@@ -203,7 +203,7 @@ function Main({ invoice, configs, t }) {
               ) : (
                 <td>
                   {currencyBefore ? currency : null}{' '}
-                  {formatNumber(taxAmount, fraction, separator)}{' '}
+                  {formatNumber(getInvoiceValue(invoice).taxAmount, fraction, separator)}{' '}
                   {currencyBefore ? null : currency}
                 </td>
               )}
