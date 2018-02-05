@@ -1,4 +1,6 @@
 const openDialog = require('../renderers/dialog');
+const appConfig = require('electron').remote.require('electron-settings');
+import { getInvoiceValue } from './invoice';
 import { isEmpty, pick, includes } from 'lodash';
 import i18n from '../../i18n/i18n';
 import uuidv4 from 'uuid/v4';
@@ -41,7 +43,7 @@ function getInvoiceData(formData) {
     settings,
   } = formData;
   // Required fields
-  const { required_fields } = settings;
+  const { editMode, required_fields } = settings;
   // Set Initial Value
   const invoiceData = { rows };
   // Set Recipient
@@ -61,15 +63,28 @@ function getInvoiceData(formData) {
   // Set Invoice DueDate
   if (required_fields.dueDate) invoiceData.dueDate = dueDate.selectedDate;
   // Set Invoice Currency
-  if (required_fields.currency) invoiceData.currency = currency;
+  if (required_fields.currency) {
+    invoiceData.currency = currency;
+  } else {
+    invoiceData.currency = appConfig.get('invoice.currency');
+  }
   // Set Invoice Discount
   if (required_fields.discount) invoiceData.discount = discount;
   // Set Invoice Tax
   if (required_fields.tax) invoiceData.tax = tax;
   // Set Invoice Note
   if (required_fields.note) invoiceData.note = note.content;
+
   // Return final value
-  return invoiceData;
+  return Object.assign({}, invoiceData, {
+    // Reuse existing data
+    _id: editMode.active ? editMode.data._id : uuidv4(),
+    created_at: editMode.active ? editMode.data.created_at : Date.now(),
+    status: editMode.active ? editMode.data.status: 'pending',
+    // Calculate subtotal & grandTotal
+    subtotal: getInvoiceValue(invoiceData).subtotal,
+    grandTotal: getInvoiceValue(invoiceData).grandTotal,
+  });
 }
 
 // VALIDATION RULES
