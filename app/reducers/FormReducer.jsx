@@ -3,7 +3,6 @@ import * as ACTION_TYPES from '../constants/actions.jsx';
 // Libs
 import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
-import currencies from '../../libs/currencies.json';
 // Retrive settings
 const appConfig = require('electron').remote.require('electron-settings');
 const invoiceSettings = appConfig.get('invoice');
@@ -22,7 +21,7 @@ const initialState = {
   note: {},
   invoiceID: "",
   // Set default values for currency and tax
-  currency: currencies[invoiceSettings.currency],
+  currency: invoiceSettings.currency,
   tax: invoiceSettings.tax,
   // Form current settings
   settings: {
@@ -115,6 +114,7 @@ const FormReducer = handleActions(
 
     [ACTION_TYPES.INVOICE_EDIT]: (state, action) => {
       const {
+        invoiceID,
         recipient,
         rows,
         currency,
@@ -132,15 +132,17 @@ const FormReducer = handleActions(
           setEditRecipient(contacts, recipient)
         ),
         rows,
-        currency,
+        // Optional Data
+        invoiceID: invoiceID !== undefined ? invoiceID : state.invoiceID,
+        currency: currency !== undefined ? currency : state.currency,
+        discount: discount !== undefined ? discount : state.discount,
+        tax: tax !== undefined ? tax : state.tax,
         dueDate:
           dueDate !== undefined
             ? Object.assign({}, state.dueDate, {
                 selectedDate: dueDate,
               })
             : state.dueDate,
-        discount: discount !== undefined ? discount : state.discount,
-        tax: tax !== undefined ? tax : state.tax,
         note:
           note !== undefined
             ? Object.assign({}, state.note, {
@@ -154,7 +156,8 @@ const FormReducer = handleActions(
             data: action.payload,
           },
           required_fields: Object.assign({}, state.settings.required_fields, {
-            currency: currency.code !== state.savedSettings.currency,
+            invoiceID: invoiceID !== undefined,
+            currency: currency !== state.savedSettings.currency,
             tax: tax !== undefined,
             dueDate: dueDate !== undefined,
             discount: discount !== undefined,
@@ -178,7 +181,7 @@ const FormReducer = handleActions(
     [ACTION_TYPES.FORM_CLEAR]: state =>
       Object.assign({}, initialState, {
         // Reset to lastest saved settings
-        currency: currencies[state.savedSettings.currency],
+        currency: state.savedSettings.currency,
         // Reset to lastest saved settings
         tax: state.savedSettings.tax,
         // Update current settings

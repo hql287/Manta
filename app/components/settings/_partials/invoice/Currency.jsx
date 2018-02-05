@@ -26,14 +26,8 @@ function sortCurrencies() {
   });
 }
 
-function Currency({
-  currency,
-  handleInputChange,
-  decimalSeparator,
-  currencyPlacement,
-  decimalFractions,
-  t
-}) {
+function Currency({ t, currency, handleCurrencyChange }) {
+  const { code, fraction, placement, separator } = currency;
   return [
     <label key="label" className="itemLabel">
       {t('form:fields:currency')}
@@ -41,45 +35,48 @@ function Currency({
     <Part key="part">
       <Row>
         <Field>
-          <label className="itemLabel">
-            {t('form:fields:currency')}
-          </label>
-          <select name="currency" value={currency} onChange={handleInputChange}>
+          <label className="itemLabel">{t('form:fields:currency')}</label>
+          <select
+            name="code"
+            value={code}
+            onChange={handleCurrencyChange}
+          >
             {sortCurrencies()}
           </select>
         </Field>
         <Field>
-          <label className="itemLabel">{t('settings:fields:currency:decimalSeparator')}</label>
+          <label className="itemLabel">{t('settings:fields:currency:separator')}</label>
           <select
-            name="decimalSeparator"
-            value={decimalSeparator}
-            onChange={handleInputChange}
+            name="separator"
+            value={separator}
+            onChange={handleCurrencyChange}
           >
-            <option value="dot">{t('settings:fields:currency:dot')}</option>
-            <option value="comma">{t('settings:fields:currency:comma')}</option>
+            <option value="commaDot">1,999.000 (Comma & Dot )</option>
+            <option value="dotComma">1.999,000 (Dot & Comma)</option>
+            <option value="spaceDot">1 999.000 (Space & Dot)</option>
           </select>
         </Field>
       </Row>
       <Row>
         <Field>
-          <label className="itemLabel">{t('settings:fields:currency:signPlacement')}</label>
+          <label className="itemLabel">{t('settings:fields:currency:placement')}</label>
           <select
-            name="currencyPlacement"
-            value={currencyPlacement}
-            onChange={handleInputChange}
+            name="placement"
+            value={placement}
+            onChange={handleCurrencyChange}
           >
             <option value="before">{t('settings:fields:currency:beforeAmount')}</option>
             <option value="after">{t('settings:fields:currency:afterAmount')}</option>
           </select>
         </Field>
         <Field>
-          <label className="itemLabel">{t('settings:fields:currency:decimalFractions')}</label>
+          <label className="itemLabel">{t('settings:fields:currency:fraction')}</label>
           <input
             className="form-control"
-            name="decimalFractions"
+            name="fraction"
             type="number"
-            value={decimalFractions}
-            onChange={handleInputChange}
+            value={fraction}
+            onChange={handleCurrencyChange}
           />
         </Field>
       </Row>
@@ -88,11 +85,8 @@ function Currency({
 }
 
 Currency.propTypes = {
-  currency: PropTypes.string.isRequired,
-  currencyPlacement: PropTypes.string.isRequired,
-  decimalFractions: PropTypes.string.isRequired,
-  decimalSeparator: PropTypes.string.isRequired,
-  handleInputChange: PropTypes.func.isRequired,
+  currency: PropTypes.object.isRequired,
+  handleCurrencyChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 

@@ -19,6 +19,7 @@ class Invoice extends Component {
     this.state = this.props.invoice;
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTaxChange = this.handleTaxChange.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
@@ -45,35 +46,12 @@ class Invoice extends Component {
   }
 
   handleInputChange(event) {
-    const { setSavable } = this.props;
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
-    const canSave = this.canSave(name, value);
-    setSavable(canSave);
-    if (!canSave) {
-      // Notifi
-      console.log('Cant save');
-    }
-
     this.setState({ [name]: value }, () => {
       this.props.updateSettings('invoice', this.state);
     });
-  }
-
-  canSave(ctrlName, value) {
-    let valid = true;
-    if (ctrlName === 'decimalFractions' && Number(value) < 0) {
-      valid = false;
-      openDialog({
-        type: 'warning',
-        title: 'Invalid decimal fraction setting',
-        message: `${value} is an invalid for decimal fractions! Please correct setting to continue.`,
-      });
-    }
-
-    return valid;
   }
 
   handleTaxChange(event) {
@@ -83,6 +61,22 @@ class Invoice extends Component {
     this.setState(
       {
         tax: Object.assign({}, this.state.tax, {
+          [name]: value,
+        }),
+      },
+      () => {
+        this.props.updateSettings('invoice', this.state);
+      }
+    );
+  }
+
+  handleCurrencyChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'fraction' ? parseInt(target.value, 10) : target.value;
+    this.setState(
+      {
+        currency: Object.assign({}, this.state.currency, {
           [name]: value,
         }),
       },
@@ -121,9 +115,6 @@ class Invoice extends Component {
       tax,
       required_fields,
       dateFormat,
-      decimalFractions,
-      currencyPlacement,
-      decimalSeparator,
     } = this.state;
     return [
       <Fields
@@ -141,10 +132,7 @@ class Invoice extends Component {
       <Currency
         key="currency_settings"
         currency={currency}
-        handleInputChange={this.handleInputChange}
-        decimalSeparator={decimalSeparator}
-        currencyPlacement={currencyPlacement}
-        decimalFractions={decimalFractions}
+        handleCurrencyChange={this.handleCurrencyChange}
         t={t}
       />,
       <Other
