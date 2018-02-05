@@ -1,9 +1,10 @@
 // Libraries
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { padStart } from 'lodash';
-import { formatNumber } from '../../../../app/helpers/number';
+import { formatNumber } from '../../../../helpers/formatNumber';
 import { getInvoiceValue } from '../../../../app/helpers/invoice';
+import currencies from '../../../../libs/currencies.json';
 
 // Styles
 import styled from 'styled-components';
@@ -112,111 +113,107 @@ function setAlignItems(configs) {
 }
 
 // Component
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.displayTax = this.displayTax.bind(this);
-    this.displayDiscount = this.displayDiscount.bind(this);
-  }
+function Main({ invoice, configs, t }) {
+  // Destructuring values
+  const { tax, discount } = invoice;
+  const { code, placement, fraction, separator } = invoice.currency;
+  // Set placement
+  const currencyBefore = placement === 'before';
+  // Set Currency Sign
+  const currency = configs.useSymbol ? currencies[code].symbol : code;
+  // Render Items
+  const itemComponents = invoice.rows.map((row, index) => (
+    <Item key={index}>
+      <td>
+        {padStart(index + 1, 2, 0)}
+        {'. '}
+        {row.description} ({formatNumber(row.quantity, 0, separator)})
+      </td>
+      <td>
+        {currencyBefore ? currency : null}{' '}
+        {formatNumber(row.subtotal, fraction, separator)}{' '}
+        {currencyBefore ? null : currency}
+      </td>
+    </Item>
+  ));
 
-  displayDiscount() {
-    const { invoice, configs, t } = this.props;
-    const currencyBefore = configs.currencyPlacement === 'before';
-    const currency = configs.useSymbol
-      ? invoice.currency.symbol
-      : invoice.currency.code;
-    return invoice.discount ? (
-      <Discount>
-        <td>
-          { t('form:fields:discount:name') }
-          {' '}
-          {invoice.discount.type === 'percentage' && (
-            <span> {invoice.discount.amount}%</span>
-          )}
-        </td>
-        <td>
-          {currencyBefore ? currency : ''} {formatNumber(getInvoiceValue(invoice).discount)} {currencyBefore ? '' : currency}
-        </td>
-      </Discount>
-    ) : null;
-  }
+  return (
+    <Table alignItems={setAlignItems(configs)}>
+      <thead>
+        <ItemsHeader>
+          <th>{t('preview:common:itemDescription')}</th>
+          <th>{t('preview:common:price')}</th>
+        </ItemsHeader>
+      </thead>
 
-  displayTax() {
-    const { t, invoice, configs } = this.props;
-    const { tax } = invoice;
-    const { taxAmount } = getInvoiceValue(invoice);
-    const currencyBefore = configs.currencyPlacement === 'before';
-    const currency = configs.useSymbol
-      ? invoice.currency.symbol
-      : invoice.currency.code;
-    return tax ? (
-      <Tax>
-        <td>
-          { t('form:fields:tax:name') }{' '}{tax.amount}%
-        </td>
-        {tax.method === 'reverse' ? (
-          <td>{t('form:fields:tax:reverse')}</td>
-        ) : (
+      <ItemsList>{itemComponents}</ItemsList>
+
+      <InvoiceSummary>
+        <Subtotal>
+          <td>{t('preview:common:subtotal')}</td>
           <td>
-            {currencyBefore ? currency : ''} {formatNumber(taxAmount)} {currencyBefore ? '' : currency}
+            {currencyBefore ? currency : null}
+            {' '}
+            {formatNumber(invoice.subtotal, fraction, separator)}
+            {' '}
+            {currencyBefore ? null : currency}
           </td>
+        </Subtotal>
+
+        {tax && (
+          <Tax>
+            <td>
+              {t('form:fields:tax:name')} {tax.amount}%
+            </td>
+            {tax.method === 'reverse' ? (
+              <td>{t('form:fields:tax:reverse')}</td>
+            ) : (
+              <td>
+                {currencyBefore ? currency : null}{' '}
+                {formatNumber(
+                  getInvoiceValue(invoice).taxAmount,
+                  fraction,
+                  separator
+                )}{' '}
+                {currencyBefore ? null : currency}
+              </td>
+            )}
+          </Tax>
         )}
-      </Tax>
-    ) : null;
-  }
 
-  render() {
-    const { invoice, configs, t } = this.props;
-    const currencyBefore = configs.currencyPlacement === 'before';
-    const currency = configs.useSymbol
-      ? invoice.currency.symbol
-      : invoice.currency.code;
-
-    const itemComponents = invoice.rows.map((row, index) => (
-      <Item key={index}>
-        <td>
-          {padStart(index + 1, 2, 0)}. {row.description} ({formatNumber(
-            row.quantity
-          )})
-        </td>
-        <td>
-          {currencyBefore ? currency : ''} {formatNumber(row.subtotal)} {currencyBefore ? '' : currency}
-        </td>
-      </Item>
-    ));
-
-    return (
-      <Table alignItems={setAlignItems(configs)}>
-        <thead>
-          <ItemsHeader>
-            <th>{t('preview:common:itemDescription')}</th>
-            <th>{t('preview:common:price')}</th>
-          </ItemsHeader>
-        </thead>
-
-        <ItemsList>{itemComponents}</ItemsList>
-
-        <InvoiceSummary>
-          <Subtotal>
-            <td>{t('preview:common:subtotal')}</td>
+        {discount && (
+          <Discount>
             <td>
-              {currencyBefore ? currency : ''} {formatNumber(invoice.subtotal)} {currencyBefore ? '' : currency}
+              {t('form:fields:discount:name')}{' '}
+              {discount.type === 'percentage' && (
+                <span> {discount.amount}%</span>
+              )}
             </td>
-          </Subtotal>
-
-          {this.displayDiscount()}
-          {this.displayTax()}
-
-          <Total>
-            <td>{t('preview:common:total')}</td>
             <td>
-              {currencyBefore ? currency : ''} {formatNumber(invoice.grandTotal)} {currencyBefore ? '' : currency}
+              {currencyBefore ? currency : null}{' '}
+              {formatNumber(
+                getInvoiceValue(invoice).discount,
+                fraction,
+                separator
+              )}{' '}
+              {currencyBefore ? null : currency}
             </td>
-          </Total>
-        </InvoiceSummary>
-      </Table>
-    );
-  }
+          </Discount>
+        )}
+
+        <Total>
+          <td>{t('preview:common:total')}</td>
+          <td>
+            {currencyBefore ? currency : null}
+            {' '}
+            {formatNumber(invoice.grandTotal, fraction, separator)}
+            {' '}
+            {currencyBefore ? null : currency}
+          </td>
+        </Total>
+      </InvoiceSummary>
+    </Table>
+  );
 }
 
 Main.propTypes = {
