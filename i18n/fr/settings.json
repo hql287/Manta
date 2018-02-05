@@ -29,7 +29,7 @@
       "fraction": "deux décimales",
       "separator": "Séparateur",
       "commaDot": "Virgule & Point",
-      "dotComma": "Point& Virgule",
+      "dotComma": "Point & Virgule",
       "spaceDot": "Space & Virgule"
     },
     "openPDFReader": "Ouvrir le fichier PDF après l'export",
