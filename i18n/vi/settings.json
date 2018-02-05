@@ -23,13 +23,14 @@
       "weekly": "Hàng tuần"
     },
     "currency": {
+      "placement": "Vị trí biểu tượng",
       "afterAmount": "Sau số tiền",
       "beforeAmount": "Trước số tiền",
-      "decimalFractions": "Phân số thập phân",
-      "decimalSeparator": "Dấu phân cách thập phân",
-      "comma": "Dấu phẩy (,)",
-      "dot": "Dấu chấm (.)",
-      "signPlacement": "Vị trí kí tự"
+      "fraction": "Phân số thập phân",
+      "separator": "Dấu phân cách thập phân",
+      "commaDot": "Phẩy & Chấm",
+      "dotComma": "Chấm & Phẩy",
+      "spaceDot": "Dấu cách & Chấm"
     },
     "openPDFReader": "Mở file PDF sau khi xuất",
     "language": {

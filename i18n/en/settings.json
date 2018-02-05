@@ -23,13 +23,14 @@
       "weekly": "Everyweek"
     },
     "currency": {
+      "placement": "Sign placement",
       "afterAmount": "After Amount",
       "beforeAmount": "Before Amount",
-      "decimalFractions": "Decimal Fractions",
-      "decimalSeparator": "Decimal Separator",
-      "comma": "Comma (,)",
-      "dot": "Dot (.)",
-      "signPlacement": "Sign placement"
+      "fraction": "Decial Fraction",
+      "separator": "Separator",
+      "commaDot": "Comma & Dot",
+      "dotComma": "Dot & Comma",
+      "spaceDot": "Space & Dot"
     },
     "openPDFReader": "Open PDF after Export",
     "language": {
