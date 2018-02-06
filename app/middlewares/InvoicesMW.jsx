@@ -14,7 +14,7 @@ import * as FormActions from '../actions/form';
 import { getInvoiceValue } from '../helpers/invoice';
 import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 
-const InvoicesMW = ({ dispatch }) => next => action => {
+const InvoicesMW = ({ dispatch, getState }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.INVOICE_NEW_FROM_CONTACT: {
       // Change Tab to Form
@@ -139,6 +139,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.INVOICE_DELETE,
             payload: remainingDocs,
           });
+          // Send Notification
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
@@ -146,6 +147,13 @@ const InvoicesMW = ({ dispatch }) => next => action => {
               message: i18n.t('messages:invoice:deleted'),
             },
           });
+          // Clear form if this invoice is being editted
+          const { editMode } = getState().form.settings;
+          if (editMode.active) {
+            if (editMode.data._id === action.payload) {
+              dispatch({ type: ACTION_TYPES.FORM_CLEAR });
+            }
+          }
         })
         .catch(err => {
           next({
