@@ -7,6 +7,9 @@ import i18n from '../../i18n/i18n';
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
 
+// Helper
+import { validateTax, validateCurrency } from '../helpers/form';
+
 const SettingsMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
@@ -26,6 +29,9 @@ const SettingsMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.SETTINGS_SAVE: {
+      // Validation
+      if (!validateTax(true, action.payload.invoice.tax)) break;
+      if (!validateCurrency(true, action.payload.invoice.currency)) break;
       // Sate Settings
       appConfig.set('profile', action.payload.profile);
       appConfig.set('invoice', action.payload.invoice);

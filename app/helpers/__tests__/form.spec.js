@@ -366,7 +366,12 @@ describe('validateFormData', () => {
   });
 
   it('should NOT pass with INCORRECT currency data', () => {
-    formData.currency = null;
+    formData.currency = {
+      code: 'USD',
+      fraction: -1,
+      separator: 'commaDot',
+      placement: 'before'
+    };
     const validation = validateFormData(formData);
     expect(validation).toEqual(false);
   });
@@ -496,7 +501,7 @@ describe('validateRows', () => {
     });
   });
 
-  it('should validate item price', () => {
+  it('should validate item quantity', () => {
     const rows = [
       {
         description: faker.commerce.productName(),
@@ -506,6 +511,21 @@ describe('validateRows', () => {
     ];
     const validation = validateRows(rows);
     expect(validation).toEqual(false);
+    expect(openDialog).toBeCalledWith({
+      type: 'warning',
+      title: i18n.t('dialog:validation:rows:qtyZero:title'),
+      message: i18n.t('dialog:validation:rows:qtyZero:message'),
+    });
+
+    const rows2 = [
+      {
+        description: faker.commerce.productName(),
+        price: faker.commerce.price(),
+        quantity: -1,
+      },
+    ];
+    const validation2 = validateRows(rows2);
+    expect(validation2).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
       title: i18n.t('dialog:validation:rows:qtyZero:title'),
@@ -559,13 +579,18 @@ describe('validateDueDate', () => {
 
 describe('validateCurrency', () => {
   it('should validate Currency', () => {
-    const currency = null;
+    const currency = {
+      code: 'USD',
+      fraction: -1,
+      separator: 'commaDot',
+      placement: 'before'
+    };
     const validation = validateCurrency(true, currency);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: i18n.t('dialog:validation:currency:title'),
-      message: i18n.t('dialog:validation:currency:message'),
+      title: i18n.t('dialog:validation:currency:fraction:title'),
+      message: i18n.t('dialog:validation:currency:fraction:message'),
     });
   });
 
@@ -620,11 +645,27 @@ describe('validateDiscount', () => {
 
 describe('validateTax', () => {
   it('should validate tax data', () => {
-    const tax = {
-      amount: 0,
-    };
-    const validation = validateTax(true, tax);
-    expect(validation).toEqual(false);
+    const tax1 = { amount: 0 };
+    const tax2 = { amount: '' };
+    const tax3 = { amount: -1 };
+    const validation1 = validateTax(true, tax1);
+    expect(validation1).toEqual(false);
+    expect(openDialog).toBeCalledWith({
+      type: 'warning',
+      title: i18n.t('dialog:validation:tax:title'),
+      message: i18n.t('dialog:validation:tax:message'),
+    });
+
+    const validation2 = validateTax(true, tax2);
+    expect(validation2).toEqual(false);
+    expect(openDialog).toBeCalledWith({
+      type: 'warning',
+      title: i18n.t('dialog:validation:tax:title'),
+      message: i18n.t('dialog:validation:tax:message'),
+    });
+
+    const validation3 = validateTax(true, tax3);
+    expect(validation3).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
       title: i18n.t('dialog:validation:tax:title'),

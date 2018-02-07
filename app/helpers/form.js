@@ -143,7 +143,7 @@ function validateRows(rows) {
       break;
     }
     // Is the price presented and greater than 0?
-    if (!row.price || row.price === 0) {
+    if (!row.price || row.price <= 0) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:priceZero:title'),
@@ -153,7 +153,7 @@ function validateRows(rows) {
       break;
     }
     // Is the quantity presented and greater than 0?
-    if (!row.quantity || row.quantity === 0) {
+    if (!row.quantity || row.quantity <= 0) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:qtyZero:title'),
@@ -184,11 +184,11 @@ function validateDueDate(isRequired, dueDate) {
 
 function validateCurrency(isRequired, currency) {
   if (isRequired) {
-    if (!currency || currency === null) {
+    if (currency.fraction < 0 ) {
       openDialog({
         type: 'warning',
-        title: i18n.t('dialog:validation:currency:title'),
-        message: i18n.t('dialog:validation:currency:message'),
+        title: i18n.t('dialog:validation:currency:fraction:title'),
+        message: i18n.t('dialog:validation:currency:fraction:message'),
       });
       return false;
     }
@@ -216,7 +216,7 @@ function validateDiscount(isRequired, discount) {
 function validateTax(isRequired, tax) {
   const { amount } = tax;
   if (isRequired) {
-    if (!amount || amount === '' || amount === 0) {
+    if (!amount || amount === '' || amount <= 0) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:tax:title'),

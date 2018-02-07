@@ -1,7 +1,9 @@
 import * as Actions from '../../actions/settings';
 import SettingsMW from '../SettingsMW';
+import * as ACTION_TYPES from '../../constants/actions.jsx';
 
 jest.mock('../../../libs/sounds');
+jest.mock('../../helpers/form');
 
 describe('Settings Middleware', () => {
   let next, dispatch, middleware;
@@ -32,12 +34,24 @@ describe('Settings Middleware', () => {
   });
 
   it('should handle SETTINGS_SAVE action', () => {
+    // TODO
+    // Validate data
     const action = Actions.saveSettings({
-      payload: {
-        profile: 'someSettings',
-        invoice: 'someSettings',
-        general: 'someSettings',
+      profile: 'someSettings',
+      invoice: {
+        currency: {
+          code: 'USD',
+          fraction: 2,
+          separator: 'commaDot',
+          placement: 'before'
+        },
+        tax: {
+          tin: '123-456-789',
+          amount: 10,
+          method: 'default'
+        }
       },
+      general: 'someSettings',
     });
     middleware(action);
     // Send Notification
