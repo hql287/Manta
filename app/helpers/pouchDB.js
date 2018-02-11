@@ -61,6 +61,18 @@ const invoicesMigrations = {
     // Omit the 'vat' key
     return omit(newDoc, ['vat']);
   },
+  2: doc => {
+    // Update current doc currency setting
+    const newDoc = Object.assign({}, doc, {
+      currency: {
+        code: doc.currency.code,
+        placement: 'before',
+        separator: 'commaDot',
+        fraction: 2,
+      }
+    });
+    return newDoc;
+  }
 };
 
 runMigration(

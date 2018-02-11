@@ -279,7 +279,7 @@ function migrateData() {
 
     2: configs => {
       // Return current configs if this is the first time install
-      if ( configs.invoice.currency.value !== undefined) {
+      if ( configs.invoice.currency.placement !== undefined) {
         return configs;
       }
       // Update current configs
