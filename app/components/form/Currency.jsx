@@ -1,5 +1,5 @@
 // Libs
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 import currencies from '../../../libs/currencies.json';
@@ -7,38 +7,59 @@ import { keys, sortBy, isEqual } from 'lodash';
 
 // Custom Components
 import { Section, Header } from '../shared/Section';
+import { Row, Field, Part } from '../shared/Part';
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
 // Component
-export class Currency extends Component {
+export class Currency extends PureComponent {
   constructor(props) {
     super(props);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.state = props.currency;
     this.isSettingsSaved = this.isSettingsSaved.bind(this);
     this.saveAsDefault = this.saveAsDefault.bind(this);
     this.sortCurrencies = this.sortCurrencies.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.currency !== nextProps.currency) return true;
-    if (this.props.savedSettings !== nextProps.savedSettings) return true;
-    return true;
+  // Handle Form Clear
+  componentWillReceiveProps(nextProps) {
+    // Already made changes but not saved
+    if (this.state !== this.props.savedSettings) {
+      // Reset to savedSettings if the below confition is met
+      if (nextProps.currency === nextProps.savedSettings) {
+        this.setState(nextProps.savedSettings, () => {
+          this.updateCurrencyState();
+        });
+      }
+    }
   }
 
   handleInputChange(event) {
-    const value = event.target.value;
-    this.props.updateFieldData('currency', currencies[value]);
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'fraction' ? parseInt(target.value, 10) : target.value;
+    this.setState({
+        [name]: value
+      }, () => {
+        this.updateCurrencyState();
+      }
+    );
+  }
+
+  updateCurrencyState() {
+    const { updateFieldData } = this.props;
+    updateFieldData('currency', this.state);
   }
 
   isSettingsSaved() {
-    return isEqual(this.props.currency.code, this.props.savedSettings);
+    return isEqual(this.props.currency, this.props.savedSettings);
   }
 
   saveAsDefault() {
     const { updateSavedSettings } = this.props;
-    updateSavedSettings('currency', this.props.currency.code);
+    updateSavedSettings('currency', this.state);
   }
 
   sortCurrencies() {
@@ -79,12 +100,63 @@ export class Currency extends Component {
             </a>
           )}
         </Header>
-        <select
-          value={this.props.currency.code}
-          onChange={this.handleInputChange}
-        >
-          {this.sortCurrencies()}
-        </select>
+        <Part>
+          <Row>
+            <Field>
+              <label className="itemLabel">
+                {t('form:fields:currency')}
+              </label>
+              <select
+                name="code"
+                value={this.state.code}
+                onChange={this.handleInputChange}
+              >
+                {this.sortCurrencies()}
+              </select>
+            </Field>
+            <Field>
+              <label className="itemLabel">{t('settings:fields:currency:separator')}</label>
+              <select
+                name="separator"
+                value={this.state.separator}
+                onChange={this.handleInputChange}
+              >
+                <option value="commaDot">
+                  1,999.000 ({t('settings:fields:currency:commaDot')})
+                </option>
+                <option value="dotComma">
+                  1.999,000 ({t('settings:fields:currency:dotComma')})
+                </option>
+                <option value="spaceDot">
+                  1 999.000 ({t('settings:fields:currency:spaceDot')})
+                </option>
+              </select>
+            </Field>
+          </Row>
+          <Row>
+            <Field>
+              <label className="itemLabel">{t('settings:fields:currency:placement')}</label>
+              <select
+                name="placement"
+                value={this.state.placement}
+                onChange={this.handleInputChange}
+              >
+                <option value="before">{t('settings:fields:currency:beforeAmount')}</option>
+                <option value="after">{t('settings:fields:currency:afterAmount')}</option>
+              </select>
+            </Field>
+            <Field>
+              <label className="itemLabel">{t('settings:fields:currency:fraction')}</label>
+              <input
+                className="form-control"
+                name="fraction"
+                type="number"
+                value={this.state.fraction}
+                onChange={this.handleInputChange}
+              />
+            </Field>
+          </Row>
+        </Part>
       </Section>
     );
   }
@@ -92,7 +164,7 @@ export class Currency extends Component {
 
 Currency.propTypes = {
   currency: PropTypes.object.isRequired,
-  savedSettings: PropTypes.string.isRequired,
+  savedSettings: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   updateFieldData: PropTypes.func.isRequired,
   updateSavedSettings: PropTypes.func.isRequired,

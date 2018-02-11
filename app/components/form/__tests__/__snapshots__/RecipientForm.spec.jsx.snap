@@ -2,13 +2,13 @@
 
 exports[`Recipient Form component matches snapshot 1`] = `
 <div
-  className="RecipientForm__Form-gIRrkZ bvrwsG"
+  className="Part__PartStyle-kAWmVX iwwkMM"
 >
   <div
-    className="RecipientForm__Row-jotDjU fYoIKq"
+    className="Part__RowStyle-nLRvo cGeXDT"
   >
     <div
-      className="RecipientForm__Field-hxcUmZ eSPXtV"
+      className="Part__FieldStyle-dkcwja bIqrsv"
     >
       <label
         className="itemLabel"
@@ -23,7 +23,7 @@ exports[`Recipient Form component matches snapshot 1`] = `
       />
     </div>
     <div
-      className="RecipientForm__Field-hxcUmZ eSPXtV"
+      className="Part__FieldStyle-dkcwja bIqrsv"
     >
       <label
         className="itemLabel"
@@ -37,10 +37,10 @@ exports[`Recipient Form component matches snapshot 1`] = `
     </div>
   </div>
   <div
-    className="RecipientForm__Row-jotDjU fYoIKq"
+    className="Part__RowStyle-nLRvo cGeXDT"
   >
     <div
-      className="RecipientForm__Field-hxcUmZ eSPXtV"
+      className="Part__FieldStyle-dkcwja bIqrsv"
     >
       <label
         className="itemLabel"
@@ -55,7 +55,7 @@ exports[`Recipient Form component matches snapshot 1`] = `
       />
     </div>
     <div
-      className="RecipientForm__Field-hxcUmZ eSPXtV"
+      className="Part__FieldStyle-dkcwja bIqrsv"
     >
       <label
         className="itemLabel"

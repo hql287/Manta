@@ -85,17 +85,17 @@ class Invoices extends PureComponent {
 
   // Render
   render() {
-    const { t, invoices, dateFormat } = this.props;
+    const { dateFormat, invoices, t } = this.props;
     const invoicesComponent = invoices.map((invoice, index) => (
       <Invoice
-        t={t}
         key={invoice._id}
+        dateFormat={dateFormat}
         deleteInvoice={this.deleteInvoice}
         editInvoice={this.editInvoice}
         setInvoiceStatus={this.setInvoiceStatus}
         index={index}
-        dateFormat={dateFormat}
         invoice={invoice}
+        t={t}
       />
     ));
     return (
@@ -119,6 +119,7 @@ class Invoices extends PureComponent {
 Invoices.propTypes = {
   dispatch: PropTypes.func.isRequired,
   invoices: PropTypes.arrayOf(PropTypes.object).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 // Map state to props & Export

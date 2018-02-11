@@ -1,6 +1,7 @@
 // Node Libs
 const appConfig = require('electron').remote.require('electron-settings');
 import uuidv4 from 'uuid/v4';
+import i18n from '../../i18n/i18n';
 
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -65,6 +66,14 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       // Save setting to DB
       const { setting, data } = action.payload;
       appConfig.set(`invoice.${setting}`, data);
+      // Dispatch notification
+      dispatch({
+        type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+        payload: {
+          type: 'success',
+          message: i18n.t('messages:settings:saved'),
+        },
+      });
       // Pass new data to action and continue
       next({
         type: ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,

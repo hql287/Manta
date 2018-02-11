@@ -37,6 +37,9 @@ const editInvoice = jest.fn();
 const deleteInvoice = jest.fn();
 const setInvoiceStatus = jest.fn();
 const dateFormat = 'MM/DD/YY';
+const currencyPlacement = 'before';
+Date.now = jest.genMockFunction().mockReturnValue(0);
+
 const t = jest.fn(status => {
   switch (status) {
     case 'invoices:status:cancelled': {
@@ -54,8 +57,6 @@ const t = jest.fn(status => {
   }
 });
 
-Date.now = jest.genMockFunction().mockReturnValue(0);
-
 // Tests
 describe('Renders correctly to the DOM', () => {
   let wrapper;
@@ -68,6 +69,7 @@ describe('Renders correctly to the DOM', () => {
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
       />
     );
   });
@@ -81,6 +83,7 @@ describe('Renders correctly to the DOM', () => {
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
       />
     );
     expect(mountWrapper.prop('invoice')).toEqual(invoice);
@@ -120,6 +123,7 @@ describe('Renders correctly to the DOM', () => {
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
       />
     );
     expect(
@@ -143,6 +147,7 @@ describe('Renders correctly to the DOM', () => {
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
       />
     );
     expect(
@@ -164,6 +169,7 @@ describe('Renders correctly to the DOM', () => {
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
       />
     );
     expect(
@@ -194,6 +200,7 @@ describe('Renders correctly to the DOM', () => {
           deleteInvoice={deleteInvoice}
           setInvoiceStatus={setInvoiceStatus}
           dateFormat={dateFormat}
+          currencyPlacement={currencyPlacement}
         />
       )
       .toJSON();
@@ -214,6 +221,7 @@ describe('handle clicks correctly', () => {
         deleteInvoice={deleteInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
       />
     );
     viewBtn = wrapper

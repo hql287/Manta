@@ -14,7 +14,7 @@ import {
   validateDiscount,
   validateTax,
   validateNote,
-  setEditRecipient
+  setEditRecipient,
 } from '../form';
 
 // Mocks
@@ -55,11 +55,19 @@ describe('getInvoiceData', () => {
         },
       ],
       dueDate: {},
-      currency: {},
+      currency: {
+        code: 'USD',
+        placement: 'before',
+        fraction: 2,
+        separator: 'commaDot',
+      },
       discount: {},
       tax: {},
       note: {},
       settings: {
+        editMode: {
+          active: false,
+        },
         open: false,
         required_fields: {
           invoiceID: false,
@@ -72,7 +80,12 @@ describe('getInvoiceData', () => {
       },
       savedSettings: {
         tax: {},
-        currency: 'USD',
+        currency: {
+          code: 'USD',
+          placement: 'before',
+          fraction: 2,
+          separator: 'commaDot',
+        },
         required_fields: {
           invoiceID: false,
           dueDate: false,
@@ -92,9 +105,9 @@ describe('getInvoiceData', () => {
     // Include Rows & Recipient Data
     expect(invoiceData).toHaveProperty('rows');
     expect(invoiceData).toHaveProperty('recipient');
+    expect(invoiceData).toHaveProperty('currency');
     // Not include non-required data
     expect(invoiceData).not.toHaveProperty('dueDate');
-    expect(invoiceData).not.toHaveProperty('currency');
     expect(invoiceData).not.toHaveProperty('discount');
     expect(invoiceData).not.toHaveProperty('tax');
     expect(invoiceData).not.toHaveProperty('note');
@@ -160,10 +173,6 @@ describe('getInvoiceData', () => {
 
   it('should return currency data when required', () => {
     const newFormData = Object.assign({}, formData, {
-      currency: {
-        code: 'USD',
-        symbol: '$',
-      },
       settings: Object.assign({}, formData.settings, {
         required_fields: Object.assign({}, formData.settings.required_fields, {
           currency: true,
@@ -174,11 +183,15 @@ describe('getInvoiceData', () => {
     const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.currency).toEqual({
       code: 'USD',
-      symbol: '$',
+      placement: 'before',
+      fraction: 2,
+      separator: 'commaDot',
     });
     expect(invoiceData.dueDate).not.toEqual({
       code: 'VND',
-      symbol: 'đ',
+      placement: 'after',
+      fraction: 0,
+      separator: 'spaceDot',
     });
   });
 
@@ -274,7 +287,9 @@ describe('validateFormData', () => {
       },
       currency: {
         code: 'USD',
-        symbol: '$',
+        placement: 'before',
+        fraction: 2,
+        separator: 'commaDot',
       },
       discount: {
         type: 'percentage',
@@ -305,7 +320,12 @@ describe('validateFormData', () => {
           method: 'reverse',
           tin: '123-456-789',
         },
-        currency: 'USD',
+        currency: {
+          code: 'USD',
+          placement: 'before',
+          fraction: 2,
+          separator: 'commaDot',
+        },
         required_fields: {
           invoiceID: true,
           dueDate: true,
@@ -346,7 +366,12 @@ describe('validateFormData', () => {
   });
 
   it('should NOT pass with INCORRECT currency data', () => {
-    formData.currency = null;
+    formData.currency = {
+      code: 'USD',
+      fraction: -1,
+      separator: 'commaDot',
+      placement: 'before'
+    };
     const validation = validateFormData(formData);
     expect(validation).toEqual(false);
   });
@@ -476,7 +501,7 @@ describe('validateRows', () => {
     });
   });
 
-  it('should validate item price', () => {
+  it('should validate item quantity', () => {
     const rows = [
       {
         description: faker.commerce.productName(),
@@ -486,6 +511,21 @@ describe('validateRows', () => {
     ];
     const validation = validateRows(rows);
     expect(validation).toEqual(false);
+    expect(openDialog).toBeCalledWith({
+      type: 'warning',
+      title: i18n.t('dialog:validation:rows:qtyZero:title'),
+      message: i18n.t('dialog:validation:rows:qtyZero:message'),
+    });
+
+    const rows2 = [
+      {
+        description: faker.commerce.productName(),
+        price: faker.commerce.price(),
+        quantity: -1,
+      },
+    ];
+    const validation2 = validateRows(rows2);
+    expect(validation2).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
       title: i18n.t('dialog:validation:rows:qtyZero:title'),
@@ -539,13 +579,18 @@ describe('validateDueDate', () => {
 
 describe('validateCurrency', () => {
   it('should validate Currency', () => {
-    const currency = null;
+    const currency = {
+      code: 'USD',
+      fraction: -1,
+      separator: 'commaDot',
+      placement: 'before'
+    };
     const validation = validateCurrency(true, currency);
     expect(validation).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
-      title: i18n.t('dialog:validation:currency:title'),
-      message: i18n.t('dialog:validation:currency:message'),
+      title: i18n.t('dialog:validation:currency:fraction:title'),
+      message: i18n.t('dialog:validation:currency:fraction:message'),
     });
   });
 
@@ -558,7 +603,9 @@ describe('validateCurrency', () => {
   it('should pass correct currency data', () => {
     const currency = {
       code: 'USD',
-      symbol: '$',
+      placement: 'before',
+      fraction: 2,
+      separator: 'commaDot',
     };
     const validation = validateCurrency(true, currency);
     expect(validation).toEqual(true);
@@ -598,11 +645,27 @@ describe('validateDiscount', () => {
 
 describe('validateTax', () => {
   it('should validate tax data', () => {
-    const tax = {
-      amount: 0,
-    };
-    const validation = validateTax(true, tax);
-    expect(validation).toEqual(false);
+    const tax1 = { amount: 0 };
+    const tax2 = { amount: '' };
+    const tax3 = { amount: -1 };
+    const validation1 = validateTax(true, tax1);
+    expect(validation1).toEqual(false);
+    expect(openDialog).toBeCalledWith({
+      type: 'warning',
+      title: i18n.t('dialog:validation:tax:title'),
+      message: i18n.t('dialog:validation:tax:message'),
+    });
+
+    const validation2 = validateTax(true, tax2);
+    expect(validation2).toEqual(false);
+    expect(openDialog).toBeCalledWith({
+      type: 'warning',
+      title: i18n.t('dialog:validation:tax:title'),
+      message: i18n.t('dialog:validation:tax:message'),
+    });
+
+    const validation3 = validateTax(true, tax3);
+    expect(validation3).toEqual(false);
     expect(openDialog).toBeCalledWith({
       type: 'warning',
       title: i18n.t('dialog:validation:tax:title'),
@@ -678,17 +741,17 @@ describe('set correct recipient information to use in edit mode', () => {
         email: faker.internet.email(),
         company: faker.company.companyName(),
         phone: faker.phone.phoneNumber(),
-      }
+      },
     ];
   });
 
   it('should return current contact if it exist', () => {
     const currentContact = allContacts[1];
-    const editRecipient =  setEditRecipient(allContacts, currentContact);
+    const editRecipient = setEditRecipient(allContacts, currentContact);
     expect(editRecipient).toEqual({
       newRecipient: false,
       select: currentContact,
-    })
+    });
   });
 
   it('should create a new contact if the current contact does not exist', () => {
@@ -699,7 +762,7 @@ describe('set correct recipient information to use in edit mode', () => {
       company: faker.company.companyName(),
       phone: faker.phone.phoneNumber(),
     };
-    const editRecipient =  setEditRecipient(allContacts, currentContact);
+    const editRecipient = setEditRecipient(allContacts, currentContact);
     expect(editRecipient).toEqual({
       newRecipient: true,
       new: {
@@ -708,6 +771,6 @@ describe('set correct recipient information to use in edit mode', () => {
         company: currentContact.company,
         phone: currentContact.phone,
       },
-    })
+    });
   });
 });

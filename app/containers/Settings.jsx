@@ -35,8 +35,9 @@ import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation'
 class Settings extends Component {
   constructor(props) {
     super(props);
-    this.state = { visibleTab: 1 };
+    this.state = { visibleTab: 1, canSave: true };
     this.saveSettingsState = this.saveSettingsState.bind(this);
+    this.setSavable = this.setSavable.bind(this);
   }
 
   // Check if settings have been saved
@@ -56,6 +57,11 @@ class Settings extends Component {
     this.setState({ visibleTab: tabNum });
   }
 
+  // controls if save button appears
+  setSavable(settingsValid) {
+    this.setState({canSave: settingsValid});
+  }
+
   // Render Main Content
   renderSettingsContent() {
     const { t } = this.props;
@@ -65,7 +71,7 @@ class Settings extends Component {
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>{t('settings:header')}</PageHeaderTitle>
-          {!this.settingsSaved() && (
+          {!this.settingsSaved() && this.state.canSave && (
             <PageHeaderActions>
               <Button primary onClick={this.saveSettingsState}>
                 {t('common:save')}
@@ -99,13 +105,13 @@ class Settings extends Component {
           </Tabs>
           <TabContent>
             {this.state.visibleTab === 1 && (
-              <Profile t={t} profile={profile} updateSettings={updateSettings} />
+              <Profile t={t} profile={profile} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
             {this.state.visibleTab === 2 && (
-              <Invoice t={t} invoice={invoice} updateSettings={updateSettings} />
+              <Invoice t={t} invoice={invoice} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
             {this.state.visibleTab === 3 && (
-              <General t={t} general={general} updateSettings={updateSettings} />
+              <General t={t} general={general} updateSettings={updateSettings} setSavable={this.setSavable} />
             )}
           </TabContent>
         </PageContent>

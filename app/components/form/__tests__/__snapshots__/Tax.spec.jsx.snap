@@ -12,13 +12,13 @@ exports[`Note component matches snapshot 1`] = `
     />
   </div>
   <div
-    className="Tax__Form-hlyaXp darYVI"
+    className="Part__PartStyle-kAWmVX iwwkMM"
   >
     <div
-      className="Tax__Row-hSUxwC ipsqia"
+      className="Part__RowStyle-nLRvo cGeXDT"
     >
       <div
-        className="Tax__Field-cbJJUC kqTpPt"
+        className="Part__FieldStyle-dkcwja bIqrsv"
       >
         <label
           className="itemLabel"
@@ -37,10 +37,10 @@ exports[`Note component matches snapshot 1`] = `
       </div>
     </div>
     <div
-      className="Tax__Row-hSUxwC ipsqia"
+      className="Part__RowStyle-nLRvo cGeXDT"
     >
       <div
-        className="Tax__Field-cbJJUC kqTpPt"
+        className="Part__FieldStyle-dkcwja bIqrsv"
       >
         <label
           className="itemLabel"
@@ -61,7 +61,7 @@ exports[`Note component matches snapshot 1`] = `
         </div>
       </div>
       <div
-        className="Tax__Field-cbJJUC kqTpPt"
+        className="Part__FieldStyle-dkcwja bIqrsv"
       >
         <label
           className="itemLabel"

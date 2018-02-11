@@ -95,31 +95,6 @@ describe('Invoices Middleware', () => {
   });
 
   describe('should handle INVOICE_SAVE action', () => {
-    it('addes _id, created_at, subtotal & grandTotal to invoice data', () => {
-      const newInvoice = {
-        currency: {
-          code: 'USD',
-          symbol: '$',
-        },
-      };
-      const action = Actions.saveInvoice(newInvoice);
-      middleware(action);
-      expect(saveDoc).toHaveBeenCalled();
-      expect(saveDoc).toHaveBeenCalledWith(
-        'invoices',
-        Object.assign({}, newInvoice, {
-          _id: uuidv4(),
-          created_at: 'now',
-          subtotal: 'subTotal',
-          grandTotal: 'grandTotal',
-          status: 'pending',
-        })
-      );
-    });
-
-    // TODO
-    it('adds default currency data to invoice data');
-
     it('should save records to DB', () => {
       // Setup
       const newInvoice = {
@@ -153,7 +128,9 @@ describe('Invoices Middleware', () => {
         },
         currency: {
           code: 'USD',
-          symbol: '$',
+          placement: 'before',
+          fraction: 2,
+          separator: 'commaDot',
         },
         rows: [
           {
@@ -175,13 +152,7 @@ describe('Invoices Middleware', () => {
             Object.assign({}, action, {
               payload: [
                 ...mockData.invoicesRecords,
-                Object.assign({}, newInvoice, {
-                  _id: uuidv4(),
-                  created_at: 'now',
-                  subtotal: 'subTotal',
-                  grandTotal: 'grandTotal',
-                  status: 'pending',
-                }),
+                newInvoice
               ],
             })
           );
@@ -206,7 +177,9 @@ describe('Invoices Middleware', () => {
         },
         currency: {
           code: 'USD',
-          symbol: '$',
+          placement: 'before',
+          fraction: 2,
+          separator: 'commaDot',
         },
         rows: [
           {
@@ -221,19 +194,9 @@ describe('Invoices Middleware', () => {
         saveDoc('invoices', newInvoice).then(data => {
           // ipc to main process
           expect(ipcRenderer.send).toHaveBeenCalled();
-          expect(ipcRenderer.send).not.toHaveBeenCalledWith(
-            'preview-invoice',
-            newInvoice
-          );
           expect(ipcRenderer.send).toHaveBeenCalledWith(
             'preview-invoice',
-            Object.assign({}, newInvoice, {
-              _id: uuidv4(),
-              created_at: 'now',
-              subtotal: 'subTotal',
-              grandTotal: 'grandTotal',
-              status: 'pending',
-            })
+            newInvoice
           );
         })
       );

@@ -1,4 +1,6 @@
 const openDialog = require('../renderers/dialog');
+const appConfig = require('electron').remote.require('electron-settings');
+import { getInvoiceValue } from './invoice';
 import { isEmpty, pick, includes } from 'lodash';
 import i18n from '../../i18n/i18n';
 import uuidv4 from 'uuid/v4';
@@ -41,7 +43,7 @@ function getInvoiceData(formData) {
     settings,
   } = formData;
   // Required fields
-  const { required_fields } = settings;
+  const { editMode, required_fields } = settings;
   // Set Initial Value
   const invoiceData = { rows };
   // Set Recipient
@@ -61,15 +63,28 @@ function getInvoiceData(formData) {
   // Set Invoice DueDate
   if (required_fields.dueDate) invoiceData.dueDate = dueDate.selectedDate;
   // Set Invoice Currency
-  if (required_fields.currency) invoiceData.currency = currency;
+  if (required_fields.currency) {
+    invoiceData.currency = currency;
+  } else {
+    invoiceData.currency = appConfig.get('invoice.currency');
+  }
   // Set Invoice Discount
   if (required_fields.discount) invoiceData.discount = discount;
   // Set Invoice Tax
   if (required_fields.tax) invoiceData.tax = tax;
   // Set Invoice Note
   if (required_fields.note) invoiceData.note = note.content;
+
   // Return final value
-  return invoiceData;
+  return Object.assign({}, invoiceData, {
+    // Reuse existing data
+    _id: editMode.active ? editMode.data._id : uuidv4(),
+    created_at: editMode.active ? editMode.data.created_at : Date.now(),
+    status: editMode.active ? editMode.data.status: 'pending',
+    // Calculate subtotal & grandTotal
+    subtotal: getInvoiceValue(invoiceData).subtotal,
+    grandTotal: getInvoiceValue(invoiceData).grandTotal,
+  });
 }
 
 // VALIDATION RULES
@@ -128,7 +143,7 @@ function validateRows(rows) {
       break;
     }
     // Is the price presented and greater than 0?
-    if (!row.price || row.price === 0) {
+    if (!row.price || row.price <= 0) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:priceZero:title'),
@@ -138,7 +153,7 @@ function validateRows(rows) {
       break;
     }
     // Is the quantity presented and greater than 0?
-    if (!row.quantity || row.quantity === 0) {
+    if (!row.quantity || row.quantity <= 0) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:rows:qtyZero:title'),
@@ -169,11 +184,11 @@ function validateDueDate(isRequired, dueDate) {
 
 function validateCurrency(isRequired, currency) {
   if (isRequired) {
-    if (!currency || currency === null) {
+    if (currency.fraction < 0 ) {
       openDialog({
         type: 'warning',
-        title: i18n.t('dialog:validation:currency:title'),
-        message: i18n.t('dialog:validation:currency:message'),
+        title: i18n.t('dialog:validation:currency:fraction:title'),
+        message: i18n.t('dialog:validation:currency:fraction:message'),
       });
       return false;
     }
@@ -201,7 +216,7 @@ function validateDiscount(isRequired, discount) {
 function validateTax(isRequired, tax) {
   const { amount } = tax;
   if (isRequired) {
-    if (!amount || amount === '' || amount === 0) {
+    if (!amount || amount === '' || amount <= 0) {
       openDialog({
         type: 'warning',
         title: i18n.t('dialog:validation:tax:title'),

@@ -2,45 +2,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
-import { keys, sortBy } from 'lodash';
-const moment = require('moment');
 
 // Custom Libs
-import currencies from '../../../libs/currencies.json';
 const openDialog = require('../../renderers/dialog.js');
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
-import styled from 'styled-components';
-
-const Row = styled.div`
-  display: flex;
-  margin: 0 -15px;
-`;
-
-const Field = styled.div`
-  flex: 1;
-  margin: 0 15px 20px 15px;
-`;
-
-const Header = styled.h2``;
-
-const Section = styled.div`
-  padding: 20px;
-  background: #f9fafa;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #f2f3f4;
-`;
+import Currency from './_partials/invoice/Currency';
+import Fields from './_partials/invoice/Fields';
+import Other from './_partials/invoice/Other';
+import Tax from './_partials/invoice/Tax';
 
 // Component
 class Invoice extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.invoice;
-    this.selectExportDir = this.selectExportDir.bind(this);
-    this.sortCurrencies = this.sortCurrencies.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTaxChange = this.handleTaxChange.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
@@ -91,6 +70,22 @@ class Invoice extends Component {
     );
   }
 
+  handleCurrencyChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'fraction' ? parseInt(target.value, 10) : target.value;
+    this.setState(
+      {
+        currency: Object.assign({}, this.state.currency, {
+          [name]: value,
+        }),
+      },
+      () => {
+        this.props.updateSettings('invoice', this.state);
+      }
+    );
+  }
+
   handleVisibilityChange(event) {
     const target = event.target;
     const name = target.name;
@@ -111,31 +106,6 @@ class Invoice extends Component {
     ipc.send('select-export-directory');
   }
 
-  sortCurrencies() {
-    const currenciesKeys = keys(currencies);
-    const currenciesKeysAndValues = currenciesKeys.map(key => [
-      key,
-      currencies[key].name,
-      currencies[key].code,
-    ]);
-    const currenciesSorted = sortBy(currenciesKeysAndValues, [
-      array => array[1],
-    ]);
-    return currenciesSorted.map(obj => {
-      const [key, name, code] = obj;
-
-      const optionKey = code;
-      const optionValue = code;
-      const optionLabel = name;
-
-      return (
-        <option value={optionValue} key={optionKey}>
-          {optionLabel}
-        </option>
-      );
-    });
-  }
-
   render() {
     const { t } = this.props;
     const {
@@ -146,211 +116,35 @@ class Invoice extends Component {
       required_fields,
       dateFormat,
     } = this.state;
-    return (
-      <div>
-        <label className="itemLabel">{t('settings:fields:taxSettings')}</label>
-        <Section>
-          <Row>
-            <Field>
-              <label className="itemLabel">{t('form:fields:tax:id')}</label>
-              <input
-                name="tin"
-                type="text"
-                value={tax.tin}
-                onChange={this.handleTaxChange}
-                placeholder={t('form:fields:tax:id')}
-              />
-            </Field>
-          </Row>
-          <Row>
-            <Field>
-              <label className="itemLabel">{t('common:amount')}</label>
-              <input
-                name="amount"
-                type="number"
-                step="0.01"
-                value={tax.amount}
-                onChange={this.handleTaxChange}
-                placeholder={t('common:amount')}
-              />
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('form:fields:tax:method')}</label>
-              <select
-                name="method"
-                value={tax.method}
-                onChange={this.handleTaxChange}
-              >
-                <option value="default">{t('common:default')}</option>
-                <option value="reverse">{t('form:fields:tax:reverse')}</option>
-              </select>
-            </Field>
-          </Row>
-        </Section>
-
-        <label className="itemLabel">{t('settings:fields:requiredFields')}</label>
-        <Section>
-          <Row>
-            <Field>
-              <label className="itemLabel">Invoice ID</label>
-              <label className="switch">
-                <input
-                  name="invoiceID"
-                  type="checkbox"
-                  checked={required_fields.invoiceID}
-                  onChange={this.handleVisibilityChange}
-                />
-                <span className="slider round" />
-              </label>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
-              <label className="switch">
-                <input
-                  name="dueDate"
-                  type="checkbox"
-                  checked={required_fields.dueDate}
-                  onChange={this.handleVisibilityChange}
-                  placeholder={t('form:fields:dueDate:name')}
-                />
-                <span className="slider round" />
-              </label>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('form:fields:currency')}</label>
-              <label className="switch">
-                <input
-                  name="currency"
-                  type="checkbox"
-                  checked={required_fields.currency}
-                  onChange={this.handleVisibilityChange}
-                />
-                <span className="slider round" />
-              </label>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('form:fields:discount:name')}</label>
-              <label className="switch">
-                <input
-                  name="discount"
-                  type="checkbox"
-                  checked={required_fields.discount}
-                  onChange={this.handleVisibilityChange}
-                />
-                <span className="slider round" />
-              </label>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('form:fields:tax:name')}</label>
-              <label className="switch">
-                <input
-                  name="tax"
-                  type="checkbox"
-                  checked={required_fields.tax}
-                  onChange={this.handleVisibilityChange}
-                />
-                <span className="slider round" />
-              </label>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('form:fields:note')}</label>
-              <label className="switch">
-                <input
-                  name="note"
-                  type="checkbox"
-                  checked={required_fields.note}
-                  onChange={this.handleVisibilityChange}
-                />
-                <span className="slider round" />
-              </label>
-            </Field>
-          </Row>
-        </Section>
-
-        <label className="itemLabel">{t('settings:fields:other')}</label>
-        <Section>
-          <Row>
-            <Field>
-              <label className="itemLabel">{t('form:fields:currency')}</label>
-              <select
-                name="currency"
-                value={currency}
-                onChange={this.handleInputChange}
-              >
-                {this.sortCurrencies()}
-              </select>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('settings:fields:template')}</label>
-              <select
-                name="template"
-                value={template}
-                onChange={this.handleInputChange}
-              >
-                <option value="minimal">Minimal</option>
-                <option value="business">Business</option>
-              </select>
-            </Field>
-          </Row>
-          <Row>
-            <Field>
-              <label className="itemLabel">{t('settings:fields:dateFormat')}</label>
-              <select
-                name="dateFormat"
-                value={dateFormat}
-                onChange={this.handleInputChange}
-              >
-                <option value="dddd, MMMM Do, YYYY">
-                  {moment(Date.now()).format('dddd, MMMM Do, YYYY')} (dddd, MMMM
-                  Do, YYYY)
-                </option>
-                <option value="MMMM Do, YYYY">
-                  {moment(Date.now()).format('MMMM Do, YYYY')} (MMMM Do, YYYY)
-                </option>
-                <option value="MM/DD/YYYY">
-                  {moment(Date.now()).format('MM/DD/YYYY')} (MM/DD/YYYY)
-                </option>
-                <option value="MM/DD/YY">
-                  {moment(Date.now()).format('MM/DD/YY')} (MM/DD/YY)
-                </option>
-                <option value="dddd, DD MMMM YYYY">
-                  {moment(Date.now()).format('dddd, DD MMMM YYYY')} (dddd, DD
-                  MMMM YYYY)
-                </option>
-                <option value="DD/MMMM/YYYY">
-                  {moment(Date.now()).format('DD/MMMM/YYYY')} (DD/MMMM/YYYY)
-                </option>
-                <option value="DD/MM/YYYY">
-                  {moment(Date.now()).format('DD/MM/YYYY')} (DD/MM/YYYY)
-                </option>
-                <option value="DD/MM/YY">
-                  {moment(Date.now()).format('DD/MM/YY')} (DD/MM/YY)
-                </option>
-              </select>
-            </Field>
-            <Field>
-              <label className="itemLabel">{t('settings:fields:pdfExportDir')}</label>
-              <div className="input-group">
-                <input
-                  className="form-control"
-                  name="exportDir"
-                  type="text"
-                  value={exportDir}
-                  disabled
-                />
-                <a
-                  href="#"
-                  className="input-group-customized "
-                  onClick={this.selectExportDir}
-                >
-                  <i className="ion-folder" />
-                </a>
-              </div>
-            </Field>
-          </Row>
-        </Section>
-      </div>
-    );
+    return [
+      <Fields
+        key="required_fields_settings"
+        required_fields={required_fields}
+        handleVisibilityChange={this.handleVisibilityChange}
+        t={t}
+      />,
+      <Tax
+        key="tax_settings"
+        handleTaxChange={this.handleTaxChange}
+        tax={tax}
+        t={t}
+      />,
+      <Currency
+        key="currency_settings"
+        currency={currency}
+        handleCurrencyChange={this.handleCurrencyChange}
+        t={t}
+      />,
+      <Other
+        key="other_settings"
+        dateFormat={dateFormat}
+        exportDir={exportDir}
+        template={template}
+        handleInputChange={this.handleInputChange}
+        selectExportDir={this.selectExportDir}
+        t={t}
+      />
+    ];
   }
 }
 
