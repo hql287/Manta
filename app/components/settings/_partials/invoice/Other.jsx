@@ -79,6 +79,9 @@ function Other({
             <option value="DD/MM/YY">
               {moment(Date.now()).format('DD/MM/YY')} (DD/MM/YY)
             </option>
+            <option value="DD.MM.YYYY">
+              {moment(Date.now()).format('DD.MM.YYYY')} (DD.MM.YYYY)
+            </option>
           </select>
         </Field>
       </Row>
