@@ -26,6 +26,7 @@ export class DueDate extends Component {
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.clearDate = this.clearDate.bind(this);
+    this.change = this.change.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -47,7 +48,7 @@ export class DueDate extends Component {
   }
 
   change(event){
-    var result = new Date();
+    let result = new Date();
     result = result.setDate(result.getDate() + parseFloat(event.target.value));
     const selectedDate = moment(result).toObject();
     this.onDateChange(selectedDate);
@@ -64,19 +65,12 @@ export class DueDate extends Component {
       <Section>
         <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
         <DueDateContent>
-
-            <select
-                name="addDay"
-                id="addDay"
-                placeholder={t('form:fields:dueDate:placeHolder')}
-                onChange={this.change.bind(this)} value={this.state.addDay}>
-              >
-                <option value="0">{t('form:fields:dueDate:addSomeDaysToCurrentDate')}</option>
-                <option value="5">+5 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
-                <option value="10">+10 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
-                <option value="30">+30 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
-                
-         </select>
+          <select name="addDay" id="addDay" placeholder={t('form:fields:dueDate:placeHolder')} onChange={this.change} value={this.state.addDay} >
+            <option value="0">{t('form:fields:dueDate:addSomeDaysToCurrentDate')}</option>
+            <option value="5">+5 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+            <option value="10">+10 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+            <option value="30">+30 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+          </select>
 
           <SingleDatePicker
             id="invoice-duedate"
