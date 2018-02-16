@@ -173,5 +173,5 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
-  translate('form'),
+  translate(),
 )(Recipient);
