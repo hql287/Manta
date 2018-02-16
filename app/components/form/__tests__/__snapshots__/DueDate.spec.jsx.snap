@@ -10,6 +10,32 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
   <div
     className="DueDate__DueDateContent-jGMeZA ddcSFi"
   >
+    <select
+      id="addDay"
+      name="addDay"
+      onChange={[Function]}
+      placeholder={undefined}
+      value={0}
+    >
+      <option
+        value="0"
+      />
+      <option
+        value="5"
+      >
+        +5 
+      </option>
+      <option
+        value="10"
+      >
+        +10 
+      </option>
+      <option
+        value="30"
+      >
+        +30 
+      </option>
+    </select>
     <div
       className="SingleDatePicker"
     >
