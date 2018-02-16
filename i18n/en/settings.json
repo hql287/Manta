@@ -54,8 +54,8 @@
       "tl": "Tagalog, Philippines",
       "tr": "Turkish",
       "vi": "Vietnamese",
-      "zhCN": "Chinese (Simplified)",
-      "zhTW": "Chinese (Traditional)"
+      "zh-CN": "Chinese (Simplified)",
+      "zh-TW": "Chinese (Traditional)"
     },
     "other": "Other"
   }
