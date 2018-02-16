@@ -1,5 +1,5 @@
 // Libs
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { BlockPicker } from 'react-color';
 import { Section, Label } from '../shared';
@@ -48,7 +48,7 @@ const Cover = styled.div`
   left: 0px;
 `;
 
-class AccentColor extends PureComponent {
+class AccentColor extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,10 +97,10 @@ class AccentColor extends PureComponent {
       '#dce775',
       '#ff8a65',
     ];
-    const { t } = this.props;
+    const { t, UILang } = this.props;
     return (
       <Section>
-        <Label>{ t('preview:sidebar:accentColor:name') }</Label>
+        <Label>{t('preview:sidebar:accentColor:name', { lng: UILang })}</Label>
         <label>
           <input
             type="checkbox"
@@ -108,7 +108,7 @@ class AccentColor extends PureComponent {
             onChange={this.handleInputChange}
           />
           {'\u00A0'}
-          { t('preview:sidebar:accentColor:useCustom') }
+          {t('preview:sidebar:accentColor:useCustom', { lng: UILang })}
         </label>
         <ColorPicker>
           <Swatch onClick={this.handleClick}>
@@ -135,6 +135,7 @@ AccentColor.propTypes = {
   accentColor: PropTypes.object.isRequired,
   handleAccentColorChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+  UILang: PropTypes.string.isRequired,
 };
 
 export default AccentColor;

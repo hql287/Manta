@@ -68,6 +68,7 @@ class Viewer extends Component {
     return (
       <Wrapper>
         <SideBar
+          UILang={UILang}
           configs={configs}
           invoice={invoice}
           updateConfigs={this.updateConfigs}

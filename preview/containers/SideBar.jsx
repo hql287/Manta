@@ -66,7 +66,7 @@ class SideBar extends Component {
   }
 
   render() {
-    const { t, configs } = this.props;
+    const { t, configs, UILang } = this.props;
     const {
       dateFormat,
       template,
@@ -79,42 +79,50 @@ class SideBar extends Component {
       <Wrapper>
         <Language
           t={t}
+          UILang={UILang}
           language={language}
           handleInputChange={this.handleInputChange}
         />
         <Template
           t={t}
+          UILang={UILang}
           template={template}
           handleInputChange={this.handleInputChange}
         />
         <DateFormat
           t={t}
+          UILang={UILang}
           language={language}
           dateFormat={dateFormat}
           handleInputChange={this.handleInputChange}
         />
         <Alignment
           t={t}
+          UILang={UILang}
           alignItems={alignItems}
           handleInputChange={this.handleInputChange}
         />
         <FontSize
           t={t}
+          UILang={UILang}
           fontSize={fontSize}
           handleInputChange={this.handleInputChange}
         />
         <Toggler
           t={t}
+          UILang={UILang}
           configs={configs}
           handleInputChange={this.handleInputChange}
         />
         <AccentColor
           t={t}
+          UILang={UILang}
           accentColor={accentColor}
           handleAccentColorChange={this.handleAccentColorChange}
         />
         <Actions
           t={t}
+          UILang={UILang}
           savePDF={this.savePDF}
           saveConfigs={this.saveConfigs}
         />
@@ -126,6 +134,7 @@ class SideBar extends Component {
 SideBar.propTypes = {
   configs: PropTypes.object.isRequired,
   updateConfigs: PropTypes.func.isRequired,
+  UILang: PropTypes.string.isRequired,
   invoice: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
 };
