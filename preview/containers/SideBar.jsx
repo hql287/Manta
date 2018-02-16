@@ -1,17 +1,10 @@
 // Libs
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { translate } from 'react-i18next';
 const ipc = require('electron').ipcRenderer;
+import i18n from '../../i18n/i18n';
 
-// Actions
-import * as ActionsCreator from '../actions';
-
-// Selector
-import { getConfigs, getInvoice } from '../reducers';
-
+// Style
 import styled from 'styled-components';
 const Wrapper = styled.div`
   flex: 1;
@@ -30,53 +23,74 @@ const Wrapper = styled.div`
 `;
 
 // Components
-import Template from '../components/sidebar/Template';
-import Alignment from '../components/sidebar/Alignment';
-import FontSize from '../components/sidebar/FontSize';
-import Toggler from '../components/sidebar/Toggler';
 import AccentColor from '../components/sidebar/AccentColor';
 import Actions from '../components/sidebar/Actions';
+import Alignment from '../components/sidebar/Alignment';
+import DateFormat from '../components/sidebar/DateFormat';
+import FontSize from '../components/sidebar/FontSize';
+import Language from '../components/sidebar/Language';
+import Template from '../components/sidebar/Template';
+import Toggler from '../components/sidebar/Toggler';
 
-class SideBar extends PureComponent {
+class SideBar extends Component {
   constructor(props) {
     super(props);
     this.savePDF = this.savePDF.bind(this);
+    this.saveConfigs = this.saveConfigs.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleAccentColorChange = this.handleAccentColorChange.bind(this);
-    this.updateConfigs = this.updateConfigs.bind(this);
   }
 
   handleInputChange(event) {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-    this.updateConfigs({ name, value });
+    this.props.updateConfigs({ name, value });
   }
 
   handleAccentColorChange(color) {
-    this.updateConfigs({ name: 'accentColor', value: color });
-  }
-
-  updateConfigs(config) {
-    const { dispatch } = this.props;
-    dispatch(
-      ActionsCreator.updateConfigs({ name: config.name, value: config.value })
-    );
+    this.props.updateConfigs({ name: 'accentColor', value: color });
   }
 
   savePDF() {
     const invoiceID = this.props.invoice._id;
     ipc.send('save-pdf', invoiceID);
+    // Always save template configs to invocie when export to PDF
+    this.saveConfigs();
+  }
+
+  saveConfigs() {
+    const { configs, invoice } = this.props;
+    const { _id: invoiceID } = invoice;
+    ipc.send('save-configs-to-invoice', invoiceID, configs);
   }
 
   render() {
     const { t, configs } = this.props;
-    const { template, alignItems, fontSize, accentColor } = configs;
+    const {
+      dateFormat,
+      template,
+      language,
+      alignItems,
+      fontSize,
+      accentColor
+    } = configs;
     return (
       <Wrapper>
+        <Language
+          t={t}
+          language={language}
+          handleInputChange={this.handleInputChange}
+        />
         <Template
           t={t}
           template={template}
+          handleInputChange={this.handleInputChange}
+        />
+        <DateFormat
+          t={t}
+          language={language}
+          dateFormat={dateFormat}
           handleInputChange={this.handleInputChange}
         />
         <Alignment
@@ -99,7 +113,11 @@ class SideBar extends PureComponent {
           accentColor={accentColor}
           handleAccentColorChange={this.handleAccentColorChange}
         />
-        <Actions t={t} savePDF={this.savePDF} />
+        <Actions
+          t={t}
+          savePDF={this.savePDF}
+          saveConfigs={this.saveConfigs}
+        />
       </Wrapper>
     );
   }
@@ -107,17 +125,9 @@ class SideBar extends PureComponent {
 
 SideBar.propTypes = {
   configs: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  updateConfigs: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  invoice: getInvoice(state),
-  configs: getConfigs(state),
-});
-
-export default compose(
-  connect(mapStateToProps),
-  translate(['common', 'preview'])
-)(SideBar);
+export default SideBar;

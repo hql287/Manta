@@ -1,20 +1,10 @@
 // Libs
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
-import { translate } from 'react-i18next';
-const ipc = require('electron').ipcRenderer;
-import { Notify } from '../../helpers/notify';
-
-// Actions
-import * as ActionsCreator from '../actions';
-
-// Selectors
-import { getConfigs, getInvoice, getProfile } from '../reducers';
 
 // Styles
 import styled from 'styled-components';
+
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -35,47 +25,45 @@ const Message = styled.p`
   margin: 0;
 `;
 
+const Page = styled.div`
+  position: relative;
+  width: 21cm;
+  height: 29.7cm;
+  min-height: 29.7cm;
+  min-width: 21cm;
+  margin-left: auto;
+  margin-right: auto;
+  background: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  display: flex;
+  border-radius: 4px;
+`;
+
 // Components
-import Invoice from '../components/main/Invoice';
+import Minimal from '../templates/minimal';
+import Business from '../templates/business';
 
-class MainContent extends PureComponent {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    ipc.on('update-preview', (event, invoiceData) => {
-      dispatch(ActionsCreator.updateInvoice(invoiceData));
-    });
-    ipc.on('update-preview-window', (event, newConfigs) => {
-      dispatch(ActionsCreator.reloadConfigs(newConfigs));
-    });
-    ipc.on('pfd-exported', (event, options) => {
-      const noti = Notify(options);
-      // Handle click on notification
-      noti.onclick = () => {
-        ipc.send('reveal-file', options.location);
-      };
-    });
-  }
-
-  componentWillUnmount() {
-    ipc.removeAllListeners([
-      'pfd-exported',
-      'update-preview',
-      'update-preview-window',
-    ]);
+class MainContent extends Component {
+  renderTemplate() {
+    switch (this.props.configs.template) {
+      case 'business': {
+        return <Business {...this.props} />;
+      }
+      default: {
+        return <Minimal {...this.props} />;
+      }
+    }
   }
 
   render() {
-    const { t, invoice, configs, profile } = this.props;
+    const { t, invoice  } = this.props;
     return (
       <Wrapper>
         {invoice._id ? (
           <div className="print-area">
-            <Invoice
-              t={t}
-              configs={configs}
-              invoice={invoice}
-              profile={profile}
-            />
+            <Page>
+              {this.renderTemplate()}
+            </Page>
           </div>
         ) : (
           <Message>{t('preview:common:chooseInvoiceToPreview')}</Message>
@@ -87,19 +75,10 @@ class MainContent extends PureComponent {
 
 MainContent.propTypes = {
   configs: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
+  UILang: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  configs: getConfigs(state),
-  invoice: getInvoice(state),
-  profile: getProfile(state),
-});
-
-export default compose(
-  connect(mapStateToProps),
-  translate(['common', 'preview'])
-)(MainContent);
+export default MainContent;
