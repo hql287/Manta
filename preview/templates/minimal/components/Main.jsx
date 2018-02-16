@@ -114,6 +114,8 @@ function setAlignItems(configs) {
 
 // Component
 function Main({ invoice, configs, t }) {
+  // Get currentLanguage
+  const currentLanguage = configs.language;
   // Destructuring values
   const { tax, discount } = invoice;
   const { code, placement, fraction, separator } = invoice.currency;
@@ -141,8 +143,8 @@ function Main({ invoice, configs, t }) {
     <Table alignItems={setAlignItems(configs)}>
       <thead>
         <ItemsHeader>
-          <th>{t('preview:common:itemDescription')}</th>
-          <th>{t('preview:common:price')}</th>
+          <th>{t('preview:common:itemDescription', {lng: currentLanguage})}</th>
+          <th>{t('preview:common:price', {lng: currentLanguage})}</th>
         </ItemsHeader>
       </thead>
 
@@ -150,7 +152,7 @@ function Main({ invoice, configs, t }) {
 
       <InvoiceSummary>
         <Subtotal>
-          <td>{t('preview:common:subtotal')}</td>
+          <td>{t('preview:common:subtotal', {lng: currentLanguage})}</td>
           <td>
             {currencyBefore ? currency : null}
             {' '}
@@ -163,10 +165,10 @@ function Main({ invoice, configs, t }) {
         {tax && (
           <Tax>
             <td>
-              {t('form:fields:tax:name')} {tax.amount}%
+              {t('form:fields:tax:name', {lng: currentLanguage})} {tax.amount}%
             </td>
             {tax.method === 'reverse' ? (
-              <td>{t('form:fields:tax:reverse')}</td>
+              <td>{t('form:fields:tax:reverse', {lng: currentLanguage})}</td>
             ) : (
               <td>
                 {currencyBefore ? currency : null}{' '}
@@ -184,7 +186,7 @@ function Main({ invoice, configs, t }) {
         {discount && (
           <Discount>
             <td>
-              {t('form:fields:discount:name')}{' '}
+              {t('form:fields:discount:name', {lng: currentLanguage})}{' '}
               {discount.type === 'percentage' && (
                 <span> {discount.amount}%</span>
               )}
@@ -202,7 +204,7 @@ function Main({ invoice, configs, t }) {
         )}
 
         <Total>
-          <td>{t('preview:common:total')}</td>
+          <td>{t('preview:common:total', {lng: currentLanguage})}</td>
           <td>
             {currencyBefore ? currency : null}
             {' '}

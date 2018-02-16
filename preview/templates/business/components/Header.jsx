@@ -58,6 +58,7 @@ const Heading = styled.h1`
 // Component
 function Header({ t, invoice, profile, configs }) {
   const { recipient } = invoice;
+  const currentLanguage = configs.language;
   return (
     <InvoiceHeader>
       <LeftColumn>
@@ -70,7 +71,7 @@ function Header({ t, invoice, profile, configs }) {
         </Company>
         {configs.showRecipient && (
           <Recipient>
-            <h4>{ t('preview:common:billedTo') }</h4>
+            <h4>{ t('preview:common:billedTo', {lng: currentLanguage}) }</h4>
             <p>{recipient.company}</p>
             <p>{recipient.fullname}</p>
             <p>{recipient.email}</p>
@@ -79,7 +80,7 @@ function Header({ t, invoice, profile, configs }) {
         )}
       </LeftColumn>
       <RightColumn>
-        <Heading accentColor={configs.accentColor}>{ t('preview:common:invoice') }</Heading>
+        <Heading accentColor={configs.accentColor}>{ t('preview:common:invoice', {lng: currentLanguage}) }</Heading>
         <h4>
           #
           { invoice.invoiceID
@@ -90,14 +91,14 @@ function Header({ t, invoice, profile, configs }) {
           }
         </h4>
         <p>
-          { t('preview:common:created') }
+          { t('preview:common:created', {lng: currentLanguage}) }
           {' '}
-          {moment(invoice.created_at).format(configs.dateFormat)}
+          {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
         </p>
         <p>
-          { t('preview:common:due') }
+          { t('preview:common:due', {lng: currentLanguage}) }
           {' '}
-          {moment(invoice.dueDate).format(configs.dateFormat)}
+          {moment(invoice.dueDate).lang(currentLanguage).format(configs.dateFormat)}
         </p>
       </RightColumn>
     </InvoiceHeader>
