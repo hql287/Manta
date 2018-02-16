@@ -63,6 +63,16 @@ class AccentColor extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const currentInvoiceID = this.props.invoiceID;
+    const nextInvoiceID = nextProps.invoiceID;
+    if (nextInvoiceID === currentInvoiceID) return;
+    this.setState({
+      useCustom: nextProps.accentColor.useCustom,
+      color: nextProps.accentColor.color,
+    });
+  }
+
   handleClick() {
     this.setState({ showPicker: !this.state.showPicker });
   }
@@ -136,6 +146,7 @@ AccentColor.propTypes = {
   handleAccentColorChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   UILang: PropTypes.string.isRequired,
+  invoiceID: PropTypes.string.isRequired,
 };
 
 export default AccentColor;

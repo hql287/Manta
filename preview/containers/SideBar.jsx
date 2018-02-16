@@ -66,7 +66,7 @@ class SideBar extends Component {
   }
 
   render() {
-    const { t, configs, UILang } = this.props;
+    const { t, configs, invoice, UILang } = this.props;
     const {
       dateFormat,
       template,
@@ -119,6 +119,7 @@ class SideBar extends Component {
           UILang={UILang}
           accentColor={accentColor}
           handleAccentColorChange={this.handleAccentColorChange}
+          invoiceID={invoice._id}
         />
         <Actions
           t={t}
