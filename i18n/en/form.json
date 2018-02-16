@@ -32,7 +32,9 @@
     },
     "dueDate": {
       "name": "Due Date",
-      "placeHolder": "Select a Date"
+      "placeHolder": "Select a custom date",
+      "addSomeDaysToCurrentDate": "Add some days to the current date",
+      "addDaysToCurrentDate" : "days from created date"
     },
     "tax": {
       "name": "Tax",

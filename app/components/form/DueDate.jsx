@@ -22,7 +22,7 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 export class DueDate extends Component {
   constructor(props) {
     super(props);
-    this.state = { focused: false };
+    this.state = { focused: false, addDay:0 };
     this.onFocusChange = this.onFocusChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
     this.clearDate = this.clearDate.bind(this);
@@ -39,10 +39,20 @@ export class DueDate extends Component {
   onDateChange(date) {
     const selectedDate = date === null ? null : moment(date).toObject();
     this.props.updateFieldData('dueDate', { selectedDate });
+    this.setState({addDay: 0});
   }
 
   clearDate() {
     this.onDateChange(null);
+  }
+
+  change(event){
+    var result = new Date();
+    result = result.setDate(result.getDate() + parseFloat(event.target.value));
+    const selectedDate = moment(result).toObject();
+    this.onDateChange(selectedDate);
+    this.setState({ addDay: event.target.value});
+    this.props.updateFieldData('dueDate', this.state);
   }
 
   render() {
@@ -54,6 +64,20 @@ export class DueDate extends Component {
       <Section>
         <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
         <DueDateContent>
+
+            <select
+                name="addDay"
+                id="addDay"
+                placeholder={t('form:fields:dueDate:placeHolder')}
+                onChange={this.change.bind(this)} value={this.state.addDay}>
+              >
+                <option value="0">{t('form:fields:dueDate:addSomeDaysToCurrentDate')}</option>
+                <option value="5">+5 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+                <option value="10">+10 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+                <option value="30">+30 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+                
+         </select>
+
           <SingleDatePicker
             id="invoice-duedate"
             placeholder={t('form:fields:dueDate:placeHolder')}
