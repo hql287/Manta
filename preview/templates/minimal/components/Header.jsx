@@ -31,11 +31,12 @@ const Heading = styled.h1`
 
 // Component
 function Header({ t, invoice, profile, configs }) {
+  const currentLanguage = configs.language;
   return (
     <Wrapper>
       <div>
         <Heading accentColor={configs.accentColor}>
-          {t('preview:common:invoice')}
+          {t('preview:common:invoice', {lng: currentLanguage})}
         </Heading>
         <h4 className="label">
           # {' '}
@@ -47,15 +48,15 @@ function Header({ t, invoice, profile, configs }) {
           }
         </h4>
         <p>
-          {t('preview:common:created')}:
+          {t('preview:common:created', {lng: currentLanguage})}:
           {' '}
-          {moment(invoice.created_at).format(configs.dateFormat)}
+          {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
         </p>
         {invoice.dueDate && (
           <p>
-            {t('preview:common:due')}:
+            {t('preview:common:due', {lng: currentLanguage})}:
             {' '}
-            {moment(invoice.dueDate).format(configs.dateFormat)}
+            {moment(invoice.dueDate).lang(currentLanguage).format(configs.dateFormat)}
           </p>
         )}
       </div>

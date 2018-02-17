@@ -1,9 +1,0 @@
-{
-  "header": "Tous les contacts",
-  "fields": {
-    "contact": "Contact",
-    "email": "Email",
-    "phone": "Téléphone",
-    "actions": "Actions"
-  }
-}

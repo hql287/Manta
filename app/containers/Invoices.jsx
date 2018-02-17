@@ -130,6 +130,6 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
-  translate(['common', 'form', 'invoices']),
+  translate(),
   _withFadeInAnimation
 )(Invoices);

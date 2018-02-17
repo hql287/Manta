@@ -68,8 +68,10 @@
       "message": "Hãy chọn một ngày"
     },
     "currency": {
-      "title": "Đơn vị tiền không hợp lệ",
-      "message": "Vui lòng chọn một loại tiền tệ"
+      "fraction": {
+        "title": "Phân số không hợp lệ",
+        "message": "Phân số thập phân phải bằng hoặc lớn hơn 0"
+      }
     },
     "discount": {
       "title": "Khuyến mãi không hợp lệ",

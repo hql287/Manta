@@ -124,6 +124,6 @@ const mapStateToProps = state => ({
 
 export default compose(
   connect(mapStateToProps),
-  translate(['common', 'form']),
+  translate(),
   _withFadeInAnimation
 )(Contacts);

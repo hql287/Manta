@@ -125,6 +125,6 @@ const mapDispatchToProps = dispatch => ({
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  translate('form'),
+  translate(),
   _withDragNDrop
 )(ItemsList);

@@ -20,7 +20,8 @@
     },
     "actions": {
       "name": "Actions",
-      "savePDF": "Export PDF"
+      "savePDF": "Export PDF",
+      "saveConfigs": "Save Configs"
     }
   },
   "common": {
