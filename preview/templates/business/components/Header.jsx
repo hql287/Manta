@@ -39,6 +39,9 @@ const RightColumn = styled.div`
     margin: 0;
     font-weight: 300;
   }
+  p {
+    text-transform: capitalize;
+  }
 `;
 
 const Heading = styled.h1`
@@ -91,12 +94,12 @@ function Header({ t, invoice, profile, configs }) {
           }
         </h4>
         <p>
-          { t('preview:common:created', {lng: currentLanguage}) }
+          { t('preview:common:created', {lng: currentLanguage}) }:
           {' '}
           {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
         </p>
         <p>
-          { t('preview:common:due', {lng: currentLanguage}) }
+          { t('preview:common:due', {lng: currentLanguage}) }:
           {' '}
           {moment(invoice.dueDate).lang(currentLanguage).format(configs.dateFormat)}
         </p>
