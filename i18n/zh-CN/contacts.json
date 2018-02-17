@@ -1,0 +1,9 @@
+{
+  "header": "所有联系人",
+  "fields": {
+    "contact": "联系人",
+    "email": "电子邮件",
+    "phone": "电话",
+    "actions": "操作"
+  }
+}

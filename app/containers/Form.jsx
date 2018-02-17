@@ -184,6 +184,6 @@ const mapDispatchToProps = dispatch => ({
 // Export
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  translate(['common', 'form']),
+  translate(),
   _withFadeInAnimation
 )(Form);

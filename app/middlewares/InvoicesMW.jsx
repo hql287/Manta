@@ -12,7 +12,7 @@ import * as FormActions from '../actions/form';
 
 // Helpers
 import { getInvoiceValue } from '../helpers/invoice';
-import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
+import { getAllDocs, getSingleDoc, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 
 const InvoicesMW = ({ dispatch, getState }) => next => action => {
   switch (action.type) {
@@ -79,6 +79,29 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
         });
     }
 
+    case ACTION_TYPES.INVOICE_CONFIGS_SAVE: {
+      const { invoiceID, configs } = action.payload;
+      return getSingleDoc('invoices', invoiceID)
+        .then(doc => {
+          dispatch({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: {
+              invoiceID,
+              data: Object.assign({}, doc, {configs})
+            },
+          })
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
+        });
+    }
+
     case ACTION_TYPES.INVOICE_EDIT: {
       // Continue
       return getAllDocs('contacts')
@@ -106,7 +129,6 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
 
     case ACTION_TYPES.INVOICE_UPDATE: {
       const { invoiceID, data } = action.payload;
-      console.log()
       return updateDoc('invoices', invoiceID, data)
         .then(docs => {
           next({

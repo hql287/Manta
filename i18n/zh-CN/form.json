@@ -1,0 +1,46 @@
+{
+  "header": {
+    "new": "创建新发票",
+    "edit": "编辑发票",
+    "btns": {
+      "clear": "清空",
+      "update": "更新",
+      "saveAndPreview": "保存并预览"
+    }
+  },
+  "settings": {
+    "name": "表单设置",
+    "hint": "打开需要在表格中设置为必填的项目"
+  },
+  "fields": {
+    "items": {
+      "name": "产品/服务",
+      "description": "简介",
+      "price": "价格",
+      "quantity": "数量",
+      "add": "增加一项"
+    },
+    "recipient": {
+      "name": "接收者",
+      "select": "选择",
+      "add": "新建"
+    },
+    "discount": {
+      "name": "折扣",
+      "percentage": "百分比",
+      "flat": "固定金额"
+    },
+    "dueDate": {
+      "name": "截止日期",
+      "placeHolder": "选择一个日期"
+    },
+    "tax": {
+      "name": "税费",
+      "id": "税号",
+      "method": "计算方法",
+      "reverse": "反向征收"
+    },
+    "note": "备注",
+    "currency": "币种"
+  }
+}

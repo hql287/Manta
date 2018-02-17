@@ -1,0 +1,9 @@
+{
+  "header": "모든 연락처",
+  "fields": {
+    "contact": "연락처",
+    "email": "이메일",
+    "phone": "휴대전화",
+    "actions": "작업"
+  }
+}

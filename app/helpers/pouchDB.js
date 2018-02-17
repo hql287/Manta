@@ -126,6 +126,17 @@ const getAllDocs = dbName =>
       .catch(err => reject(err));
   });
 
+// Get a Single Document
+const getSingleDoc = (dbName, docID) =>
+  new Promise((resolve, reject) => {
+    setDB(dbName)
+      .then(db => db.get(docID))
+      .then(result => {
+        resolve(result);
+      })
+      .catch(err => reject(err));
+  });
+
 // Save a Document
 const saveDoc = (dbName, doc) =>
   new Promise((resolve, reject) => {
@@ -169,4 +180,4 @@ const updateDoc = (dbName, docId, updatedDoc) =>
       .catch(err => reject(err));
   });
 
-export { getAllDocs, deleteDoc, saveDoc, updateDoc };
+export { getAllDocs, getSingleDoc, deleteDoc, saveDoc, updateDoc };
