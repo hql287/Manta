@@ -34,7 +34,8 @@
       "name": "Due Date",
       "placeHolder": "Select a custom date",
       "addSomeDaysToCurrentDate": "Add some days to the current date",
-      "addDaysToCurrentDate" : "days from created date"
+      "addDaysToCurrentDate" : " - Payment seven days after invoice date",
+      "addDayNet" : "Net"
     },
     "tax": {
       "name": "Tax",

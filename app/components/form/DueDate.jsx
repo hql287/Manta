@@ -57,19 +57,22 @@ export class DueDate extends Component {
   }
 
   render() {
+
     const { t, dueDate } = this.props;
     const selectedDate = dueDate.selectedDate
       ? moment(dueDate.selectedDate)
       : null;
+    var days =  [7,10,30,60,90];
+    var daysList = days.map(function(day){
+      return <option value="{day}">{t('form:fields:dueDate:addDayNet')} {day} {t('form:fields:dueDate:addDaysToCurrentDate')}</option>;
+    })
     return (
       <Section>
         <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
         <DueDateContent>
           <select name="addDay" id="addDay" placeholder={t('form:fields:dueDate:placeHolder')} onChange={this.change} value={this.state.addDay} >
             <option value="0">{t('form:fields:dueDate:addSomeDaysToCurrentDate')}</option>
-            <option value="5">+5 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
-            <option value="10">+10 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
-            <option value="30">+30 {t('form:fields:dueDate:addDaysToCurrentDate')}</option>
+           {daysList}
           </select>
 
           <SingleDatePicker
