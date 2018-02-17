@@ -8,6 +8,7 @@ import { AppContainer } from 'react-hot-loader';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import i18n from '../i18n/i18n';
+import ErrorBoundary from '../app/components/shared/ErrorBoundary';
 
 // Root Reducer
 import combineReducers from './reducers';
@@ -28,7 +29,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <AppContainer>
-      <Viewer />
+      <ErrorBoundary>
+        <Viewer />
+      </ErrorBoundary>
     </AppContainer>
   </Provider>,
   document.getElementById('root')
