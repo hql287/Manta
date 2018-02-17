@@ -146,7 +146,11 @@ AccentColor.propTypes = {
   handleAccentColorChange: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   UILang: PropTypes.string.isRequired,
-  invoiceID: PropTypes.string.isRequired,
+  invoiceID: PropTypes.string,
 };
+
+AccentColor.defaultProps = {
+  invoiceID: 'random-string',
+}
 
 export default AccentColor;
