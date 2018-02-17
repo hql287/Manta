@@ -6,9 +6,7 @@ exports[`InvoiceID component matches snapshot 1`] = `
 >
   <label
     className="itemLabel"
-  >
-    Invoice ID
-  </label>
+  />
   <input
     name="invoiceID"
     onChange={[Function]}

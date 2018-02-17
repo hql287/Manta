@@ -72,7 +72,6 @@ class Viewer extends Component {
           configs={configs}
           invoice={invoice}
           updateConfigs={this.updateConfigs}
-          UILang={UILang}
           t={t}
         />
         <MainContent
