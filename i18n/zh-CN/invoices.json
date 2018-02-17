@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "所有发票"
+  },
+  "fields": {
+    "client": "客户",
+    "invoiceID": "发票编号",
+    "createdDate": "创建日期",
+    "dueDate": "截止日期",
+    "total": "总价"
+  },
+  "status": {
+    "pending": "待定",
+    "paid": "已付款",
+    "refunded": "已退款",
+    "cancelled": "已取消"
+  },
+  "btns": {
+    "view": "查看",
+    "edit": "编辑",
+    "markAsPaid": "标记为「已付款」"
+  }
+}

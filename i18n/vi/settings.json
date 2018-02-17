@@ -27,10 +27,10 @@
       "afterAmount": "Sau số tiền",
       "beforeAmount": "Trước số tiền",
       "fraction": "Phân số thập phân",
-      "separator": "Dấu phân cách",
-      "commaDot": "Phẩy & Chấm",
-      "dotComma": "Chấm & Phẩy",
-      "spaceDot": "Dấu cách & Chấm"
+      "separator": "Dấu ngăn cách",
+      "commaDot": "Dấu phẩy & chấm",
+      "dotComma": "Dấu chấm & phẩy",
+      "spaceDot": "Dấu cách và chấm"
     },
     "openPDFReader": "Mở file PDF sau khi xuất",
     "language": {
@@ -38,24 +38,24 @@
       "cs": "Tiếng Séc",
       "da": "Tiếng Đan Mạch",
       "de": "Tiếng Đức",
-      "el": "Tiếng Hi Lạp",
+      "el": "Tiếng Hy Lạp",
       "en": "Tiếng Anh",
-      "esES": "Tiếng Tây Ban Nha",
+      "esES": "Spanish",
       "fr": "Tiếng Pháp",
       "id": "Tiếng Indonesia",
       "it": "Tiếng Ý",
       "ja": "Tiếng Nhật",
       "lt": "Tiếng Lithuania",
       "nl": "Tiếng Hà Lan",
-      "ptBR": "Tiếng Bồ Đào Nha (Brazil)",
+      "ptBR": "Tiếng Bồ Đào Nha, Brazil",
       "ptPT": "Tiếng Bồ Đào Nha",
       "ru": "Tiếng Nga",
       "th": "Tiếng Thái",
-      "tl": "Tiếng Philippines",
+      "tl": "Tiếng Tagalog, Philippines",
       "tr": "Tiếng Thổ Nhĩ Kỳ",
       "vi": "Tiếng Việt",
-      "zhCN": "Tiếng Trung (Giản Thể)",
-      "zhTW": "Tiếng Trung (Phồn Thể)"
+      "zh-CN": "Tiếng Trung (Giản thể)",
+      "zh-TW": "Tiếng Trung (Phồn Thể)"
     },
     "other": "Khác"
   }

@@ -205,8 +205,9 @@ class Invoice extends PureComponent {
   }
 
   render() {
-    const { dateFormat, invoice, setInvoiceStatus, t } = this.props;
-    const { recipient, status } = invoice;
+    const { invoice, setInvoiceStatus, t } = this.props;
+    const { recipient, status, configs } = invoice;
+    const dateFormat = invoice.configs ? invoice.configs.dateFormat : this.props.dateFormat;
     const statusActions = [
       {
         label: t('invoices:status:pending'),

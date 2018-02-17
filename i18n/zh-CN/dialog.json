@@ -1,0 +1,89 @@
+{
+  "appUpdate": {
+    "available": {
+      "title": "有可用的更新",
+      "message": "是否要在后台下载更新？"
+    },
+    "noUpdate": {
+      "title": "没有可用的更新",
+      "message": "你已经在使用最新版本"
+    },
+    "error": {
+      "title": "发生错误"
+    },
+    "downloaded": {
+      "title": "已经成功下载更新",
+      "message": "是否要立即退出程序并升级？",
+      "quitNow": "立即退出",
+      "later": "稍后"
+    }
+  },
+  "noAccess": {
+    "title": "没有访问权限",
+    "message": "请选择另外一个目录"
+  },
+  "errorBoundary": "发生错误",
+  "deleteInvoice": {
+    "title": "要删除这个发票吗？",
+    "message": "该发票将从数据库中永久删除"
+  },
+  "deleteContact": {
+    "title": "要删除此联系人吗？",
+    "message": "该联系人将从数据库中永久删除"
+  },
+  "fileTypeErr": {
+    "title": "请选择另一个文件"
+  },
+  "validation": {
+    "recipient": {
+      "empty": {
+        "title": "无效的联系人",
+        "message": "联系人不能为空"
+      },
+      "requiredFields": {
+        "title": "必填项",
+        "message": "请填写所有必填项"
+      },
+      "email": {
+        "title": "无效的电子邮件",
+        "message": "请选择另外一个电子邮件"
+      }
+    },
+    "rows": {
+      "emptyDescription": {
+        "title": "无效简介",
+        "message": "简介不能为空"
+      },
+      "priceZero": {
+        "title": "无效的价格",
+        "message": "价格必须大于零"
+      },
+      "qtyZero": {
+        "title": "无效的数量",
+        "message": "数量必须大于零"
+      }
+    },
+    "dueDate": {
+      "title": "无效的截止日期",
+      "message": "请选择一个日期"
+    },
+    "currency": {
+      "fraction": {
+        "title": "无效的分数",
+        "message": "小数必须大于等于零"
+      }
+    },
+    "discount": {
+      "title": "无效的折扣",
+      "message": "打折比例必须大于零"
+    },
+    "tax": {
+      "title": "无效的税费",
+      "message": "税率必须大于零"
+    },
+    "note": {
+      "title": "无效的备注",
+      "message": "备注内容不能为空"
+    }
+  }
+}

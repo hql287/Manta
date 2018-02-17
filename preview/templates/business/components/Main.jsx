@@ -113,6 +113,9 @@ function setAlignItems(configs) {
 
 // Component
 function Main({ invoice, configs, t }) {
+  // Set language
+  const currentLanguage = configs.language;
+  // Others
   const { tax, discount } = invoice;
   const { code, placement, fraction, separator } = invoice.currency;
   // Set placement
@@ -143,11 +146,11 @@ function Main({ invoice, configs, t }) {
       <Table accentColor={configs.accentColor}>
         <thead>
           <tr>
-            <th className="w5">{t('preview:common:order')}</th>
-            <th>{t('preview:common:itemDescription')}</th>
-            <th className="w15">{t('preview:common:price')}</th>
-            <th className="w10">{t('preview:common:qty')}</th>
-            <th className="w15">{t('preview:common:subtotal')}</th>
+            <th className="w5">{t('preview:common:order', {lng: currentLanguage})}</th>
+            <th>{t('preview:common:itemDescription', {lng: currentLanguage})}</th>
+            <th className="w15">{t('preview:common:price', {lng: currentLanguage})}</th>
+            <th className="w10">{t('preview:common:qty', {lng: currentLanguage})}</th>
+            <th className="w15">{t('preview:common:subtotal', {lng: currentLanguage})}</th>
           </tr>
         </thead>
         <tbody>{itemComponents}</tbody>
@@ -155,7 +158,7 @@ function Main({ invoice, configs, t }) {
           <tr className="invoice__subtotal">
             <td colSpan="2" />
             <td className="label" colSpan="2">
-              {t('preview:common:subtotal')}
+              {t('preview:common:subtotal', {lng: currentLanguage})}
             </td>
             <td>
               {currencyBefore ? currency : null}
@@ -170,7 +173,7 @@ function Main({ invoice, configs, t }) {
             <InvoiceDiscount>
               <td colSpan="2" />
               <td className="label" colSpan="2">
-                {t('form:fields:discount:name')}{' '}
+                {t('form:fields:discount:name', {lng: currentLanguage})}{' '}
                 {discount.type === 'percentage' && (
                   <span> {discount.amount}%</span>
                 )}
@@ -191,14 +194,14 @@ function Main({ invoice, configs, t }) {
             <InvoiceTax>
               <td colSpan="2" />
               <td className="label" colSpan={tax.method === 'reverse' ? 1 : 2}>
-                {t('form:fields:tax:name')} {tax.amount}%
+                {t('form:fields:tax:name', {lng: currentLanguage})} {tax.amount}%
               </td>
               {tax.method === 'reverse' ? (
                 <td
                   className="label"
                   colSpan={tax.method === 'reverse' ? 2 : 1}
                 >
-                  {t('form:fields:tax:reverse')}
+                  {t('form:fields:tax:reverse', {lng: currentLanguage})}
                 </td>
               ) : (
                 <td>
@@ -212,7 +215,7 @@ function Main({ invoice, configs, t }) {
 
           <InvoiceTotal accentColor={configs.accentColor}>
             <td colSpan="2" />
-            <td className="label">{t('preview:common:total')}</td>
+            <td className="label">{t('preview:common:total', {lng: currentLanguage})}</td>
             <td colSpan="2">
               {currencyBefore ? currency : null}
               {' '}

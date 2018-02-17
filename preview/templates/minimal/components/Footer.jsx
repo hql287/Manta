@@ -25,6 +25,7 @@ const Column = styled.div`
 
 // Component
 function Footer({ t, invoice, profile, configs }) {
+  const currentLanguage = configs.language;
   const { recipient } = invoice;
   return (
     <Wrapper>
@@ -37,7 +38,7 @@ function Footer({ t, invoice, profile, configs }) {
       </Column>
       {configs.showRecipient && (
         <Column right>
-          <h4 className="label">{t('preview:common:billedTo')}</h4>
+          <h4 className="label">{t('preview:common:billedTo', {lng: currentLanguage})}</h4>
           <p>{recipient.company}</p>
           <p>{recipient.fullname}</p>
           <p>{recipient.email}</p>

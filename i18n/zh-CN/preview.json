@@ -1,0 +1,41 @@
+{
+  "sidebar": {
+    "template": "模板",
+    "alignment": {
+      "name": "对齐方式",
+      "top": "顶部",
+      "middle": "中部",
+      "bottom": "底部"
+    },
+    "fontSize": "字体大小",
+    "toggle": {
+      "name": "显示选项",
+      "logo": "Logo",
+      "symbol": "货币符号",
+      "recipient": "接收者"
+    },
+    "accentColor": {
+      "name": "配色",
+      "useCustom": "使用自定义颜色"
+    },
+    "actions": {
+      "name": "操作",
+      "savePDF": "导出 PDF 文件",
+      "saveConfigs": "保存设置"
+    }
+  },
+  "common": {
+    "billedTo": "发送至",
+    "chooseInvoiceToPreview": "请选择要预览的发票",
+    "created": "创建日期",
+    "due": "截止日期",
+    "invoice": "发票",
+    "itemDescription": "简介",
+    "notice": "备注",
+    "order": "编号",
+    "price": "单价",
+    "qty": "数量",
+    "subtotal": "小计",
+    "total": "总计"
+  }
+}
