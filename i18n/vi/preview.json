@@ -9,7 +9,7 @@
     },
     "fontSize": "Cỡ chữ",
     "toggle": {
-      "name": "Ẩn Hiện",
+      "name": "Bật\/tắt",
       "logo": "Logo",
       "symbol": "Biểu tượng",
       "recipient": "Người nhận"
@@ -20,7 +20,8 @@
     },
     "actions": {
       "name": "Tác vụ",
-      "savePDF": "Xuất ra PDF"
+      "savePDF": "Xuất ra PDF",
+      "saveConfigs": "Lưu Tuỳ Chỉnh"
     }
   },
   "common": {
