@@ -46,6 +46,7 @@
       "id": "Indonesian",
       "it": "Italian",
       "ja": "Japanese",
+      "ko": "Korean",
       "lt": "Lithuanian",
       "nl": "Dutch",
       "ptBR": "Portuguese, Brazilian",
@@ -55,8 +56,8 @@
       "tl": "Tagalog, Philippines",
       "tr": "Turkish",
       "vi": "Vietnamese",
-      "zhCN": "Chinese (Simplified)",
-      "zhTW": "Chinese (Traditional)"
+      "zh-CN": "Chinese (Simplified)",
+      "zh-TW": "Chinese (Traditional)"
     },
     "other": "Other"
   }

@@ -32,16 +32,21 @@ const SettingsMW = ({ dispatch }) => next => action => {
       // Validation
       if (!validateTax(true, action.payload.invoice.tax)) break;
       if (!validateCurrency(true, action.payload.invoice.currency)) break;
-      // Sate Settings
+      // Change UI language
+      const currentLang = appConfig.get('general.language');
+      const newLang = action.payload.general.language;
+      if (currentLang !== newLang) {
+        // Change the language
+        i18n.changeLanguage(newLang);
+        // Notify previewWindow to update
+        ipc.send('change-preview-window-language', newLang);
+      }
+      // Save Settings
       appConfig.set('profile', action.payload.profile);
       appConfig.set('invoice', action.payload.invoice);
       appConfig.set('general', action.payload.general);
-      // Change language
-      i18n.changeLanguage(appConfig.get('general.language'));
       // Reload Sounds Cache
       sounds.preload();
-      // Notify previewWindow to update
-      ipc.send('update-preview-window', action.payload);
       // Continue
       next(action);
       // Create Notification

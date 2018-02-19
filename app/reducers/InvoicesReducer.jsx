@@ -7,6 +7,7 @@ const InvoicesReducer = handleActions(
     [combineActions(
       Actions.getInvoices,
       Actions.saveInvoice,
+      Actions.saveInvoiceConfigs,
       Actions.updateInvoice,
       Actions.deleteInvoice,
       Actions.setInvoiceStatus

@@ -63,6 +63,10 @@ class App extends PureComponent {
     ipc.on('menu-form-toggle-settings', () => {
       dispatch(FormActions.toggleFormSettings());
     });
+    // Save configs to invoice
+    ipc.on('save-configs-to-invoice', (event, invoiceID, configs) => {
+      dispatch(InvoicesActions.saveInvoiceConfigs(invoiceID, configs));
+    });
   }
 
   componentWillUnmount() {
@@ -77,6 +81,8 @@ class App extends PureComponent {
       'menu-form-toggle-vat',
       'menu-form-toggle-note',
       'menu-form-toggle-settings',
+      // Save template configs to invoice
+      'save-configs-to-invoice'
     ]);
   }
 

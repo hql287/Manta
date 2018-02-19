@@ -10,6 +10,11 @@ export const saveInvoice = createAction(
   invoiceData => invoiceData
 );
 
+export const saveInvoiceConfigs = createAction(
+  ACTION_TYPES.INVOICE_CONFIGS_SAVE,
+  (invoiceID, configs) => ({ invoiceID, configs })
+);
+
 // Edit an Invoice
 export const editInvoice = createAction(
   ACTION_TYPES.INVOICE_EDIT,

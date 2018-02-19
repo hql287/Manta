@@ -11,6 +11,11 @@ export const updateConfigs = createAction(
   configs => configs
 );
 
+export const changeUILanguage = createAction(
+  ACTION_TYPES.UI_CHANGE_LANGUAGE,
+  language => language
+);
+
 export const reloadConfigs = createAction(
   ACTION_TYPES.SETTINGS_RELOAD_CONFIGS,
   newConfigs => newConfigs

@@ -1,0 +1,63 @@
+{
+  "header": "설정",
+  "tabs": {
+    "profile": "프로필",
+    "invoice": "송장",
+    "general": "일반"
+  },
+  "fields": {
+    "logo": {
+      "name": "로고",
+      "hint": "PNG, JPG, SVG (권장) 형식"
+    },
+    "taxSettings": "세금 설정",
+    "template": "템플릿",
+    "dateFormat": "날짜 표시 형식",
+    "pdfExportDir": "PDF 내보내기 경로",
+    "requiredFields": "필수 입력 항목",
+    "sound": "효과음",
+    "mute": "음소거",
+    "autoCheckUpdate": {
+      "name": "자동 업데이트 확인",
+      "daily": "매일 (권장)",
+      "weekly": "매주"
+    },
+    "currency": {
+      "placement": "기호 배치",
+      "afterAmount": "합계 후",
+      "beforeAmount": "합계 전",
+      "fraction": "소수",
+      "separator": "단위 구분 기호",
+      "commaDot": "쉼표, 점",
+      "dotComma": "점, 쉼표",
+      "spaceDot": "공백, 점"
+    },
+    "openPDFReader": "PDF로 내보내고 열기",
+    "language": {
+      "name": "언어",
+      "cs": "čeština (체코어)",
+      "da": "dansk (덴마크어)",
+      "de": "Deutsch (독일어)",
+      "el": "ελληνικά (그리스어)",
+      "en": "English (영어)",
+      "esES": "español (스페인어)",
+      "fr": "français (프랑스어)",
+      "id": "Bahasa Indonesia (인도네시아어)",
+      "it": "italiano (이탈리아어)",
+      "ja": "日本語 (일본어)",
+      "ko": "한국어",
+      "lt": "lietuvių kalba (리투아니아어)",
+      "nl": "Nederlands (네덜란드어)",
+      "ptBR": "português (포르투갈어, 브라질)",
+      "ptPT": "português (포르투갈어)",
+      "ru": "Русский язык (러시아어)",
+      "th": "ภาษาไทย (태국어)",
+      "tl": "Tagalog (타갈로그어, 필리핀)",
+      "tr": "Türkçe (터기어)",
+      "vi": "tiếng việt (베트남어)",
+      "zh-CN": "중국어 (간체)",
+      "zh-TW": "중국어 (번체)"
+    },
+    "other": "기타"
+  }
+}
