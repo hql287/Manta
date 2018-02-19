@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 const moment = require('moment');
+import { calTermDate } from '../../../../helpers/date';
 
 // Styles
 import styled from 'styled-components';
@@ -52,13 +53,32 @@ function Header({ t, invoice, profile, configs }) {
           {' '}
           {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
         </p>
-        {invoice.dueDate && (
-          <p>
-            {t('preview:common:due', {lng: currentLanguage})}:
-            {' '}
-            {moment(invoice.dueDate).lang(currentLanguage).format(configs.dateFormat)}
-          </p>
-        )}
+        {invoice.dueDate && [
+          <p key="dueDate">
+            {t('preview:common:due', { lng: currentLanguage })}:{' '}
+            {invoice.dueDate.useCustom
+              ? moment(invoice.dueDate.selectedDate)
+                  .lang(currentLanguage)
+                  .format(configs.dateFormat)
+              : moment(
+                  calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
+                )
+                  .lang(currentLanguage)
+                  .format(configs.dateFormat)}
+          </p>,
+          <p key="dueDateNote">
+            {!invoice.dueDate.useCustom &&
+              `
+            (
+              ${t(
+                `form:fields:dueDate:paymentTerms:${
+                  invoice.dueDate.paymentTerm
+                }:description`
+              )}
+            )
+            `}
+          </p>,
+        ]}
       </div>
       {configs.showLogo && (
         <div>
