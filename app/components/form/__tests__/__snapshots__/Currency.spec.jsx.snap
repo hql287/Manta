@@ -650,9 +650,9 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
             )
           </option>
           <option
-            value="invertedCommaDot"
+            value="apostropheDot"
           >
-            1’999.000 (
+            1'999.000 (
             )
           </option>
         </select>
