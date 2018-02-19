@@ -652,7 +652,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           <option
             value="invertedCommaDot"
           >
-            1'999.000 (
+            1’999.000 (
             )
           </option>
         </select>
