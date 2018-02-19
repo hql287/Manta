@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { padStart } from 'lodash';
-import { formatNumber } from '../../../../app/helpers/number';
+import { formatNumber } from '../../../../helpers/formatNumber';
 import { getInvoiceValue } from '../../../../app/helpers/invoice';
+import currencies from '../../../../libs/currencies.json';
 
 // Styles
 import styled from 'styled-components';
@@ -111,120 +112,119 @@ function setAlignItems(configs) {
 }
 
 // Component
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.displayTax = this.displayTax.bind(this);
-    this.displayDiscount = this.displayDiscount.bind(this);
-  }
+function Main({ invoice, configs, t }) {
+  const { tax, discount } = invoice;
+  const { code, placement, fraction, separator } = invoice.currency;
+  // Set placement
+  const currencyBefore = placement === 'before';
+  // Set Currency Sign
+  const currency = configs.useSymbol ? currencies[code].symbol : code;
+  // Render Items
+  const itemComponents = invoice.rows.map((row, index) => (
+    <tr key={index}>
+      <td className="w5">{padStart(index + 1, 2, 0)}.</td>
+      <td>{row.description}</td>
+      <td className="w15">
+        {currencyBefore ? currency : null}{' '}
+        {formatNumber(row.price, fraction, separator)}{' '}
+        {currencyBefore ? null : currency}
+      </td>
+      <td className="w10">{formatNumber(row.quantity, 0, separator)}</td>
+      <td className="w15">
+        {currencyBefore ? currency : null}{' '}
+        {formatNumber(row.subtotal, fraction, separator)}{' '}
+        {currencyBefore ? null : currency}
+      </td>
+    </tr>
+  ));
 
-  displayDiscount() {
-    const { t, invoice, configs } = this.props;
-    const currency = configs.useSymbol
-      ? invoice.currency.symbol
-      : invoice.currency.code;
-    return invoice.discount ? (
-      <InvoiceDiscount>
-        <td colSpan="2" />
-        <td className="label" colSpan="2">
-          { t('form:fields:discount:name') }{' '}
-          {invoice.discount.type === 'percentage' && (
-            <span> {invoice.discount.amount}%</span>
-          )}
-        </td>
-        <td>
-          {currency} {formatNumber(getInvoiceValue(invoice).discount)}
-        </td>
-      </InvoiceDiscount>
-    ) : null;
-  }
+  return (
+    <InvoiceContent alignItems={setAlignItems(configs)}>
+      <Table accentColor={configs.accentColor}>
+        <thead>
+          <tr>
+            <th className="w5">{t('preview:common:order')}</th>
+            <th>{t('preview:common:itemDescription')}</th>
+            <th className="w15">{t('preview:common:price')}</th>
+            <th className="w10">{t('preview:common:qty')}</th>
+            <th className="w15">{t('preview:common:subtotal')}</th>
+          </tr>
+        </thead>
+        <tbody>{itemComponents}</tbody>
+        <tfoot>
+          <tr className="invoice__subtotal">
+            <td colSpan="2" />
+            <td className="label" colSpan="2">
+              {t('preview:common:subtotal')}
+            </td>
+            <td>
+              {currencyBefore ? currency : null}
+              {' '}
+              {formatNumber(invoice.subtotal, fraction, separator)}
+              {' '}
+              {currencyBefore ? null : currency}
+            </td>
+          </tr>
 
-  displayTax() {
-    const { t, invoice, configs } = this.props;
-    const { tax } = invoice;
-    const { taxAmount } = getInvoiceValue(invoice);
-    const currency = configs.useSymbol
-      ? invoice.currency.symbol
-      : invoice.currency.code;
-    return tax ? (
-      <InvoiceTax>
-        <td colSpan="2" />
-        <td className="label" colSpan={tax.method === 'reverse' ? 1 : 2}>
-          { t('form:fields:tax:name') }{' '}{tax.amount}%
-        </td>
-        {tax.method === 'reverse' ? (
-          <td className="label" colSpan={tax.method === 'reverse' ? 2 : 1}>
-            {t('form:fields:tax:reverse')}
-          </td>
-        ) : (
-          <td>
-            {currency} {formatNumber(taxAmount)}
-          </td>
-        )}
-      </InvoiceTax>
-    ) : null;
-  }
-
-  render() {
-    const { t, invoice, configs } = this.props;
-    const currency = configs.useSymbol
-      ? invoice.currency.symbol
-      : invoice.currency.code;
-    const itemComponents = invoice.rows.map((row, index) => (
-      <tr key={index}>
-        <td className="w5">{padStart(index + 1, 2, 0)}.</td>
-        <td>{row.description}</td>
-        <td className="w15">
-          {currency} {formatNumber(row.price)}
-        </td>
-        <td className="w10">{formatNumber(row.quantity)}</td>
-        <td className="w15">
-          {currency} {formatNumber(row.subtotal)}
-        </td>
-      </tr>
-    ));
-
-    return (
-      <InvoiceContent alignItems={setAlignItems(configs)}>
-        <Table accentColor={configs.accentColor}>
-          <thead>
-            <tr>
-              <th className="w5">{t('preview:common:order')}</th>
-              <th>{t('preview:common:itemDescription')}</th>
-              <th className="w15">{t('preview:common:price')}</th>
-              <th className="w10">{t('preview:common:qty')}</th>
-              <th className="w15">{t('preview:common:subtotal')}</th>
-            </tr>
-          </thead>
-          <tbody>{itemComponents}</tbody>
-          <tfoot>
-            <tr className="invoice__subtotal">
+          {discount && (
+            <InvoiceDiscount>
               <td colSpan="2" />
               <td className="label" colSpan="2">
-                {t('preview:common:subtotal')}
+                {t('form:fields:discount:name')}{' '}
+                {discount.type === 'percentage' && (
+                  <span> {discount.amount}%</span>
+                )}
               </td>
               <td>
-                {currency} {formatNumber(invoice.subtotal)}
+                {currencyBefore ? currency : null}{' '}
+                {formatNumber(
+                  getInvoiceValue(invoice).discount,
+                  fraction,
+                  separator
+                )}{' '}
+                {currencyBefore ? null : currency}
               </td>
-            </tr>
+            </InvoiceDiscount>
+          )}
 
-            {this.displayDiscount()}
-            {this.displayTax()}
-
-            <InvoiceTotal accentColor={configs.accentColor}>
+          {tax && (
+            <InvoiceTax>
               <td colSpan="2" />
-              <td className="label">
-                {t('preview:common:total')}
+              <td className="label" colSpan={tax.method === 'reverse' ? 1 : 2}>
+                {t('form:fields:tax:name')} {tax.amount}%
               </td>
-              <td colSpan="2">
-                {currency} {formatNumber(invoice.grandTotal)}
-              </td>
-            </InvoiceTotal>
-          </tfoot>
-        </Table>
-      </InvoiceContent>
-    );
-  }
+              {tax.method === 'reverse' ? (
+                <td
+                  className="label"
+                  colSpan={tax.method === 'reverse' ? 2 : 1}
+                >
+                  {t('form:fields:tax:reverse')}
+                </td>
+              ) : (
+                <td>
+                  {currencyBefore ? currency : null}{' '}
+                  {formatNumber(getInvoiceValue(invoice).taxAmount, fraction, separator)}{' '}
+                  {currencyBefore ? null : currency}
+                </td>
+              )}
+            </InvoiceTax>
+          )}
+
+          <InvoiceTotal accentColor={configs.accentColor}>
+            <td colSpan="2" />
+            <td className="label">{t('preview:common:total')}</td>
+            <td colSpan="2">
+              {currencyBefore ? currency : null}
+              {' '}
+              {formatNumber(invoice.grandTotal, fraction, separator)}
+              {' '}
+              {currencyBefore ? null : currency}
+            </td>
+          </InvoiceTotal>
+        </tfoot>
+      </Table>
+    </InvoiceContent>
+  );
 }
 
 Main.propTypes = {

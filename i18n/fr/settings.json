@@ -22,6 +22,16 @@
       "daily": "Tous les jours (recommandé)",
       "weekly": "Toutes les semaines"
     },
+    "currency": {
+      "placement": "Emplacement du signe",
+      "afterAmount": "Après le montant",
+      "beforeAmount": "Avant le montant",
+      "fraction": "deux décimales",
+      "separator": "Séparateur",
+      "commaDot": "Virgule & Point",
+      "dotComma": "Point & Virgule",
+      "spaceDot": "Space & Virgule"
+    },
     "openPDFReader": "Ouvrir le fichier PDF après l'export",
     "language": {
       "name": "Langue",

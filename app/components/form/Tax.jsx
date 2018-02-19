@@ -1,5 +1,5 @@
 // Libraries
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
 // Custom Components
@@ -8,31 +8,12 @@ import { Section, Header } from '../shared/Section';
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 // Styles
 import styled from 'styled-components';
+import { Part, Row, Field } from '../shared/Part';
 const TaxID = styled.div``;
-const TaxAmount = styled.div`
-  flex: 1;
-`;
-
-const Form = styled.div`
-  padding: 20px;
-  background: #f9fafa;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #f2f3f4;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin: 0 -15px;
-`;
-
-const Field = styled.div`
-  flex: 1;
-  margin: 0 15px 20px 15px;
-`;
+const TaxAmount = styled.div`flex: 1;`;
 
 // Component
-export class Tax extends Component {
+export class Tax extends PureComponent {
   constructor(props) {
     super(props);
     this.state = props.tax;
@@ -52,13 +33,6 @@ export class Tax extends Component {
         });
       }
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.state !== nextState) return true;
-    if (this.props.tax !== nextProps.tax) return true;
-    if (this.props.savedSettings !== nextProps.savedSettings) return true;
-    return false;
   }
 
   handleInputChange(event) {
@@ -101,7 +75,7 @@ export class Tax extends Component {
             </a>
           )}
         </Header>
-        <Form>
+        <Part>
           <Row>
             <Field>
               <label className="itemLabel">{t('form:fields:tax:id')}</label>
@@ -142,7 +116,7 @@ export class Tax extends Component {
               </select>
             </Field>
           </Row>
-        </Form>
+        </Part>
       </Section>
     );
   }

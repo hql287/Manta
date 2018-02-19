@@ -192,12 +192,17 @@ function setInitialValues() {
     invoice: {
       exportDir: os.homedir(),
       template: 'default',
-      currency: 'USD',
       dateFormat: 'MM/DD/YYYY',
       tax: {
         tin: '123-456-789',
         method: 'default',
         amount: 0,
+      },
+      currency: {
+        code: 'USD',
+        placement: 'before',
+        separator: 'commaDot',
+        fraction: 2,
       },
       required_fields: {
         invoiceID: false,
@@ -210,11 +215,14 @@ function setInitialValues() {
     },
   };
 
-  // Set initial values conditionally
+  // Set initial values conditionally work for 2 level depth key only,
+  // Changing anything deeper would need to be done with migration
   for (const key in defaultOptions) {
+    // Add level 1 key if not exist
     if (!appConfig.has(`${key}`)) {
       appConfig.set(`${key}`, defaultOptions[key]);
     }
+    // Add level 2 key if not exist
     for (const childKey in defaultOptions[key]) {
       if (!appConfig.has(`${key}.${childKey}`)) {
         appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
@@ -267,6 +275,24 @@ function migrateData() {
         'printOptions',
         'test',
       ]);
+    },
+
+    2: configs => {
+      // Return current configs if this is the first time install
+      if ( configs.invoice.currency.placement !== undefined) {
+        return configs;
+      }
+      // Update current configs
+      return Object.assign({}, configs, {
+        invoice: Object.assign({}, configs.invoice, {
+          currency: {
+            code: configs.invoice.currency,
+            placement: 'before',
+            separator: 'commaDot',
+            fraction: 2,
+          }
+        })
+      });
     },
   };
   // Get the current Config

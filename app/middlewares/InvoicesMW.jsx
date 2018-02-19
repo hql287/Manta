@@ -14,7 +14,7 @@ import * as FormActions from '../actions/form';
 import { getInvoiceValue } from '../helpers/invoice';
 import { getAllDocs, saveDoc, deleteDoc, updateDoc } from '../helpers/pouchDB';
 
-const InvoicesMW = ({ dispatch }) => next => action => {
+const InvoicesMW = ({ dispatch, getState }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.INVOICE_NEW_FROM_CONTACT: {
       // Change Tab to Form
@@ -51,20 +51,8 @@ const InvoicesMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.INVOICE_SAVE: {
-      const invoiceData = action.payload;
-      // Set new document
-      const doc = Object.assign({}, invoiceData, {
-        _id: uuidv4(),
-        created_at: Date.now(),
-        status: 'pending',
-        currency: invoiceData.currency
-          ? invoiceData.currency
-          : currencies[appConfig.get('invoice.currency')],
-        subtotal: getInvoiceValue(invoiceData).subtotal,
-        grandTotal: getInvoiceValue(invoiceData).grandTotal,
-      });
       // Save doc to db
-      return saveDoc('invoices', doc)
+      return saveDoc('invoices', action.payload)
         .then(newDocs => {
           next({
             type: ACTION_TYPES.INVOICE_SAVE,
@@ -78,7 +66,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             },
           });
           // Preview Window
-          ipc.send('preview-invoice', doc);
+          ipc.send('preview-invoice', action.payload);
         })
         .catch(err => {
           next({
@@ -117,11 +105,9 @@ const InvoicesMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.INVOICE_UPDATE: {
-      return updateDoc('invoices', action.payload.invoiceID, {
-        ...action.payload.data,
-        subtotal: getInvoiceValue(action.payload.data).subtotal,
-        grandTotal: getInvoiceValue(action.payload.data).grandTotal,
-      })
+      const { invoiceID, data } = action.payload;
+      console.log()
+      return updateDoc('invoices', invoiceID, data)
         .then(docs => {
           next({
             type: ACTION_TYPES.INVOICE_UPDATE,
@@ -153,6 +139,7 @@ const InvoicesMW = ({ dispatch }) => next => action => {
             type: ACTION_TYPES.INVOICE_DELETE,
             payload: remainingDocs,
           });
+          // Send Notification
           dispatch({
             type: ACTION_TYPES.UI_NOTIFICATION_NEW,
             payload: {
@@ -160,6 +147,13 @@ const InvoicesMW = ({ dispatch }) => next => action => {
               message: i18n.t('messages:invoice:deleted'),
             },
           });
+          // Clear form if this invoice is being editted
+          const { editMode } = getState().form.settings;
+          if (editMode.active) {
+            if (editMode.data._id === action.payload) {
+              dispatch({ type: ACTION_TYPES.FORM_CLEAR });
+            }
+          }
         })
         .catch(err => {
           next({

@@ -22,7 +22,12 @@ describe('Form Reducer should handle', () => {
       ],
       dueDate: {},
       note: {},
-      currency: {},
+      currency: {
+        code: 'USD',
+        fraction: 2,
+        placement: 'before',
+        separator: 'commaDot'
+      },
       discount: {},
       tax: {},
       settings: {
@@ -31,7 +36,12 @@ describe('Form Reducer should handle', () => {
       },
       savedSettings: {
         tax: {},
-        currency: 'USD',
+        currency: {
+          code: 'USD',
+          fraction: 2,
+          placement: 'before',
+          separator: 'commaDot'
+        },
         required_fields: {},
       },
     };
@@ -94,9 +104,12 @@ describe('Form Reducer should handle', () => {
     expect(newState.rows).toHaveLength(0);
     expect(newState.dueDate).toEqual({});
     expect(newState.note).toEqual({});
-    expect(newState.currency).toEqual(
-      currencies[currentState.savedSettings.currency]
-    );
+    expect(newState.currency).toEqual({
+      code: 'USD',
+      fraction: 2,
+      placement: 'before',
+      separator: 'commaDot'
+    });
     expect(newState.discount).toEqual({});
     expect(newState.tax).toEqual({});
     expect(newState.settings.open).toEqual(false);

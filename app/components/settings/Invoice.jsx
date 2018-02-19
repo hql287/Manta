@@ -2,45 +2,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 const ipc = require('electron').ipcRenderer;
-import { keys, sortBy } from 'lodash';
-const moment = require('moment');
 
 // Custom Libs
-import currencies from '../../../libs/currencies.json';
 const openDialog = require('../../renderers/dialog.js');
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 
-import styled from 'styled-components';
-
-const Row = styled.div`
-  display: flex;
-  margin: 0 -15px;
-`;
-
-const Field = styled.div`
-  flex: 1;
-  margin: 0 15px 20px 15px;
-`;
-
-const Header = styled.h2``;
-
-const Section = styled.div`
-  padding: 20px;
-  background: #f9fafa;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #f2f3f4;
-`;
+import Currency from './_partials/invoice/Currency';
+import Fields from './_partials/invoice/Fields';
+import Other from './_partials/invoice/Other';
+import Tax from './_partials/invoice/Tax';
 
 // Component
 class Invoice extends Component {
   constructor(props) {
     super(props);
     this.state = this.props.invoice;
-    this.selectExportDir = this.selectExportDir.bind(this);
-    this.sortCurrencies = this.sortCurrencies.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTaxChange = this.handleTaxChange.bind(this);
+    this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
@@ -91,6 +70,22 @@ class Invoice extends Component {
     );
   }
 
+  handleCurrencyChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = name === 'fraction' ? parseInt(target.value, 10) : target.value;
+    this.setState(
+      {
+        currency: Object.assign({}, this.state.currency, {
+          [name]: value,
+        }),
+      },
+      () => {
+        this.props.updateSettings('invoice', this.state);
+      }
+    );
+  }
+
   handleVisibilityChange(event) {
     const target = event.target;
     const name = target.name;
@@ -111,31 +106,6 @@ class Invoice extends Component {
     ipc.send('select-export-directory');
   }
 
-  sortCurrencies() {
-    const currenciesKeys = keys(currencies);
-    const currenciesKeysAndValues = currenciesKeys.map(key => [
-      key,
-      currencies[key].name,
-      currencies[key].code,
-    ]);
-    const currenciesSorted = sortBy(currenciesKeysAndValues, [
-      array => array[1],
-    ]);
-    return currenciesSorted.map(obj => {
-      const [key, name, code] = obj;
-
-      const optionKey = code;
-      const optionValue = code;
-      const optionLabel = name;
-
-      return (
-        <option value={optionValue} key={optionKey}>
-          {optionLabel}
-        </option>
-      );
-    });
-  }
-
   render() {
     const { t } = this.props;
     const {
@@ -146,6 +116,7 @@ class Invoice extends Component {
       required_fields,
       dateFormat,
     } = this.state;
+
     return (
       <div>
         <label className="itemLabel">{t('settings:fields:taxSettings')}</label>
@@ -351,6 +322,37 @@ class Invoice extends Component {
         </Section>
       </div>
     );
+//=======
+    return [
+      <Fields
+        key="required_fields_settings"
+        required_fields={required_fields}
+        handleVisibilityChange={this.handleVisibilityChange}
+        t={t}
+      />,
+      <Tax
+        key="tax_settings"
+        handleTaxChange={this.handleTaxChange}
+        tax={tax}
+        t={t}
+      />,
+      <Currency
+        key="currency_settings"
+        currency={currency}
+        handleCurrencyChange={this.handleCurrencyChange}
+        t={t}
+      />,
+      <Other
+        key="other_settings"
+        dateFormat={dateFormat}
+        exportDir={exportDir}
+        template={template}
+        handleInputChange={this.handleInputChange}
+        selectExportDir={this.selectExportDir}
+        t={t}
+      />
+    ];
+//>>>>>>> dev
   }
 }
 

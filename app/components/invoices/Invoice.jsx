@@ -7,7 +7,7 @@ const moment = require('moment');
 const ipc = require('electron').ipcRenderer;
 
 // Helper
-import { formatNumber } from '../../helpers/number';
+import { formatNumber } from '../../../helpers/formatNumber';
 
 // Custom Components
 import Button from '../shared/Button';
@@ -205,7 +205,7 @@ class Invoice extends PureComponent {
   }
 
   render() {
-    const { dateFormat, invoice, language, setInvoiceStatus, t } = this.props;
+    const { dateFormat, invoice, setInvoiceStatus, t } = this.props;
     const { recipient, status } = invoice;
     const statusActions = [
       {
@@ -221,6 +221,7 @@ class Invoice extends PureComponent {
         action: () => setInvoiceStatus(invoice._id, 'cancelled'),
       },
     ];
+    const currencyBefore = invoice.currency.placement === 'before';
     return (
       <div className="col-lg-6">
         <Wrapper>
@@ -242,27 +243,33 @@ class Invoice extends PureComponent {
               <Field>
                 <label>{t('invoices:fields:invoiceID')}</label>
                 <p>
-                  { invoice.invoiceID
+                  {invoice.invoiceID
                     ? invoice.invoiceID
                     : truncate(invoice._id, {
                         length: 8,
-                        omission: '', })
-                  }
+                        omission: '',
+                      })}
                 </p>
               </Field>
               <Field>
                 <label>{t('invoices:fields:total')}</label>
                 <p>
-                  {invoice.currency.code} {formatNumber(invoice.grandTotal)}
+                  {currencyBefore ? invoice.currency.code : null}
+                  {' '}
+                  { formatNumber(
+                      invoice.grandTotal,
+                      invoice.currency.fraction,
+                      invoice.currency.separator)
+                  }
+                  {' '}
+                  {currencyBefore ? null : invoice.currency.code}
                 </p>
               </Field>
             </Row>
             <Row>
               <Field>
                 <label>{t('invoices:fields:createdDate')}</label>
-                <p>
-                  {moment(invoice.created_at).format(dateFormat)}
-                </p>
+                <p>{moment(invoice.created_at).format(dateFormat)}</p>
               </Field>
               <Field>
                 <label>{t('invoices:fields:dueDate')}</label>
@@ -282,8 +289,12 @@ class Invoice extends PureComponent {
               }}
               options={statusActions}
             />
-            <Button onClick={this.editInvoice}>{t('invoices:btns:edit')}</Button>
-            <Button onClick={this.viewInvoice}>{t('invoices:btns:view')}</Button>
+            <Button onClick={this.editInvoice}>
+              {t('invoices:btns:edit')}
+            </Button>
+            <Button onClick={this.viewInvoice}>
+              {t('invoices:btns:view')}
+            </Button>
           </Footer>
         </Wrapper>
       </div>

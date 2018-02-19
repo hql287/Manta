@@ -68,8 +68,10 @@
       "message": "Please select a date"
     },
     "currency": {
-      "title": "Invalid currency",
-      "message": "Please choose a currency"
+      "fraction": {
+        "title": "Invalid Fraction",
+        "message": "Decimal Fraction must be equal or greater than zero"
+      }
     },
     "discount": {
       "title": "Invalid discount",

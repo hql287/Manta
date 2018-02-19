@@ -7,28 +7,12 @@ import _withFadeInAnimation from '../../components/shared/hoc/_withFadeInAnimati
 
 // Styles
 import styled from 'styled-components';
-const Form = styled.div`
-  padding: 20px;
-  background: #f9fafa;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid #f2f3f4;
-`;
-
-const Row = styled.div`
-  display: flex;
-  margin: 0 -15px;
-`;
-
-const Field = styled.div`
-  flex: 1;
-  margin: 0 15px 20px 15px;
-`;
+import { Part, Row, Field } from '../shared/Part';
 
 export function RecipientForm({ t, formData, updateRecipientForm }) {
   const { fullname, company, email, phone } = formData;
   return (
-    <Form>
+    <Part>
       <Row>
         <Field>
           <label className="itemLabel">{t('common:fields:fullname')} *</label>
@@ -69,7 +53,7 @@ export function RecipientForm({ t, formData, updateRecipientForm }) {
           />
         </Field>
       </Row>
-    </Form>
+    </Part>
   );
 }
 
