@@ -31,7 +31,7 @@
       "commaDot": "Komma & Punkt",
       "dotComma": "Punkt & Komma",
       "spaceDot": "Leerschläge & Punkte",
-      "invertedCommaDot": "Hochkomma & Punkt"
+      "apostropheDot": "Apostroph & Punkt"
     },
     "openPDFReader": "PDF nach Export öffnen",
     "language": {

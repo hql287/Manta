@@ -31,7 +31,7 @@
       "commaDot": "Comma & Dot",
       "dotComma": "Dot & Comma",
       "spaceDot": "Space & Dot",
-      "invertedCommaDot": "Inverted comma & Dot"
+      "apostropheDot": "Apostrophe & Dot"
     },
     "openPDFReader": "Open PDF after Export",
     "language": {
