@@ -4,16 +4,8 @@ import PropTypes from 'prop-types';
 
 // Custom Components
 import { Section } from '../shared/Section';
-
-// React Dates
-import { SingleDatePicker } from 'react-dates';
-import moment from 'moment';
-
-// Styles
-import styled from 'styled-components';
-const DueDateContent = styled.div`
-  display: flex;
-`;
+import DueDatePicker from './DueDatePicker';
+import DueDateTerms from './DueDateTerms';
 
 // Animation
 import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
@@ -22,60 +14,86 @@ import _withFadeInAnimation from '../shared/hoc/_withFadeInAnimation';
 export class DueDate extends Component {
   constructor(props) {
     super(props);
-    this.state = { focused: false };
-    this.onFocusChange = this.onFocusChange.bind(this);
-    this.onDateChange = this.onDateChange.bind(this);
-    this.clearDate = this.clearDate.bind(this);
+    this.state = this.props.dueDate;
+    this.toggleDatePicker = this.toggleDatePicker.bind(this);
+    this.updateCustomDate = this.updateCustomDate.bind(this);
+    this.updatePaymentTerm = this.updatePaymentTerm.bind(this);
+    this.updateDueDate = this.updateDueDate.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.state !== nextState || this.props.dueDate != nextProps.dueDate;
+  // Handle Clear Form
+  componentWillReceiveProps(nextProps) {
+    const { selectedDate, paymentTerm, useCustom } = nextProps.dueDate;
+    if (selectedDate === null && paymentTerm === null && useCustom === true) {
+      this.setState(nextProps.dueDate);
+    }
   }
 
-  onFocusChange() {
-    this.setState({ focused: !this.state.focused });
+  toggleDatePicker() {
+    this.setState({ useCustom: !this.state.useCustom }, () => {
+      this.updateDueDate(this.state);
+    });
   }
 
-  onDateChange(date) {
-    const selectedDate = date === null ? null : moment(date).toObject();
-    this.props.updateFieldData('dueDate', { selectedDate });
+  updateCustomDate(selectedDate) {
+    this.setState({ selectedDate }, () => {
+      this.updateDueDate(this.state);
+    });
   }
 
-  clearDate() {
-    this.onDateChange(null);
+  updatePaymentTerm(paymentTerm) {
+    this.setState({ paymentTerm }, () => {
+      this.updateDueDate(this.state);
+    });
+  }
+
+  updateDueDate(data) {
+    this.props.updateFieldData('dueDate', data);
   }
 
   render() {
-    const { t, dueDate } = this.props;
-    const selectedDate = dueDate.selectedDate
-      ? moment(dueDate.selectedDate)
-      : null;
+    const { t } = this.props;
+    const { selectedDate, paymentTerm } = this.state;
     return (
       <Section>
         <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
-        <DueDateContent>
-          <SingleDatePicker
-            id="invoice-duedate"
-            placeholder={t('form:fields:dueDate:placeHolder')}
-            firstDayOfWeek={1}
-            withFullScreenPortal
-            displayFormat="DD/MM/YYYY"
-            hideKeyboardShortcutsPanel
-            date={selectedDate}
-            focused={this.state.focused}
-            onFocusChange={this.onFocusChange}
-            onDateChange={newDate => this.onDateChange(newDate)}
+        {this.state.useCustom ? (
+          <DueDatePicker
+            t={t}
+            selectedDate={selectedDate}
+            updateCustomDate={this.updateCustomDate}
           />
-          {selectedDate !== null && (
-            <a
-              className="clearDateBtn active"
-              href="#"
-              onClick={this.clearDate}
-            >
-              <i className="ion-close-circled" />
-            </a>
-          )}
-        </DueDateContent>
+        ) : (
+          <DueDateTerms
+            t={t}
+            paymentTerm={paymentTerm}
+            updatePaymentTerm={this.updatePaymentTerm}
+          />
+        )}
+        <div>
+          <div className="radio">
+            <label>
+              <input
+                type="radio"
+                onChange={this.toggleDatePicker}
+                checked={this.state.useCustom === true}
+                value="new"
+              />
+              Custom Date
+            </label>
+          </div>
+          <div className="radio">
+            <label>
+              <input
+                type="radio"
+                onChange={this.toggleDatePicker}
+                checked={this.state.useCustom === false}
+                value="select"
+              />
+              Select Payment Term
+            </label>
+          </div>
+        </div>
       </Section>
     );
   }
