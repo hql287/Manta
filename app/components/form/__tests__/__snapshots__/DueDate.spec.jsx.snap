@@ -21,19 +21,39 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         value="0"
       />
       <option
-        value="5"
+        value="{day}"
       >
-        +5 
+         
+        7
+         
       </option>
       <option
-        value="10"
+        value="{day}"
       >
-        +10 
+         
+        10
+         
       </option>
       <option
-        value="30"
+        value="{day}"
       >
-        +30 
+         
+        30
+         
+      </option>
+      <option
+        value="{day}"
+      >
+         
+        60
+         
+      </option>
+      <option
+        value="{day}"
+      >
+         
+        90
+         
       </option>
     </select>
     <div
