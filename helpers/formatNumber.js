@@ -11,6 +11,12 @@ function setSeparator(separator) {
       separatorFormat.decimal = ',';
       break;
     }
+    case 'invertedCommaDot': {
+      separatorFormat.thousand = "'";
+      separatorFormat.decimal = '.';
+      break;
+    	
+    }
     default: {
       separatorFormat.thousand = ' ';
       separatorFormat.decimal = '.';
