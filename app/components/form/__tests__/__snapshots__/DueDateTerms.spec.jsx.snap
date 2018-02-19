@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly to the DOM matches snapshot 1`] = `
+<div
+  className="DueDateTerms__Container-grvKkj cHwqdm"
+>
+  <select
+    onChange={[Function]}
+    value="net10"
+  >
+    <option
+      value="net7"
+    >
+       - 
+    </option>
+    <option
+      value="net10"
+    >
+       - 
+    </option>
+    <option
+      value="net30"
+    >
+       - 
+    </option>
+    <option
+      value="net60"
+    >
+       - 
+    </option>
+    <option
+      value="net90"
+    >
+       - 
+    </option>
+  </select>
+</div>
+`;
