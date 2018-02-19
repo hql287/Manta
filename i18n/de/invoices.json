@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Alle Rechnungen"
+  },
+  "fields": {
+    "client": "Kunde",
+    "invoiceID": "Rechnungsnummer",
+    "createdDate": "Erstellt am",
+    "dueDate": "Fälligkeitsdatum",
+    "total": "Gesamtwert"
+  },
+  "status": {
+    "pending": "Ausstehend",
+    "paid": "Bezahlt",
+    "refunded": "Erstattet",
+    "cancelled": "Storniert"
+  },
+  "btns": {
+    "view": "Ansehen",
+    "edit": "Bearbeiten",
+    "markAsPaid": "Als bezahlt markieren"
+  }
+}

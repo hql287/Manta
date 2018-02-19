@@ -1,0 +1,49 @@
+{
+  "header": {
+    "new": "Neue Rechnung erstellen",
+    "edit": "Rechnung bearbeiten",
+    "btns": {
+      "clear": "Löschen",
+      "update": "Aktualisieren",
+      "saveAndPreview": "Speichern & Vorschau"
+    }
+  },
+  "settings": {
+    "name": "Formulareinstellungen",
+    "hint": "Umschalten um das Feld im Formular als benötigt darzustellen."
+  },
+  "fields": {
+    "items": {
+      "name": "Produkt / Service",
+      "description": "Beschreibung",
+      "price": "Preis",
+      "quantity": "Menge",
+      "add": "Neue Position hinzufügen"
+    },
+    "recipient": {
+      "name": "Empfänger",
+      "select": "Auswählen",
+      "add": "Neuen Empfänger hinzufügen"
+    },
+    "discount": {
+      "name": "Rabatt",
+      "percentage": "Prozent",
+      "flat": "Pauschal"
+    },
+    "dueDate": {
+      "name": "Fälligkeitsdatum",
+      "placeHolder": "Datum auswählen",
+      "addSomeDaysToCurrentDate": "Addiere einige Tage zum jetzigen Datum",
+      "addDaysToCurrentDate" : " Tage ab dem heutigen Datum",
+      "addDayNet" : "Plus"
+    },
+    "tax": {
+      "name": "Steuer",
+      "id": "USt-ID",
+      "method": "Zahlungsmethode",
+      "reverse": "Umkehr der Steuerschuld"
+    },
+    "note": "Notiz",
+    "currency": "Währung"
+  }
+}
