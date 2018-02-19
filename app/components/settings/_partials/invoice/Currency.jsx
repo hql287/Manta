@@ -54,7 +54,7 @@ function Currency({ t, currency, handleCurrencyChange }) {
             <option value="commaDot">1,999.000 (Comma & Dot )</option>
             <option value="dotComma">1.999,000 (Dot & Comma)</option>
             <option value="spaceDot">1 999.000 (Space & Dot)</option>
-            <option value="invertedCommaDot">1'999.000 ({t('settings:fields:currency:invertedCommaDot')})</option>
+            <option value="invertedCommaDot">1&rsquo;999.000 ({t('settings:fields:currency:invertedCommaDot')})</option>
           </select>
         </Field>
       </Row>

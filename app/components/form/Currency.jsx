@@ -131,7 +131,7 @@ export class Currency extends PureComponent {
                   1 999.000 ({t('settings:fields:currency:spaceDot')})
                 </option>
                 <option value="invertedCommaDot">
-                  1'999.000 ({t('settings:fields:currency:invertedCommaDot')})
+                  1&rsquo;999.000 ({t('settings:fields:currency:invertedCommaDot')})
                 </option>
               </select>
             </Field>
