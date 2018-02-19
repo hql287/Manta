@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "跳过",
+    "next": "下一步",
+    "start": "开始开票"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋  你好！",
+      "description": "感谢你尝试 Manta，请允许我展示一下如何用简单的 3 步来创建精美的发票"
+    },
+    "create": {
+      "heading": "第一步：创建",
+      "description": "Manta 拥有灵活的表单界面，默认状态下使用非常简单，但在你需要的地方都可以开启额外选项。"
+    },
+    "preview": {
+      "heading": "第二步：自定义",
+      "description": "Manta 自带了一些外观非常专业的模板，同时你也可以进一步自定义以契合自己的品牌风格。"
+    },
+    "save": {
+      "heading": "第三步：保存",
+      "description": "一旦发票的外观设置妥当，你可以把他保存成 PDF 以备日后使用，也可以打印出来或者邮件出去，用 Manta 来给你的客户留下一个好印象吧！"
+    },
+    "success": {
+      "heading": "完成！✋️",
+      "description": "都好了~ 利用 Manta，简单 3 步就能创建精美的发票，正式使用前请记得更新公司 logo 和简介。"
+    }
+  }
+}

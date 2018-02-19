@@ -82,6 +82,10 @@
     "note": {
       "title": "Chú thích không hợp lệ",
       "message": "Nội dung chú thích không được để trống"
+    },
+    "invoiceID": {
+      "title": "Mã hoá đơn không hợp lệ",
+      "message": "Mã hoá đơn không được để trống"
     }
   }
 }

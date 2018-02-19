@@ -7,20 +7,21 @@ const isDev = require('electron-is-dev');
 const moment = require('moment');
 
 // Language Files
-import fr from './fr/index.js';
-import en from './en/index.js';
-import vi from './vi/index.js';
+import fr from './fr';
+import en from './en';
+import vi from './vi';
+import zhCN from './zhCN';
 
 i18n.use(reactI18nextModule).init({
   lng: defaultLanguage,
   fallbackLng: 'en',
   debug: isDev,
-  // ns: ['form', 'common', 'invoices'],
   defaultNS: 'form',
   resources: {
     en,
     fr,
     vi,
+    zhCN
   },
   interpolation: {
     function(value, format, lng) {

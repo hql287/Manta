@@ -1,0 +1,16 @@
+{
+  "noContact": "你还没有任何联系人",
+  "noInvoice": "你还没有创建过任何发票",
+  "invoice": {
+    "saved": "已成功保存发票",
+    "updated": "已成功更新发票",
+    "deleted": "已成功删除发票"
+  },
+  "contact": {
+    "saved": "已成功保存联系人",
+    "deleted": "已成功删除联系人"
+  },
+  "settings": {
+    "saved": "已成功保存所有的设置"
+  }
+}

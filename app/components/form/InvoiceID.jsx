@@ -45,7 +45,7 @@ export class InvoiceID extends PureComponent {
     const { t } = this.props;
     return (
       <Section>
-        <label className="itemLabel">Invoice ID</label>
+        <label className="itemLabel">{t('invoices:fields:invoiceID')}</label>
         <input
           name="invoiceID"
           type="text"
