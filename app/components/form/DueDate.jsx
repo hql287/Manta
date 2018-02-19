@@ -63,7 +63,7 @@ export class DueDate extends Component {
       ? moment(dueDate.selectedDate)
       : null;
     const days =  [7,10,30,60,90];
-    const daysList = days.map(day => <option value="{day}">{t('form:fields:dueDate:addDayNet')} {day} {t('form:fields:dueDate:addDaysToCurrentDate')}</option>);
+    const daysList = days.map(day => <option value={day}>{t('form:fields:dueDate:addDayNet')} {day} {t('form:fields:dueDate:addDaysToCurrentDate')}</option>);
     return (
       <Section>
         <label className="itemLabel">{t('form:fields:dueDate:name')}</label>
