@@ -95,9 +95,7 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           <label>
             Pending
           </label>
-          <p>
-            --
-          </p>
+          <p />
         </div>
       </div>
     </div>
