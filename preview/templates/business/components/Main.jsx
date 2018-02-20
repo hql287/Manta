@@ -92,6 +92,17 @@ const InvoiceTax = styled.tr`
   }
 `;
 
+const InvoicePaid = styled.div`
+  {
+    color: #6bbb69;
+    ${props =>
+    `
+    div {
+      display: ${props.status};
+    }
+  `};
+`;
+
 function setAlignItems(configs) {
   let pos;
   switch (configs.alignItems) {
@@ -225,6 +236,9 @@ function Main({ invoice, configs, t }) {
             </td>
           </InvoiceTotal>
         </tfoot>
+        <InvoicePaid status={invoice.status == 'paid' ? 'block' : 'none'} >
+          <div className="rubber_stamp">{t('invoices:status:paid')}</div>
+        </InvoicePaid>
       </Table>
     </InvoiceContent>
   );
