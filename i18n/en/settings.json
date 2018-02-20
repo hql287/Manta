@@ -30,7 +30,8 @@
       "separator": "Separator",
       "commaDot": "Comma & Dot",
       "dotComma": "Dot & Comma",
-      "spaceDot": "Space & Dot"
+      "spaceDot": "Space & Dot",
+      "apostropheDot": "Apostrophe & Dot"
     },
     "openPDFReader": "Open PDF after Export",
     "language": {

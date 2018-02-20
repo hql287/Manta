@@ -1,0 +1,64 @@
+{
+  "header": "Einstellungen",
+  "tabs": {
+    "profile": "Profil",
+    "invoice": "Rechnung",
+    "general": "Allgemein"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Akzeptiert PNG, JPG & SVG (empfohlen)"
+    },
+    "taxSettings": "Steuer-Einstellungen",
+    "template": "Vorlage",
+    "dateFormat": "Datumsformat",
+    "pdfExportDir": "Verzeichnis für PDF-Exporte",
+    "requiredFields": "Pflichtfelder",
+    "sound": "Ton",
+    "mute": "Lautlos",
+    "autoCheckUpdate": {
+      "name": "Automatisch nach Updates suchen",
+      "daily": "Täglich (empfohlen)",
+      "weekly": "Wöchentlich"
+    },
+    "currency": {
+      "placement": "Position des Währungssymbols",
+      "afterAmount": "Nach dem Betrag",
+      "beforeAmount": "Vor dem Betrag",
+      "fraction": "Nachkommastellen",
+      "separator": "Trennsymbol",
+      "commaDot": "Komma & Punkt",
+      "dotComma": "Punkt & Komma",
+      "spaceDot": "Leerschläge & Punkte",
+      "apostropheDot": "Apostroph & Punkt"
+    },
+    "openPDFReader": "PDF nach Export öffnen",
+    "language": {
+      "name": "Sprache",
+      "cs": "Tschechisch",
+      "da": "Dänisch",
+      "de": "Deutsch",
+      "el": "Griechisch",
+      "en": "Englisch",
+      "esES": "Spanisch",
+      "fr": "Französisch",
+      "id": "Indonesisch",
+      "it": "Italienisch",
+      "ja": "Japanisch",
+      "ko": "Koreanisch",
+      "lt": "Littauisch",
+      "nl": "Niederländisch",
+      "ptBR": "Portugiesisch, Brasilianisch",
+      "ptPT": "Portugiesisch",
+      "ru": "Russisch",
+      "th": "Thailändisch",
+      "tl": "Tagalog, Philippinen",
+      "tr": "Türkisch",
+      "vi": "Vietnamesisch",
+      "zh-CN": "Chinesisch (Vereinfacht)",
+      "zh-TW": "Chinesisch (Traditionell)"
+    },
+    "other": "Andere"
+  }
+}

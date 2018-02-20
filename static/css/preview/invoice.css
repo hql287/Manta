@@ -1,0 +1,19 @@
+.rubber_stamp {
+  font-size: 39px;
+  line-height: 45px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #6bbb69;
+  border: 7px solid #6bbb69;
+  float: left;
+  padding: 10px 7px;
+  border-radius: 10px;
+  opacity: 0.8;
+  -webkit-transform: rotate(-20deg);
+  -o-transform: rotate(-20deg);
+  -moz-transform: rotate(-20deg);
+  -ms-transform: rotate(-20deg);
+  position:absolute;
+  top:32%;
+  left:30%;
+}
