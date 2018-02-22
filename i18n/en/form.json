@@ -32,7 +32,30 @@
     },
     "dueDate": {
       "name": "Due Date",
-      "placeHolder": "Select a Date"
+      "placeHolder": "Select a custom date",
+      "paymentTerms": {
+        "name": "Select a Payment Term",
+        "net7": {
+          "label": "Net 7",
+          "description": "Payment seven days after invoice date"
+        },
+        "net10": {
+          "label": "Net 10",
+          "description": "Payment ten days after invoice date"
+        },
+        "net30": {
+          "label": "Net 30",
+          "description": "Payment 30 days after invoice date"
+        },
+        "net60": {
+          "label": "Net 60",
+          "description": "Payment 60 days after invoice date"
+        },
+        "net90": {
+          "label": "Net 90",
+          "description": "Payment 90 days after invoice date"
+        }
+      }
     },
     "tax": {
       "name": "Tax",

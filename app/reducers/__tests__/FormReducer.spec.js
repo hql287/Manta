@@ -20,7 +20,11 @@ describe('Form Reducer should handle', () => {
         { id: 'Tyrion Lannister' },
         { id: 'Arya Stark' },
       ],
-      dueDate: {},
+      dueDate: {
+        selectedDate: null,
+        paymentTerm: null,
+        useCustom: true,
+      },
       note: {},
       currency: {
         code: 'USD',
@@ -102,7 +106,11 @@ describe('Form Reducer should handle', () => {
       new: {},
     });
     expect(newState.rows).toHaveLength(0);
-    expect(newState.dueDate).toEqual({});
+    expect(newState.dueDate).toEqual({
+      selectedDate: null,
+      paymentTerm: null,
+      useCustom: true,
+    });
     expect(newState.note).toEqual({});
     expect(newState.currency).toEqual({
       code: 'USD',
@@ -484,7 +492,7 @@ describe('Form Reducer should handle Invoice Edit', () => {
     // Discount
     expect(newState.discount).toEqual(invoiceData.discount);
     // DueDate
-    expect(newState.dueDate.selectedDate).toEqual(invoiceData.dueDate);
+    expect(newState.dueDate).toEqual(invoiceData.dueDate);
   });
 
   it('toggle optional field if necessary', () => {

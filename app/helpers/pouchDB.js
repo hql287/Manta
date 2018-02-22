@@ -72,6 +72,17 @@ const invoicesMigrations = {
       }
     });
     return newDoc;
+  },
+  3: doc => {
+    if (!doc.dueDate) {
+      return doc;
+    }
+    return Object.assign({}, doc, {
+      dueDate: {
+        selectedDate: doc.dueDate,
+        useCustom: true,
+      }
+    });
   }
 };
 

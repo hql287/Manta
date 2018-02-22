@@ -77,16 +77,16 @@ class SideBar extends Component {
     } = configs;
     return (
       <Wrapper>
-        <Language
-          t={t}
-          UILang={UILang}
-          language={language}
-          handleInputChange={this.handleInputChange}
-        />
         <Template
           t={t}
           UILang={UILang}
           template={template}
+          handleInputChange={this.handleInputChange}
+        />
+        <Language
+          t={t}
+          UILang={UILang}
+          language={language}
           handleInputChange={this.handleInputChange}
         />
         <DateFormat

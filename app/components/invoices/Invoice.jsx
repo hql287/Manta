@@ -8,6 +8,7 @@ const ipc = require('electron').ipcRenderer;
 
 // Helper
 import { formatNumber } from '../../../helpers/formatNumber';
+import { calTermDate } from '../../../helpers/date';
 
 // Custom Components
 import Button from '../shared/Button';
@@ -204,6 +205,25 @@ class Invoice extends PureComponent {
     }
   }
 
+  renderDueDate() {
+    const { t, invoice } = this.props;
+    const { dueDate, configs } = invoice;
+    const { useCustom, paymentTerm, selectedDate } = dueDate;
+    const dateFormat = configs ? configs.dateFormat : this.props.dateFormat;
+    // If it's a custom date then return selectedDate
+    if (useCustom === true) {
+      return  moment(selectedDate).format(dateFormat);
+    }
+    // If it's a payment term, calculate the term date and print out
+    const paymentTermDate = calTermDate(invoice.created_at, paymentTerm);
+    return `
+      ${ t(`form:fields:dueDate:paymentTerms:${paymentTerm}:label`) }
+      (
+      ${ moment(paymentTermDate).format(dateFormat) }
+      )
+    `;
+  }
+
   render() {
     const { invoice, setInvoiceStatus, t } = this.props;
     const { recipient, status, configs } = invoice;
@@ -275,9 +295,7 @@ class Invoice extends PureComponent {
               <Field>
                 <label>{t('invoices:fields:dueDate')}</label>
                 <p>
-                  {invoice.dueDate
-                    ? moment(invoice.dueDate).format(dateFormat)
-                    : '--'}
+                  { invoice.dueDate && this.renderDueDate() }
                 </p>
               </Field>
             </Row>
