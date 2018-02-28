@@ -68,6 +68,7 @@ function createTourWindow() {
     event.preventDefault();
     if (isDev) tourWindow.webContents.closeDevTools();
     tourWindow.hide();
+    app.quit();
   });
 }
 
@@ -107,6 +108,7 @@ function createMainWindow() {
     event.preventDefault();
     if (isDev) mainWindow.webContents.closeDevTools();
     mainWindow.hide();
+    if (!previewWindow.isVisible()) app.quit();
   });
 }
 
@@ -146,6 +148,7 @@ function createPreviewWindow() {
     event.preventDefault();
     if (isDev) previewWindow.webContents.closeDevTools();
     previewWindow.hide();
+    if (!mainWindow.isVisible()) app.quit();
   });
 }
 
