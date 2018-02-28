@@ -37,4 +37,8 @@ i18n.use(reactI18nextModule).init({
   },
 });
 
+i18n.on('languageChanged', currentLang => {
+  moment.locale(currentLang);
+});
+
 export default i18n;
