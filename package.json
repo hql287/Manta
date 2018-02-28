@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "dotenv": "^4.0.0",
+    "electron-debug": "^1.5.0",
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.2",
     "electron-updater": "^2.18.2",
@@ -74,6 +75,7 @@
     "duplicate-package-checker-webpack-plugin": "^1.2.6",
     "electron": "^1.7.10",
     "electron-builder": "^19.52.1",
+    "electron-react-devtools": "^0.5.3",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.15.0",

@@ -13,6 +13,12 @@ const omit = require('lodash').omit;
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { autoUpdater } = require('electron-updater');
 
+// debugging tools
+require('electron-debug')({
+  // enabled: true, // force devtools in production
+  showDevTools: 'undocked' // show devtools on each created BrowserWindow
+});
+
 // Place a BrowserWindow in center of primary display
 const centerOnPrimaryDisplay = require('./helpers/center-on-primary-display');
 
