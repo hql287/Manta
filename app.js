@@ -68,7 +68,6 @@ function createTourWindow() {
     event.preventDefault();
     if (isDev) tourWindow.webContents.closeDevTools();
     tourWindow.hide();
-    app.quit();
   });
 }
 
@@ -105,10 +104,13 @@ function createMainWindow() {
     if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
   });
   mainWindow.on('close', event => {
-    event.preventDefault();
-    if (isDev) mainWindow.webContents.closeDevTools();
-    mainWindow.hide();
-    if (!previewWindow.isVisible() && !previewWindow.isMinimized()) app.quit();
+    if (process.platform === 'darwin') {
+      event.preventDefault();
+      if (isDev) mainWindow.webContents.closeDevTools();
+      mainWindow.hide();
+    } else {
+      app.quit();
+    }
   });
 }
 
@@ -148,7 +150,6 @@ function createPreviewWindow() {
     event.preventDefault();
     if (isDev) previewWindow.webContents.closeDevTools();
     previewWindow.hide();
-    if (!mainWindow.isVisible() && !mainWindow.isMinimized()) app.quit();
   });
 }
 
