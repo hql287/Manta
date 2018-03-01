@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-family: 'Lora', serif;
+  font-family: 'Lora', 'Songti SC', serif;
   font-size: 2.1em;
   font-weight: 400;
   margin-bottom: 1em;
