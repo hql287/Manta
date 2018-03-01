@@ -150,6 +150,8 @@ function createPreviewWindow() {
 }
 
 function addDevToolsExtension() {
+  BrowserWindow.addDevToolsExtension(require('devtron').path);
+  BrowserWindow.addDevToolsExtension(require('electron-react-devtools').path);
   if (process.env.REACT_DEV_TOOLS_PATH)
     BrowserWindow.addDevToolsExtension(process.env.REACT_DEV_TOOLS_PATH);
   if (process.env.REDUX_DEV_TOOLS_PATH)
