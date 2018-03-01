@@ -16,9 +16,9 @@ const { autoUpdater } = require('electron-updater');
 // Place a BrowserWindow in center of primary display
 const centerOnPrimaryDisplay = require('./helpers/center-on-primary-display');
 
-// Prevent Linux GPU Bug
-// https://github.com/electron/electron/issues/4322
-if (process.platform == 'linux') {
+// commmandline arguments
+const forceDevtools = process.argv.includes('--force-devtools');
+if (process.argv.includes('--disable-hardware-acceleration')) {
   app.disableHardwareAcceleration();
 }
 
@@ -62,11 +62,11 @@ function createTourWindow() {
   );
   // Add Event Listeners
   tourWindow.on('show', event => {
-    if (isDev) tourWindow.webContents.openDevTools({ mode: 'detach' });
+    if (isDev || forceDevtools) tourWindow.webContents.openDevTools({ mode: 'detach' });
   });
   tourWindow.on('close', event => {
     event.preventDefault();
-    if (isDev) tourWindow.webContents.closeDevTools();
+    if (isDev || forceDevtools) tourWindow.webContents.closeDevTools();
     tourWindow.hide();
   });
 }
@@ -101,11 +101,11 @@ function createMainWindow() {
   );
   // Add Event Listeners
   mainWindow.on('show', event => {
-    if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
+    if (isDev || forceDevtools) mainWindow.webContents.openDevTools({ mode: 'detach' });
   });
   mainWindow.on('close', event => {
     event.preventDefault();
-    if (isDev) mainWindow.webContents.closeDevTools();
+    if (isDev || forceDevtools) mainWindow.webContents.closeDevTools();
     mainWindow.hide();
   });
 }
@@ -140,11 +140,11 @@ function createPreviewWindow() {
   );
   // Add Event Listener
   previewWindow.on('show', event => {
-    if (isDev) previewWindow.webContents.openDevTools({ mode: 'detach' });
+    if (isDev || forceDevtools) previewWindow.webContents.openDevTools({ mode: 'detach' });
   });
   previewWindow.on('close', event => {
     event.preventDefault();
-    if (isDev) previewWindow.webContents.closeDevTools();
+    if (isDev || forceDevtools) previewWindow.webContents.closeDevTools();
     previewWindow.hide();
   });
 }
