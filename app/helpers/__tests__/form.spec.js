@@ -2,6 +2,7 @@
 import faker from 'faker';
 import uuidv4 from 'uuid/v4';
 import i18n from '../../../i18n/i18n';
+import omit from 'lodash';
 
 // Helpers to test
 import {
@@ -267,6 +268,36 @@ describe('getInvoiceData', () => {
     const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.invoiceID).toEqual('Invoice: 123-456-789');
   });
+
+  it('should return correct metadata on editMode', () => {
+    const invoiceID = uuidv4();
+    const invoiceRev = uuidv4();
+    const createdDate = Date.now();
+    const newFormData = Object.assign({}, formData, {
+      settings: Object.assign({}, formData.settings, {
+        editMode: Object.assign({}, formData.settings.editMode, {
+          active: true,
+          data: Object.assign({}, omit(formData, ['settings, savedSettings']),
+            {
+              _id: invoiceID,
+              _rev: invoiceRev,
+              created_at: createdDate
+            }
+          )
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
+    expect(invoiceData._id).toEqual(invoiceID);
+    expect(invoiceData._rev).toEqual(invoiceRev);
+    expect(invoiceData.created_at).toEqual(createdDate);
+  });
+
+  // TODO
+  it('set status as pending when creating a new invoice');
+  it('always generate _id when creating a new invoice');
+  it('does not include _rev when creating a new invoice');
+  it('always recalculate subTotal and grandTotal');
 });
 
 describe('validateFormData', () => {
