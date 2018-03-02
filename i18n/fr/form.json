@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Créer une nouvelle facture",
+    "edit": "Modifier la facture",
+    "btns": {
+      "clear": "Supprimer",
+      "update": "Mettre à jour",
+      "saveAndPreview": "Enregistrer et prévisualiser"
+    }
+  },
+  "settings": {
+    "name": "Paramètres du formulaire",
+    "hint": "Activer un champ pour le rendre disponible."
+  },
+  "fields": {
+    "items": {
+      "name": "Produit / Service",
+      "description": "Description",
+      "price": "Prix",
+      "quantity": "Quantité",
+      "add": "Ajouter un nouvel élément"
+    },
+    "recipient": {
+      "name": "Destinataire",
+      "select": "Sélectionner",
+      "add": "Créer un nouveau"
+    },
+    "discount": {
+      "name": "Remise ",
+      "percentage": "Pourcentage",
+      "flat": "Taux Fixe"
+    },
+    "dueDate": {
+      "name": "Échéance",
+      "placeHolder": "Choisir une date",
+      "paymentTerms": {
+        "name": "Sélectionner un term de paiement",
+        "net7": {
+          "label": "Net 7",
+          "description": "Paiement sept jours après la date de facturation"
+        },
+        "net10": {
+          "label": "Net 10",
+          "description": "Paiement dix jours après la date de facturation"
+        },
+        "net30": {
+          "label": "Net 30",
+          "description": "Paiement 30 jours après la date de facturation"
+        },
+        "net60": {
+          "label": "Net 60",
+          "description": "Paiement 60 jours après la date de facturation"
+        },
+        "net90": {
+          "label": "Net 90",
+          "description": "Paiement 90 jours après la date de facturation"
+        }
+      }
+    },
+    "tax": {
+      "name": "Taxe",
+      "id": "Numéro de TVA",
+      "method": "Méthode",
+      "reverse": "Autoliquidation"
+    },
+    "note": "Remarque",
+    "currency": "Devise"
+  }
+}

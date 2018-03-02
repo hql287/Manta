@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Toutes les factures"
+  },
+  "fields": {
+    "client": "Client",
+    "invoiceID": "Numero de la facture",
+    "createdDate": "Créée le",
+    "dueDate": "Échéance",
+    "total": "Valeur Totale"
+  },
+  "status": {
+    "pending": "En attente",
+    "paid": "Payée",
+    "refunded": "Remboursée",
+    "cancelled": "Annulée"
+  },
+  "btns": {
+    "view": "Visualiser",
+    "edit": "Modifier",
+    "markAsPaid": "Marquer comme payée"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "fullname": "Nama Lengkap",
+    "company": "Perusahaan",
+    "address": "Alamat",
+    "email": "Email",
+    "phone": "Nomor Telepon",
+    "website": "Situs Web"
+  },
+  "save": "Simpan",
+  "amount": "Jumlah",
+  "default": "Standar",
+  "saveAsDefault": "Simpan sebagai Standar?",
+  "yes": "Ya",
+  "noThanks": "Tidak, terima kasih"
+}
