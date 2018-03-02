@@ -1,0 +1,41 @@
+{
+  "sidebar": {
+    "template": "Vorlage",
+    "alignment": {
+      "name": "Ausrichtung",
+      "top": "Oben",
+      "middle": "Mitte",
+      "bottom": "Unten"
+    },
+    "fontSize": "Schriftgrösse",
+    "toggle": {
+      "name": "Umschalten",
+      "logo": "Logo",
+      "symbol": "Symbol",
+      "recipient": "Empfänger"
+    },
+    "accentColor": {
+      "name": "Akzentfarbe",
+      "useCustom": "Eigene Farbe verwenden"
+    },
+    "actions": {
+      "name": "Aktionen",
+      "savePDF": "Als PDF exportieren",
+      "saveConfigs": "Konfiguration speichern"
+    }
+  },
+  "common": {
+    "billedTo": "Rechnungsempfänger",
+    "chooseInvoiceToPreview": "Zur Vorschau bitte eine Rechnung auswählen",
+    "created": "Erstellt",
+    "due": "Fällig",
+    "invoice": "Rechnung",
+    "itemDescription": "Artikel-\/Leistungsbeschreibung",
+    "notice": "Hinweis",
+    "order": "Nr",
+    "price": "Preis",
+    "qty": "Menge",
+    "subtotal": "Zwischensumme",
+    "total": "Rechnungsbetrag"
+  }
+}

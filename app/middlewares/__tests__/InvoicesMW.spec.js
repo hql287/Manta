@@ -8,9 +8,10 @@ import i18n from '../../../i18n/i18n';
 // Mock Functions
 const {
   getAllDocs,
-  updateDoc,
+  getSingleDoc,
   saveDoc,
   deleteDoc,
+  updateDoc,
   mockData,
 } = require('../../helpers/pouchDB');
 import { getInvoiceValue } from '../../helpers/invoice';
@@ -20,12 +21,15 @@ jest.mock('../../helpers/invoice');
 Date.now = jest.fn(() => 'now');
 
 describe('Invoices Middleware', () => {
-  let next, dispatch, middleware;
+  let next, dispatch, middleware, getState;
 
   beforeEach(() => {
     next = jest.fn();
     dispatch = jest.fn();
-    middleware = InvoicesMW({ dispatch })(next);
+    getState = jest.fn(() => ({
+      form: { settings: { editMode: { active: false } } }
+    }));
+    middleware = InvoicesMW({ dispatch, getState })(next);
   });
 
   describe('should handle INVOICE_GET_ALL action', () => {
@@ -286,8 +290,7 @@ describe('Invoices Middleware', () => {
     });
   })
 
-  // TODO
-  describe('should handle INVOICE_UDPATE action', () => {
+  describe('should handle INVOICE_UPDATE action', () => {
     let currentInvoice;
     beforeEach(() => {
       currentInvoice = {
@@ -365,7 +368,6 @@ describe('Invoices Middleware', () => {
     });
   })
 
-
   describe('should handle INVOICE_DELETE action', () => {
     it('should remove record from DB correctly', () => {
       const invoiceID = 'jon-invoice';
@@ -404,6 +406,39 @@ describe('Invoices Middleware', () => {
       );
     });
 
+    it('should clear the form if this invoice is being editted', () => {
+      const getState = jest.fn(() => ({
+        form: {
+          settings: {
+            editMode: {
+              active: true,
+              data: { _id: 'jon-invoice' }
+            }
+          }
+        }
+      }));
+      const middleware = InvoicesMW({ dispatch, getState })(next);
+      const invoiceID = 'jon-invoice';
+      // Execute
+      middleware(Actions.deleteInvoice(invoiceID)).then(() =>
+        deleteDoc('invoices', invoiceID).then(data => {
+          expect(dispatch.mock.calls.length).toBe(2);
+          // Dispatch success notification
+          expect(dispatch.mock.calls[0][0]).toEqual({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'success',
+              message: i18n.t('messages:invoice:deleted'),
+            },
+          });
+          // Dispatch clear Form action
+          expect(dispatch.mock.calls[1][0]).toEqual({
+            type: ACTION_TYPES.FORM_CLEAR
+          });
+        })
+      );
+    })
+
     it('handle error correctly', () => {
       // Setup
       const invoiceID = 'ned-stark';
@@ -419,6 +454,80 @@ describe('Invoices Middleware', () => {
             message: expectedError.message,
           },
         });
+      });
+    });
+  });
+
+  describe('should handle INVOICE_CONFIGS_SAVE action correctly', () => {
+    it('get the doc, merge with config object and dispatch a new action', () => {
+      const invoiceID = 'id-string';
+      const configs = { color: 'red' };
+      middleware(Actions.saveInvoiceConfigs(invoiceID, configs)).then(() =>
+        getSingleDoc('invoices', invoiceID).then(doc => {
+          expect(dispatch.mock.calls.length).toBe(1);
+          expect(dispatch).toHaveBeenCalledWith({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: Object.assign({}, doc, { configs }),
+          });
+        })
+      );
+    });
+
+    it('handle error correctly', () => {
+      // Setup
+      const invoiceID = 'id-string';
+      const configs = { color: 'red' };
+      const expectedError = new Error('No invoice found!');
+      // Execute
+      middleware(Actions.saveInvoiceConfigs(invoiceID, configs)).then(() => {
+        getSingleDoc('test', invoiceID).then(() => {
+          // Expect
+          expect(next).toHaveBeenCalled();
+          expect(next).toHaveBeenCalledWith({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: expectedError.message,
+            },
+          });
+        })
+      });
+    });
+  })
+
+  describe('should handle INVOICE_SET_STATUS action', () => {
+    it('get the doc, merge with status object and dispatch a new action', () => {
+      const invoiceID = 'id-string';
+      const status = 'paid';
+      middleware(Actions.setInvoiceStatus(invoiceID, status)).then(() =>
+        getSingleDoc('invoices', invoiceID).then(doc => {
+          expect(dispatch.mock.calls.length).toBe(1);
+          expect(dispatch).toHaveBeenCalledWith({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: Object.assign({}, doc, { status }),
+          });
+        })
+      );
+    });
+
+    it('handle error correctly', () => {
+      // Setup
+      const invoiceID = 'id-string';
+      const status = 'paid';
+      const expectedError = new Error('No invoice found!');
+      // Execute
+      middleware(Actions.setInvoiceStatus(invoiceID, status)).then(() => {
+        getSingleDoc('test', invoiceID).then(() => {
+          // Expect
+          expect(next).toHaveBeenCalled();
+          expect(next).toHaveBeenCalledWith({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: expectedError.message,
+            },
+          });
+        })
       });
     });
   });
@@ -454,4 +563,5 @@ describe('Invoices Middleware', () => {
     middleware(action);
     expect(next).toHaveBeenCalledWith(action);
   });
+
 });

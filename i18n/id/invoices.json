@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Semua Faktur"
+  },
+  "fields": {
+    "client": "Klien",
+    "invoiceID": "ID Fraktur",
+    "createdDate": "Dibuat Pada",
+    "dueDate": "Batas Tanggal Terakhir",
+    "total": "Nilai Total"
+  },
+  "status": {
+    "pending": "Menunda",
+    "paid": "Dibayar",
+    "refunded": "Dana dikembalikan",
+    "cancelled": "Dibatalkan"
+  },
+  "btns": {
+    "view": "Melihat",
+    "edit": "Sunting",
+    "markAsPaid": "Tandai sebagai Dibayar"
+  }
+}

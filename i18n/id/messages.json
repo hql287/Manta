@@ -1,0 +1,16 @@
+{
+  "noContact": "Anda belum memiliki kontak apapun",
+  "noInvoice": "Anda belum membuat faktur apapun",
+  "invoice": {
+    "saved": "Faktur disimpan dengan sukses",
+    "updated": "Faktur diperbarui dengan sukses",
+    "deleted": "Faktur dihapus dengan sukses"
+  },
+  "contact": {
+    "saved": "Kontak disimpan dengan sukses",
+    "deleted": "Kontak dihapus dengan sukses"
+  },
+  "settings": {
+    "saved": "Semua pengaturan sudah disimpan dengan sukses"
+  }
+}

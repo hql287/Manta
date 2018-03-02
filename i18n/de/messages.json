@@ -1,0 +1,16 @@
+{
+  "noContact": "Es wurde noch kein Kontakt angelegt",
+  "noInvoice": "Sie haben noch keine Rechnung erstellt",
+  "invoice": {
+    "saved": "Rechnung erfolgreich gespeichert",
+    "updated": "Rechnung wurde erfolgreich aktualisiert",
+    "deleted": "Rechnung wurde erfolgreich gelöscht"
+  },
+  "contact": {
+    "saved": "Kontakt erfolgreich gespeichert",
+    "deleted": "Kontakt erfolgreich gelöscht"
+  },
+  "settings": {
+    "saved": "Alle Einstellungen wurden erfolgreich gespeichert"
+  }
+}
