@@ -1,0 +1,41 @@
+{
+  "sidebar": {
+    "template": "Template",
+    "alignment": {
+      "name": "Penjajaran",
+      "top": "Atas",
+      "middle": "Tengah",
+      "bottom": "Bawah"
+    },
+    "fontSize": "Ukuran Huruf",
+    "toggle": {
+      "name": "Tombol Alih",
+      "logo": "Logo",
+      "symbol": "Simbol",
+      "recipient": "Penerima"
+    },
+    "accentColor": {
+      "name": "Warna Aksen",
+      "useCustom": "Gunakan Custom"
+    },
+    "actions": {
+      "name": "Tindakan",
+      "savePDF": "Ekspor PDF",
+      "saveConfigs": "Simpan Konfigurasi"
+    }
+  },
+  "common": {
+    "billedTo": "Ditagih Ke",
+    "chooseInvoiceToPreview": "Silahkan pilih sebuah faktur untuk pratinjau",
+    "created": "Dibuat",
+    "due": "Batas Waktu",
+    "invoice": "Faktur",
+    "itemDescription": "Deskripsi Item",
+    "notice": "Pemberitahuan",
+    "order": "Tidak",
+    "price": "Harga",
+    "qty": "Kuantitas",
+    "subtotal": "Subtotal",
+    "total": "Total"
+  }
+}

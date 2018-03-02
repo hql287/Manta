@@ -7,8 +7,10 @@ const isDev = require('electron-is-dev');
 const moment = require('moment');
 
 // Language Files
+import de from './de';
 import en from './en';
-import ko from './ko';
+import fr from './fr';
+import id from './id';
 import vi from './vi';
 import zhCN from './zh-CN';
 
@@ -18,8 +20,10 @@ i18n.use(reactI18nextModule).init({
   debug: isDev,
   defaultNS: 'form',
   resources: {
+    de,
     en,
-    ko,
+    fr,
+    id,
     vi,
     "zh-CN": zhCN
   },
@@ -35,6 +39,10 @@ i18n.use(reactI18nextModule).init({
     bindStore: false,
     nsMode: false,
   },
+});
+
+i18n.on('languageChanged', currentLang => {
+  moment.locale(currentLang);
 });
 
 export default i18n;
