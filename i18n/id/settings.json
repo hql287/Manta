@@ -1,0 +1,63 @@
+{
+  "header": "Pengaturan",
+  "tabs": {
+    "profile": "Profil",
+    "invoice": "Faktur",
+    "general": "Umum"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Menerima PNG, JPG & SVG (Direkomendasikan)"
+    },
+    "taxSettings": "Pengaturan Pajak",
+    "template": "Templat",
+    "dateFormat": "Format Tanggal",
+    "pdfExportDir": "Direktori Ekspor PDF",
+    "requiredFields": "Bidang-bidang yang diperlukan",
+    "sound": "Suara",
+    "mute": "Senyap",
+    "autoCheckUpdate": {
+      "name": "Pemeriksaan Otomatis untuk Pembaruan",
+      "daily": "Setiap Hari (Direkomendasikan)",
+      "weekly": "Setiap Minggu"
+    },
+    "currency": {
+      "placement": "Tanda penempatan",
+      "afterAmount": "Setelah Jumlah",
+      "beforeAmount": "Sebelum Jumlah",
+      "fraction": "Pecahan Desimal",
+      "separator": "Pemisah",
+      "commaDot": "Koma & Titik",
+      "dotComma": "Titik & Koma",
+      "spaceDot": "Spasi & Titik"
+    },
+    "openPDFReader": "Buka PDF setelah Mengekspor",
+    "language": {
+      "name": "Bahasa",
+      "cs": "Ceko",
+      "da": "Denmark",
+      "de": "Jerman",
+      "el": "Yunani",
+      "en": "Inggris",
+      "esES": "Spanyol",
+      "fr": "Perancis",
+      "id": "Indonesia",
+      "it": "Italia",
+      "ja": "Jepang",
+      "ko": "Korea",
+      "lt": "Lithuania",
+      "nl": "Belanda",
+      "ptBR": "Portugis, Brazil",
+      "ptPT": "Portugis",
+      "ru": "Rusia",
+      "th": "Thailand",
+      "tl": "Tagalog, Filipina",
+      "tr": "Turki",
+      "vi": "Vietnam",
+      "zh-CN": "China (Disederhanakan)",
+      "zh-TW": "China (Tradisional)"
+    },
+    "other": "Lainnya"
+  }
+}

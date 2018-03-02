@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Lewati",
+    "next": "Berikutnya",
+    "start": "Mulai Memfakturkan"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋  Halo!",
+      "description": "Terima kasih sudah memberikan saya sebuah kesempatan. Mari saya tunjukkan kepada anda bagaimana cara membuat faktur yang menakjubkan dengan hanya 3 langkah sederhana"
+    },
+    "create": {
+      "heading": "Langkah 1. Membuat",
+      "description": "Manta memiliki sebuah bentuk antarmuka yang fleksibel. Ia membuat hal-hal menjadi sederhana secara default tapi anda dapat selalu menghidupkan/mematikan bidang tambahan kapanpun anda merasa perlu."
+    },
+    "preview": {
+      "heading": "Langkah 2. Menyesuaikan",
+      "description": "Manta hadir dengan tampilan template profesional yang dapat disesuaikan lebih lanjut sesuai dengan gaya merek anda."
+    },
+    "save": {
+      "heading": "Langkah 3. Menyimpan",
+      "description": "Setelah puas dengan penampilan faktur anda dapat menyimpannya sebagai PDF untuk digunakan nanti. Cetak atau emailkan ia, mari gunakan Manta untuk mengesankan klien anda sekarang!"
+    },
+    "success": {
+      "heading": "Selesai!!! ✋️",
+      "description": "Anda mendapatkannya, 3 langkah sederhana untuk membuat faktur yang menakjubkan dengan Manta. Ingat untuk memperbarui profil dan logo perusahaan sebelum benar-benar menggunakan faktur tersebut."
+    }
+  }
+}

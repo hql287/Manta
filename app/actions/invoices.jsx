@@ -1,21 +1,23 @@
 import * as ACTION_TYPES from '../constants/actions.jsx';
 import { createAction } from 'redux-actions';
 
-// Get All Invoices
 export const getInvoices = createAction(ACTION_TYPES.INVOICE_GET_ALL);
 
-// Save an Invoice
 export const saveInvoice = createAction(
   ACTION_TYPES.INVOICE_SAVE,
   invoiceData => invoiceData
 );
 
-export const saveInvoiceConfigs = createAction(
-  ACTION_TYPES.INVOICE_CONFIGS_SAVE,
-  (invoiceID, configs) => ({ invoiceID, configs })
+export const newInvoiceFromContact = createAction(
+  ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
+  contact => contact
 );
 
-// Edit an Invoice
+export const deleteInvoice = createAction(
+  ACTION_TYPES.INVOICE_DELETE,
+  invoiceID => invoiceID
+);
+
 export const editInvoice = createAction(
   ACTION_TYPES.INVOICE_EDIT,
   invoiceData => invoiceData
@@ -23,23 +25,15 @@ export const editInvoice = createAction(
 
 export const updateInvoice = createAction(
   ACTION_TYPES.INVOICE_UPDATE,
-  (invoiceID, data) => ({ invoiceID, data })
+  updatedInvoice => updatedInvoice
 );
 
-// New Invoice from Contact
-export const newInvoiceFromContact = createAction(
-  ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
-  contact => contact
-);
-
-// Delete an invoice
-export const deleteInvoice = createAction(
-  ACTION_TYPES.INVOICE_DELETE,
-  invoiceID => invoiceID
-);
-
-// set the status of an invoice (pending/paid/etc.)
 export const setInvoiceStatus = createAction(
   ACTION_TYPES.INVOICE_SET_STATUS,
   (invoiceID, status) => ({ invoiceID, status })
+);
+
+export const saveInvoiceConfigs = createAction(
+  ACTION_TYPES.INVOICE_CONFIGS_SAVE,
+  (invoiceID, configs) => ({ invoiceID, configs })
 );
