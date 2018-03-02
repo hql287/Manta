@@ -104,6 +104,10 @@ Windows 7 and later are supported
 
 [More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
 
+### App Start-Options
+* Disable Hardware-Acceleration: `manta --disable-hardware-acceleration`
+* Force Devtools: `manta --force-devtools`
+
 ### Technologies
 * [Electron](https://github.com/electron/electron)
 * [React](https://github.com/facebook/react)
