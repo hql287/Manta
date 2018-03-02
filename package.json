@@ -74,6 +74,7 @@
     "duplicate-package-checker-webpack-plugin": "^1.2.6",
     "electron": "^1.7.10",
     "electron-builder": "^19.52.1",
+    "electron-react-devtools": "^0.5.3",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.15.0",
