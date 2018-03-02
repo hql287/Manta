@@ -23,15 +23,14 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       // Validate Form Data
       if (!validateFormData(currentFormData)) return;
       const currentInvoiceData = getInvoiceData(currentFormData);
-      // Check Edit Mode
+      // UPDATE DOC
       if (currentFormData.settings.editMode.active) {
-        const invoiceId = currentFormData.settings.editMode.data._id;
         // Update existing invoice
-        dispatch(InvoicesActions.updateInvoice(invoiceId, currentInvoiceData));
+        dispatch(InvoicesActions.updateInvoice(currentInvoiceData));
         // Change Tab to invoices
         dispatch(UIActions.changeActiveTab('invoices'));
       } else {
-        // Save Invoice To DB
+        // CREATE DOC
         dispatch(InvoicesActions.saveInvoice(currentInvoiceData));
       }
       // Save Contact to DB if it's a new one
