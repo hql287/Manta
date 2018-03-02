@@ -32,7 +32,30 @@
     },
     "dueDate": {
       "name": "Hạn thanh toán",
-      "placeHolder": "Chọn ngày"
+      "placeHolder": "Chọn ngày",
+      "paymentTerms": {
+        "name": "Chọn một hạn thanh toán",
+        "net7": {
+          "label": "Net 7",
+          "description": "Thanh toán sau 7 ngày hoá đơn được tạo"
+        },
+        "net10": {
+          "label": "Net 10",
+          "description": "Thanh toán sau 10 ngày hoá đơn được tạo"
+        },
+        "net30": {
+          "label": "Net 30",
+          "description": "Thanh toán sau 30 ngày hoá đơn được tạo"
+        },
+        "net60": {
+          "label": "Net 60",
+          "description": "Thanh toán sau 60 ngày hoá đơn được tạo"
+        },
+        "net90": {
+          "label": "Net 90",
+          "description": "Thanh toán sau 90 ngày hoá đơn được tạo"
+        }
+      }
     },
     "tax": {
       "name": "Thuế",
