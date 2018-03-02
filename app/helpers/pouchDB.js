@@ -69,10 +69,21 @@ const invoicesMigrations = {
         placement: 'before',
         separator: 'commaDot',
         fraction: 2,
-      }
+      },
     });
     return newDoc;
-  }
+  },
+  3: doc => {
+    if (!doc.dueDate) {
+      return doc;
+    }
+    return Object.assign({}, doc, {
+      dueDate: {
+        selectedDate: doc.dueDate,
+        useCustom: true,
+      },
+    });
+  },
 };
 
 runMigration(
@@ -165,17 +176,13 @@ const deleteDoc = (dbName, doc) =>
   });
 
 // Update A Document
-const updateDoc = (dbName, docId, updatedDoc) =>
+const updateDoc = (dbName, updatedDoc) =>
   new Promise((resolve, reject) => {
     setDB(dbName)
       .then(db =>
         db
-          .get(docId)
-          .then(record =>
-            db
-              .put(Object.assign(record, updatedDoc))
-              .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
-          )
+          .put(updatedDoc)
+          .then(getAllDocs(dbName).then(allDocs => resolve(allDocs)))
       )
       .catch(err => reject(err));
   });

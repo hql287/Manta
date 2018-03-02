@@ -16,7 +16,11 @@ const initialState = {
     new: {},
   },
   rows: [],
-  dueDate: {},
+  dueDate: {
+    selectedDate: null,
+    paymentTerm: null,
+    useCustom: true,
+  },
   discount: {},
   note: {},
   invoiceID: "",
@@ -137,12 +141,7 @@ const FormReducer = handleActions(
         currency: currency !== undefined ? currency : state.currency,
         discount: discount !== undefined ? discount : state.discount,
         tax: tax !== undefined ? tax : state.tax,
-        dueDate:
-          dueDate !== undefined
-            ? Object.assign({}, state.dueDate, {
-                selectedDate: dueDate,
-              })
-            : state.dueDate,
+        dueDate: dueDate !== undefined ? dueDate : state.dueDate,
         note:
           note !== undefined
             ? Object.assign({}, state.note, {

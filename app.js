@@ -104,9 +104,13 @@ function createMainWindow() {
     if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
   });
   mainWindow.on('close', event => {
-    event.preventDefault();
-    if (isDev) mainWindow.webContents.closeDevTools();
-    mainWindow.hide();
+    if (process.platform === 'darwin') {
+      event.preventDefault();
+      if (isDev) mainWindow.webContents.closeDevTools();
+      mainWindow.hide();
+    } else {
+      app.quit();
+    }
   });
 }
 

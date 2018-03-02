@@ -2,6 +2,7 @@
 import faker from 'faker';
 import uuidv4 from 'uuid/v4';
 import i18n from '../../../i18n/i18n';
+import omit from 'lodash';
 
 // Helpers to test
 import {
@@ -54,7 +55,11 @@ describe('getInvoiceData', () => {
           quantity: faker.random.number(100),
         },
       ],
-      dueDate: {},
+      dueDate: {
+        selectedDate: null,
+        paymentTerm: null,
+        useCustom: true,
+      },
       currency: {
         code: 'USD',
         placement: 'before',
@@ -151,6 +156,8 @@ describe('getInvoiceData', () => {
           months: 9,
           years: 2017,
         },
+        useCustom: true,
+        paymentTerm: null,
       },
       settings: Object.assign({}, formData.settings, {
         required_fields: Object.assign({}, formData.settings.required_fields, {
@@ -160,9 +167,13 @@ describe('getInvoiceData', () => {
     });
     const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.dueDate).toEqual({
-      date: 20,
-      months: 9,
-      years: 2017,
+      selectedDate: {
+        date: 20,
+        months: 9,
+        years: 2017,
+      },
+      useCustom: true,
+      paymentTerm: null,
     });
     expect(invoiceData.dueDate).not.toEqual({
       date: 2,
@@ -257,6 +268,36 @@ describe('getInvoiceData', () => {
     const invoiceData = getInvoiceData(newFormData);
     expect(invoiceData.invoiceID).toEqual('Invoice: 123-456-789');
   });
+
+  it('should return correct metadata on editMode', () => {
+    const invoiceID = uuidv4();
+    const invoiceRev = uuidv4();
+    const createdDate = Date.now();
+    const newFormData = Object.assign({}, formData, {
+      settings: Object.assign({}, formData.settings, {
+        editMode: Object.assign({}, formData.settings.editMode, {
+          active: true,
+          data: Object.assign({}, omit(formData, ['settings, savedSettings']),
+            {
+              _id: invoiceID,
+              _rev: invoiceRev,
+              created_at: createdDate
+            }
+          )
+        }),
+      }),
+    });
+    const invoiceData = getInvoiceData(newFormData);
+    expect(invoiceData._id).toEqual(invoiceID);
+    expect(invoiceData._rev).toEqual(invoiceRev);
+    expect(invoiceData.created_at).toEqual(createdDate);
+  });
+
+  // TODO
+  it('set status as pending when creating a new invoice');
+  it('always generate _id when creating a new invoice');
+  it('does not include _rev when creating a new invoice');
+  it('always recalculate subTotal and grandTotal');
 });
 
 describe('validateFormData', () => {
@@ -284,6 +325,8 @@ describe('validateFormData', () => {
       ],
       dueDate: {
         selectedDate: faker.date.future(),
+        useCustom: true,
+        paymentTerm: null,
       },
       currency: {
         code: 'USD',
@@ -549,7 +592,9 @@ describe('validateRows', () => {
 describe('validateDueDate', () => {
   it('should validate selectedDate', () => {
     const dueDate = {
+      useCustom: true,
       selectedDate: null,
+      paymentTerm: null,
     };
     const validation = validateDueDate(true, dueDate);
     expect(validation).toEqual(false);

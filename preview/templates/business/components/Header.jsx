@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { truncate } from 'lodash';
 const moment = require('moment');
 
+// Helper
+import { calTermDate } from '../../../../helpers/date';
+
 // Styles
 import styled from 'styled-components';
 
@@ -74,7 +77,7 @@ function Header({ t, invoice, profile, configs }) {
         </Company>
         {configs.showRecipient && (
           <Recipient>
-            <h4>{ t('preview:common:billedTo', {lng: currentLanguage}) }</h4>
+            <h4>{t('preview:common:billedTo', { lng: currentLanguage })}</h4>
             <p>{recipient.company}</p>
             <p>{recipient.fullname}</p>
             <p>{recipient.email}</p>
@@ -83,26 +86,50 @@ function Header({ t, invoice, profile, configs }) {
         )}
       </LeftColumn>
       <RightColumn>
-        <Heading accentColor={configs.accentColor}>{ t('preview:common:invoice', {lng: currentLanguage}) }</Heading>
+        <Heading accentColor={configs.accentColor}>
+          {t('preview:common:invoice', { lng: currentLanguage })}
+        </Heading>
         <h4>
           #
-          { invoice.invoiceID
+          {invoice.invoiceID
             ? invoice.invoiceID
             : truncate(invoice._id, {
                 length: 8,
-                omission: '', })
-          }
+                omission: '',
+              })}
         </h4>
         <p>
-          { t('preview:common:created', {lng: currentLanguage}) }:
-          {' '}
-          {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
+          {t('preview:common:created', { lng: currentLanguage })}:{' '}
+          {moment(invoice.created_at)
+            .lang(currentLanguage)
+            .format(configs.dateFormat)}
         </p>
-        <p>
-          { t('preview:common:due', {lng: currentLanguage}) }:
-          {' '}
-          {moment(invoice.dueDate).lang(currentLanguage).format(configs.dateFormat)}
-        </p>
+        {invoice.dueDate && [
+          <p key="dueDate">
+            {t('preview:common:due', { lng: currentLanguage })}:{' '}
+            {invoice.dueDate.useCustom
+              ? moment(invoice.dueDate.selectedDate)
+                  .lang(currentLanguage)
+                  .format(configs.dateFormat)
+              : moment(
+                  calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
+                )
+                  .lang(currentLanguage)
+                  .format(configs.dateFormat)}
+          </p>,
+          <p key="dueDateNote">
+            {!invoice.dueDate.useCustom &&
+              `
+            (
+              ${t(
+                `form:fields:dueDate:paymentTerms:${
+                  invoice.dueDate.paymentTerm
+                }:description`
+              )}
+            )
+            `}
+          </p>,
+        ]}
       </RightColumn>
     </InvoiceHeader>
   );

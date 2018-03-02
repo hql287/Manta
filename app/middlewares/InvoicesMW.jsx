@@ -79,29 +79,6 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
         });
     }
 
-    case ACTION_TYPES.INVOICE_CONFIGS_SAVE: {
-      const { invoiceID, configs } = action.payload;
-      return getSingleDoc('invoices', invoiceID)
-        .then(doc => {
-          dispatch({
-            type: ACTION_TYPES.INVOICE_UPDATE,
-            payload: {
-              invoiceID,
-              data: Object.assign({}, doc, {configs})
-            },
-          })
-        })
-        .catch(err => {
-          next({
-            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
-            payload: {
-              type: 'warning',
-              message: err.message,
-            },
-          });
-        });
-    }
-
     case ACTION_TYPES.INVOICE_EDIT: {
       // Continue
       return getAllDocs('contacts')
@@ -115,33 +92,6 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
           );
           // Change Tab to Form
           dispatch(UIActions.changeActiveTab('form'));
-        })
-        .catch(err => {
-          next({
-            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
-            payload: {
-              type: 'warning',
-              message: err.message,
-            },
-          });
-        });
-    }
-
-    case ACTION_TYPES.INVOICE_UPDATE: {
-      const { invoiceID, data } = action.payload;
-      return updateDoc('invoices', invoiceID, data)
-        .then(docs => {
-          next({
-            type: ACTION_TYPES.INVOICE_UPDATE,
-            payload: docs,
-          });
-          dispatch({
-            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
-            payload: {
-              type: 'success',
-              message: i18n.t('messages:invoice:updated'),
-            },
-          });
         })
         .catch(err => {
           next({
@@ -188,13 +138,11 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
         });
     }
 
-    case ACTION_TYPES.INVOICE_SET_STATUS: {
-      return updateDoc('invoices', action.payload.invoiceID, {
-        status: action.payload.status,
-      })
+    case ACTION_TYPES.INVOICE_UPDATE: {
+      return updateDoc('invoices', action.payload)
         .then(docs => {
           next({
-            type: ACTION_TYPES.INVOICE_SET_STATUS,
+            type: ACTION_TYPES.INVOICE_UPDATE,
             payload: docs,
           });
           dispatch({
@@ -204,6 +152,46 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
               message: i18n.t('messages:invoice:updated'),
             },
           });
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
+        });
+    }
+
+    case ACTION_TYPES.INVOICE_CONFIGS_SAVE: {
+      const { invoiceID, configs } = action.payload;
+      return getSingleDoc('invoices', invoiceID)
+        .then(doc => {
+          dispatch({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: Object.assign({}, doc, {configs})
+          })
+        })
+        .catch(err => {
+          next({
+            type: ACTION_TYPES.UI_NOTIFICATION_NEW,
+            payload: {
+              type: 'warning',
+              message: err.message,
+            },
+          });
+        });
+    }
+
+    case ACTION_TYPES.INVOICE_SET_STATUS: {
+      const { invoiceID, status } = action.payload;
+      return getSingleDoc('invoices', invoiceID)
+        .then(doc => {
+          dispatch({
+            type: ACTION_TYPES.INVOICE_UPDATE,
+            payload: Object.assign({}, doc, { status })
+          })
         })
         .catch(err => {
           next({

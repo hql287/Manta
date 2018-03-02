@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders correctly to the DOM matches snapshot 1`] = `
+<div
+  className="DueDatePicker__Container-jrhXSv dVnPcX"
+>
+  <div
+    className="SingleDatePicker"
+  >
+    <div>
+      <div
+        className="SingleDatePickerInput"
+      >
+        <div
+          className="DateInput DateInput--open-down"
+        >
+          <input
+            aria-describedby="DateInput__screen-reader-message-invoice-duedate"
+            aria-label="Date"
+            autoComplete="off"
+            className="DateInput__input needsclick"
+            disabled={false}
+            id="invoice-duedate"
+            name="invoice-duedate"
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            placeholder="Date"
+            readOnly={false}
+            required={false}
+            type="text"
+            value="2017-11-20"
+          />
+          <p
+            className="screen-reader-only"
+            id="DateInput__screen-reader-message-invoice-duedate"
+          >
+            Press the down arrow key to interact with the calendar and
+  select a date. Press the question mark key to get the keyboard shortcuts for changing dates.
+          </p>
+          <div
+            className="DateInput__display-text DateInput__display-text--has-input"
+          >
+            20/11/2017
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a
+    className="clearDateBtn active"
+    href="#"
+    onClick={[Function]}
+  >
+    <i
+      className="ion-close-circled"
+    />
+  </a>
+</div>
+`;

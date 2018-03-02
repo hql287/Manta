@@ -60,28 +60,29 @@ function getInvoiceData(formData) {
   }
   // Set InvoiceID
   if (required_fields.invoiceID) invoiceData.invoiceID = invoiceID;
-  // Set Invoice DueDate
-  if (required_fields.dueDate) invoiceData.dueDate = dueDate.selectedDate;
-  // Set Invoice Currency
+  // Set DueDate
+  if (required_fields.dueDate) invoiceData.dueDate = dueDate;
+  // Set Currency
   if (required_fields.currency) {
     invoiceData.currency = currency;
   } else {
     invoiceData.currency = appConfig.get('invoice.currency');
   }
-  // Set Invoice Discount
+  // Set Discount
   if (required_fields.discount) invoiceData.discount = discount;
-  // Set Invoice Tax
+  // Set Tax
   if (required_fields.tax) invoiceData.tax = tax;
-  // Set Invoice Note
+  // Set Note
   if (required_fields.note) invoiceData.note = note.content;
 
   // Return final value
   return Object.assign({}, invoiceData, {
-    // Reuse existing data
+    // Metadata
     _id: editMode.active ? editMode.data._id : uuidv4(),
+    _rev: editMode.active ? editMode.data._rev : null,
     created_at: editMode.active ? editMode.data.created_at : Date.now(),
     status: editMode.active ? editMode.data.status: 'pending',
-    // Calculate subtotal & grandTotal
+    // Alway calculate subtotal & grandTotal
     subtotal: getInvoiceValue(invoiceData).subtotal,
     grandTotal: getInvoiceValue(invoiceData).grandTotal,
   });
@@ -167,15 +168,19 @@ function validateRows(rows) {
 }
 
 function validateDueDate(isRequired, dueDate) {
-  const { selectedDate } = dueDate;
+  const { selectedDate,paymentTerm, useCustom } = dueDate;
   if (isRequired) {
-    if (!selectedDate || selectedDate === null) {
-      openDialog({
-        type: 'warning',
-        title: i18n.t('dialog:validation:dueDate:title'),
-        message: i18n.t('dialog:validation:dueDate:message'),
-      });
-      return false;
+    // If use customDate
+    if (useCustom) {
+      if (!selectedDate || selectedDate === null) {
+        openDialog({
+          type: 'warning',
+          title: i18n.t('dialog:validation:dueDate:title'),
+          message: i18n.t('dialog:validation:dueDate:message'),
+        });
+        return false;
+      }
+      return true;
     }
     return true;
   }
