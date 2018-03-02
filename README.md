@@ -143,8 +143,6 @@ With that in mind, I know that Manta would need to satisfy these criteria:
 
 ### Development
 
-#### First Steps
-
 It's very easy to get started with these 3 steps:
 
 * Clone this project to your local machine.
@@ -157,17 +155,6 @@ This is still in beta and it's far from perfect so feedbacks, issues or PRs are 
 
 Note that on Linux you will need additional dependencies to provide the `icns2png` and `gm` commands.
 Ubuntu/Debian users can run: `sudo apt install -y icnsutils graphicsmagick`.
-
-#### Devtools
-It is possible to automatically enable the DevTools Extensions [`react-devtools`](https://github.com/facebook/react-devtools) & [`redux-devtools`](https://github.com/gaearon/redux-devtools) (installed in Chrome) & Electron's `devtron` through path constants in the [.env file](https://www.npmjs.com/package/node-env-file).
-
-Example:
-```
-DEVTRON_DEV_TOOLS_PATH=./node_modules/devtron
-REACT_DEV_TOOLS_PATH=/path/to/your/react-dev-tool-extension
-REDUX_DEV_TOOLS_PATH=/path/to/your/redux-dev-tool-extension
-```
-[Here](https://github.com/electron/electron/blob/master/docs/tutorial/devtools-extension.md) you can find some information about how to get the paths.
 
 ### FAQ
 
