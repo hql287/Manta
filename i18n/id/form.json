@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Buat Sebuah Faktur Baru",
+    "edit": "Sunting Faktur",
+    "btns": {
+      "clear": "Bersihkan",
+      "update": "Pembaruan",
+      "saveAndPreview": "Simpan & Peninjauan"
+    }
+  },
+  "settings": {
+    "name": "Pengaturan Bentuk",
+    "hint": "Perhatikan setiap bidang untuk membuatnya diperlukan dalam bentuk."
+  },
+  "fields": {
+    "items": {
+      "name": "Produk/Layanan",
+      "description": "Deskripsi",
+      "price": "Harga",
+      "quantity": "Kuantitas",
+      "add": "Tambahkan sebuah Item Baru"
+    },
+    "recipient": {
+      "name": "Penerima",
+      "select": "Pilih",
+      "add": "Buat Baru"
+    },
+    "discount": {
+      "name": "Diskon",
+      "percentage": "Persentase",
+      "flat": "Tarif Tetap"
+    },
+    "dueDate": {
+      "name": "Batas Tanggal Terakhir",
+      "placeHolder": "Pilih sebuah tanggal kustom",
+      "paymentTerms": {
+        "name": "Pilih sebuah jangka waktu pembayaran",
+        "net7": {
+          "label": "Net 7",
+          "description": "Pembayaran tujuh hari setelah tanggal faktur"
+        },
+        "net10": {
+          "label": "Net 10",
+          "description": "Pembayaran 10 hari setelah tanggal faktur"
+        },
+        "net30": {
+          "label": "Net 30",
+          "description": "Pembayaran 30 hari setelah tanggal faktur"
+        },
+        "net60": {
+          "label": "Net 60",
+          "description": "Pembayaran 60 hari setelah tanggal faktur"
+        },
+        "net90": {
+          "label": "Net 90",
+          "description": "Pembayaran 90 hari setelah tanggal faktur"
+        }
+      }
+    },
+    "tax": {
+      "name": "Pajak",
+      "id": "ID Pajak",
+      "method": "Metode",
+      "reverse": "Biaya Cadangan"
+    },
+    "note": "Catatan",
+    "currency": "Mata Uang"
+  }
+}

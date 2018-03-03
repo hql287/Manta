@@ -1,0 +1,89 @@
+{
+  "appUpdate": {
+    "available": {
+      "title": "Pembaruan baru tersedia",
+      "message": "Apakah anda ingin mulai mengunduh pembaruan di latar belakang?"
+    },
+    "noUpdate": {
+      "title": "Tidak ada pembaruan yang tersedia",
+      "message": "Anda sedang menggunakan versi terbaru dari aplikasi"
+    },
+    "error": {
+      "title": "Sebuah kesalahan telah terjadi"
+    },
+    "downloaded": {
+      "title": "Pembaruan sudah diunduh",
+      "message": "Apakah anda ingin berhenti dan meningkatkan aplikasi sekarang?",
+      "quitNow": "Berhenti Sekarang",
+      "later": "Nanti"
+    }
+  },
+  "noAccess": {
+    "title": "Tidak ada izin mengakses",
+    "message": "Silahkan pilih petunjuk lainnya"
+  },
+  "errorBoundary": "Terjadi sebuah kesalahan",
+  "deleteInvoice": {
+    "title": "Hapus faktur ini?",
+    "message": "Faktur akan dihapus secara permanen dari basisdata"
+  },
+  "deleteContact": {
+    "title": "Hapus kontak ini?",
+    "message": "Kontak akan dihapus secara permanen dari basis data"
+  },
+  "fileTypeErr": {
+    "title": "Silahkan pilih berkas lain"
+  },
+  "validation": {
+    "recipient": {
+      "empty": {
+        "title": "Kontak tidak sah",
+        "message": "Kontak tidak boleh kosong"
+      },
+      "requiredFields": {
+        "title": "Bidang-bidang yang diperlukan",
+        "message": "Silahkan isi di semua kolom yang wajib diisi"
+      },
+      "email": {
+        "title": "Surel tidak sah",
+        "message": "Silahkan pilih surel lain"
+      }
+    },
+    "rows": {
+      "emptyDescription": {
+        "title": "Deskripsi tidak sah",
+        "message": "Deskripsi tidak boleh kosong"
+      },
+      "priceZero": {
+        "title": "Harga tidak sah",
+        "message": "Harga harus lebih besar daripada nol"
+      },
+      "qtyZero": {
+        "title": "Kuantitas tidak sah",
+        "message": "Kuantitas harus lebih besar daripada nol"
+      }
+    },
+    "dueDate": {
+      "title": "Batas tanggal akhir tidak sah",
+      "message": "Silahkan pilih sebuah tanggal"
+    },
+    "currency": {
+      "fraction": {
+        "title": "Pecahan tidak sah",
+        "message": "Pecahan desimal harus sama atau lebih besar dari nol"
+      }
+    },
+    "discount": {
+      "title": "Diskon tidak sah",
+      "message": "Jumlah diskon harus lebih besar daripada nol"
+    },
+    "tax": {
+      "title": "Pajak tidak sah",
+      "message": "Jumlah pajak harus lebih besar daripada nol"
+    },
+    "note": {
+      "title": "Catatan tidak sah",
+      "message": "Konten catatan tidak boleh kosong"
+    }
+  }
+}

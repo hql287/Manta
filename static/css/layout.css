@@ -74,7 +74,7 @@
 .mainContentWrapper {
   /* padding-top: 40px; */
   width: 100%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 /* Utilities */

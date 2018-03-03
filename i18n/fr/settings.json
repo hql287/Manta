@@ -1,0 +1,63 @@
+{
+  "header": "Paramètres",
+  "tabs": {
+    "profile": "Profil",
+    "invoice": "Facture",
+    "general": "Général"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Accepte PNG, JPG & SVG (Recommandé)"
+    },
+    "taxSettings": "Paramètres des Taxes",
+    "template": "Modèle",
+    "dateFormat": "Format de la Date",
+    "pdfExportDir": "Emplacement de sauvegarde du dossier PDF",
+    "requiredFields": "Champs Requis",
+    "sound": "Son",
+    "mute": "Muet",
+    "autoCheckUpdate": {
+      "name": "Verification automatique des mises à jours",
+      "daily": "Tous les jours (recommandé)",
+      "weekly": "Toutes les semaines"
+    },
+    "currency": {
+      "placement": "Emplacement du signe",
+      "afterAmount": "Après le montant",
+      "beforeAmount": "Avant le montant",
+      "fraction": "Deux décimales",
+      "separator": "Séparateur",
+      "commaDot": "Virgule & Point",
+      "dotComma": "Point & Virgule",
+      "spaceDot": "Espace & Point"
+    },
+    "openPDFReader": "Ouvrir le fichier PDF après la sauvegarde",
+    "language": {
+      "name": "Langue",
+      "cs": "Tchèque",
+      "da": "Danois",
+      "de": "Allemand",
+      "el": "Grec",
+      "en": "Anglais",
+      "esES": "Espagnol",
+      "fr": "Français",
+      "id": "Indonésien",
+      "it": "Italien",
+      "ja": "Japonais",
+      "ko": "Coréen",
+      "lt": "Lituanien",
+      "nl": "Néerlandais",
+      "ptBR": "Portugais (Brésil)",
+      "ptPT": "Portugais",
+      "ru": "Russe",
+      "th": "Thaï",
+      "tl": "Tagalog, Philippines",
+      "tr": "Turc",
+      "vi": "Vietnamien",
+      "zh-CN": "Chinois (Simplifié)",
+      "zh-TW": "Chinois (Traditionnel)"
+    },
+    "other": "Autre"
+  }
+}

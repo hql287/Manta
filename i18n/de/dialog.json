@@ -1,0 +1,89 @@
+{
+  "appUpdate": {
+    "available": {
+      "title": "Neues Update verfügbar",
+      "message": "Download im Hintergrund starten?"
+    },
+    "noUpdate": {
+      "title": "Keine neuen Updates verfügbar",
+      "message": "Ihre Version ist auf aktuellem Stand"
+    },
+    "error": {
+      "title": "Es ist ein Fehler aufgetreten"
+    },
+    "downloaded": {
+      "title": "Update heruntergeladen",
+      "message": "Wollen Sie die Applikation beenden und jetzt aktualisieren?",
+      "quitNow": "Jetzt beenden",
+      "later": "Später"
+    }
+  },
+  "noAccess": {
+    "title": "Keine Zugriffsberechtigung",
+    "message": "Bitte wählen Sie ein anderes Verzeichnis"
+  },
+  "errorBoundary": "Es ist ein Fehler aufgetreten",
+  "deleteInvoice": {
+    "title": "Diese Rechnung löschen?",
+    "message": "Die Rechnung wird endgültig gelöscht"
+  },
+  "deleteContact": {
+    "title": "Diesen Kontakt löschen?",
+    "message": "Der Kontakt wird endgültig gelöscht"
+  },
+  "fileTypeErr": {
+    "title": "Bitte wählen Sie eine andere Datei"
+  },
+  "validation": {
+    "recipient": {
+      "empty": {
+        "title": "Ungültiger Kontakt",
+        "message": "Kontakt darf nicht leer sein"
+      },
+      "requiredFields": {
+        "title": "Pflichtfelder",
+        "message": "Bitte füllen Sie alle Pflichtfelder aus"
+      },
+      "email": {
+        "title": "Ungültige E-Mail-Adresse",
+        "message": "Bitte wählen Sie eine andere E-Mail Adresse"
+      }
+    },
+    "rows": {
+      "emptyDescription": {
+        "title": "Ungültige Beschreibung",
+        "message": "Beschreibung darf nicht leer sein"
+      },
+      "priceZero": {
+        "title": "Ungültiger Preis",
+        "message": "Preis muss grösser als Null sein"
+      },
+      "qtyZero": {
+        "title": "Ungültige Menge",
+        "message": "Menge muss grösser als Null sein"
+      }
+    },
+    "dueDate": {
+      "title": "Ungültiges Fälligkeitsdatum",
+      "message": "Bitte wählen Sie ein Datum aus"
+    },
+    "currency": {
+      "fraction": {
+        "title": "Ungültige Teilung",
+        "message": "Nachkommestelle muss gleich oder grösser als Null sein"
+      }
+    },
+    "discount": {
+      "title": "Ungültiger Rabatt",
+      "message": "Der Rabatt muss grösser als Null sein"
+    },
+    "tax": {
+      "title": "Ungültiger Steuersatz",
+      "message": "Steuerbetrag muss grösser als Null sein"
+    },
+    "note": {
+      "title": "Ungültige Notiz",
+      "message": "Feld Notiz darf nicht leer sein"
+    }
+  }
+}
