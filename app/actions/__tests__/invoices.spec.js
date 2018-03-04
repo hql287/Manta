@@ -1,7 +1,7 @@
 import * as ACTION_TYPES from '../../constants/actions.jsx';
 import * as actions from '../invoices';
 
-it('getInvoices should create GET_INVOICES action', () => {
+it('getInvoices should create INVOICE_GET_ALL action', () => {
   expect(actions.getInvoices()).toEqual({
     type: ACTION_TYPES.INVOICE_GET_ALL,
   });
