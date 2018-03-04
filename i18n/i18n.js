@@ -45,4 +45,6 @@ i18n.on('languageChanged', currentLang => {
   moment.locale(currentLang);
 });
 
+moment.locale(defaultLanguage);
+
 export default i18n;
