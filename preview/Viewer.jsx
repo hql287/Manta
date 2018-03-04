@@ -39,6 +39,10 @@ class Viewer extends Component {
     ipc.on('change-preview-window-language', (event, newLang) => {
       dispatch(ActionsCreator.changeUILanguage(newLang));
     });
+    ipc.on('change-preview-window-profile', (event, newProfile) => {
+      dispatch(ActionsCreator.updateProfile(newProfile));
+    });
+
     ipc.on('pfd-exported', (event, options) => {
       const noti = Notify(options);
       // Handle click on notification

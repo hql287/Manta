@@ -32,7 +32,30 @@
     },
     "dueDate": {
       "name": "截止日期",
-      "placeHolder": "选择一个日期"
+      "placeHolder": "选择一个日期",
+      "paymentTerms": {
+        "name": "选择付款时间的条款",
+        "net7": {
+          "label": "Net 7",
+          "description": "在开票日期后 7 天内付款"
+        },
+        "net10": {
+          "label": "Net 10",
+          "description": "在开票日期后 10 天内付款"
+        },
+        "net30": {
+          "label": "Net 30",
+          "description": "在开票日期后 30 天内付款"
+        },
+        "net60": {
+          "label": "Net 60",
+          "description": "在开票日期后 60 天内付款"
+        },
+        "net90": {
+          "label": "Net 90",
+          "description": "在开票日期后 90 天内付款"
+        }
+      }
     },
     "tax": {
       "name": "税费",

@@ -17,6 +17,7 @@ win:
     - nsis
     - portable
 linux:
+  category: Office
   target:
     - deb
     - AppImage

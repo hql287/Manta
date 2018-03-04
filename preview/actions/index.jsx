@@ -11,6 +11,11 @@ export const updateConfigs = createAction(
   configs => configs
 );
 
+export const updateProfile = createAction(
+  ACTION_TYPES.SETTINGS_UPDATE_PROFILE,
+  profile => profile
+);
+
 export const changeUILanguage = createAction(
   ACTION_TYPES.UI_CHANGE_LANGUAGE,
   language => language

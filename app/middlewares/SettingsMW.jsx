@@ -32,10 +32,16 @@ const SettingsMW = ({ dispatch }) => next => action => {
       // Validation
       if (!validateTax(true, action.payload.invoice.tax)) break;
       if (!validateCurrency(true, action.payload.invoice.currency)) break;
+      // Change Preview Profile
+      const profile = appConfig.get('profile');
+      const newProfile = action.payload.profile;
+      if (profile !== newProfile) {
+        ipc.send('change-preview-window-profile', newProfile);
+      }
       // Change UI language
-      const currentLang = appConfig.get('general.language');
+      const { language } = appConfig.get('general');
       const newLang = action.payload.general.language;
-      if (currentLang !== newLang) {
+      if (language !== newLang) {
         // Change the language
         i18n.changeLanguage(newLang);
         // Notify previewWindow to update

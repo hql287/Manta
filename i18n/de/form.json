@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Neue Rechnung erstellen",
+    "edit": "Rechnung bearbeiten",
+    "btns": {
+      "clear": "Löschen",
+      "update": "Aktualisieren",
+      "saveAndPreview": "Speichern & Vorschau"
+    }
+  },
+  "settings": {
+    "name": "Formulareinstellungen",
+    "hint": "Umschalten um das Feld im Formular als benötigt darzustellen."
+  },
+  "fields": {
+    "items": {
+      "name": "Produkt / Service",
+      "description": "Beschreibung",
+      "price": "Preis",
+      "quantity": "Menge",
+      "add": "Neue Position hinzufügen"
+    },
+    "recipient": {
+      "name": "Empfänger",
+      "select": "Auswählen",
+      "add": "Neuen Empfänger hinzufügen"
+    },
+    "discount": {
+      "name": "Rabatt",
+      "percentage": "Prozent",
+      "flat": "Pauschal"
+    },
+    "dueDate": {
+      "name": "Fälligkeitsdatum",
+      "placeHolder": "Datum auswählen",
+      "paymentTerms": {
+        "name": "Zahlungsbedingung auswählen",
+        "net7": {
+          "label": "Netto sieben Tage",
+          "description": "Zahlung innerhalb von sieben Tagen ab Rechnungsdatum"
+        },
+        "net10": {
+          "label": "Netto zehn Tage",
+          "description": "Zahlung innerhalb von zehn Tagen ab Rechnungsdatum"
+        },
+        "net30": {
+          "label": "Netto 30 Tage",
+          "description": "Zahlung innerhalb von 30 Tagen ab Rechnungsdatum"
+        },
+        "net60": {
+          "label": "Netto 60 Tage",
+          "description": "Zahlung innerhalb von 60 Tagen ab Rechnungsdatum"
+        },
+        "net90": {
+          "label": "Netto 90 Tage",
+          "description": "Zahlung innerhalb von 90 Tagen ab Rechnungsdatum"
+        }
+      }
+    },
+    "tax": {
+      "name": "Steuer",
+      "id": "USt-ID",
+      "method": "Zahlungsmethode",
+      "reverse": "Umkehr der Steuerschuld"
+    },
+    "note": "Notiz",
+    "currency": "Währung"
+  }
+}

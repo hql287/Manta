@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Überspringen",
+    "next": "Weiter",
+    "start": "Rechnungserstellung starten"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋 Hallo!",
+      "description": "Vielen Dank, dass Sie mich ausprobieren. Lassen Sie mich Ihnen zeigen, wie Sie atemberaubende Rechnungen mit nur 3 einfachen Schritten erstellen"
+    },
+    "create": {
+      "heading": "Schritt 1. Erstellen",
+      "description": "Manta hat eine flexible Formularschnittstelle. Es hält die Dinge standardmässig einfach, aber Sie können immer zusätzliche Felder aktivieren/deaktivieren, jedes Mal wenn Sie es für notwendig erachten."
+    },
+    "preview": {
+      "heading": "Schritt 2. Anpassen",
+      "description": "Manta bietet professionelle Vorlagen, die individuell auf Ihr Unternehmen angepasst werden können."
+    },
+    "save": {
+      "heading": "Schritt 3. Speichern",
+      "description": "Wenn Sie mit dem Layout Ihrer Rechnung zufrieden sind, können Sie es für spätere Nutzungen als PDF speichern. Egal ob auf dem Postweg oder als E-Mail, mit Manta beeindrucken Sie Ihre Kunden!"
+    },
+    "success": {
+      "heading": "Fertig! ✋️",
+      "description": "Das war's! Mit Manta in 3 einfachen Schritten zu beeindruckenden Rechnungen. Vergessen Sie nicht, Ihr Unternehmensprofil und Ihr Logo zu aktualisieren, bevor Sie die Rechnung verwenden."
+    }
+  }
+}
