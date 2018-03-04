@@ -42,6 +42,10 @@ const RootReducer = handleActions(
           language: action.payload
         })
       }),
+    [ACTION_TYPES.SETTINGS_UPDATE_PROFILE]: (state, action) =>
+      Object.assign({}, state, {
+        profile: action.payload
+      }),
     [ACTION_TYPES.SETTINGS_UPDATE_CONFIGS]: (state, action) =>
       Object.assign({}, state, {
         configs: Object.assign({}, state.configs, {
