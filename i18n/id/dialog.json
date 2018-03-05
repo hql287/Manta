@@ -35,6 +35,10 @@
     "title": "Silahkan pilih berkas lain"
   },
   "validation": {
+    "invoiceID": {
+      "title": "ID Faktur Tidak Sah",
+      "message": "ID faktur tidak boleh kosong"
+    },
     "recipient": {
       "empty": {
         "title": "Kontak tidak sah",

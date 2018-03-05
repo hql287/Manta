@@ -35,6 +35,10 @@
     "title": "请选择另一个文件"
   },
   "validation": {
+    "invoiceID": {
+      "title": "无效的发票编号",
+      "message": "发票编号不能为空"
+    },
     "recipient": {
       "empty": {
         "title": "无效的联系人",
