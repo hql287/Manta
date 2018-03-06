@@ -105,8 +105,7 @@ Windows 7 and later are supported
 [More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
 
 ### App Start-Options
-* Disable Hardware-Acceleration: `manta --disable-hardware-acceleration`
-* Force Devtools: `manta --force-devtools`
+* Disable Hardware-Acceleration: `manta --disable-hardware-acceleration` (Related to Linux Gpu Bug #128)
 
 ### Technologies
 * [Electron](https://github.com/electron/electron)
