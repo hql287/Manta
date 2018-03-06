@@ -35,6 +35,10 @@
     "title": "Please choose another file"
   },
   "validation": {
+    "invoiceID": {
+      "title": "Invalid Invoice ID",
+      "message": "Invoice ID can not be blank"
+    },
     "recipient": {
       "empty": {
         "title": "Invalid contact",
