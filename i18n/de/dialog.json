@@ -35,6 +35,10 @@
     "title": "Bitte wählen Sie eine andere Datei"
   },
   "validation": {
+    "invoiceID": {
+      "title": "Ungültige Rechnungs-ID",
+      "message": "Rechnungs-ID darf nicht leer sein"
+    },
     "recipient": {
       "empty": {
         "title": "Ungültiger Kontakt",
