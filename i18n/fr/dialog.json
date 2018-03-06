@@ -35,6 +35,10 @@
     "title": "Veuillez choisir un autre fichier"
   },
   "validation": {
+    "invoiceID": {
+      "title": "ID de facture invalide",
+      "message": "ID de facture ne peut pas être vide"
+    },
     "recipient": {
       "empty": {
         "title": "Contact invalide",

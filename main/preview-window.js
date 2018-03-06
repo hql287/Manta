@@ -24,6 +24,11 @@ ipcMain.on('change-preview-window-language', (event, newLang) => {
   previewWindow.webContents.send('change-preview-window-language', newLang);
 });
 
+// Change invoice profile
+ipcMain.on('change-preview-window-profile', (event, newProfile) => {
+  previewWindow.webContents.send('change-preview-window-profile', newProfile);
+});
+
 // Save configs to invoice
 ipcMain.on('save-configs-to-invoice', (event, invoiceID, configs) => {
   mainWindow.webContents.send('save-configs-to-invoice', invoiceID, configs);

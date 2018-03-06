@@ -35,6 +35,10 @@
     "title": "Vui lòng chọn một file khác"
   },
   "validation": {
+    "invoiceID": {
+      "title": "Mã hoá đơn không hợp lệ",
+      "message": "Mã hoá đơn không được để trống"
+    },
     "recipient": {
       "empty": {
         "title": "Thông tin không hợp lệ",
