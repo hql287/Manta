@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 const moment = require('moment');
 
 import { Row, Field, Header, Part } from '../../../shared/Part';
+import styled from 'styled-components';
+
+const ExportDir = styled.div`
+  display: flex;
+`;
 
 function Other({
   dateFormat,
@@ -20,9 +25,8 @@ function Other({
       <Row>
         <Field>
           <label className="itemLabel">{t('settings:fields:pdfExportDir')}</label>
-          <div className="input-group">
+          <ExportDir>
             <input
-              className="form-control"
               name="exportDir"
               type="text"
               value={exportDir}
@@ -35,7 +39,7 @@ function Other({
             >
               <i className="ion-folder" />
             </a>
-          </div>
+          </ExportDir>
         </Field>
       </Row>
       <Row>
