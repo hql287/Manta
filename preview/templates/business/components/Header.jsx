@@ -63,7 +63,7 @@ const Heading = styled.h1`
 
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const { recipient } = invoice;
+  const { tax, recipient } = invoice;
   const currentLanguage = configs.language;
   return (
     <InvoiceHeader>
@@ -74,7 +74,9 @@ function Header({ t, invoice, profile, configs }) {
           <p>{profile.address}</p>
           <p>{profile.email}</p>
           <p>{profile.phone}</p>
+          { tax && <p>Tax ID: { tax.tin }</p> }
         </Company>
+
         {configs.showRecipient && (
           <Recipient>
             <h4>{t('preview:common:billedTo', { lng: currentLanguage })}</h4>
