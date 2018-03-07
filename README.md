@@ -104,6 +104,14 @@ Windows 7 and later are supported
 
 [More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
 
+Note that on Linux, some users might experience a GPU bug where the select options rendered as a black box, see [issue #128 of Manta](https://github.com/hql287/Manta/pull/128) and [issue #4322 of Electron](https://github.com/electron/electron/issues/4322). This can be fixed by disabling hardware acceleration like so:
+
+```sh
+manta --disable-hardware-acceleration
+```
+
+> Remember that doing this might lead to some degradation of the app's performance. This is why "the fix" is not included by default.
+
 ### Technologies
 * [Electron](https://github.com/electron/electron)
 * [React](https://github.com/facebook/react)

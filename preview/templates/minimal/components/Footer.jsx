@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
 `;
 
@@ -26,7 +27,7 @@ const Column = styled.div`
 // Component
 function Footer({ t, invoice, profile, configs }) {
   const currentLanguage = configs.language;
-  const { recipient } = invoice;
+  const { tax, recipient } = invoice;
   return (
     <Wrapper>
       <Column left>
@@ -35,6 +36,7 @@ function Footer({ t, invoice, profile, configs }) {
         <p>{profile.address}</p>
         <p>{profile.email}</p>
         <p>{profile.phone}</p>
+        { tax && <p>Tax ID: { tax.tin }</p> }
       </Column>
       {configs.showRecipient && (
         <Column right>
