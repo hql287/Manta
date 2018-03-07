@@ -104,8 +104,13 @@ Windows 7 and later are supported
 
 [More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
 
-### App Start-Options
-* Disable Hardware-Acceleration: `manta --disable-hardware-acceleration` (Related to Linux Gpu Bug #128)
+Note that on Linux, some users might experience a GPU bug where the select options rendered as a black box, see [issue #128 of Manta](https://github.com/hql287/Manta/pull/128) and [issue #4322 of Electron](https://github.com/electron/electron/issues/4322). You can fixed this by disable hardware acceleration like so:
+
+```sh
+manta --disable-hardware-acceleration
+```
+
+> Remember that doing this might lead to some degradation of performance, that's why it's not included by default.
 
 ### Technologies
 * [Electron](https://github.com/electron/electron)
