@@ -11,6 +11,11 @@ function setSeparator(separator) {
       separatorFormat.decimal = ',';
       break;
     }
+     case 'apostropheDot': {
+    	separatorFormat.thousand = "'";
+    	separatorFormat.decimal = '.';
+    	break;
+    }
     default: {
       separatorFormat.thousand = ' ';
       separatorFormat.decimal = '.';

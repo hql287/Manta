@@ -130,6 +130,9 @@ export class Currency extends PureComponent {
                 <option value="spaceDot">
                   1 999.000 ({t('settings:fields:currency:spaceDot')})
                 </option>
+                <option value="apostropheDot">
+                  1&apos;999.000 ({t('settings:fields:currency:apostropheDot')})
+                </option>
               </select>
             </Field>
           </Row>

@@ -37,5 +37,13 @@ describe('should return correct format number', () => {
     const formattedNumber3 = formatNumber(number3, 2, 'spaceDot');
     expect(formattedNumber3).toEqual('1 999.99');
   });
+   it('return correct formatted number with apostropheDot settings', () => {
+    const formattedNumber1 = formatNumber(number1, 2, 'apostropheDot');
+    expect(formattedNumber1).toEqual('99.00');
+    const formattedNumber2 = formatNumber(number2, 2, 'apostropheDot');
+    expect(formattedNumber2).toEqual('1\'000.00');
+    const formattedNumber3 = formatNumber(number3, 2, 'apostropheDot');
+    expect(formattedNumber3).toEqual('1\'999.99');
+  });
 })
 
