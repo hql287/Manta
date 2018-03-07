@@ -6,19 +6,25 @@ import i18n from '../../i18n/i18n';
 
 // Style
 import styled from 'styled-components';
-const Wrapper = styled.div`
+const OverflowWrapper = styled.div`
+  min-width: 300px;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  justify-content: flex-start;
   background: #f9fafa;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
-  width: 180px;
-  min-width: 180px;
-  max-width: 180px;
+`;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: min-content;
   padding: 20px;
-  justify-content: flex-start;
+
   > div:last-child {
-    flex: 1;
+    flex: 1 0 auto;
   }
 `;
 
@@ -76,58 +82,60 @@ class SideBar extends Component {
       accentColor
     } = configs;
     return (
-      <Wrapper>
-        <Template
-          t={t}
-          UILang={UILang}
-          template={template}
-          handleInputChange={this.handleInputChange}
-        />
-        <Language
-          t={t}
-          UILang={UILang}
-          language={language}
-          handleInputChange={this.handleInputChange}
-        />
-        <DateFormat
-          t={t}
-          UILang={UILang}
-          language={language}
-          dateFormat={dateFormat}
-          handleInputChange={this.handleInputChange}
-        />
-        <Alignment
-          t={t}
-          UILang={UILang}
-          alignItems={alignItems}
-          handleInputChange={this.handleInputChange}
-        />
-        <FontSize
-          t={t}
-          UILang={UILang}
-          fontSize={fontSize}
-          handleInputChange={this.handleInputChange}
-        />
-        <Toggler
-          t={t}
-          UILang={UILang}
-          configs={configs}
-          handleInputChange={this.handleInputChange}
-        />
-        <AccentColor
-          t={t}
-          UILang={UILang}
-          accentColor={accentColor}
-          handleAccentColorChange={this.handleAccentColorChange}
-          invoiceID={invoice._id}
-        />
-        <Actions
-          t={t}
-          UILang={UILang}
-          savePDF={this.savePDF}
-          saveConfigs={this.saveConfigs}
-        />
-      </Wrapper>
+      <OverflowWrapper>
+        <Wrapper>
+          <Template
+            t={t}
+            UILang={UILang}
+            template={template}
+            handleInputChange={this.handleInputChange}
+          />
+          <Language
+            t={t}
+            UILang={UILang}
+            language={language}
+            handleInputChange={this.handleInputChange}
+          />
+          <DateFormat
+            t={t}
+            UILang={UILang}
+            language={language}
+            dateFormat={dateFormat}
+            handleInputChange={this.handleInputChange}
+          />
+          <Alignment
+            t={t}
+            UILang={UILang}
+            alignItems={alignItems}
+            handleInputChange={this.handleInputChange}
+          />
+          <FontSize
+            t={t}
+            UILang={UILang}
+            fontSize={fontSize}
+            handleInputChange={this.handleInputChange}
+          />
+          <Toggler
+            t={t}
+            UILang={UILang}
+            configs={configs}
+            handleInputChange={this.handleInputChange}
+          />
+          <AccentColor
+            t={t}
+            UILang={UILang}
+            accentColor={accentColor}
+            handleAccentColorChange={this.handleAccentColorChange}
+            invoiceID={invoice._id}
+          />
+          <Actions
+            t={t}
+            UILang={UILang}
+            savePDF={this.savePDF}
+            saveConfigs={this.saveConfigs}
+          />
+        </Wrapper>
+      </OverflowWrapper>
     );
   }
 }
