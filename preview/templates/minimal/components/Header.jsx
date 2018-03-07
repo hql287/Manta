@@ -32,12 +32,13 @@ const Heading = styled.h1`
 
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const currentLanguage = configs.language;
+  const { language } = configs;
+  const { dueDate } = invoice;
   return (
     <Wrapper>
       <div>
         <Heading accentColor={configs.accentColor}>
-          {t('preview:common:invoice', {lng: currentLanguage})}
+          {t('preview:common:invoice', {lng: language})}
         </Heading>
         <h4 className="label">
           # {' '}
@@ -49,30 +50,30 @@ function Header({ t, invoice, profile, configs }) {
           }
         </h4>
         <p>
-          {t('preview:common:created', {lng: currentLanguage})}:
+          {t('preview:common:created', {lng: language})}:
           {' '}
-          {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
+          {moment(invoice.created_at).lang(language).format(configs.dateFormat)}
         </p>
-        {invoice.dueDate && [
+        {dueDate && [
           <p key="dueDate">
-            {t('preview:common:due', { lng: currentLanguage })}:{' '}
-            {invoice.dueDate.useCustom
-              ? moment(invoice.dueDate.selectedDate)
-                  .lang(currentLanguage)
+            {t('preview:common:due', { lng: language })}:{' '}
+            {dueDate.useCustom
+              ? moment(dueDate.selectedDate)
+                  .lang(language)
                   .format(configs.dateFormat)
               : moment(
-                  calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
+                  calTermDate(invoice.created_at, dueDate.paymentTerm)
                 )
-                  .lang(currentLanguage)
+                  .lang(language)
                   .format(configs.dateFormat)}
           </p>,
           <p key="dueDateNote">
-            {!invoice.dueDate.useCustom &&
+            {!dueDate.useCustom &&
               `
             (
               ${t(
                 `form:fields:dueDate:paymentTerms:${
-                  invoice.dueDate.paymentTerm
+                  dueDate.paymentTerm
                 }:description`
               )}
             )
