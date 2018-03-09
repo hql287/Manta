@@ -4,23 +4,22 @@ const { autoUpdater } = require('electron-updater');
 const appConfig = require('electron-settings');
 const isDev = require('electron-is-dev');
 
+// Set mainWindow
+const mainWindowID = appConfig.get('mainWindowID');
+const mainWindow = BrowserWindow.fromId(mainWindowID);
+
 // Disable Auto Downloading update;
 autoUpdater.autoDownload = false;
 
 // Check for update silently
 let silentMode = true;
 
-// Set mainWindow
-const mainWindowID = appConfig.get('mainWindowID');
-const mainWindow = BrowserWindow.fromId(mainWindowID);
-
-  // Check for Updates
-ipcMain.on('check-for-updates', (event) => {
-  if(!isDev) {
-    // Turn off silent mode
-    silentMode = false;
-    checkForUpdate();
-  }
+// HANDLING IPC
+// Check for updates manually
+ipcMain.on('check-for-updates', event => {
+  // Turn off silent mode first
+  silentMode = false;
+  checkForUpdate();
 });
 
 // Start Download
@@ -28,8 +27,7 @@ ipcMain.on('update-download-started', () => {
   autoUpdater.downloadUpdate();
 });
 
-// All AutoUpdater Events
-// ====================================
+// CHECKING FOR UPDATE EVENTS
 // Checking for Update
 autoUpdater.on('checking-for-update', () => {
   // Only notice user when they checked manually
@@ -58,10 +56,11 @@ autoUpdater.on('error', error => {
     errMessage = 'Unknown Error';
   } else {
     errMessage = error.message;
-  }
+  };
   mainWindow.send('update-error', errMessage);
 });
 
+// DOWNLOADING UPDATE EVENTS
 // Download Progress
 autoUpdater.on('download-progress', progressObj => {
   mainWindow.send('update-download-progress', progressObj.percent);
@@ -72,11 +71,13 @@ autoUpdater.on('update-downloaded', info => {
   mainWindow.send('update-downloaded', info);
 });
 
-// Helper
+// Main Function
 function checkForUpdate() {
-  autoUpdater.checkForUpdates();
+  // Only check for update in Production
+  if (!isDev) {
+    autoUpdater.checkForUpdates();
+  }
 }
 
-module.exports = {
-  checkForUpdate,
-};
+// Check for update on Startup
+checkForUpdate();
