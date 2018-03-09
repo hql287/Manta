@@ -300,6 +300,18 @@ function migrateData() {
         })
       });
     },
+
+    3: configs => {
+      // Return current configs if checkUpdate and lastCheck do not exist
+      const { checkUpdate, lastCheck} = configs.general;
+      if ( checkUpdate === undefined || lastCheck === undefined ) {
+        return configs;
+      }
+      // Remove checkUpdate and lastCheck
+      return Object.assign({}, configs, {
+        general: omit(configs.general, ['checkUpdate', 'lastCheck'])
+      });
+    },
   };
   // Get the current Config
   const configs = appConfig.getAll();
