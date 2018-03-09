@@ -32,15 +32,15 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 ### Screenshots
 
-Here's a few screenshots:
+Here's a few screenshots of Manta. [See more](https://github.com/hql287/Manta/wiki/Screenshots)
 
-![Example Invoice 1](https://d2ffutrenqvap3.cloudfront.net/items/2P1D0S412j0U2G0j443P/Sample%20Invoice%201.jpg?v=caa43ec7)
+![Business Template](https://d2ffutrenqvap3.cloudfront.net/items/3c1R1G1F3T3Z0M3n3V3G/Business%20Template.jpg?v=f9064204)
 
-![Example Invoice 2](https://d2ffutrenqvap3.cloudfront.net/items/2X2s1z171A0w2j3Z2C0C/Sample%20Invoice%202.jpg?v=6e4e5945)
+![Minimal Template](https://d2ffutrenqvap3.cloudfront.net/items/3k0O3a1V3N1g0u0W3540/Minimal%20Template.jpg?v=7ff9c29c)
 
-![Form](https://d2ffutrenqvap3.cloudfront.net/items/2z1m1t2f0E271p3T2w2v/Form%20UI.jpg?v=00bac22e)
+![Form](https://d2ffutrenqvap3.cloudfront.net/items/3G122M3L3I222w1v0t0W/Form.jpg?v=99f647a7)
 
-![Invoices](https://d26dzxoao6i3hh.cloudfront.net/items/1u0O110V1R0V3W3f1a1k/screenshots3.jpg?v=8a5b5487)
+![Invoice](https://d2ffutrenqvap3.cloudfront.net/items/1h34052r3S3R2D2a380z/Invoices.jpg?v=78ddc2a5)
 
 ### Translation
 

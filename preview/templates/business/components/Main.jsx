@@ -132,7 +132,7 @@ function Main({ invoice, configs, t }) {
         {formatNumber(row.price, fraction, separator)}{' '}
         {currencyBefore ? null : currency}
       </td>
-      <td className="w10">{formatNumber(row.quantity, 0, separator)}</td>
+      <td className="w10">{row.quantity}</td>
       <td className="w15">
         {currencyBefore ? currency : null}{' '}
         {formatNumber(row.subtotal, fraction, separator)}{' '}
