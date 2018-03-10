@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -21,12 +21,10 @@
         const isDev = require('electron-is-dev');
         if (isDev) {
           scripts.push(
-            'http://localhost:3000/vendor.dev.js',
             'http://localhost:3000/main.dev.js'
           );
         } else {
           scripts.push(
-            '../prod/vendor.prod.js',
             '../prod/main.prod.js'
           );
         }
