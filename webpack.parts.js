@@ -39,10 +39,3 @@ exports.minifyJavaScript = () => ({
 exports.analyzeBundle = () => ({
   plugins: [new BundleAnalyzerPlugin()],
 });
-
-// Extract vendor files
-exports.extractBundles = bundles => ({
-  plugins: bundles.map(
-    bundle => new webpack.optimize.CommonsChunkPlugin(bundle)
-  ),
-});
