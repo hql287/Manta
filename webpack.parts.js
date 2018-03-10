@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const BabelWebpackPlugin = require('babel-minify-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 
@@ -39,11 +38,6 @@ exports.minifyJavaScript = () => ({
 // Analyzing Bundle
 exports.analyzeBundle = () => ({
   plugins: [new BundleAnalyzerPlugin()],
-});
-
-// Webpack Dashboard
-exports.webpackDashboard = () => ({
-  plugins: [new DashboardPlugin()],
 });
 
 // Extract vendor files
