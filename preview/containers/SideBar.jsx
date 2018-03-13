@@ -7,7 +7,7 @@ import i18n from '../../i18n/i18n';
 // Style
 import styled from 'styled-components';
 const OverflowWrapper = styled.div`
-  min-width: 300px;
+  min-width: 215px;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
