@@ -28,7 +28,7 @@ function processImg(filePath, callback) {
     if (err) handleError(err);
     try {
       image
-        .resize(125, Jimp.AUTO)
+        .resize(500, Jimp.AUTO)
         .quality(100)
         .getBase64(Jimp.MIME_PNG, (err, result) => {
           if (err) handleError(err);

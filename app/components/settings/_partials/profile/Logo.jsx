@@ -28,14 +28,18 @@ const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const LogoDisplayzone = styled.div`
+  max-width: 160px;
+  max-height: 160px;
+  display: flex;
   img {
     max-width: 180px;
     width: 100%;
     height: auto;
   }
 `;
-
-const LogoDisplayzone = styled.div``;
 
 const RemoveLogoBtn = styled.a`
   position: absolute;
