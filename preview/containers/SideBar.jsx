@@ -6,15 +6,27 @@ import i18n from '../../i18n/i18n';
 
 // Style
 import styled from 'styled-components';
+const macOsWindowControlsSpacing = '30px';
+const SidebarWrapper = styled.div`
+  max-width: 280px;
+  background: #f9fafa;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+`;
 const OverflowWrapper = styled.div`
-  min-width: 215px;
-  height: 100vh;
+  min-width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
   flex: 1;
   justify-content: flex-start;
-  background: #f9fafa;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+  ${process.platform === 'darwin'
+    ? `
+      margin-top: ${macOsWindowControlsSpacing};
+      height: calc(100vh - ${macOsWindowControlsSpacing});
+    ` : `
+      height: 100vh;
+    `
+  }
 `;
 const Wrapper = styled.div`
   display: flex;
@@ -82,60 +94,62 @@ class SideBar extends Component {
       accentColor
     } = configs;
     return (
-      <OverflowWrapper>
-        <Wrapper>
-          <Template
-            t={t}
-            UILang={UILang}
-            template={template}
-            handleInputChange={this.handleInputChange}
-          />
-          <Language
-            t={t}
-            UILang={UILang}
-            language={language}
-            handleInputChange={this.handleInputChange}
-          />
-          <DateFormat
-            t={t}
-            UILang={UILang}
-            language={language}
-            dateFormat={dateFormat}
-            handleInputChange={this.handleInputChange}
-          />
-          <Alignment
-            t={t}
-            UILang={UILang}
-            alignItems={alignItems}
-            handleInputChange={this.handleInputChange}
-          />
-          <FontSize
-            t={t}
-            UILang={UILang}
-            fontSize={fontSize}
-            handleInputChange={this.handleInputChange}
-          />
-          <Toggler
-            t={t}
-            UILang={UILang}
-            configs={configs}
-            handleInputChange={this.handleInputChange}
-          />
-          <AccentColor
-            t={t}
-            UILang={UILang}
-            accentColor={accentColor}
-            handleAccentColorChange={this.handleAccentColorChange}
-            invoiceID={invoice._id}
-          />
-          <Actions
-            t={t}
-            UILang={UILang}
-            savePDF={this.savePDF}
-            saveConfigs={this.saveConfigs}
-          />
-        </Wrapper>
-      </OverflowWrapper>
+      <SidebarWrapper>
+        <OverflowWrapper>
+          <Wrapper>
+            <Template
+              t={t}
+              UILang={UILang}
+              template={template}
+              handleInputChange={this.handleInputChange}
+            />
+            <Language
+              t={t}
+              UILang={UILang}
+              language={language}
+              handleInputChange={this.handleInputChange}
+            />
+            <DateFormat
+              t={t}
+              UILang={UILang}
+              language={language}
+              dateFormat={dateFormat}
+              handleInputChange={this.handleInputChange}
+            />
+            <Alignment
+              t={t}
+              UILang={UILang}
+              alignItems={alignItems}
+              handleInputChange={this.handleInputChange}
+            />
+            <FontSize
+              t={t}
+              UILang={UILang}
+              fontSize={fontSize}
+              handleInputChange={this.handleInputChange}
+            />
+            <Toggler
+              t={t}
+              UILang={UILang}
+              configs={configs}
+              handleInputChange={this.handleInputChange}
+            />
+            <AccentColor
+              t={t}
+              UILang={UILang}
+              accentColor={accentColor}
+              handleAccentColorChange={this.handleAccentColorChange}
+              invoiceID={invoice._id}
+            />
+            <Actions
+              t={t}
+              UILang={UILang}
+              savePDF={this.savePDF}
+              saveConfigs={this.saveConfigs}
+            />
+          </Wrapper>
+        </OverflowWrapper>
+      </SidebarWrapper>
     );
   }
 }
