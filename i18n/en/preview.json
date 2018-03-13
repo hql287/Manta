@@ -8,6 +8,7 @@
       "bottom": "Bottom"
     },
     "fontSize": "Font Size",
+    "logoSize": "Logo Size",
     "toggle": {
       "name": "Toggle",
       "logo": "Logo",
