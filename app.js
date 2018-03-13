@@ -225,13 +225,17 @@ function setInitialValues() {
   // Changing anything deeper would need to be done with migration
   for (const key in defaultOptions) {
     // Add level 1 key if not exist
-    if (!appConfig.has(`${key}`)) {
-      appConfig.set(`${key}`, defaultOptions[key]);
-    }
-    // Add level 2 key if not exist
-    for (const childKey in defaultOptions[key]) {
-      if (!appConfig.has(`${key}.${childKey}`)) {
-        appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+    if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
+      if (!appConfig.has(`${key}`)) {
+        appConfig.set(`${key}`, defaultOptions[key]);
+      }
+      // Add level 2 key if not exist
+      for (const childKey in defaultOptions[key]) {
+        if (Object.prototype.hasOwnProperty.call(defaultOptions[key], childKey)) {
+          if (!appConfig.has(`${key}.${childKey}`)) {
+            appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+          }
+        }
       }
     }
   }
