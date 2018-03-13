@@ -23,6 +23,7 @@ const initialState = {
     // Other settings
     alignItems: 'middle',
     fontSize: '200',
+    logoSize: '20',
     showLogo: true,
     showRecipient: true,
     useSymbol: true,
