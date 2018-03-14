@@ -46,6 +46,7 @@ import Actions from '../components/sidebar/Actions';
 import Alignment from '../components/sidebar/Alignment';
 import DateFormat from '../components/sidebar/DateFormat';
 import FontSize from '../components/sidebar/FontSize';
+import LogoSize from '../components/sidebar/LogoSize';
 import Language from '../components/sidebar/Language';
 import Template from '../components/sidebar/Template';
 import Toggler from '../components/sidebar/Toggler';
@@ -91,6 +92,7 @@ class SideBar extends Component {
       language,
       alignItems,
       fontSize,
+      logoSize,
       accentColor
     } = configs;
     return (
@@ -128,6 +130,14 @@ class SideBar extends Component {
               fontSize={fontSize}
               handleInputChange={this.handleInputChange}
             />
+            { configs.showLogo &&
+              <LogoSize
+                t={t}
+                UILang={UILang}
+                logoSize={logoSize}
+                handleInputChange={this.handleInputChange}
+              />
+            }
             <Toggler
               t={t}
               UILang={UILang}

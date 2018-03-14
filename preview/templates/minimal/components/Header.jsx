@@ -10,10 +10,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  img {
-    width: auto;
-    max-height: 5em;
-  }
   text-transform: capitalize;
 `;
 
@@ -30,9 +26,25 @@ const Heading = styled.h1`
   `};
 `;
 
+const Logo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  height: auto;
+  ${props =>
+    props.logoSize &&
+    `
+    max-width: ${props.logoSize}%;
+  `};
+  img {
+    width: 100%;
+  }
+`;
+
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const { language } = configs;
+  const { language, logoSize } = configs;
   const { dueDate } = invoice;
   return (
     <Wrapper>
@@ -82,9 +94,9 @@ function Header({ t, invoice, profile, configs }) {
         ]}
       </div>
       {configs.showLogo && (
-        <div>
+        <Logo logoSize={logoSize}>
           <img src={profile.logo} alt="Logo" />
-        </div>
+        </Logo>
       )}
     </Wrapper>
   );

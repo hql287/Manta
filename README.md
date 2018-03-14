@@ -7,8 +7,8 @@
   <a href="https://travis-ci.org/hql287/Manta">
     <img src="https://travis-ci.org/hql287/Manta.svg?branch=dev" alt="Build Status">
   </a>
-  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.3">
-    <img src="https://img.shields.io/badge/version-1.1.3-green.svg" alt="v1.1.3">
+  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.4">
+    <img src="https://img.shields.io/badge/version-1.1.4-green.svg" alt="v1.1.4">
   </a>
   <a title="Crowdin" target="_blank" href="https://crowdin.com/project/manta">
     <img src="https://d322cqt584bo4o.cloudfront.net/manta/localized.svg">
@@ -83,7 +83,7 @@ The following languages are currently being translated, if you would like to Man
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/hql287/Manta/releases/download/v1.1.3/Manta-1.1.3.dmg'>Download v1.1.3</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.3/Manta.Setup.1.1.3.exe'>Download v1.1.3</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.3/Manta-1.1.3-x86_64.AppImage'>Download v1.1.3</a> |
+<a href='https://github.com/hql287/Manta/releases/download/v1.1.4/Manta-1.1.4.dmg'>Download v1.1.4</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.4/Manta.Setup.1.1.4.exe'>Download v1.1.4</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.4/Manta-1.1.4-x86_64.AppImage'>Download v1.1.4</a> |
 
 [More Download Options](https://github.com/hql287/Manta/releases)
 
