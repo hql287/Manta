@@ -2,14 +2,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Section, Label } from '../shared';
 import Button from '../../../app/components/shared/Button';
 import styled from 'styled-components';
 
+const StickySection = styled.div`
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  margin: -20px;
+  padding-top: 10px;
+`;
+
 const ButtonsGroup = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  align-self: flex-end;
+  padding: 20px;
+  background-color: #e0e1e1;
+
   > * {
     margin-bottom: 10px;
     &:last-child {
@@ -20,10 +31,7 @@ const ButtonsGroup = styled.div`
 
 function Actions({ saveConfigs, savePDF, t, UILang }) {
   return (
-    <Section>
-      <Label>
-        {t('preview:sidebar:actions:name', { lng: UILang })}
-      </Label>
+    <StickySection>
       <ButtonsGroup>
         <Button block primary onClick={savePDF}>
           {t('preview:sidebar:actions:savePDF', { lng: UILang })}
@@ -32,7 +40,7 @@ function Actions({ saveConfigs, savePDF, t, UILang }) {
           {t('preview:sidebar:actions:saveConfigs', { lng: UILang })}
         </Button>
       </ButtonsGroup>
-    </Section>
+    </StickySection>
   );
 }
 

@@ -15,7 +15,7 @@ const OverflowWrapper = styled.div`
   overflow-x: hidden;
   justify-content: flex-start;
   background: #f9fafa;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #e0e1e1;
 `;
 const Wrapper = styled.div`
   display: flex;
