@@ -20,9 +20,9 @@ const Heading = styled.h1`
   margin-bottom: 1em;
   color: #2c323a;
   ${props =>
-    props.accentColor.useCustom &&
+    props.customAccentColor &&
     `
-    color: ${props.accentColor.color};
+    color: ${props.accentColor};
   `};
 `;
 
@@ -44,12 +44,15 @@ const Logo = styled.div`
 
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const { language, logoSize } = configs;
+  const { language, logoSize, accentColor, customAccentColor } = configs;
   const { dueDate } = invoice;
   return (
     <Wrapper>
       <div>
-        <Heading accentColor={configs.accentColor}>
+        <Heading
+          accentColor={accentColor}
+          customAccentColor={customAccentColor}
+        >
           {t('preview:common:invoice', {lng: language})}
         </Heading>
         <h4 className="label">

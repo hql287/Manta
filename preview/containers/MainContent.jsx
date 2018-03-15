@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   display: flex;
-  width: 100%;
+  flex: 1;
   align-items: flex-start;
   justify-content: center;
   overflow: auto;

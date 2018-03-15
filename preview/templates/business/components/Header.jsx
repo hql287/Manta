@@ -55,16 +55,16 @@ const Heading = styled.h1`
   text-transform: uppercase;
   letter-spacing: 1px;
   ${props =>
-    props.accentColor.useCustom &&
+    props.customAccentColor &&
     `
-    color: ${props.accentColor.color};
+    color: ${props.accentColor};
   `};
 `;
 
 // Component
 function Header({ t, invoice, profile, configs }) {
   const { tax, recipient } = invoice;
-  const currentLanguage = configs.language;
+  const { language, accentColor, customAccentColor  } = configs;
   return (
     <InvoiceHeader>
       <LeftColumn>
@@ -79,7 +79,7 @@ function Header({ t, invoice, profile, configs }) {
 
         {configs.showRecipient && (
           <Recipient>
-            <h4>{t('preview:common:billedTo', { lng: currentLanguage })}</h4>
+            <h4>{t('preview:common:billedTo', { lng: language })}</h4>
             <p>{recipient.company}</p>
             <p>{recipient.fullname}</p>
             <p>{recipient.email}</p>
@@ -88,8 +88,11 @@ function Header({ t, invoice, profile, configs }) {
         )}
       </LeftColumn>
       <RightColumn>
-        <Heading accentColor={configs.accentColor}>
-          {t('preview:common:invoice', { lng: currentLanguage })}
+        <Heading
+          accentColor={accentColor}
+          customAccentColor={customAccentColor}
+        >
+          {t('preview:common:invoice', { lng: language })}
         </Heading>
         <h4>
           #
@@ -101,22 +104,22 @@ function Header({ t, invoice, profile, configs }) {
               })}
         </h4>
         <p>
-          {t('preview:common:created', { lng: currentLanguage })}:{' '}
+          {t('preview:common:created', { lng: language })}:{' '}
           {moment(invoice.created_at)
-            .lang(currentLanguage)
+            .lang(language)
             .format(configs.dateFormat)}
         </p>
         {invoice.dueDate && [
           <p key="dueDate">
-            {t('preview:common:due', { lng: currentLanguage })}:{' '}
+            {t('preview:common:due', { lng: language })}:{' '}
             {invoice.dueDate.useCustom
               ? moment(invoice.dueDate.selectedDate)
-                  .lang(currentLanguage)
+                  .lang(language)
                   .format(configs.dateFormat)
               : moment(
                   calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
                 )
-                  .lang(currentLanguage)
+                  .lang(language)
                   .format(configs.dateFormat)}
           </p>,
           <p key="dueDateNote">
