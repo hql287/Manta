@@ -10,18 +10,21 @@ const InvoiceFooter = styled.div`
     border-bottom: 4px solid #efefd1;
   }
   ${props =>
-    props.accentColor.useCustom &&
+    props.customAccentColor &&
     `
-    h4 { border-bottom: 4px solid ${props.accentColor.color}; }
+    h4 { border-bottom: 4px solid ${props.accentColor}; }
   `};
 `;
 
 // Component
 function Footer({ t, invoice, configs }) {
-  const currentLanguage = configs.language;
+  const { language, accentColor, customAccentColor  } = configs;
   return invoice.note ? (
-    <InvoiceFooter accentColor={configs.accentColor}>
-      <h4>{ t('preview:common:notice', {lng: currentLanguage}) }</h4>
+    <InvoiceFooter
+      accentColor={accentColor}
+      customAccentColor={customAccentColor}
+    >
+      <h4>{ t('preview:common:notice', {lng: language}) }</h4>
       <p>{invoice.note}</p>
     </InvoiceFooter>
   ) : null;
