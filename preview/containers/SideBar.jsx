@@ -19,6 +19,7 @@ const Wrapper = styled.div`
   justify-content: flex-start;
   > div:last-child {
     flex: 1;
+    margin-bottom: 0;
   }
 `;
 
@@ -69,13 +70,15 @@ class SideBar extends Component {
   render() {
     const { t, configs, invoice, UILang } = this.props;
     const {
-      dateFormat,
-      template,
-      language,
+      accentColor,
       alignItems,
+      customAccentColor,
+      dateFormat,
       fontSize,
+      language,
       logoSize,
-      accentColor
+      showLogo,
+      template,
     } = configs;
     return (
       <Wrapper>
@@ -110,27 +113,28 @@ class SideBar extends Component {
           fontSize={fontSize}
           handleInputChange={this.handleInputChange}
         />
-        { configs.showLogo &&
+        { showLogo && (
           <LogoSize
             t={t}
             UILang={UILang}
             logoSize={logoSize}
             handleInputChange={this.handleInputChange}
           />
-        }
+        )}
         <Toggler
           t={t}
           UILang={UILang}
           configs={configs}
           handleInputChange={this.handleInputChange}
         />
-        <AccentColor
-          t={t}
-          UILang={UILang}
-          accentColor={accentColor}
-          handleAccentColorChange={this.handleAccentColorChange}
-          invoiceID={invoice._id}
-        />
+        { customAccentColor && (
+          <AccentColor
+            t={t}
+            UILang={UILang}
+            accentColor={accentColor}
+            handleAccentColorChange={this.handleAccentColorChange}
+          />
+        )}
         <Actions
           t={t}
           UILang={UILang}
