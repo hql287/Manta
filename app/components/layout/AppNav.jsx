@@ -54,7 +54,6 @@ export const SideBar = styled.div`
   width: 80px;
   min-width: 80px;
   max-width: 80px;
-  padding-top: 50px;
   background: #2c323a;
 `;
 
@@ -86,7 +85,6 @@ export const ActiveIndicator = styled.div`
   height: ${allTabs.length * 60}px;
   width: 5px;
   position: absolute;
-  top: 50px;
   > div {
     position: absolute;
     background: #292b2c;
