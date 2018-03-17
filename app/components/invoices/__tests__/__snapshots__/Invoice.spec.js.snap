@@ -11,10 +11,10 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
       className="Invoice__StatusBar-jBWtSa joKiG"
     />
     <div
-      className="Invoice__Header-cGSpHV wcQzb"
+      className="Invoice__Header-cGSpHV gmDFcR"
     >
       <div
-        className="Invoice__Status-fxIELu cyYgut"
+        className="Invoice__Status-fxIELu bbALRd"
       >
         <span>
           <i
@@ -23,14 +23,26 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
           Pending
         </span>
       </div>
-      <button
-        className="Button__ButtonLinkStyle-caVwCA imXwRc"
-        onClick={[Function]}
+      <div
+        className="Invoice__ButtonsGroup-PwNbx emusdh"
       >
-        <i
-          className="ion-trash-a"
-        />
-      </button>
+        <button
+          className="Button__ButtonLinkStyle-caVwCA imXwRc"
+          onClick={[Function]}
+        >
+          <i
+            className="ion-ios-copy"
+          />
+        </button>
+        <button
+          className="Button__ButtonLinkStyle-caVwCA imXwRc"
+          onClick={[Function]}
+        >
+          <i
+            className="ion-trash-a"
+          />
+        </button>
+      </div>
     </div>
     <div
       className="Invoice__Body-eBItTh igYqzw"

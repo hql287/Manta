@@ -458,6 +458,28 @@ describe('Invoices Middleware', () => {
     });
   });
 
+  describe('should handle INVOICE_DUPLICATE action correctly', () => {
+    it('update the current invoice and dispatch save action', () => {
+      const invoiceData = {
+        _id: 'a-random-string',
+        _rev: 'another-random-string',
+        created_at: 'yesterday',
+      }
+      // Action
+      middleware(Actions.duplicateInvoice(invoiceData));
+      // Expect
+      expect(dispatch.mock.calls.length).toBe(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        type: ACTION_TYPES.INVOICE_SAVE,
+        payload: Object.assign({}, invoiceData, {
+          _id: 'id-string',
+          _rev: null,
+          created_at: 'now',
+        }),
+      });
+    });
+  })
+
   describe('should handle INVOICE_CONFIGS_SAVE action correctly', () => {
     it('get the doc, merge with config object and dispatch a new action', () => {
       const invoiceID = 'id-string';

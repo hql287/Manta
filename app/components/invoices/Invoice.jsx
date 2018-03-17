@@ -30,27 +30,6 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 25px 30px;
-  i.ion-trash-a {
-    font-size: 24px;
-    line-height: 24px;
-    color: #c4c8cc;
-  }
-  i.ion-checkmark {
-    font-size: 16px;
-    line-height: 16px;
-  }
-  i.ion-loop {
-    font-size: 18px;
-    line-height: 18px;
-  }
-  i.ion-backspace {
-    font-size: 18px;
-    line-height: 18px;
-  }
-  i.ion-arrow-return-left {
-    font-size: 18px;
-    line-height: 18px;
-  }
 `;
 
 const StatusBar = styled.div`
@@ -81,6 +60,48 @@ const Status = styled.div`
       margin-right: 5px;
     }
   }
+  i.ion-checkmark {
+    font-size: 16px;
+    line-height: 16px;
+  }
+  i.ion-loop {
+    font-size: 18px;
+    line-height: 18px;
+  }
+  i.ion-backspace {
+    font-size: 18px;
+    line-height: 18px;
+  }
+  i.ion-arrow-return-left {
+    font-size: 18px;
+    line-height: 18px;
+  }
+`;
+
+const ButtonsGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  i {
+    margin-left: 10px;
+    color: #B4B7BA;
+  }
+  i.ion-trash-a {
+    font-size: 24px;
+    line-height: 24px;
+    &:hover {
+      color: #EC476E;
+    }
+  }
+  i.ion-ios-copy {
+    font-size: 24px;
+    line-height: 24px;
+    &:hover {
+      color: #469FE5;
+    }
+  }
+}
 `;
 
 // Invoice Body
@@ -148,12 +169,18 @@ class Invoice extends PureComponent {
     this.viewInvoice = this.viewInvoice.bind(this);
     this.editInvoice = this.editInvoice.bind(this);
     this.deleteInvoice = this.deleteInvoice.bind(this);
+    this.duplicateInvoice = this.duplicateInvoice.bind(this);
     this.displayStatus = this.displayStatus.bind(this);
   }
 
   deleteInvoice() {
     const { invoice, deleteInvoice } = this.props;
     deleteInvoice(invoice._id);
+  }
+
+  duplicateInvoice() {
+    const { invoice, duplicateInvoice } = this.props;
+    duplicateInvoice(invoice);
   }
 
   editInvoice() {
@@ -249,9 +276,14 @@ class Invoice extends PureComponent {
           <StatusBar status={status} />
           <Header>
             <Status status={status}>{this.displayStatus()}</Status>
-            <Button link onClick={this.deleteInvoice}>
-              <i className="ion-trash-a" />
-            </Button>
+            <ButtonsGroup>
+              <Button link onClick={this.duplicateInvoice}>
+                <i className="ion-ios-copy" />
+              </Button>
+              <Button link onClick={this.deleteInvoice}>
+                <i className="ion-trash-a" />
+              </Button>
+            </ButtonsGroup>
           </Header>
           <Body>
             <Row>
@@ -324,6 +356,7 @@ class Invoice extends PureComponent {
 Invoice.propTypes = {
   dateFormat: PropTypes.string.isRequired,
   deleteInvoice: PropTypes.func.isRequired,
+  duplicateInvoice: PropTypes.func.isRequired,
   editInvoice: PropTypes.func.isRequired,
   invoice: PropTypes.object.isRequired,
   setInvoiceStatus: PropTypes.func.isRequired,

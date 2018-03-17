@@ -8,7 +8,6 @@ import Invoice from '../Invoice';
 import Button from '../../shared/Button';
 import SplitButton from '../../shared/SplitButton';
 
-
 // Mocks
 const invoice = {
   _id: '37b2804e-bfc1-4289-b1d7-226c5652ac91',
@@ -35,6 +34,7 @@ const invoice = {
 
 const editInvoice = jest.fn();
 const deleteInvoice = jest.fn();
+const duplicateInvoice = jest.fn();
 const setInvoiceStatus = jest.fn();
 const dateFormat = 'MM/DD/YY';
 const currencyPlacement = 'before';
@@ -67,6 +67,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
         currencyPlacement={currencyPlacement}
@@ -81,6 +82,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
         currencyPlacement={currencyPlacement}
@@ -121,6 +123,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={paidInvoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
         currencyPlacement={currencyPlacement}
@@ -145,6 +148,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={cancelledInvoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
         currencyPlacement={currencyPlacement}
@@ -167,6 +171,7 @@ describe('Renders correctly to the DOM', () => {
         invoice={refundedInvoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
         currencyPlacement={currencyPlacement}
@@ -181,8 +186,8 @@ describe('Renders correctly to the DOM', () => {
     ).toEqual('Refunded');
   });
 
-  it('render delete button in the header', () => {
-    expect(wrapper.find('Invoice__Header').find(Button)).toHaveLength(1);
+  it('render delete and duplicate button in the header', () => {
+    expect(wrapper.find('Invoice__Header').find(Button)).toHaveLength(2);
   });
 
   it('render a split button and 2 buttons in the footer', () => {
@@ -198,6 +203,7 @@ describe('Renders correctly to the DOM', () => {
           invoice={invoice}
           editInvoice={editInvoice}
           deleteInvoice={deleteInvoice}
+          duplicateInvoice={duplicateInvoice}
           setInvoiceStatus={setInvoiceStatus}
           dateFormat={dateFormat}
           currencyPlacement={currencyPlacement}
@@ -209,16 +215,25 @@ describe('Renders correctly to the DOM', () => {
 });
 
 describe('handle clicks correctly', () => {
-  let wrapper, editBtn, viewBtn, deleteBtn, spyViewAction, spyEditAction;
+  let wrapper,
+    editBtn,
+    viewBtn,
+    duplicateBtn,
+    deleteBtn,
+    spyViewAction,
+    spyEditAction,
+    spyDuplicateAction;
   beforeEach(() => {
     spyViewAction = jest.spyOn(Invoice.prototype, 'viewInvoice');
     spyEditAction = jest.spyOn(Invoice.prototype, 'editInvoice');
+    spyDuplicateAction = jest.spyOn(Invoice.prototype, 'duplicateInvoice');
     wrapper = shallow(
       <Invoice
         t={t}
         invoice={invoice}
         editInvoice={editInvoice}
         deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
         setInvoiceStatus={setInvoiceStatus}
         dateFormat={dateFormat}
         currencyPlacement={currencyPlacement}
@@ -232,7 +247,8 @@ describe('handle clicks correctly', () => {
       .find('Invoice__Footer')
       .find(Button)
       .first();
-    deleteBtn = wrapper.find(Button).first();
+    deleteBtn = wrapper.find(Button).at(1);
+    duplicateBtn = wrapper.find(Button).first();
   });
 
   it('handle edit action correctly', () => {
@@ -245,6 +261,12 @@ describe('handle clicks correctly', () => {
     deleteBtn.simulate('click');
     expect(deleteInvoice).toHaveBeenCalled();
     expect(deleteInvoice).toHaveBeenCalledWith(invoice._id);
+  });
+
+  it('handle duplicate action correctly', () => {
+    duplicateBtn.simulate('click');
+    expect(duplicateInvoice).toHaveBeenCalled();
+    expect(duplicateInvoice).toHaveBeenCalledWith(invoice);
   });
 
   it('handle view action correctly', () => {
