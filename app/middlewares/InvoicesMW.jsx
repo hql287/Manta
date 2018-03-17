@@ -144,11 +144,10 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
         _id: uuidv4(),
         _rev: null,
       })
-      dispatch({
+      return dispatch({
         type: ACTION_TYPES.INVOICE_SAVE,
         payload: duplicateInvoice,
       });
-      break;
     }
 
     case ACTION_TYPES.INVOICE_UPDATE: {
