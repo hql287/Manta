@@ -8,6 +8,11 @@ export const saveInvoice = createAction(
   invoiceData => invoiceData
 );
 
+export const duplicateInvoice = createAction(
+  ACTION_TYPES.INVOICE_DUPLICATE,
+  invoiceData => invoiceData
+);
+
 export const newInvoiceFromContact = createAction(
   ACTION_TYPES.INVOICE_NEW_FROM_CONTACT,
   contact => contact

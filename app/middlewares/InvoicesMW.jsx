@@ -138,6 +138,19 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
         });
     }
 
+    case ACTION_TYPES.INVOICE_DUPLICATE: {
+      const duplicateInvoice = Object.assign({}, action.payload, {
+        created_at: Date.now(),
+        _id: uuidv4(),
+        _rev: null,
+      })
+      dispatch({
+        type: ACTION_TYPES.INVOICE_SAVE,
+        payload: duplicateInvoice,
+      });
+      break;
+    }
+
     case ACTION_TYPES.INVOICE_UPDATE: {
       return updateDoc('invoices', action.payload)
         .then(docs => {
