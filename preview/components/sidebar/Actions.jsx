@@ -19,8 +19,8 @@ const ButtonsGroup = styled.div`
   width: 100%;
   align-self: flex-end;
   padding: 20px;
-  background-color: #e0e1e1;
-
+  background: #f9fafa;
+  border-top: 1px solid #e0e1e1;
   > * {
     margin-bottom: 10px;
     &:last-child {
