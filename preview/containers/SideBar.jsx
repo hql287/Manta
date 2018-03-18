@@ -6,27 +6,15 @@ import i18n from '../../i18n/i18n';
 
 // Style
 import styled from 'styled-components';
-const OverflowWrapper = styled.div`
-  min-width: 150px;
-  width: 220px;
-  max-width: 600px;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  justify-content: flex-start;
+
+const sideBarWidth = 220;
+const Wrapper = styled.div`
+  position: relative;
+  width: ${sideBarWidth}px;
   background: #f9fafa;
   border-right: 1px solid #e0e1e1;
-`;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: min-content;
   padding: 20px;
-
-  > div:last-child {
-    flex: 1 0 auto;
-  }
+  overflow: auto;
 `;
 
 // Components
@@ -87,7 +75,6 @@ class SideBar extends Component {
       template,
     } = configs;
     return (
-      <OverflowWrapper>
         <Wrapper>
           <Template
             t={t}
@@ -144,12 +131,12 @@ class SideBar extends Component {
           )}
           <Actions
             t={t}
+            sideBarWidth={sideBarWidth}
             UILang={UILang}
             savePDF={this.savePDF}
             saveConfigs={this.saveConfigs}
           />
         </Wrapper>
-      </OverflowWrapper>
     );
   }
 }

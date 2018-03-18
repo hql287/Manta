@@ -13,14 +13,6 @@ body,
   animation: fadein 0.5s;
 }
 
-body {
-  overflow-y: hidden;
-}
-
-#root {
-  min-width: min-content;
-}
-
 @keyframes fadein {
   from {
     opacity: 0;
