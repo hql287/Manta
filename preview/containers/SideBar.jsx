@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   width: ${sideBarWidth}px;
   background: #f9fafa;
   border-right: 1px solid #e0e1e1;
-  padding: 20px;
+  padding: 20px 20px 100px 20px;
   overflow: auto;
 `;
 
