@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handle render correctly matches snapshot 1`] = `
+exports[`render component correctly matches snapshot 1`] = `
 <div
   className="Layout__PageWrapperStyle-iMhhJx jVLYWQ"
 >
@@ -144,7 +144,7 @@ exports[`handle render correctly matches snapshot 1`] = `
               >
                 <label />
                 <p>
-                  2018-03-21T18:37:19+07:00
+                  2018-03-21T18:42:56+07:00
                 </p>
               </div>
               <div
@@ -279,7 +279,7 @@ exports[`handle render correctly matches snapshot 1`] = `
               >
                 <label />
                 <p>
-                  2018-03-21T18:37:19+07:00
+                  2018-03-21T18:42:56+07:00
                 </p>
               </div>
               <div
@@ -414,7 +414,7 @@ exports[`handle render correctly matches snapshot 1`] = `
               >
                 <label />
                 <p>
-                  2018-03-21T18:37:19+07:00
+                  2018-03-21T18:42:56+07:00
                 </p>
               </div>
               <div
@@ -549,7 +549,7 @@ exports[`handle render correctly matches snapshot 1`] = `
               >
                 <label />
                 <p>
-                  2018-03-21T18:37:19+07:00
+                  2018-03-21T18:42:56+07:00
                 </p>
               </div>
               <div
