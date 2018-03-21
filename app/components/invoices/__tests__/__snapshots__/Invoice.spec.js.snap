@@ -139,13 +139,13 @@ exports[`Renders correctly to the DOM matches snapshot 1`] = `
         </div>
       </div>
       <button
-        className="Button__ButtonStyle-coFSWz llSIFU"
+        className="Button__ButtonStyle-coFSWz coAhhp"
         onClick={[Function]}
       >
         Pending
       </button>
       <button
-        className="Button__ButtonStyle-coFSWz llSIFU"
+        className="Button__ButtonStyle-coFSWz coAhhp"
         onClick={[Function]}
       >
         Pending
