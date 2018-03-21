@@ -126,7 +126,7 @@ export class Invoices extends PureComponent {
         data-filter={status}
         onClick={this.setFilter}
       >
-        { status }
+        { t(`invoices:status:${status}`) }
       </Button>
     ));
 
