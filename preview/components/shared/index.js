@@ -9,6 +9,9 @@ const Section = styled.div`
   margin-bottom: 30px;
   justify-content: flex-end;
   align-items: flex-start;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Label = styled.label`
