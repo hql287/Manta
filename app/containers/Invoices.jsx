@@ -27,7 +27,7 @@ import {
   PageContent,
 } from '../components/shared/Layout';
 
-class Invoices extends PureComponent {
+export class Invoices extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { filter: null };
@@ -143,7 +143,9 @@ class Invoices extends PureComponent {
           {invoices.length === 0 ? (
             <Message info text={t('messages:noInvoice')} />
           ) : (
-            <div className="row">{invoicesComponent}</div>
+            <div className="row">
+              {invoicesComponent}
+            </div>
           )}
         </PageContent>
       </PageWrapper>
