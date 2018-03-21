@@ -1,6 +1,5 @@
-// Libs
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { render, shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
 // Component
@@ -11,75 +10,47 @@ import {
   PageHeaderActions,
   PageContent,
 } from '../../components/shared/Layout';
-import Button, { ButtonsGroup } from '../../components/shared/Button';
-import Message from '../../components/shared/Message';
 import { Invoices } from '../Invoices';
-import Invoice from '../../components/invoices/Invoice';
+import Button, { ButtonsGroup } from '../../components/shared/Button';
 
 // Mocks
 const dispatch = jest.fn();
 const t = jest.fn();
-const sharedSettings = {
-  currency: {
-    code:"USD",
-    placement:"before",
-    separator:"commaDot",
-    fraction:2
-  },
-  dateFormat: 'MMDDYY',
-  subtotal: 3843,
-  grandTotal: 3843,
-  recipient: {
-    _id: '3bd85cb9-7675-4d59-b9c3-305481cb77c9',
-    company: 'Lindgren Group',
-    email: 'Hattie42@gmail.com',
-    fullname: 'Penelope Hettinger',
-    phone: '854-306-7837',
-  },
-}
 const invoices = [
   {
     _id: 'first-invoice',
     status: 'pending',
-    ...sharedSettings
   },
   {
     _id: 'second-invoice',
     status: 'refunded',
-    ...sharedSettings
   },
   {
     _id: 'third-invoice',
     status: 'paid',
-    ...sharedSettings
   },
   {
     _id: 'fourth-invoice',
     status: 'cancelled',
-    ...sharedSettings
   },
 ];
+jest.mock('../../components/invoices/Invoice', () => () => (
+  <div className="invoice" />
+));
 
-// Tests
+jest.mock('../../components/shared/Message', () => () => (
+  <div className="message" />
+));
+
 describe('render component correctly', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(
-      <Invoices
-        t={t}
-        invoices={invoices}
-        dispatch={dispatch}
-      />
-    );
+    wrapper = mount(<Invoices t={t} invoices={invoices} dispatch={dispatch} />);
   });
 
   it('receives correct props', () => {
     const mountWrapper = mount(
-      <Invoices
-        t={t}
-        invoices={invoices}
-        dispatch={dispatch}
-      />
+      <Invoices t={t} invoices={invoices} dispatch={dispatch} />
     );
     expect(mountWrapper.prop('t')).toEqual(t);
     expect(mountWrapper.prop('dispatch')).toEqual(dispatch);
@@ -87,18 +58,14 @@ describe('render component correctly', () => {
   });
 
   it('render correct number of invoices', () => {
-    expect(wrapper.find(Invoice)).toHaveLength(invoices.length);
+    expect(wrapper.find('.invoice')).toHaveLength(invoices.length);
   });
 
   it('render empty message when there is no invoice in the DB', () => {
-    const newWrapper = shallow(
-      <Invoices
-        t={t}
-        invoices={[]}
-        dispatch={dispatch}
-      />
+    const newWrapper = mount(
+      <Invoices t={t} invoices={[]} dispatch={dispatch} />
     );
-    expect(newWrapper.find(Message)).toHaveLength(1);
+    expect(newWrapper.find('.message')).toHaveLength(1);
   });
 
   it('render a correct page layout', () => {
@@ -117,13 +84,7 @@ describe('render component correctly', () => {
 
   it('matches snapshot', () => {
     const tree = renderer
-      .create(
-        <Invoices
-          t={t}
-          dispatch={dispatch}
-          invoices={invoices}
-        />
-      )
+      .create(<Invoices t={t} dispatch={dispatch} invoices={invoices} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -133,21 +94,17 @@ describe('handle actions correcrtly', () => {
   let wrapper, spySetFilter, actions, filterBtn;
   beforeEach(() => {
     spySetFilter = jest.spyOn(Invoices.prototype, 'setFilter');
-    wrapper = shallow(
-      <Invoices
-        t={t}
-        invoices={invoices}
-        dispatch={dispatch}
-      />
+    wrapper = mount(
+      <Invoices t={t} invoices={invoices} dispatch={dispatch} />
     );
     actions = wrapper.find(PageHeaderActions).first();
     filterBtn = actions.find(Button).last();
     filterBtn.simulate('click', {
-      target : {
-        dataset : {
-          filter: 'paid'
-        }
-      }
+      target: {
+        dataset: {
+          filter: 'paid',
+        },
+      },
     });
   });
 
@@ -160,7 +117,9 @@ describe('handle actions correcrtly', () => {
 
   it('display only invoices with matched status', () => {
     const filter = wrapper.state().filter;
-    const filteredInvoices = invoices.filter(invoice => invoice.status === filter);
-    expect(wrapper.find(Invoice)).toHaveLength(filteredInvoices.length);
+    const filteredInvoices = invoices.filter(
+      invoice => invoice.status === filter
+    );
+    expect(wrapper.find('.invoice')).toHaveLength(filteredInvoices.length);
   });
 });
