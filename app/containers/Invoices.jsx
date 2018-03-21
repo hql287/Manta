@@ -17,21 +17,25 @@ import { getDateFormat } from '../reducers/SettingsReducer';
 // Components
 import Invoice from '../components/invoices/Invoice';
 import Message from '../components/shared/Message';
+import Button, { ButtonsGroup } from '../components/shared/Button';
 import _withFadeInAnimation from '../components/shared/hoc/_withFadeInAnimation';
 import {
   PageWrapper,
   PageHeader,
   PageHeaderTitle,
+  PageHeaderActions,
   PageContent,
 } from '../components/shared/Layout';
 
-class Invoices extends PureComponent {
+export class Invoices extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = { filter: null };
     this.editInvoice = this.editInvoice.bind(this);
     this.deleteInvoice = this.deleteInvoice.bind(this);
     this.duplicateInvoice = this.duplicateInvoice.bind(this);
     this.setInvoiceStatus = this.setInvoiceStatus.bind(this);
+    this.setFilter = this.setFilter.bind(this);
   }
 
   // Load Invoices & add event listeners
@@ -89,10 +93,18 @@ class Invoices extends PureComponent {
     dispatch(Actions.duplicateInvoice(invoice));
   }
 
+  setFilter(event) {
+    const currentFilter = this.state.filter;
+    const newFilter = event.target.dataset.filter;
+    this.setState({ filter: currentFilter === newFilter ? null : newFilter });
+  }
+
   // Render
   render() {
     const { dateFormat, invoices, t } = this.props;
-    const invoicesComponent = invoices.map((invoice, index) => (
+    const { filter } = this.state;
+    const filteredInvoices = filter ? invoices.filter(invoice => invoice.status === filter) : invoices
+    const invoicesComponent = filteredInvoices.map((invoice, index) => (
       <Invoice
         key={invoice._id}
         dateFormat={dateFormat}
@@ -105,16 +117,35 @@ class Invoices extends PureComponent {
         t={t}
       />
     ));
+    // Filter Buttons
+    const statuses = ['paid', 'pending', 'refunded', 'cancelled'];
+    const filterButtons = statuses.map(status => (
+      <Button
+        key={`${status}-button`}
+        active={filter === status}
+        data-filter={status}
+        onClick={this.setFilter}
+      >
+        { t(`invoices:status:${status}`) }
+      </Button>
+    ));
+
     return (
       <PageWrapper>
         <PageHeader>
           <PageHeaderTitle>{t('invoices:header:name')}</PageHeaderTitle>
+          <PageHeaderActions>
+            <i className="ion-funnel" />
+            <ButtonsGroup>{ filterButtons }</ButtonsGroup>
+          </PageHeaderActions>
         </PageHeader>
         <PageContent bare>
           {invoices.length === 0 ? (
             <Message info text={t('messages:noInvoice')} />
           ) : (
-            <div className="row">{invoicesComponent}</div>
+            <div className="row">
+              {invoicesComponent}
+            </div>
           )}
         </PageContent>
       </PageWrapper>
