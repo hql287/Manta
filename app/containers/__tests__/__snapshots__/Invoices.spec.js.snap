@@ -23,30 +23,22 @@ exports[`render component correctly matches snapshot 1`] = `
           className="Button__ButtonStyle-coFSWz coAhhp"
           data-filter="paid"
           onClick={[Function]}
-        >
-          paid
-        </button>
+        />
         <button
           className="Button__ButtonStyle-coFSWz coAhhp"
           data-filter="pending"
           onClick={[Function]}
-        >
-          pending
-        </button>
+        />
         <button
           className="Button__ButtonStyle-coFSWz coAhhp"
           data-filter="refunded"
           onClick={[Function]}
-        >
-          refunded
-        </button>
+        />
         <button
           className="Button__ButtonStyle-coFSWz coAhhp"
           data-filter="cancelled"
           onClick={[Function]}
-        >
-          cancelled
-        </button>
+        />
       </div>
     </div>
   </div>
