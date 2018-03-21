@@ -75,68 +75,68 @@ class SideBar extends Component {
       template,
     } = configs;
     return (
-      <Wrapper>
-        <Template
-          t={t}
-          UILang={UILang}
-          template={template}
-          handleInputChange={this.handleInputChange}
-        />
-        <Language
-          t={t}
-          UILang={UILang}
-          language={language}
-          handleInputChange={this.handleInputChange}
-        />
-        <DateFormat
-          t={t}
-          UILang={UILang}
-          language={language}
-          dateFormat={dateFormat}
-          handleInputChange={this.handleInputChange}
-        />
-        <Alignment
-          t={t}
-          UILang={UILang}
-          alignItems={alignItems}
-          handleInputChange={this.handleInputChange}
-        />
-        <FontSize
-          t={t}
-          UILang={UILang}
-          fontSize={fontSize}
-          handleInputChange={this.handleInputChange}
-        />
-        { showLogo && (
-          <LogoSize
+        <Wrapper>
+          <Template
             t={t}
             UILang={UILang}
-            logoSize={logoSize}
+            template={template}
             handleInputChange={this.handleInputChange}
           />
-        )}
-        <Toggler
-          t={t}
-          UILang={UILang}
-          configs={configs}
-          handleInputChange={this.handleInputChange}
-        />
-        { customAccentColor && (
-          <AccentColor
+          <Language
             t={t}
             UILang={UILang}
-            accentColor={accentColor}
-            handleAccentColorChange={this.handleAccentColorChange}
+            language={language}
+            handleInputChange={this.handleInputChange}
           />
-        )}
-        <Actions
-          t={t}
-          sideBarWidth={sideBarWidth}
-          UILang={UILang}
-          savePDF={this.savePDF}
-          saveConfigs={this.saveConfigs}
-        />
-      </Wrapper>
+          <DateFormat
+            t={t}
+            UILang={UILang}
+            language={language}
+            dateFormat={dateFormat}
+            handleInputChange={this.handleInputChange}
+          />
+          <Alignment
+            t={t}
+            UILang={UILang}
+            alignItems={alignItems}
+            handleInputChange={this.handleInputChange}
+          />
+          <FontSize
+            t={t}
+            UILang={UILang}
+            fontSize={fontSize}
+            handleInputChange={this.handleInputChange}
+          />
+          { showLogo && (
+            <LogoSize
+              t={t}
+              UILang={UILang}
+              logoSize={logoSize}
+              handleInputChange={this.handleInputChange}
+            />
+          )}
+          <Toggler
+            t={t}
+            UILang={UILang}
+            configs={configs}
+            handleInputChange={this.handleInputChange}
+          />
+          { customAccentColor && (
+            <AccentColor
+              t={t}
+              UILang={UILang}
+              accentColor={accentColor}
+              handleAccentColorChange={this.handleAccentColorChange}
+            />
+          )}
+          <Actions
+            t={t}
+            sideBarWidth={sideBarWidth}
+            UILang={UILang}
+            savePDF={this.savePDF}
+            saveConfigs={this.saveConfigs}
+          />
+        </Wrapper>
     );
   }
 }
