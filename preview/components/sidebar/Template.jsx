@@ -14,6 +14,7 @@ function Template({ t, template, handleInputChange, UILang }) {
       <select name="template" value={template} onChange={handleInputChange}>
         <option value="minimal">Minimal</option>
         <option value="business">Business</option>
+        <option value="formal">Formal</option>
       </select>
     </Section>
   );
