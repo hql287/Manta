@@ -30,23 +30,24 @@ const ColumnRight = styled.div `
 // Component
 function Footer({invoice, profile, configs}) {
   const {tax} = invoice;
-  return (<InvoiceFooter>
+  return (
+    <InvoiceFooter>
 
-    <InvoiceCompany>
-      <ColumnLeft>
-        <h1>{profile.fullname}</h1>
-        <h2>{profile.phone}</h2>
-        <h2>{profile.email}</h2>
-      </ColumnLeft>
-      <ColumnRight>
-        <h1>{profile.company}</h1>
-        <h2>{tax.tin}</h2>
-        <h2>{profile.address}</h2>
-        <h2>{profile.website}</h2>
-      </ColumnRight>
-    </InvoiceCompany>
+      <InvoiceCompany>
+        <ColumnLeft>
+          <h1>{profile.fullname}</h1>
+          <h2>{profile.phone}</h2>
+          <h2>{profile.email}</h2>
+        </ColumnLeft>
+        <ColumnRight>
+          <h1>{profile.company}</h1>
+          <h2>{tax.tin}</h2>
+          <h2>{profile.address}</h2>
+          <h2>{profile.website}</h2>
+        </ColumnRight>
+      </InvoiceCompany>
 
-  </InvoiceFooter>)
+    </InvoiceFooter>)
 }
 
 Footer.propTypes = {

@@ -32,9 +32,10 @@ const Wrapper = styled.div `
 function Logo({profile, configs}) {
   const {showLogo, logoSize} = configs;
   return showLogo
-    ? (<Wrapper logoSize={logoSize}>
-      <img src={profile.logo} alt="Logo"/>
-    </Wrapper>)
+    ? (
+      <Wrapper logoSize={logoSize}>
+        <img src={profile.logo} alt="Logo" />
+      </Wrapper>)
     : null;
 }
 

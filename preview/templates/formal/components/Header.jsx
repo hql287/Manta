@@ -49,28 +49,31 @@ const Info = styled.div `
 function Header({t, invoice, profile, configs}) {
   const {recipient} = invoice;
   const {language} = configs;
-  return (<InvoiceHeader>
+  return (
+    <InvoiceHeader>
 
-    <InvoiceId>
-      <h2>{t('preview:common:invoice', {lng: language})}</h2>
-      <h1 key="invoiceID">#{
+      <InvoiceId>
+        <h2>{t('preview:common:invoice', {lng: language})}</h2>
+        <h1 key="invoiceID">#{
           invoice.invoiceID
             ? invoice.invoiceID
             : truncate(invoice._id, {
               length: 8,
               omission: ''
             })
-        }</h1>
-    </InvoiceId>
+        }
+        </h1>
+      </InvoiceId>
 
-    <InvoiceDate>
-      <h2>{t('preview:common:created', {lng: language})}:</h2>
-      <h1 key="created_at">{' '}
-        {moment(invoice.created_at).lang(language).format(configs.dateFormat)}</h1>
-    </InvoiceDate>
+      <InvoiceDate>
+        <h2>{t('preview:common:created', {lng: language})}:</h2>
+        <h1 key="created_at">{' '}
+          {moment(invoice.created_at).lang(language).format(configs.dateFormat)}
+        </h1>
+      </InvoiceDate>
 
-    <DueDate>
-      {
+      <DueDate>
+        {
         invoice.dueDate && [
           <h2 key="dueDate">{t('preview:common:due', {lng: language})}:</h2>,
           <h1 key="paymentTerm">{' '}
@@ -91,33 +94,35 @@ function Header({t, invoice, profile, configs}) {
           </h2>
         ]
       }
-    </DueDate>
+      </DueDate>
 
-    <InvoiceRecipient>
-      {
-        configs.showRecipient && (<RecipientName>
-          <h2>
-            {t('preview:common:billedTo', {lng: language})}</h2>
-          <h1 key="company">
-            {recipient.company}
-          </h1>
-          <RecipientInfo>
-            <Info>
-              <h2>
-                {recipient.fullname}
-              </h2>
-              <h2>
-                {recipient.email}
-              </h2>
-              <h2>
-                {recipient.phone}
-              </h2>
-            </Info>
-          </RecipientInfo>
-        </RecipientName>)
+      <InvoiceRecipient>
+        {
+        configs.showRecipient && (
+          <RecipientName>
+            <h2>
+              {t('preview:common:billedTo', {lng: language})}
+            </h2>
+            <h1 key="company">
+              {recipient.company}
+            </h1>
+            <RecipientInfo>
+              <Info>
+                <h2>
+                  {recipient.fullname}
+                </h2>
+                <h2>
+                  {recipient.email}
+                </h2>
+                <h2>
+                  {recipient.phone}
+                </h2>
+              </Info>
+            </RecipientInfo>
+          </RecipientName>)
       }
-    </InvoiceRecipient>
-  </InvoiceHeader>);
+      </InvoiceRecipient>
+    </InvoiceHeader>);
 }
 
 Header.propTypes = {

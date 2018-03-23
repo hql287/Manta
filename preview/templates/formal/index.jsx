@@ -54,13 +54,14 @@ import Footer from './components/Footer';
 
 // Component
 function Formal(props) {
-  return (<Invoice baseFontSize={setBaseFontSize(props.configs.fontSize)}>
-    <Logo {...props}/>
-    <Header {...props}/>
-    <Main {...props}/>
-    <Note {...props}/>
-    <Footer {...props}/>
-  </Invoice>);
+  return (
+    <Invoice baseFontSize={setBaseFontSize(props.configs.fontSize)}>
+      <Logo {...props} />
+      <Header {...props} />
+      <Main {...props} />
+      <Note {...props} />
+      <Footer {...props} />
+    </Invoice>);
 }
 
 Formal.propTypes = {

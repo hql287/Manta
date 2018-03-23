@@ -24,10 +24,11 @@ const InvoiceNote = styled.div `
 function Note({t, invoice, configs}) {
   const {language, accentColor, customAccentColor} = configs;
   return invoice.note
-    ? (<InvoiceNote accentColor={accentColor} customAccentColor={customAccentColor}>
-      <h1>{t('preview:common:notice', {lng: language})}</h1>
-      <h2>{invoice.note}</h2>
-    </InvoiceNote>)
+    ? (
+      <InvoiceNote accentColor={accentColor} customAccentColor={customAccentColor}>
+        <h1>{t('preview:common:notice', {lng: language})}</h1>
+        <h2>{invoice.note}</h2>
+      </InvoiceNote>)
     : null;
 }
 
