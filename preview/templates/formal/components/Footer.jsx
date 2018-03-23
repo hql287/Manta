@@ -4,34 +4,33 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const InvoiceFooter = styled.div`
+const InvoiceFooter = styled.div `
   grid-column: 1 / 9;
   grid-row: 5;
   align-self: end;
 `;
 
-const InvoiceCompany = styled.div`
+const InvoiceCompany = styled.div `
   display: grid;
   grid-template-columns: repeat(8, 1fr);
   h1 {
-    margin-bottom: -1em;
+ margin-bottom: -1em;
   }
 `;
 
-const ColumnLeft = styled.div`
+const ColumnLeft = styled.div `
   grid-column: 1 / 5;
 `;
 
-const ColumnRight = styled.div`
+const ColumnRight = styled.div `
   grid-column: 6 / 9;
   align-self: end;
 `;
 
 // Component
-function Footer({ invoice, profile, configs}) {
-  const { tax } = invoice;
-  return (
-  <InvoiceFooter>
+function Footer({invoice, profile, configs}) {
+  const {tax} = invoice;
+  return (<InvoiceFooter>
 
     <InvoiceCompany>
       <ColumnLeft>
@@ -53,7 +52,7 @@ function Footer({ invoice, profile, configs}) {
 Footer.propTypes = {
   configs: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  invoice: PropTypes.object.isRequired,
+  invoice: PropTypes.object.isRequired
 };
 
 export default Footer;

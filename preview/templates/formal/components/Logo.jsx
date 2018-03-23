@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Styles
 import styled from 'styled-components';
 
-const InvoiceLogo = styled.div`
+const InvoiceLogo = styled.div `
   grid-column: 1 / 9;
   grid-row: 1;
   max-height: 6em;
@@ -15,12 +15,11 @@ const InvoiceLogo = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div `
   grid-column: 1 / 9;
   grid-row: 1;
   margin-bottom: 2em;
-  ${props =>
-    props.logoSize &&`
+  ${props => props.logoSize && `
     max-width: ${props.logoSize}%;
   `};
   img {
@@ -30,18 +29,18 @@ const Wrapper = styled.div`
 `;
 
 // Component
-function Logo({ profile, configs }) {
-  const { showLogo, logoSize } = configs;
-  return showLogo ? (
-    <Wrapper logoSize={logoSize}>
-      <img src={profile.logo} alt="Logo" />
-    </Wrapper>
-  ) : null;
+function Logo({profile, configs}) {
+  const {showLogo, logoSize} = configs;
+  return showLogo
+    ? (<Wrapper logoSize={logoSize}>
+      <img src={profile.logo} alt="Logo"/>
+    </Wrapper>)
+    : null;
 }
 
 Logo.propTypes = {
   configs: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 export default Logo;
