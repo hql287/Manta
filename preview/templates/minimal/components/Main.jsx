@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { padStart } from 'lodash';
 import { formatNumber } from '../../../../helpers/formatNumber';
 import { getInvoiceValue } from '../../../../app/helpers/invoice';
+import { formatTaxDescription, formatTaxValue } from '../../../helper/formatInvoiceParts';
 import currencies from '../../../../libs/currencies.json';
 
 // Styles
@@ -164,22 +165,8 @@ function Main({ invoice, configs, t }) {
 
         {tax && (
           <Tax>
-            <td>
-              {t('form:fields:tax:name', {lng: currentLanguage})} {tax.amount}%
-            </td>
-            {tax.method === 'reverse' ? (
-              <td>{t('form:fields:tax:reverse', {lng: currentLanguage})}</td>
-            ) : (
-              <td>
-                {currencyBefore ? currency : null}{' '}
-                {formatNumber(
-                  getInvoiceValue(invoice).taxAmount,
-                  fraction,
-                  separator
-                )}{' '}
-                {currencyBefore ? null : currency}
-              </td>
-            )}
+            <td>{formatTaxDescription(invoice, configs, t)}</td>
+            <td>{formatTaxValue(invoice, configs, t)}</td>
           </Tax>
         )}
 
@@ -208,7 +195,7 @@ function Main({ invoice, configs, t }) {
           <td>
             {currencyBefore ? currency : null}
             {' '}
-            {formatNumber(invoice.grandTotal, fraction, separator)}
+            {formatNumber(getInvoiceValue(invoice).grandTotal, fraction, separator)}
             {' '}
             {currencyBefore ? null : currency}
           </td>

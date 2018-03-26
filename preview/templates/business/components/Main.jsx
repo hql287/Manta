@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { padStart } from 'lodash';
 import { formatNumber } from '../../../../helpers/formatNumber';
 import { getInvoiceValue } from '../../../../app/helpers/invoice';
+import { formatTaxDescription, formatTaxValue } from '../../../helper/formatInvoiceParts';
 import currencies from '../../../../libs/currencies.json';
 
 // Styles
@@ -197,20 +198,18 @@ function Main({ invoice, configs, t }) {
             <InvoiceTax>
               <td colSpan="2" />
               <td className="label" colSpan={tax.method === 'reverse' ? 1 : 2}>
-                {t('form:fields:tax:name', {lng: language})} {tax.amount}%
+                {formatTaxDescription(invoice, configs, t)}
               </td>
               {tax.method === 'reverse' ? (
                 <td
                   className="label"
                   colSpan={tax.method === 'reverse' ? 2 : 1}
                 >
-                  {t('form:fields:tax:reverse', {lng: language})}
+                  {formatTaxValue(invoice, configs, t)}
                 </td>
               ) : (
                 <td>
-                  {currencyBefore ? currency : null}{' '}
-                  {formatNumber(getInvoiceValue(invoice).taxAmount, fraction, separator)}{' '}
-                  {currencyBefore ? null : currency}
+                  {formatTaxValue(invoice, configs, t)}
                 </td>
               )}
             </InvoiceTax>
@@ -225,7 +224,7 @@ function Main({ invoice, configs, t }) {
             <td colSpan="2">
               {currencyBefore ? currency : null}
               {' '}
-              {formatNumber(invoice.grandTotal, fraction, separator)}
+              {formatNumber(getInvoiceValue(invoice).grandTotal, fraction, separator)}
               {' '}
               {currencyBefore ? null : currency}
             </td>
