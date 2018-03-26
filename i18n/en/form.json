@@ -61,7 +61,8 @@
       "name": "Tax",
       "id": "Tax ID",
       "method": "Method",
-      "reverse": "Reverse Charge"
+      "reverse": "Reverse Charge",
+      "fixed": "Fixed"
     },
     "note": "Note",
     "currency": "Currency"
