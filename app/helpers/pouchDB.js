@@ -61,6 +61,7 @@ const invoicesMigrations = {
     // Omit the 'vat' key
     return omit(newDoc, ['vat']);
   },
+
   2: doc => {
     // Update current doc currency setting
     const newDoc = Object.assign({}, doc, {
@@ -73,6 +74,7 @@ const invoicesMigrations = {
     });
     return newDoc;
   },
+
   3: doc => {
     if (!doc.dueDate) {
       return doc;
@@ -82,6 +84,19 @@ const invoicesMigrations = {
         selectedDate: doc.dueDate,
         useCustom: true,
       },
+    });
+  },
+
+  4: doc => {
+    if (!doc.configs) return doc;
+    const { configs } = doc;
+    const { accentColor } = configs;
+    const migratedConfigs = Object.assign({}, configs, {
+      accentColor: accentColor.color,
+      customAccentColor: accentColor.useCustom,
+    });
+    return Object.assign({}, doc, {
+      configs: migratedConfigs
     });
   },
 };

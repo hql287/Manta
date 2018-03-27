@@ -16,9 +16,9 @@ const { autoUpdater } = require('electron-updater');
 // Place a BrowserWindow in center of primary display
 const centerOnPrimaryDisplay = require('./helpers/center-on-primary-display');
 
-// Prevent Linux GPU Bug
-// https://github.com/electron/electron/issues/4322
-if (process.platform == 'linux') {
+// commmandline arguments
+const forceDevtools = process.argv.includes('--force-devtools');
+if (process.argv.includes('--disable-hardware-acceleration')) {
   app.disableHardwareAcceleration();
 }
 
@@ -62,11 +62,11 @@ function createTourWindow() {
   );
   // Add Event Listeners
   tourWindow.on('show', event => {
-    if (isDev) tourWindow.webContents.openDevTools({ mode: 'detach' });
+    if (isDev || forceDevtools) tourWindow.webContents.openDevTools({ mode: 'detach' });
   });
   tourWindow.on('close', event => {
     event.preventDefault();
-    if (isDev) tourWindow.webContents.closeDevTools();
+    if (isDev || forceDevtools) tourWindow.webContents.closeDevTools();
     tourWindow.hide();
   });
 }
@@ -82,7 +82,6 @@ function createMainWindow() {
     height: mainWindownStateKeeper.height,
     minWidth: 600,
     minHeight: 400,
-    titleBarStyle: 'hiddenInset',
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Main Window',
@@ -101,12 +100,12 @@ function createMainWindow() {
   );
   // Add Event Listeners
   mainWindow.on('show', event => {
-    if (isDev) mainWindow.webContents.openDevTools({ mode: 'detach' });
+    if (isDev || forceDevtools) mainWindow.webContents.openDevTools({ mode: 'detach' });
   });
   mainWindow.on('close', event => {
     if (process.platform === 'darwin') {
       event.preventDefault();
-      if (isDev) mainWindow.webContents.closeDevTools();
+      if (isDev || forceDevtools) mainWindow.webContents.closeDevTools();
       mainWindow.hide();
     } else {
       app.quit();
@@ -125,7 +124,6 @@ function createPreviewWindow() {
     height: previewWindownStateKeeper.height,
     minWidth: 1024,
     minHeight: 800,
-    titleBarStyle: 'hiddenInset',
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Preview Window',
@@ -144,11 +142,11 @@ function createPreviewWindow() {
   );
   // Add Event Listener
   previewWindow.on('show', event => {
-    if (isDev) previewWindow.webContents.openDevTools({ mode: 'detach' });
+    if (isDev || forceDevtools) previewWindow.webContents.openDevTools({ mode: 'detach' });
   });
   previewWindow.on('close', event => {
     event.preventDefault();
-    if (isDev) previewWindow.webContents.closeDevTools();
+    if (isDev || forceDevtools) previewWindow.webContents.closeDevTools();
     previewWindow.hide();
   });
 }
@@ -225,13 +223,17 @@ function setInitialValues() {
   // Changing anything deeper would need to be done with migration
   for (const key in defaultOptions) {
     // Add level 1 key if not exist
-    if (!appConfig.has(`${key}`)) {
-      appConfig.set(`${key}`, defaultOptions[key]);
-    }
-    // Add level 2 key if not exist
-    for (const childKey in defaultOptions[key]) {
-      if (!appConfig.has(`${key}.${childKey}`)) {
-        appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+    if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
+      if (!appConfig.has(`${key}`)) {
+        appConfig.set(`${key}`, defaultOptions[key]);
+      }
+      // Add level 2 key if not exist
+      for (const childKey in defaultOptions[key]) {
+        if (Object.prototype.hasOwnProperty.call(defaultOptions[key], childKey)) {
+          if (!appConfig.has(`${key}.${childKey}`)) {
+            appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+          }
+        }
       }
     }
   }
@@ -298,6 +300,18 @@ function migrateData() {
             fraction: 2,
           }
         })
+      });
+    },
+
+    3: configs => {
+      // Return current configs if checkUpdate and lastCheck do not exist
+      const { checkUpdate, lastCheck} = configs.general;
+      if ( checkUpdate === undefined || lastCheck === undefined ) {
+        return configs;
+      }
+      // Remove checkUpdate and lastCheck
+      return Object.assign({}, configs, {
+        general: omit(configs.general, ['checkUpdate', 'lastCheck'])
       });
     },
   };

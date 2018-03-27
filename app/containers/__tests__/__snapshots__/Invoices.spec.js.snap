@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render component correctly matches snapshot 1`] = `
+<div
+  className="Layout__PageWrapperStyle-iMhhJx jVLYWQ"
+>
+  <div
+    className="Layout__PageHeaderStyle-iGolPb jBPoCI"
+  >
+    <p
+      className="Layout__PageHeaderTitleStyle-dWMwjR hsLeeO"
+    />
+    <div
+      className="Layout__PageHeaderActionsStyle-eysiui fAXKb"
+    >
+      <i
+        className="ion-funnel"
+      />
+      <div
+        className="Button__ButtonsGroupStyle-kpiclP cdhXmK"
+      >
+        <button
+          className="Button__ButtonStyle-coFSWz coAhhp"
+          data-filter="paid"
+          onClick={[Function]}
+        />
+        <button
+          className="Button__ButtonStyle-coFSWz coAhhp"
+          data-filter="pending"
+          onClick={[Function]}
+        />
+        <button
+          className="Button__ButtonStyle-coFSWz coAhhp"
+          data-filter="refunded"
+          onClick={[Function]}
+        />
+        <button
+          className="Button__ButtonStyle-coFSWz coAhhp"
+          data-filter="cancelled"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="Layout__PageContentStyle-dERDcF ciKDVW"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="invoice"
+      />
+      <div
+        className="invoice"
+      />
+      <div
+        className="invoice"
+      />
+      <div
+        className="invoice"
+      />
+    </div>
+  </div>
+</div>
+`;

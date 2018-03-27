@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Section, Label } from '../shared';
 
 function Toggler({ t, configs, handleInputChange, UILang }) {
-  const { showLogo, useSymbol, showRecipient } = configs;
+  const { showLogo, useSymbol, showRecipient, customAccentColor } = configs;
   return (
     <Section>
       <Label>
@@ -39,6 +39,16 @@ function Toggler({ t, configs, handleInputChange, UILang }) {
         />
         {'\u00A0'}
         { t('preview:sidebar:toggle:recipient', { lng: UILang }) }
+      </label>
+      <label>
+        <input
+          name="customAccentColor"
+          type="checkbox"
+          checked={customAccentColor}
+          onChange={handleInputChange}
+        />
+        {'\u00A0'}
+        { t('preview:sidebar:accentColor:name', { lng: UILang }) }
       </label>
     </Section>
   );

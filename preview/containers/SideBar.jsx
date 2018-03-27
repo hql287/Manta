@@ -6,19 +6,26 @@ import i18n from '../../i18n/i18n';
 
 // Style
 import styled from 'styled-components';
+const OverflowWrapper = styled.div`
+  min-width: 150px;
+  width: 220px;
+  max-width: 600px;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  justify-content: flex-start;
+  background: #f9fafa;
+  border-right: 1px solid #e0e1e1;
+`;
 const Wrapper = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
-  background: #f9fafa;
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
-  width: 180px;
-  min-width: 180px;
-  max-width: 180px;
+  height: 100%;
+  min-height: min-content;
   padding: 20px;
-  justify-content: flex-start;
+
   > div:last-child {
-    flex: 1;
+    flex: 1 0 auto;
   }
 `;
 
@@ -28,6 +35,7 @@ import Actions from '../components/sidebar/Actions';
 import Alignment from '../components/sidebar/Alignment';
 import DateFormat from '../components/sidebar/DateFormat';
 import FontSize from '../components/sidebar/FontSize';
+import LogoSize from '../components/sidebar/LogoSize';
 import Language from '../components/sidebar/Language';
 import Template from '../components/sidebar/Template';
 import Toggler from '../components/sidebar/Toggler';
@@ -68,66 +76,80 @@ class SideBar extends Component {
   render() {
     const { t, configs, invoice, UILang } = this.props;
     const {
-      dateFormat,
-      template,
-      language,
+      accentColor,
       alignItems,
+      customAccentColor,
+      dateFormat,
       fontSize,
-      accentColor
+      language,
+      logoSize,
+      showLogo,
+      template,
     } = configs;
     return (
-      <Wrapper>
-        <Template
-          t={t}
-          UILang={UILang}
-          template={template}
-          handleInputChange={this.handleInputChange}
-        />
-        <Language
-          t={t}
-          UILang={UILang}
-          language={language}
-          handleInputChange={this.handleInputChange}
-        />
-        <DateFormat
-          t={t}
-          UILang={UILang}
-          language={language}
-          dateFormat={dateFormat}
-          handleInputChange={this.handleInputChange}
-        />
-        <Alignment
-          t={t}
-          UILang={UILang}
-          alignItems={alignItems}
-          handleInputChange={this.handleInputChange}
-        />
-        <FontSize
-          t={t}
-          UILang={UILang}
-          fontSize={fontSize}
-          handleInputChange={this.handleInputChange}
-        />
-        <Toggler
-          t={t}
-          UILang={UILang}
-          configs={configs}
-          handleInputChange={this.handleInputChange}
-        />
-        <AccentColor
-          t={t}
-          UILang={UILang}
-          accentColor={accentColor}
-          handleAccentColorChange={this.handleAccentColorChange}
-          invoiceID={invoice._id}
-        />
-        <Actions
-          t={t}
-          UILang={UILang}
-          savePDF={this.savePDF}
-          saveConfigs={this.saveConfigs}
-        />
-      </Wrapper>
+      <OverflowWrapper>
+        <Wrapper>
+          <Template
+            t={t}
+            UILang={UILang}
+            template={template}
+            handleInputChange={this.handleInputChange}
+          />
+          <Language
+            t={t}
+            UILang={UILang}
+            language={language}
+            handleInputChange={this.handleInputChange}
+          />
+          <DateFormat
+            t={t}
+            UILang={UILang}
+            language={language}
+            dateFormat={dateFormat}
+            handleInputChange={this.handleInputChange}
+          />
+          <Alignment
+            t={t}
+            UILang={UILang}
+            alignItems={alignItems}
+            handleInputChange={this.handleInputChange}
+          />
+          <FontSize
+            t={t}
+            UILang={UILang}
+            fontSize={fontSize}
+            handleInputChange={this.handleInputChange}
+          />
+          { showLogo && (
+            <LogoSize
+              t={t}
+              UILang={UILang}
+              logoSize={logoSize}
+              handleInputChange={this.handleInputChange}
+            />
+          )}
+          <Toggler
+            t={t}
+            UILang={UILang}
+            configs={configs}
+            handleInputChange={this.handleInputChange}
+          />
+          { customAccentColor && (
+            <AccentColor
+              t={t}
+              UILang={UILang}
+              accentColor={accentColor}
+              handleAccentColorChange={this.handleAccentColorChange}
+            />
+          )}
+          <Actions
+            t={t}
+            UILang={UILang}
+            savePDF={this.savePDF}
+            saveConfigs={this.saveConfigs}
+          />
+        </Wrapper>
+      </OverflowWrapper>
     );
   }
 }

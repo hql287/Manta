@@ -10,10 +10,6 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  img {
-    width: auto;
-    max-height: 5em;
-  }
   text-transform: capitalize;
 `;
 
@@ -24,20 +20,40 @@ const Heading = styled.h1`
   margin-bottom: 1em;
   color: #2c323a;
   ${props =>
-    props.accentColor.useCustom &&
+    props.customAccentColor &&
     `
-    color: ${props.accentColor.color};
+    color: ${props.accentColor};
   `};
+`;
+
+const Logo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  height: auto;
+  ${props =>
+    props.logoSize &&
+    `
+    max-width: ${props.logoSize}%;
+  `};
+  img {
+    width: 100%;
+  }
 `;
 
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const currentLanguage = configs.language;
+  const { language, logoSize, accentColor, customAccentColor } = configs;
+  const { dueDate } = invoice;
   return (
     <Wrapper>
       <div>
-        <Heading accentColor={configs.accentColor}>
-          {t('preview:common:invoice', {lng: currentLanguage})}
+        <Heading
+          accentColor={accentColor}
+          customAccentColor={customAccentColor}
+        >
+          {t('preview:common:invoice', {lng: language})}
         </Heading>
         <h4 className="label">
           # {' '}
@@ -49,30 +65,30 @@ function Header({ t, invoice, profile, configs }) {
           }
         </h4>
         <p>
-          {t('preview:common:created', {lng: currentLanguage})}:
+          {t('preview:common:created', {lng: language})}:
           {' '}
-          {moment(invoice.created_at).lang(currentLanguage).format(configs.dateFormat)}
+          {moment(invoice.created_at).lang(language).format(configs.dateFormat)}
         </p>
-        {invoice.dueDate && [
+        {dueDate && [
           <p key="dueDate">
-            {t('preview:common:due', { lng: currentLanguage })}:{' '}
-            {invoice.dueDate.useCustom
-              ? moment(invoice.dueDate.selectedDate)
-                  .lang(currentLanguage)
+            {t('preview:common:due', { lng: language })}:{' '}
+            {dueDate.useCustom
+              ? moment(dueDate.selectedDate)
+                  .lang(language)
                   .format(configs.dateFormat)
               : moment(
-                  calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
+                  calTermDate(invoice.created_at, dueDate.paymentTerm)
                 )
-                  .lang(currentLanguage)
+                  .lang(language)
                   .format(configs.dateFormat)}
           </p>,
           <p key="dueDateNote">
-            {!invoice.dueDate.useCustom &&
+            {!dueDate.useCustom &&
               `
             (
               ${t(
                 `form:fields:dueDate:paymentTerms:${
-                  invoice.dueDate.paymentTerm
+                  dueDate.paymentTerm
                 }:description`
               )}
             )
@@ -81,9 +97,9 @@ function Header({ t, invoice, profile, configs }) {
         ]}
       </div>
       {configs.showLogo && (
-        <div>
+        <Logo logoSize={logoSize}>
           <img src={profile.logo} alt="Logo" />
-        </div>
+        </Logo>
       )}
     </Wrapper>
   );

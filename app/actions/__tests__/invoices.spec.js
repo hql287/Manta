@@ -19,6 +19,18 @@ it('saveInvoice should create INVOICE_SAVE action', () => {
   });
 });
 
+it('duplicateInvoice should create INVOICE_DUPLICATE action', () => {
+  const invoiceData = {
+    _id: 'jon_snow',
+    fulname: 'Jon Snow',
+    email: 'jon@snow.got',
+  };
+  expect(actions.duplicateInvoice(invoiceData)).toEqual({
+    type: ACTION_TYPES.INVOICE_DUPLICATE,
+    payload: invoiceData,
+  });
+});
+
 it('newInvoiceFromContact should create INVOICE_NEW_FROM_CONTACT action', () => {
   const contactData = {
     _id: 'jon_snow',

@@ -7,8 +7,8 @@
   <a href="https://travis-ci.org/hql287/Manta">
     <img src="https://travis-ci.org/hql287/Manta.svg?branch=dev" alt="Build Status">
   </a>
-  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.3">
-    <img src="https://img.shields.io/badge/version-1.1.3-green.svg" alt="v1.1.3">
+  <a href="https://github.com/hql287/Manta/releases/tag/v1.1.4">
+    <img src="https://img.shields.io/badge/version-1.1.4-green.svg" alt="v1.1.4">
   </a>
   <a title="Crowdin" target="_blank" href="https://crowdin.com/project/manta">
     <img src="https://d322cqt584bo4o.cloudfront.net/manta/localized.svg">
@@ -32,15 +32,15 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 ### Screenshots
 
-Here's a few screenshots:
+Here's a few screenshots of Manta. [See more](https://github.com/hql287/Manta/wiki/Screenshots)
 
-![Example Invoice 1](https://d2ffutrenqvap3.cloudfront.net/items/2P1D0S412j0U2G0j443P/Sample%20Invoice%201.jpg?v=caa43ec7)
+![Business Template](https://d2ffutrenqvap3.cloudfront.net/items/3c1R1G1F3T3Z0M3n3V3G/Business%20Template.jpg?v=f9064204)
 
-![Example Invoice 2](https://d2ffutrenqvap3.cloudfront.net/items/2X2s1z171A0w2j3Z2C0C/Sample%20Invoice%202.jpg?v=6e4e5945)
+![Minimal Template](https://d2ffutrenqvap3.cloudfront.net/items/3k0O3a1V3N1g0u0W3540/Minimal%20Template.jpg?v=7ff9c29c)
 
-![Form](https://d2ffutrenqvap3.cloudfront.net/items/2z1m1t2f0E271p3T2w2v/Form%20UI.jpg?v=00bac22e)
+![Form](https://d2ffutrenqvap3.cloudfront.net/items/3G122M3L3I222w1v0t0W/Form.jpg?v=99f647a7)
 
-![Invoices](https://d26dzxoao6i3hh.cloudfront.net/items/1u0O110V1R0V3W3f1a1k/screenshots3.jpg?v=8a5b5487)
+![Invoice](https://d2ffutrenqvap3.cloudfront.net/items/1h34052r3S3R2D2a380z/Invoices.jpg?v=78ddc2a5)
 
 ### Translation
 
@@ -83,7 +83,7 @@ The following languages are currently being translated, if you would like to Man
 
 macOS | Windows | Linux
 -----------------| ---| ---|
-<a href='https://github.com/hql287/Manta/releases/download/v1.1.3/Manta-1.1.3.dmg'>Download v1.1.3</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.3/Manta.Setup.1.1.3.exe'>Download v1.1.3</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.3/Manta-1.1.3-x86_64.AppImage'>Download v1.1.3</a> |
+<a href='https://github.com/hql287/Manta/releases/download/v1.1.4/Manta-1.1.4.dmg'>Download v1.1.4</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.4/Manta.Setup.1.1.4.exe'>Download v1.1.4</a> | <a href='https://github.com/hql287/Manta/releases/download/v1.1.4/Manta-1.1.4-x86_64.AppImage'>Download v1.1.4</a> |
 
 [More Download Options](https://github.com/hql287/Manta/releases)
 
@@ -103,6 +103,14 @@ Windows 7 and later are supported
 - Debian 8
 
 [More information](https://github.com/electron/electron/blob/master/docs/tutorial/supported-platforms.md).
+
+Note that on Linux, some users might experience a GPU bug where the select options rendered as a black box, see [issue #128 of Manta](https://github.com/hql287/Manta/pull/128) and [issue #4322 of Electron](https://github.com/electron/electron/issues/4322). This can be fixed by disabling hardware acceleration like so:
+
+```sh
+manta --disable-hardware-acceleration
+```
+
+> Remember that doing this might lead to some degradation of the app's performance. This is why "the fix" is not included by default.
 
 ### Technologies
 * [Electron](https://github.com/electron/electron)

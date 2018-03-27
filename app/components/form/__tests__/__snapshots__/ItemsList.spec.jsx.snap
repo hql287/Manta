@@ -25,7 +25,7 @@ exports[`Note component matches snapshot 1`] = `
       className="itemsListActions"
     >
       <button
-        className="ItemsList__ItemsListActionsBtn-fnweJK bouIBy Button__ButtonStyle-coFSWz hJbnhZ"
+        className="ItemsList__ItemsListActionsBtn-fnweJK bouIBy Button__ButtonStyle-coFSWz drmiqa"
         onClick={
           [MockFunction] {
             "calls": Array [

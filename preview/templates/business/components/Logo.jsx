@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 // Styles
 import styled from 'styled-components';
-
 const InvoiceLogo = styled.div`
   flex: 1;
   max-height: 6em;
@@ -14,12 +13,30 @@ const InvoiceLogo = styled.div`
   }
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 2em;
+  ${props =>
+    props.logoSize &&
+    `
+    max-width: ${props.logoSize}%;
+  `};
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
 // Component
 function Logo({ profile, configs }) {
-  return configs.showLogo ? (
-    <InvoiceLogo>
+  const { showLogo, logoSize } = configs;
+  return showLogo ? (
+    <Wrapper logoSize={logoSize}>
       <img src={profile.logo} alt="Logo" />
-    </InvoiceLogo>
+    </Wrapper>
   ) : null;
 }
 
@@ -27,5 +44,6 @@ Logo.propTypes = {
   configs: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
 };
+
 
 export default Logo;

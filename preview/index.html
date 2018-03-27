@@ -18,12 +18,10 @@
         const isDev = require('electron-is-dev');
         if (isDev) {
           scripts.push(
-            'http://localhost:3000/vendor.dev.js',
             'http://localhost:3000/preview.dev.js'
           );
         } else {
           scripts.push(
-            '../prod/vendor.prod.js',
             '../prod/preview.prod.js'
           );
         }

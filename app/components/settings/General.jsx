@@ -61,14 +61,18 @@ class General extends Component {
         <div className="row">
           <div className="col-md-6">
             <div className="pageItem">
-              <label className="itemLabel">{t('settings:fields:autoCheckUpdate:name')}</label>
+              <label className="itemLabel">{t('settings:fields:language:name')}</label>
               <select
-                name="checkUpdate"
-                value={this.state.checkUpdate}
+                name="language"
+                value={this.state.language}
                 onChange={this.handleInputChange}
               >
-                <option value="daily">{t('settings:fields:autoCheckUpdate:daily')}</option>
-                <option value="weekly">{t('settings:fields:autoCheckUpdate:weekly')}</option>
+                <option value="de">{t('settings:fields:language:de', { lng: 'de' })}</option>
+                <option value="en">{t('settings:fields:language:en', { lng: 'en' })}</option>
+                <option value="fr">{t('settings:fields:language:fr', { lng: 'fr' })}</option>
+                <option value="id">{t('settings:fields:language:id', { lng: 'id' })}</option>
+                <option value="vi">{t('settings:fields:language:vi', { lng: 'vi' })}</option>
+                <option value="zh-CN">{t('settings:fields:language:zh-CN', { lng: 'zh-CN' })}</option>
               </select>
             </div>
           </div>
@@ -84,25 +88,6 @@ class General extends Component {
                 />
                 <span className="slider round" />
               </label>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <div className="pageItem">
-              <label className="itemLabel">{t('settings:fields:language:name')}</label>
-              <select
-                name="language"
-                value={this.state.language}
-                onChange={this.handleInputChange}
-              >
-                <option value="de">{t('settings:fields:language:de', { lng: 'de' })}</option>
-                <option value="en">{t('settings:fields:language:en', { lng: 'en' })}</option>
-                <option value="fr">{t('settings:fields:language:fr', { lng: 'fr' })}</option>
-                <option value="id">{t('settings:fields:language:id', { lng: 'id' })}</option>
-                <option value="vi">{t('settings:fields:language:vi', { lng: 'vi' })}</option>
-                <option value="zh-CN">{t('settings:fields:language:zh-CN', { lng: 'zh-CN' })}</option>
-              </select>
             </div>
           </div>
         </div>

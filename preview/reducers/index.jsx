@@ -12,20 +12,20 @@ const initialState = {
   invoice: {},
   profile: profileSettings,
   configs: {
-    accentColor: {
-      useCustom: false,
-      color: '#2CCCE4',
-    },
     // Set default from settings
     dateFormat: invoiceSettings.dateFormat,
     language: generalSettings.language,
     template: invoiceSettings.template,
+    accentColor: '#2CCCE4',
     // Other settings
-    alignItems: 'middle',
+    logoSize: '20',
     fontSize: '200',
+    alignItems: 'middle',
+    // Toggle
     showLogo: true,
-    showRecipient: true,
     useSymbol: true,
+    customAccentColor: true,
+    showRecipient: true,
   },
 };
 

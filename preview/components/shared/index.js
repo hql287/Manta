@@ -2,12 +2,16 @@
 import React from 'react';
 
 import styled from 'styled-components';
+
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-bottom: 30px;
   justify-content: flex-end;
   align-items: flex-start;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Label = styled.label`
