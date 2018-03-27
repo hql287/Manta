@@ -1,0 +1,66 @@
+{
+  "header": "ترتیبات",
+  "tabs": {
+    "profile": "پروفائل",
+    "invoice": "انوائس",
+    "general": "عمومی"
+  },
+  "fields": {
+    "logo": {
+      "name": "لوگو",
+      "hint": "JPG ،PNG اور SVG (تجویز کردہ) قبول کرتا ہے"
+    },
+    "taxSettings": "ٹیکس کی ترتیبات",
+    "template": "سانچہ",
+    "dateFormat": "تاریخ کا فارمیٹ",
+    "pdfExportDir": "PDF برآمد کرنے کی ڈائریکٹری",
+    "requiredFields": "مطلوبہ فیلڈز",
+    "sound": "آواز",
+    "mute": "خاموش",
+    "autoCheckUpdate": {
+      "name": "اپ ڈیٹ کے لیے خود بخود چیک کریں",
+      "daily": "ہر روز (تجویز کردہ)",
+      "weekly": "ہر ہفتہ"
+    },
+    "currency": {
+      "placement": "دستخط کا تعین",
+      "afterAmount": "بعد کی رقم",
+      "beforeAmount": "پہلے والی رقم",
+      "fraction": "اعشاری کسر",
+      "separator": "جدا کرنے والا",
+      "commaDot": "کاما ا ور نقطہ",
+      "dotComma": "نقطہ اور کاما",
+      "spaceDot": "خالی جگہ اور نقطہ"
+    },
+    "openPDFReader": "برآمد کرنے کے بعد PDF کھولیں",
+    "language": {
+      "name": "زبان",
+      "ar": "عربی",
+      "cs": "Czech",
+      "da": "Danish",
+      "de": "German",
+      "el": "Greek",
+      "en": "English",
+      "esES": "Spanish",
+      "fr": "French",
+      "id": "Indonesian",
+      "it": "Italian",
+      "ja": "Japanese",
+      "ko": "Korean",
+      "lt": "Lithuanian",
+      "nl": "Dutch",
+      "ptBR": "Portuguese, Brazilian",
+      "ptPT": "Portuguese",
+      "ru": "Russian",
+      "sk": "Slovak",
+      "th": "Thai",
+      "tl": "Tagalog, Philippines",
+      "tr": "Turkish",
+      "ur-PK": "اُردو (پاکستان)",
+      "vi": "Vietnamese",
+      "zh-CN": "Chinese (Simplified)",
+      "zh-TW": "Chinese (Traditional)"
+    },
+    "other": "دیگر"
+  }
+}

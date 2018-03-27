@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Salta",
+    "next": "Avanti",
+    "start": "Crea la tua prima Fattura"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋  Ciao!",
+      "description": "Grazie per avermi dato fiducia. Permettimi di mostrarti come creare fatture mozzafiato in soli 3 semplici passi"
+    },
+    "create": {
+      "heading": "Step 1. Crea",
+      "description": "Manta ha un'interfaccia flessibile. Mantiene fisse le cose semplici, ma puoi sempre attivare/disattivare campi aggiuntivi ogni volta che lo desideri."
+    },
+    "preview": {
+      "heading": "Step 2. Personalizzazione",
+      "description": "Manta è dotato di template professionali che possono essere personalizzati ulteriormente per adattarsi al vostro marchio."
+    },
+    "save": {
+      "heading": "Step 3. Salva",
+      "description": "Una volta soddisfatto dell'aspetto della fattura è possibile salvarla come PDF. Stampala o inviala via email, usa Manta per impressionare i tuoi clienti!"
+    },
+    "success": {
+      "heading": "Fatto!!! ✋️",
+      "description": "Questo è tutto, 3 semplici passi per creare fatture mozzafiato con Manta. Ricordati di aggiornare il profilo aziendale e il logo prima di creare la prima fattura."
+    }
+  }
+}

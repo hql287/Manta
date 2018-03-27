@@ -1,0 +1,41 @@
+{
+  "sidebar": {
+    "template": "سانچہ",
+    "alignment": {
+      "name": "قطار بندی",
+      "top": "اوپر",
+      "middle": "درمیان",
+      "bottom": "نیچے"
+    },
+    "fontSize": "فانٹ سائز",
+    "toggle": {
+      "name": "تبدیل کرنا",
+      "logo": "لوگو",
+      "symbol": "علامت",
+      "recipient": "وصول کنندہ"
+    },
+    "accentColor": {
+      "name": "لہجے کا رنگ",
+      "useCustom": "اپنی مرضی کے مطابق استعمال کریں"
+    },
+    "actions": {
+      "name": "افعال",
+      "savePDF": "PDF برآمد کریں",
+      "saveConfigs": "کونفگز محفوظ کریں"
+    }
+  },
+  "common": {
+    "billedTo": "کو بل بھیجا گیا",
+    "chooseInvoiceToPreview": "برائے مہربانی پیش نظارہ کرنے کے لیے ایک انوائس منتخب کریں",
+    "created": "بنایا گیا",
+    "due": "واجب",
+    "invoice": "انوائس",
+    "itemDescription": "شے کی تفصیل",
+    "notice": "نوٹس",
+    "order": "نمبر",
+    "price": "قیمت",
+    "qty": "مقدار",
+    "subtotal": "ذیلی میزان",
+    "total": "کل"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Creare una Nuova Fattura",
+    "edit": "Modifica Fattura",
+    "btns": {
+      "clear": "Ripulisci",
+      "update": "Aggiorna",
+      "saveAndPreview": "Salva e Anteprima"
+    }
+  },
+  "settings": {
+    "name": "Impostazioni del modulo",
+    "hint": "Imposta i campi obbligatori del modulo."
+  },
+  "fields": {
+    "items": {
+      "name": "Prodotto/Servizio",
+      "description": "Descrizione",
+      "price": "Prezzo",
+      "quantity": "Quantità",
+      "add": "Aggiungi una nuova riga"
+    },
+    "recipient": {
+      "name": "Destinatario",
+      "select": "Seleziona",
+      "add": "Crea Nuovo"
+    },
+    "discount": {
+      "name": "Sconto",
+      "percentage": "Percentuale",
+      "flat": "Tariffa Fissa"
+    },
+    "dueDate": {
+      "name": "Data di Scadenza",
+      "placeHolder": "Seleziona una data",
+      "paymentTerms": {
+        "name": "Seleziona i termini di pagamento",
+        "net7": {
+          "label": "7 gg",
+          "description": "Pagamento entro 7 giorni data fattura"
+        },
+        "net10": {
+          "label": "10 gg",
+          "description": "Pagamento entro 10 giorni data fattura"
+        },
+        "net30": {
+          "label": "30 gg FM",
+          "description": "Pagamento entro 30 giorni fine mese data fattura"
+        },
+        "net60": {
+          "label": "60 gg FM",
+          "description": "Pagamento entro 60 giorni fine mese data fattura"
+        },
+        "net90": {
+          "label": "90 gg FM",
+          "description": "Pagamento entro 90 giorni fine mese data fattura"
+        }
+      }
+    },
+    "tax": {
+      "name": "Imposta",
+      "id": "Partita IVA",
+      "method": "Metodo",
+      "reverse": "Inversione Contabile"
+    },
+    "note": "Note",
+    "currency": "Valuta"
+  }
+}

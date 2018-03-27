@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "fullname": "Nome e Cognome",
+    "company": "Azienda",
+    "address": "Indirizzo",
+    "email": "Email",
+    "phone": "Numero di Telefono",
+    "website": "Sito web"
+  },
+  "save": "Salva",
+  "amount": "Importo",
+  "default": "Predefinito",
+  "saveAsDefault": "Salva come Predefinito?",
+  "yes": "Si",
+  "noThanks": "No, grazie"
+}

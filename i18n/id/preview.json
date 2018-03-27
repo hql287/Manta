@@ -32,7 +32,7 @@
     "invoice": "Faktur",
     "itemDescription": "Deskripsi Item",
     "notice": "Pemberitahuan",
-    "order": "Tidak",
+    "order": "Nomor",
     "price": "Harga",
     "qty": "Kuantitas",
     "subtotal": "Subtotal",

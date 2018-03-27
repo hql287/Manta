@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Všetky faktúry"
+  },
+  "fields": {
+    "client": "Zákazník",
+    "invoiceID": "ID faktúry",
+    "createdDate": "Vytvorené",
+    "dueDate": "Dátum splatnosti",
+    "total": "Celková suma"
+  },
+  "status": {
+    "pending": "Čakajúce",
+    "paid": "Zaplatené",
+    "refunded": "Vrátené",
+    "cancelled": "Zrušené"
+  },
+  "btns": {
+    "view": "Zobraziť",
+    "edit": "Upraviť",
+    "markAsPaid": "Označiť ako zaplatené"
+  }
+}
