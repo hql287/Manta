@@ -1,0 +1,66 @@
+{
+  "header": "Nastavenia",
+  "tabs": {
+    "profile": "Profil",
+    "invoice": "Faktúra",
+    "general": "Všeobecné"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Povolené PNG, JPG a SVG (odporúča sa)"
+    },
+    "taxSettings": "Nastavenia dane",
+    "template": "Šablóna",
+    "dateFormat": "Formát dátumu",
+    "pdfExportDir": "Priečinok pre export PDF",
+    "requiredFields": "Povinné polia",
+    "sound": "Zvuk",
+    "mute": "Stlmiť",
+    "autoCheckUpdate": {
+      "name": "Automaticky kontrolovať aktualizácie",
+      "daily": "Každý deň (odporúčané)",
+      "weekly": "Každý týždeň"
+    },
+    "currency": {
+      "placement": "Umiestnenie znaku",
+      "afterAmount": "Za čiastkou",
+      "beforeAmount": "Pred čiastkou",
+      "fraction": "Desatinné miesta",
+      "separator": "Oddeľovač",
+      "commaDot": "Čiarka a bodka",
+      "dotComma": "Bodka a čiarka",
+      "spaceDot": "Medzera a bodka"
+    },
+    "openPDFReader": "Po exporte otvoriť PDF",
+    "language": {
+      "name": "Jazyk",
+      "ar": "Arabský",
+      "cs": "Český",
+      "da": "Dánsky",
+      "de": "Nemecký",
+      "el": "Grécky",
+      "en": "Anglický",
+      "esES": "Španielsky",
+      "fr": "Francúzsky",
+      "id": "Indonézsky",
+      "it": "Taliansky",
+      "ja": "Japonský",
+      "ko": "Kórejský",
+      "lt": "Litovský",
+      "nl": "Holandský",
+      "ptBR": "Portugalčina (Brazília)",
+      "ptPT": "Portugalský",
+      "ru": "Ruský",
+      "sk": "Slovenský",
+      "th": "Thajský",
+      "tl": "Tagalog, Filipíny",
+      "tr": "Turecký",
+      "ur-PK": "Urdský (Pakistan)",
+      "vi": "Vietnamský",
+      "zh-CN": "Čínština (zjednodušená)",
+      "zh-TW": "Čínština (tradičná)"
+    },
+    "other": "Ostatné"
+  }
+}
