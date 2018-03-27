@@ -1,0 +1,16 @@
+{
+  "noContact": "Zatiaľ nemáte žiadne kontakty",
+  "noInvoice": "Zatiaľ ste nevytvorili žiadne faktúry",
+  "invoice": {
+    "saved": "Faktúra bola úspešne uložená",
+    "updated": "Faktúra bola úspešne aktualizovaná",
+    "deleted": "Faktúra bola úspešne vymazaná"
+  },
+  "contact": {
+    "saved": "Kontakt bol úspešne uložený",
+    "deleted": "Kontakt bol úspešne odstránený"
+  },
+  "settings": {
+    "saved": "Všetky nastavenia boli úspešne uložené"
+  }
+}

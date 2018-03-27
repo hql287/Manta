@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Vytvoriť novú faktúru",
+    "edit": "Upraviť faktúru",
+    "btns": {
+      "clear": "Vyčistiť",
+      "update": "Aktualizovať",
+      "saveAndPreview": "Uložiť a zobraziť"
+    }
+  },
+  "settings": {
+    "name": "Nastavenie formulára",
+    "hint": "Prepnutím sa pole stane povinným."
+  },
+  "fields": {
+    "items": {
+      "name": "Produkt/služba",
+      "description": "Popis",
+      "price": "Cena",
+      "quantity": "Množstvo",
+      "add": "Pridať novú položku"
+    },
+    "recipient": {
+      "name": "Príjemca",
+      "select": "Vybrať",
+      "add": "Vytvoriť nového príjemcu"
+    },
+    "discount": {
+      "name": "Zľava",
+      "percentage": "Percentuálne",
+      "flat": "Paušálna sadzba"
+    },
+    "dueDate": {
+      "name": "Dátum splatnosti",
+      "placeHolder": "Vyberte vlastný dátum",
+      "paymentTerms": {
+        "name": "Vyberte splatnosť",
+        "net7": {
+          "label": "Sieť 7",
+          "description": "Platba do siedmich dní od dátumu vystavenia faktúry"
+        },
+        "net10": {
+          "label": "Sieť 10",
+          "description": "Platba do desiatich dní od dátumu vystavenia faktúry"
+        },
+        "net30": {
+          "label": "Sieť 30",
+          "description": "Platba do 30 dní od dátumu vystavenia faktúry"
+        },
+        "net60": {
+          "label": "Sieť 60",
+          "description": "Platba do 60 dní od dátumu vystavenia faktúry"
+        },
+        "net90": {
+          "label": "Sieť 90",
+          "description": "Platba do 90 dní od dátumu vystavenia faktúry"
+        }
+      }
+    },
+    "tax": {
+      "name": "Daň",
+      "id": "Daňové identifikačné číslo",
+      "method": "Spôsob",
+      "reverse": "Prenesenie daňovej povinnosti"
+    },
+    "note": "Poznámka",
+    "currency": "Mena"
+  }
+}

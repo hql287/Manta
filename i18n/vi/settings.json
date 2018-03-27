@@ -35,6 +35,7 @@
     "openPDFReader": "Mở file PDF sau khi xuất",
     "language": {
       "name": "Ngôn ngữ",
+      "ar": "Tiếng ả Rập",
       "cs": "Tiếng Séc",
       "da": "Tiếng Đan Mạch",
       "de": "Tiếng Đức",
@@ -51,9 +52,11 @@
       "ptBR": "Tiếng Bồ Đào Nha, Brazil",
       "ptPT": "Tiếng Bồ Đào Nha",
       "ru": "Tiếng Nga",
+      "sk": "Tiếng Slovakia",
       "th": "Tiếng Thái",
       "tl": "Tiếng Tagalog, Philippines",
       "tr": "Tiếng Thổ Nhĩ Kỳ",
+      "ur-PK": "Tiếng Urdu (Pakistan)",
       "vi": "Tiếng Việt",
       "zh-CN": "Tiếng Trung (Giản thể)",
       "zh-TW": "Tiếng Trung (Phồn Thể)"

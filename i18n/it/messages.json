@@ -1,0 +1,16 @@
+{
+  "noContact": "Nessun contatto disponibile",
+  "noInvoice": "Non hai ancora creato alcuna fattura",
+  "invoice": {
+    "saved": "Fattura salvata correttamente",
+    "updated": "Fattura aggiornata correttamente",
+    "deleted": "Fattura eliminata con successo"
+  },
+  "contact": {
+    "saved": "Contatto salvato correttamente",
+    "deleted": "Contatto eliminato con successo"
+  },
+  "settings": {
+    "saved": "Tutte le impostazioni sono state salvate correttamente"
+  }
+}

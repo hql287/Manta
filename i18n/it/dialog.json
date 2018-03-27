@@ -1,0 +1,93 @@
+{
+  "appUpdate": {
+    "available": {
+      "title": "Nuovo aggiornamento disponibile",
+      "message": "Vuoi iniziare a scaricare l'aggiornamento in background?"
+    },
+    "noUpdate": {
+      "title": "Nessun aggiornamento disponibile",
+      "message": "Stai utilizzando la versione più recente dell'app"
+    },
+    "error": {
+      "title": "Si è verificato un errore"
+    },
+    "downloaded": {
+      "title": "Aggiornamento scaricato",
+      "message": "Si desidera chiudere e aggiornare l'app ora?",
+      "quitNow": "Chiudi Ora",
+      "later": "Più tardi"
+    }
+  },
+  "noAccess": {
+    "title": "Nessuna autorizzazione di accesso",
+    "message": "Si prega di scegliere un'altra directory"
+  },
+  "errorBoundary": "Si è verificato un errore",
+  "deleteInvoice": {
+    "title": "Elimina questa fattura?",
+    "message": "La fattura verrà rimossa definitivamente dal database"
+  },
+  "deleteContact": {
+    "title": "Eliminare questo contatto?",
+    "message": "Il contatto verrà rimosso definitivamente dal database"
+  },
+  "fileTypeErr": {
+    "title": "Si prega di scegliere un altro file"
+  },
+  "validation": {
+    "invoiceID": {
+      "title": "Numero fattura non valido",
+      "message": "Il campo numero fattura non può essere vuoto"
+    },
+    "recipient": {
+      "empty": {
+        "title": "Contatto non valido",
+        "message": "Il campo Contatto non può essere vuoto"
+      },
+      "requiredFields": {
+        "title": "Campi obbligatori",
+        "message": "Si prega di compilare tutti i campi obbligatori"
+      },
+      "email": {
+        "title": "Email non valida",
+        "message": "Si prega di scegliere un altro indirizzo email"
+      }
+    },
+    "rows": {
+      "emptyDescription": {
+        "title": "Descrizione non valida",
+        "message": "Il campo Descrizione non può essere vuoto"
+      },
+      "priceZero": {
+        "title": "Prezzo non valido",
+        "message": "Il prezzo deve essere maggiore di zero"
+      },
+      "qtyZero": {
+        "title": "Quantità non valida",
+        "message": "La quantità deve essere maggiore di zero"
+      }
+    },
+    "dueDate": {
+      "title": "Scadenza non valida",
+      "message": "Si prega di selezionare una data"
+    },
+    "currency": {
+      "fraction": {
+        "title": "Frazione non valida",
+        "message": "La frazione decimale deve essere uguale o maggiore di zero"
+      }
+    },
+    "discount": {
+      "title": "Sconto non valido",
+      "message": "Lo sconto deve essere maggiore di zero"
+    },
+    "tax": {
+      "title": "Imposta non valida",
+      "message": "L'importo dell'imposta deve essere maggiore di zero"
+    },
+    "note": {
+      "title": "Nota non valida",
+      "message": "Il campo Nota non può essere vuoto"
+    }
+  }
+}
