@@ -1,0 +1,66 @@
+{
+  "header": "Impostazioni",
+  "tabs": {
+    "profile": "Profilo",
+    "invoice": "Fattura",
+    "general": "Generale"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Accetta PNG, JPG e SVG (raccomandato)"
+    },
+    "taxSettings": "Impostazioni Fiscali",
+    "template": "Template",
+    "dateFormat": "Formato della Data",
+    "pdfExportDir": "Cartella di Esportazione PDF",
+    "requiredFields": "Campi Obbligatori",
+    "sound": "Suono",
+    "mute": "Muto",
+    "autoCheckUpdate": {
+      "name": "Controllo Automatico degli Aggiornamenti",
+      "daily": "Tutti i giorni (raccomandato)",
+      "weekly": "Ogni settimana"
+    },
+    "currency": {
+      "placement": "Posizione del segno",
+      "afterAmount": "Dopo l'importo",
+      "beforeAmount": "Prima dell'importo",
+      "fraction": "Frazione Decimale",
+      "separator": "Separatore",
+      "commaDot": "Virgola & Punto",
+      "dotComma": "Punto & Virgola",
+      "spaceDot": "Spazio & Punto"
+    },
+    "openPDFReader": "Apri PDF dopo l'esportazione",
+    "language": {
+      "name": "Lingua",
+      "ar": "Arabo",
+      "cs": "Ceco",
+      "da": "Danese",
+      "de": "Tedesco",
+      "el": "Greco",
+      "en": "Inglese",
+      "esES": "Spagnolo",
+      "fr": "Francese",
+      "id": "Indonesiano",
+      "it": "Italiano",
+      "ja": "Giapponese",
+      "ko": "Coreano",
+      "lt": "Lituano",
+      "nl": "Olandese",
+      "ptBR": "Portoghese, Brasiliano",
+      "ptPT": "Portoghese",
+      "ru": "Russo",
+      "sk": "Slovacco",
+      "th": "Tailandese",
+      "tl": "Tagalog, Filippine",
+      "tr": "Turco",
+      "ur-PK": "Urdu (Pakistan)",
+      "vi": "Vietnamita",
+      "zh-CN": "Cinese (Semplificato)",
+      "zh-TW": "Cinese (Tradizionale)"
+    },
+    "other": "Altro"
+  }
+}
