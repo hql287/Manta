@@ -11,6 +11,9 @@ import de from './de';
 import en from './en';
 import fr from './fr';
 import id from './id';
+import it from './it';
+import sk from './sk';
+import urPK from './ur-PK';
 import vi from './vi';
 import zhCN from './zh-CN';
 
@@ -24,6 +27,9 @@ i18n.use(reactI18nextModule).init({
     en,
     fr,
     id,
+    it,
+    sk,
+    "ur-PK": urPK,
     vi,
     "zh-CN": zhCN
   },

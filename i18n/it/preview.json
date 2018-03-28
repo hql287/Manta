@@ -1,0 +1,41 @@
+{
+  "sidebar": {
+    "template": "Template",
+    "alignment": {
+      "name": "Allineamento",
+      "top": "In Alto",
+      "middle": "Centrale",
+      "bottom": "In Fondo"
+    },
+    "fontSize": "Dimensione del Carattere",
+    "toggle": {
+      "name": "Attiva\/Disattiva",
+      "logo": "Logo",
+      "symbol": "Simbolo",
+      "recipient": "Destinatario"
+    },
+    "accentColor": {
+      "name": "Colore Primario",
+      "useCustom": "Usa un Colore Personalizzato"
+    },
+    "actions": {
+      "name": "Azioni",
+      "savePDF": "Esporta PDF",
+      "saveConfigs": "Salva Configurazione"
+    }
+  },
+  "common": {
+    "billedTo": "Destinatario",
+    "chooseInvoiceToPreview": "Si prega di scegliere una fattura per l'anteprima",
+    "created": "Creato",
+    "due": "Scadenza",
+    "invoice": "Fattura",
+    "itemDescription": "Descrizione Oggetto",
+    "notice": "Avviso",
+    "order": "Num",
+    "price": "Prezzo",
+    "qty": "Quantità",
+    "subtotal": "Compenso",
+    "total": "Totale"
+  }
+}

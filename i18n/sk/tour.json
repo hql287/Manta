@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Preskočiť",
+    "next": "Ďalej",
+    "start": "Začnite fakturovať"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "Ahoj!",
+      "description": "Ďakujem, že ste sa rozhodli ma vyskúšať. Dovoľte mi ukázať ako vytvoriť úžasné faktúry iba v troch jednoduchých krokoch"
+    },
+    "create": {
+      "heading": "Krok 1. Vytvoriť",
+      "description": "Manta má prispôsobiteľné rozhranie formulára. V základe udržiava veci jednoduché, ale kedykoľvek si môžete zapnúť/vypnúť dodatočné polia, keď to považujete za potrebné."
+    },
+    "preview": {
+      "heading": "Krok 2. Prispôsobiť",
+      "description": "Manta prichádza s profesionálne vyzerajúcimi šablónami, ktoré je možné ďalej upravovať, aby zodpovedali vášmu štýlu."
+    },
+    "save": {
+      "heading": "Krok 3. Uložiť",
+      "description": "Keď ste spokojný so vzhľadom faktúry, môžete si ju uložiť na neskoršie použitie. Vytlačte si ju, alebo ju odošlite e-mailom, dovoľte Mante zapôsobiť na Vašich klientov!"
+    },
+    "success": {
+      "heading": "Hotovo!!! ✋️",
+      "description": "To je všetko, iba 3 jednoduché kroky pre vytváranie úžasných faktúr s Mantou. Nezabudnite aktualizovať profil Vašej spoločnosti a Vaše logo predtým ako začnete vytvárať faktúry."
+    }
+  }
+}

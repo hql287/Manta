@@ -35,6 +35,7 @@
     "openPDFReader": "PDF nach Export öffnen",
     "language": {
       "name": "Sprache",
+      "ar": "Arabisch",
       "cs": "Tschechisch",
       "da": "Dänisch",
       "de": "Deutsch",
@@ -51,9 +52,11 @@
       "ptBR": "Portugiesisch, Brasilianisch",
       "ptPT": "Portugiesisch",
       "ru": "Russisch",
+      "sk": "Slowakisch",
       "th": "Thailändisch",
       "tl": "Tagalog, Philippinen",
       "tr": "Türkisch",
+      "ur-PK": "Urdu (Pakistan)",
       "vi": "Vietnamesisch",
       "zh-CN": "Chinesisch (Vereinfacht)",
       "zh-TW": "Chinesisch (Traditionell)"

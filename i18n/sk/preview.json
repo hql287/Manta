@@ -1,0 +1,41 @@
+{
+  "sidebar": {
+    "template": "Šablóna",
+    "alignment": {
+      "name": "Zarovnanie",
+      "top": "Hore",
+      "middle": "Na stred",
+      "bottom": "Dole"
+    },
+    "fontSize": "Veľkosť písma",
+    "toggle": {
+      "name": "Prepnúť",
+      "logo": "Logo",
+      "symbol": "Symbol",
+      "recipient": "Príjemca"
+    },
+    "accentColor": {
+      "name": "Farba zvýraznenia",
+      "useCustom": "Použiť vlastnú"
+    },
+    "actions": {
+      "name": "Akcie",
+      "savePDF": "Exportovať do PDF",
+      "saveConfigs": "Uložiť nastavenia"
+    }
+  },
+  "common": {
+    "billedTo": "Fakturované",
+    "chooseInvoiceToPreview": "Vyberte faktúru na ukážku",
+    "created": "Vytvorené",
+    "due": "Termín",
+    "invoice": "Faktúra",
+    "itemDescription": "Popis položky",
+    "notice": "Oznámenie",
+    "order": "Nie",
+    "price": "Cena",
+    "qty": "Množstvo",
+    "subtotal": "Medzisúčet",
+    "total": "Celkom"
+  }
+}

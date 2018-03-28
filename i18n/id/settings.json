@@ -35,6 +35,7 @@
     "openPDFReader": "Buka PDF setelah Mengekspor",
     "language": {
       "name": "Bahasa",
+      "ar": "Arab",
       "cs": "Ceko",
       "da": "Denmark",
       "de": "Jerman",
@@ -51,9 +52,11 @@
       "ptBR": "Portugis, Brazil",
       "ptPT": "Portugis",
       "ru": "Rusia",
+      "sk": "Slovakia",
       "th": "Thailand",
       "tl": "Tagalog, Filipina",
       "tr": "Turki",
+      "ur-PK": "Urdu (Pakistan)",
       "vi": "Vietnam",
       "zh-CN": "China (Disederhanakan)",
       "zh-TW": "China (Tradisional)"
