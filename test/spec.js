@@ -2,8 +2,6 @@ const testhelper = require('./helper.js');
 const app = testhelper.initializeSpectron();
 const { expect } = require('chai');
 
-const appConfig = require('./configs.json');
-
 describe('Application launch', () => {
   before(() => app.start());
   after(() => {
@@ -138,7 +136,9 @@ describe('Application launch', () => {
 
     // Preview Window
     describe('it should create previewWindow', () => {
-      beforeEach(() => app.client.waitUntilWindowLoaded().window(previewWindow));
+      beforeEach(() =>
+        app.client.waitUntilWindowLoaded().window(previewWindow)
+      );
 
       it('with correct title', () =>
         app.client.browserWindow.getTitle().then(title => {
