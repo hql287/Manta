@@ -11,6 +11,7 @@ env:
   commonjs: true
   es6: true
   browser: true
+  mocha: true
 globals:
   # JEST GLOBALS
   jest: false
