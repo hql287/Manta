@@ -40,6 +40,11 @@ class Contacts extends PureComponent {
         this.confirmedDeleteContact(contactId);
       }
     });
+    // Analytic
+    ipc.send('send-hit-to-analytic', {
+       t: 'screenview', // Hit Type
+       cd: 'Contacts', // Screen Name
+    });
   }
 
   componentWillUnmount() {

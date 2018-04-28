@@ -46,6 +46,11 @@ export class Invoices extends PureComponent {
         this.confirmedDeleteInvoice(invoiceId);
       }
     });
+    // Analytic
+    ipc.send('send-hit-to-analytic', {
+       t: 'screenview', // Hit Type
+       cd: 'Invoices', // Screen Name
+    });
   }
 
   // Remove all IPC listeners when unmounted

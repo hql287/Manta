@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { translate } from 'react-i18next';
+const ipc = require('electron').ipcRenderer;
 
 // Selectors
 import {
@@ -38,6 +39,14 @@ class Settings extends Component {
     this.state = { visibleTab: 1, canSave: true };
     this.saveSettingsState = this.saveSettingsState.bind(this);
     this.setSavable = this.setSavable.bind(this);
+  }
+
+  componentDidMount() {
+    // Analytic
+    ipc.send('send-hit-to-analytic', {
+       t: 'screenview', // Hit Type
+       cd: 'Settings', // Screen Name
+    });
   }
 
   // Check if settings have been saved

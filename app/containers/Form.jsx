@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getCurrentInvoice } from '../reducers/FormReducer';
 import { translate } from 'react-i18next';
+const ipc = require('electron').ipcRenderer;
 
 // Actions
 import * as FormActions from '../actions/form';
@@ -33,6 +34,13 @@ import {
 
 // Component
 class Form extends PureComponent {
+  componentDidMount() {
+    // Analytic
+    ipc.send('send-hit-to-analytic', {
+       t: 'screenview', // Hit Type
+       cd: 'Form', // Screen Name
+    });
+  }
   render() {
     // Form & Settings Actions
     const { updateSettings } = this.props.boundSettingsActionCreators;
