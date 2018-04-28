@@ -26,10 +26,12 @@
   },
   "common": {
     "billedTo": "Facturé à",
+    "estimateTo": "Devis pour",
     "chooseInvoiceToPreview": "Veuillez choisir une facture à visualiser",
     "created": "Créé",
     "due": "Échéance",
     "invoice": "Facture",
+    "estimate": "Devis",
     "itemDescription": "Description de l'élement",
     "notice": "Notice",
     "order": "No",

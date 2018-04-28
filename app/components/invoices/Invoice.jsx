@@ -42,7 +42,8 @@ const StatusBar = styled.div`
   ${props => props.status === 'pending' && `background: #469FE5;`} ${props =>
       props.status === 'paid' && `background: #6BBB69;`} ${props =>
       props.status === 'refunded' && `background: #4F555C;`} ${props =>
-      props.status === 'cancelled' && `background: #EC476E;`};
+        props.status === 'cancelled' && `background: #EC476E;`} ${props =>
+          props.status === 'estimate' && `background: #db42d9;`};
 `;
 
 const Status = styled.div`
@@ -53,7 +54,8 @@ const Status = styled.div`
   ${props => props.status === 'pending' && `color: #469FE5;`} ${props =>
       props.status === 'paid' && `color: #6BBB69;`} ${props =>
       props.status === 'refunded' && `color: #4F555C;`} ${props =>
-      props.status === 'cancelled' && `color: #EC476E;`} span {
+      props.status === 'cancelled' && `color: #EC476E;`} ${props =>
+      props.status === 'estimate' && `color: #db42d9;`} span {
     display: flex;
     align-items: center;
     i {
@@ -197,6 +199,14 @@ class Invoice extends PureComponent {
     const { status } = invoice;
     const { recipient } = invoice;
     switch (status) {
+      case 'estimate': {
+        return (
+          <span>
+            <i className="ion-edit" />
+            {t('invoices:status:estimate')}
+          </span>
+        );
+      }
       case 'cancelled': {
         return (
           <span>
@@ -257,6 +267,14 @@ class Invoice extends PureComponent {
     const dateFormat = invoice.configs ? invoice.configs.dateFormat : this.props.dateFormat;
     const statusActions = [
       {
+        label: t('invoices:btns:markAsPaid'),
+        action: () => setInvoiceStatus(invoice._id, 'paid'),
+      },
+      {
+        label: t('invoices:status:estimate'),
+        action: () => setInvoiceStatus(invoice._id, 'estimate'),
+      },
+      {
         label: t('invoices:status:pending'),
         action: () => setInvoiceStatus(invoice._id, 'pending'),
       },
@@ -269,6 +287,9 @@ class Invoice extends PureComponent {
         action: () => setInvoiceStatus(invoice._id, 'cancelled'),
       },
     ];
+    if (status === 'estimate') {
+      Array.prototype.unshift.apply(statusActions, statusActions.splice(2, 1))
+    }
     const currencyBefore = invoice.currency.placement === 'before';
     return (
       <div className="col-lg-6">
@@ -334,11 +355,8 @@ class Invoice extends PureComponent {
           </Body>
           <Footer>
             <SplitButton
-              mainButton={{
-                label: t('invoices:btns:markAsPaid'),
-                action: () => setInvoiceStatus(invoice._id, 'paid'),
-              }}
-              options={statusActions}
+              mainButton={statusActions[0]}
+              options={statusActions.slice(1)}
             />
             <Button onClick={this.editInvoice}>
               {t('invoices:btns:edit')}

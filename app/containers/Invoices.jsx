@@ -118,7 +118,7 @@ export class Invoices extends PureComponent {
       />
     ));
     // Filter Buttons
-    const statuses = ['paid', 'pending', 'refunded', 'cancelled'];
+    const statuses = ['estimate', 'paid', 'pending', 'refunded', 'cancelled'];
     const filterButtons = statuses.map(status => (
       <Button
         key={`${status}-button`}

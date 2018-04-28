@@ -10,6 +10,7 @@
     "total": "Valeur Totale"
   },
   "status": {
+    "estimate": "Devis",
     "pending": "En attente",
     "paid": "Payée",
     "refunded": "Remboursée",

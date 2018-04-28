@@ -63,7 +63,7 @@ const Heading = styled.h1`
 
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const { tax, recipient } = invoice;
+  const { tax, recipient, status } = invoice;
   const { language, accentColor, customAccentColor  } = configs;
   return (
     <InvoiceHeader>
@@ -79,7 +79,7 @@ function Header({ t, invoice, profile, configs }) {
 
         {configs.showRecipient && (
           <Recipient>
-            <h4>{t('preview:common:billedTo', { lng: language })}</h4>
+            <h4>{t(status=== 'estimate'?'preview:common:estimateTo':'preview:common:billedTo', { lng: language })}</h4>
             <p>{recipient.company}</p>
             <p>{recipient.fullname}</p>
             <p>{recipient.email}</p>
@@ -92,7 +92,7 @@ function Header({ t, invoice, profile, configs }) {
           accentColor={accentColor}
           customAccentColor={customAccentColor}
         >
-          {t('preview:common:invoice', { lng: language })}
+          {t(status=== 'estimate'?'preview:common:estimate':'preview:common:invoice', { lng: language })}
         </Heading>
         <h4>
           #

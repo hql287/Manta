@@ -42,6 +42,9 @@ Date.now = jest.genMockFunction().mockReturnValue(0);
 
 const t = jest.fn(status => {
   switch (status) {
+    case 'invoices:status:estimate': {
+      return 'Estimate';
+    }
     case 'invoices:status:cancelled': {
       return 'Cancelled';
     }
@@ -136,6 +139,31 @@ describe('Renders correctly to the DOM', () => {
         .find('span')
         .text()
     ).toEqual('Paid');
+
+    // Estimate Invoice
+    const estimateInvoice = Object.assign({}, invoice, {
+      status: 'estimate',
+    });
+    const estimateInvoiceWapper = shallow(
+      <Invoice
+        t={t}
+        language="en"
+        invoice={estimateInvoice}
+        editInvoice={editInvoice}
+        deleteInvoice={deleteInvoice}
+        duplicateInvoice={duplicateInvoice}
+        setInvoiceStatus={setInvoiceStatus}
+        dateFormat={dateFormat}
+        currencyPlacement={currencyPlacement}
+      />
+    );
+    expect(
+      estimateInvoiceWapper
+        .find('Invoice__Header')
+        .find('Invoice__Status')
+        .find('span')
+        .text()
+    ).toEqual('Estimate');
 
     // Cancelled Invoice
     const cancelledInvoice = Object.assign({}, invoice, {
