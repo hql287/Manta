@@ -8,6 +8,7 @@ const path = require('path');
 const glob = require('glob');
 const isDev = require('electron-is-dev');
 const omit = require('lodash').omit;
+const uuidV4 = require('uuid/v4');
 
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
@@ -217,6 +218,10 @@ function setInitialValues() {
         note: false,
       },
     },
+    userData: {
+      uuid: uuidV4(),
+      unsentSessions: [],
+    }
   };
 
   // Set initial values conditionally work for 2 level depth key only,
