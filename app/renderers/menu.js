@@ -32,6 +32,7 @@ const aboutMenu = {
       label: 'Quit App',
       accelerator: 'CmdOrCtrl+Q',
       click() {
+        ipc.send('save-current-session-hits');
         ipc.send('quit-app');
       },
     },
@@ -206,6 +207,7 @@ if (process.platform !== 'darwin') {
       label: 'Quit App',
       accelerator: 'CmdOrCtrl+Q',
       click() {
+        ipc.send('save-current-session-hits');
         ipc.send('quit-app');
       },
     },
