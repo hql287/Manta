@@ -125,18 +125,25 @@ function Main({ invoice, configs, t }) {
   const currency = configs.useSymbol ? currencies[code].symbol : code;
   // Render Items
   const itemComponents = invoice.rows.map((row, index) => (
-    <Item key={index}>
-      <td>
-        {padStart(index + 1, 2, 0)}
-        {'. '}
-        {row.description} ({row.quantity})
-      </td>
-      <td>
-        {currencyBefore ? currency : null}{' '}
-        {formatNumber(row.subtotal, fraction, separator)}{' '}
-        {currencyBefore ? null : currency}
-      </td>
-    </Item>
+    (row.price === undefined || row.quantity === undefined) ?
+    (
+      <Item key={index}>
+        <td>{row.description}</td>
+      </Item>
+    )
+      :
+      <Item key={index}>
+        <td>
+          {padStart(index + 1, 2, 0)}
+          {'. '}
+          {row.description} ({row.quantity})
+        </td>
+        <td>
+          {currencyBefore ? currency : null}{' '}
+          {formatNumber(row.subtotal, fraction, separator)}{' '}
+          {currencyBefore ? null : currency}
+        </td>
+      </Item>
   ));
 
   return (

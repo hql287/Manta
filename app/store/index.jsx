@@ -22,7 +22,7 @@ const middlewares = [FormMW, ContactsMW, InvoicesMW, SettingsMW, UIMiddleware];
 // Dev Mode Middlewares
 if (isDev) {
   middlewares.unshift(MeasureMW);
-  middlewares.push(Logger);
+  // middlewares.push(Logger);
 }
 
 // Redux Devtool

@@ -5,6 +5,7 @@ import { padStart } from 'lodash';
 import { formatNumber } from '../../../../helpers/formatNumber';
 import { getInvoiceValue } from '../../../../app/helpers/invoice';
 import currencies from '../../../../libs/currencies.json';
+import ReactMarkdown from 'react-markdown'
 
 // Styles
 import styled from 'styled-components';
@@ -57,6 +58,13 @@ const Table = styled.table`
       }
     }
   }
+`;
+
+const MarkDownDescription = styled(ReactMarkdown)`
+    color: #2c323a;
+    font-weight: 300;
+    line-height: 1.8;
+    font-size: 0.7em;
 `;
 
 const InvoiceTotal = styled.tr`
@@ -124,21 +132,33 @@ function Main({ invoice, configs, t }) {
   const currency = configs.useSymbol ? currencies[code].symbol : code;
   // Render Items
   const itemComponents = invoice.rows.map((row, index) => (
-    <tr key={index}>
-      <td className="w5">{padStart(index + 1, 2, 0)}.</td>
-      <td>{row.description}</td>
-      <td className="w15">
-        {currencyBefore ? currency : null}{' '}
-        {formatNumber(row.price, fraction, separator)}{' '}
-        {currencyBefore ? null : currency}
-      </td>
-      <td className="w10">{row.quantity}</td>
-      <td className="w15">
-        {currencyBefore ? currency : null}{' '}
-        {formatNumber(row.subtotal, fraction, separator)}{' '}
-        {currencyBefore ? null : currency}
-      </td>
-    </tr>
+    (row.price === undefined || row.quantity === undefined) ?
+    (
+      <tr key={index}>
+        <td className="w5" />
+        <MarkDownDescription source={row.description} />
+        <td className="w15" />
+        <td className="w10" />
+        <td className="w15" />
+      </tr>)
+    :
+      (
+        <tr key={index}>
+          <td className="w5">{padStart(index + 1, 2, 0)}.</td>
+          <td>{row.description}</td>
+          <td className="w15">
+            {currencyBefore ? currency : null}{' '}
+            {formatNumber(row.price, fraction, separator)}{' '}
+            {currencyBefore ? null : currency}
+          </td>
+          <td className="w10">{row.quantity}</td>
+          <td className="w15">
+            {currencyBefore ? currency : null}{' '}
+            {formatNumber(row.subtotal, fraction, separator)}{' '}
+            {currencyBefore ? null : currency}
+          </td>
+        </tr>
+      )
   ));
 
   return (

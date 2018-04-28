@@ -51,6 +51,7 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
     }
 
     case ACTION_TYPES.INVOICE_SAVE: {
+      console.log('INVOICE_SAVE', action.payload);
       // Save doc to db
       return saveDoc('invoices', action.payload)
         .then(newDocs => {
