@@ -35,37 +35,37 @@ async function dispatchBatch(session) {
   for (const [index, item] of session.entries()) {
     // Prep item
     const isFirst = index === 0;
-    const isLast  = index === session.length - 1;
+    const isLast = index === session.length - 1;
     const payload = prepItem(item, isFirst, isLast);
     // Send payload
     await dispatch(payload)
       .then(res => {
         if (res !== 200) {
-         failedItems.push(payload);
+          failedItems.push(payload);
         }
       })
       .catch(err => {
-         failedItems.push(payload);
-      })
+        failedItems.push(payload);
+      });
   }
   return failedItems;
 }
 
 // Update sessionControl and queueTime params
-function prepItem(payload, isFirst=false, isLast=false) {
+function prepItem(payload, isFirst = false, isLast = false) {
   const now = getNow();
   const updatedPayload = Object.assign({}, payload, {
     qt: now - payload.__timeStamp,
   });
   if (isFirst) {
     return Object.assign({}, updatedPayload, {
-      sc: "start"
-    })
+      sc: 'start',
+    });
   }
   if (isLast) {
     return Object.assign({}, updatedPayload, {
-      sc: "end"
-    })
+      sc: 'end',
+    });
   }
   return updatedPayload;
 }
@@ -77,4 +77,4 @@ module.exports = {
   cleanQueue,
   getCurrentSessionHits,
   setCurrentSessionHits,
-}
+};

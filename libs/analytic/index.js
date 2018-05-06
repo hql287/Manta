@@ -10,9 +10,8 @@ const { getNow, getDefaultParams, dispatch } = require('./helpers');
 
 class Analytics {
   constructor(trackingID, clientID, options = {}) {
-    if (!trackingID || !clientID) {
-      throw new Error('trackingID and clientID required');
-    }
+    if (!clientID) throw new Error('clientID is required');
+    if (!trackingID) throw new Error('trackingID is required');
     this.initialParams = Object.assign({}, options, getDefaultParams(), {
       tid: trackingID,
       cid: clientID,
@@ -28,7 +27,6 @@ class Analytics {
     if (q.length === 0) return;
     const q1 = await processQueue(q);
     const q2 = cleanQueue(q1);
-    // Reset both queues
     setQueue(q2);
     setCurrentSessionHits([]);
   }
@@ -37,7 +35,7 @@ class Analytics {
     const payload = this._getPayload(hitType, hitParams, getNow());
     dispatch(payload)
       .then(res => {
-        console.log('Hit sent successfully', res);
+        console.log(res);
       })
       .catch(err => {
         this.currentSessionHits.push(payload);
@@ -48,12 +46,12 @@ class Analytics {
   _getPayload(hitType, hitParams = {}, time) {
     return Object.assign(
       {},
-      this.initialParams,  // Initial params
-      hitParams,           // Additional hit params
+      this.initialParams, // Initial params
+      hitParams, // Additional hit params
       {
-        t: hitType,        // hitType
-        dp: hitParams.cd,  // Page
-        __timeStamp: time, // Use to calculate qt
+        t: hitType, // Hit type
+        dp: hitParams.cd, // Screen name
+        __timeStamp: time, // Use to calculate queueTime later
       }
     );
   }
