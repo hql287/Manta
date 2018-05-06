@@ -47,9 +47,8 @@ export class Invoices extends PureComponent {
       }
     });
     // Analytic
-    ipc.send('send-hit-to-analytic', {
-       t: 'screenview', // Hit Type
-       cd: 'Invoices', // Screen Name
+    ipc.send('send-hit-to-analytic', 'screenview', {
+       cd: 'Invoices',
     });
   }
 

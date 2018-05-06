@@ -43,9 +43,8 @@ class Settings extends Component {
 
   componentDidMount() {
     // Analytic
-    ipc.send('send-hit-to-analytic', {
-       t: 'screenview', // Hit Type
-       cd: 'Settings', // Screen Name
+    ipc.send('send-hit-to-analytic', 'screenview', {
+       cd: 'Settings',
     });
   }
 

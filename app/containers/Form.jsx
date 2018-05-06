@@ -36,9 +36,8 @@ import {
 class Form extends PureComponent {
   componentDidMount() {
     // Analytic
-    ipc.send('send-hit-to-analytic', {
-       t: 'screenview', // Hit Type
-       cd: 'Form', // Screen Name
+    ipc.send('send-hit-to-analytic', 'screenview', {
+       cd: 'Form',
     });
   }
   render() {
