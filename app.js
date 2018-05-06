@@ -193,6 +193,7 @@ function setInitialValues() {
       previewPDF: true,
       checkUpdate: 'daily',
       lastCheck: Date.now(),
+      allowsAnalytic: true,
     },
     invoice: {
       exportDir: os.homedir(),
@@ -221,6 +222,7 @@ function setInitialValues() {
     userData: {
       uuid: uuidV4(),
       unsentSessions: [],
+      currentSessionHits: [],
     }
   };
 
@@ -433,6 +435,8 @@ function initialize() {
   });
   // Close all windows before quit the app
   app.on('before-quit', () => {
+    // TODO
+    // Investigate why this event is emitted twice at the moment
     // Use condition in case quit sequence is initiated by autoUpdater
     // which will destroy all there windows already before emitting this event
     if (tourWindow !== null) tourWindow.destroy();
