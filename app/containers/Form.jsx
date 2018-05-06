@@ -34,12 +34,30 @@ import {
 
 // Component
 class Form extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.saveFormData = this.saveFormData.bind(this);
+  }
+
   componentDidMount() {
-    // Analytic
     ipc.send('send-hit-to-analytic', 'screenview', {
-       cd: 'Form',
+      cd: 'Form',
     });
   }
+
+  saveFormData() {
+    const {
+      saveFormData,
+    } = this.props.boundFormActionCreators;
+    saveFormData();
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Create',
+      el: 'Create A New Invoice',
+      ev: 1,
+    });
+  }
+
   render() {
     // Form & Settings Actions
     const { updateSettings } = this.props.boundSettingsActionCreators;
@@ -81,7 +99,7 @@ class Form extends PureComponent {
             <Button
               primary={editMode.active}
               success={editMode.active === false}
-              onClick={saveFormData}
+              onClick={this.saveFormData}
             >
               {editMode.active
                 ? t('form:header:btns:update')

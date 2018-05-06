@@ -65,16 +65,7 @@ const InvoicesMW = ({ dispatch, getState }) => next => action => {
               message: i18n.t('messages:invoice:saved'),
             },
           });
-          // Preview Window
           ipc.send('preview-invoice', action.payload);
-          // Send Analytic Hit
-          ipc.send('send-hit-to-analytic', {
-            t: 'event', // Hit Type
-            // cd: 'Contacts', // Screen Name
-            ec: 'Invoice',
-            ea: 'Create',
-            el: 'Create A New Invoice'
-          });
         })
         .catch(err => {
           next({

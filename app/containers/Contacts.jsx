@@ -75,6 +75,11 @@ class Contacts extends PureComponent {
   confirmedDeleteContact(contactId) {
     const { dispatch } = this.props;
     dispatch(ContactsActions.deleteContact(contactId));
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Contact',
+      ea: 'Delete',
+      el: 'Delete A Contact'
+    });
   }
 
   render() {

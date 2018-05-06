@@ -58,6 +58,11 @@ class Settings extends Component {
   saveSettingsState() {
     const { currentSettings, boundActionCreators } = this.props;
     boundActionCreators.saveSettings(currentSettings);
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Settings',
+      ea: 'Save',
+      el: 'Save Settings'
+    });
   }
 
   // Switch Tab

@@ -79,28 +79,54 @@ export class Invoices extends PureComponent {
   confirmedDeleteInvoice(invoiceId) {
     const { dispatch } = this.props;
     dispatch(Actions.deleteInvoice(invoiceId));
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Delete',
+      el: 'Delete An Invoice'
+    });
   }
 
   // set the invoice status
   setInvoiceStatus(invoiceId, status) {
     const { dispatch } = this.props;
     dispatch(Actions.setInvoiceStatus(invoiceId, status));
+    // Send Analytic Hit
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Set Invoice Status',
+      el: `Mark as ${status}`
+    });
   }
 
   editInvoice(invoice) {
     const { dispatch } = this.props;
     dispatch(Actions.editInvoice(invoice));
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Edit',
+      el: 'Edit An Invoice'
+    });
   }
 
   duplicateInvoice(invoice) {
     const { dispatch } = this.props;
     dispatch(Actions.duplicateInvoice(invoice));
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Duplicate',
+      el: 'Duplicate An Invoice'
+    });
   }
 
   setFilter(event) {
     const currentFilter = this.state.filter;
     const newFilter = event.target.dataset.filter;
     this.setState({ filter: currentFilter === newFilter ? null : newFilter });
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Filter Invoices',
+      el: `View ${newFilter} invoices`
+    });
   }
 
   // Render
