@@ -37,6 +37,7 @@
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.2",
     "electron-updater": "^2.21.0",
+    "first-run": "^1.2.0",
     "geoip-lite": "^1.2.1",
     "glob": "^7.1.2",
     "i18next": "^10.5.0",
