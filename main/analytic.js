@@ -4,6 +4,7 @@ const appConfig = require('electron-settings');
 const isDev = require('electron-is-dev');
 const Analytics = require('../libs/analytic');
 const pkg = require('../package.json');
+const firstRun = require('first-run');
 
 // Options
 const trackingID = 'UA-109914010-2'; // tid
@@ -26,3 +27,23 @@ ipcMain.on('send-hit-to-analytic', (event, hitType, hitParams) => {
   if (!allowsAnalytic) return;
   tracker.track(hitType, hitParams);
 });
+
+// Track installations
+if (firstRun()) {
+  tracker.track('event', {
+    ec: 'Installation',
+    ea: 'New Installation',
+    el: 'New Installation',
+    ev: 1,
+  });
+}
+
+// Track install of specific version
+if (firstRun({name: `${appName}-${appVersion}`})) {
+  tracker.track('event', {
+    ec: 'Installation',
+    ea: `Install version ${appVersion}`,
+    el: `Install version ${appVersion}`,
+    ev: 1
+  });
+}
