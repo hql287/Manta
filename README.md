@@ -34,13 +34,13 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 Here's a few screenshots of Manta. [See more](https://github.com/hql287/Manta/wiki/Screenshots)
 
-![Business Template](https://d2ffutrenqvap3.cloudfront.net/items/3c1R1G1F3T3Z0M3n3V3G/Business%20Template.jpg?v=f9064204)
+![Business Template](https://dzwonsemrish7.cloudfront.net/items/3c1R1G1F3T3Z0M3n3V3G/Business%20Template.jpg?v=f9064204)
 
-![Minimal Template](https://d2ffutrenqvap3.cloudfront.net/items/3k0O3a1V3N1g0u0W3540/Minimal%20Template.jpg?v=7ff9c29c)
+![Minimal Template](https://dzwonsemrish7.cloudfront.net/items/3k0O3a1V3N1g0u0W3540/Minimal%20Template.jpg?v=7ff9c29c)
 
-![Form](https://d2ffutrenqvap3.cloudfront.net/items/3G122M3L3I222w1v0t0W/Form.jpg?v=99f647a7)
+![Form](https://dzwonsemrish7.cloudfront.net/items/3G122M3L3I222w1v0t0W/Form.jpg?v=99f647a7)
 
-![Invoice](https://d2ffutrenqvap3.cloudfront.net/items/1h34052r3S3R2D2a380z/Invoices.jpg?v=78ddc2a5)
+![Invoice](https://dzwonsemrish7.cloudfront.net/items/1h34052r3S3R2D2a380z/Invoices.jpg?v=78ddc2a5)
 
 ### Translation
 
