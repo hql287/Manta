@@ -270,7 +270,7 @@
     "name_plural": "Djiboutian francs"
   },
   "DKK": {
-    "symbol": "Dkr",
+    "symbol": "DKK",
     "name": "Danish Krone",
     "symbol_native": "kr",
     "decimal_digits": 2,
@@ -432,7 +432,7 @@
     "name_plural": "Israeli new sheqels"
   },
   "INR": {
-    "symbol": "Rs",
+    "symbol": "₹",
     "name": "Indian Rupee",
     "symbol_native": "টকা",
     "decimal_digits": 2,
