@@ -43,6 +43,10 @@
           "label": "Sieť 10",
           "description": "Platba do desiatich dní od dátumu vystavenia faktúry"
         },
+        "net14": {
+          "label": "Sieť 14",
+          "description": "Platba do 14 dní od dátumu vystavenia faktúry"
+        },
         "net30": {
           "label": "Sieť 30",
           "description": "Platba do 30 dní od dátumu vystavenia faktúry"
