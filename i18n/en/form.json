@@ -64,6 +64,11 @@
       "reverse": "Reverse Charge"
     },
     "note": "Note",
-    "currency": "Currency"
+    "currency": "Currency",
+    "payment": {
+      "name": "Payment",
+      "details": "Payment details",
+      "description": "Bank accounts, digital payment options or other payment related informations"
+    }
   }
 }
