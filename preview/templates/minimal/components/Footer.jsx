@@ -43,6 +43,7 @@ function Footer({ t, invoice, profile, configs }) {
           <h4 className="label">{t('preview:common:billedTo', {lng: currentLanguage})}</h4>
           <p>{recipient.company}</p>
           <p>{recipient.fullname}</p>
+          <p>{recipient.address}</p>
           <p>{recipient.email}</p>
           <p>{recipient.phone}</p>
         </Column>
