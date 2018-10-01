@@ -1,4 +1,3 @@
-// Libraries
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { isEqual } from 'lodash';
@@ -25,7 +24,6 @@ const PaymentContent = styled.textarea`
 // Component
 export class Payment extends Component {
   constructor(props) {
-    console.log('Payment Props:', props)
     super(props);
     this.state = props.payment;
     this.isSettingsSaved = this.isSettingsSaved.bind(this);
