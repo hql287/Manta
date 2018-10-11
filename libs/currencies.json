@@ -170,13 +170,13 @@
     "code": "BWP",
     "name_plural": "Botswanan pulas"
   },
-  "BYR": {
-    "symbol": "BYR",
+  "BYN": {
+    "symbol": "BYN",
     "name": "Belarusian Ruble",
-    "symbol_native": "BYR",
-    "decimal_digits": 0,
+    "symbol_native": "Br",
+    "decimal_digits": 2,
     "rounding": 0,
-    "code": "BYR",
+    "code": "BYN",
     "name_plural": "Belarusian rubles"
   },
   "BZD": {
