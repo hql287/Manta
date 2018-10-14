@@ -10,7 +10,7 @@
   },
   "settings": {
     "name": "Form Settings",
-    "hint": "Toogle any field to make it required in the form."
+    "hint": "Toggle any field to make it required in the form."
   },
   "fields": {
     "items": {
