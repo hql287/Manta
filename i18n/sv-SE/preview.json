@@ -1,0 +1,42 @@
+{
+  "sidebar": {
+    "template": "Mall",
+    "alignment": {
+      "name": "Placering",
+      "top": "Topp",
+      "middle": "Mitten",
+      "bottom": "Botten"
+    },
+    "fontSize": "Textstorlek",
+    "logoSize": "Loggans Storlek",
+    "toggle": {
+      "name": "Storlek på Logotyp",
+      "logo": "Logotyp",
+      "symbol": "Symbol",
+      "recipient": "Mottagare"
+    },
+    "accentColor": {
+      "name" : "Accent Färg",
+      "useCustom": "Använd Anpassad"
+    },
+    "actions": {
+      "name": "Åtgärder",
+      "savePDF": "Exportera PDF",
+      "saveConfigs": "Spara Konfigurationer"
+    }
+  },
+  "common": {
+    "billedTo": "Faktureras till",
+    "chooseInvoiceToPreview": "Välj en faktura för att förhandsgranska",
+    "created": "Skapad",
+    "due": "Sista dag",
+    "invoice": "Faktura",
+    "itemDescription": "Item Beskrivning",
+    "notice": "Notis",
+    "order": "Nej",
+    "price": "Pris",
+    "qty": "Antal",
+    "subtotal": "Delsumma",
+    "total": "Total"
+  }
+}

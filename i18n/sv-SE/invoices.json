@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Alla fakturor"
+  },
+  "fields": {
+    "client": "Klient",
+    "invoiceID": "Fakturanummer",
+    "createdDate": "Skapad den",
+    "dueDate": "Förfallodatum",
+    "total": "Att betala"
+  },
+  "status": {
+    "pending": "Avvaktar",
+    "paid": "Betald",
+    "refunded": "Återbetald",
+    "cancelled": "Annullerad"
+  },
+  "btns": {
+    "view": "Visa",
+    "edit": "Ändra",
+    "markAsPaid": "Markera som betald"
+  }
+}

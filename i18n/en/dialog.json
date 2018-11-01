@@ -5,7 +5,7 @@
       "message": "Do you want to start download the update in the background?"
     },
     "noUpdate": {
-      "title": "No update availbale",
+      "title": "No update available",
       "message": "You're using the latest version of the app"
     },
     "error": {
