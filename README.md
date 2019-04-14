@@ -186,7 +186,7 @@ I wrote all the CSS myself. I only use Bootstrap for prototyping at first. But I
 * **Why did you name the project Manta? It has nothing to do with invoicing.**
 
 It's actually very common to associate an animal with your brand. There's a reason behind the Twitter bird, the famous MailChimp Freddy or the Docker whale ... It's called the Baby-Face bias. You can read more about it in the book [Designing for Emotion](https://abookapart.com/products/designing-for-emotion) by [Aaron Walter](http://aarronwalter.com/).
-In my case, I was inspired by the movie [Racing Extinction](http://racingextinction.com/) and by naming this project Manta, I hope to raise people's awareness on some environmental issues mentioned in the movie. You can [read more about it here](https://manta.life/about)
+In my case, I was inspired by the movie [Racing Extinction](http://racingextinction.com/) and by naming this project Manta, I hope to raise people's awareness on some environmental issues mentioned in the movie. You can [read more about it here](https://getmanta.app/about/)
 
 * **I like Manta's logo, did you design it?**
 
@@ -198,13 +198,8 @@ Yes, I'm exploring new opportunities at the moment. Please let me know what you 
 
 * **How do I contact you?**
 
-If you find an issue, please report it here. For everything else, please drop me a line at hi@manta.life
+If you find an issue, please report it here. For everything else, please drop me a line at hi@getmanta.app
 
 ### Acknowledgement
 
-Special thanks to [Crowdin](https://crowdin.com) for providing [an open-source license](https://crowdin.com/page/open-source-project-setup-request) for Manta.
-Feel free to check out [their website](https://crowdin.com/) for more information about this amazing localization management platform.
-
-<a href="https://crowdin.com/" target="_blank">
-  <img src="https://d2ffutrenqvap3.cloudfront.net/items/0n1W0v3D3y0f3b393v2T/crowdin-CollaborativeTranslationTool-logo.png?v=52f34c6a" height="50px">
-</a>
+Special thanks to [Crowdin](https://crowdin.com) for providing [an open-source license](https://crowdin.com/page/open-source-project-setup-request) for Manta. Feel free to check out [their website](https://crowdin.com/) for more information about this amazing localization management platform.
