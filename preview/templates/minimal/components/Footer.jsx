@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 const Column = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: auto;
   ${props =>
     props.left &&
     `
@@ -27,7 +27,7 @@ const Column = styled.div`
 // Component
 function Footer({ t, invoice, profile, configs }) {
   const currentLanguage = configs.language;
-  const { tax, recipient } = invoice;
+  const { tax, recipient, payment } = invoice;
   return (
     <Wrapper>
       <Column left>
@@ -37,6 +37,7 @@ function Footer({ t, invoice, profile, configs }) {
         <p>{profile.email}</p>
         <p>{profile.phone}</p>
         { tax && <p>Tax ID: { tax.tin }</p> }
+        { payment && payment.details.split('\n').map((item, i) => <p key={i}>{item}</p>) }
       </Column>
       {configs.showRecipient && (
         <Column right>

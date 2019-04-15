@@ -11,6 +11,7 @@ import Currency from './_partials/invoice/Currency';
 import Fields from './_partials/invoice/Fields';
 import Other from './_partials/invoice/Other';
 import Tax from './_partials/invoice/Tax';
+import Payment from './_partials/invoice/Payment';
 
 // Component
 class Invoice extends Component {
@@ -20,6 +21,7 @@ class Invoice extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleTaxChange = this.handleTaxChange.bind(this);
     this.handleCurrencyChange = this.handleCurrencyChange.bind(this);
+    this.handlePaymentChange = this.handlePaymentChange.bind(this);
     this.handleVisibilityChange = this.handleVisibilityChange.bind(this);
   }
 
@@ -86,6 +88,22 @@ class Invoice extends Component {
     );
   }
 
+  handlePaymentChange(event) {
+    const target = event.target;
+    const name = target.name;
+    const value = target.value;
+    this.setState(
+      {
+        payment: Object.assign({}, this.state.payment, {
+          [name]: value,
+        }),
+      },
+      () => {
+        this.props.updateSettings('invoice', this.state);
+      }
+    );
+  }
+
   handleVisibilityChange(event) {
     const target = event.target;
     const name = target.name;
@@ -113,6 +131,7 @@ class Invoice extends Component {
       template,
       currency,
       tax,
+      payment,
       required_fields,
       dateFormat,
     } = this.state;
@@ -133,6 +152,12 @@ class Invoice extends Component {
         key="currency_settings"
         currency={currency}
         handleCurrencyChange={this.handleCurrencyChange}
+        t={t}
+      />,
+      <Payment
+        key="payment_settings"
+        handlePaymentChange={this.handlePaymentChange}
+        payment={payment}
         t={t}
       />,
       <Other

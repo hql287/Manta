@@ -165,6 +165,27 @@ exports[`Settings component matches snapshot 1`] = `
         />
       </label>
     </div>
+    <div
+      className="Settings__Setting-iSwZaF jiKDp"
+    >
+      <label
+        className="Settings__Label-bIhYmz iPSgUQ"
+      />
+      <label
+        className="Switch__SwitchStyle-cIZUZy lcgmHp"
+      >
+        <input
+          checked={false}
+          className="Switch__Input-jIJATX kGoGgc"
+          name="payment"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <span
+          className="Switch__Slider-iwwTvI egztuK"
+        />
+      </label>
+    </div>
   </div>
 </div>
 `;

@@ -63,7 +63,7 @@ const Heading = styled.h1`
 
 // Component
 function Header({ t, invoice, profile, configs }) {
-  const { tax, recipient } = invoice;
+  const { tax, recipient, payment } = invoice;
   const { language, accentColor, customAccentColor  } = configs;
   return (
     <InvoiceHeader>
@@ -75,6 +75,7 @@ function Header({ t, invoice, profile, configs }) {
           <p>{profile.email}</p>
           <p>{profile.phone}</p>
           { tax && <p>Tax ID: { tax.tin }</p> }
+          { payment && payment.details.split('\n').map((item, i) => <p key={i}>{item}</p>) }
         </Company>
 
         {configs.showRecipient && (

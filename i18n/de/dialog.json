@@ -88,6 +88,10 @@
     "note": {
       "title": "Ungültige Notiz",
       "message": "Feld Notiz darf nicht leer sein"
+    },
+    "payment": {
+      "title": "Ungültige Zahlungsdetails",
+      "message": "Feld Zahlungsdetails darf nicht leer sein"
     }
   }
 }

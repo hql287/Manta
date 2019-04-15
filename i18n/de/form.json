@@ -64,6 +64,11 @@
       "reverse": "Umkehr der Steuerschuld"
     },
     "note": "Notiz",
-    "currency": "Währung"
+    "currency": "Währung",
+    "payment": {
+      "name": "Bezahlung",
+      "details": "Zahlungsdetails",
+      "description": "Bankverbindungen, digitale Zahlungsoptionen oder andere zahlungsrelevante Informationen"
+    }
   }
 }

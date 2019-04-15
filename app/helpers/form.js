@@ -40,6 +40,7 @@ function getInvoiceData(formData) {
     discount,
     tax,
     note,
+    payment,
     settings,
   } = formData;
   // Required fields
@@ -74,6 +75,8 @@ function getInvoiceData(formData) {
   if (required_fields.tax) invoiceData.tax = tax;
   // Set Note
   if (required_fields.note) invoiceData.note = note.content;
+  // Set Payment
+  if (required_fields.payment) invoiceData.payment = payment;
 
   // Return final value
   return Object.assign({}, invoiceData, {
@@ -250,6 +253,22 @@ function validateNote(isRequired, note) {
   return true;
 }
 
+function validatePayment(isRequired, payment) {
+  const { details } = payment;
+  if (isRequired) {
+    if (!details || details === '') {
+      openDialog({
+        type: 'warning',
+        title: i18n.t('dialog:validation:payment:title'),
+        message: i18n.t('dialog:validation:payment:message'),
+      });
+      return false;
+    }
+    return true;
+  }
+  return true;
+}
+
 function validateInvoiceID(isRequired, invoiceID) {
   if (isRequired) {
     if (!invoiceID || invoiceID === '') {
@@ -292,5 +311,6 @@ export {
   validateDiscount,
   validateTax,
   validateNote,
+  validatePayment,
   setEditRecipient,
 };

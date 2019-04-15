@@ -11,6 +11,7 @@
       "hint": "Accepts PNG, JPG & SVG (Recommended)"
     },
     "taxSettings": "Tax Settings",
+    "paymentSettings": "Payment Settings",
     "template": "Template",
     "dateFormat": "Date Format",
     "pdfExportDir": "PDF Export Directory",

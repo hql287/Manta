@@ -23,6 +23,7 @@ const initialState = {
   },
   discount: {},
   note: {},
+  payment: invoiceSettings.payment,
   invoiceID: "",
   // Set default values for currency and tax
   currency: invoiceSettings.currency,
@@ -39,6 +40,7 @@ const initialState = {
   savedSettings: {
     tax: invoiceSettings.tax,
     currency: invoiceSettings.currency,
+    payment: invoiceSettings.payment,
     required_fields: invoiceSettings.required_fields,
   },
 };
@@ -126,6 +128,7 @@ const FormReducer = handleActions(
         dueDate,
         discount,
         note,
+        payment,
         contacts,
       } = action.payload;
       return Object.assign({}, state, {
@@ -141,6 +144,7 @@ const FormReducer = handleActions(
         currency: currency !== undefined ? currency : state.currency,
         discount: discount !== undefined ? discount : state.discount,
         tax: tax !== undefined ? tax : state.tax,
+        payment: payment !== undefined ? payment : state.payment,
         dueDate: dueDate !== undefined ? dueDate : state.dueDate,
         note:
           note !== undefined
@@ -158,6 +162,7 @@ const FormReducer = handleActions(
             invoiceID: invoiceID !== undefined,
             currency: currency !== state.savedSettings.currency,
             tax: tax !== undefined,
+            payment: payment !== undefined,
             dueDate: dueDate !== undefined,
             discount: discount !== undefined,
             note: note !== undefined,
@@ -171,6 +176,7 @@ const FormReducer = handleActions(
       return Object.assign({}, state, {
         savedSettings: Object.assign({}, state.savedSettings, {
           tax: invoiceSettings.tax,
+          payment: invoiceSettings.payment,
           currency: invoiceSettings.currency,
           required_fields: invoiceSettings.required_fields,
         }),
@@ -183,6 +189,7 @@ const FormReducer = handleActions(
         currency: state.savedSettings.currency,
         // Reset to lastest saved settings
         tax: state.savedSettings.tax,
+        payment: state.savedSettings.payment,
         // Update current settings
         settings: Object.assign({}, state.settings, {
           open: false,

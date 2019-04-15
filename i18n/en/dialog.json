@@ -94,6 +94,11 @@
     "note": {
       "title": "Invalid note",
       "message": "Note content can not be blank"
+    },
+
+    "payment": {
+      "title": "Invalid payment details",
+      "message": "Payment details can not be blank"
     }
   }
 }

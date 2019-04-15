@@ -191,6 +191,15 @@ class Settings extends PureComponent {
                   onChange={this.handleInputChange}
                 />
               </Setting>
+
+              <Setting>
+                <Label>{t('form:fields:payment:name')}</Label>
+                <Switch
+                  name="payment"
+                  checked={required_fields.payment}
+                  onChange={this.handleInputChange}
+                />
+              </Setting>
             </AllSettings>
           </Wrapper>
         )}
