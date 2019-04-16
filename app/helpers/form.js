@@ -42,10 +42,24 @@ function getInvoiceData(formData) {
     note,
     settings,
   } = formData;
+  console.log('getInvoiceData', formData);
   // Required fields
   const { editMode, required_fields } = settings;
   // Set Initial Value
   const invoiceData = { rows };
+
+  invoiceData.rows.forEach(row => {
+    if (row.price === '') {
+      row.price = undefined;
+    }
+    if (row.quantity === '') {
+      row.quantity = undefined;
+    }
+    if (row.subtotal === '') {
+      row.subtotal = undefined;
+    }
+  });
+  console.log('getInvoiceData2', invoiceData);
   // Set Recipient
   if (recipient.newRecipient) {
     // Add id & created_at so the invoice records will remembers
@@ -144,25 +158,25 @@ function validateRows(rows) {
       break;
     }
     // Is the price presented and greater than 0?
-    if (!row.price || row.price <= 0) {
-      openDialog({
-        type: 'warning',
-        title: i18n.t('dialog:validation:rows:priceZero:title'),
-        message: i18n.t('dialog:validation:rows:priceZero:message'),
-      });
-      validated = false;
-      break;
-    }
-    // Is the quantity presented and greater than 0?
-    if (!row.quantity || row.quantity <= 0) {
-      openDialog({
-        type: 'warning',
-        title: i18n.t('dialog:validation:rows:qtyZero:title'),
-        message: i18n.t('dialog:validation:rows:qtyZero:message'),
-      });
-      validated = false;
-      break;
-    }
+    // if (!row.price || row.price <= 0) {
+    //   openDialog({
+    //     type: 'warning',
+    //     title: i18n.t('dialog:validation:rows:priceZero:title'),
+    //     message: i18n.t('dialog:validation:rows:priceZero:message'),
+    //   });
+    //   validated = false;
+    //   break;
+    // }
+    // // Is the quantity presented and greater than 0?
+    // if (!row.quantity || row.quantity <= 0) {
+    //   openDialog({
+    //     type: 'warning',
+    //     title: i18n.t('dialog:validation:rows:qtyZero:title'),
+    //     message: i18n.t('dialog:validation:rows:qtyZero:message'),
+    //   });
+    //   validated = false;
+    //   break;
+    // }
   }
   return validated;
 }

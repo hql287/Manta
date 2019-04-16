@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'recompose';
+import TextareaAutosize from 'react-autosize-textarea';
 
 // HOCs
 import _withDraggable from './hoc/_withDraggable';
@@ -14,7 +15,7 @@ const ItemDiv = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  flex: 1;
+  flex: 1 auto;
 
   & > div {
     display: flex;
@@ -27,6 +28,18 @@ const ItemDiv = styled.div`
 `;
 
 const ItemDivInput = styled.input`
+  min-height: 36px;
+  border-radius: 4px;
+  padding: 0 10px;
+  font-size: 16px;
+  display: block;
+  width: 100%;
+  border: 1px solid #f2f3f4;
+  color: #3a3e42;
+  font-size: 14px;
+`;
+
+const ItemDivTextArea = styled(TextareaAutosize)`
   min-height: 36px;
   border-radius: 4px;
   padding: 0 10px;
@@ -134,12 +147,14 @@ export class ItemRow extends Component {
           </div>
         )}
         <div className="flex3">
-          <ItemDivInput
+          <ItemDivTextArea
+            maxRows={4}
             name="description"
-            type="text"
+            contentEditable
+            suppressContentEditableWarning
             value={this.state.description}
             onChange={this.handleTextInputChange}
-            onKeyDown={this.handleKeyDown}
+            // onKeyDown={this.handleKeyDown}
             placeholder={t('form:fields:items:description')}
           />
         </div>

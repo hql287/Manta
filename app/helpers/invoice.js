@@ -1,6 +1,6 @@
 function getInvoiceValue(data) {
   function calSub(data) {
-    return data.rows.reduce((value, row) => value + row.subtotal, 0);
+    return data.rows.reduce((value, row) => value + (row.subtotal || 0), 0);
   }
 
   function calDiscount(data) {

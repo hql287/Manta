@@ -20,6 +20,7 @@ const FormMW = ({ dispatch, getState }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.FORM_SAVE: {
       const currentFormData = getState().form;
+      console.log('currentFormData', currentFormData);
       // Validate Form Data
       if (!validateFormData(currentFormData)) return;
       const currentInvoiceData = getInvoiceData(currentFormData);
