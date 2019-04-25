@@ -29,6 +29,7 @@ rules:
 
   # RULES THAT WE SHOULD INVESTIGATE AND PROBABLY ENABLE
   prefer-template: off
+  no-await-in-loop: off
   no-underscore-dangle: off
   prefer-destructuring: off
   no-use-before-define: off

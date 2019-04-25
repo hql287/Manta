@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { getCurrentInvoice } from '../reducers/FormReducer';
 import { translate } from 'react-i18next';
+const ipc = require('electron').ipcRenderer;
 
 // Actions
 import * as FormActions from '../actions/form';
@@ -33,6 +34,30 @@ import {
 
 // Component
 class Form extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.saveFormData = this.saveFormData.bind(this);
+  }
+
+  componentDidMount() {
+    ipc.send('send-hit-to-analytic', 'screenview', {
+      cd: 'Form',
+    });
+  }
+
+  saveFormData() {
+    const {
+      saveFormData,
+    } = this.props.boundFormActionCreators;
+    saveFormData();
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Create',
+      el: 'Create A New Invoice',
+      ev: 1,
+    });
+  }
+
   render() {
     // Form & Settings Actions
     const { updateSettings } = this.props.boundSettingsActionCreators;
@@ -74,7 +99,7 @@ class Form extends PureComponent {
             <Button
               primary={editMode.active}
               success={editMode.active === false}
-              onClick={saveFormData}
+              onClick={this.saveFormData}
             >
               {editMode.active
                 ? t('form:header:btns:update')

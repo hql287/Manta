@@ -94,6 +94,22 @@ class General extends Component {
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col-md-6">
+            <div className="pageItem">
+              <label className="itemLabel">{t('settings:fields:allowsAnalytic')}</label>
+              <label className="switch">
+                <input
+                  name="allowsAnalytic"
+                  type="checkbox"
+                  checked={this.state.allowsAnalytic}
+                  onChange={this.handleInputChange}
+                />
+                <span className="slider round" />
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

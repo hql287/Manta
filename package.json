@@ -12,6 +12,7 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
+    "debug": "electron --inspect=5858 .",
     "dev": "webpack-dev-server --mode development",
     "build": "webpack --env.production --mode production",
     "test": "jest",
@@ -31,16 +32,19 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "dotenv": "^5.0.1",
     "electron-is-dev": "^0.3.0",
     "electron-settings": "^3.1.2",
     "electron-updater": "^2.21.0",
+    "first-run": "^1.2.0",
     "glob": "^7.1.2",
     "i18next": "^10.5.0",
     "is-svg": "^3.0.0",
     "jimp": "^0.2.28",
     "moment": "^2.21.0",
     "pouchdb-browser": "6.2.0",
+    "querystring": "^0.2.0",
     "rc-progress": "^2.2.5",
     "react": "^16.2.0",
     "react-addons-shallow-compare": "^15.6.2",

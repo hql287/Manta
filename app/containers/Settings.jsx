@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { isEqual } from 'lodash';
 import { translate } from 'react-i18next';
+const ipc = require('electron').ipcRenderer;
 
 // Selectors
 import {
@@ -40,6 +41,13 @@ class Settings extends Component {
     this.setSavable = this.setSavable.bind(this);
   }
 
+  componentDidMount() {
+    // Analytic
+    ipc.send('send-hit-to-analytic', 'screenview', {
+       cd: 'Settings',
+    });
+  }
+
   // Check if settings have been saved
   settingsSaved() {
     const { currentSettings, savedSettings } = this.props;
@@ -50,6 +58,11 @@ class Settings extends Component {
   saveSettingsState() {
     const { currentSettings, boundActionCreators } = this.props;
     boundActionCreators.saveSettings(currentSettings);
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Settings',
+      ea: 'Save',
+      el: 'Save Settings'
+    });
   }
 
   // Switch Tab

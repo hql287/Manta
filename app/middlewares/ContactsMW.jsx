@@ -1,5 +1,6 @@
 // Node Libs
 import uuidv4 from 'uuid/v4';
+const ipc = require('electron').ipcRenderer;
 
 // Actions Verbs
 import * as ACTION_TYPES from '../constants/actions.jsx';
@@ -31,6 +32,11 @@ const ContactsMW = ({ dispatch }) => next => action => {
     }
 
     case ACTION_TYPES.CONTACT_SAVE: {
+      ipc.send('send-hit-to-analytic', 'event', {
+        ec: 'Contact',
+        ea: 'Create',
+        el: 'Create A New Contact'
+      });
       return saveDoc('contacts', action.payload)
         .then(newDocs => {
           next({
