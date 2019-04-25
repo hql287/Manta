@@ -34,7 +34,7 @@ describe('Recipient Form component', () => {
 
   // RENDER
   it('renders necessary element', () => {
-    expect(wrapper.find('input')).toHaveLength(4);
+    expect(wrapper.find('input')).toHaveLength(5);
   });
 
   // METHOD

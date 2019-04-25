@@ -91,6 +91,23 @@ exports[`Recipient component matches snapshot 1`] = `
             />
           </div>
         </div>
+        <div
+          className="Part__RowStyle-nLRvo cGeXDT"
+        >
+          <div
+            className="Part__FieldStyle-dkcwja bIqrsv"
+          >
+            <label
+              className="itemLabel"
+            />
+            <input
+              name="address"
+              onChange={[Function]}
+              type="text"
+              value=""
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
