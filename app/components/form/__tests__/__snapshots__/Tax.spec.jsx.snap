@@ -77,6 +77,9 @@ exports[`Note component matches snapshot 1`] = `
           <option
             value="reverse"
           />
+          <option
+            value="fixed"
+          />
         </select>
       </div>
     </div>

@@ -113,6 +113,7 @@ export class Tax extends PureComponent {
               >
                 <option value="default">{t('common:default')}</option>
                 <option value="reverse">{t('form:fields:tax:reverse')}</option>
+                <option value="fixed">{t('form:fields:tax:fixed')}</option>
               </select>
             </Field>
           </Row>

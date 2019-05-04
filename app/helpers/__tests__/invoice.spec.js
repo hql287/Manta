@@ -38,6 +38,23 @@ const data3 = {
   rows: [{ subtotal: 50 }, { subtotal: 100 }, { subtotal: 150 }],
 };
 
+const data4 = {
+  rows: [
+    { subtotal: 10 },
+    { subtotal: 20 },
+    { subtotal: 40 },
+    { subtotal: 50 },
+  ],
+  discount: {
+    type: 'percentage',
+    amount: 10,
+  },
+  tax: {
+    amount: 2,
+    method: 'fixed',
+  },
+};
+
 it('should return correct subtotal value', () => {
   expect(getInvoiceValue(data1).subtotal).toEqual(200);
   expect(getInvoiceValue(data1).subtotal).not.toEqual(100);
@@ -45,6 +62,8 @@ it('should return correct subtotal value', () => {
   expect(getInvoiceValue(data2).subtotal).not.toEqual(180);
   expect(getInvoiceValue(data3).subtotal).toEqual(300);
   expect(getInvoiceValue(data3).subtotal).not.toEqual(310);
+  expect(getInvoiceValue(data4).subtotal).toEqual(120);
+  expect(getInvoiceValue(data4).subtotal).not.toEqual(130);
 });
 
 it('should return correct discount', () => {
@@ -53,6 +72,8 @@ it('should return correct discount', () => {
   expect(getInvoiceValue(data2).discount).toEqual(16);
   expect(getInvoiceValue(data2).discount).not.toEqual(18);
   expect(getInvoiceValue(data3).discount).toEqual(undefined);
+  expect(getInvoiceValue(data4).discount).toEqual(12);
+  expect(getInvoiceValue(data4).discount).not.toEqual(13);
 });
 
 it('should return correct tax value', () => {
@@ -61,6 +82,8 @@ it('should return correct tax value', () => {
   expect(getInvoiceValue(data2).taxAmount).toEqual(7.2);
   expect(getInvoiceValue(data2).taxAmount).not.toEqual(8);
   expect(getInvoiceValue(data3).taxAmount).toEqual(undefined);
+  expect(getInvoiceValue(data4).taxAmount).toEqual(2);
+  expect(getInvoiceValue(data4).taxAmount).not.toEqual(4);
 });
 
 it('should return correct grandTotal value', () => {
@@ -70,4 +93,6 @@ it('should return correct grandTotal value', () => {
   expect(getInvoiceValue(data2).grandTotal).not.toEqual(151.2);
   expect(getInvoiceValue(data3).grandTotal).toEqual(300);
   expect(getInvoiceValue(data3).grandTotal).not.toEqual(310);
+  expect(getInvoiceValue(data4).grandTotal).toEqual(110);
+  expect(getInvoiceValue(data4).grandTotal).not.toEqual(115);
 });

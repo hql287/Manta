@@ -38,6 +38,7 @@ function Tax({ t, tax, handleTaxChange }) {
           <select name="method" value={tax.method} onChange={handleTaxChange}>
             <option value="default">{t('common:default')}</option>
             <option value="reverse">{t('form:fields:tax:reverse')}</option>
+            <option value="fixed">{t('form:fields:tax:fixed')}</option>
           </select>
         </Field>
       </Row>
