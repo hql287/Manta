@@ -16,6 +16,7 @@ import sk from './sk';
 import urPK from './ur-PK';
 import vi from './vi';
 import zhCN from './zh-CN';
+import svSE from './sv-SE';
 
 i18n.use(reactI18nextModule).init({
   lng: defaultLanguage,
@@ -31,7 +32,8 @@ i18n.use(reactI18nextModule).init({
     sk,
     "ur-PK": urPK,
     vi,
-    "zh-CN": zhCN
+    "zh-CN": zhCN,
+    "sv-SE": svSE
   },
   interpolation: {
     function(value, format, lng) {

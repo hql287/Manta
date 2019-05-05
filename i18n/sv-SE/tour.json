@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Hoppa Över",
+    "next": "Nästa",
+    "start": "Starta fakturering"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋  Hej!",
+      "description": "Tack för att du gav mig ett försök. Låt mig visa dig hur du skapar fantastiska fakturor med bara tre enkla steg"
+    },
+    "create": {
+      "heading": "Steg 1. Skapa",
+      "description": "Manta har ett flexibelt formgränssnitt. Det håller saker enkelt som standard men du kan alltid slå på / av ytterligare fält när du finner det nödvändigt."
+    },
+    "preview": {
+      "heading": "Steg 2. Anpassa",
+      "description": "Manta kommer med professionella mallar som kan anpassas ytterligare för att matcha ditt varumärke."
+    },
+    "save": {
+      "heading": "Steg 3. Spara",
+      "description": "När du är nöjd med fakturans utseende kan du spara den som PDF för senare användning. Skriv ut det eller maila det, låt oss använda Manta för att imponera på dina kunder nu!"
+    },
+    "success": {
+      "heading": "Klart!!! ✋️",
+      "description": "Där har du det, de tre enkla stegen för att skapa fantastiska fakturor med Manta. Kom ihåg att uppdatera företagsprofil och logotyp innan du faktiskt använder fakturan."
+    }
+  }
+}

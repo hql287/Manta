@@ -36,7 +36,7 @@ function Footer({ t, invoice, profile, configs }) {
         <p>{profile.address}</p>
         <p>{profile.email}</p>
         <p>{profile.phone}</p>
-        { tax && <p>Tax ID: { tax.tin }</p> }
+        { tax && <p>{t('form:fields:tax:id')}: { tax.tin }</p> }
       </Column>
       {configs.showRecipient && (
         <Column right>

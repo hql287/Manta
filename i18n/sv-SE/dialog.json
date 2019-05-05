@@ -1,0 +1,99 @@
+{
+  "appUpdate" : {
+    "available": {
+      "title": "Ny uppdatering tillgänglig",
+      "message": "Vill du börja ladda ner uppdateringen i bakgrunden?"
+    },
+    "noUpdate": {
+      "title": "Ingen uppdatering tillgänglig",
+      "message": "Du använder den senaste versionen av appen"
+    },
+    "error": {
+      "title": "Ett fel har uppstått"
+    },
+    "downloaded": {
+      "title": "Uppdatering hämtad",
+      "message": "Vill du avsluta och uppgradera appen nu?",
+      "quitNow": "Avsluta nu",
+      "later": "Senare"
+    }
+  },
+  "noAccess": {
+    "title": "Ingen åtkomstbehörighet",
+    "message": "Vänligen välj en annan katalog"
+  },
+  "errorBoundary": "Ett fel har uppstått",
+  "deleteInvoice": {
+    "title": "Ta bort denna faktura?",
+    "message": "Fakturan kommer att tas bort permanent från databasen"
+  },
+  "deleteContact": {
+    "title": "Ta bort den här kontakten?",
+    "message": "Kontakten kommer att tas bort permanent från databasen"
+  },
+  "fileTypeErr": {
+    "title": "Var god välj en annan fil"
+  },
+  "validation": {
+    "invoiceID": {
+      "title": "Ogiltigt Fakturanummer",
+      "message": "Fakturanummer kan inte vara tomt"
+    },
+    "recipient": {
+      "empty": {
+        "title": "Ogiltig kontakt",
+        "message": "Kontakt kan inte vara tomt"
+      },
+      "requiredFields": {
+        "title": "Obligatoriska fält",
+        "message": "Vänligen fyll i alla obligatoriska fält"
+      },
+      "email": {
+        "title": "Ogiltig email",
+        "message": "Vänligen skriv in en giltig email address"
+      }
+    },
+
+    "rows": {
+      "emptyDescription": {
+        "title": "Ogiltig beskrivning",
+        "message": "Beskrivning kan inte vara tom"
+      },
+      "priceZero": {
+        "title": "Ogiltigt pris",
+        "message": "Priset måste vara större än noll"
+      },
+      "qtyZero": {
+        "title": "Ogiltig kvantitet",
+        "message": "kvantitet måste vara större än noll"
+      }
+    },
+
+    "dueDate": {
+      "title": "Ogiltigt förfallodatum",
+      "message": "Var god välj ett datum"
+    },
+
+    "currency": {
+      "fraction": {
+        "title": "Ogiltig fraktion",
+        "message": "Decimalfraktionen måste vara lika med eller större än noll"
+      }
+    },
+
+    "discount": {
+      "title": "Ogiltig rabatt",
+      "message": "Rabattbeloppet måste vara större än noll"
+    },
+
+    "tax": {
+      "title": "Ogiltig skatt",
+      "message": "Skattebeloppet måste vara större än noll"
+    },
+
+    "note": {
+      "title": "Ogiltig anteckning",
+      "message": "anteckning kan inte vara tomt"
+    }
+  }
+}

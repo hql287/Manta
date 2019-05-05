@@ -1,0 +1,67 @@
+{
+  "header": "Inställningar",
+  "tabs": {
+    "profile": "Profil",
+    "invoice": "Faktura",
+    "general": "Allmänt"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logotyp",
+      "hint": "Accepterar PNG, JPG & SVG (rekommenderas)"
+    },
+    "taxSettings": "Skatteinställningar",
+    "template": "Mall",
+    "dateFormat": "Datumformat",
+    "pdfExportDir": "PDF Exportkatalog",
+    "requiredFields": "Obligatoriska fält",
+    "sound": "Ljud",
+    "mute": "Stäng ljudet",
+    "autoCheckUpdate": {
+      "name": "Automatisk kontroll för uppdatering",
+      "daily": "Varje dag (rekommenderas)",
+      "weekly": "Varje vecka"
+    },
+    "currency": {
+      "placement": "Teckenplacering",
+      "afterAmount": "Efter belopp",
+      "beforeAmount": "Före belopp",
+      "fraction": "Decimal Fraktion",
+      "separator": "Separator",
+      "commaDot": "Kommatecken & Punkt",
+      "dotComma": "Punkt & Kommatecken",
+      "spaceDot": "Utrymme & Punkt"
+    },
+    "openPDFReader": "Öppna PDF efter exportering",
+    "language": {
+      "name": "Språk",
+      "ar": "Arabiska",
+      "cs": "Tjeckiska",
+      "da": "Danska",
+      "de": "Tyska",
+      "el": "Grekisk",
+      "en": "Engelsk",
+      "esES": "Spansk",
+      "fr": "Franska",
+      "id": "Indonesisk",
+      "it": "Italienska",
+      "ja": "Japanska",
+      "ko": "Koreanska",
+      "lt": "Litauiska",
+      "nl": "Holländska",
+      "ptBR": "Brasiliansk portugisiska",
+      "ptPT": "Portugisiska",
+      "ru": "Ryska",
+      "sk": "Slovakiska",
+      "th": "Taiwanesiska",
+      "tl": "Tagalog, Filippinerna",
+      "tr": "Turkiska",
+      "ur-PK": "Urdu (Pakistan)",
+      "vi": "Vietnamesiska",
+      "zh-CN": "Kinesiska (Förenklad)",
+      "zh-TW": "Kinesiska (Traditionell)",
+      "sv-SE": "Svenska"
+    },
+    "other": "Annat"
+  }
+}

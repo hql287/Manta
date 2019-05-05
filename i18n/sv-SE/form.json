@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Skapa en ny faktura",
+    "edit": "Redigera faktura",
+    "btns": {
+      "clear": "Rensa",
+      "update": "Uppdatera",
+      "saveAndPreview": "Spara & förhandsgranska"
+    }
+  },
+  "settings": {
+    "name": "Form Inställningar",
+    "hint": "Växla fälten av/på för att göra dem obligatoriska i formuläret."
+  },
+  "fields": {
+    "items": {
+      "name": "Produkt/Tjänst",
+      "description": "Beskrivning",
+      "price": "Pris",
+      "quantity": "Antal",
+      "add": "Lägg till"
+    },
+    "recipient": {
+      "name": "Mottagare",
+      "select": "Välj",
+      "add": "Skapa ny"
+    },
+    "discount": {
+      "name": "Rabatt",
+      "percentage": "Procentsats",
+      "flat": "Platt avgift"
+    },
+    "dueDate": {
+      "name": "Förfallodatum",
+      "placeHolder": "Välj ett anpassat datum",
+      "paymentTerms": {
+        "name": "Välj ett betalningsvillkor",
+        "net7": {
+          "label": "Netto 7",
+          "description": "Betalning sju dagar efter fakturadatum"
+        },
+        "net10": {
+          "label": "Netto 10",
+          "description": "Betalning tio dagar efter fakturadatum"
+        },
+        "net30": {
+          "label": "Netto 30",
+          "description": "Betalning 30 dagar efter fakturadatum"
+        },
+        "net60": {
+          "label": "Netto 60",
+          "description": "Betalning 60 dagar efter fakturadatum"
+        },
+        "net90": {
+          "label": "Netto 90",
+          "description": "Betalning 90 dagar efter fakturadatum"
+        }
+      }
+    },
+    "tax": {
+      "name": "Skatt",
+      "id": "Organisationsnummer",
+      "method": "Metod",
+      "reverse": "Omvänd skattskyldighet"
+    },
+    "note": "Anteckning",
+    "currency": "Valuta"
+  }
+}

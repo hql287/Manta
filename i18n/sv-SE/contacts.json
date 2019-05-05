@@ -1,0 +1,9 @@
+{
+  "header": "Alla kontakter",
+  "fields": {
+    "contact": "Kontakt",
+    "email": "E-post",
+    "phone": "Telefon",
+    "actions": "Åtgärder"
+  }
+}

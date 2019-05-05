@@ -1,0 +1,16 @@
+{
+  "noContact": "Du har ingen kontakt än",
+  "noInvoice": "Du har inte skapat någon faktura än",
+  "invoice": {
+    "saved": "Fakturan sparades framgångsrikt",
+    "updated": "Fakturan uppdaterades framgångsrikt",
+    "deleted": "Fakturan raderades framgångsrikt"
+  },
+  "contact": {
+    "saved": "Kontakten sparades framgångsrikt",
+    "deleted": "Kontakten raderades framgångsrikt"
+  },
+  "settings": {
+    "saved": "Alla inställningar har sparats framgångsrikt"
+  }
+}
