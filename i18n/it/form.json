@@ -43,6 +43,10 @@
           "label": "10 gg",
           "description": "Pagamento entro 10 giorni data fattura"
         },
+        "net14": {
+          "label": "14 gg FM",
+          "description": "Pagamento entro 14 giorni fine mese data fattura"
+        },
         "net30": {
           "label": "30 gg FM",
           "description": "Pagamento entro 30 giorni fine mese data fattura"

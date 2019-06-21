@@ -43,6 +43,10 @@
           "label": "Netto zehn Tage",
           "description": "Zahlung innerhalb von zehn Tagen ab Rechnungsdatum"
         },
+        "net14": {
+          "label": "Netto 14 Tage",
+          "description": "Zahlung innerhalb von 14 Tagen ab Rechnungsdatum"
+        },
         "net30": {
           "label": "Netto 30 Tage",
           "description": "Zahlung innerhalb von 30 Tagen ab Rechnungsdatum"
