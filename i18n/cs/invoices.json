@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Všechny faktury"
+  },
+  "fields": {
+    "client": "Klient",
+    "invoiceID": "Číslo faktury",
+    "createdDate": "Datum vystavení",
+    "dueDate": "Datum splatnosti",
+    "total": "Částka celkem"
+  },
+  "status": {
+    "pending": "Čeká na uzrahení",
+    "paid": "Uhrazena",
+    "refunded": "Vrácena",
+    "cancelled": "Stornována"
+  },
+  "btns": {
+    "view": "Zobrazit",
+    "edit": "Editovat",
+    "markAsPaid": "Označit jako zaplacenou"
+  }
+}

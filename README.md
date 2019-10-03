@@ -51,6 +51,7 @@ The following languages are currently being translated, if you would like to Man
 
 * [🇨🇳 中文 (Chinese Simplified)](https://crowdin.com/project/manta/zh-CN#)
 * [🇨🇳 中文 (Chinese Traditional)](https://crowdin.com/project/manta/zh-TW#)
+* [CZ Česky (Czech)](https://crowdin.com/project/manta/cs-CZ#)
 * [🇩🇪 Deutsch (German)](https://crowdin.com/project/manta/de#)
 * [🇩🇰 Dansk (Danish)](https://crowdin.com/project/manta/da#)
 * [🇪🇸 Español (Spanish)](https://crowdin.com/project/manta/es-ES)

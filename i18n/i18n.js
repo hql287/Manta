@@ -7,6 +7,7 @@ const isDev = require('electron-is-dev');
 const moment = require('moment');
 
 // Language Files
+import cs from './cs';
 import de from './de';
 import en from './en';
 import fr from './fr';
@@ -23,6 +24,7 @@ i18n.use(reactI18nextModule).init({
   debug: isDev,
   defaultNS: 'form',
   resources: {
+    cs,
     de,
     en,
     fr,

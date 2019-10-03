@@ -1,0 +1,29 @@
+{
+  "actions": {
+    "skip": "Přeskočit",
+    "next": "Další",
+    "start": "Začít fakturovat"
+  },
+  "slides": {
+    "welcome": {
+      "heading": "👋  Ahoj!",
+      "description": "Díky, že jste mne vyzkoušli. Ukážu vám, jak vytvářet senzanční faktury pouze ve třech krocích"
+    },
+    "create": {
+      "heading": "Krok 1. Vytvořit",
+      "description": "Manta má flexibilní rozhraní formuláře. Defaultně zachovává věci jednoduché, ale vždy můžete zapnout/vypnout doplňková pole, kdykoli budete potřebovat."
+    },
+    "preview": {
+      "heading": "Krok 2. Přizpůsobit",
+      "description": "Manta poskytuje profesionální šablony, které lze dále přizpůsobit tak, aby odpovídaly vašemu firemnímu vzhledu."
+    },
+    "save": {
+      "heading": "Krok 3. Uložit",
+      "description": "Jakmile jste spokojeni se vzhledem faktury, můžete ji uložit jako PDF pro pozdější použití. Vytiskněte ji nebo ji pošlete emailem, nechte Mantu ať udělá dojem na vaše klienty!"
+    },
+    "success": {
+      "heading": "Hotovo!!! ✋️",
+      "description": "Toto jsou tedy 3 jednoduché kroky pro vytváření senzačních faktur s Manta. Před použitím faktury nezapomeňte aktualizovat firemní profil a logo."
+    }
+  }
+}

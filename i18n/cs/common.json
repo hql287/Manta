@@ -1,0 +1,16 @@
+{
+  "fields": {
+    "fullname": "Celé jméno",
+    "company": "Společnost",
+    "address": "Adresa",
+    "email": "Email",
+    "phone": "Telefon",
+    "website": "Web"
+  },
+  "save": "Uložit",
+  "amount": "Částka",
+  "default": "Defaultní",
+  "saveAsDefault": "Uložit jako defaultní?",
+  "yes": "Ano",
+  "noThanks": "Ne, děkuji"
+}
