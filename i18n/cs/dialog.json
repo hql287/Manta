@@ -1,0 +1,99 @@
+{
+  "appUpdate" : {
+    "available": {
+      "title": "Je dostupná nová aktualizace",
+      "message": "Chcete zahájit stahování aktualizace na pozadí?"
+    },
+    "noUpdate": {
+      "title": "Žádná aktualizace není k dispozici",
+      "message": "Používáte poslední verzi aplikace"
+    },
+    "error": {
+      "title": "Vyskytla se chyba"
+    },
+    "downloaded": {
+      "title": "Aktualizace stažena",
+      "message": "Chcete ukončit program a aktualizovat aplikaci ihned?",
+      "quitNow": "Ukončit nyní",
+      "later": "Později"
+    }
+  },
+  "noAccess": {
+    "title": "Žádná oprávnění k přístupu",
+    "message": "Prosím, zvolte jinou složku"
+  },
+  "errorBoundary": "Vyskytla se chyba",
+  "deleteInvoice": {
+    "title": "Odstranit tuto fakturu?",
+    "message": "Faktura bude trvale odstraněna z databáze"
+  },
+  "deleteContact": {
+    "title": "Odstranit tento kontakt?",
+    "message": "Kontakt bude trvale odstraněn z databáze"
+  },
+  "fileTypeErr": {
+    "title": "Prosím zvolte jiný souboru"
+  },
+  "validation": {
+    "invoiceID": {
+      "title": "Neplatné ID faktury",
+      "message": "ID faktury nemůže být prázdné"
+    },
+    "recipient": {
+      "empty": {
+        "title": "Neplatný kontakt",
+        "message": "Kontakt nemůže být prázdný"
+      },
+      "requiredFields": {
+        "title": "Povinná pole",
+        "message": "Prosím, vplyňte všechny povinná pole"
+      },
+      "email": {
+        "title": "Neplatný email",
+        "message": "Prosím zvolte jiný email"
+      }
+    },
+
+    "rows": {
+      "emptyDescription": {
+        "title": "Neplatný popis",
+        "message": "Popis nemůže být prázdný"
+      },
+      "priceZero": {
+        "title": "Neplatná cena",
+        "message": "Cena musí být vyšší než nula"
+      },
+      "qtyZero": {
+        "title": "Neplatné množství",
+        "message": "Množství musí být větší než nula"
+      }
+    },
+
+    "dueDate": {
+      "title": "Neplatné datum splatnosti",
+      "message": "Prosím, zvolte datum"
+    },
+
+    "currency": {
+      "fraction": {
+        "title": "Neplatný počet desetinných míst",
+        "message": "Počet desetinných míst musí být roven nule nebo větší"
+      }
+    },
+
+    "discount": {
+      "title": "Neplatná sleva",
+      "message": "Sleva musí být větší než nula"
+    },
+
+    "tax": {
+      "title": "Neplatná daň",
+      "message": "Částka daně musí být větší než nula"
+    },
+
+    "note": {
+      "title": "Neplatná poznámka",
+      "message": "Obsah poznámky nemůže být prázdný"
+    }
+  }
+}

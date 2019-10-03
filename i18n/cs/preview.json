@@ -1,0 +1,42 @@
+{
+  "sidebar": {
+    "template": "Šablona",
+    "alignment": {
+      "name": "Zarovnání",
+      "top": "Nahoru",
+      "middle": "Nastřed",
+      "bottom": "Dolu"
+    },
+    "fontSize": "Velikost písma",
+    "logoSize": "Velikost loga",
+    "toggle": {
+      "name": "Zapnout",
+      "logo": "Logo",
+      "symbol": "Symbol",
+      "recipient": "Příjemce"
+    },
+    "accentColor": {
+      "name" : "Barva akcentu",
+      "useCustom": "Použít vlastní"
+    },
+    "actions": {
+      "name": "Akce",
+      "savePDF": "Exportovat do PDF",
+      "saveConfigs": "Uložit konfiguraci"
+    }
+  },
+  "common": {
+    "billedTo": "Účtováno na vrub",
+    "chooseInvoiceToPreview": "Prosím, zvolte fakturu, jejíž náhled bude zobrazen",
+    "created": "Datum vytvoření",
+    "due": "Datum splatnosti",
+    "invoice": "Faktura",
+    "itemDescription": "Popis položky",
+    "notice": "Poznámka",
+    "order": "Č.",
+    "price": "Cena",
+    "qty": "Množství",
+    "subtotal": "Částka",
+    "total": "Částka celkem"
+  }
+}

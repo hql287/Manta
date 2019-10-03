@@ -1,0 +1,69 @@
+{
+  "header": {
+    "new": "Vytvořit novou fakturu",
+    "edit": "Editovat fakturu",
+    "btns": {
+      "clear": "Vyčistit",
+      "update": "Aktualizovat",
+      "saveAndPreview": "Uložit & zobrazit náhled"
+    }
+  },
+  "settings": {
+    "name": "Nastavení formuláře",
+    "hint": "Všechna zaškrtnutá pole budou ve formuláři povinná."
+  },
+  "fields": {
+    "items": {
+      "name": "Produkt/služba",
+      "description": "Popis",
+      "price": "Cena",
+      "quantity": "Množství",
+      "add": "Přidat novou položku"
+    },
+    "recipient": {
+      "name": "Příjemce",
+      "select": "Vybrat",
+      "add": "Vytvořit nového"
+    },
+    "discount": {
+      "name": "Sleva",
+      "percentage": "Procenta",
+      "flat": "Fixní částka"
+    },
+    "dueDate": {
+      "name": "Datum splatnosti",
+      "placeHolder": "Zvolit vlastní datum",
+      "paymentTerms": {
+        "name": "Vybrat termín platby",
+        "net7": {
+          "label": "7 dní",
+          "description": "Platba do sedmi dní od vystavení faktury"
+        },
+        "net10": {
+          "label": "10 dní",
+          "description": "Platba do deseti dní od vystavení faktury"
+        },
+        "net30": {
+          "label": "30 dní",
+          "description": "Platba do 30 dní od vystavení faktury"
+        },
+        "net60": {
+          "label": "60 dní",
+          "description": "Platba do 60 dní od vystavení faktury"
+        },
+        "net90": {
+          "label": "90 dní",
+          "description": "Platba do 90 dní od vystavení faktury"
+        }
+      }
+    },
+    "tax": {
+      "name": "Daň",
+      "id": "DIČ",
+      "method": "Metoda",
+      "reverse": "Reverse Charge"
+    },
+    "note": "Poznámka",
+    "currency": "Měna"
+  }
+}

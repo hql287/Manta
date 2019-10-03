@@ -1,0 +1,66 @@
+{
+  "header": "Nastavení",
+  "tabs": {
+    "profile": "Profil",
+    "invoice": "Faktura",
+    "general": "Obecné"
+  },
+  "fields": {
+    "logo": {
+      "name": "Logo",
+      "hint": "Akceptuje PNG, JPG & SVG (Doporučeno)"
+    },
+    "taxSettings": "Nastavení daně",
+    "template": "Šablona",
+    "dateFormat": "Formát data",
+    "pdfExportDir": "Složka pro export do PDF",
+    "requiredFields": "Povinná pole",
+    "sound": "Zvuk",
+    "mute": "Ztlumit",
+    "autoCheckUpdate": {
+      "name": "Automatická kontrola aktualizací",
+      "daily": "Denně (Doporučeno)",
+      "weekly": "Týdně"
+    },
+    "currency": {
+      "placement": "Umístění znaku měny",
+      "afterAmount": "Za částkou",
+      "beforeAmount": "Před částkou",
+      "fraction": "Počet desetinných míst",
+      "separator": "Oddělovač",
+      "commaDot": "Čárka & Tečka",
+      "dotComma": "Tečka & Čárka",
+      "spaceDot": "Mezera & Tečka"
+    },
+    "openPDFReader": "Otevřít PDF po exportu",
+    "language": {
+      "name": "Jazyk",
+      "ar": "Arabština",
+      "cs": "Čeština",
+      "da": "Dánština",
+      "de": "Němčina",
+      "el": "Řečtina",
+      "en": "Angličtina",
+      "esES": "Španělština",
+      "fr": "Francouzština",
+      "id": "Indonéština",
+      "it": "Italština",
+      "ja": "Japonština",
+      "ko": "Korejština",
+      "lt": "Litevština",
+      "nl": "Holandština",
+      "ptBR": "Portugalština, Brazilština",
+      "ptPT": "Portugalština",
+      "ru": "Ruština",
+      "sk": "Slovenština",
+      "th": "Thajština",
+      "tl": "Tagalština, Filipínština",
+      "tr": "Turečtina",
+      "ur-PK": "Urduština (Pakistánština)",
+      "vi": "Vietnamština",
+      "zh-CN": "Čínština (Zjednodušená)",
+      "zh-TW": "Čínština (Tradiční)"
+    },
+    "other": "Jiný"
+  }
+}

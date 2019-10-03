@@ -1,0 +1,9 @@
+{
+  "header": "Všechny kontakty",
+  "fields": {
+    "contact": "Kontakt",
+    "email": "Email",
+    "phone": "Telefon",
+    "actions": "Akce"
+  }
+}
