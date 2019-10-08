@@ -1,0 +1,23 @@
+{
+  "header": {
+    "name": "Сите Фактури"
+  },
+  "fields": {
+    "client": "Клиент",
+    "invoiceID": "Клиент ID",
+    "createdDate": "Креирано На ",
+    "dueDate": "Краен Рок ",
+    "total": "Вкупна вредност"
+  },
+  "status": {
+    "pending": "Во чекање",
+    "paid": "Платено",
+    "refunded": "Повратно",
+    "cancelled": "Откажано"
+  },
+  "btns": {
+    "view": "Види",
+    "edit": "Измени",
+    "markAsPaid": "Маркирај како платено"
+  }
+}

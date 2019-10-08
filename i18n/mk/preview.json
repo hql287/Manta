@@ -1,0 +1,42 @@
+{
+  "sidebar": {
+    "template": "Шаблон",
+    "alignment": {
+      "name": "Alignment",
+      "top": "Горе",
+      "middle": "Средина",
+      "bottom": "Доле"
+    },
+    "fontSize": "Големина на Фонт",
+    "logoSize": "Големина на Лого ",
+    "toggle": {
+      "name": "Вклучи",
+      "logo": "Лого",
+      "symbol": "Симбол",
+      "recipient": "Примател"
+    },
+    "accentColor": {
+      "name": "Акцент боја",
+      "useCustom": "Избери сам"
+    },
+    "actions": {
+      "name": "Акции",
+      "savePDF": "Направи PDF",
+      "saveConfigs": "Зачувај конфигурација"
+    }
+  },
+  "common": {
+    "billedTo": "Фактурирано до",
+    "chooseInvoiceToPreview": "Изберрете фактурар за преглед",
+    "created": "Креирано",
+    "due": "Крај",
+    "invoice": "Фактура",
+    "itemDescription": "Опис",
+    "notice": "Известување",
+    "order": "Не",
+    "price": "Цена",
+    "qty": "Количина",
+    "subtotal": "Субтотално",
+    "total": "Тотално"
+  }
+}
