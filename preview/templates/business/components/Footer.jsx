@@ -9,6 +9,9 @@ const InvoiceFooter = styled.div`
     padding-bottom: 0.83333em;
     border-bottom: 4px solid #efefd1;
   }
+  p {
+    white-space: pre-wrap;
+  }
   ${props =>
     props.customAccentColor &&
     `
