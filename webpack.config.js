@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const parts = require('./webpack.parts');
 const nodeExternals = require('webpack-node-externals');
 const PATHS = {
@@ -26,7 +26,7 @@ const productionConfig = merge([
     // Exclude NodeModules
     externals: [
       nodeExternals({
-        whitelist: [
+        allowlist: [
           'react-hot-loader',
           'react-hot-loader/patch',
           'redux-logger',
@@ -53,8 +53,6 @@ const developmentConfig = merge([
     },
     // Other Plugins
     plugins: [
-      // prints more readable module names in the browser console on HMR updates
-      new webpack.NamedModulesPlugin(),
       // Ignore stuff
       new webpack.IgnorePlugin(/vertx/),
     ],
@@ -63,7 +61,7 @@ const developmentConfig = merge([
       nodeExternals({
         // Except Webpack Hot Devserver & Emitter so
         // react-hot-loader can work properly
-        whitelist: ['webpack/hot/dev-server', 'webpack/hot/emitter'],
+        allowlist: ['webpack/hot/dev-server', 'webpack/hot/emitter'],
       }),
     ],
   },
@@ -77,7 +75,7 @@ const commonConfig = merge([
     emitError: true,
   }),
   // Separate source map from bundles
-  parts.generateSourceMaps({ type: 'none' }),
+  parts.generateSourceMaps({ type: 'source-map' }),
   {
     target: 'electron-renderer',
     // Set Performance Budget
