@@ -49,6 +49,10 @@ function createTourWindow() {
     movable: false,
     title: 'Tour Window',
     backgroundColor: '#F9FAFA',
+            webPreferences: {
+            nodeIntegration:true,
+enableRemoteModule: true,
+        },
   });
   // Register WindowID with appConfig
   appConfig.set('tourWindowID', parseInt(tourWindow.id));
@@ -85,6 +89,10 @@ function createMainWindow() {
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Main Window',
+            webPreferences: {
+            nodeIntegration:true,
+enableRemoteModule: true,
+        },
   });
   // Register WindowID
   appConfig.set('mainWindowID', parseInt(mainWindow.id));
@@ -127,6 +135,10 @@ function createPreviewWindow() {
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Preview Window',
+            webPreferences: {
+            nodeIntegration:true,
+enableRemoteModule: true,
+        },
   });
   // Register WindowID
   appConfig.set('previewWindowID', parseInt(previewWindow.id));
@@ -224,13 +236,13 @@ function setInitialValues() {
   for (const key in defaultOptions) {
     // Add level 1 key if not exist
     if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
-      if (!appConfig.has(`${key}`)) {
+      if (!appConfig.hasSync(`${key}`)) {
         appConfig.set(`${key}`, defaultOptions[key]);
       }
       // Add level 2 key if not exist
       for (const childKey in defaultOptions[key]) {
         if (Object.prototype.hasOwnProperty.call(defaultOptions[key], childKey)) {
-          if (!appConfig.has(`${key}.${childKey}`)) {
+          if (!appConfig.hasSync(`${key}.${childKey}`)) {
             appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
           }
         }
@@ -287,7 +299,7 @@ function migrateData() {
 
     2: configs => {
       // Return current configs if this is the first time install
-      if ( configs.invoice.currency.placement !== undefined) {
+      if ( configs.invoice.currency && configs.invoice.currency.placement !== undefined) {
         return configs;
       }
       // Update current configs
@@ -304,9 +316,9 @@ function migrateData() {
     },
 
     3: configs => {
+        
       // Return current configs if checkUpdate and lastCheck do not exist
-      const { checkUpdate, lastCheck} = configs.general;
-      if ( checkUpdate === undefined || lastCheck === undefined ) {
+      if (!configs.general ||  configs.general.checkUpdate === undefined || configs.general.lastCheck === undefined ) {
         return configs;
       }
       // Remove checkUpdate and lastCheck
@@ -316,9 +328,9 @@ function migrateData() {
     },
   };
   // Get the current Config
-  const configs = appConfig.getAll();
+  const configs = appConfig.getSync();
   // Get the current configs
-  const version = appConfig.get('version') || 0;
+  const version = appConfig.getSync('version') || 0;
   // Handle migration
   const newMigrations = Object.keys(migrations)
     .filter(k => k > version)
@@ -332,7 +344,8 @@ function migrateData() {
     configs
   );
   // Save the final config to DB
-  appConfig.deleteAll().setAll(migratedConfigs);
+  appConfig.reset()
+  appConfig.setSync(migratedConfigs);
   // Update the latest config version
   appConfig.set('version', newMigrations[newMigrations.length - 1]);
 }
@@ -359,7 +372,13 @@ function addEventListeners() {
 
 function loadMainProcessFiles() {
   const files = glob.sync(path.join(__dirname, 'main/*.js'));
-  files.forEach(file => require(file));
+  files.forEach(file => {
+      try {
+        require(file)
+      } catch (e) {
+          console.log(e);
+      }
+  });
 }
 
 function windowStateKeeper(windowName) {
@@ -367,8 +386,8 @@ function windowStateKeeper(windowName) {
 
   function setBounds() {
     // Restore from appConfig
-    if (appConfig.has(`windowState.${windowName}`)) {
-      windowState = appConfig.get(`windowState.${windowName}`);
+    if (appConfig.hasSync(`windowState.${windowName}`)) {
+      windowState = appConfig.getSync(`windowState.${windowName}`);
       return;
     }
     // Default

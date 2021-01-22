@@ -76,7 +76,7 @@ const FormMW = ({ dispatch, getState }) => next => action => {
       // Pass new data to action and continue
       next({
         type: ACTION_TYPES.SAVED_FORM_SETTING_UPDATE,
-        payload: appConfig.get('invoice'),
+        payload: appConfig.getSync('invoice'),
       });
       // Reload app settings so that
       // Settings tab will have up-to-date information

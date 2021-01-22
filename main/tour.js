@@ -3,9 +3,9 @@ const { BrowserWindow, ipcMain } = require('electron');
 const appConfig = require('electron-settings');
 
 // Get Windows Instance
-const tourWindowID = appConfig.get('tourWindowID');
-const mainWindowID = appConfig.get('mainWindowID');
-const previewWindowID = appConfig.get('previewWindowID');
+const tourWindowID = appConfig.getSync('tourWindowID');
+const mainWindowID = appConfig.getSync('mainWindowID');
+const previewWindowID = appConfig.getSync('previewWindowID');
 const tourWindow = BrowserWindow.fromId(tourWindowID);
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 const previewWindow = BrowserWindow.fromId(previewWindowID);
@@ -41,7 +41,7 @@ function endTour() {
 }
 
 function showWindow(context) {
-  const tour = appConfig.get('tour');
+  const tour = appConfig.getSync('tour');
   if (tour.isActive) {
     if (context === 'startup') {
       tourWindow.on('ready-to-show', () => {
@@ -73,7 +73,7 @@ function showWindow(context) {
 }
 
 function restoreWindows() {
-  const { isMainWinVisible, isPreviewWinVisible } = appConfig.get(
+  const { isMainWinVisible, isPreviewWinVisible } = appConfig.getSync(
     'winsLastVisibleState'
   );
   if (!isMainWinVisible && !isPreviewWinVisible) {

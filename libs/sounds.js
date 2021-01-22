@@ -21,7 +21,7 @@ function preload() {
 
 let sounds;
 function setSounds() {
-  const soundTheme = appConfig.get('general.sound');
+  const soundTheme = appConfig.getSync('general.sound');
   switch (soundTheme) {
     case 'cs': {
       sounds = cs_sounds;
@@ -35,7 +35,7 @@ function setSounds() {
 }
 
 function play(name) {
-  const appMute = appConfig.get('general.muted');
+  const appMute = appConfig.getSync('general.muted');
   if (!appMute) {
     let audio = cache[name];
     if (!audio) {
