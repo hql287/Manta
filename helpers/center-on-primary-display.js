@@ -1,4 +1,5 @@
 const {app, screen} = require('electron');
+
 const centerOnPrimaryDisplay = (winWidth, winHeight) => {
   return app.whenReady().then(() => {
       console.log(screen);

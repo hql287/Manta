@@ -15,6 +15,7 @@ const productionConfig = merge([
   parts.minifyJavaScript(),
   // Output
   {
+    mode: 'production',
     output: {
       path: PATHS.prod,
       filename: '[name].prod.js',
