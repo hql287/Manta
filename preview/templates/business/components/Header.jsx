@@ -106,7 +106,7 @@ function Header({ t, invoice, profile, configs }) {
         <p>
           {t('preview:common:created', { lng: language })}:{' '}
           {moment(invoice.created_at)
-            .lang(language)
+            .locale(language)
             .format(configs.dateFormat)}
         </p>
         {invoice.dueDate && [
@@ -114,12 +114,12 @@ function Header({ t, invoice, profile, configs }) {
             {t('preview:common:due', { lng: language })}:{' '}
             {invoice.dueDate.useCustom
               ? moment(invoice.dueDate.selectedDate)
-                  .lang(language)
+                  .locale(language)
                   .format(configs.dateFormat)
               : moment(
                   calTermDate(invoice.created_at, invoice.dueDate.paymentTerm)
                 )
-                  .lang(language)
+                  .locale(language)
                   .format(configs.dateFormat)}
           </p>,
           <p key="dueDateNote">

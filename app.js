@@ -55,7 +55,7 @@ function createTourWindow() {
     },
   });
   // Register WindowID with appConfig
-  appConfig.set('tourWindowID', parseInt(tourWindow.id));
+  appConfig.setSync('tourWindowID', parseInt(tourWindow.id));
   // Load Content
   tourWindow.loadURL(
     url.format({
@@ -96,7 +96,7 @@ function createMainWindow() {
     },
   });
   // Register WindowID
-  appConfig.set('mainWindowID', parseInt(mainWindow.id));
+  appConfig.setSync('mainWindowID', parseInt(mainWindow.id));
   // Track window state
   mainWindownStateKeeper.track(mainWindow);
   // Load Content
@@ -143,7 +143,7 @@ function createPreviewWindow() {
     },
   });
   // Register WindowID
-  appConfig.set('previewWindowID', parseInt(previewWindow.id));
+  appConfig.setSync('previewWindowID', parseInt(previewWindow.id));
   // Track window state
   previewWindownStateKeeper.track(previewWindow);
   // Load Content
@@ -240,7 +240,7 @@ function setInitialValues() {
     // Add level 1 key if not exist
     if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
       if (!appConfig.hasSync(`${key}`)) {
-        appConfig.set(`${key}`, defaultOptions[key]);
+        appConfig.setSync(`${key}`, defaultOptions[key]);
       }
       // Add level 2 key if not exist
       for (const childKey in defaultOptions[key]) {
@@ -248,7 +248,7 @@ function setInitialValues() {
           Object.prototype.hasOwnProperty.call(defaultOptions[key], childKey)
         ) {
           if (!appConfig.hasSync(`${key}.${childKey}`)) {
-            appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+            appConfig.setSync(`${key}.${childKey}`, defaultOptions[key][childKey]);
           }
         }
       }
@@ -305,6 +305,7 @@ function migrateData() {
     2: (configs) => {
       // Return current configs if this is the first time install
       if (
+        configs.invoice &&
         configs.invoice.currency &&
         configs.invoice.currency.placement !== undefined
       ) {
@@ -358,7 +359,7 @@ function migrateData() {
   appConfig.reset();
   appConfig.setSync(migratedConfigs);
   // Update the latest config version
-  appConfig.set('version', newMigrations[newMigrations.length - 1]);
+  appConfig.setSync('version', newMigrations[newMigrations.length - 1]);
 }
 
 function addEventListeners() {
@@ -415,7 +416,7 @@ function windowStateKeeper(windowName) {
       windowState = window.getBounds();
     }
     windowState.isMaximized = window.isMaximized();
-    appConfig.set(`windowState.${windowName}`, windowState);
+    appConfig.setSync(`windowState.${windowName}`, windowState);
   }
 
   function track(win) {

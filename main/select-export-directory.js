@@ -17,7 +17,7 @@ ipc.on('select-export-directory', event => {
         if (err) {
           event.sender.send('no-access-directory', err.message);
         } else {
-          appConfig.set('exportDir', path[0]);
+          appConfig.setSync('exportDir', path[0]);
           event.sender.send('confirmed-export-directory', path[0]);
         }
       });

@@ -23,12 +23,12 @@ function startTour() {
   tourWindow.show();
   tourWindow.focus();
   // Update tour active state
-  appConfig.set('tour.isActive', true);
+  appConfig.setSync('tour.isActive', true);
 }
 
 function endTour() {
   // Update tour state
-  appConfig.set('tour', {
+  appConfig.setSync('tour', {
     hasBeenTaken: true,
     isActive: false,
   });
@@ -92,7 +92,7 @@ function hideAllWindows() {
 }
 
 function saveWinsVisibleState() {
-  appConfig.set('winsLastVisibleState', {
+  appConfig.setSync('winsLastVisibleState', {
     isMainWinVisible: mainWindow.isVisible(),
     isPreviewWinVisible: previewWindow.isVisible(),
   });

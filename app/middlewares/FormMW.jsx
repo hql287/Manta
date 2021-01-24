@@ -64,7 +64,7 @@ const FormMW = ({ dispatch, getState }) => next => action => {
     case ACTION_TYPES.SAVED_FORM_SETTING_UPDATE: {
       // Save setting to DB
       const { setting, data } = action.payload;
-      appConfig.set(`invoice.${setting}`, data);
+      appConfig.setSync(`invoice.${setting}`, data);
       // Dispatch notification
       dispatch({
         type: ACTION_TYPES.UI_NOTIFICATION_NEW,

@@ -48,9 +48,9 @@ const SettingsMW = ({ dispatch }) => next => action => {
         ipc.send('change-preview-window-language', newLang);
       }
       // Save Settings
-      appConfig.set('profile', action.payload.profile);
-      appConfig.set('invoice', action.payload.invoice);
-      appConfig.set('general', action.payload.general);
+      appConfig.setSync('profile', action.payload.profile);
+      appConfig.setSync('invoice', action.payload.invoice);
+      appConfig.setSync('general', action.payload.general);
       // Reload Sounds Cache
       sounds.preload();
       // Continue
