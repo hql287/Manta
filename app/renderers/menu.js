@@ -5,7 +5,7 @@ const ipc = require('electron').ipcRenderer;
 const isDev = require('electron-is-dev');
 
 // Get mainWindow Object
-const mainWindowID = appConfig.get('mainWindowID');
+const mainWindowID = appConfig.getSync('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
 const aboutMenu = {

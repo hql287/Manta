@@ -49,9 +49,13 @@ function createTourWindow() {
     movable: false,
     title: 'Tour Window',
     backgroundColor: '#F9FAFA',
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+    },
   });
   // Register WindowID with appConfig
-  appConfig.set('tourWindowID', parseInt(tourWindow.id));
+  appConfig.setSync('tourWindowID', parseInt(tourWindow.id));
   // Load Content
   tourWindow.loadURL(
     url.format({
@@ -61,10 +65,11 @@ function createTourWindow() {
     })
   );
   // Add Event Listeners
-  tourWindow.on('show', event => {
-    if (isDev || forceDevtools) tourWindow.webContents.openDevTools({ mode: 'detach' });
+  tourWindow.on('show', (event) => {
+    if (isDev || forceDevtools)
+      tourWindow.webContents.openDevTools({ mode: 'detach' });
   });
-  tourWindow.on('close', event => {
+  tourWindow.on('close', (event) => {
     event.preventDefault();
     if (isDev || forceDevtools) tourWindow.webContents.closeDevTools();
     tourWindow.hide();
@@ -85,9 +90,13 @@ function createMainWindow() {
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Main Window',
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+    },
   });
   // Register WindowID
-  appConfig.set('mainWindowID', parseInt(mainWindow.id));
+  appConfig.setSync('mainWindowID', parseInt(mainWindow.id));
   // Track window state
   mainWindownStateKeeper.track(mainWindow);
   // Load Content
@@ -99,10 +108,11 @@ function createMainWindow() {
     })
   );
   // Add Event Listeners
-  mainWindow.on('show', event => {
-    if (isDev || forceDevtools) mainWindow.webContents.openDevTools({ mode: 'detach' });
+  mainWindow.on('show', (event) => {
+    if (isDev || forceDevtools)
+      mainWindow.webContents.openDevTools({ mode: 'detach' });
   });
-  mainWindow.on('close', event => {
+  mainWindow.on('close', (event) => {
     if (process.platform === 'darwin') {
       event.preventDefault();
       if (isDev || forceDevtools) mainWindow.webContents.closeDevTools();
@@ -127,9 +137,13 @@ function createPreviewWindow() {
     backgroundColor: '#2e2c29',
     show: false,
     title: 'Preview Window',
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+    },
   });
   // Register WindowID
-  appConfig.set('previewWindowID', parseInt(previewWindow.id));
+  appConfig.setSync('previewWindowID', parseInt(previewWindow.id));
   // Track window state
   previewWindownStateKeeper.track(previewWindow);
   // Load Content
@@ -141,10 +155,11 @@ function createPreviewWindow() {
     })
   );
   // Add Event Listener
-  previewWindow.on('show', event => {
-    if (isDev || forceDevtools) previewWindow.webContents.openDevTools({ mode: 'detach' });
+  previewWindow.on('show', (event) => {
+    if (isDev || forceDevtools)
+      previewWindow.webContents.openDevTools({ mode: 'detach' });
   });
-  previewWindow.on('close', event => {
+  previewWindow.on('close', (event) => {
     event.preventDefault();
     if (isDev || forceDevtools) previewWindow.webContents.closeDevTools();
     previewWindow.hide();
@@ -224,14 +239,16 @@ function setInitialValues() {
   for (const key in defaultOptions) {
     // Add level 1 key if not exist
     if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
-      if (!appConfig.has(`${key}`)) {
-        appConfig.set(`${key}`, defaultOptions[key]);
+      if (!appConfig.hasSync(`${key}`)) {
+        appConfig.setSync(`${key}`, defaultOptions[key]);
       }
       // Add level 2 key if not exist
       for (const childKey in defaultOptions[key]) {
-        if (Object.prototype.hasOwnProperty.call(defaultOptions[key], childKey)) {
-          if (!appConfig.has(`${key}.${childKey}`)) {
-            appConfig.set(`${key}.${childKey}`, defaultOptions[key][childKey]);
+        if (
+          Object.prototype.hasOwnProperty.call(defaultOptions[key], childKey)
+        ) {
+          if (!appConfig.hasSync(`${key}.${childKey}`)) {
+            appConfig.setSync(`${key}.${childKey}`, defaultOptions[key][childKey]);
           }
         }
       }
@@ -242,7 +259,7 @@ function setInitialValues() {
 function migrateData() {
   // Migration scheme
   const migrations = {
-    1: configs => {
+    1: (configs) => {
       // Get the current configs
       const { info, appSettings } = configs;
       // Return current configs if this is the first time install
@@ -285,9 +302,13 @@ function migrateData() {
       ]);
     },
 
-    2: configs => {
+    2: (configs) => {
       // Return current configs if this is the first time install
-      if ( configs.invoice.currency.placement !== undefined) {
+      if (
+        configs.invoice &&
+        configs.invoice.currency &&
+        configs.invoice.currency.placement !== undefined
+      ) {
         return configs;
       }
       // Update current configs
@@ -298,30 +319,33 @@ function migrateData() {
             placement: 'before',
             separator: 'commaDot',
             fraction: 2,
-          }
-        })
+          },
+        }),
       });
     },
 
-    3: configs => {
+    3: (configs) => {
       // Return current configs if checkUpdate and lastCheck do not exist
-      const { checkUpdate, lastCheck} = configs.general;
-      if ( checkUpdate === undefined || lastCheck === undefined ) {
+      if (
+        !configs.general ||
+        configs.general.checkUpdate === undefined ||
+        configs.general.lastCheck === undefined
+      ) {
         return configs;
       }
       // Remove checkUpdate and lastCheck
       return Object.assign({}, configs, {
-        general: omit(configs.general, ['checkUpdate', 'lastCheck'])
+        general: omit(configs.general, ['checkUpdate', 'lastCheck']),
       });
     },
   };
   // Get the current Config
-  const configs = appConfig.getAll();
+  const configs = appConfig.getSync();
   // Get the current configs
-  const version = appConfig.get('version') || 0;
+  const version = appConfig.getSync('version') || 0;
   // Handle migration
   const newMigrations = Object.keys(migrations)
-    .filter(k => k > version)
+    .filter((k) => k > version)
     .sort();
   // Exit if there's no migration to run
   if (!newMigrations.length) return;
@@ -332,9 +356,10 @@ function migrateData() {
     configs
   );
   // Save the final config to DB
-  appConfig.deleteAll().setAll(migratedConfigs);
+  appConfig.reset();
+  appConfig.setSync(migratedConfigs);
   // Update the latest config version
-  appConfig.set('version', newMigrations[newMigrations.length - 1]);
+  appConfig.setSync('version', newMigrations[newMigrations.length - 1]);
 }
 
 function addEventListeners() {
@@ -346,20 +371,26 @@ function addEventListeners() {
   ipcMain.on('quit-and-install', () => {
     setImmediate(() => {
       // Remove this listener
-      app.removeAllListeners("window-all-closed");
+      app.removeAllListeners('window-all-closed');
       // Force close all windows
       tourWindow.destroy();
       mainWindow.destroy();
       previewWindow.destroy();
       // Start the quit and update sequence
       autoUpdater.quitAndInstall(false);
-    })
+    });
   });
 }
 
 function loadMainProcessFiles() {
   const files = glob.sync(path.join(__dirname, 'main/*.js'));
-  files.forEach(file => require(file));
+  files.forEach((file) => {
+    try {
+      require(file);
+    } catch (e) {
+      console.log(e);
+    }
+  });
 }
 
 function windowStateKeeper(windowName) {
@@ -367,8 +398,8 @@ function windowStateKeeper(windowName) {
 
   function setBounds() {
     // Restore from appConfig
-    if (appConfig.has(`windowState.${windowName}`)) {
-      windowState = appConfig.get(`windowState.${windowName}`);
+    if (appConfig.hasSync(`windowState.${windowName}`)) {
+      windowState = appConfig.getSync(`windowState.${windowName}`);
       return;
     }
     // Default
@@ -385,12 +416,12 @@ function windowStateKeeper(windowName) {
       windowState = window.getBounds();
     }
     windowState.isMaximized = window.isMaximized();
-    appConfig.set(`windowState.${windowName}`, windowState);
+    appConfig.setSync(`windowState.${windowName}`, windowState);
   }
 
   function track(win) {
     window = win;
-    ['resize', 'move'].forEach(event => {
+    ['resize', 'move'].forEach((event) => {
       win.on(event, saveState);
     });
   }

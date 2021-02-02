@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const appConfig = require('electron').remote.require('electron-settings');
 const BrowserWindow = require('electron').remote.BrowserWindow;
 const ipc = require('electron').ipcRenderer;
-const mainWindow = BrowserWindow.fromId(appConfig.get('mainWindowID'));
+const mainWindow = BrowserWindow.fromId(appConfig.getSync('mainWindowID'));
 
 import styled from 'styled-components';
 

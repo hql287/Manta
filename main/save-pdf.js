@@ -5,13 +5,13 @@ const path = require('path');
 const fs = require('fs');
 
 ipcMain.on('save-pdf', (event, docId) => {
-  const exportDir = appConfig.get('invoice.exportDir');
+  const exportDir = appConfig.getSync('invoice.exportDir');
   const pdfPath = path.join(exportDir, `${docId}.pdf`);
   const win = BrowserWindow.fromWebContents(event.sender);
 
   let printOptions;
-  if (appConfig.has('general.printOptions')) {
-    printOptions = appConfig.get('general.printOptions');
+  if (appConfig.hasSync('general.printOptions')) {
+    printOptions = appConfig.getSync('general.printOptions');
   } else {
     printOptions = {
       landscape: false,
@@ -27,7 +27,7 @@ ipcMain.on('save-pdf', (event, docId) => {
       if (error) {
         throw error;
       }
-      if (appConfig.get('general.previewPDF')) {
+      if (appConfig.getSync('general.previewPDF')) {
         // Open the PDF with default Reader
         shell.openExternal('file://' + pdfPath);
       }

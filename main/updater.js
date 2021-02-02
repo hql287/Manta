@@ -5,7 +5,7 @@ const appConfig = require('electron-settings');
 const isDev = require('electron-is-dev');
 
 // Set mainWindow
-const mainWindowID = appConfig.get('mainWindowID');
+const mainWindowID = appConfig.getSync('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
 // Disable Auto Downloading update;

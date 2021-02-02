@@ -66,7 +66,7 @@ function getInvoiceData(formData) {
   if (required_fields.currency) {
     invoiceData.currency = currency;
   } else {
-    invoiceData.currency = appConfig.get('invoice.currency');
+    invoiceData.currency = appConfig.getSync('invoice.currency');
   }
   // Set Discount
   if (required_fields.discount) invoiceData.discount = discount;

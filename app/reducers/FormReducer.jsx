@@ -5,7 +5,7 @@ import { handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
 // Retrive settings
 const appConfig = require('electron').remote.require('electron-settings');
-const invoiceSettings = appConfig.get('invoice');
+const invoiceSettings = appConfig.getSync('invoice');
 // Helper
 import { setEditRecipient } from '../helpers/form';
 

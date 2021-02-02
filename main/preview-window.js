@@ -1,9 +1,9 @@
 // Libs
 const { BrowserWindow, ipcMain } = require('electron');
 const appConfig = require('electron-settings');
-const previewWindowID = appConfig.get('previewWindowID');
+const previewWindowID = appConfig.getSync('previewWindowID');
 const previewWindow = BrowserWindow.fromId(previewWindowID);
-const mainWindowID = appConfig.get('mainWindowID');
+const mainWindowID = appConfig.getSync('mainWindowID');
 const mainWindow = BrowserWindow.fromId(mainWindowID);
 
 ipcMain.on('preview-invoice', (event, invoiceData) => {
