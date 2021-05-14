@@ -346,7 +346,7 @@ function addEventListeners() {
   ipcMain.on('quit-and-install', () => {
     setImmediate(() => {
       // Remove this listener
-      app.removeAllListeners("window-all-closed");
+      app.removeAllListeners('window-all-closed');
       // Force close all windows
       tourWindow.destroy();
       mainWindow.destroy();
