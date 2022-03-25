@@ -76,7 +76,7 @@
     "compression-webpack-plugin": "^1.1.11",
     "devtron": "^1.4.0",
     "duplicate-package-checker-webpack-plugin": "^2.1.0",
-    "electron": "^1.8.3",
+    "electron": "^13.6.6",
     "electron-builder": "^20.4.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
