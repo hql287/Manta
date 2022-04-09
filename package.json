@@ -39,7 +39,7 @@
     "i18next": "^10.5.0",
     "is-svg": "^3.0.0",
     "jimp": "^0.2.28",
-    "moment": "^2.21.0",
+    "moment": "^2.29.2",
     "pouchdb-browser": "6.2.0",
     "rc-progress": "^2.2.5",
     "react": "^16.2.0",
