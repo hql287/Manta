@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://d3crtwyc2nw0fl.cloudfront.net/items/0M0W110L142j0t2H0W2X/manta-logo.svg" alt="Manta App Logo" width="180" height="auto"/>
+  <img width="128" alt="457761" src="https://github.com/user-attachments/assets/80f92e83-7dcb-4586-9c54-2d6f80fcb501" alt="Manta App Logo" width="180" height="auto" />
 </p>
 
 <h2>
@@ -34,13 +34,11 @@ A desktop application for creating invoices with beautiful and customizable temp
 
 Here's a few screenshots of Manta. [See more](https://github.com/hql287/Manta/wiki/Screenshots)
 
-![Business Template](https://dzwonsemrish7.cloudfront.net/items/3c1R1G1F3T3Z0M3n3V3G/Business%20Template.jpg?v=f9064204)
+![Business Template](https://github.com/user-attachments/assets/199d6705-b248-43f4-b581-84b7e351be32)
 
-![Minimal Template](https://dzwonsemrish7.cloudfront.net/items/3k0O3a1V3N1g0u0W3540/Minimal%20Template.jpg?v=7ff9c29c)
+![Minimal Template](https://github.com/user-attachments/assets/cd9d3227-41e0-4ff5-aa59-28c7f7055e4e)
 
-![Form](https://dzwonsemrish7.cloudfront.net/items/3G122M3L3I222w1v0t0W/Form.jpg?v=99f647a7)
-
-![Invoice](https://dzwonsemrish7.cloudfront.net/items/1h34052r3S3R2D2a380z/Invoices.jpg?v=78ddc2a5)
+![Form](https://github.com/user-attachments/assets/4d17905b-753c-472a-a906-cbba3373527a)
 
 ### Translation
 
