@@ -184,7 +184,7 @@ I wrote all the CSS myself. I only use Bootstrap for prototyping at first. But I
 * **Why did you name the project Manta? It has nothing to do with invoicing.**
 
 It's actually very common to associate an animal with your brand. There's a reason behind the Twitter bird, the famous MailChimp Freddy or the Docker whale ... It's called the Baby-Face bias. You can read more about it in the book [Designing for Emotion](https://abookapart.com/products/designing-for-emotion) by [Aaron Walter](http://aarronwalter.com/).
-In my case, I was inspired by the movie [Racing Extinction](http://racingextinction.com/) and by naming this project Manta, I hope to raise people's awareness on some environmental issues mentioned in the movie. You can [read more about it here](https://getmanta.app/about/)
+In my case, I was inspired by the movie [Racing Extinction](http://racingextinction.com/) and by naming this project Manta, I hope to raise people's awareness on some environmental issues mentioned in the movie. You can [read more about it here](https://usemanta.app/about/)
 
 * **I like Manta's logo, did you design it?**
 
@@ -196,7 +196,7 @@ Yes, I'm exploring new opportunities at the moment. Please let me know what you 
 
 * **How do I contact you?**
 
-If you find an issue, please report it here. For everything else, please drop me a line at hi@getmanta.app
+If you find an issue, please report it here. For everything else, please drop me a line at hi@usemanta.app
 
 ### Acknowledgement
 
