@@ -3,7 +3,5 @@ module.exports = {
   // verbose: true,
   collectCoverage: true,
   setupFiles: ['./jest.shim.js', './jest.setup.js'],
-  testPathIgnorePatterns: [
-    '<rootDir>/test/'
-  ]
-};
+  testPathIgnorePatterns: ['<rootDir>/test/'],
+}

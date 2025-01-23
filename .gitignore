@@ -2,5 +2,6 @@
 /node_modules
 /coverage
 /dist
+/dist-electron/*
 /prod
 /monitor

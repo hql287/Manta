@@ -1,0 +1,84 @@
+/* App Wrapper */
+/* =================================================================== */
+/* .appWrapper { */
+/*   display: flex; */
+/*   flex-direction: row; */
+/* } */
+
+/* Sidebar Wrapper */
+/* =================================================================== */
+/* .sideBarWrapper { */
+/*   background: #f9fafa; */
+/*   min-width: 190px; */
+/*   max-width: 190px; */
+/*   width: 190px; */
+/*   border-right: 1px solid #f2f3f4; */
+/* } */
+/* ul.sideBar { */
+/*   list-style: none; */
+/*   margin-top: 0; */
+/*   margin-bottom: 0; */
+/*   padding: 0; */
+/*   padding-top: 50px; */
+/* } */
+/*  */
+/* ul.sideBar li { */
+/*   display: flex; */
+/*   justify-content: flex-start; */
+/*   align-items: center; */
+/*   padding: 0 10px; */
+/* } */
+/*  */
+/* ul.sideBar li a { */
+/*   color: #3a3e42; */
+/*   font-size: 14px; */
+/*   line-height: 21px; */
+/*   text-decoration: none; */
+/*   display: flex; */
+/*   padding: 2px 20px; */
+/*   width: 100%; */
+/*   align-items: center; */
+/*   margin-bottom: 5px; */
+/*   border-radius: 4px; */
+/* } */
+/* ul.sideBar a.active { */
+/*   background: #eceeef; */
+/* } */
+
+/* i#icon-archive { */
+/*   color: #cbc189; */
+/*   font-size: 24px; */
+/*   margin-right: 8px; */
+/* } */
+/*  */
+/* #icon-form { */
+/*   color: #6bbb69; */
+/*   margin-right: 8px; */
+/*   font-size: 18px; */
+/* } */
+/*  */
+/* #icon-contacts { */
+/*   color: #469fe5; */
+/*   margin-right: 8px; */
+/*   font-size: 18px; */
+/* } */
+/*  */
+/* #icon-settings { */
+/*   color: #3a3e42; */
+/*   margin-right: 8px; */
+/*   font-size: 18px; */
+/* } */
+
+/* Main Content */
+/* =================================================================== */
+.mainContentWrapper {
+  /* padding-top: 40px; */
+  width: 100%;
+  overflow: auto;
+}
+
+/* Utilities */
+.flex1 { flex: 1; }
+.flex2 { flex: 2; }
+.flex3 { flex: 3; }
+.flex4 { flex: 4; }

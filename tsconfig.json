@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "moduleResolution": "Bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@eMain/*": ["electron/main/*"],
+      "@eWindows/*": ["electron/windows/*"],
+      "@eUtils/*": ["electron/utils/*"],
+      "@uiConstants/*": ["src/constants/*"],
+      "@uiHelpers/*": ["src/helpers/*"],
+      "@uiChakra/*": ["src/chakra/*"],
+      "@uiTypes/*": ["src/types/*"],
+      "@uiLibs/*": ["src/libs/*"],
+      "@uiStatic/*": ["src/static/*"],
+      "@uiWindows/*": ["src/windows/*"],
+      "@uiSharedComponents/*": ["src/windows/main/components/shared/*"],
+      "@uiMainStore/*": ["./src/windows/main/store/*"],
+      "@uiMainComponents/*": ["./src/windows/main/components/*"],
+      "@uiMainPages/*": ["./src/windows/main/pages/*"]
+    },
+    "outDir": "./dist",
+    "rootDir": ".",
+    "noEmitOnError": true,
+    "isolatedModules": true,
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["ESNext", "DOM"]
+  },
+  "include": [
+    "app.ts",
+    "vite.config.ts",
+    "webpack.config.ts",
+    "src/**/*",
+    "electron/**/*",
+    "app/**/*",
+    "main/**/*",
+    "utils/**/*",
+    "shared/**/*",
+    "windows/**/*",
+    "helpers/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "public",
+    "**/*.test.*",
+    "**/__tests__/**/*"
+  ]
+}

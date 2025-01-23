@@ -1,1 +1,1 @@
-module.exports = jest.fn(() => 'id-string');
+module.exports = jest.fn(() => 'id-string')

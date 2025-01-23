@@ -1,0 +1,273 @@
+*:focus,
+*:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+body,
+#root,
+.appWrapper {
+  height: 100vh;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  animation: fadein 0.5s;
+}
+
+body {
+  overflow-y: hidden;
+}
+
+#root {
+  min-width: min-content;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.draggable {
+  -webkit-app-region: drag;
+}
+.non-draggable {
+  -webkit-app-region: no-drag !important;
+}
+select,
+input[type="text"],
+input[type="number"] {
+  display: block;
+  padding: 0 10px;
+  width: 100%;
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #f2f3f4;
+  font-size: 14px;
+  color: #3a3e42;
+  background: white;
+  -webkit-user-select: none;
+  -webkit-app-region: no-drag;
+}
+
+.input-group-customized {
+  border: 1px solid #f2f3f4;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-left: none;
+  min-width: 60px;
+  justify-content: center;
+  background: #f2f3f4;
+}
+
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+input:disabled {
+  background: #f2f3f4 !important;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  display: none;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #49e845;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #49e845;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.pageLabels {
+  display: flex;
+  margin-bottom: 0 !important;
+}
+.itemLabelNumner {
+  flex: 1;
+  max-width: 20px;
+}
+.itemLabelId {
+  flex: 2;
+}
+.itemLabelDate {
+  flex: 4;
+}
+
+/* Section */
+/* ====================================================== */
+/* Tabs */
+/* ====================================================== */
+.pageTabs {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 40px;
+  margin-bottom: 40px;
+}
+
+.sectionHeader,
+.pageTabs a {
+  text-decoration: none;
+  color: #292b2c;
+  font-weight: 400;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+.pageTabs a.active {
+  color: #0275d8;
+  border-bottom: 2px solid #0275d8;
+}
+
+/* Content */
+/* ====================================================== */
+
+.pageItem {
+  margin-bottom: 20px;
+}
+
+
+#pageFooterHint a {
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  padding: 0;
+}
+
+
+select#themeSwitcher {
+  max-width: 150px;
+  max-height: 24px;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+/* Page Hint */
+.pageHint {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.pageHint-enter {
+  opacity: 0.01;
+}
+
+.pageHint-enter.pageHint-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
+}
+
+.pageHint-leave {
+  opacity: 1;
+}
+
+.pageHint-leave.pageHint-leave-active {
+  opacity: 0.01;
+  transition: opacity 250ms ease-in;
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating {
+  from {
+    -ms-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -ms-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+  -moz-animation: rotating 2s linear infinite;
+  -ms-animation: rotating 2s linear infinite;
+  -o-animation: rotating 2s linear infinite;
+  animation: rotating 2s linear infinite;
+}
