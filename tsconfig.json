@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@components/*": ["app/components/*"],
+      "@shared/*": ["app/shared/*"],
+      "@store/*": ["app/store/*"],
+      "@helpers/*": ["helpers/*"],
+      "@utils/*": ["utils/*"]
+    },
+    "outDir": "./dist",
+    "rootDir": ".",
+    "noEmitOnError": true,
+    "isolatedModules": true,
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["ESNext", "DOM"]
+  },
+  "include": [
+    "app.ts",
+    "vite.config.ts",
+    "webpack.config.ts",
+    "app/**/*",
+    "main/**/*",
+    "utils/**/*",
+    "shared/**/*",
+    "windows/**/*",
+    "helpers/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "public",
+    "**/*.test.*",
+    "**/__tests__/**/*"
+  ]
+}

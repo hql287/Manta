@@ -9,39 +9,53 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
+    "dev": "concurrently \"vite\" \"npm run electron:dev\"",
+    "electron:dev": "cross-env NODE_ENV=development electron .",
     "build": "vite build",
-    "electron": "electron .",
-    "start": "vite & electron .",
-    "dist": "vite build && electron-builder"
+    "start": "electron ."
+  },
+  "build": {
+    "appId": "com.yourapp.id",
+    "files": ["dist/**/*", "main/**/*", "preload.js"],
+    "directories": {
+      "output": "release"
+    }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vitejs/plugin-react": "^4.3.4",
     "electron": "^34.0.1",
     "electron-is-dev": "^3.0.1",
     "electron-settings": "^4.0.4",
     "electron-updater": "^6.3.9",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
+    "node-fetch": "^3.3.2",
+    "path-browserify": "^1.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/prop-types": "^15.7.14",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.21.0",
+    "@typescript-eslint/parser": "^8.21.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
     "electron-builder": "^25.1.8",
-    "vite": "^6.0.11"
-  },
-  "build": {
-    "appId": "com.yourapp.id",
-    "files": [
-      "dist/**/*",
-      "main/**/*",
-      "preload.js"
-    ],
-    "directories": {
-      "output": "release"
-    }
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "prettier": "^3.4.2",
+    "styled-components": "^6.1.14",
+    "uuid": "^11.0.5",
+    "vite": "^6.0.11",
+    "vite-plugin-electron": "^0.29.0",
+    "vite-plugin-svgr": "^4.3.0"
   }
 }
