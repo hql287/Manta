@@ -1,0 +1,31 @@
+.itemLabel {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #444444;
+}
+
+/* Buttons */
+.bottomBarWrapper a {
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  padding: 0 40px;
+}
+.bottomBarWrapper a:focus {
+  background: #f2f3f4;
+}
+.bottomBarWrapper a:hover {
+  border: 1px solid #f2f3f4;
+}
+
+.dragHandler {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #B4B7BA;
+  cursor: move;
+  margin-right: 10px;
+  height: 36px
+}

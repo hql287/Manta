@@ -1,26 +1,22 @@
-// Node Libs
-const fs = require('fs');
+import fs from 'fs';
+import { ipcMain, dialog, BrowserWindow } from 'electron';
+import appConfig from 'electron-settings';
 
-// Electron Libs
-const ipc = require('electron').ipcMain;
-const dialog = require('electron').dialog;
-const BrowserWindow = require('electron').BrowserWindow;
-
-// 3rd Party Libs
-const appConfig = require('electron-settings');
-
-ipc.on('select-export-directory', event => {
+ipcMain.on('select-export-directory', async (event) => {
   const window = BrowserWindow.fromWebContents(event.sender);
-  dialog.showOpenDialog(window, { properties: ['openDirectory'] }, path => {
-    if (path) {
-      fs.access(path[0], fs.constants.W_OK, err => {
-        if (err) {
-          event.sender.send('no-access-directory', err.message);
-        } else {
-          appConfig.set('exportDir', path[0]);
-          event.sender.send('confirmed-export-directory', path[0]);
-        }
-      });
-    }
+  const { canceled, filePaths } = await dialog.showOpenDialog(window, {
+    properties: ['openDirectory'],
   });
+
+  if (!canceled && filePaths.length > 0) {
+    const dirPath = filePaths[0];
+    fs.access(dirPath, fs.constants.W_OK, (err) => {
+      if (err) {
+        event.sender.send('no-access-directory', err.message);
+      } else {
+        appConfig.set('exportDir', dirPath);
+        event.sender.send('confirmed-export-directory', dirPath);
+      }
+    });
+  }
 });

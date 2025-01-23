@@ -1,15 +1,12 @@
-// Electron Libs
-const ipc = require('electron').ipcMain;
-const dialog = require('electron').dialog;
+import { ipcMain, dialog } from 'electron';
 
-ipc.on('open-file-dialog', event => {
-  dialog.showOpenDialog(
-    {
-      properties: ['openFile'],
-      filters: [{ name: 'Images', extensions: ['jpg', 'png', 'svg'] }],
-    },
-    file => {
-      if (file) event.sender.send('file-selected', file[0]);
-    }
-  );
+ipcMain.on('open-file-dialog', async (event) => {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    properties: ['openFile'],
+    filters: [{ name: 'Images', extensions: ['jpg', 'png', 'svg'] }],
+  });
+
+  if (!canceled && filePaths.length > 0) {
+    event.sender.send('file-selected', filePaths[0]);
+  }
 });

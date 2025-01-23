@@ -1,35 +1,74 @@
-// Libs
-const { BrowserWindow, ipcMain } = require('electron');
-const appConfig = require('electron-settings');
-const previewWindowID = appConfig.get('previewWindowID');
-const previewWindow = BrowserWindow.fromId(previewWindowID);
-const mainWindowID = appConfig.get('mainWindowID');
-const mainWindow = BrowserWindow.fromId(mainWindowID);
+import { BrowserWindow, ipcMain } from 'electron';
+import path from 'path';
+import appConfig from 'electron-settings';
 
+const isDev = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
+const getWindowUrl = (windowName) => {
+  return isDev
+    ? `http://localhost:5173/${windowName}`
+    : `file://${path.join(__dirname, `../dist/${windowName}.html`)}`;
+};
+
+let previewWindow = null;
+
+export function createPreviewWindow() {
+  if (!previewWindow) {
+    previewWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      webPreferences: {
+        preload: path.join(__dirname, 'preload.js'),
+        nodeIntegration: false,
+        contextIsolation: true,
+      },
+    });
+
+    previewWindow.loadURL(getWindowUrl('preview'));
+    appConfig.set('previewWindowID', previewWindow.id);
+
+    previewWindow.on('closed', () => {
+      previewWindow = null;
+      appConfig.delete('previewWindowID');
+    });
+  }
+  return previewWindow;
+}
+
+function getMainWindow() {
+  const mainWindowID = appConfig.get('mainWindowID');
+  return BrowserWindow.fromId(mainWindowID);
+}
+
+// IPC Events
 ipcMain.on('preview-invoice', (event, invoiceData) => {
-  // Show & Focus
+  const previewWindow = createPreviewWindow();
   previewWindow.show();
   previewWindow.focus();
-  // Pass Data
   previewWindow.webContents.send('update-preview', invoiceData);
 });
 
-// Update Preview window Config
 ipcMain.on('update-preview-window', (event, newConfigs) => {
-  previewWindow.webContents.send('update-preview-window', newConfigs);
+  if (previewWindow) {
+    previewWindow.webContents.send('update-preview-window', newConfigs);
+  }
 });
 
-// Change UI language for Preview Window
 ipcMain.on('change-preview-window-language', (event, newLang) => {
-  previewWindow.webContents.send('change-preview-window-language', newLang);
+  if (previewWindow) {
+    previewWindow.webContents.send('change-preview-window-language', newLang);
+  }
 });
 
-// Change invoice profile
 ipcMain.on('change-preview-window-profile', (event, newProfile) => {
-  previewWindow.webContents.send('change-preview-window-profile', newProfile);
+  if (previewWindow) {
+    previewWindow.webContents.send('change-preview-window-profile', newProfile);
+  }
 });
 
-// Save configs to invoice
 ipcMain.on('save-configs-to-invoice', (event, invoiceID, configs) => {
-  mainWindow.webContents.send('save-configs-to-invoice', invoiceID, configs);
+  const mainWindow = getMainWindow();
+  if (mainWindow) {
+    mainWindow.webContents.send('save-configs-to-invoice', invoiceID, configs);
+  }
 });

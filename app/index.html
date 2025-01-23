@@ -4,36 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Manta</title>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css"></link>
-    <link rel="stylesheet" href="../static/css/ionicons.min.css"></link>
-    <link rel="stylesheet" href="../static/css/general.css"></link>
-    <link rel="stylesheet" href="../static/css/layout.css"></link>
-    <link rel="stylesheet" href="../static/css/form.css"></link>
-    <link rel="stylesheet" href="../static/css/contact.css"></link>
-    <link rel="stylesheet" href="../static/css/items.css"></link>
-    <link rel="stylesheet" href="../static/css/date-picker.css"></link>
+    <!--<link rel="stylesheet" href="../public/static/css/bootstrap.min.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/ionicons.min.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/general.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/layout.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/form.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/contact.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/items.css"></link>-->
+    <!--<link rel="stylesheet" href="../public/static/css/date-picker.css"></link>-->
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      {
-        const scripts = [];
-        const isDev = require('electron-is-dev');
-        if (isDev) {
-          scripts.push(
-            'http://localhost:3000/main.dev.js'
-          );
-        } else {
-          scripts.push(
-            '../prod/main.prod.js'
-          );
-        }
-        document.write(
-          scripts
-            .map(script => '<script defer src="' + script + '"><\/script>')
-            .join('')
-        );
-      }
-    </script>
   </body>
 </html>

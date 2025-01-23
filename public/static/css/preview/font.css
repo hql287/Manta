@@ -1,0 +1,51 @@
+/* Montserrat */
+@font-face {
+  font-family: 'Montserrat';
+  src:
+    local('Montserrat'),
+    url('../../fonts/Montserrat/Montserrat-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src:
+    local('Montserrat'),
+    url('../../fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src:
+    local('Montserrat'),
+    url('../../fonts/Montserrat/Montserrat-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src:
+    local('Montserrat'),
+    url('../../fonts/Montserrat/Montserrat-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+/* Source Serif Pro */
+@font-face {
+  font-family: 'Source Serif Pro';
+  src:
+    local('Source Serif Pro'),
+    url('../../fonts/SourceSerifPro/SourceSerifPro-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+/* Lora */
+@font-face {
+  font-family: 'Lora';
+  src:
+    local('Lora'),
+    url('../../fonts/Lora/Lora-Regular.ttf') format('truetype');
+    font-weight: 400;
+}

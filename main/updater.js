@@ -1,83 +1,60 @@
-// Libs
-const { BrowserWindow, ipcMain } = require('electron');
-const { autoUpdater } = require('electron-updater');
-const appConfig = require('electron-settings');
-const isDev = require('electron-is-dev');
+import { BrowserWindow, ipcMain } from 'electron';
+import pkg from 'electron-updater';
+import appConfig from 'electron-settings';
 
-// Set mainWindow
-const mainWindowID = appConfig.get('mainWindowID');
-const mainWindow = BrowserWindow.fromId(mainWindowID);
+const { autoUpdater } = pkg;
 
-// Disable Auto Downloading update;
+const mainWindowID = appConfig.getSync('mainWindowID');
+const mainWindow = mainWindowID ? BrowserWindow.fromId(mainWindowID) : null;
+
 autoUpdater.autoDownload = false;
 
-// Check for update silently
 let silentMode = true;
 
-// HANDLING IPC
-// Check for updates manually
-ipcMain.on('check-for-updates', event => {
-  // Turn off silent mode first
+// IPC Handlers
+ipcMain.on('check-for-updates', () => {
   silentMode = false;
   checkForUpdate();
 });
 
-// Start Download
 ipcMain.on('update-download-started', () => {
   autoUpdater.downloadUpdate();
 });
 
-// CHECKING FOR UPDATE EVENTS
-// Checking for Update
+// AutoUpdater Events
 autoUpdater.on('checking-for-update', () => {
-  // Only notice user when they checked manually
-  if (!silentMode) {
-    mainWindow.send('update-checking');
+  if (!silentMode && mainWindow) {
+    mainWindow.webContents.send('update-checking');
   }
 });
 
-// Update Available
-autoUpdater.on('update-available', info => {
-  mainWindow.send('update-available', info);
+autoUpdater.on('update-available', (info) => {
+  if (mainWindow) mainWindow.webContents.send('update-available', info);
 });
 
-// Update Not Available
 autoUpdater.on('update-not-available', () => {
-  // Only notice user when they checked manually
-  if (!silentMode) {
-    mainWindow.send('update-not-available');
+  if (!silentMode && mainWindow) {
+    mainWindow.webContents.send('update-not-available');
   }
 });
 
-// Update Error
-autoUpdater.on('error', error => {
-  let errMessage;
-  if (error == null) {
-    errMessage = 'Unknown Error';
-  } else {
-    errMessage = error.message;
-  };
-  mainWindow.send('update-error', errMessage);
+autoUpdater.on('error', (error) => {
+  const errMessage = error?.message || 'Unknown Error';
+  if (mainWindow) mainWindow.webContents.send('update-error', errMessage);
 });
 
-// DOWNLOADING UPDATE EVENTS
-// Download Progress
-autoUpdater.on('download-progress', progressObj => {
-  mainWindow.send('update-download-progress', progressObj.percent);
+autoUpdater.on('download-progress', (progressObj) => {
+  if (mainWindow) mainWindow.webContents.send('update-download-progress', progressObj.percent);
 });
 
-// Update Downloaded
-autoUpdater.on('update-downloaded', info => {
-  mainWindow.send('update-downloaded', info);
+autoUpdater.on('update-downloaded', (info) => {
+  if (mainWindow) mainWindow.webContents.send('update-downloaded', info);
 });
 
-// Main Function
 function checkForUpdate() {
-  // Only check for update in Production
-  if (!isDev) {
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
     autoUpdater.checkForUpdates();
   }
 }
 
-// Check for update on Startup
 checkForUpdate();
