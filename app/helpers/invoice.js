@@ -14,14 +14,28 @@ function getInvoiceValue(data) {
   }
 
   function calTax(data) {
+    const calTaxByMethod = function(amount, tax) {
+      let taxAmount = 0;
+      switch (tax.method) {
+        case 'fixed':
+          taxAmount = tax.amount;
+          break;
+
+        case 'default':
+        default:
+          taxAmount = amount * tax.amount / 100;
+          break;
+      }
+      return taxAmount;
+    }
     if (data.tax) {
       const subtotal = calSub(data);
       if (data.discount) {
         const discount = calDiscount(data);
         const afterDiscount = subtotal - discount;
-        return afterDiscount * data.tax.amount / 100;
+        return calTaxByMethod(afterDiscount, data.tax);
       }
-      return subtotal * data.tax.amount / 100;
+      return calTaxByMethod(subtotal, data.tax);
     }
   }
 
@@ -33,8 +47,11 @@ function getInvoiceValue(data) {
     }
     if (data.tax) {
       const taxAmount = calTax(data);
-      if (data.tax.method === 'default') {
-        grandTotal += taxAmount;
+      switch (data.tax.method) {
+        case 'default':
+        case 'fixed':
+          grandTotal += taxAmount;
+          break;
       }
     }
     return grandTotal;
