@@ -6,6 +6,10 @@ function calTermDate(createdAt, adjustment) {
       numberOfDaysToAdd = 10;
       break;
     }
+    case 'net14': {
+      numberOfDaysToAdd = 14;
+      break;
+    }
     case 'net30': {
       numberOfDaysToAdd = 30;
       break;

@@ -43,6 +43,10 @@
           "label": "Net 10",
           "description": "Payment ten days after invoice date"
         },
+        "net14": {
+          "label": "Net 14",
+          "description": "Payment 14 days after invoice date"
+        },
         "net30": {
           "label": "Net 30",
           "description": "Payment 30 days after invoice date"

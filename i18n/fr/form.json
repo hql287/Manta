@@ -43,6 +43,10 @@
           "label": "Net 10",
           "description": "Paiement dix jours après la date de facturation"
         },
+        "net14": {
+          "label": "Net 14",
+          "description": "Paiement 14 jours après la date de facturation"
+        },
         "net30": {
           "label": "Net 30",
           "description": "Paiement 30 jours après la date de facturation"
