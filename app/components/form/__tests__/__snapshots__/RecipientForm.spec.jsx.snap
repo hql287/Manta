@@ -68,5 +68,22 @@ exports[`Recipient Form component matches snapshot 1`] = `
       />
     </div>
   </div>
+  <div
+    className="Part__RowStyle-nLRvo cGeXDT"
+  >
+    <div
+      className="Part__FieldStyle-dkcwja bIqrsv"
+    >
+      <label
+        className="itemLabel"
+      />
+      <input
+        name="address"
+        onChange={[MockFunction]}
+        type="text"
+        value=""
+      />
+    </div>
+  </div>
 </div>
 `;
