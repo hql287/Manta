@@ -66,6 +66,7 @@ The following languages are currently being translated, if you would like to Man
 * [🇹🇭 ไทย (Thai)](https://crowdin.com/project/manta/th#)
 * [🇹🇷 Türkçe (Turkish)](https://crowdin.com/project/manta/tr#)
 * [🇻🇳 Việt Nam (Vietnamese)](https://crowdin.com/project/manta/vi)
+* [sv Svenska](https://crowdin.com/project/manta/sv-SE#)
 
 ### Features
 * 🎚 Flexible form. You can turn on/off field and save as default setting.
