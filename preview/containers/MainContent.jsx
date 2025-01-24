@@ -42,12 +42,16 @@ const Page = styled.div`
 // Components
 import Minimal from '../templates/minimal';
 import Business from '../templates/business';
+import Formal from '../templates/formal';
 
 class MainContent extends Component {
   renderTemplate() {
     switch (this.props.configs.template) {
       case 'business': {
         return <Business {...this.props} />;
+      }
+      case 'formal': {
+        return <Formal {...this.props} />;
       }
       default: {
         return <Minimal {...this.props} />;
