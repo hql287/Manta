@@ -60,6 +60,9 @@ class App extends PureComponent {
     ipc.on('menu-form-toggle-note', () => {
       dispatch(FormActions.toggleField('note'));
     });
+    ipc.on('menu-form-toggle-payment', () => {
+      dispatch(FormActions.toggleField('payment'));
+    });
     ipc.on('menu-form-toggle-settings', () => {
       dispatch(FormActions.toggleFormSettings());
     });
@@ -80,6 +83,7 @@ class App extends PureComponent {
       'menu-form-toggle-discount',
       'menu-form-toggle-vat',
       'menu-form-toggle-note',
+      'menu-form-toggle-payment',
       'menu-form-toggle-settings',
       // Save template configs to invoice
       'save-configs-to-invoice'

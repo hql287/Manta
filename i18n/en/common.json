@@ -12,5 +12,6 @@
   "default": "Default",
   "saveAsDefault": "Save as Default?",
   "yes": "Yes",
-  "noThanks": "No, thanks"
+  "noThanks": "No, thanks",
+  "details": "Details"
 }

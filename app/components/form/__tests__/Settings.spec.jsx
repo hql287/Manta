@@ -20,6 +20,7 @@ const currentInvoice = {
   discount: {},
   tax: {},
   note: {},
+  payment: {},
   settings: {
     open: false,
     required_fields: {
@@ -29,6 +30,7 @@ const currentInvoice = {
       discount: false,
       tax: false,
       note: false,
+      payment: false
     },
   },
   savedSettings: {
@@ -41,6 +43,7 @@ const currentInvoice = {
       discount: false,
       tax: false,
       note: false,
+      payment: false
     },
   },
 };
@@ -74,8 +77,8 @@ describe('Settings component', () => {
 
   // RENDER
   it('renders necessary element', () => {
-    expect(wrapper.find('label')).toHaveLength(13);
-    expect(wrapper.find(Switch)).toHaveLength(6);
+    expect(wrapper.find('label')).toHaveLength(15);
+    expect(wrapper.find(Switch)).toHaveLength(7);
   });
 
   // LIFE CYCLE EVENTS
@@ -91,6 +94,7 @@ describe('Settings component', () => {
     const discount = wrapper.find(Switch).at(3);
     const tax = wrapper.find(Switch).at(4);
     const note = wrapper.find(Switch).at(5);
+    const payment = wrapper.find(Switch).at(6);
 
     // Execute & Assert
     invoiceID.find('input').simulate('change');
@@ -121,6 +125,11 @@ describe('Settings component', () => {
     note.find('input').simulate('change');
     expect(toggleField).toHaveBeenCalled();
     expect(toggleField).toHaveBeenCalledWith('note');
+    expect(toggleField).not.toHaveBeenCalledWith('something-else');
+
+    payment.find('input').simulate('change');
+    expect(toggleField).toHaveBeenCalled();
+    expect(toggleField).toHaveBeenCalledWith('payment');
     expect(toggleField).not.toHaveBeenCalledWith('something-else');
   });
 

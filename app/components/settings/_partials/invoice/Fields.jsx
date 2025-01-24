@@ -83,6 +83,18 @@ function Fields({ t, required_fields, handleVisibilityChange }) {
             <span className="slider round" />
           </label>
         </Field>
+        <Field>
+          <label className="itemLabel">{t('form:fields:payment:name')}</label>
+          <label className="switch">
+            <input
+              name="payment"
+              type="checkbox"
+              checked={required_fields.payment}
+              onChange={handleVisibilityChange}
+            />
+            <span className="slider round" />
+          </label>
+        </Field>
       </Row>
     </Part>,
   ];
