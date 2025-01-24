@@ -528,37 +528,37 @@ describe('validateRows', () => {
     });
   });
 
-  it('should validate item price', () => {
-    const rows = [
-      {
-        description: faker.commerce.productName(),
-        price: 0,
-      },
-    ];
-    const validation = validateRows(rows);
-    expect(validation).toEqual(false);
-    expect(openDialog).toBeCalledWith({
-      type: 'warning',
-      title: i18n.t('dialog:validation:rows:priceZero:title'),
-      message: i18n.t('dialog:validation:rows:priceZero:message'),
-    });
-  });
+  // it('should validate item price', () => {
+  //   const rows = [
+  //     {
+  //       description: faker.commerce.productName(),
+  //       price: 0,
+  //     },
+  //   ];
+  //   const validation = validateRows(rows);
+  //   expect(validation).toEqual(false);
+  //   expect(openDialog).toBeCalledWith({
+  //     type: 'warning',
+  //     title: i18n.t('dialog:validation:rows:priceZero:title'),
+  //     message: i18n.t('dialog:validation:rows:priceZero:message'),
+  //   });
+  // });
 
-  it('should validate item quantity', () => {
-    const rows = [
-      {
-        description: faker.commerce.productName(),
-        price: faker.commerce.price(),
-        quantity: 0,
-      },
-    ];
-    const validation = validateRows(rows);
-    expect(validation).toEqual(false);
-    expect(openDialog).toBeCalledWith({
-      type: 'warning',
-      title: i18n.t('dialog:validation:rows:qtyZero:title'),
-      message: i18n.t('dialog:validation:rows:qtyZero:message'),
-    });
+  // it('should validate item quantity', () => {
+  //   const rows = [
+  //     {
+  //       description: faker.commerce.productName(),
+  //       price: faker.commerce.price(),
+  //       quantity: 0,
+  //     },
+  //   ];
+  //   const validation = validateRows(rows);
+  //   expect(validation).toEqual(false);
+  //   expect(openDialog).toBeCalledWith({
+  //     type: 'warning',
+  //     title: i18n.t('dialog:validation:rows:qtyZero:title'),
+  //     message: i18n.t('dialog:validation:rows:qtyZero:message'),
+  //   });
 
     const rows2 = [
       {

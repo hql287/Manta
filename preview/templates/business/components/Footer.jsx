@@ -1,6 +1,8 @@
 // React Libraries
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown'
+
 
 import styled from 'styled-components';
 const InvoiceFooter = styled.div`
@@ -25,7 +27,7 @@ function Footer({ t, invoice, configs }) {
       customAccentColor={customAccentColor}
     >
       <h4>{ t('preview:common:notice', {lng: language}) }</h4>
-      <p>{invoice.note}</p>
+      <ReactMarkdown source={invoice.note} />
     </InvoiceFooter>
   ) : null;
 }
