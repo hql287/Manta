@@ -8,8 +8,8 @@ module.exports = {
     require: jest.fn(name => {
       if (name === 'electron-settings') {
         return {
-          set: jest.fn(),
-          get: jest.fn(() => 'someSettings'),
+          setSync: jest.fn(),
+          getSync: jest.fn(() => 'someSettings'),
         };
       }
     }),

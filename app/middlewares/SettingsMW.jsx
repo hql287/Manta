@@ -14,9 +14,9 @@ const SettingsMW = ({ dispatch }) => next => action => {
   switch (action.type) {
     case ACTION_TYPES.SETTINGS_GET_INITIAL: {
       const savedSettings = {
-        profile: appConfig.get('profile'),
-        invoice: appConfig.get('invoice'),
-        general: appConfig.get('general'),
+        profile: appConfig.getSync('profile'),
+        invoice: appConfig.getSync('invoice'),
+        general: appConfig.getSync('general'),
       };
       return next(
         Object.assign({}, action, {
@@ -33,13 +33,13 @@ const SettingsMW = ({ dispatch }) => next => action => {
       if (!validateTax(true, action.payload.invoice.tax)) break;
       if (!validateCurrency(true, action.payload.invoice.currency)) break;
       // Change Preview Profile
-      const profile = appConfig.get('profile');
+      const profile = appConfig.getSync('profile');
       const newProfile = action.payload.profile;
       if (profile !== newProfile) {
         ipc.send('change-preview-window-profile', newProfile);
       }
       // Change UI language
-      const { language } = appConfig.get('general');
+      const { language } = appConfig.getSync('general');
       const newLang = action.payload.general.language;
       if (language !== newLang) {
         // Change the language
@@ -48,9 +48,9 @@ const SettingsMW = ({ dispatch }) => next => action => {
         ipc.send('change-preview-window-language', newLang);
       }
       // Save Settings
-      appConfig.set('profile', action.payload.profile);
-      appConfig.set('invoice', action.payload.invoice);
-      appConfig.set('general', action.payload.general);
+      appConfig.setSync('profile', action.payload.profile);
+      appConfig.setSync('invoice', action.payload.invoice);
+      appConfig.setSync('general', action.payload.general);
       // Reload Sounds Cache
       sounds.preload();
       // Continue

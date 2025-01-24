@@ -25,6 +25,10 @@ function showModalWindow(dialogOptions, returnChannel = '', ...rest) {
     backgroundColor: '#282828',
     frame: false,
     show: false,
+    webPreferences: {
+      nodeIntegration:true,
+      enableRemoteModule: true,
+    },
   });
   modalWin.loadURL(
     url.format({

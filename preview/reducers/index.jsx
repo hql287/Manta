@@ -3,9 +3,9 @@ import * as ACTION_TYPES from '../constants/actions';
 import { createSelector } from 'reselect';
 import { handleActions } from 'redux-actions';
 const appConfig = require('electron').remote.require('electron-settings');
-const invoiceSettings = appConfig.get('invoice');
-const profileSettings = appConfig.get('profile');
-const generalSettings = appConfig.get('general');
+const invoiceSettings = appConfig.getSync('invoice');
+const profileSettings = appConfig.getSync('profile');
+const generalSettings = appConfig.getSync('general');
 
 const initialState = {
   ui: { language: generalSettings.language },
