@@ -63,6 +63,12 @@ class SideBar extends Component {
   savePDF() {
     const invoiceID = this.props.invoice._id;
     ipc.send('save-pdf', invoiceID);
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Export Invoice',
+      el: 'Export  Invoice to PDF',
+      ev: 1,
+    });
     // Always save template configs to invocie when export to PDF
     this.saveConfigs();
   }
@@ -71,6 +77,11 @@ class SideBar extends Component {
     const { configs, invoice } = this.props;
     const { _id: invoiceID } = invoice;
     ipc.send('save-configs-to-invoice', invoiceID, configs);
+    ipc.send('send-hit-to-analytic', 'event', {
+      ec: 'Invoice',
+      ea: 'Save Config',
+      el: 'Save Invoice Config',
+    });
   }
 
   render() {

@@ -8,6 +8,7 @@ const path = require('path');
 const glob = require('glob');
 const isDev = require('electron-is-dev');
 const omit = require('lodash').omit;
+const uuidV4 = require('uuid/v4');
 
 // Electron Libs
 const { app, BrowserWindow, ipcMain } = require('electron');
@@ -192,6 +193,7 @@ function setInitialValues() {
       previewPDF: true,
       checkUpdate: 'daily',
       lastCheck: Date.now(),
+      allowsAnalytic: true,
     },
     invoice: {
       exportDir: os.homedir(),
@@ -217,6 +219,11 @@ function setInitialValues() {
         note: false,
       },
     },
+    userData: {
+      uuid: uuidV4(),
+      unsentSessions: [],
+      currentSessionHits: [],
+    }
   };
 
   // Set initial values conditionally work for 2 level depth key only,
@@ -428,6 +435,8 @@ function initialize() {
   });
   // Close all windows before quit the app
   app.on('before-quit', () => {
+    // TODO
+    // Investigate why this event is emitted twice at the moment
     // Use condition in case quit sequence is initiated by autoUpdater
     // which will destroy all there windows already before emitting this event
     if (tourWindow !== null) tourWindow.destroy();

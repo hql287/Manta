@@ -33,6 +33,7 @@
       "spaceDot": "Space & Dot"
     },
     "openPDFReader": "Open PDF after Export",
+    "allowsAnalytic": "Allows Analytic",
     "language": {
       "name": "Language",
       "ar": "Arabic",
